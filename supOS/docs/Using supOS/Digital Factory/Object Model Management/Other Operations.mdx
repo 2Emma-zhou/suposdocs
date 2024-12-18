@@ -1,0 +1,76 @@
+---
+hide_title: true
+---
+
+### Creating Function Set
+
+1. Log in to supOS, and then click <img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/factoryModeling/7.png" alt="" /> to go to the design center.
+2. Select **Object Model Management** > **Function Set**, and then click <img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/factoryModeling/26.png" />.
+3. Enter the basic information of the function set and then click <strong>OK</strong>.
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/16.png" />
+
+<ul>
+<ul>
+<li>Operations of creating a function set are similar to entity template creation. For details, see <a href="Creating Entity Template">Creating Entity Template</a>.</li>
+<li>A function set can be bound with templates and instances for inheritance.</li>
+<li>Select a function set, and then click <strong>Sync Reference Template</strong> on the basic information page to synchronize changes of the function set to bound templates and instances.</li>
+</ul>
+</ul>
+
+### Creating Tag
+
+Create tags to filter and search for templates, instances, attributes, services, events and subscriptions.
+1. Log in to supOS, and then click <img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/factoryModeling/7.png" /> to go to the design center.
+2. Select <strong>Object Model Management</strong> > <strong>Tag Management</strong>.
+3. Click <img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/factoryModeling/26.png" /> and enter information of the tag category.
+4. Select a category, click <strong>New</strong> to add a tag.
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/factoryModeling/14.png" width={470}/>
+
+  
+### Creating Data Group
+
+Group and manage instance data permission.
+- You cannot see objects that you have no permission of in design center or object selector under **Services**.
+- You cannot see corresponding attribute data that you have no permission of in operation center.
+
+:::info 
+Data groups can only be applied to entity instances.
+:::
+
+1. Log in to supOS, and then click <img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/factoryModeling/7.png" /> to go to the design center.
+2. Select <strong>Object Model Management</strong> > <strong>Data Group</strong>, and then click <strong>New</strong>.
+3. Enter basic information of the data group, and then click <strong>Save</strong>.
+4. Select the <strong>Permission Config</strong> tab, click <img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/factoryModeling/26.png"/> next to <strong>Template Config</strong>.
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/17.png" width={470}/>
+
+5. Select entity templates to which you want to grant access for the data group.
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/18.png" width={470}/>
+
+- On the right side, select <strong>All Instances</strong> to grant permissions to properties of all instances under the template.
+- Click <strong>Partial Instances</strong> to grant permissions to attributes of selected instances under the template.
+
+<ol>
+<ol>
+<li>Click <strong>New</strong> to select instances.</li>
+<li>Click <strong>Attributes</strong> under <strong>Operate</strong> to select all or partial attributes of the instance.
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/19.png" width={470}/>
+
+</li>
+<li>Click <strong> Alarm Permission</strong> under <strong>Operate </strong>of the selected attribute to configure alarm permissions, and then click <strong>OK</strong>.
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/20.png" width={470}/>
+
+</li>
+<li>Click <strong>Close</strong>.</li>
+</ol>
+</ol>
+
+:::info
+- Alarm data can be viewed in operation center, but not used to build templates.
+- Data groups are used to grant permissions to users or roles. For details, see <a href="../../../../4.2/category/user-center">User Center</a>.
+::: 

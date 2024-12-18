@@ -1,0 +1,273 @@
+---
+hide_title: true
+---
+
+<div className='div'>
+<div className='title'>
+
+## ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/openAPI/1.png) Send Message
+
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Path</div>
+<div className='rightCol'>
+
+```
+http://{supOS ip:port}/open-api/p/notification/v2/messages
+```
+
+</div>
+<div className='leftCol'>Request body</div>
+<div className='rightCol'>
+
+```json
+{
+  "businessCode": "businessCode",  //required
+  "businessName": "businessName",  //required
+  "receivers": [  //required
+    {
+      "rangeType": "STAFF",  //receiver type. STAFF/POSITION/DEPARTMENT/ROLE
+      "codes": [
+        "STAFF_CODE"  //corresponds to rangeType
+      ]
+    }
+  ],
+  "contents": [  //required
+    {
+      "protocol": "email",
+      "content": "{\"subject\":\"title\",\"text\":\"content\"}"
+    },
+    {
+      "protocol": "stationLetter",
+      "content": "{\"text\":\"content\"}"
+    }
+  ]
+}
+```
+
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+
+- 200: Successful.
+```json
+{
+  "taskCode": "taskCode"
+}
+```
+- 400
+
+```json
+{
+  "code": 100000001,
+  "message": "sender business code cannot be empty"
+}
+```
+
+<ul>
+<ul>
+<li>100000001: Sender service name cannot be empty.</li>
+<li>100000001: Message receiver range type cannot be empty.</li>
+<li>100000001: Message content cannot be empty.</li>
+<li>100102009: Receiver does not exist.</li>
+<li>100102012: Protocol does not exist.</li>
+</ul>
+</ul>
+
+- 500
+```json
+{
+  "code": 100000001,
+  "message": "internal service exception"
+}
+```
+</div>
+</div>
+</div>
+
+<div className='div'>
+<div className='title'>
+
+## ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/openAPI/1.png) Send Message Based on Topic
+
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Path</div>
+<div className='rightCol'>
+
+```
+http://{supOS ip:port}/open-api/p/notification/v2/topic/messages
+```
+
+</div>
+<div className='leftCol'>Request body</div>
+<div className='rightCol'>
+
+```json
+{
+  "businessCode": "businessCode",  //required
+  "businessName": "businessName",  //required
+  "topicCode": "topicCode",  //required
+  "protocols": [
+    "stationLetter"
+  ],
+  "receivers": [
+    {
+      "rangeType": "STAFF",  //receiver type. STAFF/POSITION/DEPARTMENT/ROLE
+      "codes": "STAFF_CODE"  //corresponds to rangeType
+    }
+  ],
+  "param": {}
+}
+```
+
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+
+- 200: Successful.
+```json
+{
+  "taskCode": "taskCode"
+}
+```
+- 400
+
+```json
+{
+  "code": 100000001,
+  "message": "sender business code cannot be empty"
+}
+```
+
+<ul>
+<ul>
+<li>100000001: Sender service name cannot be empty.</li>
+<li>100000001: Topic code cannot be empty.</li>
+<li>100000001: Message content cannot be empty.</li>
+<li>100102009: Receiver does not exist.</li>
+<li>100102012: Protocol does not exist.</li>
+<li>100102007: Topic does not exist.</li>
+<li>100102008: No linked template with the topic.</li>
+<li>100102011: The topic does not contain the protocol.</li>
+</ul>
+</ul>
+
+- 500
+```json
+{
+  "code": 100000001,
+  "message": "internal service exception"
+}
+```
+</div>
+</div>
+</div>
+
+<div className='div'>
+<div className='title'>
+
+## ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/openAPI/4.png) Get User Message
+
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Path</div>
+<div className='rightCol'>
+
+```
+http://{supOS ip:port}/open-api/p/notification/v2alpha1/users/{username}/messages
+```
+
+</div>
+<div className='leftCol'>Query parameter</div>
+<div className='rightCol'>
+
+- startTime: Required. Format is **yyyy-MM-dd'T'HH:mm:ss.SSZ**. For example: startTime=2021-01-26T16:02:15.666+0800.
+- endTime: Required. Format is **yyyy-MM-dd'T'HH:mm:ss.SSZ**. For example: startTime=2021-01-26T16:02:15.666+0800.
+- noticeProtocol: Message reminding method. For example: noticeProtocol=stationLetter.
+- current: Integer. Current page number, starting from 1.
+- pageSize: Integer. Items on the page.
+
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+
+- 200: Successful.
+```json
+{
+  "pagination": {
+    "current": 1,
+    "pageSize": 20,
+    "total": 3
+  },
+  "list": [
+    {
+      "sender": "work_flow",
+      "topic": "to-do",
+      "param": "{\"creator\":\"zhangsan\",\"creationTime\":\"2021-07-26 09:36:49\",\"extendcontent\":\"\",\"title\":\"regression test\",\"content\":\"person-receive notice\",\"url\":\"/project/flow/#/workflowPage?todoId=1531845319510608&processId=1531845294377552&appId=App_93549d29f01ca145d916fd72c1dd6ac6\"}",
+      "staffCode": "zhangsan",
+      "staffName": "zhangsan",
+      "sendStatus": 1,
+      "readStatus": 1,
+      "noticeProtocol": "stationLetter",
+      "errorResult": null
+    },
+    {
+      "sender": "work_flow",
+      "topic": "to-do",
+      "param": "{\"creator\":\"zhangsan\",\"creationTime\":\"2021-07-26 09:36:49\",\"extendcontent\":\"\",\"title\":\"regression test\",\"content\":\"person-receive notice\",\"url\":\"/project/flow/#/workflowPage?todoId=1531845319510608&processId=1531845294377552&appId=App_93549d29f01ca145d916fd72c1dd6ac6\"}",
+      "staffCode": "zhangsan",
+      "staffName": "zhangsan",
+      "sendStatus": 1,
+      "readStatus": 0,
+      "noticeProtocol": "stationLetter",
+      "errorResult": null
+    },
+    {
+      "sender": "work_flow",
+      "topic": "to-do",
+      "param": "{\"creator\":\"zhangsan\",\"creationTime\":\"2021-07-26 09:36:49\",\"extendcontent\":\"\",\"title\":\"regression test\",\"content\":\"person-receive notice\",\"url\":\"/project/flow/#/workflowPage?todoId=1531845319510608&processId=1531845294377552&appId=App_93549d29f01ca145d916fd72c1dd6ac6\"}",
+      "staffCode": "zhangsan",
+      "staffName": "zhangsan",
+      "sendStatus": 0,
+      "readStatus": 0,
+      "noticeProtocol": "stationLetter",
+      "errorResult": "no channel"
+    }
+  ]
+}
+```
+- 400
+
+```json
+{
+  "code": 100000001,
+  "message": "start time cannot be empty"
+}
+```
+
+<ul>
+<ul>
+<li>100000001: End time cannot be empty.</li>
+<li>100102022: User does not exist.</li>
+<li>100102023: Start time format is incorrect.</li>
+<li>100102024: End time format is incorrect.</li>
+<li>100102025: 'current' must be larger than and equal to 1.</li>
+<li>100102026: 'pageSize' must be larger than or equal to 1 and smaller than or equal to 500.</li>
+<li>100102012: Protocol does not exist.</li>
+</ul>
+</ul>
+
+- 500
+```json
+{
+  "code": 100000001,
+  "message": "internal service exception"
+}
+```
+</div>
+</div>
+</div>

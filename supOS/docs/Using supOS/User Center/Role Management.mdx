@@ -1,0 +1,81 @@
+---
+sidebar_position: 2
+---
+
+Define roles and assign corresponding permissions to them, to realize systematic and easy permission management.
+
+<ul>
+<li>
+<strong>Admin</strong> has full permissions of the
+platform by default.
+</li>
+<li>
+<strong>System Admin</strong> has permissions of
+organization and user security management by default.
+</li>
+<li>
+<strong>System Admin</strong> and <strong>Admin</strong> can only manage users and
+assign permissions to users under the same enterprise.
+</li>
+</ul>
+
+### Adding Role Folder
+
+1. Log in to supOS, and then click <img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/platform/7.png"/> at the upper-right corner to go to the design center.
+2. Select <strong>User Security Management</strong> > <strong>Role Management</strong>.
+3. Select a company, click <img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/platform/28.png"/> next to the search box, and then select <strong>New Folder</strong>.
+4. Enter the name and description of the folder, and then click <strong>OK</strong>.
+
+
+### Adding Role
+
+1. Log in to supOS, and then click <img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/platform/7.png"/> at the upper-right corner to go to the design center.
+2. Select <strong>User Security Management</strong> > <strong>Role Management</strong>.
+3. Select a company or a role folder, click <img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/platform/28.png"/> next to the search box, and then select <strong>New Role</strong>.
+4. Enter the name, code and description of the role, and then click <strong>OK</strong>.
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/209.png"/>
+
+5. Point to the role, click <img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/platform/23.png"/> and then select <strong>Setting Permissions</strong> to assign permissions to the role based on the role definition.
+:::info
+For details on assigning permissions, see <a href="User Management">Assigning Permission</a>.
+:::
+
+### Importing Roles
+1. Click **Import**, and select the import type.
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/213.png"/>
+
+2. Click **Download File Template**, and fill in the template file.
+3. Click **Import** again, and upload the filled template.
+:::info
+- Make sure the role code and name exist and match the template content in supOS when importing role permission and resource permissions.
+- When unmatching content exist in the template file, import fails and data rolls back.
+:::
+
+### Linking User
+
+Link the role to multiple users, and the permissions of the role will be assigned to the linked user.
+
+<ul>
+<li>
+Add employees under <b>Enterprise Organization Structure</b>.
+</li>
+<li>Link employees to normal user accounts.</li>
+</ul>
+
+1. Log in to supOS, and then click <img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/platform/7.png"/> at the upper-right corner to go to the design center.
+2. Select <strong>User Security Management</strong> > <strong>Role Management</strong>.
+3. Select a role, and then click <strong>Link User</strong> at the upper-right corner.
+4. Select an employee, and then click <strong>OK</strong>.
+:::tip
+Select <strong>Show user with no account</strong>, and you can see employees who are not linked with any user accounts, which cannot be linked with roles.
+:::
+
+<img width={450} src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/platform/29.png"/>
+
+5. (optional) Under <strong>Operate</strong>, click <strong>Unlink</strong> to cancel the linkage between the role and the personnel.
+
+:::info
+If <strong>Unlink</strong> is grayed out, you need to go to <strong>Organizational Structure</strong> > <strong>Organization Management</strong> > <strong>Post</strong> to cancel the linkage between the role and the post.
+:::

@@ -1,0 +1,180 @@
+The example project is provided together with X-BD installation package, and it contains the following items.
+
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>backend</td>
+<td>Contains <b>exercise.py</b> (algorithm training) and <b>runtime.py</b> (runtime algorithm) files. You can directly edit them to develop your own algorithm.</td>
+</tr>
+<tr>
+<td>frontend</td>
+<td>Contains frontend developing files of the algorithm.</td>
+</tr>
+<tr>
+<td>manifest.json</td>
+<td>Records algorithm name, version number and configuration.</td>
+</tr>
+</tbody>
+</table>
+
+### Editing exercise.py
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supBD/24.png)
+
+#### Input Parameter
+
+- dataSources: Can contain multiple data sets and use `ds = dataSources[0]` to get the first data set.
+![data set](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supBD/17.png)
+
+<table>
+    <thead>
+      <tr>
+        <th>Parameter</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>data</td>
+        <td>Each array is the data of the field.</td>
+      </tr>
+      <tr>
+        <td>struct</td>
+        <td>Data structure.</td>
+      </tr>
+      <tr>
+        <td>role</td>
+        <td>Field role. Options are 2 (dependent), 1 (independent), 0 (none).</td>
+      </tr>
+      <tr>
+        <td>customName</td>
+        <td>Field name.</td>
+      </tr>
+      <tr>
+        <td>name</td>
+        <td>Encrypted field name.</td>
+      </tr>
+    </tbody>
+  </table>
+
+![get data](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supBD/18.png)
+
+- config: Design the configuration which you can set during modeling on the right side.
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supBD/19.png)
+
+#### Output Parameter
+
+- dataSources: Data structure is similar to input data sources.
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supBD/20.png)
+
+- model: Model information that can be shared in runtime. It must be output in the type of string.
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supBD/21.png)
+
+- insight: Data displayed on the front end. It can be hidden when there is no specific requirements.
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supBD/22.png)
+
+#### Process Example
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supBD/23.png)
+
+### Editing runtime.py
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supBD/25.png)
+
+#### Input Parameter
+
+- dataSources/config: Same as the content in exercise.py file.
+
+- model: Model information (string).
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supBD/26.png)
+
+#### Output Parameter
+
+Data structure is similar to input data sources.
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supBD/27.png)
+
+#### Process Example
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supBD/28.png)
+
+### Editing manifest.json
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>algorithmName</td>
+<td>
+
+- Must be unique in the platform.
+- Cannot end with a number.
+- Cannot exceed 50 in length.
+- Update with the same name.
+
+</td>
+</tr>
+<tr>
+<td>alias</td>
+<td>
+
+- Cannot contain Chinese characters or /. Combinations of letters, numbers and underscores are recommended.
+- Cannot duplicate.
+
+</td>
+</tr>
+<tr>
+<td>description</td>
+<td>Cannot exceed 500 in length.</td>
+</tr>
+<tr>
+<td>version</td>
+<td>
+
+- Meet the regular expression "\\d+(\\.\\d+){2}". For example, v0.0.1.
+- Must be unique.
+- Update by the ascending order of version number.
+
+</td>
+</tr>
+<tr>
+<td>versionFeatures</td>
+<td>Features of the current version. Cannot exceed 500 in length.</td>
+</tr>
+<tr>
+<td>algorithmCategory</td>
+<td>
+
+- DataInOut: Level 1.
+- DataPreprocessing: Level 1.
+- FeatureEngineering: Level 1.
+- MachineLearning: Level 1.
+- Regression: Level 2.
+- Classification: Level 2.
+- Optimization: Level 2.
+- Cluster: Level 2.
+
+</td>
+</tr>
+<tr>
+<td>defaultConfig</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+
+### Uploading Algorithm
+1. Pack the 3 files, including **exercise.py**, **runtime.py** and **manifest.json** into a zip file.
+2. Log in to supOS, and then select **Data Intelligence** > **Data Science** > **Bigdata Analysis** > **Extend algorithm**.
+3. Click **Import**, select the package from local, and then click **OK**.
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supBD/29.png)

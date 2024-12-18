@@ -1,0 +1,42 @@
+---
+hide_title: true
+---
+
+Mapping templates convert data from databases added to supOS for easy service usage.
+
+1. Log in to supOS, and then click <img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/factoryModeling/7.png" /> to go to the design center.
+2. Select **Object Model Management** > **Object Template** > **Mapping Template**, hover over **Mapping Template** and add a new template.
+3. Enter the information of the template.
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/14.png" />
+
+<table>
+  <tr>
+    <th>Parameter</th>
+    <th>Description</th>
+  </tr>
+  <tr>
+    <td>Data Source</td>
+    <td>Select data source from <b>Datalake</b> and <b>dam</b> of supOS.</td>
+  </tr>
+  <tr>
+    <td>Data source name</td>
+    <td>Databases in the selected data source.</td>
+  </tr>
+  <tr>
+    <td>Table name</td>
+    <td>Tables in the selected database.</td>
+  </tr>
+  <tr>
+    <td>Template Settings</td>
+    <td>The target template contains data mapped from the selected table.</td>
+  </tr>
+</table>
+
+4. (Optional) Click **Attribute**, **Services** to add attributes and services to the relation template.
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/15.png" />
+
+:::tip
+To add custom attributes to the template after data table mapping, you need to add table fields on the original database, and refresh the page so that options are available under **PhysicalTableColumn**.
+:::

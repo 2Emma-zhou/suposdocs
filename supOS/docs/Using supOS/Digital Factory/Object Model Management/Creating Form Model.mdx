@@ -1,0 +1,49 @@
+---
+hide_title: true
+---
+
+This section uses the following table as an example to demonstrate the creation of form model.
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/factoryModeling/33.png)
+
+
+## Creating Form Template
+
+1. Log in to supOS, and then click <img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/factoryModeling/7.png" /> to go to the design center.
+2. Select **Object Model Management** > **Object Template** > **Form Template**, and add a new form template.
+3. Enter the template name, and then click **Save**.
+4. On the **Attribute** tab, click **New** to add attributes including ID, product, workshop, date and amount with correct data type and unique alias.
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/factoryModeling/35.png)
+
+:::info
+When the attribute data type is **OBJECT**, make sure the linked template is in the same database as the current form template. Cross-database query is not available.
+:::
+
+## Creating Form Instance
+
+1. On **Object Instance** page, select the created form template, and then click <strong>New</strong> to add an instance.
+2. Click <strong>Save</strong>.
+3. Click **Attribute** to add rows of data to the form.
+
+<ol>
+<ol>
+<li>Click <b>New</b> to add a row.</li>
+<li>Click <img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/factoryModeling/9.png" /> next to an attribute inherited from the parent template, and enter a value.</li>
+<li>Do the same to all attributes, add values from the example table to add a row of data.</li>
+</ol>
+</ol>
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/factoryModeling/36.png)
+
+## Adding Data in Batches
+
+1. Select the form template, and then click the **Service** tab.
+2. Click **New**, enter required information and set the **Type** under **Information Output** to **JSON**.
+3. Click **Script**, and then click **Object Selector** to select the embedded server **addDataTableEntries** to add table data in batches.
+4. Select the current template, under **Service**, select **addDataTableEntries** and then click **OK** to load the code example.
+5. Change the input parameters.
+:::tip
+Go back to the **Service** page, and copy the input parameter format by clicking the service under **Other Service**.
+:::
+6. Click **Debugging** after finishing the code. Data is added when the debugging result is **true**.
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/factoryModeling/37.png)

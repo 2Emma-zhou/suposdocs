@@ -1,0 +1,110 @@
+
+
+The supOS platform provides database dump to offer easy access for third_party systems to the real-time industrial data.
+
+1. Log in to supOS, and then click <img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/platform/7.png" /> at the upper-right corner to go to the design center.
+2. Add a data source from <strong>Storage Resources</strong> > <strong>Resources Management</strong> to be the target database.
+:::info
+For details, see <a href="../Storage%20Resources/Adding Data Source">Adding Data Source</a>.
+:::
+3. Select **Task Management** > <strong>Live Data Dump</strong>, and then click **New Task**.
+4. Enter the information of the task.
+
+<img width={700} src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/platform/35.png"/>
+
+<table>
+<thead>
+<tr>
+<th colSpan={2}>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td rowSpan={6}>Basic</td>
+<td>Data Source</td>
+<td>Select the data source of the database dump task.</td>
+</tr>
+<tr>
+<td>Storage Form</td>
+<td>
+<ul>
+<li>
+<strong>Timing Storage</strong>: Dump the data at fixed time.
+</li>
+<li>
+<strong>Change Storage</strong>: Dump the data when the source attribute value changes.
+</li>
+</ul>
+</td>
+</tr>
+<tr>
+<td>Table Name</td>
+<td>
+
+- Enter the name of a table that exists in the database, make sure field names match the original table.
+- Enter the name of a new table, the table and all fields under **Field** are created in the database.
+
+</td>
+</tr>
+<tr>
+<td>Start Time</td>
+<td rowSpan={2}>Set the begin time and interval of the data dump task.
+
+:::info
+Only available when <strong>Timing Storage</strong> is set as the <strong>Storage Form</strong>.
+:::
+
+</td>
+</tr>
+<tr>
+<td>Interval</td>
+</tr>
+<tr>
+<td>Marking Time</td>
+<td>Enable and set the <strong>Marking Time</strong>. For example, set the label time to be one hour delay, and the timestamp in the database after the dump is displayed as one hour later than the actual dumping time.</td>
+</tr>
+<tr>
+<td rowSpan={6}>Field</td>
+<td>Attribute Name</td>
+<td>Set the name of the field which represents the selected attribute name.</td>
+</tr>
+<tr>
+<td>Type</td>
+<td>Set the name of the field which represents the selected attribute data type.</td>
+</tr>
+<tr>
+<td>Time Tag</td>
+<td>Set the name of the field which represents the timestamp when the data is transferred.</td>
+</tr>
+<tr>
+<td>Attribute Value</td>
+<td>Set the name of the field which represents the selected attribute value.</td>
+</tr>
+<tr>
+<td>Quality Code</td>
+<td>Set the name of the field which represents the quality of the transferred data.</td>
+</tr>
+<tr>
+<td>Feature Field</td>
+<td>Set the name of the field which is used to be extension field on the table.</td>
+</tr>
+<tr>
+<td colSpan={2}>Attribute</td>
+<td>The object attributes which need to be saved to the database.</td>
+</tr>
+</tbody>
+</table>
+
+5. Under <strong>Attribute</strong>, click <strong>New</strong> to select object attributes, and then click <strong>Save</strong>.
+
+:::info
+- Up to 1000 attributes can be added.
+- To add attributes to another task, we recommend to export attributes and then import to another task. You can also download a template, and enter the attribute information (<strong>Object</strong> and <strong>Attribute</strong> are required) before import.
+:::
+
+6. Click <strong>Submit</strong>.
+7. Log in to the target database, and check whether the task is successfully executed.
+
+<img width={450} src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/217.png"/>
+<img width={450} src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/218.png"/>

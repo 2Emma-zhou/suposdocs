@@ -1,0 +1,413 @@
+---
+hide_title: true
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+
+<div className='div'>
+<div className='title'>
+
+## ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/openAPI/4.png) Get Design Structure
+
+:::info
+- No **Layout** block in the results.
+- API responses are for reference only.
+:::
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Path</div>
+<div className='rightCol'>
+
+```
+http://{supOS ip:port}/open-api/p/compose/v2/pages/tree
+```
+
+
+</div>
+<div className='leftCol'>Query parameters</div>
+<div className='rightCol'>
+
+- **parentId**: Required. String. 
+- **type**: String. When it is set to **symbol**, element tree is returned; if empty or other, design tree is returned.
+
+</div>
+</div>
+<div className="response">
+<div className="grid">
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+
+<Tabs>
+<TabItem value="200" label="200" default>
+<details>
+<summary>
+<strong>Click here</strong> to see response example.
+</summary>
+
+```json
+{
+  "id": "App_bac090d688004de9bf927b9ff66bfca7",
+  "name": "desktop",
+  "description": "",
+  "appName": "Desktop",
+  "appId": "App_bac090d688004de9bf927b9ff66bfca7",
+  "templateName": "App",
+  "appSecret": "cd5d7e2ac9f8d94658e0f6495cc043f1",
+  "appVersion": "1.0.0",
+  "hasChildren": true,
+  "allowEdit": 1,
+  "userAuthUrl": "",
+  "roleAuthUrl": "",
+  "coverUrl": "/api/app/manager/images/AppIconPreview?fileName=xxx",
+  "defaultDeskPageId": "Page_f0d175ba73b74e2a9a17a0150b3d8849",
+  "defaultShowId": "Page_f0d175ba73b74e2a9a17a0150b3d8849",
+  "icon": "",
+  "jarRunEnv": "openjdk:8-jdk-alpine",
+  "suposCpbVersion": "supOS-1.8.2",
+  "totalPage": 1,
+  "totalSymbol": 0,
+  "userId": "1",
+  "vendorName": "supos",
+  "order": 10000,
+  "children": [
+    {
+      "id": "Folder_41d355ee3641de25ac4c6e355e0c4c6e",
+      "name": "new folder 1",
+      "description": "",
+      "parentId": "App_bac090d688004de9bf927b9ff66bfca7",
+      "appId": "App_bac090d688004de9bf927b9ff66bfca7",
+      "templateName": "Folder",
+      "menuDisplay": true,
+      "hasChildren": true,
+      "order": 10000,
+      "children": [
+        {
+          "id": "Folder_105a11e36d6848e4a4eb85869bfede4e",
+          "name": "new folder 2",
+          "description": "",
+          "parentId": "App_bac090d688004de9bf927b9ff66bfca7",
+          "appId": "App_bac090d688004de9bf927b9ff66bfca7",
+          "templateName": "Folder",
+          "menuDisplay": true,
+          "hasChildren": false,
+          "order": 10000
+        },
+        {
+          "id": "Page_314e531cbcdd4faeb2174f5eb42be97e",
+          "name": "page1",
+          "description": "",
+          "layout": "{\"pageConfig\":{\"platformLayoutType\":\"PC\",\"singleLayout\":true,\"lwType\":\"1\",\"lwValue\":1638,\"lhValue\":912,\"linkage\":\"0\",\"background\":\"\",\"pageId\":\"Page_314e531cbcdd4faeb2174f5eb42be97e\"},\"layoutNodes\":[{\"kind\":\"free\",\"col\":1,\"colW\":200,\"w\":240,\"h\":44.9,\"x\":0,\"y\":0,\"i\":\"2be97e-0\",\"moved\":false,\"static\":false,\"isResizable\":false,\"minW\":1,\"minH\":1,\"type\":\"2\",\"lw\":1638,\"lh\":912,\"opacity\":1,\"id\":\"Layout_5a1ebebfe2bd4f18b80a24047a004962\"}]}",
+          "type": 1,
+          "url": "",
+          "parentId": "Folder_41d355ee3641de25ac4c6e355e0c4c6e",
+          "appId": "App_bac090d688004de9bf927b9ff66bfca7",
+          "kind": "free",
+          "platformType": "PC",
+          "menuDisplay": true,
+          "mobileShowType": "auto",
+          "navbarBgColor": "#ffffff",
+          "navbarFront": "dark",
+          "navbarStyle": "fixed",
+          "extra": "{}",
+          "order": 20000,
+          "userId": "1",
+          "originalImage": "/resource/App_bac090d688004de9bf927b9ff66bfca7/screenshot/original/Page_314e531cbcdd4faeb2174f5eb42be97e.png",
+          "thumbnail": "/resource/App_bac090d688004de9bf927b9ff66bfca7/screenshot/thumbnail/Page_314e531cbcdd4faeb2174f5eb42be97e.png",
+          "isWorkflow": false
+        }
+      ]
+    },
+    {
+      "id": "Page_f0d175ba73b74e2a9a17a0150b3d8849",
+      "name": "page1",
+      "description": "",
+      "layout": "{\"pageConfig\":{\"platformLayoutType\":\"PC\",\"singleLayout\":true,\"lwType\":\"1\",\"lwValue\":1638,\"lhValue\":912,\"linkage\":\"0\",\"background\":\"\",\"pageId\":\"Page_f0d175ba73b74e2a9a17a0150b3d8849\"},\"layoutNodes\":[{\"kind\":\"free\",\"col\":1,\"colW\":200,\"w\":240,\"h\":44.9,\"x\":0,\"y\":0,\"i\":\"3d8849-0\",\"moved\":false,\"static\":false,\"isResizable\":false,\"minW\":1,\"minH\":1,\"type\":\"2\",\"lw\":1638,\"lh\":912,\"opacity\":1,\"id\":\"Layout_9480068bb2bb40f0b0704ec7ae515ce0\"}]}",
+      "type": 1,
+      "url": "",
+      "parentId": "App_bac090d688004de9bf927b9ff66bfca7",
+      "appId": "App_bac090d688004de9bf927b9ff66bfca7",
+      "kind": "free",
+      "platformType": "PC",
+      "menuDisplay": true,
+      "mobileShowType": "auto",
+      "navbarBgColor": "#ffffff",
+      "navbarFront": "dark",
+      "navbarStyle": "fixed",
+      "extra": "{}",
+      "order": 20000,
+      "userId": "1",
+      "originalImage": "/resource/App_bac090d688004de9bf927b9ff66bfca7/screenshot/original/Page_f0d175ba73b74e2a9a17a0150b3d8849.png",
+      "thumbnail": "/resource/App_bac090d688004de9bf927b9ff66bfca7/screenshot/thumbnail/Page_f0d175ba73b74e2a9a17a0150b3d8849.png",
+      "isWorkflow": false
+    }
+  ]
+}
+```
+
+</details>
+</TabItem>
+<TabItem value="400" label="400">
+
+- 400: Request failed.
+- 401: Permission authentication failed.
+- 404: Corresponding data not found.
+- 409: Request conflicted. The Specified name exists, cannot add.
+
+</TabItem>
+<TabItem value="500" label="500">
+System error.
+</TabItem>
+</Tabs>
+</div>
+</div>
+</div>
+</div>
+
+<div className='div'>
+<div className='title'>
+
+## ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/openAPI/1.png) Create a Page
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Path</div>
+<div className='rightCol'>
+
+```
+http://{supOS ip:port}/open-api/p/compose/v2/pages
+```
+
+</div>
+<div className='leftCol'>Request body</div>
+<div className='rightCol'>
+
+```json
+{
+  "name": "page", //required
+  "description": "",
+  "layout": "",  //page layout, write in JSON
+  "type": 1, //page type. 1-empty page, 2-internal linked page, 3-external linked page
+  "url": "",  //page URL. For empty page, leave it as blank
+  "parentId": "App_bac090d688004de9bf927b9ff66bfca7", //required
+  "appId": "App_bac090d688004de9bf927b9ff66bfca7",  //required
+  "kind": "free", //layout. "free" means free layout, "new" means grid layout
+  "platformType": "PC",  //platform type. "PC" or "mobile"
+  "menuDisplay": true, //whether or not to be displayed on system menu
+  "mobileShowType": "auto",  //diaplay mode. "auto/portrait/landscape"
+  "navbarBgColor": "#ffffff",  //background color of navigation bar
+  "navbarFront": "dark",  //text color on navigation bar. "dark" for light background and "light" for dark background
+  "navbarStyle": "fixed",  //navigation bar style. "fixed/suspend"
+  "isWorkflow": false, //whether or not to enable workflow
+  "layouts": [ //required. At least one layout block on a page
+    {
+      "description": "",
+      "context": "{}" //required. JSON format
+    }
+  ]
+}
+```
+
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+
+- 200: Successful.
+
+```json
+{
+  "location": "string"  //resource URL of the page
+}
+```
+- 400
+
+<ul>
+<ul>
+<li>400: Request failed.</li>
+<li>401: Permission authentication failed.</li>
+<li>404: Corresponding data not found.</li>
+<li>409: Request conflicted. The Specified name exists, cannot add.</li>
+</ul>
+</ul>
+
+- 500: System error.
+
+</div>
+</div>
+</div>
+
+<div className='div'>
+<div className='title'>
+
+## ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/openAPI/4.png) Get Page Details
+
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Path</div>
+<div className='rightCol'>
+
+```
+http://{supOS ip:port}/open-api/p/compose/v2/pages/{pageId}
+```
+**pageId**: Required.
+
+</div>
+<div className='leftCol'>Query parameters</div>
+<div className='rightCol'>
+
+**kind**: Data type you want to get. "new" means data in draft bin.
+
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+
+- 200: Successful.
+
+```json
+{
+  "layouts": [
+    {
+      "id": "Layout_9480068bb2bb40f0b0704ec7ae515ce0",
+      "name": "3d8849-0",
+      "description": "layout",
+      "context": "{}",
+      "parentId": "Page_f0d175ba73b74e2a9a17a0150b3d8849",
+      "appId": "Page",
+      "kind": "free"
+    }
+  ],
+  "id": "Page_f0d175ba73b74e2a9a17a0150b3d8849",
+  "name": "page",
+  "description": "",
+  "layout": "{\"pageConfig\":{\"platformLayoutType\":\"PC\",\"singleLayout\":true,\"lwType\":\"1\",\"lwValue\":1638,\"lhValue\":912,\"linkage\":\"0\",\"background\":\"\",\"pageId\":\"Page_f0d175ba73b74e2a9a17a0150b3d8849\"},\"layoutNodes\":[{\"kind\":\"free\",\"col\":1,\"colW\":200,\"w\":240,\"h\":44.9,\"x\":0,\"y\":0,\"i\":\"3d8849-0\",\"moved\":false,\"static\":false,\"isResizable\":false,\"minW\":1,\"minH\":1,\"type\":\"2\",\"lw\":1638,\"lh\":912,\"opacity\":1,\"id\":\"Layout_9480068bb2bb40f0b0704ec7ae515ce0\"}]}",
+  "type": 1,
+  "url": "",
+  "parentId": "App_bac090d688004de9bf927b9ff66bfca7",
+  "appId": "App_bac090d688004de9bf927b9ff66bfca7",
+  "kind": "free",
+  "platformType": "PC",
+  "menuDisplay": true,
+  "mobileShowType": "auto",
+  "navbarBgColor": "#ffffff",
+  "navbarFront": "dark",
+  "navbarStyle": "fixed",
+  "extra": "{}",
+  "order": 20000,
+  "userId": "1",
+  "originalImage": "/resource/App_bac090d688004de9bf927b9ff66bfca7/screenshot/original/Page_f0d175ba73b74e2a9a17a0150b3d8849.png",
+  "thumbnail": "/resource/App_bac090d688004de9bf927b9ff66bfca7/screenshot/thumbnail/Page_f0d175ba73b74e2a9a17a0150b3d8849.png",
+  "isWorkflow": false
+}
+```
+- 404: Page not found.
+
+</div>
+</div>
+</div>
+
+<div className='div'>
+<div className='title'>
+
+## ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/openAPI/2.png) Edit Page Information
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Path</div>
+<div className='rightCol'>
+
+```
+http://{supOS ip:port}/open-api/p/compose/v2/pages/{pageId}
+```
+
+**pageId**: Required.
+
+</div>
+<div className='leftCol'>Request body</div>
+<div className='rightCol'>
+
+```json
+{
+  "name": "page", //required
+  "description": "",
+  "layout": "{\"pageConfig\":{\"platformLayoutType\":\"PC\",\"singleLayout\":true,\"lwType\":\"1\",\"lwValue\":1638,\"lhValue\":912,\"linkage\":\"0\",\"background\":\"\",\"pageId\":\"Page_f0d175ba73b74e2a9a17a0150b3d8849\"},\"layoutNodes\":[{\"kind\":\"free\",\"col\":1,\"colW\":200,\"w\":240,\"h\":44.9,\"x\":0,\"y\":0,\"i\":\"3d8849-0\",\"moved\":false,\"static\":false,\"isResizable\":false,\"minW\":1,\"minH\":1,\"type\":\"2\",\"lw\":1638,\"lh\":912,\"opacity\":1,\"id\":\"Layout_9480068bb2bb40f0b0704ec7ae515ce0\"}]}",  //page layout, write in JSON
+  "type": 1, //page type. 1-empty page, 2-internal linked page, 3-external linked page
+  "url": "",  //page URL. For empty page, leave it as blank
+  "platformType": "PC",  //platform type. "PC" or "mobile"
+  "menuDisplay": true, //whether or not to be displayed on system menu
+  "mobileShowType": "auto",  //diaplay mode. "auto/portrait/landscape"
+  "navbarBgColor": "#ffffff",  //background color of navigation bar
+  "navbarFront": "dark",  //text color on navigation bar. "dark" for light background and "light" for dark background
+  "navbarStyle": "fixed",  //navigation bar style. "fixed/suspend"
+  "isWorkflow": false, //whether or not to enable workflow
+}
+```
+
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+
+- 200: Successful.
+
+```json
+{
+  "location": "string"
+}
+```
+- 400
+
+<ul>
+<ul>
+<li>400: Request failed.</li>
+<li>401: Permission authentication failed.</li>
+<li>404: Page not found.</li>
+<li>409: Request conflicted. The Specified name exists, cannot add.</li>
+</ul>
+</ul>
+
+- 500: System error.
+
+</div>
+</div>
+</div>
+
+<div className='div'>
+<div className='title'>
+
+## ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/openAPI/3.png) Delete a Page
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Path</div>
+<div className='rightCol'>
+
+```
+http://{supOS ip:port}/open-api/p/compose/v2/pages/{pageId}
+```
+
+**pageId**: Required.
+
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+
+- 200: Successful.
+- 400
+
+<ul>
+<ul>
+<li>400: Request failed.</li>
+<li>401: Permission authentication failed.</li>
+<li>404: Page not found.</li>
+<li>409: Request conflicted. The Specified name exists, cannot add.</li>
+</ul>
+</ul>
+
+- 500: System error.
+
+</div>
+</div>
+</div>
+

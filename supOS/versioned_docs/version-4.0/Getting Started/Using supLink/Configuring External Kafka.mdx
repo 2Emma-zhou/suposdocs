@@ -1,0 +1,73 @@
+---
+hide_title: true
+---
+
+:::info What Kafka is used for
+Kafka is needed for supLink mobile to receive real-time alarms.
+:::
+
+### Installing Kafka
+1. Download Kafka installation package on https://wordpressfreezonex.oss-accelerate.aliyuncs.com/package/kafka_zk_install_alone.tar.
+2. On a server that is on the same network segment as supOS platform, copy the package to /root directory and decompress it.
+```
+tar -xvf /root/kafka_zk_install_alone.tar
+```
+3. Grant permission to the installation script.
+```
+chmod +x /root/zkinstall_scripts/dispatcher.sh
+```
+4. Change the IP address to the host IP and then install Kafka.
+```
+bash /root/zkinstall_scripts/dispatcher.sh your_host_IP
+```
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supLink/62.png)
+5. Check whether the installation is done.
+```
+source /etc/profile
+jps
+```
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supLink/63.png)
+6. Check the robustness of Kafka process.
+```
+kill kafka_pid
+```
+7. Run `jps` again after a minute, see if Kafka is restarted.
+
+### Starting supOS Service
+1. Access supOS installation path **bin** directory.
+```
+cd supOS_installation_path/bin
+```
+2. Open and edit **env.sh** file.
+```
+vi env.sh
+```
+3. Change Kafka address.
+```
+KAFKA=external_kafka_address:9012
+```
+4. Save the file and update supOS.
+```
+sudo bash update-modules.sh
+```
+:::info
+To restore supOS, access the **env.sh** file, change Kafka IP back and update supOS.
+:::
+
+5. Access Kafka server to check whether Kafka service is started.
+```
+cd /usr/local/kafka_2.12-1.0.2/bin
+./kafka-console-consumer.sh --bootstrap-server Kafka_IP_address:9012
+--topic supngin.streammodel.command
+```
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supLink/64.png)
+
+### Uninstalling Kafka
+1. Uninstall Kafka.
+```
+bash /root/zkinstall_scripts/uninstall.sh
+```
+2. Clear all data of external Kafka.
+```
+rm -rf /dam/
+```

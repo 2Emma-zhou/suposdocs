@@ -1,0 +1,1038 @@
+---
+hide_title: true
+---
+
+<div class="div">
+<div class="title">
+
+## ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/openAPI/1.png) Create Template
+
+</div>
+<div class="grid">
+<div class="leftCol">Path</div>
+<div class="rightCol"> 
+
+```
+http://8.219.92.105:8080/open-api/supos/oodm/v2/template
+```
+
+</div>
+<div class="leftCol">Request Body</div>
+<div class="rightCol"> 
+
+```json
+{
+"appAccessMode": "PUBLIC",//required
+"appName": "system",//required
+"comment": "created template",
+"displayAttributes": [
+14444
+],
+"displayName": "t1",//required
+"enName": "t1",//required
+"fileName": "boatxxx.png",
+"functionSetIds": [
+10016
+],
+"iconPath": "/api/config/download?fileName=2021-03-02/1614673872183/boatxxx.png",
+"labelIds": [
+10017
+],
+"namespace": "system",//required
+"parentId": 10018,//required. Parent template ID
+"type": "ENTITY",//required. Template type, must be the same as the parent template type. ENTITY or FORM
+"dataUsedBy": "USER", //data is from SYSTEM (created by internal services) or USER (created by user)
+"attributeDtos": [
+{
+"comment": "this is a test template",
+"dataType": "LONG",
+"subDataType": "LONG",
+"dataTypePrecision": 0,
+"dataTypeScale": 0,
+"defaultValue": "666",
+"display": false,
+"displayName": "p1",
+"enName": "p1",
+"hasKeyRelation": false,
+"historical": false,
+"persistent": false,
+"readWriteMode": "READ_ONLY",
+"stringMaxLength": 0,
+"unique": false,
+"valueScale": 2,
+"appAccessMode": "PUBLIC",
+"appName": "system",
+"appShowName": "system",
+"namespace": "system",
+"max": 100,
+"min": 0,
+"maxValue": 100.88,
+"minValue": 0.88,
+"unit": "kg",
+"compress": true,
+"paramValue": "0.2",
+"paramUnit": "%",
+"maxRisingPeriod": 600,
+"labelIds": [
+12333
+],
+"alarms": [
+{
+"displayName": "alarm1",
+"priority": 2,
+"enable": false,
+"operator": "EQ",
+"limitValue": "11",
+"deadBand": 12,
+"deadBandType": "NUMERIC",
+"comment": "test data",
+"alarmType": "test alarm"
+}
+]
+}
+],
+"eventDtos": [
+{
+"appAccessMode": "PUBLIC",
+"appName": "system",
+"comment": "test data",
+"dataSetId": 501,
+"displayName": "event1",
+"enName": "event1",
+"labelIds": [
+11131
+],
+"namespace": "system"
+}
+],
+"serviceDtos": [
+{
+"appAccessMode": "PUBLIC",
+"appName": "system",
+"comment": "test data",
+"displayName": "service1",
+"enName": "service1",
+"inputs": [
+{
+"appAccessMode": "PUBLIC",
+"appName": "system",
+"comment": "test data",
+"dataType": "BOOLEAN",
+"defaultValue": "string",
+"displayName": "filed1",
+"enName": "filed1",
+"id": 11135,
+"jsonDesc": "{'name':'string'}",
+"namespace": "system",
+"referDataDisplayName": "ds1",
+"referDataSetEnName": "ds1",
+"referDataSetId": 12222,
+"required": false
+}
+],
+"labelIds": [
+11132
+],
+"namespace": "system",
+"out": {
+"appAccessMode": "PUBLIC",
+"appName": "system",
+"comment": "test data",
+"dataType": "BOOLEAN",
+"defaultValue": "string",
+"displayName": "filed1",
+"enName": "filed1",
+"id": 11135,
+"jsonDesc": "{'name':'string'}",
+"namespace": "system",
+"referDataDisplayName": "ds1",
+"referDataSetEnName": "ds1",
+"referDataSetId": 12222,
+"required": false
+},
+"script": "print('1');"
+}
+],
+"subscriptionDtos": [
+{
+"appAccessMode": "PUBLIC",
+"appName": "system",
+"appShowName": "system",
+"comment": "test data",
+"displayName": "sub1",
+"enName": "sub1",
+"eventTriggers": [
+{
+"attributeId": 11134,
+"eventId": 11135,
+"instanceId": "11136",
+"templateId": 11137
+}
+],
+"labelIds": [
+11133
+],
+"namespace": "system",
+"script": "print('1');",
+"timingTrigger": {
+"enable": false,
+"end": "2020-12-15T02:56:51.000Z",
+"periodMs": 60,
+"start": "2020-12-15T02:56:50.000Z"
+},
+"triggerType": "EVENT"
+}
+]
+}
+```
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+<ul>
+<li>200: Successful.
+
+```json
+{
+"code": 200,
+"data": 19999,
+"detail": "string",
+"message": "ok"
+}
+```
+
+</li>
+<li>500: General internal error of OODM.
+
+```json
+{
+"code": 10001001,
+"data": {},
+"detail": "string",
+"message": "string"
+}
+```
+
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div class="div">
+<div class="title">
+
+## ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/openAPI/4.png) Get All Templates under an APP
+
+</div>
+<div class="grid">
+<div class="leftCol">Path</div>
+<div class="rightCol"> 
+
+```
+http://8.219.92.105:8080/open-api/supos/oodm/v2/template/listByAppName
+```
+</div>
+<div class="leftCol">Query Parameter</div>
+<div class="rightCol">
+<table>
+<caption>Table 1. Query parameter description</caption>
+<colgroup>
+ <col style={{ width: "25%" }} />
+ <col style={{ width: "25%" }} />
+ <col style={{ width: "50%" }} />
+ </colgroup>
+<thead>
+ <tr>
+ <th>Parameter</th>
+ <th>Type</th>
+ <th>Description</th>
+ </tr>
+</thead>
+<tbody>
+ <tr>
+ <td>appName</td>
+ <td>string</td>
+ <td>Required. Application name.</td>
+ </tr>
+ <tr>
+ <td>pageIndex</td>
+ <td>integer</td>
+ <td>Required. Page number. The default is 1.</td>
+ </tr>
+ <tr>
+ <td>pageSize</td>
+ <td>integer</td>
+ <td>Required. The number of data on each page. The default is 20 and the maximum is 500.</td>
+ </tr>
+</tbody>
+</table>
+</div>
+<div class="leftCol">Response</div>
+<div class="rightCol">
+<ul>
+<li>200: Successful.
+
+```
+ {
+ "code": 200,
+ "data": {
+ "data": [
+ {
+ "editable": true,
+ "deletable": true,
+ "instanceCreatable": true,
+ "instanceQueryable": true,
+ "supportInstanceMetadata": true,
+ "templateCreatable": true,
+ "templateEditable": true,
+ "templateQueryable": true,
+ "appAccessMode": "PUBLIC",
+ "appName": "system",
+ "comment": "this is a test template",
+ "displayAttributes": [
+ {
+ "displayName": "data1",
+ "id": 11119,
+ "templateId": 15556
+ }
+ ],
+ "displayName": "t1",
+ "enName": "t1",
+ "fileName": "boatxxx.png",
+ "functionSets": [
+ {
+ "displayName": "data1",
+ "id": 11119
+ }
+ ],
+ "iconPath": "/api/config/download?fileName=2021-03-02/1614673872183/boatxxx.png",
+ "id": 11111,
+ "labels": [
+ {
+ "displayName": "data1",
+ "id": 11119
+ }
+ ],
+ "mark": 0,
+ "namespace": "system",
+ "parent": {
+ "displayName": "data1",
+ "id": 11119
+ },
+ "type": "ENTITY"
+ }
+ ],
+ "pageIndex": 1,
+ "pageSize": 20,
+ "total": 100
+ },
+ "detail": "string",
+ "message": "ok"
+ }
+```
+
+</li>
+<li>500: General internal error of OODM.
+
+```json
+{
+"code": 10001001,
+"data": {},
+"detail": "string",
+"message": "string"
+}
+```
+
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div class="div">
+<div class="title">
+
+## ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/openAPI/4.png) Get All Templates under a Label
+
+</div>
+<div class="grid">
+<div class="leftCol">Path</div>
+<div class="rightCol"> 
+
+```
+http://8.219.92.105:8080/open-api/supos/oodm/v2/template/listByLabel
+```
+
+</div>
+<div class="leftCol">Query Parameter</div>
+<div class="rightCol">
+<table>
+<caption>Table 1. Query parameter description</caption>
+<colgroup>
+<col style={{ width: "25%" }} />
+<col style={{ width: "25%" }} />
+<col style={{ width: "50%" }} />
+</colgroup>
+<thead>
+<tr>
+ <th>Parameter</th>
+ <th>Type</th>
+ <th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+ <td>labelId</td>
+ <td>integer</td>
+ <td>Required. Label ID.</td>
+</tr>
+<tr>
+ <td>templateTypes</td>
+ <td>array of string</td>
+ <td>Template types such as ENTITY, ROOT, INTERNAL, EXTERNAL, RELATION, FORM, REMOTE, COLLECTOR and MAPPING.</td>
+</tr>
+<tr>
+ <td>pageIndex</td>
+ <td>integer</td>
+ <td>Required. Page number. The default is 1.</td>
+</tr>
+<tr>
+ <td>pageSize</td>
+ <td>integer</td>
+ <td>Required. The number of data on each page. The default is 20 and the maximum is 500.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="leftCol">Response</div>
+<div class="rightCol">
+<ul>
+<li>200: Successful.
+
+```json
+{
+"code": 200,
+"data": {
+ "data": [
+ {
+ "editable": true,
+ "deletable": true,
+ "instanceCreatable": true,
+ "instanceQueryable": true,
+ "supportInstanceMetadata": true,
+ "templateCreatable": true,
+ "templateEditable": true,
+ "templateQueryable": true,
+ "appAccessMode": "PUBLIC",
+ "appName": "system",
+ "comment": "this is a test template",
+ "displayAttributes": [
+ {
+ "displayName": "data1",
+ "id": 11119,
+ "templateId": 15556
+ }
+ ],
+ "displayName": "t1",
+ "enName": "t1",
+ "fileName": "boatxxx.png",
+ "functionSets": [
+ {
+ "displayName": "data1",
+ "id": 11119
+ }
+ ],
+ "iconPath": "/api/config/download?fileName=2021-03-02/1614673872183/boatxxx.png",
+ "id": 11111,
+ "labels": [
+ {
+ "displayName": "data1",
+ "id": 11119
+ }
+ ],
+ "mark": 0,
+ "namespace": "system",
+ "parent": {
+ "displayName": "data1",
+ "id": 11119
+},
+"type": "ENTITY"
+}
+],
+"pageIndex": 1,
+"pageSize": 20,
+"total": 100
+},
+"detail": "string",
+"message": "ok"
+}
+```
+
+</li>
+<li>500: General internal error of OODM.
+
+```json
+{
+"code": 10001001,
+"data": {},
+"detail": "string",
+"message": "string"
+}
+```
+
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div class="div"> 
+<div class="title">
+
+## ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/openAPI/1.png) Get Template through Alias
+
+</div> 
+<div class="grid"> 
+<div class="leftCol">Path</div> 
+<div class="rightCol"> 
+
+```
+http://8.219.92.105:8080/open-api/supos/oodm/v2/template/listByNames
+```
+
+</div> 
+<div class="leftCol">Request Body</div> 
+<div class="rightCol"> 
+
+```json
+{
+"inputs": [ //array of strings. Template namespace and alias
+{
+"enName": "xxx",
+"namespace": "system"
+}
+]
+}
+```
+
+</div> 
+<div class="leftCol">Response</div> 
+<div class="rightCol"> 
+<ul> 
+<li>200: Successful. 
+
+```json
+{
+"code": 200,
+"data": [
+{
+"editable": true,
+"deletable": true,
+"instanceCreatable": true,
+"instanceQueryable": true,
+"supportInstanceMetadata": true,
+"templateCreatable": true,
+"templateEditable": true,
+"templateQueryable": true,
+"appAccessMode": "PUBLIC",
+"appName": "system",
+"comment": "this is a test template",
+"displayAttributes": [
+{
+"displayName": "data1",
+"id": 11119,
+"templateId": 15556
+}
+],
+"displayName": "t1",
+"enName": "t1",
+"fileName": "boatxxx.png",
+"functionSets": [
+{
+"displayName": "data1",
+"id": 11119
+}
+],
+"iconPath": "/api/config/download?fileName=2021-03-02/1614673872183/boatxxx.png",
+"id": 11111,
+"labels": [
+{
+"displayName": "data1",
+"id": 11119
+}
+],
+"mark": 0,
+"namespace": "system",
+"parent": {
+"displayName": "data1",
+"id": 11119
+},
+"type": "ENTITY"
+}
+],
+"detail": "string",
+"message": "ok"
+}
+```
+
+</li> 
+<li>500: General internal error of OODM. 
+
+```json
+{
+"code": 10001001,
+"data": {},
+"detail": "string",
+"message": "string"
+}
+```
+
+</li> 
+</ul> 
+</div> 
+</div> 
+</div>
+
+<div class="div"> 
+<div class="title"> 
+
+## ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/openAPI/4.png) Search for Templates 
+
+</div> 
+<div class="grid"> 
+<div class="leftCol">Path</div> 
+<div class="rightCol"> 
+
+```
+http://8.219.92.105:8080/open-api/supos/oodm/v2/template/search
+``` 
+
+</div> 
+<div class="leftCol">Query Parameter</div> 
+<div class="rightCol"> 
+<table>
+<caption>Table 1. Query parameter description</caption>
+<colgroup>
+<col style={{ width: "25%" }} />
+<col style={{ width: "25%" }} />
+<col style={{ width: "50%" }} />
+</colgroup>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>labelId</td>
+<td>integer</td>
+<td>Required. Label ID.</td>
+</tr>
+<tr>
+<td>keyword</td>
+<td>string</td>
+<td>Fuzzy match the name and alias.</td>
+</tr>
+<tr>
+<td>pageIndex</td>
+<td>integer</td>
+<td>Required. Page number. The default is 1.</td>
+</tr>
+<tr>
+<td>pageSize</td>
+<td>integer</td>
+<td>Required. The number of data on each page. The default is 20 and the maximum is 500.</td>
+</tr>
+<tr>
+<td>templateTypes</td>
+<td>array of string</td>
+<td>Template types such as ENTITY, ROOT, INTERNAL, EXTERNAL, RELATION, FORM, REMOTE, COLLECTOR and MAPPING.</td>
+</tr>
+<tr>
+<td>dataUsedBy</td>
+<td>array of string</td>
+<td>data is from SYSTEM (created by internal services) or USER (created by user).</td>
+</tr>
+</tbody>
+</table> 
+</div> 
+<div class="leftCol">Response</div> 
+<div class="rightCol"> 
+<ul> 
+<li>200: Successful. 
+
+```json
+{
+"code": 200,
+"data": {
+"data": [
+{
+"appName": "system",
+"displayName": "t1",
+"enName": "t1",
+"id": 12323,
+"labelIds": [
+12222
+],
+"namespace": "system",
+"type": "ENTITY"
+}
+],
+"pageIndex": 1,
+"pageSize": 20,
+"total": 100
+},
+"detail": "string",
+"message": "ok"
+}
+``` 
+
+</li> 
+<li>500: General internal error of OODM. 
+
+```json
+{
+"code": 10001001,
+"data": {},
+"detail": "string",
+"message": "string"
+}
+``` 
+
+</li> 
+</ul> 
+</div>
+</div>
+</div>
+
+<div class="div">
+<div class="title"> 
+
+## ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/openAPI/4.png) Get APP of Templates
+
+</div>
+<div class="grid">
+<div class="leftCol">Path</div>
+<div class="rightCol">
+
+```
+http://8.219.92.105:8080/open-api/supos/oodm/v2/template/searchAppNamesOfTemplate
+```
+
+</div>
+<div class="leftCol">Query Parameter</div>
+<div class="rightCol">
+<table>
+<caption>Table 1. Query parameter description</caption>
+<colgroup>
+<col style={{ width: "25%" }} />
+<col style={{ width: "25%" }} />
+<col style={{ width: "50%" }} />
+</colgroup>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>keyword</td>
+<td>string</td>
+<td>Fuzzy match the app name.</td>
+</tr>
+<tr>
+<td>pageIndex</td>
+<td>integer</td>
+<td>Required. Page number. The default is 1.</td>
+</tr>
+<tr>
+<td>pageSize</td>
+<td>integer</td>
+<td>Required. The number of data on each page. The default is 20 and the maximum is 500.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="leftCol">Response</div>
+<div class="rightCol">
+<ul>
+<li>200: Successful.
+
+```json
+{
+"code": 200,
+"data": {
+"data": [
+"app1"
+],
+"pageIndex": 1,
+"pageSize": 20,
+"total": 100
+},
+"detail": "string",
+"message": "ok"
+}
+```
+
+</li>
+<li>500: General internal error of OODM.
+
+```json
+{
+"code": 10001001,
+"data": {},
+"detail": "string",
+"message": "string"
+}
+```
+
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div class="div">
+<div class="title">
+
+## ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/openAPI/2.png) Edit Templates
+
+</div>
+<div class="grid">
+<div class="leftCol">Path</div>
+<div class="rightCol"> 
+
+```
+http://8.219.92.105:8080/open-api/supos/oodm/v2/template/{templateNamespace}/{templateName}
+```
+
+</div>
+<div class="leftCol">Request Body</div>
+<div class="rightCol"> 
+
+```json
+{
+"appAccessMode": "PUBLIC", //required. Whether can be viewed on other apps
+"comment": "Edited template",
+"displayAttributes": [ //main display field ID
+12349
+],
+"displayName": "updatet1",
+"functionSetIds": [
+12344
+],
+"iconPath": "/api/config/download?fileName=2021-03-02/1614673872183/boatxxx.png",
+"id": 12345,
+"labelIds": [
+12343
+]
+}
+```
+
+</div>
+<div class="leftCol">Response</div>
+<div class="rightCol">
+<ul>
+<li>200: Successful.
+
+```json
+{
+"code": 200,
+"message": "ok",
+"data": null,
+"detail": null
+}
+```
+
+</li>
+<li>500: General internal error of OODM.
+
+```json
+{
+"code": 10001001,
+"data": {},
+"detail": "string",
+"message": "string"
+}
+```
+
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div class="div">
+<div class="title">
+
+## ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/openAPI/3.png) Delete Templates
+
+</div>
+<div class="grid">
+<div class="leftCol">Path</div>
+<div class="rightCol">
+
+```
+http://8.219.92.105:8080/open-api/supos/oodm/v2/template/{templateNamespace}/{templateName}
+```
+
+</div>
+<div class="leftCol">Response</div>
+<div class="rightCol">
+<ul>
+<li>200: Successful.
+
+```json
+{
+"code": 200,
+"message": "ok",
+"data": null,
+"detail": null
+}
+```
+
+</li>
+<li>500: General internal error of OODM.
+
+```json
+{
+"code": 10001001,
+"data": {},
+"detail": "string",
+"message": "string"
+}
+```
+
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div class="div"> 
+<div class="title">
+
+## ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/openAPI/4.png) Get Derived Templates
+
+</div> 
+<div class="grid"> 
+<div class="leftCol">Path</div> 
+<div class="rightCol"> 
+
+```
+http://8.219.92.105:8080/open-api/supos/oodm/v2/template/{templateNamespace}/{templateName}/children
+``` 
+
+</div> 
+<div class="leftCol">Response</div> 
+<div class="rightCol"> 
+<ul> 
+<li>200: Successful. 
+
+```json
+{
+"code": 200,
+"data": [
+{
+"editable": true,
+"deletable": true,
+"instanceCreatable": true,
+"instanceQueryable": true,
+"supportInstanceMetadata": true,
+"templateCreatable": true,
+"templateEditable": true,
+"templateQueryable": true,
+"associationType": "BINARY",
+"comment": "this is a test template",
+"displayName": "t1",
+"enName": "t1",
+"id": 16666,
+"leaf": true,
+"namespace": "system",
+"type": "ENTITY"
+}
+],
+"detail": "string",
+"message": "ok"
+}
+```
+
+</li> 
+<li>500: General internal error of OODM. 
+
+```json
+{
+"code": 10001001,
+"data": {},
+"detail": "string",
+"message": "string"
+}
+```
+
+</li> 
+</ul> 
+</div> 
+</div> 
+</div>
+
+<div class="div">
+<div class="title">
+
+## ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/openAPI/4.png) Recurrent Search for Parent Templates
+
+</div>
+<div class="grid">
+<div class="leftCol">Path</div>
+<div class="rightCol">
+
+```
+http://8.219.92.105:8080/open-api/supos/oodm/v2/template/{templateNamespace}/{templateName}/parents
+```
+
+</div>
+<div class="leftCol">Response</div>
+<div class="rightCol">
+<ul>
+<li>200: Successful. 
+
+```json
+{
+"code": 200,
+"data": {
+"children": [
+{}
+],
+"deletable": true,
+"displayName": "t1",
+"editable": true,
+"enName": "t1",
+"id": 13333,
+"namespace": "system",
+"type": "ENTITY"
+},
+"detail": "string",
+"message": "ok"
+}
+```
+
+</li>
+<li>500: General internal error of OODM.
+
+```json
+{
+"code": 10001001,
+"data": {},
+"detail": "string",
+"message": "string"
+}
+```
+
+</li>
+</ul>
+</div>
+</div>
+</div>

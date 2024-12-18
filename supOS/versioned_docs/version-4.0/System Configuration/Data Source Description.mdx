@@ -1,0 +1,410 @@
+
+This chapter lists important parameters of all types of data sources that the supOS platform supports.
+
+:::info
+HANA data source is only for report elements presently.
+:::
+
+<table>
+<caption>Relational data source</caption>
+<colgroup>
+<col style={{ width: "21.052631578947366%" }} />
+<col style={{ width: "21.894736842105264%" }} />
+<col style={{ width: "57.05263157894736%" }} />
+</colgroup>
+<thead>
+<tr>
+<th>
+Data Source
+</th>
+<th>
+Parameter
+</th>
+<th>
+Description
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+SQL Server
+</td>
+<td>
+Data Source Version
+</td>
+<td>
+The database version of the SQL server.
+</td>
+</tr>
+<tr>
+<td>
+Oracle
+</td>
+<td>
+Access Mode
+</td>
+<td>
+Access the database by <strong>Server name</strong> or <strong>SID</strong>. Make sure to select the same mode as that of Oracle.
+</td>
+</tr>
+</tbody>
+</table>
+
+<table>
+<caption>API data source</caption>
+<colgroup>
+<col style={{ width: "20.703933747412005%" }} />
+<col style={{ width: "32.091097308488614%" }} />
+<col style={{ width: "47.20496894409937%" }} />
+</colgroup>
+<thead>
+<tr>
+<th>
+Data Source
+</th>
+<th>
+Parameter
+</th>
+<th>
+Description
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td rowSpan={6}>
+Web Service
+</td>
+<td>
+Address
+</td>
+<td>
+Interface address of web service. Click <strong>Parse</strong> after entering the address, and then supOS automatically starts parsing the address.
+</td>
+</tr>
+<tr>
+<td>
+HTTP Authorization
+</td>
+<td>
+Enable HTTP authorization and enter username and password to get authorization.
+</td>
+</tr>
+<tr>
+<td>
+Method
+</td>
+<td>
+Select corresponding methods based on the address parsing results.
+</td>
+</tr>
+<tr>
+<td>
+Resolve Path
+</td>
+<td>
+Data path in response data XML file. For example: Body/OutputParameters/P_OUT_CONTENT/HEADERS/HEADER.
+</td>
+</tr>
+<tr>
+<td>
+Input Mode
+</td>
+<td>
+Displays corresponding input parameters based on the selected mode.
+<ul>
+<li>
+<strong>List mode</strong>: Click <strong>New</strong> and enter the parameter information under <strong>Input Parameter</strong>.
+</li>
+<li>
+<strong>Xml mode</strong>: Configure data interface by entering xml text.
+</li>
+</ul>
+</td>
+</tr>
+<tr>
+<td>
+Output Mode
+</td>
+<td>
+Displays corresponding output parameters based on the selected mode. <strong>Parse</strong> means to parse strings to display parameter list, and <strong>No parse</strong> means to return JSON strings.
+</td>
+</tr>
+<tr>
+<td rowSpan={8}>
+RESTful
+</td>
+<td>
+HTTP Method
+</td>
+<td>
+Request method of HTTP, which can be <strong>GET</strong> or <strong>POST</strong>.
+</td>
+</tr>
+<tr>
+<td>
+Response Character Encoding
+</td>
+<td>
+Select character encoding method.
+</td>
+</tr>
+<tr>
+<td>
+Maximum allowable amount of data at one time
+</td>
+<td>
+Set the maximum data volume returned at one time.
+</td>
+</tr>
+<tr>
+<td>
+Headers Parameter
+</td>
+<td>
+Header parameter of HTTP request.
+</td>
+</tr>
+<tr>
+<td>
+Body parameters
+</td>
+<td>
+Body parameter of HTTP request.
+<ul>
+<li>
+<strong>FormData</strong>: Form submit method. You can select parameter type from <strong>Object</strong> and <strong>List</strong>, and click <strong>New</strong> to add parameters.
+</li>
+<li>
+<strong>JSON</strong>: JSON submit method. You need to enter input parameters in JSON format.
+</li>
+</ul>
+
+:::info
+When setting <strong>GET</strong> or <strong>DELETE</strong> as <strong>HTTP Method</strong>, only Form-data parameter is available.
+:::
+
+</td>
+</tr>
+<tr>
+<td>
+Output parameter configuration
+</td>
+<td>The output parameters of the API.</td>
+</tr>
+<tr>
+<td>
+Output Type
+</td>
+<td>The output type of the API.</td>
+</tr>
+<tr>
+<td>
+Response Result
+</td>
+<td>Response result of the API.</td>
+</tr>
+</tbody>
+</table>
+
+<table>
+<caption>Object model data source</caption>
+<colgroup>
+<col style={{ width: "26.525198938992045%" }} />
+<col style={{ width: "73.47480106100795%" }} />
+</colgroup>
+<thead>
+<tr>
+<th>
+Parameter
+</th>
+<th>
+Description
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Local Data Source
+</td>
+<td>
+Enable it to make the current supOS platform to be the data
+source.
+</td>
+</tr>
+<tr>
+<td>
+supOS Address
+</td>
+<td>
+Enter another supOS address and port.
+</td>
+</tr>
+<tr>
+<td>
+supOS Tenant
+</td>
+<td>
+Enter tenant name when the supOS is multi-tenant version.
+</td>
+</tr>
+<tr>
+<td>
+supOS Authentication
+</td>
+<td>
+When connecting to another supOS platform, the supOS
+authentication is necessary. You can use the generated AK/SK
+credential to access the openAPI of supOS. For details, see <a href="System Management#managing_ak_sk_certificate">Managing AK/SK Certificate</a>.
+</td>
+</tr>
+</tbody>
+</table>
+
+<table>
+<caption>File data source</caption>
+<colgroup>
+<col style={{ width: "20.32520325203252%" }} />
+<col style={{ width: "26.82926829268293%" }} />
+<col style={{ width: "52.84552845528455%" }} />
+</colgroup>
+<thead>
+<tr>
+<th>
+Data Source
+</th>
+<th>
+Parameter
+</th>
+<th>
+Description
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td rowSpan={2}>
+Local and server file directories
+</td>
+<td>
+Type
+</td>
+<td>
+Only <strong>Server file</strong> is available.
+</td>
+</tr>
+<tr>
+<td>
+Database File Path
+</td>
+<td>
+Enter the absolute path under /volumes/supfiles/. If the path does
+not exist, the platform will create it automatically.
+</td>
+</tr>
+<tr>
+<td rowSpan={2}>
+HDFS
+</td>
+<td>
+File Directory Relative Path
+</td>
+<td>
+Directory relative path on hadoop server, and it stores HDFS files
+generated during Hive data transferring.
+</td>
+</tr>
+<tr>
+<td>
+Server address/port
+</td>
+<td>
+The IP address and port of hadoop server.
+</td>
+</tr>
+</tbody>
+</table>
+
+:::info
+- EXCEL and CSV files are supported.
+- HDFS must be working with Hive.
+:::
+
+<table>
+<caption>Big data storage</caption>
+<colgroup>
+<col style={{ width: "19.342359767891683%" }} />
+<col style={{ width: "28.820116054158607%" }} />
+<col style={{ width: "51.83752417794971%" }} />
+</colgroup>
+<thead>
+<tr>
+<th>
+Data Source
+</th>
+<th>
+Parameter
+</th>
+<th>
+Description
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Hive
+</td>
+<td>
+Data Transfer
+</td>
+<td>
+Enable it and select an HDFS data source to save data to Hive
+through HDFS.
+</td>
+</tr>
+<tr>
+<td rowSpan={4}>
+HBase
+</td>
+<td>
+Zookeeper IP/Host
+</td>
+<td>
+Enter the Zookeeper IP address. When it is under cluster
+deployment, use English comma to separate addresses.
+</td>
+</tr>
+<tr>
+<td>
+Zookeeper Port
+</td>
+<td>
+Zookeeper port. It is 2181 by default.
+</td>
+</tr>
+<tr>
+<td>
+Master IP/Host
+</td>
+<td>
+Master IP or hostname of cluster Zookeeper. Leave it empty when it
+is not under cluster deployment.
+</td>
+</tr>
+<tr>
+<td>
+Special Authentication
+</td>
+<td>
+Leave it as default.
+</td>
+</tr>
+</tbody>
+</table>
+
+:::info
+To connect with HBase data source, you need to cnfigure parameters at the X-ETL backend. For details, see <a href="../../category/using-x-etl">Using X-ETL</a>.
+:::

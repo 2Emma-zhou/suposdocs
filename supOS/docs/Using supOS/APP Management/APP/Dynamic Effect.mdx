@@ -1,0 +1,261 @@
+---
+sidebar_position: 7
+---
+
+Dynamic effects display real-time status of equipment to simulate production process going inside the plant.
+
+:::info what you should know first
+Each dynamic effect works on two types of data sources.
+- **Object**: Click <img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/appDesign/18.png" /> to select an object.
+- **Expression**: Click <img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/appDesign/18.png" /> to select an object and do simple preprocessing.
+:::
+
+## Visible
+
+Controls whether the graphic element is visible when the selected data source changes.
+1. Double-click a graphic element or right-click a grouped element, and then click <strong>Dynamic</strong> to open dynamic effect configuration window.
+2. Click <strong>Visible</strong>, and then select a data sopurce.
+:::info
+You can also select <strong>Expression</strong> from the drop-down list next to <strong>Data Source</strong> and write a script.
+:::
+3. Select <strong>Data Type</strong> and set corresponding visibility.
+
+<ul>
+<ul>
+<li><strong>Analog Quantity</strong>: Select <b>Numeric Type</b> between <strong>Quantities</strong> and <strong>Percentage</strong>, and then set the lower and upper limits as conditions for the graphic element visibility.
+</li>
+<li><strong>Switching Value</strong>: Only <strong>True</strong> and <strong>False</strong> for boolean type of data. Set effect for each value and the element displays as configured when the collected data changes.
+</li>
+</ul>
+</ul>
+
+4. Click <strong>OK</strong>.<br/>
+As shown in the following figure, when the collected value is between 0-60, the element is visible, and when it is between 60-80, it is invisible.
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/60.png" />
+
+## Movement
+
+Controls the horizontal or vertical movement of an element.
+
+:::info
+In this section, <strong>Horizontal Movement</strong> is used as an example.
+:::
+
+1. Double-click a graphic element or right-click a grouped element, and then click <strong>Dynamic</strong> to open dynamic effect configuration window.
+2. Click <strong>Horizontal Movement</strong>, and then select a data sopurce.
+3. Select <strong>Positioning</strong>.
+- <strong>Absolute</strong>: Use the current position of the element as position 0.
+- <strong>Relative</strong>: Presently unavailable.
+4. Select <strong>Numeric Type</strong> between <strong>Quantities</strong> and <strong>Percentage</strong>, and then set the minimum and maximum values and corresponding positions of the element.
+:::info
+When the set data range is exceeded, the element can only move between the set position range.
+:::
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/61.png"/>
+
+5. Click <strong>OK</strong>.
+
+## Flicker
+
+Controls the dynamic flashing and flashing color of the element.
+1. Double-click a graphic element or right-click a grouped element, and then click <strong>Dynamic</strong> to open dynamic effect configuration window.
+2. Click <strong>Flicker</strong>, and then select a data sopurce.
+- <strong>Analog Quantity</strong>: Select <b>Numeric Type</b> between <strong>Quantities</strong> and <strong>Percentage</strong>,a and then set lower and upper limits as conditions for flashing effect of the element.
+- <strong>Switching Value</strong>: Only <strong>True</strong> and <strong>False</strong> for boolean type of data. Set flashing effect for each value and the element displays as configured when the collected data changes.
+4. Set limits and corresponding flashing effects, or switch value and corresponding flashing effects, and then click <strong>OK</strong>.<br/>
+As shown in the following figure, when the collected value is between 0-20, the element is flashing between green and red at a frequency of 500.
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/62.png" />
+
+## Fill
+ 
+Controls the dynamic filling effect of the element.
+1. Double-click a graphic element or right-click a grouped element, and then click <strong>Dynamic</strong> to open dynamic effect configuration window.
+2. Click <strong>Fill</strong>, and then select a data source.
+3. Select <strong>Numeric Type</strong>.
+- The filling percentage moves along with the set value. For example, set <strong>Minimum Value</strong> to 20, and <strong>Minimum Fill Percentage</strong> to 0, meaning the element starts filling the set color when the data value reaches 20.
+- Select <strong>Fill Direction</strong>, and the element fills from the set direction.
+4. Set ranges and corresponding colors in different levels for clear notification.
+
+:::info
+- We recommend set multiple ranges to improve alarm effect. Fro example, when the data value reaches a dangerous range, set the filling color to red.
+- When the set data range is exceeded, the element filling is in default color.
+:::
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/68.png" />
+
+5. Click <strong>OK</strong>.
+
+## Scaling
+ 
+Controls the dynamic scaling of the element.
+1. Double-click a graphic element or right-click a grouped element, and then click <strong>Dynamic</strong> to open dynamic effect configuration window.
+2. Click <strong>Scaling</strong>, and then select a data sopurce.
+3. Select <strong>Numeric Type</strong>, and then set the minimum and maximum values and corresponding scaling ratio and direction.
+- The element scales along with the set value. For example, set as the image has shown, the element scales from 10%-100% when the value is 0 to 80.
+- Select <strong>Scaling Direction</strong>, and the element scales as the set direction.
+
+:::info
+The element can only be scaled based on the set ratio in equal proportions.
+:::
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/64.png" />
+
+4. Click <strong>OK</strong>.
+
+
+## Color
+
+Controls the dynamic color of the graphic element.
+1. Double-click a graphic element or right-click a grouped element, and then click <strong>Dynamic</strong> to open dynamic effect configuration window.
+2. Click <strong>Color</strong>, and then select a data sopurce.
+3. Select <strong>Data Type</strong>.
+- <strong>Analog Quantity</strong>: Select <b>Numeric Type</b> between <strong>Quantities</strong> and <strong>Percentage</strong>, and then set lower and upper limits as conditions for dynamic effect of the graphic element.
+- <strong>Switching Value</strong>: Only <strong>True</strong> and <strong>False</strong> for boolean type of data. Set color for each value and the element displays as configured when the collected data changes.
+4. Click <strong>OK</strong>.<br/>
+As shown in the following figure, when the collected value is between 0-60, the element is red, and when it is between 61-80, it is black.
+
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/65.png" />
+
+
+## Line
+Controls the line color (open graphic) or border color (enclosed graphic) of the graphic element.
+:::info
+The configuration of line or border color is similar to that of the element color. For details, see <a href="#color">Color</a>.
+:::
+
+## Tooltip
+
+Indicates data source information. You can point to the element and the tooltip appears in operation center.
+1. Double-click a graphic element or right-click a grouped element, and then click <strong>Dynamic</strong> to open dynamic effect configuration window.
+2. Click <strong>Tooltip</strong>, and then select a <strong>Numeric Type</strong>.
+- <strong>Dynamic Data</strong>: Select a data source, and when hovering over the element, the selected data source is displayed.
+- <strong>Static Data</strong>: Set a tip and when hovering over the element, the set content isdisplayed.
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/66.png" />
+
+3. Click <strong>OK</strong>.
+
+## Turn
+
+:::caution
+**Turn** and **Scaling** cannot be enabled at the same time on the same element.
+:::
+
+Controls the dynamic turning angle of the element.
+1. Double-click a graphic element or right-click a grouped element, and then click <strong>Dynamic</strong> to open dynamic effect configuration window.
+2. Click <strong>Turn</strong>, and then select a data sopurce.
+3. Select <strong>Data Type</strong>.
+- <strong>Analog Quantity</strong>: Set the minimum and maximum values and corresponding turning angles. For example, set <strong>Minimum Value</strong> and <strong>Maximum Value</strong> to 20 and 100 respectively, and <strong>Corresponding Angle</strong> to 0 and 180, meaning the element stays the same when the data value reaches 20 and turns upside down when it reaches 100.
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/67.png" />
+
+- <strong>Switching Value</strong>: Set <strong>Rotation Speed</strong>, and then select <strong>Rotation Timing</strong> and <strong>Rotation Direction</strong>. For example, in the figure below, the element rotates in clockwise at a speed of 30 seconds a cycle when the switching value is <strong>True</strong>.
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/67.png" />
+
+4. Click <strong>OK</strong>.
+
+## Flow
+
+:::info
+For **Pipe** element only.
+:::
+
+Controls the dynamic flow effect of the pipe element.
+1. Double-click a pipe, and then click <strong>Dynamic</strong> to open dynamic effect configuration window.
+2. Click <strong>Flow</strong>, and then select a data sopurce.
+3. Select <strong>Data Type</strong>.
+- <strong>Analog Quantity</strong>: Set value ranges, corresponding color, flow speed and direction of the pipe flow.
+- <strong>Switching Value</strong>: Set corresponding color, flow speed and direction of the flow for <strong>True</strong> and <strong>False</strong>.
+4. Set <strong>Line Length</strong> and <strong>Interval</strong>, and then click <strong>OK</strong>.
+- The larger the **Line Length**, the thicker the line is.
+- The larger the **Interval**, the bigger the space interval between lines.
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/69.png"/>
+
+5. Click <strong>OK</strong>.
+
+## Text Dynamic Effect
+
+Controls the dynamic display effect of text element.
+1. Double-click a text element, and then click <strong>Dynamic</strong> to open dynamic effect configuration window.
+
+- Static Text Content
+
+<ol>
+<ol>
+<li>
+Click <strong>Static Text Content</strong>, and then set the content.
+</li>
+<li>
+Click <strong>OK</strong>, and the set content is displayed on the text element.
+</li>
+</ol>
+</ol>
+
+- Word
+
+<ol>
+<ol>
+<li>
+Click <strong>Word</strong>, and then select a data source.
+</li>
+<li>
+Set ranges and corresponding text contents, and then click <strong>OK</strong>.
+<p>
+When the data reaches the set limits, corresponding texts are
+displayed.
+</p>
+</li>
+</ol>
+</ol>
+
+- Text Display
+
+<ol>
+<ol>
+<li>Click <strong>Text Display</strong>, and then select a data source.
+</li>
+<li>
+Select a color, and then click <strong>OK</strong>.
+<p>The data source value is displayed in the set color.</p>
+</li>
+</ol>
+</ol>
+
+- Analog Quantity Display
+
+<ol>
+<ol>
+<li>
+Click <strong>Analog Quantity Display</strong>, and then select a data source.
+</li>
+<li>
+Set ranges and corresponding text colors, and then click <strong>OK</strong>.
+<p>
+When the data reaches the set limits, texts are displayed in
+set colors.
+</p>
+</li>
+</ol>
+</ol>
+
+- Switching Value Display
+
+<ol>
+<ol>
+<li>
+Click <strong>Switching Value Display</strong>, and then select a data source.
+</li>
+<li>
+Set corresponding texts and colors for <strong>TRUE</strong> and <strong>FALSE</strong>, and then click <strong>OK</strong>.
+<p>
+When the value is <strong>TRUE</strong> or <strong>False</strong>, set texts are
+displayed in set colors.
+</p>
+</li>
+</ol>
+</ol>

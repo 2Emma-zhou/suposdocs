@@ -1,0 +1,37 @@
+Set quality control rules, and check data sources according to the rules.
+
+### Creating General rules
+1. Log in to supOS, and then select **Data Intelligence** > **Data Governance** > **Data quality** > **QC rule**.
+2. Select **New** > **New directoy** at the top to add a directory.
+3. Select **New** > **Create rule**, and then select a rule type.
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supDAM/22.png)
+4. Configure the rule information, and then click **Save**.
+- Null check: Check whether all selected fields are null or at least one of them is null.
+:::info
+General information, such as rule name, rule category, data source, field to be checked, is required for each rule type.
+:::
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supDAM/23.png)
+
+- Duplication check: Check whether the selected fields are duplicated. For multiple fields, duplication is only detected when all fields contain duplicate data. <br/>
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supDAM/24.png)
+
+- Value domain check: Check whether the selected fields are within the set range. Multiple ranges are available.
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supDAM/25.png)
+
+- Data format check: Check whether the selected fields conform to the set data format.
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supDAM/26.png)
+
+- Enumeration value check: Check whether the selected fields are out of the numerated values. Use comma to seperate multiple values.<br/>
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supDAM/27.png)
+
+### Creating Rules Based on Data Standard
+
+1. Select **New** > **Create rule based on standard**, and then select a standard.
+:::info
+The selected standard must be configured with quality attribute and mapped with matching type of fields.
+:::
+2. Select mapped fields, and then click **Save**.
+:::info
+Field names can only be combinations of characters, letters, numbers and underscore.
+:::
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supDAM/23.png)

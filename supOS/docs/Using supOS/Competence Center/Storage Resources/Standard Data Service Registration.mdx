@@ -1,0 +1,63 @@
+### Registering Data Service
+Access a server and read the data in real time.
+
+1. In **Resources Management**, click **Add**.
+2. Under **register resource**, select **DataServices**.
+3. Enter the information.
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/55.png"/>
+
+<ul>
+<ul>
+<li><strong>Heterogeneous Library Address/Port</strong>: Enter the IP and port of the server.
+
+:::info
+The port is 6081 by default when setting the port of the data source to 2800 in standard data service, and keept it the same as the default port on **Web.config**. The binding method is **WebHttpBinding**.
+:::
+
+</li>
+<li><strong>supOS address</strong>: Enter the IP address of the supOS server for standalone deployment and the IP of nginx_vip for cluster deployment. </li>
+</ul>
+</ul>
+
+4. Click <strong>OK</strong>.
+
+### Syncing Tags
+
+1. Select the data service you added, and then click <strong>sync number</strong>.
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/56.png"/>
+
+2. Click **enumeration** to get all public tags of the data service.
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/57.png"/>
+
+3. Select tags, and then click **synchronous resource** to synchronize the selected tags to supOS.
+
+:::info what happens when tags are deleted
+- For synchronized tags, they will be marked as **Invalid** under **Synchronized**.
+- For unsynchronized tags, they will be deleted from **unsynchronized**.
+:::
+4. Select  <strong>Object Model Management</strong> > <strong>Object Instance</strong> > <strong>Entity Template</strong> > <strong>Link Template</strong>, check whether the added data service is listed.
+
+:::info
+After adding the data service, a new object instance with the same name is added with the connected data, and only synchronized tags can create corresponding attributes under the instance.
+:::
+
+### Resource List Description
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/58.png"/>
+
+- **origin**: The source of the data resource.
+
+<ul>
+<ul>
+<li><b>Internal</b>: Resources applied from the datalake.</li>
+<li><b>Heterogeneous</b>: External PI and data services registered on supOS.</li>
+<li><b>Register</b>: External databases registered on supOS.</li>
+<li><b>System</b>: Reserved.</li>
+</ul>
+</ul>
+
+- **Access Address**: Automatically generated access address of the resource.
+- **release**: Delete the corresponding resource.

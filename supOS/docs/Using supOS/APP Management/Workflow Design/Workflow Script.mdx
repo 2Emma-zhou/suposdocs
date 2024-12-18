@@ -1,0 +1,226 @@
+---
+hide_title: true
+---
+
+Workflow script is normally used after submitting a to do task. To do task triggers the script to execute and complete the workflow.
+:::info
+Write the script in a template service for workflows calling.
+:::
+## Creating Object Service
+Add 3 input parameters to represent data involved in workflows.
+- data: JSON data from business form transmitted from the previous task.
+
+```json
+{
+    "name": "Emma",
+    "sex": "F"
+    ...
+}
+```
+- auditData: Branch task information.
+
+<table>
+                <colgroup>
+                  <col style={{ width: "25%" }} />
+                  <col style={{ width: "25%" }} />
+                  <col style={{ width: "50%" }} />
+                </colgroup>
+                <thead>
+                  <tr>
+                    <th>
+                      Parameter
+                    </th>
+                    <th>
+                      Type
+                    </th>
+                    <th>
+                      Description
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                      name
+                    </td>
+                    <td>
+                    string
+                    </td>
+                    <td>
+                      Branch name
+                    </td>
+                    </tr>
+                    <tr>
+                    <td>
+                      reject
+                    </td>
+                    <td>
+                      boolean
+                    </td>
+                    <td>
+                      Whether to reject the branch task
+                    </td>
+                    </tr>
+                    <tr>
+                    <td>
+                      order
+                    </td>
+                    <td>
+                      integer
+                    </td>
+                    <td>
+                      Branch code.
+                    </td>
+                    </tr>
+                    </tbody>
+                    </table>
+
+- flowData: Workflow information.
+
+<table>
+<colgroup>
+                  <col style={{ width: "25%" }} />
+                  <col style={{ width: "25%" }} />
+                  <col style={{ width: "50%" }} />
+                </colgroup>
+                <thead>
+                  <tr>
+                    <th>
+                      Parameter
+                    </th>
+                    <th>
+                      Type
+                    </th>
+                    <th>
+                      Description
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                      processId
+                    </td>
+                    <td>
+                    string
+                    </td>
+                    <td>
+                      Process instance ID
+                    </td>
+                    </tr>
+                    <tr>
+                    <td>
+                      processName
+                    </td>
+                    <td>
+                      string
+                    </td>
+                    <td>
+                      Process name
+                    </td>
+                    </tr>
+                    <tr>
+                    <td>
+                      taskName
+                    </td>
+                    <td>
+                      string
+                    </td>
+                    <td>
+                      To do task name
+                    </td>
+                    </tr>
+                    <tr>
+                    <td>
+                      taskId
+                    </td>
+                    <td>
+                      string
+                    </td>
+                    <td>
+                      To do task ID
+                    </td>
+                    </tr>
+                    <tr>
+                    <td>
+                      userId
+                    </td>
+                    <td>
+                      string
+                    </td>
+                    <td>
+                      Executor ID of the to do task
+                    </td>
+                    </tr>
+                    <tr>
+                    <td>
+                      staffName
+                    </td>
+                    <td>
+                      string
+                    </td>
+                    <td>
+                      Executor name
+                    </td>
+                    </tr>
+                    <tr>
+                    <td>
+                      initiatorId
+                    </td>
+                    <td>
+                      string
+                    </td>
+                    <td>
+                      Process initiator ID
+                    </td>
+                    </tr>
+                    <tr>
+                    <td>
+                      initiatorName
+                    </td>
+                    <td>
+                      string
+                    </td>
+                    <td>
+                      Process initiator name
+                    </td>
+                    </tr>
+                    <tr>
+                    <td>
+                      createTime
+                    </td>
+                    <td>
+                      string
+                    </td>
+                    <td>
+                      Receive time of the to do task
+                    </td>
+                    </tr>
+                    </tbody>
+                    </table>
+
+## Writing Service Script
+
+```javascript
+var formDataJson = JSON.parse(data); // JSON data of the form
+var auditDataJson = JSON.parse(auditData);
+var flowDataJson = JSON.parse(flowData);
+
+var name = auditDataJson.name; //branch task name
+var order = auditDataJson.order; //branch task name
+var isReject = auditDataJson.reject; //whether to reject the branch task
+
+var taskName = flowDataJson.taskName;//currently submitted task name
+var startUser = flowDataJson.initiatorName;//process initiator name
+var processId = flowDataJson.processId;//current process instance ID
+var taskId = flowDataJson.taskId; //currently submitted task ID
+
+//TODO specific business logic
+.....
+
+var result = {
+    "code": "200",  // 200 represents success. Error returns codes other than 200 and 201
+    "message": "error message"
+}
+result;
+```

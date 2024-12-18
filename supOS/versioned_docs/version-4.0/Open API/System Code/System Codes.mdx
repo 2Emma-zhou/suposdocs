@@ -1,0 +1,151 @@
+---
+hide_title: true
+---
+
+<div className='div'>
+<div className='title'>
+
+## ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/openAPI/4.png) Get Code Value by Entity Code
+
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Path</div>
+<div className='rightCol'>
+
+```
+http://{supOS ip:port}/open-api/systemcode/v2/entities/{entityCode}/values
+```
+
+</div>
+<div className='leftCol'>Query parameter</div>
+<div className='rightCol'>
+
+- keyword: Keyword for fuzzy matching.
+- includeDeleted: Whether to contain deleted code values. The default is false.
+- current: Required integer. Current page number, starting from 1.
+- pageSize: Required integer. Items on the page, default is 20 and the maximum is 100.
+
+</div>
+<div className='leftCol'>Header parameter</div>
+<div className='rightCol'>
+
+Accept-Language: Default is the server language. Options are **en-us** and **zh-cn**.
+
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+
+- 200: Successful.
+```json
+{
+  "list": [
+    {
+      "code": "hangzhou",
+      "name": "sys.hangzhou",
+      "displayName": "Hangzhou"
+    },
+    {
+      "code": "zhengzhou",
+      "name": "sys.zhengzhou",
+      "displayName": "Zhengzhou"
+    }
+  ],
+  "pagination": {
+    "total": 2,
+    "pageSize": 20,
+    "current": 1
+  }
+}
+```
+- 400
+
+```json
+{
+  "code": 100111010,
+  "message": "entityCode cannot be empty"
+}
+```
+
+<ul>
+<ul>
+<li>100111011: Current page number cannot be empty.</li>
+<li>100111012: Number of items per page cannot be empty.</li>
+<li>100111013: Current page number cannot be less than 1.</li>
+<li>100111014: Number of items per page cannot be less than 1.</li>
+<li>100111015: Number of items per page cannot be greater than 100.</li>
+<li>100111016: Entity corresponding to the system code does not exist.</li>
+</ul>
+</ul>
+
+</div>
+</div>
+</div>
+
+<div className='div'>
+<div className='title'>
+
+## ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/openAPI/4.png) Get Code Details by Entity Code and Value Code
+
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Path</div>
+<div className='rightCol'>
+
+```
+http://{supOS ip:port}/open-api/systemcode/v2/entities/{entityCode}/values/{valueCodes}
+```
+
+</div>
+<div className='leftCol'>Query parameter</div>
+<div className='rightCol'>
+
+**includeDeleted**: Whether to contain deleted code values. The default is false.
+
+</div>
+<div className='leftCol'>Header parameter</div>
+<div className='rightCol'>
+
+Accept-Language: Default is the server language. Options are **en-us** and **zh-cn**.
+
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+
+- 200: Successful.
+```json
+{
+  "list": [
+    {
+      "code": "hangzhou",
+      "name": "sys.hangzhou",
+      "displayName": "Hangzhou"
+    },
+    {
+      "code": "zhengzhou",
+      "name": "sys.zhengzhou",
+      "displayName": "Zhengzhou"
+    }
+  ]
+}
+```
+- 400
+
+```json
+{
+  "code": 100111010,
+  "message": "entityCode cannot be empty"
+}
+```
+
+<ul>
+<ul>
+<li>100111016: Entity corresponding to the system code does not exist.</li>
+<li>100111018: Value code array cannot be longer than 20.</li>
+</ul>
+</ul>
+
+</div>
+</div>
+</div>

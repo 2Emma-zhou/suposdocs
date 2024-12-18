@@ -1,0 +1,167 @@
+---
+hide_title: true
+---
+
+<div className='div'>
+<div className='title'>
+
+## ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/openAPI/4.png) Get Model List
+
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Path</div>
+<div className='rightCol'>
+
+```
+http://{supOS ip:port}/open-api/bigdata/v2/models
+```
+
+</div>
+<div className='leftCol'>Query parameter</div>
+<div className='rightCol'>
+
+- name: Model name. Fuzzy match based on the set name.
+- trainable: Whether it is trainable. Integer. 0-no and 1-yes.
+- pageNo: Page number.
+- pageSize: Items on the page.
+
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+
+- 200: Successful.
+
+```json
+{
+  "list": [
+    {
+      "id": "uuiduuiduuid",
+      "name": "model-1",
+      "description": "linear regression training model",
+      "code": "Xsdfsfd24dfsadfsaf",
+      "inParams": "[{\"name\":\"a\",\"dataType\":\"Integer\",\"description\":\"a\"},{\"name\":\"y\",\"dataType\":\"String\",\"description\":\"y\"}]",
+      "outParams": "[{\"name\":\"pre\",\"dataType\":\"Double\",\"description\":\"a\"}]",
+      "trainable": 0,
+      "createdTime": 15612344562000,
+      "updateTime": 15612344562000
+    }
+  ],
+  "pagination": {
+    "total": 100,
+    "pageSize": 20,
+    "current": 1
+  }
+}
+```
+- 400
+
+```json
+{
+  "code": 40000404,
+  "message": "unknown error"
+}
+```
+
+</div>
+</div>
+</div>
+
+<div className='div'>
+<div className='title'>
+
+## ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/openAPI/4.png) Get Model Version List
+
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Path</div>
+<div className='rightCol'>
+
+```
+http://{supOS ip:port}/open-api/bigdata/v2/models/{modelCode}/versions
+```
+
+**modelCode**: Model code. Required. String.
+
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+
+- 200: Successful.
+
+```json
+{
+  "list": [
+    {
+      "id": "uuiduuiduuid",
+      "description": "upgrade model precision to 99%",
+      "modelCode": "Xsdfsfd24dfsadfsaf",
+      "version": "v1.0",
+      "createdTime": 15612344562000
+    }
+  ]
+}
+```
+- 400
+
+```json
+{
+  "code": 40000404,
+  "message": "unknown error"
+}
+```
+
+</div>
+</div>
+</div>
+
+<div className='div'>
+<div className='title'>
+
+## ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/openAPI/1.png) Call Runtime Model
+
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Path</div>
+<div className='rightCol'>
+
+```
+http://{supOS ip:port}/open-api/bigdata/v2/models/{modelCode}/trainings
+```
+
+**modelCode**: Model code. Required. String.
+
+</div>
+<div className='leftCol'>Request body</div>
+<div className='rightCol'>
+
+- file: Required. Training data file. Excel2007 and csv are supported (with comma as separator).
+- source: Training source.
+- sourceId: Training source ID.
+- sourceName: Training source name.
+
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+
+- 201: Successful.
+
+```json
+{
+  "id": "uuiduuiduuid"  //training record ID
+}
+```
+- 400
+
+```json
+{
+  "code": 40000404,
+  "message": "unknown error"
+}
+```
+
+</div>
+</div>
+</div>

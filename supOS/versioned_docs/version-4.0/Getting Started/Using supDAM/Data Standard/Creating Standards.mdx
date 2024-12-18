@@ -1,0 +1,34 @@
+Add standard set and new standards for subsequent quality control on added data sources.
+
+### Adding Standard Set
+1. Log in to supOS, and then select **Data Intelligence** > **Data Governance** > **Data standards** > **Standards Management**.
+2. Click ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supDAM/17.png) to add a new standard set.
+3. Set basic information, and then click **Select attributes**.
+4. Select an attribute type, and then select corresponding attributes for the standard.
+:::info
+For example, when setting QC rules based on a standard set, the standard set must have enabled **Quality attribute**. Otherwise, the rule cannot be created.
+:::
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supDAM/18.png)
+
+5. Click **Confirm**.
+6. On the attribute list, set whether the attribute is required and whether to display it on the standard list, and then click **Confirm**.
+
+### Adding Standard
+1. Select the standard set, click **New standard**.
+2. Enter information of the selected attributes, and then click **Confirm**.
+:::info
+Different types of attributes require different configuration, and quality attributes are used as an example in this section.
+:::
+
+- Data specification: Select a type of data and corresponding expressions are displayed in **Expression**. You can also select **Custom** and set specific expression for data format check.
+- Value range: Set the value range of the standard for data check.
+- Data completeness: Select whether the checked fields can or cannot be empty.
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supDAM/19.png)
+
+3. Click **Publish** under **Operation** of the standard to publish it.
+:::info
+Published standards cannot be directly deleted when they are enabled. You need to disable them first under **Standard execution**.
+:::
+

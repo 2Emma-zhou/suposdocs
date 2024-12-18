@@ -1,0 +1,49 @@
+Access a server and read the data in real time.
+
+1. Log in to supOS, and then click  <img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/platform/7.png"/> at the upper-right corner to go to the design center.
+2. Select <strong>Global Configuration</strong> > <strong>Heterogeneous Resources</strong> > <strong>Standard Data Service</strong>, and then click <strong>New</strong>.
+3. Enter the information.
+
+<ul>
+<ul>
+<li><strong>server address</strong>/<strong>server port</strong>: Enter the IP and port of the server.</li>
+<li><strong>supOS address</strong>: Enter the IP address of the supOS server for standalone deployment and the IP of k8s workermain node server for cluster deployment. </li>
+</ul>
+</ul>
+
+<img width={350} src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/platform/59.png"/>
+
+4. Click <strong>OK</strong>.
+5. Select  <strong>Object Model Management</strong> > <strong>Object Instance</strong> > <strong>Entity Template</strong> > <strong>Link Template</strong>, check whether the added database is listed.
+
+:::info
+After adding the database, a new object instance with the same name is added with the connected data.
+:::
+
+6. (Optional) Filter the tags connected to the supOS platform through SUPCON.
+
+<ul>
+<ul>
+<li>Only the selected tags can create corresponding attributes in the link object instance.</li>
+<li>Only the selected tags can upload data in real time to supOS and its historical data can be searched.</li>
+</ul>
+</ul>
+
+<ol>
+<ol>
+<li>Select a standard data service on the left, and then click <strong>Enumeration</strong>.
+
+:::info
+If tags are displayed as red, meaning they are deleted in SUPCON but not in the supOS platform. You can select them and click <strong>Delete</strong>.
+:::
+
+</li>
+<li>Select tags to be connected to the supOS platform, click <strong>Synchronize Resource</strong>, and then click <strong>OK</strong> in the pop-up window.
+
+:::info
+The selected tags are synced to the attributes of the corresponding supOS object instance.
+:::
+
+</li>
+</ol>
+</ol>

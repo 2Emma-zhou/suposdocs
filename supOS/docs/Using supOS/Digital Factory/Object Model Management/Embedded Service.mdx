@@ -1,0 +1,1920 @@
+---
+hide_title: true
+sidebar_position: 7
+slug: Embedded Service
+---
+
+## Embedded Service in Entity Template
+Entity services can only apply to entity instances. Entity template, corresponding properties and instance used in following examples are listed below:
+- Template: device. Namespace is **factory**.
+- Property:
+<ul><li>code: string. Represents device code.</li></ul>
+<ul><li>name: string. Represents device name.</li></ul>
+<ul><li>workshop: string. Represents workshop of the device.</li></ul>
+<ul><li>first_use_time: Date. Represents the time when the device is first used.</li></ul>
+<ul><li>temperature: Float. Represents device temperature.</li></ul>
+<ul><li>pressure: Float. Represents device pressure.</li></ul>
+- Instance: Alias is **boiler1**.
+:::info
+Namespaces in examples can be skipped when the alias is unique. 
+:::
+
+<div className='div'>
+<div className='title'>
+
+### getPropertyValue
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Usage</div>
+<div className='rightCol'>
+Get real-time value of the property.
+</div>
+<div className='leftCol'>Input parameter</div>
+<div className='rightCol'>
+Property namespace.property alias
+
+```json
+{
+"propName": "namespace.propertyName"
+}
+```
+
+</div>
+<div className='leftCol'>Output parameter</div>
+<div className='rightCol'>
+Instant value of the property.
+</div>
+<div className='leftCol'>Used in custom service</div>
+<div className='rightCol'>
+
+```javascript
+var inputs = {
+    "propName": "factory.temperature"
+    }
+```
+
+</div>
+<div className='leftCol'>Used by openAPI</div>
+<div className='rightCol'>
+
+{domain}/runtime/factory/template/device/instance/boiler1/service/system/getPropertyValue.
+
+```json
+{
+//post body
+"propName": "factory.temperature"
+}
+```
+
+</div>
+</div>
+</div>
+<div className='div'>
+<div className='title'>
+
+### getPropertyValues
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Usage</div>
+<div className='rightCol'>
+Get real-time value of the property in batches.
+</div>
+<div className='leftCol'>Input parameter</div>
+<div className='rightCol'>
+propNames is the namespace and alias of the property to be searched for. Multiple properties are separated by commas.
+
+```json
+{
+"propNames": "namespace.propertyName1,namespace.propertyName2"
+}
+```
+
+</div>
+<div className='leftCol'>Output parameter</div>
+<div className='rightCol'>
+
+```json
+{
+"/templateNamespace/templateName/instanceName/propertyNamespace/propertyName1": 50,
+"/templateNamespace/templateName/instanceName/propertyNamespace/propertyName2": 150
+}
+```
+
+</div>
+<div className='leftCol'>Used in custom service</div>
+<div className='rightCol'>
+
+```json
+{
+"propNames": "factory.pressure,factory.temperature"
+}
+```
+
+</div>
+<div className='leftCol'>Used by openAPI</div>
+<div className='rightCol'>
+
+{domain}/runtime/factory/template/device/instance/boiler1/service/system/getPropertyValues.
+
+```json
+{
+//post body
+"propNames": "factory.pressure,factory.temperature"
+}
+```
+
+</div>
+</div>
+</div>
+
+<div className='div'>
+<div className='title'>
+
+### getPropertyVQTValue
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Usage</div>
+<div className='rightCol'>
+Get real-time value of the property and return the data in VQT format.
+</div>
+<div className='leftCol'>Input parameter</div>
+<div className='rightCol'>
+Property namespace.property alias
+
+```json
+{
+"propName": "namespace.propertyName"
+}
+```
+
+</div>
+<div className='leftCol'>Output parameter</div>
+<div className='rightCol'>
+
+```json
+{
+"value": 18,
+"tags": {
+"name": "/templateNamespace/templateName/instanceName/propertyNamespace/propertyName",
+"value": 50,
+"status": "0",
+"timeStamp": 1612355987068
+}
+}
+```
+
+</div>
+<div className='leftCol'>Used in custom service</div>
+<div className='rightCol'>
+
+```javascript
+var inputs = {
+"propName": "factory.temperature"
+}
+```
+
+</div>
+<div className='leftCol'>Used by openAPI</div>
+<div className='rightCol'>
+
+{domain}/runtime/factory/template/device/instance/boiler1/service/system/getPropertyVQTValue.
+
+```json
+{
+//post body
+"propNames": "namespace.propertyName1,namespace.propertyName2"
+}
+```
+
+</div>
+</div>
+</div>
+
+<div className='div'>
+<div className='title'>
+
+### getPropertyVQTValues
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Usage</div>
+<div className='rightCol'>
+Get real-time value of the property in batches and return the data in VQT format.
+</div>
+<div className='leftCol'>Input parameter</div>
+<div className='rightCol'>
+Property namespace.property alias. Multiple properties are separated by commas.
+
+```json
+{
+"propNames": "namespace.propertyName"
+}
+```
+
+</div>
+<div className='leftCol'>Output parameter</div>
+<div className='rightCol'>
+
+```json
+{
+"/templateNamespace/templateName/instanceName/propertyNamespace/propertyName1": {
+    "name": "/templateNamespace/templateName/instanceName/propertyNamespace/propertyName1",
+    "value": 50,
+    "status": "0",
+    "timeStamp": 1612356497037
+    },
+"/templateNamespace/templateName/instanceName/propertyNamespace/propertyName2": {
+    "name": "/templateNamespace/templateName/instanceName/propertyNamespace/propertyName2",
+    "value": 150,
+    "status": "0",
+    "timeStamp": 1612356497037
+    }
+}
+```
+
+</div>
+<div className='leftCol'>Used in custom service</div>
+<div className='rightCol'>
+
+```javascript
+var inputs = {
+"propNames": "factory.pressure,factory.temperature"
+}
+```
+
+</div>
+<div className='leftCol'>Used by openAPI</div>
+<div className='rightCol'>
+
+{domain}/runtime/factory/template/device/instance/boiler1/service/system/getPropertyVQTValues.
+
+```json
+{
+//post body
+"propNames": "factory.pressure,factory.temperature"
+}
+```
+
+</div>
+</div>
+</div>
+
+<div className='div'>
+<div className='title'>
+
+### getPropertyLastValue
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Usage</div>
+<div className='rightCol'>
+Get the last normal history value of the property.
+</div>
+<div className='leftCol'>Input parameter</div>
+<div className='rightCol'>
+Property namespace.property alias
+
+```json
+{
+"propName": "namespace.propertyName"
+}
+```
+
+</div>
+<div className='leftCol'>Output parameter</div>
+<div className='rightCol'>
+Outputs the last normal history value.
+</div>
+<div className='leftCol'>Used in custom service</div>
+<div className='rightCol'>
+
+```javascript
+var inputs = {
+"propName": "factory.temperature"
+}
+```
+
+</div>
+<div className='leftCol'>Used by openAPI</div>
+<div className='rightCol'>
+
+{domain}/runtime/factory/template/device/instance/boiler1/service/system/getPropertyLastValue.
+
+```json
+{
+//post body
+"propName": "factory.temperature"
+}
+```
+
+</div>
+</div>
+</div>
+
+<div className='div'>
+<div className='title'>
+
+### getPropertyLastVQTValue
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Usage</div>
+<div className='rightCol'>
+Get the last normal history value of the property and return the data in VQT format.
+</div>
+<div className='leftCol'>Input parameter</div>
+<div className='rightCol'>
+Property namespace.property alias
+
+```json
+{
+"propName": "namespace.propertyName"
+}
+```
+
+</div>
+<div className='leftCol'>Output parameter</div>
+<div className='rightCol'>
+
+```json
+{
+"time": "2021-02-03T13:16:17Z",
+"value": 50,
+"status": "0"
+}
+```
+
+</div>
+<div className='leftCol'>Used in custom service</div>
+<div className='rightCol'>
+
+```javascript
+var inputs = {
+"propName": "factory.temperature"
+}
+```
+
+</div>
+<div className='leftCol'>Used by openAPI</div>
+<div className='rightCol'>
+
+{domain}/runtime/factory/template/device/instance/boiler1/service/system/getPropertyLastVQTValue.
+
+```json
+{
+//post body
+"propName": "factory.temperature"
+}
+```
+
+</div>
+</div>
+</div>
+
+
+<div className='div'>
+<div className='title'>
+
+### getPropertiesHistory
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Usage</div>
+<div className='rightCol'>
+Get history value of the property.
+</div>
+<div className='leftCol'>Input parameter</div>
+<div className='rightCol'>
+<ul>
+<li>fill: strategy of filling values.</li>
+<li>groupBy: Group query in time sequence.</li>
+<li>limit: Return data volume.</li>
+<li>offset: Offset value.</li>
+<li>select: Required. Search for full names of tags. You can define query strategy before tags such as first, max, sum and more.</li>
+<li>where: Required. Search time period. The minimum time is required.</li>
+</ul>
+
+```json
+{
+"fill": {
+    "strategy": "previous"
+    },
+"groupBy": {
+    "time": "300s"
+    },
+"limit": 5,
+"offset": 0,
+"select": [
+    "first(\"templateNamespace.templateName.instanceName.propertyNamespace.propertyName\")"
+    ],
+"where": {
+    "and": {
+    "timestamp": {
+        "ge": "",
+        "gt": "2020-05-26T05:30:00Z",
+        "le": "",
+        "lt": "2020-05-26T06:15:01Z"
+        }
+    }
+}
+}
+```
+
+</div>
+<div className='leftCol'>Used in custom service</div>
+<div className='rightCol'>
+
+```javascript
+var inputs = {
+"fill": {
+    "strategy": "previous"
+    },
+"groupBy": {
+    "time": "300s"
+    },
+"limit": 5,
+"offset": 0,
+"select": [
+    "first(\"factory.device.boiler1.factory.temperature\")"
+    ],
+"where": {
+"and": {
+    "timestamp": {
+        "ge": "",
+        "gt": "2020-05-26T05:30:00Z",
+        "le": "",
+        "lt": "2020-05-26T06:15:01Z"
+    }
+}
+}
+}
+
+var param = {
+"inputs": JSON.stringify(inputs)
+}
+
+var propValue = objects.boiler1.getPropertiesHistory(param)
+```
+
+</div>
+<div className='leftCol'>Used by openAPI</div>
+<div className='rightCol'>
+
+{domain}/runtime/factory/template/device/instance/boiler1/service/system/getPropertiesHistory.
+
+```json
+{
+//post body
+"fill": {
+    "strategy": "previous"
+    },
+    "groupBy": {
+        "time": "300s"
+        },
+    "limit": 5,
+    "offset": 0,
+    "select": [
+        "first(\"factory.device.boiler1.factory.temperature\")"
+        ],
+    "where": {
+    "and": {
+        "timestamp": {
+            "ge": "",
+            "gt": "2020-05-26T05:30:00Z",
+            "le": "",
+            "lt": "2020-05-26T06:15:01Z"
+        }
+    }
+    }
+}
+```
+
+</div>
+</div>
+</div>
+
+<div className='div'>
+<div className='title'>
+
+### getCertainHistory
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Usage</div>
+<div className='rightCol'>
+Get the latest history value of the property according to the defined time and processing strategy.
+</div>
+<div className='leftCol'>Input parameter</div>
+<div className='rightCol'>
+<ul>
+<li>propNames: Namespace and alias of the property to be searched for.</li>
+<li>time: Query time.</li>
+<li>strategy: Query strategy. <strong>pre</strong> is the former value of the set query time and <strong>next</strong> is the next one.</li>
+</ul>
+
+```json
+{
+"propNames": [
+    "namespace.propertyName1",
+    "namespace.propertyName2"
+    ],
+"time": "2021-01-01T12:00:00Z",
+"strategy": "pre/next"
+}
+```
+
+</div>
+<div className='leftCol'>Output parameter</div>
+<div className='rightCol'>
+
+```json
+{
+"map": {
+"/templateNamespace/templateName/instanceName/propertyNamespace/propertyName1": 50,
+"/templateNamespace/templateName/instanceName/propertyNamespace/propertyName2": 150
+}
+}
+```
+
+</div>
+<div className='leftCol'>Used in custom service</div>
+<div className='rightCol'>
+
+```javascript
+var inputs = {
+"propNames": [
+    "factory.temperature",
+    "factory.pressure"
+    ],
+"time": "2021-01-01T12:00:00Z",
+"strategy": "pre"
+}
+var param = {
+"inputs": JSON.stringify(inputs)
+}
+
+var propValue = objects.boiler1.getCertainHistory(param)
+```
+
+</div>
+<div className='leftCol'>Used by openAPI</div>
+<div className='rightCol'>
+
+{domain}/runtime/factory/template/device/instance/boiler1/service/system/getCertainHistory.
+
+```json
+{
+//post body
+"propNames": [
+    "factory.temperature",
+    "factory.pressure"
+],
+"time": "2021-01-01T12:00:00Z",
+"strategy": "next"
+}
+```
+
+</div>
+</div>
+</div>
+
+
+<div className='div'>
+<div className='title'>
+
+### setPropertyValue
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Usage</div>
+<div className='rightCol'>
+Set the real-time value of the property.
+</div>
+<div className='leftCol'>Input parameter</div>
+<div className='rightCol'>
+<ul>
+<li>propName: Namespace and alias of the property to be searched for.</li>
+<li>propValue: Property value to be set.</li>
+</ul>
+
+```json
+{
+"propName": "namespace.propertyName",
+"propValue": 123
+}
+```
+
+</div>
+<div className='leftCol'>Output parameter</div>
+<div className='rightCol'>
+
+```json
+{
+"success":true
+}
+```
+
+</div>
+<div className='leftCol'>Used in custom service</div>
+<div className='rightCol'>
+
+```javascript
+var inputs = {
+"propName": "factory.temperature",
+"propValue": 123
+}
+
+var result = objects.boiler1.setPropertyValue(inputs)
+```
+
+</div>
+<div className='leftCol'>Used by openAPI</div>
+<div className='rightCol'>
+
+{domain}/runtime/factory/template/device/instance/boiler1/service/system/setPropertyValue.
+
+```json
+{
+//post body
+"propName": "factory.temperature",
+"propValue": 123
+}
+```
+
+</div>
+</div>
+</div>
+
+
+<div className='div'>
+<div className='title'>
+
+### setPropertyValues
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Usage</div>
+<div className='rightCol'>
+Set the real-time value of the property in batches.
+</div>
+<div className='leftCol'>Input parameter</div>
+<div className='rightCol'>
+<ul>
+<li>key: Namespace and alias of the property to be searched for.</li>
+<li>value: Property value to be set.</li>
+</ul>
+
+```json
+{
+"namsapace.propertyName1": "11",// key1: value1
+"namsapace.propertyName2": "zhangsan"// key2: value2
+}
+```
+
+</div>
+<div className='leftCol'>Output parameter</div>
+<div className='rightCol'>
+
+```json
+{
+"success":true
+}
+```
+
+</div>
+<div className='leftCol'>Used in custom service</div>
+<div className='rightCol'>
+
+```javascript
+var inputs = {
+"factory.temperature": 50,
+"factory.pressure": 150
+}
+
+objects.boiler1.setPropertyValues(inputs)
+```
+
+</div>
+<div className='leftCol'>Used by openAPI</div>
+<div className='rightCol'>
+
+{domain}/runtime/factory/template/device/instance/boiler1/service/system/setPropertyValues.
+
+```json
+{
+//post body
+"factory.temperature": 50,
+"factory.pressure": 150
+}
+```
+
+</div>
+</div>
+</div>
+
+
+<div className='div'>
+<div className='title'>
+
+### setPropertyVQTValues
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Usage</div>
+<div className='rightCol'>
+Set the real-time VQT value of the property in batches.
+</div>
+<div className='leftCol'>Input parameter</div>
+<div className='rightCol'>
+<ul>
+<li>key: Namespace and alias of the property to be searched for.</li>
+<li>value: Property value set to be configured.</li>
+</ul>
+
+```json
+{
+"namespace.propertyName": [//key
+{ // value
+"value": 234, 
+"timestamp": 1612408661716
+}
+]
+}
+```
+
+</div>
+<div className='leftCol'>Output parameter</div>
+<div className='rightCol'>
+
+```json
+{
+"success":true
+}
+```
+
+</div>
+<div className='leftCol'>Used in custom service</div>
+<div className='rightCol'>
+
+```javascript
+var param = {
+    "factory.temperature": [
+        {
+        "value": 50,
+        "timestamp": 1612408661716
+        }
+        ],
+        "factory.pressure": [
+            {
+            "value": 150,
+            "timestamp": 1612408661716
+            }
+    ]
+}
+
+var inputs = {
+inputs: JSON.stringify(param)
+}
+
+objects.boiler1.setPropertyVQTValues(inputs)
+```
+
+</div>
+<div className='leftCol'>Used by openAPI</div>
+<div className='rightCol'>
+
+{domain}/runtime/factory/template/device/instance/boiler1/service/system/setPropertyVQTValues.
+
+```json
+{
+//post body
+ "factory.temperature": [
+    {
+    "value": 50,
+    "timestamp": 1612408661716
+    }
+    ],
+    "factory.pressure": [
+        {
+        "value": 150,
+        "timestamp": 1612408661716
+        }
+]
+}
+```
+
+</div>
+</div>
+</div>
+
+
+<div className='div'>
+<div className='title'>
+
+### setPropertyDefaultValue
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Usage</div>
+<div className='rightCol'>
+Set the default value of the property in batches.
+</div>
+<div className='leftCol'>Input parameter</div>
+<div className='rightCol'>
+<ul>
+<li>propName: Namespace and alias of the property to be searched for.</li>
+<li>propValue: Property value to be set.</li>
+</ul>
+
+```json
+{
+"propName": "namespace.propertyName",
+"propValue": 123
+}
+```
+
+</div>
+<div className='leftCol'>Output parameter</div>
+<div className='rightCol'>
+
+```json
+{
+"success":true
+}
+```
+
+</div>
+<div className='leftCol'>Used in custom service</div>
+<div className='rightCol'>
+
+```javascript
+var inputs = {
+    "propName": "factory.temperature",
+    "propValue": 123
+}
+
+var result = objects.boiler1.setPropertyDefaultValue(inputs)
+```
+
+</div>
+<div className='leftCol'>Used by openAPI</div>
+<div className='rightCol'>
+
+{domain}/runtime/factory/template/device/instance/boiler1/service/system/setPropertyVQTValues.
+
+```json
+{
+//post body
+"propName": "factory.temperature",
+"propValue": 123
+}
+```
+
+</div>
+</div>
+</div>
+
+
+## Embedded Service in Form Template
+Form template services can only apply to form templates. Template and corresponding properties used in following examples are listed below:
+- Template: user. Namespace is **work**.
+- Property:
+<ul><li>uid: string. Represents staff code.</li></ul>
+<ul><li>name: string. Represents staff name.</li></ul>
+<ul><li>dep: string. Represents the department to which the staff belongs.</li></ul>
+<ul><li>age: Integer. Represents satff age.</li></ul>
+<ul><li>employ_time: Date. Represents the start date of the staff.</li></ul>
+
+
+
+<div className='div'>
+<div className='title'>
+
+### AddDataTableEntry
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Usage</div>
+<div className='rightCol'>
+Insert an entry to the template.
+</div>
+<div className='leftCol'>OpenAPI input parameter</div>
+<div className='rightCol'>
+<ul>
+<li>key: Property alias.</li>
+<li>value: Property value to be set.</li>
+</ul>
+
+```json
+{ //key: value
+ "uid": "01",
+ "name": "Emma",
+ "age": 30
+}
+```
+
+</div>
+<div className='leftCol'>Whether is required</div>
+<div className='rightCol'>
+If the property is set to be the primary key, the property is required and cannot duplicate.
+</div>
+<div className='leftCol'>Output parameter</div>
+<div className='rightCol'>
+Integer. The number of inserted data entries.
+</div>
+<div className='leftCol'>Used in custom service</div>
+<div className='rightCol'>
+
+```javascript
+// input parameter is an object
+var inputs = {
+ uid: "01",
+ name: "Emma",
+ age: 30
+};
+
+templates["work.user"].AddDataTableEntry(inputs);
+```
+
+</div>
+<div className='leftCol'>Used by openAPI</div>
+<div className='rightCol'>
+
+{domain}/runtime/work/template/user/service/system/AddDataTableEntry.
+
+```json
+{
+//post body
+ "uid": "01",
+ "name": "Emma",
+ "age": 30
+}
+```
+
+</div>
+</div>
+</div>
+
+
+<div className='div'>
+<div className='title'>
+
+### AddDataTableEntry
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Usage</div>
+<div className='rightCol'>
+Insert an entry to the template.
+</div>
+<div className='leftCol'>OpenAPI input parameter</div>
+<div className='rightCol'>
+<ul>
+<li>key: Property alias.</li>
+<li>value: Property value to be set.</li>
+</ul>
+
+```json
+{ //key: value
+ "uid": "01",
+ "name": "Emma",
+ "age": 30
+}
+```
+
+</div>
+<div className='leftCol'>Whether is required</div>
+<div className='rightCol'>
+If the property is set to be the primary key, the property is required and cannot duplicate.
+</div>
+<div className='leftCol'>Output parameter</div>
+<div className='rightCol'>
+Integer. The number of inserted data entries.
+</div>
+<div className='leftCol'>Used in custom service</div>
+<div className='rightCol'>
+
+```javascript
+// input parameter is an object
+var inputs = {
+ uid: "01",
+ name: "Emma",
+ age: 30
+};
+
+templates["work.user"].AddDataTableEntry(inputs);
+```
+
+</div>
+<div className='leftCol'>Used by openAPI</div>
+<div className='rightCol'>
+
+{domain}/runtime/work/template/user/service/system/AddDataTableEntry.
+
+```json
+{
+//post body
+ "uid": "01",
+ "name": "Emma",
+ "age": 30
+}
+```
+
+</div>
+</div>
+</div>
+
+<div className='div'>
+<div className='title'>
+
+### AddDataTableEntries
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Usage</div>
+<div className='rightCol'>
+Insert multiple entries to the template.
+</div>
+<div className='leftCol'>OpenAPI input parameter</div>
+<div className='rightCol'>
+**list** contains all data to be inserted with the format of **property alias: property value**.
+
+```json
+{
+    "list":[
+        {
+            "name": "Emma",
+            "age": 30
+        },
+        {
+            "system.name": "Jason",
+            "system.age": 40
+        }
+    ]
+}
+```
+
+</div>
+<div className='leftCol'>Output parameter</div>
+<div className='rightCol'>
+Integer. The number of inserted data entries.
+</div>
+<div className='leftCol'>Used in custom service</div>
+<div className='rightCol'>
+
+```javascript
+var param = {
+    list: [
+        {
+            name: "Emma",
+            age: 30
+        },
+        {
+            name: "Jason",
+            age: 40
+        }
+    ]
+};
+var params = {
+params: JSON.stringify(param)
+}
+
+// leave out the namespace when accessing template
+templates["work.user"].AddDataTableEntries(params);
+```
+
+</div>
+<div className='leftCol'>Used by openAPI</div>
+<div className='rightCol'>
+
+{domain}/runtime/work/template/user/service/system/AddDataTableEntry.
+
+```json
+{
+//post body
+ "list":[
+{
+ "name": "Emma",
+ "age": 30
+},
+{
+ "system.name": "Jason",
+ "system.age": 40
+}
+ ]
+}
+```
+
+</div>
+</div>
+</div>
+
+
+<div className='div'>
+<div className='title'>
+
+### UpdateDataTableEntry
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Usage</div>
+<div className='rightCol'>
+Update an entry of the template.
+</div>
+<div className='leftCol'>OpenAPI input parameter</div>
+<div className='rightCol'>
+<ul><li>update: Alias and value of the property to be updated.</li></ul>
+<ul><li>where: Conditions of the property. Multiple conditions are separated by commas.</li></ul>
+
+:::info
+Only properties that conform to the defined conditions will be updated with set values and conditions cannot be empty.
+:::
+
+```json
+{
+"update": {
+    "age": 40,
+    "grade": 3
+},
+"where": {
+    "name": "Emma",
+    "dep": "Dev"
+}
+}
+```
+
+</div>
+<div className='leftCol'>Output parameter</div>
+<div className='rightCol'>
+Integer. The number of updated data entries.
+</div>
+<div className='leftCol'>Used in custom service</div>
+<div className='rightCol'>
+
+```javascript
+var inputs = {
+update: {
+    age: 40,
+    grade: 3
+},
+where: {
+    name: "Emma",
+    dep: "Dev"
+}
+}
+templates["work.user"].UpdateDataTableEntry(inputs);
+```
+
+</div>
+<div className='leftCol'>Used by openAPI</div>
+<div className='rightCol'>
+
+{domain}/runtime/work/template/user/service/system/UpdateDataTableEntry.
+
+```json
+{
+//post body
+"update": {
+    "age": 40,
+    "grade": 3
+},
+"where": {
+    "name": "Emma",
+    "dep": "Dev"
+}
+}
+```
+
+</div>
+</div>
+</div>
+
+
+<div className='div'>
+<div className='title'>
+
+### DeleteDataTableEntries
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Usage</div>
+<div className='rightCol'>
+Delete multiple entries of the template.
+</div>
+<div className='leftCol'>OpenAPI input parameter</div>
+<div className='rightCol'>
+Conditions of properties to be deleted. Multiple conditions are separated by commas.
+:::info
+At least one condition is necessary.
+:::
+
+```json
+
+{
+"name": "Emma",
+"dep": "Dev"
+}
+```
+
+</div>
+<div className='leftCol'>Output parameter</div>
+<div className='rightCol'>
+Integer. The number of deleted data entries.
+</div>
+<div className='leftCol'>Used in custom service</div>
+<div className='rightCol'>
+
+```javascript
+var inputs = {
+    name: "Emma",
+    dep: "Dev"
+};
+
+templates.user.DeleteDataTableEntries(inputs);
+```
+
+</div>
+<div className='leftCol'>Used by openAPI</div>
+<div className='rightCol'>
+
+{domain}/runtime/work/template/user/service/system/DeleteDataTableEntries.
+
+```json
+{
+//post body
+"name": "Emma",
+"dep": "Dev"
+}
+```
+
+</div>
+</div>
+</div>
+
+
+<div className='div'>
+<div className='title'>
+
+### GetDataTableEntries
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Usage</div>
+<div className='rightCol'>
+Get multiple data entries of the template.
+</div>
+<div className='leftCol'>OpenAPI input parameter</div>
+<div className='rightCol'>
+<ul><li>fields: Return fields.</li></ul>
+<ul><li>distinct: Whether to deduplicate.</li></ul>
+<ul><li>pageIndex: Start page of the query. It is 1 by default.</li></ul>
+<ul><li>pageSize: Page size of the query. It is 50 by default.</li></ul>
+<ul><li>order: Sort the data. <strong>order</strong> means sorting field, <strong>sort</strong> is sorting method, <strong>desc</strong>/<strong>asc</strong> is descending or ascending order.</li></ul>
+<ul><li>condition: Search conditions.</li></ul>
+
+:::info
+When using fuzzy match, you can only use and and or as operator.
+:::
+
+```json
+{
+"fields": [],
+"distinct":false,
+"pageIndex":1,
+"pageSize":50,
+"order": [
+    {
+    "order": "name",
+    "sort": "desc"
+    }
+],
+"condition": { //both "and" and "or" conditions need to be met.
+    "and": { // conditions are: name is Emma and age is 20
+        "name": "Emma",
+        "age": 20
+    },
+    "or": { // conditions are: name is Jason or age is 30
+        "name": "Jason",
+        "age": 30
+    }
+}
+}
+```
+
+</div>
+<div className='leftCol'>Output parameter</div>
+<div className='rightCol'>
+
+```json
+{
+"pagination": {
+    "current": 1,
+    "total": 1,
+    "pageSize": 10
+    },
+"list": [
+    {
+    "work.uid": "user_fdbaa34tbvs",
+    "work.name": "zhangsan",
+    "work.age": 32,
+    "work.dep": "销售部",
+    "work.app_name": "system",
+    "work.creator_id": "1025876580291488",
+    "work.last_modifier_id": "1025876580291488",
+    "work.created_time": "2021-02-03 12:32:12",
+    "work.last_modified_time": "2021-02-03 12:32:12"
+    }
+]
+}
+```
+
+</div>
+<div className='leftCol'>Used in custom service</div>
+<div className='rightCol'>
+
+```javascript
+var param = {
+    "fields": ["name", "age"],
+    "pageIndex":1,
+    "pageSize":10,
+    "order": [
+        {
+        "order": "name",
+        "sort": "desc"
+        }
+    ],
+    "condition": {
+        "and": {
+            "name": "Emma",
+            "age": 20
+        }
+    }
+}
+var params = {
+params: JSON.stringify(param)
+}
+
+var data = templates["work.user"].GetDataTableEntries(params);
+```
+
+</div>
+<div className='leftCol'>Used by openAPI</div>
+<div className='rightCol'>
+
+{domain}/runtime/work/template/user/service/system/GetDataTableEntries.
+
+```json
+
+{
+//post body
+    "fields": ["name", "age"],
+    "pageIndex":1,
+    "pageSize":10,
+    "order": [
+        {
+        "order": "name",
+        "sort": "desc"
+        }
+    ],
+    "condition": {
+        "and": {
+            "name": "Emma",
+            "age": 20
+        }
+    }
+}
+```
+
+</div>
+</div>
+</div>
+
+
+
+<div className='div'>
+<div className='title'>
+
+### getDatatableDetails
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Usage</div>
+<div className='rightCol'>
+Get table structure of DataTable object.
+</div>
+<div className='leftCol'>Input parameter</div>
+<div className='rightCol'>
+No input parameter required.
+</div>
+<div className='leftCol'>Output parameter</div>
+<div className='rightCol'>
+
+```json
+{
+    "data": [
+        {
+        "columns": [
+            {
+            "name": "name",
+            "type": "varchar"
+            },
+            {
+            "name": "age",
+            "type": "int"
+            },
+            {
+            "name": "code",
+            "type": "varchar"
+            },
+            {
+            "name": "dataCategory",
+            "type": "varchar"
+            }
+        ],
+        "tableName": "tbl_weiqyTableObj_weiqyTableDataStruct"
+        }
+    ],
+    "error": false
+    }
+```
+
+</div>
+</div>
+</div>
+
+
+<div className='div'>
+<div className='title'>
+
+### querySQLTest
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Usage</div>
+<div className='rightCol'>
+Execute SQL commands and return corresponding data.
+</div>
+<div className='leftCol'>Input parameter</div>
+<div className='rightCol'>
+SQL commands.
+</div>
+<div className='leftCol'>Return value</div>
+<div className='rightCol'>
+
+```json
+{
+"data": [
+    "system_id",
+    "system_created_time",
+    "system_last_modified_time",
+    "system_creator_id",
+    "system_last_modifier_id",
+    "system_app_name",
+    "system_app_access_mode",
+    "zhuzh_za_name",
+    "zhuzh_za_age"
+    ]
+}
+```
+
+</div>
+</div>
+</div>
+
+
+<div className='div'>
+<div className='title'>
+
+### querySQLExec
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Usage</div>
+<div className='rightCol'>
+Execute SQL commands to search for DataTable object data.
+</div>
+<div className='leftCol'>Input parameter</div>
+<div className='rightCol'>
+
+```json
+{
+    "sql": "select * from table1 where name=${name} and age=${age}",
+    "params": [{
+        "name": "name",
+        "value": "zhangsan"
+    }, {
+        "name": "age",
+        "value": 10
+    }
+    ],
+    "pageSize": 200
+}
+```
+
+</div>
+<div className='leftCol'>Return value</div>
+<div className='rightCol'>
+
+```json
+{
+    "total": 2,
+    "data": {
+        "columnNames": ["system_id", "system_created_time", "system_last_modified_time", "system_creator_id", "system_last_modifier_id", "system_app_name", "system_app_access_mode", "scp_scp_names", "scp_scp_ages", "scp_scp_xx"],
+        "dataSource": [
+            {
+                "scp_scp_xx": "123",
+                "system_creator_id": "1376878722077440",
+                "system_app_name": "App_2467085462006d991209bd7597024b28",
+                "system_id": 10773,
+                "system_last_modifier_id": "1376878722077440",
+                "system_app_access_mode": "PUBLIC",
+                "scp_scp_names": "Jay",
+                "system_created_time": "2021-06-11 01:17:32",
+                "system_last_modified_time": "2021-06-11 01:17:32",
+                "scp_scp_ages": "123"
+            }, 
+            {
+                "scp_scp_xx": "33",
+                "system_creator_id": "1376878722077440",
+                "system_app_name": "App_2467085462006d991209bd7597024b28",
+                "system_id": 10776,
+                "system_last_modifier_id": "1376878722077440",
+                "system_app_access_mode": "PUBLIC",
+                "scp_scp_names": "Jason2",
+                "system_created_time": "2021-06-11 01:19:41",
+                "system_last_modified_time": "2021-06-11 01:19:41",
+                "scp_scp_ages": "33"
+            }
+        ]
+    }
+}
+```
+
+</div>
+</div>
+</div>
+
+## Common Services
+This chapter introduces some common services you can use by writing script.
+
+<div className='div'>
+<div className='title'>
+
+### Get Auto-increment Value
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Definition</div>
+<div className='rightCol'>
+System embedded object provides service to get auto-increment serial number to generate flow number.
+</div>
+<div className='leftCol'>Usage</div>
+<div className='rightCol'>
+
+```javascript
+var result = services['SerialNumberService'].acquire();
+result;
+```
+
+</div>
+</div>
+</div>
+
+
+
+<div className='div'>
+<div className='title'>
+
+### Get Aggregated Result in InfluxDB
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Usage</div>
+<div className='rightCol'>
+Get the history value sum of an object property in set period.
+</div>
+<div className='leftCol'>Code</div>
+<div className='rightCol'>
+
+```javascript
+function influxDbDataFun(expressStr, objName, propName, startTimeUtcStr, endTimeUtcStr) {
+  var objProp = objName + '.' + propName;
+  log.debug("objProp=" + objProp);
+  var query = {
+    "select": [expressStr + "(\"" + objProp + "\")"],
+    "where": {
+      "and": {
+        "timestamp": {
+          "ge": startTimeUtcStr,
+          "lt": endTimeUtcStr
+        }
+      }
+    }
+  }
+  var resultHistoryJsonStr = ObjectPool.get('testInstance').executeService('getPropertiesHistory', {inputs: JSON.stringify(query)});
+  log.debug('resultHistoryJsonStr = ' + resultHistoryJsonStr);
+  return resultHistoryJsonStr.results[0].datas[0];
+}
+var result = influxDbDataFun('sum', 'syetem.testTemplate', 'system.p1', '2021-04-10T00:00:00Z', '2021-04-15T00:00:00Z');
+result;
+```
+
+</div>
+<div className='leftCol'>Field description</div>
+<div className='rightCol'>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>expressStr</td>
+<td>Expressions such as sum/mean/first/last/max/min</td>
+</tr>
+<tr>
+<td>objName</td>
+<td>Template namespace.template alias.instance alias</td>
+</tr>
+<tr>
+<td>propName</td>
+<td>Property namespace.property alias</td>
+</tr>
+<tr>
+<td>startTimeUtcStr</td>
+<td>Start time such as '2019-07-10T17:08:47Z'</td>
+</tr>
+<tr>
+<td>endTimeUtcStr</td>
+<td>End time such as '2019-07-12T17:11:47Z'</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+<div className='div'>
+<div className='title'>
+
+### History Value Query
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Script example</div>
+<div className='rightCol'>
+
+```javascript
+var query = {
+    select: [
+        "first(\"system.testTemplate.testInstance.system.p4\")"
+        ],
+    where: {
+        and: {
+            timestamp: {
+            "ge": "2021-04-10T00:00:00Z",
+            "le": "2021-04-15T00:00:00Z"
+            }
+        }
+    },
+    groupBy: {
+        time: "1s,1s"
+        },
+    fill: {
+        "strategy": "previous"
+        },
+    offset: 0,
+    limit: 5
+ }
+var result = ObjectPool.get('testInstance').executeService('getPropertiesHistory',{inputs: JSON.stringify(query)});
+result;
+```
+
+</div>
+<div className='leftCol'>Script parameter description</div>
+<div className='rightCol'>
+
+:::info
+\> and >> are marks for nesting.
+:::
+
+<table>
+<colgroup>
+<col style={{ width: "15%" }} />
+<col style={{ width: "35%" }} />
+<col style={{ width: "20%" }} />
+<col style={{ width: "50%" }} />
+</colgroup>
+<thead>
+<tr>
+<th>Key</th>
+<th>Value</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>select</td>
+<td>["function("template namespace.template alias.instance alias.property namespace.property alias")"] or [""template namespace.template alias.instance alias.property namespace.property alias""]</td>
+<td>String array</td>
+<td>Required. The selected object property and aggregation methods (mean/sum/max/min) only support numberic parameters, and <strong>first/last/count</strong> supports all types of data.</td>
+</tr>
+<tr>
+<td>where</td>
+<td>("and":())</td>
+<td>Object</td>
+<td>Required. Filter conditions. Presently only <strong>and</strong> is available.</td>
+</tr>
+<tr>
+<td>>and</td>
+<td>("timestamp":())</td>
+<td>Object</td>
+<td>Filter conditions. Presently only <strong>timestamp</strong> is available.</td>
+</tr>
+<tr>
+<td>>>timestamp</td>
+<td>("ge":"2020-04-01T00:00:00Z,"le":"2020-04-01T00:00:00Z"")</td>
+<td>Object</td>
+<td>Time period. <strong>ge, gt, lt</strong> and <strong>le</strong> are available.</td>
+</tr>
+<tr>
+<td>groupBy</td>
+<td>("time":"")</td>
+<td>Object</td>
+<td>Grouping conditions. Only <strong>time</strong> is available.</td>
+</tr>
+<tr>
+<td>>time</td>
+<td>"1s,1s"</td>
+<td>String</td>
+<td>Data granularity. Supports s, m, h, d, w and m. The first parameter is data granularity and the last is grouping offset.</td>
+</tr>
+<tr>
+<td>fill</td>
+<td>("strategy":"")</td>
+<td>Object</td>
+<td>Fill strategy. Only <strong>previous</strong> is available.</td>
+</tr>
+<tr>
+<td>>strategy</td>
+<td>"previous"</td>
+<td>Get the data from previous group when current group is empty</td>
+<td>-</td>
+</tr>
+<tr>
+<td>offset</td>
+<td>Positive integer</td>
+<td>Integer</td>
+<td>Value offset.</td>
+</tr>
+<tr>
+<td>limit</td>
+<td>Positive integer</td>
+<td>Integer</td>
+<td>Pieces of data.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div className='leftCol'>Result</div>
+<div className='rightCol'>
+
+```javascript
+{
+ "unauthorized": [],
+ "results": [
+    {
+        "datas": [
+            [
+            "2021-04-10T00:00:00Z",
+            null,
+            null
+            ],
+            [
+            "2021-04-10T00:00:01Z",
+            null,
+            null
+            ],
+            [
+            "2021-04-10T00:00:02Z",
+            null,
+            null
+            ],
+            [
+            "2021-04-10T00:00:03Z",
+            null,
+            null
+            ],
+            [
+            "2021-04-10T00:00:04Z",
+            null,
+            null
+            ]
+        ],
+        "authorized": true,
+        "function": "first",
+        "name": "/system/testTemplate/testInstance/system/p4",
+        "fields": [
+        "time",
+        "value",
+        "status"
+        ]
+    }
+ ]
+}
+```
+
+</div>
+<div className='leftCol'>Result parameter description</div>
+<div className='rightCol'>
+
+:::info
+\> and >> are marks for nesting.
+:::
+
+<table>
+<colgroup>
+<col style={{ width: "15%" }} />
+<col style={{ width: "35%" }} />
+<col style={{ width: "20%" }} />
+<col style={{ width: "50%" }} />
+</colgroup>
+<thead>
+<tr>
+<th>Key</th>
+<th>Value</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>name</td>
+<td>/template namespace/template alias/instance alias/property namespace/property alias</td>
+<td>String</td>
+<td>Full path of the selected object property.</td>
+</tr>
+<tr>
+<td>function</td>
+<td>Aggregation function</td>
+<td>String</td>
+<td>Aggregation methods such as <strong>mean/sum/max/min</strong> only support numberic parameters, and <strong>first/last/count</strong> supports all types of data.</td>
+</tr>
+<tr>
+<td>>fields</td>
+<td>["time","value","status"]</td>
+<td>String array</td>
+<td>Return fields such as <strong>time/value/status</strong>.</td>
+</tr>
+<tr>
+<td>>datas</td>
+<td>["2021-04-10T00:00:04Z",null,null]</td>
+<td>2D array</td>
+<td>Value after grouping (<strong>null</strong> means empty).</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+
+
+<div className='div'>
+<div className='title'>
+
+### Service Calls Service
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Example 1</div>
+<div className='rightCol'>
+Call the property value setting service of testInstance. You need to define input parameters of setPropertyValue service in inputs.
+
+```javascript
+var inputs = {
+    propValue:'test111', //String property value
+    propName:'p1' //Stringproperty name
+    };
+ObjectPool.get('testInstance').executeService('setPropertyValue',inputs);
+```
+
+</div>
+<div className='leftCol'>Example 2</div>
+<div className='rightCol'>
+Define other objects in the script to call services.
+
+```javascript
+var httservice = services["HttpClientService"];
+var result = httpservice.getString(baseUrl,3000);
+```
+
+</div>
+</div>
+</div>

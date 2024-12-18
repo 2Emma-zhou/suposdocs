@@ -1,0 +1,47 @@
+1. Log in to supOS, and then select **Data Intelligence** > **Data Science** > **Rule Base** > **Rule Design**.
+2. Click **Add** > **Add rule set** to add a rule set.
+3. Select the rule, and then click **Add rule**.
+4. Start setting the rule.
+
+<ul>
+<ul>
+<li><b>If</b>: Set the condition of the rule.
+
+- Click the operator, and select **Or** from the drop-down list to change the relationship between multiple conditions.
+- Click the operator, and select **Add condition** or **Add union condition** from the drop-down list to add more conditions.
+- Click **Select type**, and select from **Variable**, **Method** or **Input value** to set the value on both sides of the **Comparison operator**.
+
+</li>
+<li><b>Then</b>: Click <b>Add action</b>, and click <b>Action type</b> to set the actions for variables that conform to the conditions.
+
+- **Assign and update**: Select variables, assign a value to it and update.
+- **Print log**: Print the selected variables in the log.
+
+</li>
+<li><b>Else</b>: Set the actions for values that do not meet the requirements.</li>
+</ul>
+</ul>
+
+:::info
+In this section, a simple example is used to demonstrate the process of rule configuration.
+- When the value of field **age** is larger than that of **id1**, assign the value of **id1** to **age**.
+- When the value of field **age** is smaller than or equal to that of **id1**, assign the value of **id2** to **age**.
+For the rule to work, 3 fields named **age**, **id1** and **id2** need to be created under **Data Object**.
+:::
+
+<ol>
+<ol>
+<li>Click <img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supBD/11.png"/> to add data objects.</li>
+<li>Next to <b>If</b>, click <b>Select type</b> and set it to the variable field <b>age</b>.</li>
+<li>Set the <b>Comparison operator</b> to <b>></b>, and the field to <b>id1</b>.</li>
+<li>Next to <b>Then</b>, click <b>Add action</b> > <b>Action type</b>, set it to <b>Assign and update</b> and the value equation is <b>age = id1</b>.</li>
+<li>Next to <b>Else</b>, click <b>Add action</b> > <b>Action type</b>, set it to <b>Assign and update</b> and the value equation is <b>age = id2</b>.</li>
+</ol>
+</ol>
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supBD/10.png)
+
+5. Click **Save**, and then click the **Test** tab.
+6. Enter the input value of each field, and then click **Start test**.
+7. Check whether the output values are correct, and then click **Publish**.
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supBD/12.png)

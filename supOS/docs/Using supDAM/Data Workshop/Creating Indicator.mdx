@@ -1,0 +1,77 @@
+Create indicators to analyze data by different dimensions. Indicators can be added based on data models or SQL statements.
+In this section, the table below is used as an example.
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supDAM/36.png)
+
+Indicators that will be demonstrated are:
+- Total amount of oxygen produced by workshop A in a month.
+- Total amount of nitrogen produced by workshop B in a month.
+
+### Creating Indicator Based on Data Model
+1. Log in to supOS, and then select **Data Intelligence** > **Data Workshop** > **Indicator management**.
+2. Click ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supDAM/34.png) to add a directory.
+3. Select the directory, click **Add**, and then select **Create from data model**.
+4. Select a data model, and then calculate the total amount of oxygen produced by workshop A in a month.
+:::info
+Only DWD and DWS models can be used to create indicators.
+:::
+
+<ol>
+<ol>
+<li>Drag a time field to <b>Data period</b>, and then click the field, change the <b>Time statistics</b> to <b>Month</b>.
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supDAM/43.png)
+
+</li>
+<li>Drag both <b>workshop</b> and <b>product</b> to <b>Dimension</b>, and then click <b>Data filtering</b>.</li>
+<li>Set the filtering condition to get <b>workshop A</b> and <b>product oxygen</b>.
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supDAM/44.png)
+
+</li>
+<li>Drag <b>amount</b> to <b>Indicator</b>, and then click the field to set its calculation type.
+
+:::tip
+Click **Custom**, you can set calculation type and formula to create multiple indicators.
+:::
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supDAM/45.png)
+
+</li>
+</ol>
+</ol>
+
+5. Click **Next**, and then enter the information of the indicator.
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supDAM/46.png)
+
+6. Click **Next**, set the output configuration, and then click **Submit**.
+- Output indicator to form template: Generate a form template to the local supOS platform with the indicator data.
+- Publish indicator to data service: Publish the indicator data as a data service for third-party usage.
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supDAM/47.png)
+
+### Creating Indicator from SQL
+
+1. Select a directory, click **Add**, and then select **Create from SQL**.
+2. Select the ODS table, and then write the SQL statement to get the total amount of nitrogen produced by workshop B in a month.
+- When acquiring data from ODS tables, the prefix **ods.** must be added before the table name.
+- **SELECT** statement does not support *****.
+- The acquired data must contain at least one numeric field as the indicator.
+:::tip
+Click **Format** to format the SQL statements, and click **Query** to check the result and error messages.
+:::
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supDAM/48.png)
+
+3. Enter the indicator information, and then click **Next**.
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supDAM/49.png)
+
+4. Set the output configuration, and then click **Submit**.
+
+:::tip
+On the indicator list, you can click **Query data** under **Operation** to search for indicator data.
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supDAM/50.png)
+
+:::

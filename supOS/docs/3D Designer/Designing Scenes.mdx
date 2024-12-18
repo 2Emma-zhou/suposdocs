@@ -1,0 +1,221 @@
+---
+hide_title: true
+---
+
+According to the real site, add models and particles to a scene to simulate and view site status in real time.
+
+## Adding Scene
+1. Select **APP Management** > **3D Designer** > **Scene List**, and then click **Add Scene**.
+2. Name the scene, select IOT products (entity template from supOS) with bound models in **Project Management**, and then click **Confirm**.
+:::info
+Bound models can be directly imported through the template, and you can also import other models to the scene.
+:::
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/3dDesigner/73.jpg"/> 
+
+## Editing Scene
+Select a scene, and click <img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/3dDesigner/6.png"/> to start editing.
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/3dDesigner/101.png"/>
+
+<table>
+<tr>
+<th>No.</th>
+<th>Function</th>
+<th>Description</th>
+</tr>
+<tbody>
+<tr>
+<td>1</td>
+<td>Scene Info</td>
+<td>The basic information of the scene, including scene name, the associated template and bound models.</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Operations</td>
+<td>Basic operations of the scene, such as save, preview and close the scene, and view documentation.</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Model List</td>
+<td>Displays the models bound with the selected template, and available models and particles for import.</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Canvas</td>
+<td>Displays the scene with all the effects.</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Tool Bar</td>
+<td>Tools for editing the scene effect.</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Tool List</td>
+<td>A list of all effects added in the scene.</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Settings</td>
+<td>Scene settings including style, oreview effect and popup.</td>
+</tr>
+</tbody>
+</table>
+
+### Adding Models and Particles
+
+1. Select a device under **Model** > **Device list**, and select the bound animation to be displayed on the scene.
+
+<img width={300} src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/3dDesigner/102.png"/>
+
+2. Click **Import**.
+:::tip
+Click **Model** > **Project model**, you can select models that are not bound with the selected template and add them to the scene.
+:::
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/3dDesigner/103.png"/>
+
+3. Under **Particle**, select a particle and then click **Import Particle** to add particles to the scene. 
+ 
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/3dDesigner/104.png"/>
+ 
+
+### Editing Model
+1. Select a model from the list on the right side, or click the model on the scene to start editing.
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/3dDesigner/105.png"/>
+
+2. Set the name of the model, and then next to **Tranformation**, change the position, direction and size of the model.
+3. Click **Set current as default view** next to **Model view** to add a default viewpoint of the model. 
+4. Select a model type, and click <img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/3dDesigner/106.png"/> to bind a device with the model.
+- **Mobile Device**: Import the location data at the backend, set mobile device and bind to the scene, so the model goes along the set route.
+- **Fixed device**: Templates that are bound with models.
+:::tip
+Click <img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/3dDesigner/107.png"/> to select attributes to be displayed on the popup window.
+:::
+ 
+<img width={550} src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/3dDesigner/108.png"/> 
+
+5. Select **Preview animation**.
+- When bound with devices, the only option is **IOT animation** and animations are triggered by data.
+- When no devices is bound, you can select animations configured with the model.
+
+6. (optional) Click **Locate** next to **Operation** to return to the default view of the scene.
+7. Click **Edit** next to **Personality popup**, and edit the size and position of the window. 
+- Select attributes to be displayed on the popup window from the bound device.
+
+<img width={550} src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/3dDesigner/118.png"/>
+
+- Set the **Panel content**, for example, https://www.google.com, and the page content is displayed on the popup window.
+
+
+### Editing Particle
+1. Select a particle imported to the scene, and edit the particle name.
+2. Select a type next to **Transform**, and drag on the canvas to change the position, direction and size of the particle.
+:::tip
+Change the value of **Position**, **Rotate**, and **Scale** to edit the particle, and scale can only be edited in the same ratio.
+:::
+<img width={550} src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/3dDesigner/109.png"/>
+
+3. Click **Preview** and save it. 
+
+### Adding Label
+1. Click <img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/3dDesigner/110.png"/> to add a label in the scene.
+2. Enter the content of the label, and then click **Upload** next to **Icon** to add an SVG image in the label.
+
+<img width={350} src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/3dDesigner/111.png"/> 
+
+3. Select the uploaded image for it to show on the canvas, and the Click **Select**, and then click on the canvas to set the label location.
+4. Change **Position** and **Scale** value to reach the desired effect.
+
+### Adding Track
+Track means to add perspective changes in the scene to get a comprehensive view. 
+1. Click <img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/3dDesigner/112.png"/> to add a track. 
+2. Name the track, and then click **Select** to set the current perspective as the first view.
+
+<img width={350} src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/3dDesigner/113.png"/>
+
+3. Change the viewpoint and click **Select** again to add more views in the track.
+:::TIP
+- Select the added view, change the view by editing the value next to **Camera position**.
+- Select the added view, change the view and click **Update** to change the view.
+:::
+4. Select an added view, and then click <img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/3dDesigner/114.png"/>, click the model that is configured with default view, to add a pause duration during the track.
+:::tip
+Set the duration of the view to achieve a detailed effect.
+:::
+
+<img width={350} src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/3dDesigner/115.png"/>
+
+5. Click <img width={29} src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/3dDesigner/81.jpg"/> to set the view speed of the track.
+- **x 0.5/1.0/2.0**: Select a value to set the view speed.
+- **Custom**: Customize the duration of each view point.
+
+<img width={350} src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/3dDesigner/116.png"/> 
+
+### Designing Light
+1. Click <img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/3dDesigner/117.png"/> to add lights in the scene. 
+2. Select light type to **Parallel** or **Point**. 
+
+- <b>Parallel light</b>: Rays of the light are parallel to each other. 
+
+<ol>
+<ol>
+<li>Click <b>Select</b>.</li>
+<li>Click on the canvas to put the light.</li>
+</ol>
+</ol>
+<img width={450} src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/3dDesigner/83.jpg"/>
+
+- <b>Point light</b>: Rays of the light radiate to all directions from a single point.
+<ol>
+<ol>
+<li>Click <b>Select</b>, and then click on the canvas to put the light.</li>
+<li>Set the illuminant range of the light next to <b>Distance</b>.</li>
+<li>Set the <b>Decay value</b> of the light. The bigger the value, the faster the light illumance reduces.</li>
+</ol>
+</ol>
+<img width={450} src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/3dDesigner/84.jpg"/>
+
+:::tip
+You can drag or edit the value of <b>Position</b> to edit the light source location.
+::: 
+3. Select the light color, and drag the **Intensity** bar to edit color intensity. 
+4. Click **Save**.
+ 
+### Changing Views
+Display selected models and labels in a view.
+1. Click <img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/3dDesigner/120.png"/> to create a view. 
+
+<img width={350} src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/3dDesigner/121.png"/>
+
+2. Set **Camera type**. 
+
+- <b>Perspective camera</b>: Creates a sense of depth and distance in the scene.
+- <b>Parallel camera</b>:  Maintains plane effect in viewing.
+
+3. Next to **Display list**, select models and labels to be displayed in the view, and then click **Add View**.
+:::tip
+CHange the **Display list** items, and then click **Update view** to update.
+:::
+4. Click <b>Save</b>.
+
+## Measuring 3D Display
+- <img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/3dDesigner/11.png"/>: Click on the scene and click again to select another point, double-click to finish and the distance between these 2 points is displayed.
+- <img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/3dDesigner/12.png"/>: Click on the scene and click again to select another point, double-click to finish and the height difference between these 2 points is displayed.
+- <img width={27} src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/3dDesigner/13.png"/>: Draw on the scene, and double-click to finish drawing and the drawing area is displayed.
+
+:::tip
+Right-click the model in the scene to bind device to, or **Copy**, **Hide**, and **Delete** the model. 
+:::
+
+## Previewing the Scene
+Save all the settings and click **Preview** at the upper-right corner to preview the scene.
+
+<img width={550} src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/3dDesigner/89.jpg"/>
+
+- Click <img width={25} src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/3dDesigner/21.png"/> to preview the track. 
+- Click <img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/3dDesigner/22.png"/> and <img width={25} src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/3dDesigner/23.png"/> to check the models and particles. 
+- Click <img width={25} src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/3dDesigner/24.png"/> to change display color.
+- Click <img width={25} src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/3dDesigner/119.png"/> to perform operations such as keyboard control, automatic rotation, outline when hovering over and measuring.

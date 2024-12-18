@@ -1,0 +1,249 @@
+---
+openapi: 3.0.0
+info:
+  description: "System code: \n\n# Authentication\n\n<!-- ReDoc-Inject: <security-definitions>
+    -->"
+  version:
+  title: System Code
+servers:
+- url: "/open-api/systemcode/v2/"
+tags:
+- name: systemcodes
+  description: System code
+security:
+- Sign: []
+components:
+  parameters:
+    acceptLanguage:
+      name: Accept-Language
+      in: header
+      description: 'Internationalization language (system code values will be returned
+        in different languages based on the selected language). Default is the language
+        of the server''s operating system. English: en-us, Chinese: zh-cn.'
+      required: false
+      schema:
+        type: string
+        example: zh-cn
+        maxLength: 8
+  securitySchemes:
+    Sign:
+      type: apiKey
+      name: Authorization
+      in: header
+  schemas:
+    SystemCodeBaseVO:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Code
+          example: hangzhou
+        name:
+          type: string
+          description: Name (internationalization key)
+          example: sys.hangzhou
+        displayName:
+          type: string
+          description: Display name (internationalization value, defaults to the internationalization
+            key if no internationalization value is available)
+          example: Hangzhou
+    Pagination:
+      description: Pagination information
+      type: object
+      properties:
+        total:
+          type: integer
+          description: Total count
+          example: 1
+        pageSize:
+          type: integer
+          description: Number of items per page
+          example: 20
+        current:
+          type: integer
+          description: Current page number
+          example: 1
+  responses:
+    GeneralError:
+      description: General errors
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                type: string
+                description: Error code
+              message:
+                type: string
+                description: Error details
+    Created:
+      description: The command was successfully received and processed by the backend
+paths:
+  "/entities/{entityCode}/values":
+    get:
+      tags:
+      - systemcodes
+      summary: Retrieve a Paginated List of Code Values
+      description: Retrieve a paginated list of code values based on the entity code
+      operationId: queryValuesByEntityCode
+      parameters:
+      - "$ref": "#/components/parameters/acceptLanguage"
+      - name: entityCode
+        in: path
+        description: The entity code is required (exact match)
+        required: true
+        schema:
+          type: string
+      - name: keyword
+        in: query
+        description: Query data by fuzzy matching the code or name of the code value
+        required: false
+        schema:
+          type: string
+      - name: includeDeleted
+        in: query
+        description: Whether to include deleted code values, default is false (Code
+          values are logically deleted. This parameter is used to control whether
+          to include deleted code values in the query. The default value is false,
+          which means deleted code values are not included))
+        required: false
+        schema:
+          type: boolean
+      - name: current
+        in: query
+        description: Current page number, starting from 1
+        required: true
+        schema:
+          type: integer
+          default: 1
+      - name: pageSize
+        in: query
+        description: Number of items per page (default is 20 and maximum is 100)
+        required: true
+        schema:
+          type: integer
+          default: 20
+          maximum: 100
+      responses:
+        '200':
+          description: Retrieve a paginated list of code values based on the entity
+            code
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  list:
+                    type: array
+                    items:
+                      "$ref": "#/components/schemas/SystemCodeBaseVO"
+                  pagination:
+                    "$ref": "#/components/schemas/Pagination"
+                example:
+                  list:
+                  - code: hangzhou
+                    name: sys.hangzhou
+                    displayName: Hangzhou
+                  - code: zhengzhou
+                    name: sys.zhengzhou
+                    displayName: Zhengzhou
+                  pagination:
+                    total: 2
+                    pageSize: 20
+                    current: 1
+        '400':
+          description: |
+            Error messages
+            * 100111011 Current page number cannot be empty,{"code":100111011,"message":"Current page number cannot be empty"}
+            * 100111012 每页数量不可以为空,{"code":100111012,"message":"每页数量不可以为空"}
+            * 100111013 Current page number不可以小于1,{"code":100111013,"message":"Current page number不可以小于1"}
+            * 100111014 每页数量不可以小于1,{"code":100111014,"message":"每页数量不可以小于1"}
+            * 100111015 每页数量不可以大于100,{"code":100111015,"message":"每页数量不可以大于100"}
+            * 100111016 system code实体不存在,{"code":100111016,"message":"system code实体不存在"}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    description: Error code
+                    example: 100111010
+                  message:
+                    type: string
+                    description: Error details
+                    example: Parameters of the code cannot be empty
+  "/entities/{entityCode}/values/{valueCodes}":
+    get:
+      tags:
+      - systemcodes
+      summary: Retrieve Details of Specified Code Values
+      description: Retrieve details of specified code values based on the entity code
+        and code values
+      operationId: queryValuesByEntityCodeAndValueCode
+      parameters:
+      - "$ref": "#/components/parameters/acceptLanguage"
+      - name: entityCode
+        in: path
+        description: The entity code is required (exact match)
+        required: true
+        schema:
+          type: string
+      - name: valueCodes
+        in: path
+        description: The code values in an array format, with a maximum length of
+          20 (If a code value in the parameter does not exist, it will not be returned.
+          Only valid code values will be returned)
+        required: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: includeDeleted
+        in: query
+        description: Whether to include deleted code value data, default is false
+          (Deletion of code values is a logical deletion. This parameter controls
+          whether to include deleted code value data in the query. Default is false,
+          which means deleted code value data will not be included)
+        required: false
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: Retrieve details of specified code values based on the entity
+            code and code values
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  list:
+                    type: array
+                    items:
+                      "$ref": "#/components/schemas/SystemCodeBaseVO"
+                example:
+                  list:
+                  - code: hangzhou
+                    name: sys.hangzhou
+                    displayName: Hangzhou
+                  - code: zhengzhou
+                    name: sys.zhengzhou
+                    displayName: Zhengzhou
+        '400':
+          description: |
+            Error messages
+            * 100111016 system code entity does not exist,{"code":100111016,"message":"system code entity does not exist"}
+            * 100111018 Code value array length cannot exceed 20,{"code":100111017,"message":"Code value array length cannot exceed 20"}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    description: Error code
+                    example: 100111010
+                  message:
+                    type: string
+                    description: Error details
+                    example: Parameters of system code entity cannot be empty

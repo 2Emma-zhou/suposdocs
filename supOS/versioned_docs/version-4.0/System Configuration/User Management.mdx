@@ -1,0 +1,251 @@
+---
+sidebar_position: 2
+---
+
+Add users based on the post and assign corresponding permissions to
+achieve easy management.
+
+### Adding User
+
+1. Log in to supOS, and then click <img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/platform/7.png"/> at the upper-right corner to go to the design center.
+2. Select <strong>User Security Management</strong> > <strong>User Management</strong>, and then click <strong>New</strong>.
+3. Select a user type and then enter the information.
+
+<img width={350} src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/platform/22.png"/>
+
+<table>
+<colgroup>
+<col style={{ width: "22.522522522522525%" }} />
+<col style={{ width: "77.47747747747749%" }} />
+</colgroup>
+<thead>
+<tr>
+<th>
+Parameter
+</th>
+<th>
+Description
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+User Type
+</td>
+<td>
+<ul>
+<li>
+<strong>General User</strong>: Needs to link with a personnel in a company and cannot access the design center.
+</li>
+<li>
+<b>System Administrator</b>: Has permissions of organization and user
+management and cannot link with personnels.
+</li>
+</ul>
+
+:::tip
+- System admin created under the default company, it has the same assignable permissions as the <strong>Admin</strong> user.
+- System admin created under a branch company, it has the same assignable permissions as the branch admin user.
+:::
+
+</td>
+</tr>
+<tr>
+<td>
+Username
+</td>
+<td rowSpan={2}>
+Set the login username and password.
+
+:::info
+- The password must consist of 8-16 non-blank characters and contain at least three types of the following characters: Upper case, lower case, numbers and special characters.
+- Notification for password reset prompts during first-time login. Admin cannot view the reset password.
+:::
+
+</td>
+</tr>
+<tr>
+<td>
+Password
+</td>
+</tr>
+<tr>
+<td>
+Personnel
+</td>
+<td>
+Select a personnel from the company organization.
+</td>
+</tr>
+<tr>
+<td>
+Role
+</td>
+<td>
+Select a role for the user. All permissions of the role are assigned to the user and cannot be changed.
+</td>
+</tr>
+<tr>
+<td>
+Time Zone
+</td>
+<td>
+Select the time zone where the user is located.
+</td>
+</tr>
+<tr>
+<td>
+Describe
+</td>
+<td>
+User description.
+</td>
+</tr>
+</tbody>
+</table>
+
+4. Click <strong>OK</strong>.
+
+<ul>
+<li>
+Import user
+<ol>
+<li>
+Click <img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/platform/23.png"/> and select <strong>Download Template</strong>.
+</li>
+<li>
+Fill in the template as required, and then click <img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/platform/23.png"/> and select <strong>Import</strong>.
+</li>
+<li>
+Select the filled template, and upload it to the supOS
+platform.
+</li>
+</ol>
+</li>
+<li>
+Export user: Click <strong>Export</strong>,
+select the scope of export on the pop-up window and then click <strong>OK</strong>.
+</li>
+<li>
+Edit user: Under <strong>Operate</strong>, click <strong>Edit</strong>.
+</li>
+<li>
+Delete user: Select users and click <img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/platform/24.png" />, or click <strong>Delete</strong> under <strong>Operate</strong> to delete the corresponding user.
+</li>
+<li>
+Lock/unlock user: Click the icon under <strong>Status</strong> to lock/unlock the corresponding user.
+
+:::info
+The current user and admin cannot be manually locked.
+:::
+
+</li>
+<li>
+Reset password: Click <strong>Change Password</strong> under <strong>Operate</strong>, and change the password.
+</li>
+</ul>
+
+
+### Assigning Permission
+
+Aside from the permissions of the role, you can assign extra
+permissions to the user.
+
+<ul>
+<li>Admin can only assign permissions to users in the same company.</li>
+<li>Branch admin can only assign APP permissions to user after the system admin assigns APP permission to the branch.</li>
+</ul>
+
+1. Log in to supOS, and then click <img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/platform/7.png"/> at the upper-right corner to go to the design center.
+2. Select <strong>User Security Management</strong> > <strong>User Management</strong>, and then click <strong>Permission</strong> under <strong>Operate</strong> of a user.
+3. Select permissions for the user under <strong>Function Permission</strong>.
+
+:::tip
+
+<ul>
+<li>
+Click <img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/platform/26.png"/> next to <strong>Sync to user</strong>, you can select users in the company and assign the selected permissions to them. Up to 10 users and 50 permission can be assigned at the same time.
+</li>
+<li>Permissions are compatible with the ADP platform operations according to configurations including post and department restrictions, specified post, department and personnel, and handler.
+</li>
+</ul>
+:::
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/platform/25.png"/>
+
+<table>
+<colgroup>
+<col style={{ width: "26.525198938992045%" }} />
+<col style={{ width: "73.47480106100795%" }} />
+</colgroup>
+<thead>
+<tr>
+<th>
+Parameter
+</th>
+<th>
+Description
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Function Permission
+</td>
+<td>
+The system permissions of the supOS platform.
+<ul>
+<li>
+<strong>Operation Center</strong>: Includes permissions of default APPs (<strong>Desktop</strong> and <strong>Business DIY</strong> in <strong>Business Designer</strong>), third party APPs and designed industrial APPs.
+</li>
+<li><strong>Design Center</strong>: Permissions to access menus of the design center.
+</li>
+<li>
+<b>Permission Assigned</b>: Permissions assigned to the user.
+</li>
+</ul>
+</td>
+</tr>
+<tr>
+<td>
+Permissions
+</td>
+<td>
+Permissions manually assigned to the user.
+</td>
+</tr>
+<tr>
+<td>
+Inherited Permissions
+</td>
+<td>
+Permissions inherited from the role.
+</td>
+</tr>
+</tbody>
+</table>
+
+4. Click <strong>Assign Permission</strong> at the upper-right corner.
+:::tip
+You can select an assigned permission, and drag it to the trash bin at the upper-right corner to delete it.
+:::
+
+5. Click the <strong>Data Group</strong> tab.
+
+<ul id="assigning_permission__ul_ky5_tjf_ytb">
+<li>
+<strong>Resource Controlled</strong>: Assign data permissions based on the selected data group. It is the default option for all general users.
+</li>
+<li><strong>Resource Uncontrolled</strong>: Assign all data permissions. It is the default option for admin.
+</li>
+</ul>
+
+:::info
+Permissions here are linked with those of the object model management.
+:::
+
+<img width={450} src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/platform/27.png"/>
+
+6. Select the data modeling permission, and then click <strong>Assign Permission</strong>.

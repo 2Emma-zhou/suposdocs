@@ -1,0 +1,107 @@
+The data protocol is based on ProtoBuf.
+
+## Value Type
+
+```
+enum ValueType
+{
+  Unknown = 0;
+  Integer = 1;	
+  Double = 2;	
+  Boolean = 3;	
+  String = 4;	
+  Bytes = 5;	
+}
+```
+## Histroy Compression
+```
+message CompressSpec
+{
+  bool enable = 1;	// whether to enable compression, the default is false
+  float value = 2;	// compression value
+  int64 maxElapse = 3;	// maximum upload cycle (s)
+}
+```
+
+## Meta Tag
+- Metatag
+```
+message MetaTag
+{
+  int32 version = 1;		// tag version, update when tag changes
+  string name = 2;		// tag name (start with character and no illegal character)
+  string showName = 3;		// tag display name (optional)
+  string description = 4;	// tag description (optional)
+  ValueType type = 5;		// tag value type
+  string unit = 6;		// tag value unit
+  string range = 7;		// tag value range (lower limit-upper limit), range is closed interval, eg.0-100 (optional)
+  RtdValue defaultValue = 8;	// default tag value (optional)
+  bool storage = 9;		// whether to synchronize value changes to supOS (optional)
+  CompressSpec compress = 10;	// tag compression (optional)
+}
+```
+- Metatag Sequence
+```
+message MetaTagSequence
+{
+  repeated MetaTag tags = 1;
+}
+```
+
+## Real-time Data
+- Real-time Data
+```
+message RtdValue
+{
+  int64 timeStamp = 1;	// UTC timestamp
+  int64 quality = 2;	// quality code, 0 means normal
+  oneof value
+  {
+​    int64 intVal = 3;
+​    double dblVal = 4;
+​    bool boolVal = 5;
+​    string strVal = 6;
+​    bytes bytVal = 7;
+  }
+}
+```
+- Real-time Data Name
+```
+message NamedValue
+{
+  string name = 1;	// tag name
+  RtdValue value = 2;	// tag real-time value
+}
+```
+- Real-time Data Sequence
+```
+message ValueSequence
+{
+  repeated NamedValue values = 1;
+}
+```
+- Automatic Network Replenishment
+Same as **ValueSequence**.
+
+## Event Data
+```
+message RtdEvent
+{
+  string topic = 1;
+  bytes payload = 2;
+}
+```
+## Time Synchronization
+```
+message GatewayCoordinate
+{
+  int64 localTimeStamp =1;
+}
+
+message ServerCoordinate
+{
+  int64 localTimeStamp =1;
+  int64 serverTimeStamp =2;
+}
+```
+

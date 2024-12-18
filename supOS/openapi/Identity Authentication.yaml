@@ -1,0 +1,578 @@
+---
+openapi: 3.0.0
+info:
+  description: |-
+    * oauth2.0 service interface
+
+    # Authentication
+
+    <!-- ReDoc-Inject: <security-definitions> -->
+  version:
+  title: Authentication Interface Definition
+  contact:
+    name: Contact Developer
+    email: openapi@supos.com
+servers:
+- url: "/open-api/"
+tags:
+- name: OAuth2
+  description: OAuth2 authentication
+- name: V2.8.1
+  description: supOS V2.8.1 dedicated authentication interface, which will be discarded
+    soon
+security:
+- Sign: []
+- Token: []
+components:
+  securitySchemes:
+    Sign:
+      type: apiKey
+      name: Authorization
+      in: header
+    Token:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    ErrorCode:
+      type: integer
+      format: int64
+      enum:
+      - 800000
+      - 800001
+      - 800002
+      - 800003
+      description: |
+        The information code returned by the openapi-service request
+         * 800000: the operation succeeded
+         * 800001: the operation failed
+         * 800002: the system internal exception
+         * 800003: the parameter error
+    oauthToken:
+      type: object
+      properties:
+        grantType:
+          type: string
+          description: type
+          enum:
+          - authorization_code
+          - refresh_token
+        code:
+          type: string
+          description: authorizeCode obtained by authorization code mode
+        logoutUri:
+          type: string
+          description: token invalidation callback third-party application exit address
+        refreshToken:
+          type: string
+          description: refresh token
+    AddClient:
+      type: object
+      properties:
+        clientType:
+          type: string
+          enum:
+          - internal
+          description: 'Client type internal: built-in'
+          example: internal
+        protocolType:
+          type: string
+          enum:
+          - bluetron
+          description: 'Protocol type bluetron: bluetron'
+          example: bluetron
+        clientName:
+          type: string
+          description: Client Name
+          example: test1
+        enabled:
+          type: boolean
+          description: 'Whether to enable true: enabled, false: not enabled'
+          example: true
+        clientId:
+          type: string
+          description: client id
+          example: test
+        clientSecret:
+          type: string
+          description: Client Secret
+          example: xxxxx
+        authorizationUri:
+          type: string
+          description: Authorization Address
+          example: http[s]://{host:port}/{prefix}/authrize
+        tokenUri:
+          type: string
+          description: token address
+          example: http[s]://{host:port}/{prefix}/token
+        userinfoUri:
+          type: string
+          description: User Information Address
+          example: http[s]://{host:port}/{prefix}/userinfo
+        logoutUri:
+          type: string
+          description: logout address
+          example: http[s]://{host:port}/{prefix}/logout
+      required:
+      - clientType
+      - protocolType
+      - clientId
+      - clientSecret
+      - authorizationUri
+      - tokenUri
+      - userinfoUri
+      - logoutUri
+  responses:
+    GeneralError:
+      description: General Error
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                type: string
+                description: |
+                  * 800000: Operation succeeded
+                  * 800001: Operation failed
+                  * 800002: System internal exception
+                  * 800003: Parameter error
+              message:
+                type: string
+                description: 'Error information, for example: "The corresponding data
+                  was not found","Failed to modify the corresponding data"'
+    Created:
+      description: The background has successfully accepted the command and processed
+        it successfully
+      headers:
+        Location:
+          description: URL of the accessed resource
+          schema:
+            type: string
+    Updated:
+      description: The background has successfully accepted the command and processed
+        it successfully
+      headers:
+        Location:
+          description: URL of the accessed resource
+          schema:
+            type: string
+    Accepted:
+      description: The background has successfully accepted the command, but it has
+        not been processed yet
+      headers:
+        Location:
+          description: Query processing result URL
+          schema:
+            type: string
+paths:
+  "/auth/v2/oauth2/token":
+    post:
+      tags:
+      - OAuth2
+      summary: Authorization code mode to obtain Access Token and refresh token
+      operationId: getToken
+      description: |
+        * When grantType is authorization_code, code and logouutUri are required
+        * When grantType is refresh_token, refresh_token is required
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/oauthToken"
+      responses:
+        '200':
+          description: If the return is successful, the Access Token can be obtained
+            in the return package
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  accessToken:
+                    type: string
+                    description: Authorization token, accessToken.
+                  expiresIn:
+                    type: string
+                    description: The validity period of the accessToken, in milliseconds.
+                  refreshToken:
+                    type: string
+                    description: A parameter that needs to be provided when obtaining
+                      a new accessToken in the authorization auto-renewal step.
+                  username:
+                    type: string
+                    description: user name.
+                  personCode:
+                    type: string
+                    description: Personnel code uniqueness code.
+                  companyCode:
+                    type: string
+                    description: The unique code of the company's business.
+                  accountType:
+                    type: integer
+                    example: 0
+                    description: 0 ordinary users 1 system administrators.
+        '400':
+          description: "* 100106500 Parameter verification error\n"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    description: |
+                      Error prompt
+                      * 100106500 Parameter format error
+                    example: 100106500
+                  message:
+                    type: string
+                    description: Invalid parameter
+                    example: invalid grant_Type
+        '401':
+          description: "* 100106403 invalid accessToken\n"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    description: "* 100106403 invalid accessToken\n"
+                    example: 100106403
+                  message:
+                    type: string
+                    description: prompt information
+                    example: invalid accessToken
+  "/auth/v2/oauth2/identity/provider/instances":
+    post:
+      summary: Add a third-party certification authority
+      tags:
+      - OAuth2
+      security: []
+      description: |
+        * Built-in: clinetType = internal
+        * Lanzhuoyun: protocolType = bluetron
+        * When enable is false, the third-party certification center is not enabled by default, you need to contact the system administrator to enable the certification center
+      operationId: addClient
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/AddClient"
+      responses:
+        '200':
+          description: Added successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  redirectUri:
+                    type: string
+                    description: Redirect to supOS address
+                    example: http[s]://xxx/xx/xxx/xxx/authrize?protocolType=bluetron
+        '400':
+          description: |
+            Error prompt
+            * 100106500 Parameter verification error, {"code":100106500,"message":"authorizationUri length up to 256"}
+            * 100112000 The client already exists
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    description: |
+                      Error code
+                      * 100106500 Parameter verification error
+                      * 100106023 Client already exists
+                    example: 100106023
+                  message:
+                    type: string
+                    description: Error message
+                    example: Client already exists
+  "/supos/auth/v2/code/authorize":
+    get:
+      tags:
+      - V2.8.1
+      summary: Authorization address, about to be discarded
+      operationId: getCode
+      deprecated: true
+      parameters:
+      - name: responseType
+        in: query
+        description: Authorization type, this value is fixed as code.
+        required: true
+        schema:
+          type: string
+      - name: appid
+        in: query
+        description: The appid assigned to the application after successful login
+          of the application account.
+        required: true
+        schema:
+          type: string
+      - name: redirectUri
+        in: query
+        description: Callback address after successful authorization.
+        required: true
+        schema:
+          type: string
+      - name: state
+        in: query
+        description: The status value of the client side.
+        required: true
+        schema:
+          type: string
+      - name: scope
+        in: query
+        description: A list of authorizations.
+        schema:
+          type: string
+      responses:
+        '302':
+          description: The result returned after the processing is successful
+        '400':
+          "$ref": "#/components/responses/GeneralError"
+  "/supos/auth/v2/code/accessToken":
+    get:
+      tags:
+      - V2.8.1
+      summary: Obtain token, will be discarded
+      operationId: getOldToken
+      deprecated: true
+      parameters:
+      - name: grantType
+        in: query
+        description: Authorization type, this value is fixed as authorization_code.
+        required: true
+        schema:
+          type: string
+      - name: appid
+        in: query
+        description: The appid assigned to the application after successful login
+          of the application account.
+        required: true
+        schema:
+          type: string
+      - name: code
+        in: query
+        description: authorizeCode obtained by authorization code mode
+        required: true
+        schema:
+          type: string
+      - name: logoutUri
+        in: query
+        description: APP logout link
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: If the return is successful, the Access Token can be obtained
+            in the return package
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  accessToken:
+                    type: string
+                    description: Authorization token, accessToken.
+                  expiresIn:
+                    type: string
+                    description: The validity period of the access token, in seconds.
+                  refreshToken:
+                    type: string
+                    description: A parameter that needs to be provided when obtaining
+                      a new accessToken in the authorization auto-renewal step.
+        '400':
+          "$ref": "#/components/responses/GeneralError"
+  "/supos/auth/v2/code/refreshToken":
+    get:
+      tags:
+      - V2.8.1
+      summary: Refresh token, it will be discarded soon
+      operationId: refreshOldToken
+      deprecated: true
+      parameters:
+      - name: refreshToken
+        in: query
+        description: Refresh token
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: If the return is successful, the Access Token can be obtained
+            in the return package
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  accessToken:
+                    type: string
+                    description: Authorization token, accessToken.
+                  expiresIn:
+                    type: string
+                    description: The validity period of the access token, in seconds.
+                  refreshToken:
+                    type: string
+                    description: A parameter that needs to be provided when obtaining
+                      a new accessToken in the authorization auto-renewal step.
+        '400':
+          "$ref": "#/components/responses/GeneralError"
+  "/supos/auth/v2/username":
+    get:
+      tags:
+      - V2.8.1
+      summary: Get username, will be obsolete
+      operationId: getOldUserInfo
+      deprecated: true
+      parameters:
+      - name: accessToken
+        in: query
+        description: access token
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: If the return is successful, the username can be obtained in
+            the return packet
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: returned messages.
+        '400':
+          "$ref": "#/components/responses/GeneralError"
+  "/supos/auth/v2/{accessToken}/valid":
+    get:
+      tags:
+      - V2.8.1
+      summary: The authentication token is valid and will be discarded soon
+      operationId: validOldToken
+      deprecated: true
+      parameters:
+      - name: accessToken
+        in: path
+        description: access token
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: If the return is successful, you can get the authorization
+            token accessToken in the return packet whether it is valid
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  valid:
+                    type: boolean
+                    description: Whether the authorization token accessToken is valid.
+        '400':
+          "$ref": "#/components/responses/GeneralError"
+  "/supos/auth/v2/logout":
+    delete:
+      tags:
+      - V2.8.1
+      summary: Signed out, about to be discarded
+      operationId: oldLogout
+      deprecated: true
+      parameters:
+      - name: accessToken
+        in: query
+        description: access token
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: If successful, return nothing
+        '400':
+          "$ref": "#/components/responses/GeneralError"
+  "/auth/v2/oauth2/token/standard":
+    post:
+      tags:
+      - OAuth2
+      summary: Authorization code mode to obtain Access Token and refresh token, which
+        will be discarded soon and migrated to /auth/v2/oauth2/token
+      operationId: getTokenByStandard
+      description: |
+        * When grantType is authorization_code, code and logouutUri are required
+        * When grantType is refresh_token, refresh_token is required
+      deprecated: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/oauthToken"
+      responses:
+        '200':
+          description: If the return is successful, the Access Token can be obtained
+            in the return package
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  accessToken:
+                    type: string
+                    description: Authorization token, accessToken.
+                  expiresIn:
+                    type: string
+                    description: The validity period of the accessToken, in milliseconds.
+                  refreshToken:
+                    type: string
+                    description: A parameter that needs to be provided when obtaining
+                      a new accessToken in the authorization auto-renewal step.
+                  username:
+                    type: string
+                    description: username.
+                  accountType:
+                    type: integer
+                    example: 0
+                    description: 0 ordinary users 1 system administrators.
+        '400':
+          description: "* 100106500 Parameter verification error\n"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    description: |
+                      Error prompt
+                      * 100106500 Parameter format error
+                    example: 100106500
+                  message:
+                    type: string
+                    description: Invalid parameter
+                    example: invalid grant_Type
+        '500':
+          description: "* 100106403 invalid accessToken\n"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    description: "* 100106403 invalid accessToken\n"
+                    example: 100106403
+                  message:
+                    type: string
+                    description: Prompt Message
+                    example: invalid accessToken

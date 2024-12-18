@@ -1,0 +1,177 @@
+---
+hide_title: true
+---
+
+1. Select the **Furnace** template, and then click <strong>New</strong> to add an instance.
+2. Enter the basic information of the instance **Furnace A**.
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/factoryModeling/10.png" width={470}
+  height={864} />
+
+:::info
+Optional parameters can be left as empty.
+:::
+
+3. Add **Humidty** and **Pressure** as attributes of **Furnace A**.
+4. Set the value of **Furnace A** attributes and inherited attribute **Temperature** under **Other Attributes**.
+
+<ol>
+<ol>
+<li>Select an attribute (Humidity), click <strong>Setup</strong> next to <strong>Data Sources</strong> under <strong>Attribute Info</strong>, and then select a <strong>Type of Data Processing</strong>.
+
+:::tip
+By clicking **Binding Relationship** at the upper-right corner, you can quickly bind attributes in batches.
+:::
+
+<ul>
+<li><strong>Associative Binding</strong>: Click <b>Select attribute</b> and select the attribute that represents humidity to bind data source. You can also add formula and external attributes to do initial data processing.
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/factoryModeling/11.png"  width={470}/>
+
+:::info details you should know
+- Compariosn operators: When comparison operators are used in a formula, a boolean value is returned. For example: `PROP(“system.Template_3623.Instance_429.system.Property_3941”)` returns the property value, and `PROP(“system.Template_3623.Instance_429.system.Property_3941”) < 5` returns **true** or **false**.
+- Condition expression: x=expression1?expression2:expression3. For example: `min=(a<b)?a:b` means if a < b, min = a, otherwise, min = b. a nd b must be the same data type.
+:::
+
+</li>
+<li><strong>Attribute Aggregation Statistics</strong>: Select the humidity attribute, and set rules of aggregate statistics to process the value.<br/>
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/factoryModeling/12.png" width={470}
+  height={864} />
+
+<table>
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Start Time/End Time</td>
+      <td>
+        Begin and end time of a calculation. The calculation continues if the
+        end time is left empty till the data source is manually cleared.
+      </td>
+    </tr>
+    <tr>
+      <td>Statistical Period</td>
+      <td>
+        Calculation runs at each cycle.
+        <br />
+        For example, set it to 1 hour, the calculation returns a result every
+        hour and the return time is displayed as the cycle beginning.
+      </td>
+    </tr>
+    <tr>
+      <td>Marking Cycle</td>
+      <td>
+        Changes return time of results.
+        <br />
+        For example, the maximum value is returned at 12:00:00, set <strong>Marking Cycle</strong> to <strong>Delay 1 Statistical Period</strong>, and then the result is
+        returned at 13:00:00 in display.
+      </td>
+    </tr>
+    <tr>
+      <td>Statistical Methods</td>
+      <td>
+        Calculate the instant, maximum, minimum, average, sum and difference
+        value of the selected attribute.
+      </td>
+    </tr>
+    <tr>
+      <td>Statistics Configuration</td>
+      <td>
+        Only available when calculating instant value.
+
+- **Calculation Begin**： The first instant value calculated in each cycle is returned.
+- **Calculation End**: The last instant value calculated in each cycle is returned.
+
+</td>
+</tr>
+  <tr>
+  <td>Instantaneous Time</td>
+  <td>
+  Only available when calculating instant value. Changes the return time of
+  results to the exact time.
+  <br />
+  For example, an instant value is returned at 12:31:09, select <strong>Instantaneous Time</strong>, and then the result is returned at
+  12:31:09 instead of the begin time of a calculation cycle.
+  </td>
+  </tr>
+  <tr>
+  <td>Max. Time/Min. Time</td>
+  <td>
+  Only available when calculating maximum or minimum value. Select it to
+  change the return time of results to the exact time.
+  </td>
+  </tr>
+  <tr>
+  <td>Back to 0 Rule</td>
+  <td>
+  Enable it to eliminate the influence on data that has make zero principle. For example, collect values of a water meter. Last month, it read 3L, this month it reads 7L. When the value goes to 0, with the rule enabled, the collected value will be the difference between restored value (7L) -3L; Otherwise, the difference will be negative (0-3=-3).
+  </td>
+  </tr>
+    </tbody>
+</table>
+
+:::info
+**Instantaneous Time**, **Max. Time** and **Min. Time** are mutually exclusive with **Marking Cycle**.
+:::
+
+</li>
+</ul>
+</li>
+<li>Set related expressions or rules of data process, and then click <strong>OK</strong>.</li>
+</ol>
+</ol>
+
+
+:::tip
+On <strong>Attributes</strong> list, hover over the attribute <strong>Value</strong> to view its <strong>Value</strong>, <strong>Status Code</strong> and <strong>Generation Time</strong>.
+<table>
+      <thead>
+        <tr>
+          <th>Status Code</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>0</td>
+          <td>Normal</td>
+        </tr>
+        <tr>
+          <td>8000000000000000</td>
+          <td>Data connection error</td>
+        </tr>
+        <tr>
+          <td>4000000000000000</td>
+          <td>Calculation error</td>
+        </tr>
+        <tr>
+          <td>2000000000000000</td>
+          <td>Data quality error</td>
+        </tr>
+        <tr>
+          <td>1000000000000000</td>
+          <td>
+            No permission
+          </td>
+        </tr>
+        <tr>
+          <td>800000000000000</td>
+          <td>
+            Only Keep-Alive messages are received
+          </td>
+        </tr>
+        <tr>
+          <td>100000000000000</td>
+          <td>
+            Time series data exceeds authorized limit and the current tag does
+            not have authorized quota
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    
+:::

@@ -1,0 +1,117 @@
+---
+sidebar_position: 6
+
+---
+
+## Adding Data Source
+supOS supports access of multiple data sources such as MySQL, SQL Server, Oracle and more. With the connected data source, you can dump the supOS data to databases in real time and call data during APP development.
+
+1. Log in to supOS, and then click <img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/platform/7.png"/> at the upper-right corner to go to the design center.
+2. Select <strong>Global Configuration</strong> > <strong>Data Source Management</strong>, and then click <strong>New</strong>.
+3. Select a type of data source, and then enter the data source information in the pop-up window.
+
+:::info
+MySQL is used as an example in this section.
+:::
+
+<img width={350} src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/platform/58.png"/>
+
+<table>
+<colgroup>
+<col style={{ width: "27.027027027027025%" }} />
+<col style={{ width: "72.97297297297297%" }} />
+</colgroup>
+<thead>
+<tr>
+<th>
+Parameter
+</th>
+<th>
+Description
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Data Source Name
+</td>
+<td rowSpan={2}>
+Enter the name and description of the data source. The
+maximum length of the name and description is 20 and 100
+characters respectively.
+</td>
+</tr>
+<tr>
+<td>
+Data Source Description
+</td>
+</tr>
+<tr>
+<td>
+Server Address
+</td>
+<td rowSpan={2}>
+The IP address and port of the database server.
+</td>
+</tr>
+<tr>
+<td>
+Server Port
+</td>
+</tr>
+<tr>
+<td>
+Database Name
+</td>
+<td rowSpan={3}>
+Enter the name of the database, and the username and
+password to log in to the database.
+
+:::info
+Make sure the database exists on the server.
+:::
+
+</td>
+</tr>
+<tr>
+<td>
+Username
+</td>
+</tr>
+<tr>
+<td>
+Password
+</td>
+</tr>
+<tr>
+<td>
+Timezone
+</td>
+<td>
+Enter the time zone of the data source.
+</td>
+</tr>
+</tbody>
+</table>
+
+4. Click <strong>Connection test</strong>.
+5. Click <strong>Confirm</strong> after the successful connection notification pops up.
+
+<ul>
+<ul>
+<li>
+Select multiple data sources, and then click <strong>Test Connectivity</strong> at the top to test connection in batches.
+</li>
+<li>
+Click <strong>Edit</strong> or <strong>Delete</strong> under <strong>Operate</strong> to edit or delete the data source.
+
+:::info
+The data source that has been using cannot be deleted.
+:::
+
+</li>
+<li> to refresh the data source list to check the connection status in time.
+</li>
+</ul>
+</ul>

@@ -1,0 +1,113 @@
+This document is to demonstrate the process of deploying the programmable component on supOS platform to local environment, so you can upload third-party libraries and develop your own react programm on local IDEs.
+:::info
+Presently, only VSCode is supported for local deployment and development.
+:::
+
+## Deployment Process
+### Local Dependencies
+- Nodejs V12
+- VSCode plugin: supOS-vscode-editor-2
+- NPM packages: yo and generator-supos-cli
+:::tip
+The local depolyment of programmable component is recommended to work with Nodejs V12.
+:::
+### Deploying to Local
+1.  After installing Nodejs, open cmd, and then install yo and generator-supos-cli.
+```nodejs
+npm install -g yo generator-supos-cli
+```
+2. Start yo.
+```
+yo
+```
+3. Connect to supOS and select an application to synchronize local data.
+<ol>
+<li>Select <b>Supos Cli</b>, press Enter, and then enter a folder name for the project.</li>
+<li>Select protocol type based on your supOS platform from <b>http</b> and <b>https</b>.</li>
+<li>Enter the platform IP address with port number, or directly domain name.</li>
+<li>Enter the platform login username and password.
+
+:::info
+The password is invisivle. Press Enter after entering.
+:::
+
+</li>
+<li>Select an existing application on supOS, decide whether to create a github repository, and then initiate the project.</li>
+</ol>
+
+:::info
+If you cannot initiate the project, download the package [here](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/programmableComponent/programmable%20component.7z) and change the platform and application information to connect to corresponding app.
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/programmableComponent/1.png)
+:::
+## Uploading Third-party Library
+The programmable component supports React language, and embeds 3 third-party libraries such as MOMENT, LODASH and ANTDESIGN that you can directly use. Follow the instructions to upload more libraries.
+1. Search for and install the **supos-vscode-editor-2** plugin on VSCode.
+2. Open a terminal on VSCode, and then install libraries you need.<br />
+Here we use **echarts** as an example.
+```nodejs
+npm install echarts
+```
+3. Upload the library to supOS platform.<br />
+Once the library is successfully uploaded, there will be an **echarts.js** file under the automatically generated path **src/out/libs**. 
+```nodejs
+npm run build:libs
+```
+## Publishing Local Program to supOS
+You can synchronize details of existing programmable components inside the application from supOS platform, and publish local programs to the platform.
+1. Press **ctrl+shift+p** in VSCode, and then enter **sync** to search for the corresponding SVE command.
+2. Click the **SVE:sync** command to synchronize details of existing programmable components.<br />
+- The existing components will be displayed under the path **src/controls/component name**, and the detailed code will be inside the **index.js** file under the folder.
+- If there is no existing components, you need to create the path **src/controls/component name**, and create a **index.js** file under the folder.
+:::tip
+You can copy the initial code from the programmable component on supOS.
+:::
+3. Write your react program in the index file. <br />
+For example:
+```javascript
+import React, { Component } from 'react';
+import * as echarts from 'echarts';
+
+class CustomComp extends Component {
+    componentDidMount() {
+        this.getChart()
+    }
+    getChart = () => {
+        var myChart = echarts.init(document.getElementById('main'));
+        // draw charts
+        myChart.setOption({
+            title: {
+                text: 'ECharts example'
+            },
+            tooltip: {},
+            xAxis: {
+                data: ['shirt', 'cashmere', 'T-shirt', 'pants', 'heels', 'socks']
+            },
+            yAxis: {},
+            series: [
+                {
+                    name: 'Sale',
+                    type: 'bar',
+                    data: [5, 20, 36, 10, 10, 20]
+                }
+            ]
+        });
+    }
+    render() {
+        return (
+            <div id='main' style={{ width: '100%', height: '100%' }}></div>
+        );
+    }
+}
+
+export default CustomComp;
+```
+4. Press **ctrl+shift+p** in VSCode, and then enter **publish** to search for the corresponding SVE command. <br />
+- **SVE:publish**: You need to specify the folder name to publish.
+- **SVE:publish all**: Publish all folders to supOS which may take more unneccessary time.
+:::info
+All resources are uploaded to the **Static Resource Management** on supOS.
+:::
+5. Click the **SVE:publish** command from the search results, and then enter the folder name to be published.
+6. Go to supOS platform, inside the corresponding application, drag a programmable component, and set its name to the folder name created on local.
+7. Save and preview the page, you can see the effect of code written on local.

@@ -1,0 +1,87 @@
+---
+hide_title: true
+---
+
+<div className='div'>
+<div className='title'>
+
+## ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/openAPI/1.png) Send Message
+
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Path</div>
+<div className='rightCol'>
+
+```
+http://supOS ip:port/api/openapi/notification/v1/message
+```
+
+</div>
+<div className='leftCol'>Request body</div>
+<div className='rightCol'>
+
+```json
+{
+  "content": {  //required when message type is specified
+    "title": "title",
+    "text": "text"
+  },
+  "multipleType": [  //specify multiple types of message. When type is specified, multipleType is invalid
+    [
+      "email",
+      ""
+    ],
+    [
+      "stationLetter",
+      ""
+    ]
+  ],
+  "receivers": [  //required
+    "userName"  //admin cannot be a receiver
+  ],
+  "sender": "sender",  //required
+  "source": "source",  //required
+  "text": "text",    //required when multipleType is set
+  "title": "title",   //required when multipleType is set
+  "type": "email"
+}
+```
+
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+
+- 200: Successful.
+```json
+{
+  "taskCode": "taskCode"
+}
+```
+- 400
+
+```json
+{
+  "code": 100000001,
+  "message": "'sender' cannot be empty"
+}
+```
+
+<ul>
+<ul>
+<li>100000001: 'source' cannot be empty.</li>
+<li>100000001: 'receivers' cannot be empty.</li>
+<li>100102002: Non-existent receivers.</li>
+</ul>
+</ul>
+
+- 500
+```json
+{
+  "code": 100000001,
+  "message": "internal service exception"
+}
+```
+</div>
+</div>
+</div>

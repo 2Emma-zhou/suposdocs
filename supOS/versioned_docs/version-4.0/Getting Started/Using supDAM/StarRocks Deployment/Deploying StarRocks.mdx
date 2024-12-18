@@ -1,0 +1,21 @@
+:::info
+Only one FE and BE node deployment is stated in this section. Normally, a StarRocks cluster needs to deploy 3 BE nodes.
+:::
+
+## Preparation
+- Make sure you have the installation package of StarRocks.
+- Disable swap space to eliminate the influence from wapping space.
+```
+echo 0 | sudo tee /proc/sys/vm/swappiness
+```
+- Set **overcommit_memory** to avoid out of memory issue.
+```
+echo 1 | sudo tee /proc/sys/vm/overcommit_memory
+```
+
+## Deploying FE Node
+FE (Front End) node manages metadata, client connection and schedule query.
+
+1. 
+
+## Deploying BE Node

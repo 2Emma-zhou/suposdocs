@@ -1,0 +1,89 @@
+---
+hide_title: true
+---
+
+<div className='div'>
+<div className='title'>
+
+## ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/openAPI/4.png) Get App List
+
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Path</div>
+<div className='rightCol'>
+
+```
+http://{supOS ip:port}/open-api/appmgr/v2/apps
+```
+
+</div>
+<div className='leftCol'>Query parameter</div>
+<div className='rightCol'>
+
+- appType: Required array of strings. Get data of the set type of applications in business designer. If set type does not exist, an empty list is returned.
+- current: Required integer. Current page number, starting from 1.
+- pageSize: Required integer. Items on the page, default is 20 and the maximum is 100.
+
+</div>
+<div className='leftCol'>Header parameter</div>
+<div className='rightCol'>
+
+Accept-Language: Default is the server language. Options are **en-us** and **zh-cn**.
+
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+
+- 200: Successful.
+
+```json
+{
+  "list": [
+    {
+      "appId": "App_9b04f4ae960146eaa3f2e82a39e757f5",
+      "icon": "/api/image/download?fileName=2021-11-02/1635867899321/App_9b04f4ae960146eaa3f2e82a39e757f5.jpg",
+      "appName": "test1",
+      "name": "test_1",
+      "appType": "ide",
+      "appVersion": "1.0.0",
+      "vendorName": "zhangsan"
+    },
+    {
+      "appId": "App_2df207739b1c49158eff72ec1f89dca5",
+      "icon": "/api/image/download?fileName=2021-11-02/1635867899409/App_2df207739b1c49158eff72ec1f89dca5.jpg",
+      "appName": "test2",
+      "name": "test_2",
+      "appType": "ide",
+      "appVersion": "1.0.0",
+      "vendorName": "lisi"
+    }
+  ],
+  "pagination": {
+    "total": 2,
+    "pageSize": 20,
+    "current": 1
+  }
+}
+```
+- 400
+
+```json
+{
+  "code": 100122000,
+  "message": "APP type cannot be empty"
+}
+```
+<ul>
+<ul>
+<li>100122001: Current page number cannot be empty.</li>
+<li>100122002: Page size cannot be empty.</li>
+<li>100122003: Current page number cannot be less than 1.</li>
+<li>100122004: Page size cannot be smaller than 1.</li>
+<li>100122005: Page size cannot be larger than 100.</li>
+</ul>
+</ul>
+
+</div>
+</div>
+</div>

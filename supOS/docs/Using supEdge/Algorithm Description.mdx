@@ -1,0 +1,165 @@
+The X-Edge platform provides 3 types of algorithms that you can directly upload after purchase.
+## Exclusion Zone
+For certain areas, for example, coal conveyor belts, confidential archive room or other dangerous equipment lab, people are not allowed to access. With cameras set up nearby and the exclusion algorithm, people without permissions attempting to access will trigger alarms.<br/>
+The accuracy of the algorithm is over 95%, making it very effective in improving the efficiency of human supervision. It can be used for personnel safety detection in industrial areas, as well as platforms in high-speed trains, subways, and railway stations.
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supEdge/17.jpg)
+
+<table>
+<caption>Table 1. Exclusion zone parameter description</caption>
+  <thead>
+  
+    <tr>
+      <th>Parameter</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Recognition Content</td>
+      <td>Dangerous area recognition, personnel intrusion behavior recognition</td>
+    </tr>
+    <tr>
+      <td>Recognition Accuracy</td>
+      <td>Above 95%</td>
+    </tr>
+    <tr>
+      <td>Minimum Detection Size</td>
+      <td>40x40 pixels</td>
+    </tr>
+    <tr>
+      <td>Analysis Area</td>
+      <td>Supports custom analysis area within the image</td>
+    </tr>
+    <tr>
+      <td>Video/Image Resolution</td>
+      <td>Minimum D1 (720x576) resolution (higher resolutions require greater server performance)</td>
+    </tr>
+    <tr>
+      <td>Video Angle Requirements</td>
+      <td>Pitch angle less than 60 degrees</td>
+    </tr>
+    <tr>
+      <td>Alarm Method</td>
+      <td>Provides alarm video viewing</td>
+    </tr>
+    <tr>
+      <td>Response Time</td>
+      <td>Within 1 second delay (instant analysis of the video feed, delay depends on the front-end video stream)</td>
+    </tr>
+    <tr>
+      <td>Hardware Parameters</td>
+      <td>Video stream supports RTSP protocol, resolution above 720P</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+## Safety Helmet Recognition
+
+The algorithm is primarily used in factory work areas to automatically identify people entering the work area.<br/>
+If a person is detected without wearing a safety helmet, an alarm will be triggered immediately, and the alarm signal will be sent to the management staff. <br/>
+This algorithm greatly improves the efficiency of managing the work area and ensures the safety of the workers.
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supEdge/18.jpg)
+
+<table>
+		<caption>Table 2. Safety helmet recognition parameter description</caption>
+		<thead>
+			<tr>
+				<th>Parameter</th>
+				<th>Description</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>Recognition Content</td>
+				<td>Detection of personnel wearing safety helmets</td>
+			</tr>
+			<tr>
+				<td>Recognition Accuracy</td>
+				<td>Above 95%</td>
+			</tr>
+			<tr>
+				<td>Minimum Detection Size</td>
+				<td>40 x 40 pixels</td>
+			</tr>
+			<tr>
+				<td>Analysis Area</td>
+				<td>Supports custom analysis area in the image</td>
+			</tr>
+			<tr>
+				<td>Video/Image Resolution</td>
+				<td>Minimum D1 (720 x 576) resolution (higher resolution requires higher server performance)</td>
+			</tr>
+			<tr>
+				<td>Video Angle Requirement</td>
+				<td>Overhead angle smaller than 60 degrees</td>
+			</tr>
+			<tr>
+				<td>Alarm Method</td>
+				<td>Provides alarm video for viewing</td>
+			</tr>
+			<tr>
+				<td>Response Time</td>
+				<td>Within 1 second delay (real-time analysis of video, delay depends on the front-end video stream)</td>
+			</tr>
+			<tr>
+				<td>Hardware Parameters</td>
+				<td>Video stream supports RTSP protocol, resolution above 720P</td>
+			</tr>
+		</tbody>
+	</table>
+
+## Conveyor Belt Mistracking
+The algorithm is used to detect potential deviation issues in industrial conveyor belts. <br/>
+- It automatically recognizes the degree of belt deviation and issues an alarm if any deviation occurs.
+- It can also provide a warning if the belt appears to be continuously moving in one direction, indicating that deviation may occur soon.
+This algorithm greatly improves the efficiency of maintaining belt conveyors in factories, prevents problems caused by belt deviation such as belt wear, uneven roller force, and scattered materials, and increases overall production efficiency.
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supEdge/19.jpg)
+
+<table>
+  <caption>Table 3. Conveyor belt mistracking parameter description </caption>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Recognition Content</td>
+      <td>Belt deviation angle</td>
+    </tr>
+    <tr>
+      <td>Recognition Accuracy</td>
+      <td>95% or above</td>
+    </tr>
+    <tr>
+      <td>Minimum Detection Size</td>
+      <td>40x40 pixels</td>
+    </tr>
+    <tr>
+      <td>Video Resolution</td>
+      <td>1280x720 or 1920x1080 (higher resolution requires higher server performance)</td>
+    </tr>
+    <tr>
+      <td>Frame Rate</td>
+      <td>Recommended 25-30 frames per second (not less than 20 frames)</td>
+    </tr>
+    <tr>
+      <td>Video Angle Requirement</td>
+      <td>Angle with the horizontal line not less than 45 degrees</td>
+    </tr>
+    <tr>
+      <td>Color Requirement</td>
+      <td>Color</td>
+    </tr>
+    <tr>
+      <td>Alarm Method</td>
+      <td>Provide alarm video for viewing</td>
+    </tr>
+  </tbody>
+</table>

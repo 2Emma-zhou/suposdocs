@@ -1,0 +1,65 @@
+
+:::info
+For details of APIs, see **API Reference**.
+:::
+
+### Send by Receiver
+
+Send the message based on the specified receiver range and content.
+
+```js
+var httpservice = services["HttpClientService"];
+var param = {
+
+"businessCode": "businessCode",
+"businessName": "businessName",
+"receivers": [
+        {
+        "rangeType": "STAFF",
+        "codes": [
+        "STAFF_CODE"
+        ]
+        }
+  ],
+"contents": [
+        {
+        "protocol": "email",
+        "content": "{\"subject\":\"subject\",\"text\":\"text\"}"
+        },
+        {
+        "protocol": "stationLetter",
+        "content": "{\"text\":\"text\"}"
+        }
+  ]
+}
+ 
+httpservice.post("http://IP:8080/open-api/p/notification/v2/messages",JSON.stringify(param),3000);
+```
+
+
+
+### Send by Template
+
+Set the content and receiver through the template.
+
+:::info
+The receiver range and protocol type of the template theme will be replaced when they are specified in the input parameter.
+:::
+
+```js
+var httpservice = services["HttpClientService"];
+var param = {
+    "businessCode": "a01",
+    "businessName": "administrator",
+    "topicCode": "topicCode",
+    "protocols": ["stationLetter"],
+    "receivers": [{
+      "rangeType": "STAFF",
+      "codes": ["msa1"],
+      }],
+    "param": {
+}
+}
+ 
+httpservice.post("http://IP:8080/open-api/p/notification/v2/topic/messages",JSON.stringify(param),3000);
+```

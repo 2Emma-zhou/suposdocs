@@ -1,0 +1,170 @@
+---
+sidebar_position: 4
+---
+
+Data linkage is necessary for data requests between linking sources and linking targets.
+
+- Trigger condition
+
+<table>
+<colgroup>
+<col style={{ width: "27.47252747252747%" }} />
+<col style={{ width: "72.52747252747253%" }} />
+</colgroup>
+<thead>
+<tr>
+ <th>
+    Condition
+  </th>
+ <th>
+    Description
+  </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+ <td>
+    Initialization
+  </td>
+ <td>
+    Triggers linked actions when initialization.
+  </td>
+</tr>
+<tr>
+ <td>
+    Value Change
+  </td>
+ <td>
+    Triggers linked actions when element value changes.
+  </td>
+</tr>
+<tr>
+ <td>
+    Lose Focus
+  </td>
+ <td>
+    Triggers linked actions when moving away from the element.
+  </td>
+</tr>
+<tr>
+ <td>
+    Click/Double-click
+  </td>
+ <td>
+    Triggers linked actions when clicking/double-clicking the
+    element.
+  </td>
+</tr>
+<tr>
+ <td>
+    Click Row
+  </td>
+ <td>
+    Triggers linked actions when clicking a table row. Available
+    for tables only.
+  </td>
+</tr>
+<tr>
+ <td>
+    Click Cell
+  </td>
+ <td>
+    Triggers linked actions when clicking a table cell. Available
+    for tables only.
+  </td>
+</tr>
+<tr>
+ <td>
+    Area Selection
+  </td>
+ <td>
+    Triggers linked actions when dragging to select an area.
+    Available for tables only.
+  </td>
+</tr>
+</tbody>
+          </table>
+
+- Linked actions
+
+<ul>
+<ul>
+<li><strong>Search</strong>: The output value of linked source is used as input
+parameters to run queries on linked target. When the data source
+of linked target is a form template, the input parameter is
+corresponding table filed, and when the data source of linked
+target is a service, the input parameter is also used for the
+service.
+</li>
+<li>
+<strong>Store value</strong>: Stores values entered through linked sources, and
+then associates events such as click or double-click to realize
+queries. Generally used for manual query.
+</li>
+<li>
+<strong>Set value</strong>: Displays values entered through linked sources on
+linked targets. The set value is only available on the current
+page and will be invalid after refreshing.
+</li>
+<li>
+<strong>Set selected</strong>: Selects values in linked targets that corresponds to
+values entered through linked sources.
+</li>
+</ul>
+</ul>
+
+
+## Demonstrating Query
+
+Drag a table, 2 input boxes and a button to the canvas, and then select a data source for the table and set table headers based on the data source.
+
+:::info
+- In this example, a form template is used as the table data source.
+- Elements used in the example are for reference only. For details on all elements, see <a href="../Element Details">Element Details</a>.
+:::
+
+1. Press ctrl and select both input boxes, and then click <strong>Choose a target</strong> at the upper-right corner.
+2. Select the button as the target, and then configure the linkage.
+- Select <strong>Value Change</strong> as trigger sources for both boxes.
+- Select <strong>Store Value</strong> as linked actions.
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/appDesign/42.png"/>
+
+3. Click <strong>Submit</strong>.
+4. Click the button, and then click <img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/appDesign/43.png"/> under <strong>Linkage</strong>.
+5. Select <strong>Click</strong> from the drop-down list, and then click <strong>Choose a target</strong> to select the table.
+
+- Select <strong>Settings</strong> from <strong>Action</strong> list.
+- Click <strong>Configuration Structure</strong>, and then select input field for each input boxes. For example, select <strong>name1</strong> for the first box, you can enter a name in the first box to search for corresponding data.
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/appDesign/44.png"/>
+
+6. Click <strong>Save</strong> and <strong>Preview</strong> at the upper-right corner, and then enter search text in input boxes, click the button to view corresponding results.
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/appDesign/45.png"/>
+
+
+## Demonstrating Value Selection
+
+Drag a drop-down box and a radio to the canvas.
+
+
+:::info
+In this example, a form template is used as data sources.
+:::
+
+1. Click the drop-down box, and then select <strong>Dynamic Options</strong> under <strong>Options</strong>.
+2. Select the form template as the data source and then set option text and value.
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/appDesign/46.png"/>
+
+3. Click <strong>Linkage</strong>, and then select <strong>Value Change</strong> to be the trigger event.
+4. Select the radio to be the linked target, and then set <strong>Action</strong> to <strong>Set Checked</strong> and <strong>Source Field</strong> to either option value or label.
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/appDesign/47.png"/>
+
+5. Select the radio, and then select the same data source.
+6. Click <strong>Save</strong> and <strong>Preview</strong> at the upper-right corner, and then select a value from the drop-down list and check whether the radio selects the same option.
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/appDesign/48.png"/>
+

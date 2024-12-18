@@ -1,0 +1,106 @@
+---
+hide_title: true
+---
+
+## Overview
+This document dedicates in demonstrating the internal usage of common openAPIs in supOS platform.
+:::info
+OpenAPIs are often used together with general HTTP requests such as GET, POST, DELETE and PUT.
+:::
+
+## Operation
+Internal use of open APIs is conducted inside an object service. In this section, 4 types of requests will be covered.
+1. Log in to supOS platform, in design center, click **Object Model Management**.
+2. Select a template, inside it click **Service**.
+3. Add a new service and enter basic information of it.
+:::info
+Make sure to set the output type to **JSON**.
+:::
+4. Write the corresponding script in the service and then click <b>Debugging</b> to check the result from the pop-up window.
+:::tip
+You can write your own script which requires a basic HTTP request body code and an open API path code. 
+Both of them you can get from <a href="../category/openapi">Open API</a> and check the video class <a href="../class series/Open API/OpenAPI Internal Usage">Open API Internal Usage</a> to learn the method.
+:::
+
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+<Tabs>
+<TabItem value="js" label="Create an instance">
+
+```js
+baseUrl = "/open-api/supos/oodm/v2/template/{template namespace}/{template alias}/instance"
+
+var param = {
+"appAccessMode": "PUBLIC", //whether can be seen in all applications (PUBLIC or PRIVATE). Required
+"appName": "system", //application name. Required
+"attributeValues": [ //array of objects. Existing attributes of the parent template
+{
+"attributeName": "test",
+"attributeNamespace": "system",
+"attributeValue": "123"
+}
+],
+"code": "xxxxx", //string. Instance code
+"comment": "create test instance", //string. Instance description
+"displayName": "createInstance", //string. Display name of the instance. Required for entity instance
+"enName": "createInstance", //string. Instance alias. Required
+
+}
+var headers = {}
+var httpService= services["HttpClientService"];
+httpService.post(baseUrl, JSON.stringify(param), headers, 10000)
+```
+
+</TabItem>
+<TabItem value="js2" label="Get instance details by alias">
+
+```js
+var baseUrl = "/open-api/supos/oodm/v2/templates/{template namespace}/{template alias}/instances/{instance alias}/value";
+var httpservice= services["HttpClientService"];// create hidden service object
+//3000 is the maximum timeout period with millisecond as unit. When no data returned after the set time, the request is timed out
+var result = httpservice.getString(baseUrl,3000);
+result;
+```
+
+</TabItem>
+<TabItem value="js3" label="Change instance information">
+
+```js
+var baseUrl = "/open-api/supos/oodm/v2/template/{template namespace}/{template alias}/instance/{instance alias}"
+
+var param = {
+  "appAccessMode": "PUBLIC", ////whether can be seen in all applications (PUBLIC or PRIVATE). Required
+  "attributeValues": [ //existing attributes of the parent template
+    {
+      "attributeName": "test",
+      "attributeNamespace": "system",
+      "attributeValue": "123"
+    }
+  ],
+  "code": "this is a test",
+  "comment": "modify instance",
+  "displayName": "UpdateInstance1",
+}
+var headers = {}
+var httpService= services["HttpClientService"];
+httpService.put(baseUrl, JSON.stringify(param), headers, 10000)
+```
+
+</TabItem>
+<TabItem value="js4" label="Delete instance">
+
+```js
+var baseUrl = "/open-api/supos/oodm/v2/template/{template namespace}/{template alias}/instance/{instance alias}";
+
+var httpservice= services["HttpClientService"];// create hidden service object
+//3000 is the maximum timeout period with millisecond as unit. When no data returned after the set time, the request is timed out
+var result = httpservice.delete(baseUrl,3000);
+result; 
+```
+
+</TabItem>
+</Tabs>
+
+

@@ -1,0 +1,136 @@
+To access PI database of the industrial control system and read the data in real time.
+
+### Configuring PI Server
+
+Add the supOS platform to the trust list of the PI server for it to get data.
+1. Log in to the PI database server.
+2. Select <strong>Security</strong> > <b>Identities, Users, & Groups</b> > <strong>PI Users</strong>, and then click <img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/platform/60.png"/> to add a new user.
+3. Enter the username and password, and then click <strong>Create</strong>.
+4. Double-click the created username, select the <strong>Mappings&Trusts</strong> tab in the pop-up window.
+5. Click <strong>Add</strong> under <strong>Trust name</strong>.
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/platform/61.png"/>
+
+6. Enter the trust information, and then click <strong>OK</strong>.
+
+<ul>
+<ul>
+<li>
+<strong>Trust Name</strong>: The trust name for supOS.
+</li>
+<li>
+<strong>IP Address</strong>: The IP address on which the PI tool kit runs and has access to the PI server.
+
+:::info
+Enable port 5450 of the PI server when the computer cannot access the server under normal network.
+:::
+
+</li>
+<li><strong>NetMask</strong>: Subnet mask.
+</li>
+</ul>
+</ul>
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/platform/62.png"/>
+
+7. Select <strong>Security Settings</strong> on the main page, and then change the level to **Disable explicit login for pi**.
+:::info
+It takes effect upon restarting the PI server.
+:::
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/platform/63.png"/>
+
+8. (Optional) Set the value of update queue when there are more than 5000 data points access.
+
+<ol>
+<ol>
+<li>Select <strong>Tuning Parameters</strong> on the main page.</li>
+<li>Under the <strong>Update Manager</strong> tab, double-click <strong>MaxUpdateQueue</strong>.</li>
+<li>Set the value higher than the access points, and then click <strong>OK</strong>.
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/platform/64.png"/>
+
+</li>
+</ol>
+</ol>
+
+### Configuring PI Tool Kit
+
+PI tool kit connects the supOS platform and the PI database.
+- Get the PI tool kit from technical support.
+- A computer that can access the PI server with Windows10 or Windows Server 2016 operating system.
+
+1. Double-click "PiWebApi_XXX.exe" and follow the instructions to install the tool kit.
+2. Find the server.xml file under the installation path of the tool kit, and then open it with notepad.
+3. Change the file content and save it.
+```xml
+<conf>
+  <PI>
+    <Address>server_ip</Address>
+    <Account>trusted_Username</Account>
+    <Password>Password_of_the_trusted_username</Password>
+  </PI>
+  <Server>
+    <Address>127.0.0.1</Address>
+    <Port>8087</Port>
+  </Server>
+  <History>
+    <Port>30257</Port>
+    <Port>30258</Port>
+    <Port>30259</Port>
+  </History>
+</conf>
+```
+4. Double-click the "meta.csv" file, and change the content to match with the <strong>Digital States</strong> on the PI server, so the supOS platform can recognize the converted
+digital type.
+
+:::info
+Presently, the PI server only supports to convert <strong>Digital States</strong> to <strong>Boolean</strong>.
+:::
+
+<ul>
+<ul>
+<li><strong>Name</strong>: Same with that in the PI server.</li>
+<li><strong>Sno</strong>: The <strong>State Number</strong> on the PI server.</li>
+<li><strong>State</strong>: The <strong>State Name</strong> on the PI server, and corresponds with <strong>Sno</strong>.</li>
+<li><strong>Vtype</strong>: Leave it as default.<br/>
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/platform/66.png"/>
+
+</li>
+</ul>
+</ul>
+
+
+
+5. Double-click the start.bat file to start the tool kit service.
+
+:::tip
+Double-click the stop.bat file to stop the service when
+necessary.
+:::
+
+### Adding PI Database
+
+1. Log in to supOS, and then click  <img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/platform/7.png"/> at the upper-right corner to go to the design center.
+2. Select <strong>Global Configuration</strong> > <strong>Heterogeneous Resources</strong> > <strong>PI</strong>, and then click <strong>New</strong>.
+
+<ul>
+<ul>
+<li>Heterogeneous Database Address/Heterogeneous Database Port: Enter the IP and port of the PI server.</li>
+<li><strong>supOS Address</strong>: Enter the IP address of the supOS server for standalone deployment and the IP of k8sworkermain node server for
+cluster deployment.</li>
+</ul>
+</ul>
+
+<img width={350} src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/platform/65.png"/>
+
+3. Click <strong>OK</strong>.
+4. Select <strong>Object Model Management</strong> > <strong>Object Instance</strong> > <strong>Entity Template</strong> > <strong>Link Template</strong>, check whether the added PI database is listed.
+
+<ul>
+<ul>
+<li>After adding PI database, a new object instance with the same name is added with the connected data.</li>
+<li>You can filter tags connected to supOS through the PI database.</li>
+</ul>
+</ul>

@@ -1,0 +1,119 @@
+---
+hide_title: true
+---
+
+supOS supports installation of third-party applications with required packing methods, and running them on supOS.
+
+## Setting Quota Verification
+Running applications on supOS take up system resources. To prevent overuse of server resource, quota verification is necessary before installing application.
+
+1. Log in to supOS, and then click <img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/factoryModeling/7.png" /> to go to the design center.
+2. Select **APP Management** > **App Runtime Management**, and then enable **Quota verification** on the top.
+
+:::info
+- When **Quota verification** is disabled, no resource limits are applied.
+- It can only be enabled when all installed applications are stopped.
+:::
+
+<img width={450} src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/21.png" />
+
+<table>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>Install available quota</td>
+<td>The result of <b>APP total quota</b>*<b>Quota overrun ratio</b>-<b>Total installed apps limit</b>.</td>
+</tr>
+<tr>
+<td>Actual usage</td>
+<td>The actual usage of installed applications.</td>
+</tr>
+<tr>
+<td>Total installed apps limit</td>
+<td>The occupied resources of all installed applications.</td>
+</tr>
+<tr>
+<td>APP total quota</td>
+<td>The assigned resources for installing applications.
+
+:::info
+- Minimum: CPU 3vC/RAM 3G
+- Maximum: OS total resource-supOS resource (supOS/X-BD/X-ETL/X-DAM included)-system resource (5% generally)
+:::
+
+</td>
+</tr>
+<tr>
+<td>Quota overrun ratio</td>
+<td>Resource applications occupy/APP total quota ratio. When the resource your application needs exceeds <b>APP total quota</b>*<b>Quota overrun ratio</b>, the app cannot be installed.</td>
+</tr>
+</table>
+
+3. Click **OK**.
+
+## Installing Application
+
+1. On **App Runtime Management**, click **Local Installation**.
+2. Select the application package (.zip), and then click **Open**.
+
+:::info
+If the application package has not defined its resource requirements, you need to define them in the pop-up window during uploading.
+:::
+
+<img width={450} src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/3dDesigner/3.png"/>
+
+3. After the package uploaded, click **Start** under **Operation** to start the application.
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/3dDesigner/1.png"/>
+
+:::info
+The installed application can only be displayed after permission assigned.
+:::
+
+## Operation Description
+
+:::info
+You can set the number of copies of the application directly on the application list if it supports multiple copies.
+:::
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/59.png"/>
+
+<table>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>Purchased APP</td>
+<td>The list of applications you purchased from Bluetron app store after logging in your Bluetron ID from the upper-right corner.</td>
+</tr>
+<tr>
+<td>Start/Stop</td>
+<td>Select multiple applications, and start/stop them together.</td>
+</tr>
+<tr>
+<td>Task Queue</td>
+<td>Displays the start/stop tasks of selected applications.</td>
+</tr>
+<tr>
+<td>Upgrade</td>
+<td>Upload new version installation package to update the current application.
+
+:::info
+- The version number must be larger and application name must be the same.
+- Quato and permission will be the same as the older version. 
+:::
+
+</td>
+</tr>
+<tr>
+<td>Update Configuration</td>
+<td>Directly update the application configuration without new package upload. Normally used for update license and token.</td>
+</tr>
+<tr>
+<td>Authorized Company</td>
+<td>Grant access of the current application to designated companies.</td>
+</tr>
+</table>

@@ -1,0 +1,78 @@
+---
+hide_title: true
+---
+
+<div className='div'>
+<div className='title'>
+
+## ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/openAPI/1.png) Add Layout
+
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Path</div>
+<div className='rightCol'>
+
+```
+http://{supOS ip:port}/open-api/p/compose/v2/pages/{pageId}/layouts
+```
+
+**pageId**: Required.
+
+</div>
+<div className='leftCol'>Request body</div>
+<div className='rightCol'>
+
+```json
+{
+  "list": [
+    {
+      "dataSource": "system.template1.instance1.system.prop1",
+      "type": "instance.property", //request type. "network"-get factory model tree/"instance.property"-get attribute history data/"instance.service"-execute entity instance service/"template.service"-execute form template service/"template.data"-get template instance data
+      "filters": {  //required when "type" is set to "instance.property"
+        "aggrType": "first", //aggregation type. "first/mean/max/min/sum"
+        "group": "time(48s,27s) fill(previous)",  //aggregation time
+        "limit": 601,  //data volume to be queried
+        "minDate": "2021-12-22T16:00:00Z",
+        "maxDate": "2021-12-23T16:00:00Z"
+      }
+    }
+  ]
+}
+```
+**dataSource**: Request data source. Different depends on the **type**. 
+- type is network, value is {networkEnName}.
+- type is instance.property, value is {templateNamespace.templateEnName.instanceEnName.attriubteNamespace.attributeEnName}.
+- type is instance.service, value is {templateNamespace.templateEnName.instanceEnName.serviceNamespace.serviceEnName}.
+- type is template.service, value is {templateNamespace.templateEnName.serviceNamespace.serviceEnName}.
+- type is template.data, value is {templateNamespace.templateEnName}. 
+
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+
+- 200: Successful.
+
+```json
+{
+  "list": [
+    {}
+  ]
+}
+```
+- 400
+
+<ul>
+<ul>
+<li>400: Request failed.</li>
+<li>401: Permission authentication failed.</li>
+<li>404: Corresponding data not found.</li>
+<li>409: Request conflicted. The Specified name exists, cannot add.</li>
+</ul>
+</ul>
+
+- 500: System error.
+
+</div>
+</div>
+</div>

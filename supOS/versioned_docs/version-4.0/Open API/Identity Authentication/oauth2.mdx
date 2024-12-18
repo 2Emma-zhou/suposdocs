@@ -1,0 +1,226 @@
+---
+hide_title: true
+---
+
+<div className='div'>
+<div className='title'>
+
+## ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/openAPI/1.png) Get Access Token and Refresh Token
+
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Path</div>
+<div className='rightCol'>
+
+```
+http://{supOS ip:port}/open-api/auth/v2/oauth2/token
+```
+
+</div>
+<div className='leftCol'>Request body</div>
+<div className='rightCol'>
+
+```json
+{
+  "grantType": "authorization_code",  //refresh_code or authorization_code
+  "code": "string",  //required for authorization_code
+  "logoutUri": "string",  //required for authorization_code
+  "refreshToken": "string"  //required for refresh_code
+}
+```
+
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+
+- 200: Successful.
+
+```json
+{
+  "accessToken": "string",
+  "expiresIn": "string",
+  "refreshToken": "string",
+  "username": "string",
+  "personCode": "string",
+  "companyCode": "string",
+  "accountType": 0
+}
+```
+- 400
+
+```json
+{
+  "code": 100106500,
+  "message": "invalid grant_Type"
+}
+```
+
+- 401
+```json
+{
+  "code": 100106403,
+  "message": "invalid accessToken"
+}
+```
+
+</div>
+</div>
+</div>
+
+<div className='div'>
+<div className='title'>
+
+## ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/openAPI/1.png) Add Third-party Authentication Center
+
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Path</div>
+<div className='rightCol'>
+
+```
+http://{supOS ip:port}/open-api/auth/v2/oauth2/identity/provider/instances
+```
+
+</div>
+<div className='leftCol'>Request body</div>
+<div className='rightCol'>
+
+```json
+{
+  "clientType": "internal",  //required. Internal means embedded client
+  "protocolType": "bluetron",  //required
+  "clientName": "test1",
+  "enabled": true,
+  "clientId": "test",  //required
+  "clientSecret": "xxxxx",  //required
+  "authorizationUri": "http[s]://{host:port}/{prefix}/authrize",  //required
+  "tokenUri": "http[s]://{host:port}/{prefix}/token",  //required
+  "userinfoUri": "http[s]://{host:port}/{prefix}/userinfo",  //required
+  "logoutUri": "http[s]://{host:port}/{prefix}/logout"  //required
+}
+```
+
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+
+- 200: Successful.
+
+```json
+{
+  "redirectUri": "http[s]://xxx/xx/xxx/xxx/authrize?protocolType=bluetron"
+}
+```
+- 400
+
+```json
+{
+  "code": 100106023,
+  "message": "client already exists"
+}
+```
+100106500: 'authorizationUri' cannot exceed 256 in length.
+
+</div>
+</div>
+</div>
+
+<div className='div'>
+<div className='title'>
+
+## ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/openAPI/4.png) Get Access Token on Client
+
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Path</div>
+<div className='rightCol'>
+
+```
+http://supOS ip:port/{basePath}/oauth2/client/v1/accessToken
+```
+
+</div>
+<div className='leftCol'>Query parameter</div>
+<div className='rightCol'>
+
+- grantType: Set to 'client_credential'. Required.
+- appId: Unique credential of the third party user. Required.
+- secret: Unique credential key of the third party user. Required.
+
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+
+- 200: Successful.
+
+```json
+{
+  "accessToken": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJwelhpeXRYVHZVVmx6YTloUC1tZTdEUXNLbXlvRkxLSmFHeE5HMEQzdUpNIn0.eyJleHAiOjE2MzQ4OTgyNTUsImlhdCI6MTYzNDg5MTA1NSwianRpIjoiOTU5NThhMDItZDI4Zi00NDhhLTk5NzItNDQ1YjA4NzBjMDBiIiwiaXNzIjoiaHR0cDovLzEwMC42NC44LjE2MTo4MDgwL2F1dGgvcmVhbG1zL2R0Iiwic3ViIjoiNWMxMzMyN2EtYzNkZS00NDVmLTk4NGEtYTgwOWRmZWY4MWM2IiwidHlwIjoiQmVhcmVyIiwiYXpwIjoiQXBwX2NlOGRjNjAyMzY4YmRjZTY5MjUzYzNiZDk3NTEyNDNhIiwic2Vzc2lvbl9zdGF0ZSI6IjYyODFlYjFhLTFlMDgtNDZhMy1iNThjLWE4MzM4MzE1MzE2YSIsImFjciI6IjEiLCJzY29wZSI6IiIsImNsaWVudElkIjoiQXBwX2NlOGRjNjAyMzY4YmRjZTY5MjUzYzNiZDk3NTEyNDNhIiwiY2xpZW50SG9zdCI6IjEwMC42NC44LjE1MiIsImNsaWVudEFkZHJlc3MiOiIxMDAuNjQuOC4xNTIifQ.nsptCw0lWeKzauAaFBWkCVOjMdkPDvfqvcVCIx-qig4dmwso_GH3fMtfZ1bhFUjbwsBqKZMUiFRekaURSZAiIIijAYc4uX0lJxsMmHNd5BZWsr-KPKjwAMkCUTxWJy8Eg-LcbSwWQXXZHtXR1MRiSouaAwVe15Q77YLgyQAWJSRtN_hAfPXdhPQiZxRab7_tWaiDu-AIEZktmnKIsm0YHYMeaNtlHCoBwCbW5McLbnscMrFdscXkeEyoOJHN8k3byY62nAY1XoSZQmtSz02HUXhcJVr2mZsQmP2Ry_z_An8t_LNrU64Us7-I64SB1j4G2X3W6okwrp8KAUcWFHU-ag",
+  "expiresIn": 7200000,
+  "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICIwZjRkZTZlNS1jYzQ1LTQyMTMtYjRmYy1mZDlmY2Q1ZmQ1YTUifQ.eyJleHAiOjE2MzQ4OTgyNTUsImlhdCI6MTYzNDg5MTA1NSwianRpIjoiNDQ2NDhhOGMtM2I1YS00MWJkLWI5YTEtZTUwM2M5ZWZhY2Q0IiwiaXNzIjoiaHR0cDovLzEwMC42NC44LjE2MTo4MDgwL2F1dGgvcmVhbG1zL2R0IiwiYXVkIjoiaHR0cDovLzEwMC42NC44LjE2MTo4MDgwL2F1dGgvcmVhbG1zL2R0Iiwic3ViIjoiNWMxMzMyN2EtYzNkZS00NDVmLTk4NGEtYTgwOWRmZWY4MWM2IiwidHlwIjoiUmVmcmVzaCIsImF6cCI6IkFwcF9jZThkYzYwMjM2OGJkY2U2OTI1M2MzYmQ5NzUxMjQzYSIsInNlc3Npb25fc3RhdGUiOiI2MjgxZWIxYS0xZTA4LTQ2YTMtYjU4Yy1hODMzODMxNTMxNmEiLCJzY29wZSI6IiJ9.sJ3VcgbavyT41OCc8xZ4sbAHliMOkXPYcvehIX_ttJE"
+}
+```
+- 400
+
+```json
+{
+  "code": 100106500,
+  "message": "request parameter error"
+}
+```
+- 404: Not found.
+
+</div>
+</div>
+</div>
+
+<div className='div'>
+<div className='title'>
+
+## ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/openAPI/4.png) Get Refresh Token on Client
+
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Path</div>
+<div className='rightCol'>
+
+```
+http://supOS ip:port/{basePath}/oauth2/client/v1/refreshToken
+```
+
+</div>
+<div className='leftCol'>Query parameter</div>
+<div className='rightCol'>
+
+**refreshToken**: Refresh token.
+
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+
+- 200: Successful.
+
+```json
+{
+  "accessToken": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJwelhpeXRYVHZVVmx6YTloUC1tZTdEUXNLbXlvRkxLSmFHeE5HMEQzdUpNIn0.eyJleHAiOjE2MzQ4OTgyNTUsImlhdCI6MTYzNDg5MTA1NSwianRpIjoiOTU5NThhMDItZDI4Zi00NDhhLTk5NzItNDQ1YjA4NzBjMDBiIiwiaXNzIjoiaHR0cDovLzEwMC42NC44LjE2MTo4MDgwL2F1dGgvcmVhbG1zL2R0Iiwic3ViIjoiNWMxMzMyN2EtYzNkZS00NDVmLTk4NGEtYTgwOWRmZWY4MWM2IiwidHlwIjoiQmVhcmVyIiwiYXpwIjoiQXBwX2NlOGRjNjAyMzY4YmRjZTY5MjUzYzNiZDk3NTEyNDNhIiwic2Vzc2lvbl9zdGF0ZSI6IjYyODFlYjFhLTFlMDgtNDZhMy1iNThjLWE4MzM4MzE1MzE2YSIsImFjciI6IjEiLCJzY29wZSI6IiIsImNsaWVudElkIjoiQXBwX2NlOGRjNjAyMzY4YmRjZTY5MjUzYzNiZDk3NTEyNDNhIiwiY2xpZW50SG9zdCI6IjEwMC42NC44LjE1MiIsImNsaWVudEFkZHJlc3MiOiIxMDAuNjQuOC4xNTIifQ.nsptCw0lWeKzauAaFBWkCVOjMdkPDvfqvcVCIx-qig4dmwso_GH3fMtfZ1bhFUjbwsBqKZMUiFRekaURSZAiIIijAYc4uX0lJxsMmHNd5BZWsr-KPKjwAMkCUTxWJy8Eg-LcbSwWQXXZHtXR1MRiSouaAwVe15Q77YLgyQAWJSRtN_hAfPXdhPQiZxRab7_tWaiDu-AIEZktmnKIsm0YHYMeaNtlHCoBwCbW5McLbnscMrFdscXkeEyoOJHN8k3byY62nAY1XoSZQmtSz02HUXhcJVr2mZsQmP2Ry_z_An8t_LNrU64Us7-I64SB1j4G2X3W6okwrp8KAUcWFHU-ag",
+  "expiresIn": 7200000,
+  "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICIwZjRkZTZlNS1jYzQ1LTQyMTMtYjRmYy1mZDlmY2Q1ZmQ1YTUifQ.eyJleHAiOjE2MzQ4OTgyNTUsImlhdCI6MTYzNDg5MTA1NSwianRpIjoiNDQ2NDhhOGMtM2I1YS00MWJkLWI5YTEtZTUwM2M5ZWZhY2Q0IiwiaXNzIjoiaHR0cDovLzEwMC42NC44LjE2MTo4MDgwL2F1dGgvcmVhbG1zL2R0IiwiYXVkIjoiaHR0cDovLzEwMC42NC44LjE2MTo4MDgwL2F1dGgvcmVhbG1zL2R0Iiwic3ViIjoiNWMxMzMyN2EtYzNkZS00NDVmLTk4NGEtYTgwOWRmZWY4MWM2IiwidHlwIjoiUmVmcmVzaCIsImF6cCI6IkFwcF9jZThkYzYwMjM2OGJkY2U2OTI1M2MzYmQ5NzUxMjQzYSIsInNlc3Npb25fc3RhdGUiOiI2MjgxZWIxYS0xZTA4LTQ2YTMtYjU4Yy1hODMzODMxNTMxNmEiLCJzY29wZSI6IiJ9.sJ3VcgbavyT41OCc8xZ4sbAHliMOkXPYcvehIX_ttJE"
+}
+```
+- 400
+
+```json
+{
+  "code": 100106500,
+  "message": "request parameter error"
+}
+```
+- 404: Not found.
+
+</div>
+</div>
+</div>

@@ -1,0 +1,525 @@
+---
+hide_title: true
+---
+
+
+<div className='div'>
+<div className='title'>
+
+## ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/openAPI/1.png) Confirm Alarm Information
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Path</div>
+<div className='rightCol'>
+
+```
+http://{supOS ip:port}/open-api/supos/oodm/v2/alerts/ack
+```
+
+
+</div>
+<div className='leftCol'>Request body</div>
+<div className='rightCol'>
+
+```json
+{
+  "ackAll": false,
+  "userName": "Emma",
+  "fullNames": [
+    "11401uuid08fb884b9a4743d08464e95c64074d09"
+  ]
+}
+```
+- ackAll: Boolean. Whether to confirm all
+- userName: String. User to confirm the alarm
+- fullName: Array of strings. Instance ID triggered by the alarm and alarm alias
+
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+400: General internal error of OODM.
+
+```json
+{
+  "code": 10001001,
+  "data": {},
+  "detail": "string",
+  "message": "string"
+}
+```
+
+</div>
+</div>
+</div>
+
+<div className='div'>
+<div className='title'>
+
+## ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/openAPI/1.png) Create Alarms in Batches
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Path</div>
+<div className='rightCol'>
+
+```
+http://{supOS ip:port}/open-api/supos/oodm/v2/alarms
+```
+
+
+</div>
+<div className='leftCol'>Request body</div>
+<div className='rightCol'>
+
+```json
+{
+  "dtos": [
+    {
+      "templateName": "system.employee", //Required. Template namespace.template alias. String.
+      "attributeName": "system.p1", //Required. Attribute name space.attribute alias. String.
+      "instanceName": "zhangsan", //String. Instance name.
+      "displayName": "alarm1", //Required. String. Alarm name.
+      "priority": 2, //Required. Integer. Alarm priority from 1-10.
+      "enable": false, //Boolean. Whether to enable the alarm. The default is false.
+      "operator": "EQ", //Required. String.
+      "limitValue": "11", //Required. String. Limit value of the property (value if the property is a number and true/false if the property is boolean)
+      "deadBand": 12, //Required. Double. Deadband value.
+      "deadBandType": "NUMERIC", //Required. String. Numeric or percent.
+      "comment": "test data", //String. Alarm description.
+      "alarmType": "test alarm" 
+    }
+  ]
+}
+```
+
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+
+400: General internal error of OODM.
+
+```json
+{
+  "code": 10001001,
+  "data": {},
+  "detail": "string",
+  "message": "string"
+}
+```
+
+</div>
+</div>
+</div>
+
+<div className='div'>
+<div className='title'>
+
+## ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/openAPI/4.png) Get Alarms
+Run complex filtering on alarms.
+
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Path</div>
+<div className='rightCol'>
+
+```
+http://{supOS ip:port}/open-api/supos/oodm/v2/alarms
+```
+
+
+</div>
+<div className='leftCol'>Query parameters</div>
+<div className='rightCol'>
+
+<table>
+<caption>Table 1. Query parameter description</caption>
+                
+                <thead>
+                  <tr>
+                    <th>Parameter</th>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>instanceEnName</td>
+                    <td>string</td>
+                    <td>Instance alias.</td>
+                    </tr>
+                    <tr>
+                    <td>instanceDisplayName</td>
+                    <td>string</td>
+                    <td>Instance name. Get all instances with the same name under multiple namespaces.</td>
+                    </tr>
+                    <tr>
+                    <td>instanceLabelNames</td>
+                    <td>array of strings</td>
+                    <td>List of instance labels. Get all instance labels with the same name under multiple namespaces.</td>
+                    </tr>
+                    <tr>
+                    <td>attributeEnName</td>
+                    <td>string</td>
+                    <td>Attribute alias. Get all attributes with the same alias under multiple namespaces.</td>
+                    </tr>
+                    <tr>
+                    <td>attributeDisplayName</td>
+                    <td>string</td>
+                    <td>Attribure name. Get all attributes with the same name under multiple namespaces.</td>
+                    </tr>
+                    <tr>
+                    <td>attributeComment</td>
+                    <td>string</td>
+                    <td>Attribute description. Fuzzy matching is available.</td>
+                    </tr>
+                    <tr>
+                    <td>attributeLabelNames</td>
+                    <td>array of strings</td>
+                    <td>List of attribute labels.Get all labels with the same name under multiple namespaces.</td>
+                    </tr>
+                    <tr>
+                    <td>alarmEnName</td>
+                    <td>string</td>
+                    <td>Alarm alias. Use comma to separate multiple aliases.</td>
+                    </tr>
+                    <tr>
+                    <td>alarmDisplayName</td>
+                    <td>string</td>
+                    <td>Alarm name. Fuzzy matching is available.</td>
+                    </tr>
+                    <tr>
+                    <td>alarmComment</td>
+                    <td>string</td>
+                    <td>Alarm description. Fuzzy matching is available.</td>
+                    </tr>
+                    <tr>
+                    <td>alarmPriority</td>
+                    <td>integer</td>
+                    <td>Alarm priority between 1-10.</td>
+                    </tr>
+                    <tr>
+                    <td>alarmEnabled</td>
+                    <td>boolean</td>
+                    <td>Whether the alarm is enabled.</td>
+                    </tr>
+                    <tr>
+                    <td>alarmType</td>
+                    <td>string</td>
+                    <td>Alarm type.</td>
+                    </tr>
+                    <tr>
+                    <td>page</td>
+                    <td>integer</td>
+                    <td>The starting page number. The default is 1.</td>
+                    </tr>
+                    <tr>
+                    <td>perPage</td>
+                    <td>integer</td>
+                    <td>The number of returned data on every page. The default is 20 per page and the maximum is 500.</td>
+                    </tr>
+                    <tr>
+                    <td>excludeFunctionSetAlarm	</td>
+                    <td>boolean</td>
+                    <td>Whether to exclude function set alarms.</td>
+                    </tr>
+                    </tbody>
+                    </table>
+
+</div>
+<div className='leftCol'>Request body</div>
+<div className='rightCol'>
+
+```
+instanceEnName=employee&attributeLabelNames=system.aaa&
+alarmDisplayName=xxx&alarmEnable=true //search for enabled alarms with "xxx" in its name under a property bound with the label system.aaa inside the instance employee
+```
+
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+
+- 200: Successful.
+
+```json
+{
+  "list": [
+    {
+      "displayName": "alarm1",
+      "priority": 2,
+      "enable": false,
+      "operator": "EQ",
+      "limitValue": "11",
+      "deadBand": 12,
+      "deadBandType": "NUMERIC",
+      "comment": "test data",
+      "alarmType": "test alarm",
+      "id": 11145,
+      "enName": "uuid08fb884b9a4743d08464e95c64074d09",
+      "templateEnName": "testTemplate",
+      "templateDisplayName": "test template",
+      "instanceEnName": "testEntity",
+      "instanceDisplayName": "test instance",
+      "attributeEnName": "p1",
+      "attributeDisplayName": "p1",
+      "attributeComment": "teat property p1",
+      "instanceLabels": [
+        {
+          "displayName": "data1",
+          "id": 11119,
+          "enName": "metadata1"
+        }
+      ],
+      "attributeLabels": [
+        {
+          "displayName": "data1",
+          "id": 11119,
+          "enName": "metadata1"
+        }
+      ]
+    }
+  ],
+  "pagination": {}
+}
+```
+- 400: General internal error of OODM.
+
+```json
+{
+  "code": 10001001,
+  "data": {},
+  "detail": "string",
+  "message": "string"
+}
+```
+
+</div>
+</div>
+</div>
+
+<div className='div'>
+<div className='title'>
+
+## ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/openAPI/2.png) Edit Alarm Information
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Path</div>
+<div className='rightCol'>
+
+```
+http://{supOS ip:port}/open-api/supos/oodm/v2/alarms/{name} //name is alarm alias. Presently is the automatically generated UUID during creation
+```
+
+
+</div>
+<div className='leftCol'>Request body</div>
+<div className='rightCol'>
+
+```json
+{
+  "displayName": "boiler overheating alarm",
+  "priority": 8,
+  "enable": true,
+  "operator": "GE",
+  "limitValue": "100",
+  "deadBand": 10,
+  "deadBandType": "NUMERIC",
+  "comment": "trigger alarm when the boiler temperature is over 100°C.",
+  "alarmType": "temperature alarm"
+}
+```
+
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+
+- 200: Successful.
+
+```json
+{
+  "code": 200,
+  "message": "ok",
+  "data": null,
+  "detail": null
+}
+```
+- 400: General internal error of OODM.
+
+```json
+{
+  "code": 10001013,
+  "message": "priority:0 illegal: must integer from 1-10",
+  "data": {},
+  "detail": "string"
+}
+```
+
+</div>
+</div>
+</div>
+
+<div className='div'>
+<div className='title'>
+
+## ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/openAPI/3.png) Delete Alarms
+Delete alarm metadata. Returns successful when alarms not found as well.
+
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Path</div>
+<div className='rightCol'>
+
+```
+http://{supOS ip:port}/open-api/supos/oodm/v2/alarms/{name} //name is alarm alias. Presently is the automatically generated UUID during creation
+```
+
+
+</div>
+<div className='leftCol'>Query parameters</div>
+<div className='rightCol'>
+
+
+
+</div>
+<div className='leftCol'>Request body</div>
+<div className='rightCol'>
+
+```json
+{
+  "displayName": "boiler overheating alarm",
+  "priority": 8,
+  "enable": true,
+  "operator": "GE",
+  "limitValue": "100",
+  "deadBand": 10,
+  "deadBandType": "NUMERIC",
+  "comment": "trigger alarm when the boiler temperature is over 100°C.",
+  "alarmType": "temperature alarm"
+}
+```
+
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+
+204 OK
+
+</div>
+</div>
+</div>
+
+
+<div className='div'>
+<div className='title'>
+
+## ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/openAPI/4.png) Get Alarms under Specified Attribute
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Path</div>
+<div className='rightCol'>
+
+```
+http://{supOS ip:port}/open-api/supos/oodm/v2/attributes/{attributeFullName}/alarms
+```
+**attributeFullName**: Full path of the attribute. Template namespace.template alias.instance alias.attribute namesoace.attribure alias.
+
+
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+
+- 200: Successful.
+
+```
+[
+  {
+    "displayName": "alarm1",
+    "priority": 2,
+    "enable": false,
+    "operator": "EQ",
+    "limitValue": "11",
+    "deadBand": 12,
+    "deadBandType": "NUMERIC",
+    "comment": "test data",
+    "alarmType": "test alarm",
+    "enName": "alarm1",
+    "id": 11145,
+    "instanceId": "11234"
+  }
+]
+```
+- 400: General internal error of OODM.
+
+```json
+{
+  "code": 10001001,
+  "data": {},
+  "detail": "string",
+  "message": "string"
+}
+```
+
+</div>
+</div>
+</div>
+
+
+<div className='div'>
+<div className='title'>
+
+## ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/openAPI/4.png) Get Authorized Alarm Receivers
+Corresponding empty array will be returned when alarm full path does not exist or no authorized users.
+To handle high concurrency, user list of each alarm is saved in cache for 5 minutes (user data changes may be delayed).
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Path</div>
+<div className='rightCol'>
+
+```
+http://{supOS ip:port}/open-api/supos/oodm/v2/alarms/authorized-users
+```
+
+
+</div>
+<div className='leftCol'>Query parameters</div>
+<div className='rightCol'>
+
+**alarmFullPaths**: Full path of the attribute. Template namespace.template alias.instance alias.alarm alias. Use comma to separate multiple alarms.
+:::info
+The maximum number of alarms is 100. Error happens when exceeding 100.
+:::
+
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+
+- 200: Successful.
+
+```json
+{
+  "system.Template_823.msa_test_05.p1_a1": [
+    "admin",
+    "test"
+  ],
+  "system.Template_829.msa_test_09.p1_a2": []
+}
+```
+- 400: General internal error of OODM.
+
+```json
+{
+  "code": 90900002,
+  "message": "alarmFullPaths cannot be empty",
+  "data": {},
+  "detail": "string"
+}
+```
+
+</div>
+</div>
+</div>

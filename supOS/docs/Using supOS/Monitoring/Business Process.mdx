@@ -1,0 +1,44 @@
+---
+sidebar_position: 2
+
+---
+
+
+In design center, you can use different elements to form a diagram to demonstrate the full process of production. The diagram changes based on equipment
+running status in real time.
+
+:::info
+Dynamic effects allow you to directly view equipment status through graphic element colors, flashing status and fluid volume.
+:::
+
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/monitoring/8.png" />
+
+<ul>
+<li>Status of data connection element
+<ul>
+    <li> <strong>?????</strong>: Data connection failed.</li>
+    <li><strong>#####</strong>: The bound data source does not exist.</li>
+    <li><strong>!</strong>: No data permission.</li>
+  </ul>
+</li>
+<li>Operations on data connection element
+  <ul>
+    <li>Trend chart: Right-click the element, and then click <strong>View Trend Graph</strong>.</li>
+    <li>Data source details: Hover over the element, and then click <strong>Details</strong> on the floating window.
+      <img width={450} height={300} src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/monitoring/9.png" />
+    </li>
+    <li>Write back data: Change the data collected and displayed through the element, and then click <img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/monitoring/10.png"/> next to <strong>Value</strong> to change and send the new value to equipment.
+
+:::info
+- Collector driver types that support writing back data include ModBus TCP, ModBusRTU, OPC DA and OPC UA.
+- IOT gateway supports writing data back when setting <strong>R/W status</strong> of corresponding object property and gateway to <strong>R/W</strong>.
+:::
+
+<img  width={400} height={300} src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/monitoring/11.png"/>
+
+  </li>
+  </ul>
+</li>
+      </ul>
+

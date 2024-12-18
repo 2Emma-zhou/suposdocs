@@ -1,0 +1,106 @@
+---
+sidebar_position: 4
+
+---
+
+## Overview
+This demo demonstrates the process of creating a report to display sales order data that is previously processed in supOS platform.
+## Operation Process
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/demo/15.png)
+## Creating Data Source
+You can either create data in supOS or call data from existing database. In this section, adding data through form template attributes is used as an example.
+:::info
+For connecting data from third-party database, see <a href="../Using supOS/Factory Modeling/Third-party Database Connection">Third-party Database Connection</a>.
+:::
+1. Log in to supOS platform, and then click ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/platform/7.png) to go to the design center.
+2. Select **Object Model Management** > **Object Template** > **Form Template**, and then click ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/factoryModeling/26.png) to add a sales template.<br/>
+3. Inside the template, click **Attributes** tab, and then manually add all fields necessary in sales order report as attributes of the template.
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/demo/17.png)
+4. Select **Object Model Management** > **Object Instance**, find the template you created, and then add order data to fill all attributes.
+:::info
+Each attribute with instance data is a complete row of data in the form.
+:::
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/demo/20.gif)
+
+## Processing Source Data
+Create a service under the template to get the data you need.
+1. Under the template, add a new service named **Data**, set input and output parameters and write the script below to get revenue data from the form template.
+- Add an input parameter named **clientName** with data type of string.
+- Set output type to **JSON**.
+- Debug the script and copy the result to **Return Format** under **Basic Information**.
+```javascript
+var ArrayList = Java.type("java.util.ArrayList");
+
+var sql = "select system_clientName client" //get client name and corresponding revenue money in each month, and then display data by client name
++",sum(case left(system_orderDate,7) when '2022-04' then system_money else '0' end) m202204"
++",sum(case left(system_orderDate,7) when '2022-03' then system_money else '0' end) m202203"
++",sum(case left(system_orderDate,7) when '2022-02' then system_money else '0' end) m202202"
++",sum(case left(system_orderDate,7) when '2022-01' then system_money else '0' end) m202201"
++",sum(case left(system_orderDate,7) when '2022-12' then system_money else '0' end) m202212"
++",sum(case left(system_orderDate,7) when '2022-11' then system_money else '0' end) m202211"
++",sum(case left(system_orderDate,7) when '2022-10' then system_money else '0' end) m202210"
++",sum(case left(system_orderDate,7) when '2022-09' then system_money else '0' end) m202209"
++",sum(case left(system_orderDate,7) when '2022-08' then system_money else '0' end) m202208"
++",sum(case left(system_orderDate,7) when '2022-07' then system_money else '0' end) m202207"
++",sum(case left(system_orderDate,7) when '2022-06' then system_money else '0' end) m202206"
++",sum(case left(system_orderDate,7) when '2022-05' then system_money else '0' end) m202205"
++" from system_sales group by system_clientName"  
+
+var input = {
+ sql: sql
+};
+var res = templates['system.sales'].querySQLExec(input).data.dataSource; //get field information from the template
+
+var result = {
+  list:res
+}
+
+result;
+```
+:::info
+In the example above, **system** is the namespace of all attributes.
+:::
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/demo/21.gif)
+2. Add another service named **getClientNameList** to get a list of client names for future use in report design.
+```javascript
+var sql = "select distinct(system_clientName) client from system_sales "
+var input = {
+ sql: sql
+};
+var res = templates['system.sales'].querySQLExec(input).data.dataSource; 
+var result = {
+  list:res
+}
+result;
+```
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/demo/22.gif)
+
+## Creating Sales Report Page
+Create a page to display processed sales order data.
+1. On supOS platform, select **Business Designer** and then create an application.
+2. Add a new page.
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/demo/16.png)
+:::info
+Data in this example is for reference only.
+:::
+- Add data from **Data** service to the report.
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/demo/23.gif)
+:::info
+Operations on the report element are similar to those on Excel. You need to add headers manually before dragging fields to it.
+:::
+- Add options from **getClientNameList** service to the drop-down list.
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/demo/24.gif)
+- Link the drop-down list to the report.
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/demo/25.gif)
+- Add script to **Export** button.
+```javascript
+var report = scriptUtil.getRegisterReactDom('htDiv-l7r2gryv0-448').report; //get data from the report element
+report.doExport('xlsx');
+```
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/demo/26.gif)
+3. Save the page.
+
+## Demo Effect
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/demo/27.gif)
+
+

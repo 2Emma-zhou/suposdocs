@@ -1,0 +1,113 @@
+---
+hide_title: true
+---
+
+<div className='div'>
+<div className='title'>
+
+## ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/openAPI/1.png) Add Layout
+
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Path</div>
+<div className='rightCol'>
+
+```
+http://{supOS ip:port}/open-api/p/compose/v2/pages/{pageId}/layouts
+```
+
+**pageId**: Required.
+
+</div>
+<div className='leftCol'>Request body</div>
+<div className='rightCol'>
+
+```json
+{
+  "name": "3d8849-0", //required
+  "description": "",
+  "context": "{}",  //JSON format
+  "kind": "free", //layout. "free" means free layout, "new" means grid layout
+  "appId": "App_bac090d688004de9bf927b9ff66bfca7"
+}
+```
+
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+
+- 200: Successful.
+
+```json
+{
+    "location": "api/layouts/Car001"  //resource URL of the application instance
+}
+```
+- 400
+
+<ul>
+<ul>
+<li>400: Request failed.</li>
+<li>401: Permission authentication failed.</li>
+<li>404: Corresponding data not found.</li>
+<li>409: Request conflicted. The Specified name exists, cannot add.</li>
+</ul>
+</ul>
+
+- 500: System error.
+
+</div>
+</div>
+</div>
+
+<div className='div'>
+<div className='title'>
+
+## ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/openAPI/2.png) Edit Layout Information
+
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Path</div>
+<div className='rightCol'>
+
+```
+http://{supOS ip:port}/open-api/p/compose/v2/pages/layouts/{layoutId}
+```
+
+**layoutId**: Required.
+
+</div>
+<div className='leftCol'>Request body</div>
+<div className='rightCol'>
+
+```json
+{
+  "description": "layout",
+  "context": "{}"  //JSON format
+}
+```
+
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+
+- 201: Request accepted and processed.
+- 202: Request accepted but not fully processed.
+- 400
+
+<ul>
+<ul>
+<li>400: Request failed.</li>
+<li>401: Permission authentication failed.</li>
+<li>404: Corresponding data not found.</li>
+<li>409: Request conflicted. The Specified name exists, cannot add.</li>
+</ul>
+</ul>
+
+- 500: System error.
+
+</div>
+</div>
+</div>

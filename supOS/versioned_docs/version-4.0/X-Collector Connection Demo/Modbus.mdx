@@ -1,0 +1,42 @@
+---
+sidebar_position: 2
+
+---
+## Overview
+Modbus is a common protocol used on electronic controllers.
+Through this protocol, controllers can communicate with each other, with other devices via a network (eg, Ethernet).
+It has become a common industry standard. With it, controllers produced by different manufacturers can be connected into an industrial network for centralized monitoring.
+### Modbus Application
+Small controllers or small PLCs used in factories generally use RS232/485 interface to transmit data through specified communication method.
+RS232/485 interface is connected to a serial server due to its short transmission distance and few interface types, to convert the communication protocol into Modbus TCP for better transmission in actual use.
+### Modbus Feature
+- Simple configuration leads to simple communication.
+- Small transmission volume of 2,000 to 3,000 tags.
+## Debugging Modbus
+Debug through Modbus Poll or Modbus Scan, see if the data can be correctly collected.
+1. Download and install Modbus Poll.
+2. Run it, and then select **Connection** > **Connect**.
+3. Enter the serial server information.<br/>
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/collectorDemo/19.jpg)
+4. (Optional) Select **Setup** > **Read&Write Definition** to configure register information according to the serial server.<br/>
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/collectorDemo/20.jpg)
+
+:::info
+- Register type is normally holding register, which is read by **03** function code. For data saved in input register, use **04**.
+- Make sure to disable Modbus Poll when connecting X-Collector. In Modbus TCP communication, a main station can connect with multiple sub stations but a sub station can only connect to one main station.
+:::
+## Connecting supOS Platform
+1. Log in to X-Collector, and then select **RTD Collector** > **Source**.<br/>
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/collectorDemo/8.gif)
+2. Synchronize tags connected to the source point.<br/>
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/collectorDemo/9.gif)
+:::info
+On the source list, check whether the state of the source point you just added is connected.
+:::
+3. Log in to supOS platform, go to design center and then select **Collection Node Management** > **Authentication** to add a collector.<br/>
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/collectorDemo/10.gif)
+4. On X-Collector, select **RTD Collector** > **Connection Info** and then connect to the supOS platform.<br/>
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/collectorDemo/11.gif)
+5. On supOS platform, select **Collection Node Management** > **Status**, find the collector you added and approve the connection, and then you can select **Object Model Management** > **Object Instance** and see whether the tags on OPC server are displayed under **Collector Template**.<br/>
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/collectorDemo/12.gif)

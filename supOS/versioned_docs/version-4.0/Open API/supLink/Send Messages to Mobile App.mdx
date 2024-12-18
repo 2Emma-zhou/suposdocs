@@ -1,0 +1,660 @@
+---
+hide_title: true
+---
+
+<div className='div'>
+<div className='title'>
+
+## ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/openAPI/1.png) Send General Messages
+
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Path</div>
+<div className='rightCol'>
+
+```
+http://{supLink ip:port}/suplink/openapi/v1/notify
+```
+
+</div>
+<div className='leftCol'>Header parameter</div>
+<div className='rightCol'>
+
+<table>
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Required</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>agentId</td>
+      <td>Optional</td>
+      <td>Tenant ID. Only available for multi-tenant version</td>
+    </tr>
+    <tr>
+      <td>Authorization</td>
+      <td>Required</td>
+      <td>Calculated from SDK</td>
+    </tr>
+    <tr>
+      <td>Content-Type</td>
+      <td>Required</td>
+      <td>application/json</td>
+    </tr>
+  </tbody>
+</table>
+
+</div>
+<div className='leftCol'>Body request</div>
+<div className='rightCol'>
+
+```json
+{
+    "appId": "", //supLink app ID
+    "msg": {
+        "content": "string", //required. Message content
+        "link": "string", //optional. Go to the link when tapping the message
+        "title": "string", //Optional. Message title
+        "type": "default"  //Optional. Message UI type
+    },
+    "toUsers": [ //required. Message receivers
+        "string"
+    ]
+}
+```
+
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+
+- 200: Successful.
+```json
+{
+    "code": 200,
+    "content": {
+        "messageId": "15d6f3e1-007f-476f-b9af-c9bc04b7cc03"
+    },
+    "message": "success"
+}
+```
+- 401
+
+```json
+{
+    "timestamp": 1685339479974,
+    "path": "/suplink/openapi/v1/notify",
+    "code": 401,
+    "message": "Token expiration",
+    "content": 401
+}
+```
+
+</div>
+</div>
+</div>
+
+
+<div className='div'>
+<div className='title'>
+
+## ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/openAPI/1.png) Send Card Messages
+
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Path</div>
+<div className='rightCol'>
+
+```
+http://{supLink ip:port}/suplink/openapi/v1/notify
+```
+
+</div>
+<div className='leftCol'>Header parameter</div>
+<div className='rightCol'>
+
+<table>
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Required</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>agentId</td>
+      <td>Optional</td>
+      <td>Tenant ID. Only available for multi-tenant version</td>
+    </tr>
+    <tr>
+      <td>Authorization</td>
+      <td>Required</td>
+      <td>Calculated from SDK</td>
+    </tr>
+    <tr>
+      <td>Content-Type</td>
+      <td>Required</td>
+      <td>application/json</td>
+    </tr>
+  </tbody>
+</table>
+
+</div>
+<div className='leftCol'>Body request</div>
+<div className='rightCol'>
+
+```json
+{
+    "appId": "", //supLink app ID
+    "msg": {
+        "content": "string", //required. Message content
+        "link": "string", //optional. Go to the link when tapping the message
+        "msgType": "card_msg",//required. Message type
+        "title": "string", //Optional. Message title
+        "type": "default"  //Optional. Message UI type
+    },
+    "toUsers": [ //required. Message receivers
+        "string"
+    ]
+}
+```
+
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+
+- 200: Successful.
+```json
+{
+    "code": 200,
+    "content": {
+        "messageId": "15d6f3e1-007f-476f-b9af-c9bc04b7cc03"
+    },
+    "message": "success"
+}
+```
+- 401
+
+```json
+{
+    "timestamp": 1685339479974,
+    "path": "/suplink/openapi/v1/notify",
+    "code": 401,
+    "message": "Token expiration",
+    "content": 401
+}
+```
+
+</div>
+</div>
+</div>
+
+<div className='div'>
+<div className='title'>
+
+## ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/openAPI/1.png) Send Text Messages
+
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Path</div>
+<div className='rightCol'>
+
+```
+http://{supLink ip:port}/suplink/openapi/v1/notify
+```
+
+</div>
+<div className='leftCol'>Header parameter</div>
+<div className='rightCol'>
+
+<table>
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Required</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>agentId</td>
+      <td>Optional</td>
+      <td>Tenant ID. Only available for multi-tenant version</td>
+    </tr>
+    <tr>
+      <td>Authorization</td>
+      <td>Required</td>
+      <td>Calculated from SDK</td>
+    </tr>
+    <tr>
+      <td>Content-Type</td>
+      <td>Required</td>
+      <td>application/json</td>
+    </tr>
+  </tbody>
+</table>
+
+</div>
+<div className='leftCol'>Body request</div>
+<div className='rightCol'>
+
+```json
+{
+    "appId": "", //supLink app ID
+    "msg": {
+        "content": "string", //required. Message content
+        "msgType": "text_msg",//required. Message type
+    },
+    "toUsers": [ //required. Message receivers
+        "string"
+    ]
+}
+```
+
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+
+- 200: Successful.
+```json
+{
+    "code": 200,
+    "content": {
+        "messageId": "15d6f3e1-007f-476f-b9af-c9bc04b7cc03"
+    },
+    "message": "success"
+}
+```
+- 401
+
+```json
+{
+    "timestamp": 1685339479974,
+    "path": "/suplink/openapi/v1/notify",
+    "code": 401,
+    "message": "Token expiration",
+    "content": 401
+}
+```
+
+</div>
+</div>
+</div>
+
+<div className='div'>
+<div className='title'>
+
+## ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/openAPI/1.png) Send Image Messages
+
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Path</div>
+<div className='rightCol'>
+
+```
+http://{supLink ip:port}/suplink/openapi/v1/notify
+```
+
+</div>
+<div className='leftCol'>Header parameter</div>
+<div className='rightCol'>
+
+<table>
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Required</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>agentId</td>
+      <td>Optional</td>
+      <td>Tenant ID. Only available for multi-tenant version</td>
+    </tr>
+    <tr>
+      <td>Authorization</td>
+      <td>Required</td>
+      <td>Calculated from SDK</td>
+    </tr>
+    <tr>
+      <td>Content-Type</td>
+      <td>Required</td>
+      <td>application/json</td>
+    </tr>
+  </tbody>
+</table>
+
+</div>
+<div className='leftCol'>Body request</div>
+<div className='rightCol'>
+
+```json
+{
+    "appId": "", //supLink app ID
+    "msg": {
+        "msgType": "img_msg",//required. Message type
+        "resourceId": 12 // required. Returned resourceId of the image after uploading to supLink
+    },
+    "toUsers": [ //required. Message receivers
+        "string"
+    ]
+}
+```
+
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+
+- 200: Successful.
+```json
+{
+    "code": 200,
+    "content": {
+        "messageId": "15d6f3e1-007f-476f-b9af-c9bc04b7cc03"
+    },
+    "message": "success"
+}
+```
+- 401
+
+```json
+{
+    "timestamp": 1685339479974,
+    "path": "/suplink/openapi/v1/notify",
+    "code": 401,
+    "message": "Token expiration",
+    "content": 401
+}
+```
+
+</div>
+</div>
+</div>
+
+<div className='div'>
+<div className='title'>
+
+## ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/openAPI/1.png) Send Video Messages
+
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Path</div>
+<div className='rightCol'>
+
+```
+http://{supLink ip:port}/suplink/openapi/v1/notify
+```
+
+</div>
+<div className='leftCol'>Header parameter</div>
+<div className='rightCol'>
+
+<table>
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Required</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>agentId</td>
+      <td>Optional</td>
+      <td>Tenant ID. Only available for multi-tenant version</td>
+    </tr>
+    <tr>
+      <td>Authorization</td>
+      <td>Required</td>
+      <td>Calculated from SDK</td>
+    </tr>
+    <tr>
+      <td>Content-Type</td>
+      <td>Required</td>
+      <td>application/json</td>
+    </tr>
+  </tbody>
+</table>
+
+</div>
+<div className='leftCol'>Body request</div>
+<div className='rightCol'>
+
+```json
+{
+    "appId": "", //supLink app ID
+    "msg": {
+        "msgType": "video_msg",//required. Message type
+        "resourceId": 12 // required. Returned resourceId of the video after uploading to supLink
+    },
+    "toUsers": [ //required. Message receivers
+        "string"
+    ]
+}
+```
+
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+
+- 200: Successful.
+```json
+{
+    "code": 200,
+    "content": {
+        "messageId": "15d6f3e1-007f-476f-b9af-c9bc04b7cc03"
+    },
+    "message": "success"
+}
+```
+- 401
+
+```json
+{
+    "timestamp": 1685339479974,
+    "path": "/suplink/openapi/v1/notify",
+    "code": 401,
+    "message": "Token expiration",
+    "content": 401
+}
+```
+
+</div>
+</div>
+</div>
+
+<div className='div'>
+<div className='title'>
+
+## ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/openAPI/1.png) Send Voice Messages
+
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Path</div>
+<div className='rightCol'>
+
+```
+http://{supLink ip:port}/suplink/openapi/v1/notify
+```
+
+</div>
+<div className='leftCol'>Header parameter</div>
+<div className='rightCol'>
+
+<table>
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Required</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>agentId</td>
+      <td>Optional</td>
+      <td>Tenant ID. Only available for multi-tenant version</td>
+    </tr>
+    <tr>
+      <td>Authorization</td>
+      <td>Required</td>
+      <td>Calculated from SDK</td>
+    </tr>
+    <tr>
+      <td>Content-Type</td>
+      <td>Required</td>
+      <td>application/json</td>
+    </tr>
+  </tbody>
+</table>
+
+</div>
+<div className='leftCol'>Body request</div>
+<div className='rightCol'>
+
+```json
+{
+    "appId": "", //supLink app ID
+    "msg": {
+        "msgType": "voice_msg",//required. Message type
+        "resourceId": 12 // required. Returned resourceId of the voice after uploading to supLink
+    },
+    "toUsers": [ //required. Message receivers
+        "string"
+    ]
+}
+```
+
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+
+- 200: Successful.
+```json
+{
+    "code": 200,
+    "content": {
+        "messageId": "15d6f3e1-007f-476f-b9af-c9bc04b7cc03"
+    },
+    "message": "success"
+}
+```
+- 401
+
+```json
+{
+    "timestamp": 1685339479974,
+    "path": "/suplink/openapi/v1/notify",
+    "code": 401,
+    "message": "Token expiration",
+    "content": 401
+}
+```
+
+</div>
+</div>
+</div>
+
+<div className='div'>
+<div className='title'>
+
+## ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/openAPI/1.png) Send File Messages
+
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Path</div>
+<div className='rightCol'>
+
+```
+http://{supLink ip:port}/suplink/openapi/v1/notify
+```
+
+</div>
+<div className='leftCol'>Header parameter</div>
+<div className='rightCol'>
+
+<table>
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Required</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>agentId</td>
+      <td>Optional</td>
+      <td>Tenant ID. Only available for multi-tenant version</td>
+    </tr>
+    <tr>
+      <td>Authorization</td>
+      <td>Required</td>
+      <td>Calculated from SDK</td>
+    </tr>
+    <tr>
+      <td>Content-Type</td>
+      <td>Required</td>
+      <td>application/json</td>
+    </tr>
+  </tbody>
+</table>
+
+</div>
+<div className='leftCol'>Body request</div>
+<div className='rightCol'>
+
+```json
+{
+    "appId": "", //supLink app ID
+    "msg": {
+        "msgType": "file_msg",//required. Message type
+        "resourceId": 12 // required. Returned resourceId of the file after uploading to supLink
+    },
+    "toUsers": [ //required. Message receivers
+        "string"
+    ]
+}
+```
+
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+
+- 200: Successful.
+```json
+{
+    "code": 200,
+    "content": {
+        "messageId": "15d6f3e1-007f-476f-b9af-c9bc04b7cc03"
+    },
+    "message": "success"
+}
+```
+- 401
+
+```json
+{
+    "timestamp": 1685339479974,
+    "path": "/suplink/openapi/v1/notify",
+    "code": 401,
+    "message": "Token expiration",
+    "content": 401
+}
+```
+
+</div>
+</div>
+</div>

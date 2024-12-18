@@ -1,0 +1,147 @@
+openapi: 3.0.0
+info:
+  title: Send message to supLink mobile
+  version: '1.0'
+servers:
+  - url: /suplink/openapi/v1
+security:
+  - Sign: []
+tags:
+  - name: send message
+    description: Send various types of message to supLink mobile
+paths:
+  /notify:
+    post:
+      tags: 
+        - send message
+      summary: Sends message to supLink mobile
+      parameters:
+          - in: header
+            name: agentId
+            schema:
+              type: string
+            required: false
+            description: Tenant ID. Only available for multi-tenant version
+            example: xxxxxxx
+          - in: header
+            name: token
+            schema:
+              type: string
+            required: false
+            description: Token value assigned by supOS after having authenticated supLink
+            example: yyyyyyyy
+      requestBody:
+        description: ''
+        required: true 
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/sendGeneralMessage'
+      responses:
+        '200':
+          description: A JSON array of user names
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/200'
+        '401':
+          description: A JSON array of user names
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/401'
+components:
+  securitySchemes:
+    Sign:
+      type: apiKey
+      name: Authorization
+      in: header
+  schemas:
+    sendGeneralMessage:
+      type: object
+      required: 
+        - appId
+        - toUsers
+      properties:
+        appId:
+          type: string
+          description: supLink app ID
+          example: d4b51208-830e-46ea-bd64-24be8abfd703
+        toUsers:
+          type: array
+          description: Message receivers
+          items:
+            type: string
+            example: [ "admin","test106" ]
+        msg:
+          type: object
+          required: 
+            - content
+            - msgType
+            - resourceId
+          properties:
+            content:
+              type: string
+              description: Message content
+              example: Hello World
+            link:
+              type: string
+              description: Go to the link when tapping the message
+              example: www.google.com
+            msgType:
+              type: string
+              description: Message type
+              enum: 
+                - card_msg
+                - text_msg
+                - img_msg
+                - video_msg
+                - voice_msg
+                - file_msg
+              example: card_msg
+            title:
+              type: string
+              description: Message title
+              example: Hello World
+            type:
+              type: string
+              description: Message UI type
+              example: default
+            resourceId:
+              type: integer
+              description: Message source ID. Required for img_msg, video_msg, voice_msg and file_msg
+              example: 12
+  responses:
+    200:
+      type: object
+      properties:
+        code:
+          type: integer
+          example: 200
+        content:
+          type: object
+          properties:
+            messageId:
+              type: string
+              example: 15d6f3e1-007f-476f-b9af-c9bc04b7cc03
+        message:
+          type: string
+          example: success
+    401:
+      type: object
+      properties:
+        timestamp:
+          type: date-time
+          example: 1685339479974
+        path:
+          type: string
+          example: /suplink/openapi/v1/notify
+        code:
+          type: integer
+          example: 401
+        message:
+          type: string
+          example: Token expiration
+        content:
+          type: integer
+          example: 401

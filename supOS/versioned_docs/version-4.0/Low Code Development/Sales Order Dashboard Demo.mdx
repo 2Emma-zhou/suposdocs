@@ -1,0 +1,484 @@
+---
+sidebar_position: 5
+
+---
+
+## Overview
+This demo demonstrates the process of designing a dashboard using sales order data processed through object services in supOS platform.<br/>
+In this example, the dashboard looks like this.<br/>
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/demo/20.png)
+## Operation Process
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/demo/18.png)
+## Creating Data Source
+For details, see <a href="Sales Order Report Demo">Creating Data Source</a>.
+
+## Creating Data Service
+Create services under the form template to get the data you need. In this dashboard, to display various dimensions of data, you need to create multiple services.
+### Displaying Sales Volume by City
+1. Under the form template, add a new service named **salesVolumeByCity**, set output parameters and write the script below to get the top 8 sales volume data according to client address from the form template.
+- Set output type to **JSON**.
+- Debug the script and copy the result to **Return Format** under **Basic Information**.
+```js
+var input = {
+ sql:"select system_clientAddress,sum(system_money) sums from system_sales group by system_clientAddress order by count(system_money) desc limit 8"
+};
+var res = templates['system.sales'].querySQLExec(input).data.dataSource;
+var result = {
+  list: res
+}
+result;
+```
+:::info
+In all scripts of the example, **system** is the namespace of all attributes and attributes are called by their aliases. 
+:::
+2. In **Business Designer**, create a new application and add a page to design the sales order dashboard.
+3. Click ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/demo/19.png) at the upper-right corner of the canvas to upload a background image for the block.
+4. Add a bar chart to the canvas, and select the **salesVolumeByCity** service as its data source.
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/demo/29.gif)
+
+### Displaying Order Volume by City
+1. Under the form template, add a new service named **orderVolumeByCity**, set output parameters and write the script below to get the top 5 order volume data according to client address from the form template.
+- Set output type to **JSON**.
+- Debug the script and copy the result to **Return Format** under **Basic Information**.
+```javascript
+var input = {
+ sql: "select system_clientAddress,count(system_orderNo) sums from system_sales group by system_clientAddress order by count(system_orderNo) desc limit 5"
+};
+var res = templates['system.sales'].querySQLExec(input).data.dataSource;
+var result = {
+  list: res
+}
+result;
+```
+2. In **Business Designer**, on the sales order dashboard, add a bar chart to the canvas, and select the **orderVolumeByCity** service as its data source.
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/demo/30.gif)
+
+### Displaying Order Trend
+1. Under the form template, add a new service named **orderTrend**, set input and output parameters and write the script below.
+- Add **type** with a data type of string as an input parameter.
+- Set output type to **JSON**.
+- Debug the script and copy the result to **Return Format** under **Basic Information**.
+```js
+if(type){
+if(type=='7'){
+var date=new Date();
+var dates=new Date(date.getTime()-6*24*60*60*1000);
+var year=dates.getFullYear();
+var month=dates.getMonth()+1;
+var day=dates.getDate();
+if(month<10){month="0"+month;}
+if(day<10){day="0"+day;}
+var time=year+"-"+month+"-"+day;
+var input = {
+sql: "select system_orderDate,count(system_orderNo) num from system_sales where system_orderDate >= '"+time+"' group by system_orderDate"
+};
+var res = templates['system.sales'].querySQLExec(input).data.dataSource;
+var result={
+  list:res
+}
+result
+}else if(type=='15'){
+var date=new Date();
+var year=date.getFullYear();
+var month=date.getMonth()+1;
+var day=date.getDate();
+if(month<10){month="0"+month;}
+if(day<10){day="0"+day;}
+
+var time=year;
+var input = {
+sql: "select substring(system_orderDate,6,2) system_orderdate,count(system_orderNo) num from system_sales where system_orderDate like '"+time+"%' group by substr(system_orderDate,1,7)"
+};
+var res = templates['system.sales'].querySQLExec(input).data.dataSource;
+var result={
+  list:res
+}
+result
+  }else if(type=='30'){
+ var input = {
+sql: "select substring(system_orderDate,6,2) system_orderdate,count(system_orderNo) num from system_sales group by substr(system_orderDate,1,4)"
+};
+var res = templates['system.sales'].querySQLExec(input).data.dataSource;
+var result={
+  list:res
+}
+result
+  }
+}else{
+
+var date=new Date();
+var dates=new Date(date.getTime()-6*24*60*60*1000);
+var year=dates.getFullYear();
+var month=dates.getMonth()+1;
+var day=dates.getDate();
+if(month<10){month="0"+month;}
+if(day<10){day="0"+day;}
+var time=year+"-"+month+"-"+day;
+
+var input = {
+ sql: "select system_orderDate,count(system_orderNo) num from system_sales where system_orderDate >= '"+time+"' group by system_orderDate"
+};
+var res = templates['system.sales'].querySQLExec(input).data.dataSource;
+var result={
+  list:res
+}
+result
+}
+```
+2. In **Business Designer**, on the sales order dashboard, add an area chart to the canvas, and select the **orderTrend** service as its data source.
+3. Add a radio button at the upper-right corner to allow the area chart to switch between different time periods, such as **day**, **month** and **year**.
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/demo/31.gif)
+4. Link the radio button to the area chart.
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/demo/32.gif)
+
+### Displaying Client Type
+1. Under the form template, add a new service named **clientType**, set output parameters and write the script below.
+- Set output type to **JSON**.
+- Debug the script and copy the result to **Return Format** under **Basic Information**.
+```javascript
+var date=new Date();
+var year=date.getFullYear();
+var month=date.getMonth()+1;
+var day=date.getDate();
+if(month<10){month="0"+month;}
+if(day<10){day="0"+day;}
+var time=year+"-"+month;
+
+var input = {
+sql: "select system_clientType,count(system_clientType) num from system_sales where system_orderDate like '%"+time+"%' group by system_clientType"
+};
+var res = templates['system.sales'].querySQLExec(input).data.dataSource;
+var result={
+  list:res
+}
+result
+```
+2. In **Business Designer**, on the sales order dashboard, add a pie chart to the canvas, and select the **clientType** service as its data source.<br/>
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/demo/24.png)
+
+### Displaying Monthly Sales Volume Trend 
+1. Under the form template, add a new service named **monthSalesTrend**, set output parameters and write the script below.
+- Set output type to **JSON**.
+- Debug the script and copy the result to **Return Format** under **Basic Information**.
+```javascript
+var sql = "select substring(system_orderDate,1,7) system_orderDate,ROUND(sum(system_money)/10000,2) num from system_sales group by left(system_orderDate,7)"
+
+var input = {
+ sql: sql
+};
+var res = templates['system.sales'].querySQLExec(input).data.dataSource;
+var num=res.length-12;
+var num1=res.length;
+
+var sql = "select substring(system_orderDate,6,2) system_orderDate,ROUND(sum(system_money)/10000,2) num from system_sales group by left(system_orderDate,7) limit "+num+","+num1+""
+
+var input = {
+ sql: sql
+};
+var res = templates['system.sales'].querySQLExec(input).data.dataSource;
+var result = {
+  list: res
+}
+result;
+```
+2. In **Business Designer**, on the sales order dashboard, add a line chart to the canvas, and select the **monthSalesTrend** service as its data source.<br/>
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/demo/21.png)
+
+### Displaying Inventory Class 
+1. Under the form template, add a new service named **inventoryClass**, set output parameters and write the script below.
+- Set output type to **JSON**.
+- Debug the script and copy the result to **Return Format** under **Basic Information**.
+```javascript
+var date=new Date();
+var year=date.getFullYear();
+var month=date.getMonth()+1;
+var day=date.getDate();
+if(month<10){month="0"+month;}
+if(day<10){day="0"+day;}
+var time=year+"-"+month;
+var input = {
+sql: "select system_inventoryClass,count(system_inventoryClass) num from system_sales where system_orderDate like '%"+time+"%' group by system_inventoryClass"
+
+};
+var res = templates['system.sales'].querySQLExec(input).data.dataSource;
+var result={
+  list:res
+}
+result
+```
+2. In **Business Designer**, on the sales order dashboard, add a line chart to the canvas, and select the **inventoryClass** service as its data source.<br/>
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/demo/22.png)
+
+### Displaying Order and Sales Volume by Periods 
+On the upper section of the dashboard, there are 6 floating labels that indicate order and sales volumes in different time periods. Following instructions demonstrate the process of designing.
+:::info
+Scripts are for reference only. You can write differently as long as it returns the right result.
+:::
+- Today's Order
+1. Under the form template, add a new service named **dailyOrder**, set output parameters and write the script below.
+<ul><li>Set output type to **JSON**.</li>
+<li>Debug the script and copy the result to **Return Format** under **Basic Information**.
+</li></ul>
+
+```javascript
+var date=new Date();
+var year=date.getFullYear();
+var month=date.getMonth()+1;
+var day=date.getDate();
+if(month<10){month="0"+month;}
+if(day<10){day="0"+day;}
+var time=year+"-"+month+"-"+day;
+var input = {
+sql: "select sum(system_orderNo) num from system_sales where system_orderDate like '%"+time+"%'"
+};
+var res = templates['system.sales'].querySQLExec(input).data.dataSource;
+res
+```
+2. In **Business Designer**, on the sales order dashboard, add a label element under **Form Library** to the canvas, and then add a **Content Loading** event with the script below to it.
+```javascript
+var label = scriptUtil.getRegisterReactDom('htDiv-l8jt0z2b0-3660');
+
+scriptUtil.callFunction('system.sales', 'system.orderDisplay').then(function(res){
+label.setLabelContent(res.data[0].num)
+});
+setInterval(function() {
+scriptUtil.callFunction('system.sales', 'system.orderDisplay').then(function(res){
+label.setLabelContent(res.data[0].num)
+})
+},60*60*1000);
+```
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/demo/33.gif)
+
+- This Week's Order
+
+<ul><ul><li>Service script</li></ul></ul>
+
+```javascript
+var input = {
+sql: "select sum(system_orderNo) num from system_sales where DATE_SUB(CURDATE(), INTERVAL 7 DAY) <= system_orderDate and system_orderDate <= curdate()"
+};
+var res = templates['system.sales'].querySQLExec(input).data.dataSource;
+res
+```
+<ul><ul><li>Content loading event script</li></ul></ul>
+
+```javascript
+var label = scriptUtil.getRegisterReactDom('htDiv3668');
+
+scriptUtil.callFunction('system.sales', 'system.weeklyOrder').then(function(res){
+label.setLabelContent(res.data[0].num)
+});
+setInterval(function() {
+scriptUtil.callFunction('system.sales', 'system.weeklyOrder').then(function(res){
+label.setLabelContent(res.data[0].num)
+})
+},60*60*1000);
+```
+
+- This Month's Order
+
+<ul><ul><li>Service script</li></ul></ul>
+
+```javascript
+var date=new Date();
+var year=date.getFullYear();
+var month=date.getMonth()+1;
+var day=date.getDate();
+if(month<10){month="0"+month;}
+if(day<10){day="0"+day;}
+var time=year+"-"+month;
+var input = {
+sql: "select sum(system_orderNo) num from system_sales where system_orderDate like '%"+time+"%'"
+};
+var res = templates['system.sales'].querySQLExec(input).data.dataSource;
+res
+```
+<ul><ul><li>Content loading event script</li></ul></ul>
+
+```javascript
+var label = scriptUtil.getRegisterReactDom('htDiv3669');
+
+scriptUtil.callFunction('system.sales', 'system.monthlyOrder').then(function(res){
+label.setLabelContent(res.data[0].num)
+});
+setInterval(function() {
+scriptUtil.callFunction('system.sales', 'system.monthlyOrder').then(function(res){
+label.setLabelContent(res.data[0].num)
+})
+},60*60*1000);
+```
+
+- Total Sales
+
+<ul><ul><li>Service script</li></ul></ul>
+
+```javascript
+var input = {
+ sql: "select sum(system_money) sums from system_sales"
+};
+var res = templates['system.sales'].querySQLExec(input).data.dataSource;
+res
+```
+<ul><ul><li>Content loading event script</li></ul></ul>
+
+```javascript
+var label = scriptUtil.getRegisterReactDom('htDiv3670');
+
+scriptUtil.callFunction('system.sales', 'system.totalSales').then(function(res){
+label.setLabelContent(res.data[0].sums)
+});
+setInterval(function() {
+scriptUtil.callFunction('system.sales', 'system.totalSales').then(function(res){
+label.setLabelContent(res.data[0].sums)
+})
+},60*60*1000);
+```
+
+- Today's Sales
+
+<ul><ul><li>Service script</li></ul></ul>
+
+```javascript
+var date=new Date();
+var year=date.getFullYear();
+var month=date.getMonth()+1;
+var day=date.getDate();
+if(month<10){month="0"+month;}
+if(day<10){day="0"+day;}
+var time=year+"-"+month+"-"+day;
+var input = {
+sql: "select sum(system_money) num from system_sales where system_orderDate like '%"+time+"%'"
+};
+var res = templates['system.sales'].querySQLExec(input).data.dataSource;
+res
+```
+<ul><ul><li>Content loading event script</li></ul></ul>
+
+```javascript
+var label = scriptUtil.getRegisterReactDom('htDiv3671');
+
+scriptUtil.callFunction('system.sales', 'system.todaySale').then(function(res){
+label.setLabelContent(res.data[0].num)
+});
+setInterval(function() {
+scriptUtil.callFunction('system.sales', 'system.todaySale').then(function(res){
+label.setLabelContent(res.data[0].num)
+})
+},60*60*1000);
+```
+- This Month's Sales
+
+<ul><ul><li>Service script</li></ul></ul>
+
+```javascript
+var date=new Date();
+var year=date.getFullYear();
+var month=date.getMonth()+1;
+var day=date.getDate();
+if(month<10){month="0"+month;}
+if(day<10){day="0"+day;}
+var time=year+"-"+month;
+var input = {
+sql: "select sum(system_money) num from system_sales where system_orderDate like '%"+time+"%'"
+};
+var res = templates['system.sales'].querySQLExec(input).data.dataSource;
+res
+```
+<ul><ul><li>Content loading event script</li></ul></ul>
+
+```javascript
+var label = scriptUtil.getRegisterReactDom('htDiv3672');
+
+scriptUtil.callFunction('system.sales', 'system.monthSale').then(function(res){
+label.setLabelContent(res.data[0].num)
+});
+setInterval(function() {
+scriptUtil.callFunction('system.sales', 'system.monthSale').then(function(res){
+label.setLabelContent(res.data[0].num)
+})
+},60*60*1000);
+```
+### Displaying Total Order
+1. In **Business Designer**, on the top middle of the dashboard, add a **Total Order** text to display order number in total.
+2. Place a programmable component to the canvas, and then double-click it to write the script below.
+```js
+import React, { Component } from 'react';
+
+class CustomComp extends Component {
+    state = {
+        num: '' 
+    }
+    componentDidMount() {
+          this.GetSHSOutput();
+  }
+     GetSHSOutput = () => {
+        console.log(this,'thisssssss')
+        var that = this;
+      scriptUtil.callFunction('system.sales', 'system.totalOrder').then(function(res){
+        var data=[];
+        data.push(res.data[0].sums);
+        that.setState({
+            num:res.data[0].sums+""
+        })
+      });
+  }
+
+    
+
+    render() {
+        return (
+             <div>
+               {
+                   this.state.num.split("").map(item => 
+                        <span style={{ fontSize: '48px', color: '#fff', backgroundColor: 'rgb(255 183 17)', opacity:'0.8', borderRadius:3.84, fontWeight: 600, padding: '3px 7px', margin: '0 6px' }}>
+                           {item}
+                        </span>
+                   )
+               }
+            </div>
+        );
+    }
+}
+
+export default CustomComp;
+```
+### Displaying Weather
+1. In **Business Designer**, on the upper-right corner of the dashboard, add a web page element to display weather in current location.
+2. Add the weather site url to the web page element.<br/>
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/demo/23.png)
+
+### Displaying Date and Time
+1. In **Business Designer**, on the upper-right corner of the dashboard, add a label to display date and time in real-time.
+2. Add a content loading event to the label and write the script below.
+```javascript
+var label = scriptUtil.getRegisterReactDom('htDiv-l8jt0z2b0-13770');
+
+setInterval(function(){
+    function add0(m){return m<10?'0'+m:m }
+    var time =new Date();
+    var y = time.getFullYear();
+    var m = time.getMonth()+1;
+    var d = time.getDate();
+    var day = time.getDay();
+    var weeks = new Array("Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday");
+    var week = weeks[day];
+    var h = time.getHours();
+    var mm = time.getMinutes();
+    var s = time.getSeconds();
+    var dates = y + '-' + add0(m) + '-' + add0(d) + ' ' + week + ' ' + add0(h) + ':' + add0(mm) + ':' + add0(s);
+    label.setLabelContent(dates);
+},1000);
+```
+3. Save the page.
+
+## Demo Effect
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/demo/34.gif)

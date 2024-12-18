@@ -1,0 +1,238 @@
+---
+hide_title: true
+---
+
+<div className='div'>
+<div className='title'>
+
+## ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/openAPI/4.png) Get Business Topics for Subscription
+
+Get the list of business topics that can be externally subscribed on the current platform.
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Path</div>
+<div className='rightCol'>
+
+```
+http://{supOS ip:port}/open-api/webhook/v2/topics
+```
+
+</div>
+<div className='leftCol'>Query parameter</div>
+<div className='rightCol'>
+
+- current: Page number.
+- pageSize: Items on the page.
+
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+
+- 200: Successful.
+
+```json
+{
+  "list": [
+    {
+      "businessTopic": "myTopic",
+      "businessModule": "Organization",
+      "description": "my topic"
+    }
+  ],
+  "pagination": {
+    "total": 1,
+    "pageSize": 20,
+    "current": 1
+  }
+}
+```
+- 400
+
+```json
+{
+  "code": 100108503,
+  "message": "username cannot be empty"
+}
+```
+- 500
+```json
+{
+  "code": 100000007,
+  "message": "service internal error"
+}
+```
+
+<ul>
+<ul>
+<li>100121001: Business topic not found.</li>
+<li>100121005: The current parameter needs to be greater than 0.</li>
+<li>100121006: pageSize needs to be set between 20-500.</li>
+<li>100000007: Internal service exception.</li>
+</ul>
+</ul>
+</div>
+</div>
+</div>
+
+<div className='div'>
+<div className='title'>
+
+## ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/openAPI/1.png) Subscribe Business Topics
+
+Subscribe business topics from external. Batch subscription is available.
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Path</div>
+<div className='rightCol'>
+
+```
+http://{supOS ip:port}/open-api/webhook/v2/topics/subscribe
+```
+
+</div>
+<div className='leftCol'>Request body</div>
+<div className='rightCol'>
+
+```json
+{
+  "tenantId": "dt", //required
+  "appId": "App_ca4f1aeb382142849cebadb8b780c9ed", //required
+  "webhookUrl": "http://127.0.0.1/listen/message",  //required
+  "topicList": [
+    "myTopic"
+  ]
+}
+```
+
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+
+- 200: Successful.
+
+```json
+{
+  "appRegisterId": 2646255255224320,
+  "topicHistoryStatusList": [
+    {
+      "businessTopic": "myTopic",
+      "historyStatus": false
+    }
+  ]
+}
+```
+- 500
+```json
+{
+  "code": 100000007,
+  "message": "service internal error"
+}
+```
+</div>
+</div>
+</div>
+
+<div className='div'>
+<div className='title'>
+
+## ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/openAPI/2.png) Change Subscribed Topic History to Read
+
+:::info
+When **historyStatus** is returned as **false** after calling the **/topics/subscribe** API, 
+you need to synchronize full historical data, and then call this API again to get incremental business data.
+:::
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Path</div>
+<div className='rightCol'>
+
+```
+http://{supOS ip:port}/open-api/webhook/v2/topics/readiness
+```
+
+</div>
+<div className='leftCol'>Request body</div>
+<div className='rightCol'>
+
+```json
+{
+  "tenantId": "dt", //required
+  "appId": "App_ca4f1aeb382142849cebadb8b780c9ed", //required
+  "topicList": [
+    "myTopic"
+  ]
+}
+```
+
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+
+- 200: Successful.
+
+```json
+{
+  "data": true
+}
+```
+- 500
+```json
+{
+  "code": 100000007,
+  "message": "service internal error"
+}
+```
+</div>
+</div>
+</div>
+
+<div className='div'>
+<div className='title'>
+
+## ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/openAPI/4.png) Activate Pushed Task
+
+:::info
+Usually used when the subscriber service restarts or data inconsistancy happens.
+:::
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Path</div>
+<div className='rightCol'>
+
+```
+http://{supOS ip:port}/open-api/webhook/v2/retry
+```
+
+</div>
+<div className='leftCol'>Request body</div>
+<div className='rightCol'>
+
+```json
+{
+  "tenantId": "dt", //required
+  "appId": "App_ca4f1aeb382142849cebadb8b780c9ed", //required
+  "topicList": [
+    "myTopic"
+  ]
+}
+```
+
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+
+- 200: Successful.
+- 500
+```json
+{
+  "code": "string",
+  "message": "string"
+}
+```
+</div>
+</div>
+</div>

@@ -1,0 +1,52 @@
+
+Create algorithm models out of the published experiments. 
+1. Log in to supOS, and then select **Data Intelligence** > **Data Science** > **Model Management**.
+2. Click **Add** > **Add experimental model**, and then enter the basic information of the model.
+:::info
+Click **Import**, and then select third-party models to upload to X-BD. For developing details, see <a href="Developing Third-party Algorithm Model">Developing Third-party Algorithm Model</a>.
+:::
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supBD/7.png)
+
+<table>
+    <thead>
+      <tr>
+        <th>Parameter</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Related experiments</td>
+        <td>Select an experiment that is successfully debugged to be the base of the model.</td>
+      </tr>
+      <tr>
+        <td>Code</td>
+        <td>Automatically generated. You can manually change it. It must be unique.</td>
+      </tr>
+      <tr>
+        <td>Support update</td>
+        <td>Enable it, and when the requirements are met, the model can be updated through openAPI or X-ETL.</td>
+      </tr>
+      <tr>
+        <td>Benchmark model</td>
+        <td>Select a component that is categorized as <b>Model Assessment</b> in the experiment.</td>
+      </tr>
+      <tr>
+        <td>Health threshold</td>
+        <td>When the debug result is higher than the set health threshold, the model is updated. The threshold needs to be within 60-100.</td>
+      </tr>
+      <tr>
+        <td>Batch debug times</td>
+        <td>When debugging the experiment, click <b>Batch debug</b>, the experiment will be debugged the set times. The number must be within 1-100.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  3. Click **Next**, and then edit the input/output fields of the experiment to be the input/output fields of the model.
+  :::tip
+  Click **Preview** to see the effect.
+  :::
+  ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supBD/8.png)
+
+  4. Click **Submit**.

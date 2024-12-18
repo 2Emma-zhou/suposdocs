@@ -1,0 +1,46 @@
+---
+
+hide_title: true
+
+---
+
+# Overview
+Object data in supOS can be extracted through OPC DA server with an OPC DA client.
+:::info
+Only Integer, Long, Float, Double, Boolean, String type of data is supported.
+:::
+
+# Preparation
+- For independent deployment supOS, kafka service needs to be installed and enabled.
+- Get a set of AK/SK from supOS platform under <strong>System Management</strong> > <strong>System Configuration</strong> > <strong>AK/SK credential</strong>
+# Configuration Process
+## Configuring OPC DA Server
+Install OPC DA Server software and configure related information to connect with your supOS, so object data can transmit through it.
+1. Find the installation file inside the supOS package.
+2. Double-click to start installing, and follow the instruction to finish.
+3. Find the <b>regserver.bat</b> file under the server installation directory, and edit the file according to the actual information.
+<code>
+"%~dp0opcdaserver.exe" --regserver --tenant-id=dt   //tenant name for multi-tenant version, otherwise 'dt'
+--supos-api-ip=x.x.x.x  // supOS server IP
+--supos-api-port=x    // supOS server port
+--supos-access-key=3abfd581dca03d1f39e9f5587f3a4141  // AK
+--supos-secret-key=02ef6aebca290843d7cfdcd1d47fa68c  // SK
+--kafka-brokers=x.x.x.x:x  //kafka server IP and port, must match with information in /home/supos/supos/bin/env.sh
+--collector-filter=collector134  //optional, regular expression to filter instances
+--tag-filter=iec104.* //manually add, regular expression to filter tag names
+--sync-interval=5   //manually add, interval (s) of syncing tag metadata to supOS
+</code>
+
+:::info
+- For independent deployment, kafka port is <b>9012</b> by default.
+- For cluster deployment, kafka cluster contains multiple brokers. Enter them and separate them with commas. For example: kafka-brokers=192.168.18.23:9092,192.168.18.25:9092,192.168.18.26:9092.
+:::
+4. Save the file, run it as administrator, and then a <b>start.bat</b> file is generated.
+:::info
+Run the <b>unregserver.bat</b> file each time you changed the <b>regserver.bat</b> file to reverse registratipn before register again.
+:::
+5. Double-click <b>start.bat</b> to start the service.
+
+# Uninstalling Services
+1. Double-click <b>stop.bat</b> to stop the service.
+2. Run <b>unregserver.bat</b> as administrator to uninstall OPC DA server.

@@ -1,0 +1,137 @@
+---
+sidebar_position: 3
+
+---
+
+
+This chapter demonstrates the detailed process of workflow creation with an example of sales order.<br/>
+
+Make sure you have completed the following preparations.
+- Complete the organization structure with correct companies, departments, posts and personnels.
+- Create object templates, instances and their attributes, services and events.
+- Make sure object instances are bound with correct data sources.
+
+:::info
+The workflow of sales order only uses a few elements that are available on the supOS platform. For details on all elements, see <a href="Element Description">Element Description</a>.
+:::
+
+## Creating Related Pages
+  
+Create pages that relate to your workflow, and make sure to link them during workflow creation. 
+:::info
+In this example, a page for adding a new sales order is needed.
+:::
+  
+1. Log in to supOS, and then click <img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/workflow/7.png" /> at the upper-right corner to go to the design center.
+2. Click <strong>Business Designer</strong>, click <img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/workflow/16.png"/> and enter corresponding information to create an application.
+3. Enter the application, and then click <strong>Interface Design</strong> on the left side.
+4. Click <img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/workflow/2.png" /> at the bottom, and then enter page information.
+
+:::info
+Check <strong>Enabling Workflow</strong> checkbox to link the page in the workflow.
+:::
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/workflow/3.png"/>
+
+5. Design the page and then save it.
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/workflow/4.png"/>
+
+
+## Creating Workflow
+
+Draw a workflow to demonstrate actual business flow with related pages and personnels.
+  
+1. In <strong>Business Designer</strong>, click the <strong>Workflow Management</strong> tab.
+2. Click <strong>New</strong>, enter workflow information and then click <strong>Confirm</strong>.
+3. Click the <strong>Start Flow</strong> icon, and then click <img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/workflow/5.png" /> to add a new sales order.
+
+<ol>
+<ol>
+<li>Click the first step, and then enter the <strong>Step name</strong> on the right side.</li>
+<li>Set <strong>Node type</strong> to <strong>User task</strong>.</li>
+<li>Click the frame next to <strong>Page</strong>, and then select the <strong>Add Order</strong> page you just created.</li>
+<li>Click <strong>Config</strong> next to <strong>Executor</strong>, select a personnel as the task executor.
+
+:::info
+In this example. the initiator is set as executor.
+:::
+
+</li>
+</ol>
+</ol>
+
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/workflow/6.png" />
+
+4. Click the first step and then click <img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/workflow/5.png" /> to check and approve the order information.
+
+<ol>
+<ol>
+<li>Set the step name and node type.</li>
+<li>Select the same page as the first step.</li>
+<li>Select an executor.
+
+:::info 
+In this example, the initiator is selected for easy operation.
+:::
+  
+</li>
+<li>(Optional) Under <strong>Service</strong>, select a service from an instance to add the approved sales order data to thedatabase.
+
+:::info
+The workflow can proceed without binding a service, and no data will be added to the database.
+:::
+
+</li>
+</ol>
+</ol>
+
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/workflow/8.png" />
+
+5. Click <img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/workflow/9.png" /> next to the last step to end the workflow.
+6. Click <strong>Publish</strong> at the upper-right corner.
+
+
+:::tip
+To edit a published workflow, you need to upgrade it by clicking <strong>Upgrade</strong> at the upper-right corner.
+:::
+
+
+## Creating Workflow Page
+
+Create another page to which the workflow applies.
+
+1. In <strong>Business Designer</strong>, click <img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/workflow/16.png"/> to add a new page.
+
+:::info
+Make sure to check <strong>Enabling Workflow</strong> checkbox to be able to link a workflow.
+:::
+
+2. Add a button and a to-do list on the page, and then configure the button property as needed.
+3. Click <strong>Interact</strong>, add a <strong>Click</strong> event to the button, and then click <strong>Setting</strong> to configure the event.
+4. Add the drawn workflow to the page.
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/workflow/10.png"/>
+
+5. Click <strong>Finish</strong>.
+
+
+## Running the Workflow
+
+1. Inside the application, go to <strong>Interface Design</strong> to preview the workflow page.
+2. Click the button, the page where you can add an order is displayed.
+3. Enter the order information, and then click <strong>Submit</strong>.
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/workflow/11.png"/>
+
+4. The page is redirected to workflow page, and a new record is added to the to-do list for approval.
+5. Click the first record, check the order information and then click <strong>Submit</strong>.
+
+:::info
+If you have bound a service to add the approved data to the database, you can check the database to see whether the data is successfully added.
+:::
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/workflow/12.png"/>
+

@@ -1,0 +1,150 @@
+---
+hide_title: true
+---
+
+## X-ETL Installation
+:::info
+- X-ETL can be installed on the same server as supOS or separately. Either way, the installation process is done on the supOS server.
+- Make sure the supOS platform is installed in advance.
+:::
+
+### Installing through Visual Application
+1. Double-click the **setup.exe** file in the installation package, and then click **Install**.
+2. Under **Deploy config**, enter server information.
+
+:::info
+Make sure SSH is enabled on the server, and you need to use root to log in.
+:::
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supDAM/2.png)
+
+<table>
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Auth info</td>
+      <td>supOS authorization server IP.</td>
+    </tr>
+    <tr>
+      <td>O&M server info</td>
+      <td>
+
+- Username: Can only be root.
+- Password: Root password.
+- Server node: supOS server IP.
+
+</td>
+    </tr>
+    <tr>
+      <td>Deployment config</td>
+      <td>
+
+- Specify DAM server: Enable it if X-ETL is installed on an independent server and enter corresponding information.
+- Cluster config: Enable it when supOS is in cluster deployment and enter corresponding middleware information.
+
+</td>
+    </tr>
+    <tr>
+      <td>DW config</td>
+      <td>
+
+- Tianhu as DW: Select whether to use the embedded MySQL as the database.
+- DW type: Select the database type when using external databases.
+
+</td>
+    </tr>
+  </tbody>
+</table>
+
+3. Select **Installation type**, and then click **Next**.
+4. Upload the installation package and then start installing X-ETL.
+:::info
+Make sure you have copied the installation package to **/home/supngin/supngin-etl** on the server before you select **Server**. Files under this path are displayed here by default.
+:::
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supDAM/3.png)
+
+
+
+
+### Installing on Server
+1. Create a path **/home/supngin/supngin-etl** for X-ETL, and copy the installation package to it.
+2. Access the path, use the md5 file to start verification, and then decompress the package when verification is ok.
+```
+cd /home/supngin/supngin-dam
+md5sum -c X-ETL-VXXXXXX-XXXXXX-C.tgz.md5
+tar zxvf X-ETL-VXXXXXX-XXXXXX-C.tgz
+```
+3. Access **/home/supngin/supngin-etl/bin**, and then copy **env.sh.tmpl** file to generate **env.sh**.
+```
+cd bin
+cp env.sh.tmpl env.sh
+```
+4. Edit the **env.sh** file.
+- Configure middleware information.
+
+:::info
+Middleware configuration is only needed for supOS cluster deployment.
+:::
+
+<ul>
+<ul>
+<li>Kafka: KAFKA=kafka_IP_1:9092,kafka_IP_2:9092,kafka_IP_3:9092</li>
+<li>Redis: REDIS_HOSTS=redis_IP_1:6379,redis_IP_2:6379,redis_IP_3:6379,redis_IP_4:6379,redis_IP_5:6379,redis_IP_6:6379 and REDIS_PASSWD=redisPassword</li>
+<li>Nacos: NACOS=nacos_IP_1:8848,nacos_IP_2:8848,nacos_IP_3:8848</li>
+<li>NFS: NFS_HOST=nfs_vip_IP and NFS_PATH=/nfs</li>
+</ul>
+</ul>
+
+- Configure X-ETL server information when it is deployed independently.
+```
+ETL_SERVER=192.168.x.x //X-ETL server IP
+ETL_SERVER_PWD=123456 //X-ETL server password
+ETL_SERVER_PORT=22 //access port through SSH
+```
+
+- Configure data warehouse information.
+
+```
+WM_KAFKA_SERVER=dam-kafka:9092
+AUTO_IMPORT_SOURCE=true
+CLOUD_VERSION=false
+DAM_ENABLE=true // default is false. True means X-DAM is used
+```
+
+- Configure supOS authorization.
+```
+MULTI_TENANT=false //whether to enable multi-tenant mode. Default is false (disable)
+HASP_SERVER=x.x.x.x  //authorization dongle server IP 
+```
+
+5. Save the file and then install X-ETL.
+```
+sudo bash install.sh
+```
+
+6. Check the service status.
+```
+kubectl get po
+```
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supETL/1.png)
+
+
+## Accessing X-ETL
+Log in to supOS, and then select **Data Integration Exchange**.
+:::info
+After installation, X-ETL permission is not granted to admin or any user be default. Make sure you access supOS and assign corresponding module permission under **User Security Management**.
+:::
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supETL/2.png)
+
+
+## Uninstalling X-ETL
+- Uninstall X-ETL through visual application.
+- Run `sudo bash uninstall.sh` under **/home/supngin/supngin-etl/bin**.

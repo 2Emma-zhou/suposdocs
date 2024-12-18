@@ -1,0 +1,468 @@
+---
+hide_title: true
+---
+
+:::info
+Variables used in operators need to be configured in advance during task development.
+:::
+
+<span id="inputNode"></span>
+
+## Data Input Node
+### Data Input
+- supOS instance
+
+<ul>
+<ul>
+<li>Select template, instance, attribute from the supOS you added.</li>
+<li>Enable <b>History</b> to add attribute history information such as alias, value and time as output fields.</li>
+</ul>
+</ul>
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supETL/52.png)
+
+- File data source
+
+<ul>
+<ul>
+<li>HDFS is not supported.</li>
+<li>Select <b>File match</b> under <b>File selection method</b>, and you can use wildcard * with suffix to match the file name. For example, test*.xlsx.</li>
+<li>Select <b>File upload</b> under <b>File selection method</b>, and you need to save the file in UTF-8 encoding if the file contains Chinese characters.</li>
+</ul>
+</ul>
+
+:::info
+When the input data source is a file, the published task reads the file and output results again if the file changes.
+:::
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supETL/53.png)
+
+- API data source
+
+<table>
+  <thead>
+    <tr>
+<th>Item</th>
+<th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+<td>Data source type</td>
+<td>
+
+- WebService: Automatically match output fields. 
+Variables can be configured in XML text with the '#' symbol as an identifier, and the variable must exist in the task global variables.
+- RESTFul: Automatically match output fields. 
+Variables can be configured in the request URL, request headers, and JSON text, and the variable must exist in the task global variables.
+
+</td>
+    </tr>
+    <tr>
+<td>Request address</td>
+<td>
+
+Enter the API request address and use **#{}** to identify variables.
+
+</td>
+    </tr>
+    <tr>
+<td>Request header param</td>
+<td>Set the header parameter of the API. When setting <b>Variable</b> as the <b>Processing method</b>, you can select the value from global variables.</td>
+    </tr>
+  </tbody>
+</table>
+
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supETL/54.png)
+### Message Queue Input
+Collects data from message queue and maps it to a 2-demension table, and delivers to downstream operators for processing.
+
+<table>
+  <thead>
+    <tr>
+<th>Item</th>
+<th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+<td>Data source type</td>
+<td>Only Kafka and RocketMQ are available.</td>
+    </tr>
+    <tr>
+<td>Topic</td>
+<td>Select the corresponding topic of the data to be added. You can click <b>Data preview</b> to view the data.</td>
+    </tr>
+    <tr>
+<td>Field settings</td>
+<td>Click <b>New field</b> to add fields corresponding to output information.</td>
+    </tr>
+    <tr>
+<td>Initial offset</td>
+<td>
+
+- **earliest**: During each scheduling, if there is no new submitted offset, synchronization starts from the beginning. 
+If there is a new submitted offset, consumption starts from the newly submitted offset.
+- **latest**: When there is no submitted offset, consumption will start from the currently submitted data and will not consume data that was generated in the past.
+
+</td>
+    </tr>
+  </tbody>
+</table>
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supETL/55.png)
+
+### Data Warehouse Input
+Supports tables and views on ODS, DW and local DW message.
+:::info
+Install X-DAM in advance. Otherwise, **Local data warehouse** will not be available.
+:::
+
+<table>
+  <thead>
+    <tr>
+<th>Item</th>
+<th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+<td>Data source type</td>
+<td>Presently, only <b>Local data warehouse</b> is available with X-DAM installed.</td>
+    </tr>
+    <tr>
+<td>Data warehouse level</td>
+<td>Select the level of the data in data warehouse.</td>
+    </tr>
+    <tr>
+<td>Data sheet</td>
+<td>Select the data sheet.</td>
+    </tr>
+  </tbody>
+</table>
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supETL/56.png)
+
+## Data Processing Node
+### Data Quality
+<table>
+  <thead>
+    <tr>
+<th>QC Rule</th>
+<th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+<td>Null check</td>
+<td>Select a field, check whether the field has null values, and select from <b>Discard</b>, <b>Fix</b> and <b>Ignore</b> as the subsequent operation.</td>
+    </tr>
+    <tr>
+<td>Range check</td>
+<td>Select a field, set a value range to filter the field and leave values only within the set range.</td>
+    </tr>
+    <tr>
+<td>Data format check</td>
+<td>Select a field, and use the embedded or custom expression to verify its data format.</td>
+    </tr>
+    <tr>
+<td>Enumeration value check</td>
+<td>Select a field, and set certain values to check whether the field value is one of the enumerated values.</td>
+    </tr>
+  </tbody>
+</table>
+
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supETL/57.png)
+
+### SQL Execution
+Uses SQL statements to perform simple operations such as insert, delete and update on the relational data sources.
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supETL/58.png)
+
+### Data Set
+Renames data fields or configures field mapping to generate a new dataset, mainly used for redefining the data structure set during data processing.
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supETL/59.png)
+
+### Data Filtering
+Multiple filter conditions are available for a single field, and data that meets all conditions will be filtered.
+- in/not in: For numeric fields. Value is an array of numbers and use comma to separate. **in** means the field value equals to one of the numbers and **not in** means equals to none.
+- like/not like: For text type of fields. **like** matches part or all of the text and **not like** matches none.
+- between/not between: For date type of fields. **between** means the date is within the set range and **not between** means not.
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supETL/60.png)
+
+### Data Connection
+Integrates data from multiple tables into one.
+1. Drag 2 data input operators and configure them with 2 relational data tables.
+2. Drag the **Data connection** operator and connect both data sources to it.
+3. Double-click **Data connection**, and then configure its connection relation.
+
+<ol>
+<ol>
+<li>Select data sources, and then click to select the join relation.</li>
+<li>Click the data source to be matched.</li>
+<li>Click <b>New</b> to add the match field.</li>
+</ol>
+</ol>
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supETL/61.png)
+
+### Data Sorting
+:::info
+The sorting priority goes down along with the field position on the list.
+:::
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supETL/62.png)
+
+### Data Merging
+Merges data from multiple data sources. You can select columns from multiple sample sets and merge them into a data set.
+
+1. Drag 2 data input operators and configure them with 2 relational data tables.
+2. Drag the **Data merging** operator and connect both data sources to it.
+3. Double-click **Data merging**, and then configure its merging relation.
+
+<ol>
+<ol>
+<li>Click <b>New</b> to add a merged field.</li>
+<li>Enter the merged field name, and then select field type and fields from both data source to be merged.</li>
+</ol>
+</ol>
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supETL/63.png)
+
+### Missing Value Handling
+Replaces null and empty strings in the data source to make sure subsequent data processing such as feature query, modeling, goes smoothly.
+- Replaces the missing value with the maximum, minimum, average value of the column, or a constant value, global variable or linear fitting value.
+- Use custom formula to generate values as replacement. Only **+, -, *, /** are supported.
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supETL/64.png)
+
+### Data Type Conversion
+Converts the type of input fields.
+:::info
+If the conversion is not legal, **0** is generated.
+:::
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supETL/65.png)
+
+### Data Completion
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supETL/66.png)
+
+<table>
+  <thead>
+    <tr>
+<th>Item</th>
+<th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+<td>Data completion time granularity</td>
+<td>Complete data columns based on the set granularity. For example, set the granularity to <b>Second</b>, the complete the column where seconds are missing.</td>
+    </tr>
+    <tr>
+<td>Completion base time field</td>
+<td>Select a time field to be completed.</td>
+    </tr>
+    <tr>
+<td>Start data</td>
+<td>The data column where the completion starts.</td>
+    </tr>
+    <tr>
+<td>End data</td>
+<td>The data column where the completion ends.</td>
+    </tr>
+  </tbody>
+</table>
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supETL/66-1.png)
+
+
+### Variable Settings
+
+Gives new value to global variables you set during task development. The new value can be either manually set or fields from the input data source.
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supETL/67.png)
+
+### Data Aggregation
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supETL/68.png)
+
+Aggregate data based on the set group fields.
+1. Select fields, and then click **Add group field**. The aggregated data will be grouped by the set fields.
+2. Select fields of numeric type, and then click **Add aggregated field** to add fields to be aggregated.
+3. Set **Aggregation cycle type**.
+
+<table>
+  <thead>
+    <tr>
+<th>Item</th>
+<th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+<td>Aggregation cycle type</td>
+<td>
+
+- None: Aggregate all data based on the group fields.
+- Time: Aggregate grouped data by time. For example, set the cycle to 5 minutes, and then every 5 minutes, run the aggregation.
+- Data record: Aggregate grouped data by number of data record. For example, set the cycle to 60 data records, and then every 60 records, run the aggregation.
+
+</td>
+    </tr>
+    <tr>
+<td>Aggregate base time field/Sort field</td>
+<td>Select a base sorting field.</td>
+    </tr>
+    <tr>
+<td>Aggregation cycle</td>
+<td>Set the time or data record by which the aggregation is calculated.</td>
+    </tr>
+    <tr>
+<td>Record time filling method/Record entry method</td>
+<td>Set the output value, which can be either the initial value or end value of each cycle.</td>
+    </tr>
+    <tr>
+<td>Sliding window</td>
+<td>Only available when setting <b>Aggregation cycle type</b> to <b>Time</b>.</td>
+    </tr>
+    <tr>
+<td>Additional output data record field</td>
+<td>Only available when setting <b>Aggregation cycle type</b> to <b>Data record</b>. Select an additional field for output.</td>
+    </tr>
+  </tbody>
+</table>
+
+![Aggregate by time](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supETL/68-1.png)
+![Aggregate by data record](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supETL/68-2.png)
+
+
+
+### Table Transposition
+
+:::info
+Only available for file type data, and output to file type of data.
+:::
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supETL/69.png)
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supETL/69-1.png)
+
+
+### Custom Operator
+
+You can customize algorithm and its functions.
+:::info
+Presently, only original JaveScript is available.
+:::
+
+- JavaScript rules:
+
+<ul>
+<ul>
+  <li>The input parameter of the JS script is a collection of data passed down from the previous node, which can be a single or multiple entries.</li>
+  <li>The definition of the data collection in the script is "dataList".</li>
+  <li>To obtain the value of a property, use the dot notation followed by the property name (e.g., ".id").</li>
+  <li>The JS script should return the corresponding object or data collection after performing the required operation in the form of a JSON array or string.</li>
+  <li>The variables configured on the page can be directly used in the JS script (just ensure that the variable names match).</li>
+  <li>Debugging logs can be added to the JS script using the "log.debug()" function, and the debugging results can be viewed at the bottom of the script.</li>
+  <li>It is possible to use Java-related collection classes for operations within the JS script.</li>
+</ul>
+</ul>
+
+- Script example
+```javascript
+var arr = [];
+for (var i=0; i<dataList.length; i++) {
+    dataList[i].id = dataList[i].id + 10;
+    arr[i] = dataList[i];
+    }
+    arr;
+```
+
+:::caution
+- When calling a function with an input object, pay attention to null values that may cause a NullPointerException.
+- When performing operations on input fields, be aware of the object types of the fields (comparing time objects may result in different dates appearing equal, so it is recommended to convert them to strings or primitive types before operating on them).
+- When performing calculations on numerical values, the data type may change unexpectedly.
+- In a JS script, custom variables cannot have the same name as global variables configured during task development.
+:::
+
+- After writing the script, click **Data simulation** to debug the data. You can add up to 50 records.
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supETL/70-1.png)
+
+- Debug the script to make sure the result is reasonable.
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supETL/70.png)
+
+## Big Data Model
+### Model Operation
+Runs big data model of supOS and output the results.
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supETL/71.png)
+
+### Model Update
+Select big data models that can be updated, and update them automatically and output the results.
+### Generate Sample Set
+Generates sample sets data and synchronizes to X-BD sample set management.
+:::info
+- No downstream operators.
+- String type of data in sample set cannot contain English comma **,**.
+:::
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supETL/73.png)
+
+## Process Control
+
+Based on the set conditional statements, branch tasks that meet the conditions are executed. 
+1. Connect multiple operators (up to five branches) after the branch task node, and then double-click the branch task to configure its parameters. 
+2. Click **Settings** corresponding to each subsequent operator, and set their conditions.
+:::info
+Make sure the result is boolean type of data, and only condition returns **True**, will the branch task be executed.
+:::
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supETL/74.png)
+
+## Data Desensitization
+By using data desensitization to process multiple fields, the desensitized data will overwrite the original data and flow to downstream operators.
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supETL/75.png)
+
+## Data Output
+### Data Output
+
+Configurations are similar to the input data source. For details, see <a href="#inputNode">Data Input Node</a>.
+
+- supOS instance
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supETL/76.png)
+
+- File data source
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supETL/77.png)
+
+- API data source
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supETL/78.png)
+
+### Message Queue Output
+Kafka, mQTT and RocketMQ are supported.
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supETL/79.png)
+
+### Data Warehouse Output
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supETL/80.png)
+
+### HBASE Output
+
+:::info
+- HBase data source only receives string type of data.
+- **rowKey**, as the primary key for an HBase data source, a mapping relationship must be established for it. If there are duplicate values in the data source mapped to it, only the latest row of data will be retained.
+:::
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supETL/81.png)
+
+

@@ -1,0 +1,55 @@
+---
+hide_title: true
+---
+
+## Before Installation
+
+:::info
+We recommend to prepare a server dedicated for X-Collector only.
+:::
+
+- Disable the automatic update service of Windows on X-Collector server. For details, see <a href="Appendix/Disable Windows Update Service">Disable Windows Update Service</a>.
+- Download and install service packs before installing X-Collector on Windows Server 2012 system. For details, see <a href="Appendix/Update Error Solution">Update Error Solution</a>.
+- On Windows7（32-bit）or Windows Server 2008, .Net Framework cannot be automatically installed. In that case, refer to <a href="Appendix/Net Program Installation">Net Program Installation</a> before installing X-Collector.
+- Disable Windows firewall and third-party security software before installing X-Collector.
+:::tip if security is necessary
+You can add X-Collector IP to anti-virus software allowlist.
+:::
+
+## Installing X-Collector
+
+1. Double-click the installation file, and then follow instructions of the installation wizard to install X-Collector.
+- Make sure the installation path of X-Collector has only ASCII characters.
+- During installation, .Net Framework 4.6.2 will be automatically installed. If it already exists, click <strong>Close</strong> or <strong>Cancel</strong> when asked to continue installation.
+2. Restart the system to complete installation.
+:::info
+If <strong>nginx</strong> is not enabled, check whether the IIS server on Windows occupies the port 80.
+:::
+3. Open **Service** panel, and check whether the following services are running.
+
+<ul>
+  <li>supos_breakpad: supOS breakpad service</li>
+  <li>supos_collector: supOS collector service </li>
+  <li>supos_nginx: supOS nginx service</li>
+  <li>supos_videocollector: supOS video collector service</li>
+  <li>supos_aecollector: supOS OPC AE collector service</li>
+</ul>
+
+## Logging in to X-Collector
+
+1. Access http://&lt;IP address&gt;, and then enter the default login account and password (admin/admin) to login.
+:::info
+If the default port 80 for X-Collector is occupied, you can change it and then use the changed port and IP to log in. For details, see <a href="Appendix/Change Login Port"> Change Login Port</a>.
+:::
+3. Change password on the pop-up window.
+
+## Uninstalling X-Collector
+
+1. Select **Control Panel** > **Uninstall Program**.
+2. Right-click <strong>X-Collector</strong> and then click <strong>Uninstall</strong>.
+3. Select whether to delete all X-Collector modules, and then click <strong>Yes</strong>.
+  
+:::info
+Configuration and design data of X-Collector will not be deleted after uninstallation.
+:::
+

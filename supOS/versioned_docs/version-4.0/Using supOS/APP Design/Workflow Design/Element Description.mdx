@@ -1,0 +1,540 @@
+---
+hide_title: false
+---
+
+This chapter introduces all elements the supOS platform provides for
+workflow creation.
+
+
+## Start
+
+Starts the workflow.
+<img width={450} height={300} src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/workflow/21.png" />
+<table>
+<colgroup>
+<col style={{ width: "27.027027027027025%" }} />
+<col style={{ width: "72.97297297297297%" }} />
+</colgroup>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Node type</td>
+<td>
+<ul>
+<li>
+<strong>Start event</strong>: Directly start the workflow.
+</li>
+<li>
+<strong>Signal start</strong>: Binds with an event and the
+workflow is triggered when the event takes place.
+</li>
+</ul>
+</td>
+</tr>
+<tr>
+<td>
+Start on mobile
+</td>
+<td>
+Enable it and then you can initiate the workflow on mobile
+clients.
+
+:::info
+Only available when setting <strong>Node type</strong> to <strong>Start event</strong>.
+:::
+
+</td>
+</tr>
+<tr>
+<td>Event type</td>
+<td>
+<ul>
+<li>
+<strong>Interrupt</strong>: When the bound event takes place,
+the sub-process which contains the signal start is triggered,
+and the main process is interrupted.
+</li>
+<li>
+<strong>No interrupt</strong>: When the bound event takes
+place, the sub-process which contains the signal start is
+triggered, and the main process continues.
+</li>
+</ul>
+
+:::info
+Only available when setting <strong>Node type</strong> to <strong>Signal start</strong>.
+:::
+
+</td>
+</tr>
+<tr>
+<td>Signal source</td>
+<td>
+Select an event that triggers the workflow.
+
+:::info
+Only available when setting <strong>Node type</strong> to <strong>Signal start</strong>.
+:::
+
+</td>
+</tr>
+</tbody>
+</table>
+
+:::info
+- For <strong>Start event</strong>, the workflow is directly initiated. We recommend to start a user task with the initiator as the executor for the next step. When the workflow is started, the user task is executed by default.
+- If the executor of the next step after <strong>Start event</strong> is not the initiator, when starting the workflow, the form of the step after.
+:::
+
+
+## Intermediate
+
+### Timer Event
+
+A timer event sets the deadline time of current task or the last task. It can be used in following ways:
+- Place it between two tasks, and the second task only starts when reaching the set time.
+- Place it on a task, and if the task is finished before the set time, the timer becomes invalid; if not, the subsequent branch task of the timer is triggered.
+
+<img width={450} height={300} src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/workflow/23.png" />
+<table>
+<colgroup>
+<col style={{ width: "27.027027027027025%" }} />
+<col style={{ width: "72.97297297297297%" }} />
+</colgroup>
+<thead>
+<tr>
+<th>
+Parameter
+</th>
+<th>
+Description
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Event type
+</td>
+<td>
+
+- <strong>Interrupt</strong>: The current task executor cannot proceed the workflow after reaching the set time, and the subsequent branches of the timer proceed.
+- <strong>No interrupt</strong>: The current task executor can proceed the workflow after reaching the set time.
+
+:::info
+Only available when placing the timer on a task.
+:::
+
+</td>
+</tr>
+<tr>
+<td>
+Page
+</td>
+<td>
+Select a page that links with the timer and when reaching the
+set time, the linked page is triggered.
+</td>
+</tr>
+<tr>
+<td>
+Time Variable
+</td>
+<td>
+Select a time field from the linked page to be the trigger time
+of the timer.
+
+:::info
+Only effective for times between tasks.
+:::
+
+</td>
+</tr>
+</tbody>
+</table>
+
+### Signal Event
+
+Normally it is used in pairs between main and sub processes with the same signal source bound. One event throws a signal after completing the current workflow and another event catches the signal and starts corresponding workflow.
+
+<img width={450} height={300} src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/workflow/22.png" />
+<table>
+<colgroup>
+<col style={{ width: "27.027027027027025%" }} />
+<col style={{ width: "72.97297297297297%" }} />
+</colgroup>
+<thead>
+<tr>
+<th>
+Parameter
+</th>
+<th>
+Description
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Event type
+</td>
+<td>
+<ul>
+<li>
+<strong>Throw</strong>: The event throws a signal when the
+current workflow finishes.
+</li>
+<li>
+<strong>Catch</strong>: The event catches the signal from
+another signal event and starts corresponding workflow.
+</li>
+</ul>
+</td>
+</tr>
+<tr>
+<td>
+Signal source
+</td>
+<td>
+Select an event that triggers the workflow.
+
+:::info
+Only available when setting <strong>Node type</strong> to <strong>Signal start</strong>.
+:::
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## Task
+
+### Task Description
+
+
+Set specific tasks in the workflow.
+<img width={450} height={300} src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/workflow/25.png" />
+<table>
+<colgroup>
+<col style={{ width: "20%" }} />
+<col style={{ width: "80%" }} />
+</colgroup>
+<thead>
+<tr>
+<th>
+Parameter
+</th>
+<th>
+Description
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Node type
+</td>
+<td>
+<ul>
+<li>
+<strong>User task</strong>: Specific tasks in the workflow.
+</li>
+<li>
+<strong>Countersign task</strong>: Used for approval where
+multiple personnels are involved. The workflow will only
+proceed when all personnels submit the task.
+</li>
+<li>
+<strong>Service task</strong>: Binds and executes object
+services.
+</li>
+</ul>
+</td>
+</tr>
+<tr>
+<td>
+Page
+</td>
+<td>
+Select a page that links with the task and when the workflow
+proceeds to the step, the linked page is triggered.
+</td>
+</tr>
+<tr>
+<td>
+Read Only
+</td>
+<td>
+Enable it and the linked page of this task cannot be edited.
+</td>
+</tr>
+<tr>
+<td>
+Ignore condition
+</td>
+<td>
+Select fields from the last step to set conditions, and when
+
+:::info
+The first task cannot set <strong>Ignore condition</strong>.
+:::
+</td>
+</tr>
+<tr>
+<td>
+Executor
+</td>
+<td>
+Click <strong>Config</strong> and select executors and their
+types.
+
+:::info
+When setting multiple people as executors, all of them will receive a to do event. One of them submits the event and all to-do events are done.
+:::
+
+</td>
+</tr>
+<tr>
+<td>
+Event binding
+</td>
+<td>
+Select an event, and the workflow proceeds to the next step when
+the event is triggered.
+</td>
+</tr>
+<tr>
+<td>
+Enable comment
+</td>
+<td>
+Select whether to display the remark input box at the bottom of
+linked pages.
+</td>
+</tr>
+<tr>
+<td>
+Display remarks
+</td>
+<td>
+Select whether to display process log icon at the upper-right
+corner of linked pages during approval.
+</td>
+</tr>
+<tr>
+<td>
+Revocable
+</td>
+<td>
+Select whether to enable recalling complete processes by
+displaying a <strong>Recall</strong> button at the upper-left
+
+:::info
+Only available for <strong>User task</strong>.
+:::
+
+</td>
+</tr>
+<tr>
+<td>
+View on mobile
+</td>
+<td>
+Enable it and then you can view the workflow on mobile clients.
+</td>
+</tr>
+<tr>
+<td>
+New countersign
+</td>
+<td>
+Select whether to allow submitter to add more personnel to
+countersign the current task.
+
+:::info
+Only available for <strong>Countersign task</strong>.
+:::
+
+</td>
+</tr>
+<tr>
+<td>
+Async
+</td>
+<td>
+Enable it, the service task is executed independently at the
+backend and the workflow proceeds. We recommend enabling it for
+
+:::info
+Only available for <strong>Service task</strong>.
+:::
+
+</td>
+</tr>
+<tr>
+<td>
+Service
+</td>
+<td>
+Select an object service, it will be executed when the task is
+submitted and if the service fails, the task cannot be
+successfully submitted.
+</td>
+</tr>
+<tr>
+<td>
+Mail
+</td>
+<td>
+Enable notification mails sent to users of the last step after
+submitting the task.
+</td>
+</tr>
+</tbody>
+</table>
+
+### Task Executor Configuration
+
+
+This section demonstrates the process of configuring task executors.
+
+1. Click <strong>Config</strong> next to <strong>Executor</strong>, and then click <strong>New</strong>.
+2. On the added record, click the drop-down list under <strong>Type</strong>, and then click <strong>Select</strong> to select executors.
+
+<ul>
+<ul>
+<li>When selecting <strong>Staff</strong>, if cross company is enabled for the workflow, you can select staff from other companies.</li>
+<li>When selecting <strong>Role</strong>, <strong>Department</strong> and <strong>Position</strong>, all staff linked to the role, department and position are set to the task executors.</li>
+</ul>
+</ul>
+
+3. Set restrictions to executors.
+
+<ul>
+<ul>
+<li><strong>Post restrictions</strong>: Enable it and the executor can only process forms submitted by corresponding subordinates. For example, in the figure below, when <strong>Post restrictions</strong> are enabled for B and C, then forms submitted by A can only be reviewed by B and C.
+<img width={450} height={300} src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/workflow/30.png"/>
+</li>
+<li><strong>Designated position</strong>: Select a position and grant corresponding permissions to the executor. For example, assign department manager of R&amp;D to D in test department, then D can review forms submitted by A and B.
+<img width={450} height={300} src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/workflow/31.png"/>
+</li>
+<li><strong>Designated staff</strong>: Select a staff, and then the executor can only review forms submitted by the designated staff.</li>
+<li><strong>Unlimited</strong>: No restrictions on the executor.</li>
+</ul>
+</ul>
+
+4. Select executor types.
+
+:::info
+The task will be sent to both selected types of and designated executors.
+:::
+
+5. Click <strong>Confirm</strong>.
+
+<img width={450} height={300} src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/workflow/29.png"/>
+
+
+## Subprocess
+
+A subprocess is a part of a workflow. It is generally started with a signal event and triggered by signals thrown by multiple tasks in main process.
+
+## Gateway
+
+### Definition
+Gateway decides how subsequent process is proceeded based on different gateway types.
+
+- <strong>Exclusive</strong>: Execute only one subsequent branch process that meets the requirements.
+
+:::info
+Branches after an exclusive gateway must be configured with conditions.
+:::
+
+- <strong>Parallel</strong>: Execute all subsequent branch processes without any conditions.
+
+:::info
+Multiple branches before parallel gateway are available and subsequent processes will only be executed after all pre-branches are finished.
+:::
+
+- <strong>Inclusive</strong>: Execute subsequent branch processes that either meet the requirements or without any conditions.
+
+<img width={450} height={300} src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/workflow/28.png" />
+
+### Setting Condition
+
+Click the connection lines after the gateway to set conditions of corresponding branch.
+
+- <strong>Assignee</strong>: Allows you to select a receiver for the subsequent process on the linked page of last step.
+- <strong>Expression</strong>: Set conditions to decide whether to execute subsequent processes.
+
+<img width={450} height={300} src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/workflow/32.png" />
+
+## End
+
+The element that ends the workflow.
+- <strong>End event</strong>: End the current branch process.
+- <strong>Terminate event</strong>: Terminate the whole workflow. When used in a sub-process, enable <strong>Terminate all</strong> to end the whole process. Otherwise, only the sub-process is ended.
+
+## Connection Line
+
+Connects steps and tasks to make sure the workflow proceeds in correct order.
+
+:::info
+A task can be connected to one or more tasks, and when necessary, subsequent reviewer can revoke the task to previous submitter.
+:::
+
+<img width={450} height={300} src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/workflow/33.png" />
+
+<table>
+<colgroup>
+<col style={{ width: "27.027027027027025%" }} />
+<col style={{ width: "72.97297297297297%" }} />
+</colgroup>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>
+Description
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Assignee
+</td>
+<td>
+Allows you to select a receiver for the subsequent process on the
+linked page of last step.
+</td>
+</tr>
+<tr>
+<td>
+Reject line
+</td>
+<td>
+Enable it and the reviewer can revoke the process to previous
+submitter.
+
+:::info
+When there are multiple executors on the last task, enabling <strong>Reject line</strong> ensures that only the previous submitter receives the revoked task.
+:::
+
+</td>
+</tr>
+<tr>
+<td>
+Order
+</td>
+<td>
+Available for connecting multiple subsequent tasks. You can set the order of each subsequent task.
+</td>
+</tr>
+</tbody>
+</table>
+
+

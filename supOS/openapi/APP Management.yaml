@@ -1,0 +1,209 @@
+---
+openapi: 3.0.0
+info:
+  title: APP Management API Definition
+  description: |-
+    # Authentication
+
+    <!-- ReDoc-Inject: <security-definitions> -->
+  version: 
+servers:
+- url: https://virtserver.swaggerhub.com/222031010/api/v1
+  description: SwaggerHub API Auto Mocking
+- url: /open-api/appmgr/v2/
+security:
+- Sign: []
+tags:
+- name: apps
+  description: APP Management
+paths:
+  /apps:
+    get:
+      tags:
+      - apps
+      summary: "Get App List"
+      description: "Use the appType parameter to query data for different types of apps. Currently, only supports \"ide\" type, which refers to the Tianfang (Business Designer) app."
+      operationId: queryAppsList
+      parameters:
+      - name: appType
+        in: query
+        description: "APP type(s) to query. Use an array to specify multiple types. Currently, only supports \"ide\". If the specified type does not exist, an empty list will be returned."
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: current
+        in: query
+        description: "Current page number, starting from 1."
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: integer
+          default: 1
+      - name: pageSize
+        in: query
+        description: "Number of items per page (default is 20, maximum is 100)."
+        required: true
+        style: form
+        explode: true
+        schema:
+          maximum: 100
+          type: integer
+          default: 20
+      - name: Accept-Language
+        in: header
+        description: "Internationalization language (returns content in different languages based on the language code). Defaults to the language of the server's operating system. English is en-us, Chinese is zh-cn."
+        required: false
+        style: simple
+        explode: false
+        schema:
+          maxLength: 8
+          type: string
+          example: zh-cn
+      responses:
+        "200":
+          description: Response content after a successful request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200'
+              example:
+                list:
+                - appId: App_9b04f4ae960146eaa3f2e82a39e757f5
+                  icon: /api/image/download?fileName=2021-11-02/1635867899321/App_9b04f4ae960146eaa3f2e82a39e757f5.jpg
+                  appName: test1
+                  name: test_1
+                  appType: ide
+                  appVersion: 1.0.0
+                  vendorName: zhangsan
+                - appId: App_2df207739b1c49158eff72ec1f89dca5
+                  icon: /api/image/download?fileName=2021-11-02/1635867899409/App_2df207739b1c49158eff72ec1f89dca5.jpg
+                  appName: test2
+                  name: test_2
+                  appType: ide
+                  appVersion: 1.0.0
+                  vendorName: lisi
+                pagination:
+                  total: 2
+                  pageSize: 20
+                  current: 1
+        "400":
+          description: |
+            Error message
+            * 100122000 APP type parameter cannot be empty,{"code":100122000,"message":"APP type parameter cannot be empty"}
+            * 100122001 Current page number cannot be empty,{"code":100122001,"message":"Current page number cannot be empty"}
+            * 100122002 Number of items per page cannot be empty,{"code":100122002,"message":"Number of items per page cannot be empty"}
+            * 100122003 Current page number cannot be less than 1,{"code":100122003,"message":"Current page number cannot be less than 1"}
+            * 100122004 Number of items per page cannot be less than 1,{"code":100122004,"message":"Number of items per page cannot be less than 1"}
+            * 100122005 Number of items per page cannot be greater than 100,{"code":100122005,"message":"Number of items per page cannot be greater than 100"}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+components:
+  schemas:
+    ErrorCode:
+      type: integer
+      description: |
+        Error code returned in the response
+          * 400: Request failed
+          * 401: Authorization failed
+          * 404: Data not found
+          * 409: Conflict in request, the specified name already exists and cannot be added
+          * 500: System error
+      format: int64
+      enum:
+      - 400
+      - 401
+      - 404
+      - 409
+      - 500
+    App:
+      type: object
+      properties:
+        appId:
+          type: string
+          description: app id (maximum length is 255)
+        appType:
+          type: string
+          description: APP type (maximum length is 50)
+        icon:
+          type: string
+          description: Icon (maximum length is 255)
+        appName:
+          type: string
+          description: Name (maximum length is 255)
+        name:
+          type: string
+          description: Display name (maximum length is 255)
+        appVersion:
+          type: string
+          description: Version (maximum length is 255)
+        vendorName:
+          type: string
+          description: Developer name (maximum length is 255)
+      description: APP data
+    Pagination:
+      type: object
+      properties:
+        total:
+          type: integer
+          description: Total number of items
+          example: 1
+        pageSize:
+          type: integer
+          description: Number of items per page
+          example: 20
+        current:
+          type: integer
+          description: Current page number
+          example: 1
+      description: Pagination information
+    inline_response_200:
+      type: object
+      properties:
+        list:
+          type: array
+          items:
+            $ref: '#/components/schemas/App'
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+    inline_response_400:
+      type: object
+      properties:
+        code:
+          type: integer
+          description: Error code
+          example: 100122000
+        message:
+          type: string
+          description: Error message
+          example: APP type parameter cannot be empty
+  responses:
+    GeneralError:
+      description: Request failed
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorCode'
+  parameters:
+    acceptLanguage:
+      name: Accept-Language
+      in: header
+      description: "Internationalization language (returns content in different languages based on the language code). Defaults to the language of the server's operating system. English is en-us, Chinese is zh-cn."
+      required: false
+      style: simple
+      explode: false
+      schema:
+        maxLength: 8
+        type: string
+        example: zh-cn
+  securitySchemes:
+    Sign:
+      type: apiKey
+      name: Authorization
+      in: header

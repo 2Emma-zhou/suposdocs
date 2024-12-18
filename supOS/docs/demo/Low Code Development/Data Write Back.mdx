@@ -1,0 +1,77 @@
+---
+sidebar_position: 6
+
+---
+
+You can send and display the data you defined on the supOS platform to
+third party gateways through datalink and reports used during APP development.
+
+:::info
+Make sure the gateway is set to <strong>Read&Write</strong>.
+:::
+
+## Writing through Datalink
+
+1. Log in to supOS, and then click <img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/platform/7.png"/> at the upper-right corner to go to the design center.
+2. Select <strong>Object Model Management</strong> > <strong>Object Instance</strong>.
+3. Select an object template, and then click <strong>New</strong> on the right to add an instance.
+4. In the <strong>Attributes</strong> tab, click <strong>New</strong> to add an attribute under <strong>My Attributes</strong>.
+5. Select the third party gateway as the data source, and set the <strong>Read and Write Status</strong> of the object attribute to <strong>Read and Write</strong>.
+
+<img width={350} src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/platform/67.png"/>
+
+6. Select <strong>Business Designer</strong> on the design center, and then add a data connection element to an APP canvas with the added object attribute as data source.
+7. Go to the operation center, hover over the data connection control, and then on the data detail window, click <img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/platform/68.png"/> next to the value.
+
+<img width={300} src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/platform/69.png"/>
+
+8. Enter a value in the pop-up window, and then click <strong>Confirm</strong>.
+
+<img width={350} src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/platform/70.png"/>
+
+## Writing through Report
+
+1. Log in to supOS, and then click <img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/platform/7.png"/> at the upper-right corner to go to the design center.
+2. Select <strong>Object Model Management</strong> > <strong>Object Instance</strong>.
+3. Select an object template, and then click <strong>New</strong> on the right to add an instance.
+4. In the <strong>Attributes</strong> tab, click <strong>New</strong> to add an attribute under <strong>My Attributes</strong>.
+5. Select the third party gateway as the data source, and set the <strong>Read and Write Status</strong> of the object attribute to <strong>Read and Write</strong>.
+
+<img width={300} src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/platform/67.png"/>
+
+6. Select <strong>Business Designer</strong> on the design center, add a report control to an APP canvas and set its attributes.
+
+<ol>
+<ol>
+<li>
+
+1. Select the report, and then enable <strong>Run Edit</strong> under <strong>Property</strong> on the right
+side.
+2. Double-click the report, and then select <img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/platform/28.png"/> > <strong>Object Model</strong> on the right side under <strong>Data Source Management</strong>.
+3. Select the attributes of the added object instance.
+
+<img width={500} src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/platform/71.png"/>
+
+4. Drag a piece of data from the data source list to a cell, and then set <strong>Data Type</strong> to <strong>Real-time Data</strong> on the right side under <strong>Property Configuration</strong>.
+
+<img width={350} src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/platform/73.png"/>
+
+5. Select the cell and then grant read&amp;write permission to
+roles.
+
+<img width={500} src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/platform/72.png"/>
+
+</li>
+</ol>
+</ol>
+
+7. Add a button next to the report, change its name to <strong>Save</strong> and add a click event to the button and write corresponding script.
+
+<img width={500} src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/platform/74.png"/>
+
+8. Go to the operation center, double-click the report to change its content, and then click <strong>Save</strong> to send the data to equipment.
+
+:::info
+Make sure the gateway is set to <strong>Read&amp;Write</strong>.
+:::
+

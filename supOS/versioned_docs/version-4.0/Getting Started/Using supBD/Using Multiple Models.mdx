@@ -1,0 +1,30 @@
+Calling multiple models at the same time through data tasks.
+:::info
+In this section, 2 bigdata models will be called as an example of usage.
+:::
+1. Log in to supOS, and then select **Data Intelligence** > **Data Science** > **Model Scheduling** > **Multi Model**.
+2. Add a directory and create a data task.
+:::info
+This part is similar to data task development in X-ETL. For details, see <a href="../Using supETL/Configuring Data Task">Configuring Data Task</a>.
+:::
+3. Drag **Data input**, **Model operation**, **Generate sample set** and **Data output** to the canvas, and then connect them as the image shows.
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supBD/15.png)
+4. Select the input data source, and then configure **Model operation**.
+
+<ol>
+<ol>
+<li>Select a supOS instance that is added under <b>Data Integration Exchange</b> > <b>Data connection</b>.</li>
+<li>Select a model that is published in X-BD.</li>
+<li>Map the input data with the model input fields, and then save the configuration.</li>
+</ol>
+</ol>
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supBD/14.png)
+
+5. Click **Generate sample set**, and configure its information.
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supBD/16.png)
+
+6. Select an output source, and then click **Debug**.
+7. After successful debugging, check whether the results are right.
+- Check the set output source to see whether the data is processed by the model.
+- Under **Sample set**, check whether the sample set is created and with the right data.

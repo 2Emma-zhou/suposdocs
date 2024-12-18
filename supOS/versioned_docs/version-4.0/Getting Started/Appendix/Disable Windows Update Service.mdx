@@ -1,0 +1,29 @@
+
+This section describes how to disable auto update service of Windows 10 pro version. For other Windows operating systems, please search for details on the Internet.
+
+### System and Security Setting
+1. Press Windows + R keys to open **Running** window, enter **gpedit.msc** and then click **OK** to open **Local Group Policy Editor**.
+2. Select **Computer Configuration** > **Administrative Templates** > **Windows Components**.
+
+<img width={450} src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supCollector/3.png" />
+
+3. Double-click **Windows Update**, and then set it to **Disabled**.
+
+<img width={450} src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supCollector/4.png" />
+
+### System Service Settings
+1. Search for **Services** in the start menu, and then on the services list, find **Windows Update**.
+
+<img width={450} src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supCollector/5.png" />
+
+2. Double-click it and then set the **Startup Type** to **Disabled**.
+
+
+<img width={350} src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supCollector/6.png" />
+
+3. Do the same for the following services.
+- Internet Connection Sharing
+- Security Center
+- Windows Backup
+- Windows Firewall
+- Windows Time

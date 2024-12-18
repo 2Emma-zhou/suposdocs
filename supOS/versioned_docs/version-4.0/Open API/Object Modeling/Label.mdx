@@ -1,0 +1,521 @@
+---
+hide_title: true
+---
+
+<div class="div">
+  <div class="title">
+
+## ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/openAPI/4.png) Get Label Category List
+
+</div>
+  <div class="grid">
+    <div class="leftCol">Path</div>
+    <div class="rightCol">
+
+```
+http://{supOS ip:port}/open-api/supos/oodm/v2/model-label-types
+```
+
+</div>
+    <div class="leftCol">Query parameters</div>
+    <div class="rightCol">
+<table>
+<caption>Table 2. Query parameter description</caption>
+                <colgroup>
+                  <col style={{ width: "25%" }} />
+                  <col style={{ width: "25%" }} />
+                  <col style={{ width: "50%" }} />
+                </colgroup>
+                <thead>
+                  <tr>
+                    <th>Parameter</th>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                    <td>keyword</td>
+                    <td>string</td>
+                    <td>Fuzzy match the name and alias.</td>
+                    </tr>
+                    <tr>
+                    <td>pageIndex</td>
+                    <td>integer</td>
+                    <td>Required. Page number. The default is 1.</td>
+                    </tr>
+                    <tr>
+                    <td>pageSize</td>
+                    <td>integer</td>
+                    <td>Required. The number of data on each page. The default is 20 and the maximum is 500.</td>
+                    </tr>
+                    </tbody>
+                    </table>
+</div>
+    <div class="leftCol">Response</div>
+    <div class="rightCol">
+<ul>
+<li>200: Successful.
+
+```json
+{
+  "code": 200,
+  "data": {
+    "data": [
+      {
+        "appAccessMode": "PUBLIC",
+        "appName": "system",
+        "comment": "this is a test label",
+        "displayName": "category1",
+        "enName": "labelCategory1",
+        "namespace": "system",
+        "id": 17777
+      }
+    ],
+    "pageIndex": 1,
+    "pageSize": 20,
+    "total": 100
+  },
+  "detail": "string",
+  "message": "ok"
+}
+```
+
+</li>
+<li>500: General internal error of OODM.
+
+```json
+{
+  "code": 10001001,
+  "data": {},
+  "detail": "string",
+  "message": "string"
+}
+```
+
+</li>
+</ul>
+</div>
+  </div>
+</div>
+
+<div class="div">
+<div class="title">
+
+## ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/openAPI/1.png) Create Label Category
+
+</div>
+<div class="grid">
+<div class="leftCol">Path</div>
+<div class="rightCol">
+
+```
+http://{supOS ip:port}/open-api/supos/oodm/v2/model-label-types
+```
+
+</div>
+<div class="leftCol">Request Body</div>
+<div class="rightCol">
+
+```json
+{
+  "appAccessMode": "PUBLIC", //whether can be seen in other apps (PUBLIC or PRIVATE). Required.
+  "appName": "system", //required
+  "comment": "this is a test label",
+  "displayName": "category1",
+  "enName": "labelCategory1", //label alias
+  "namespace": "system"
+}
+```
+
+</div>
+    <div class="leftCol">Response</div>
+    <div class="rightCol">
+<ul>
+<li>200: Successful.
+
+```json
+{
+  "code": 200,
+  "data": 19999,
+  "detail": "string",
+  "message": "ok"
+}
+```
+
+</li>
+<li>500: General internal error of OODM.
+
+
+```json
+{
+  "code": 10001001,
+  "data": {},
+  "detail": "string",
+  "message": "string"
+}
+```
+
+</li>
+</ul>
+</div>
+  </div>
+</div>
+
+<div class="div">
+  <div class="title">
+
+## ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/openAPI/4.png) Get Label/Category
+
+</div>
+  <div class="grid">
+    <div class="leftCol">Path</div>
+    <div class="rightCol">
+
+```
+http://{supOS ip:port}/open-api/supos/oodm/v2/model-label-types/{namespace}/{name}
+```
+
+- namespace: Label namespce. Required. String.
+- name: Label alias. Required. String.
+
+</div>
+    <div class="leftCol">Response</div>
+    <div class="rightCol">
+<ul>
+<li>200: Successful.
+
+
+```json
+{
+  "code": 200,
+  "data": {
+    "appAccessMode": "PUBLIC",
+    "appName": "system",
+    "comment": "this is a test label",
+    "displayName": "category1",
+    "enName": "labelCategory1",
+    "namespace": "system",
+    "id": 17778
+  },
+  "detail": "string",
+  "message": "ok"
+}
+```
+
+</li>
+<li>500: General internal error of OODM.
+
+```json
+{
+  "code": 10001001,
+  "data": {},
+  "detail": "string",
+  "message": "string"
+}
+```
+
+</li>
+</ul>
+</div>
+  </div>
+</div>
+
+<div class="div">
+  <div class="title">
+
+## ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/openAPI/4.png) Get All Labels
+
+</div>
+  <div class="grid">
+    <div class="leftCol">Path</div>
+    <div class="rightCol">
+
+```
+http://{supOS ip:port}/open-api/supos/oodm/v2/model-labels
+```
+
+</div>
+    <div class="leftCol">Query parameters</div>
+    <div class="rightCol">
+<table>
+<caption>Table 2. Query parameter description</caption>
+                <colgroup>
+                  <col style={{ width: "25%" }} />
+                  <col style={{ width: "25%" }} />
+                  <col style={{ width: "50%" }} />
+                </colgroup>
+                <thead>
+                  <tr>
+                    <th>Parameter</th>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                    <td>keyword</td>
+                    <td>string</td>
+                    <td>Fuzzy match the name and alias.</td>
+                    </tr>
+                    <tr>
+                    <td>pageIndex</td>
+                    <td>integer</td>
+                    <td>Required. Page number. The default is 1.</td>
+                    </tr>
+                    <tr>
+                    <td>pageSize</td>
+                    <td>integer</td>
+                    <td>Required. The number of data on each page. The default is 20 and the maximum is 500.</td>
+                    </tr>
+                    <tr>
+                    <td>categoryId</td>
+                    <td>integer</td>
+                    <td>Label category ID.</td>
+                    </tr>
+                    <tr>
+                    <td>metadataType</td>
+                    <td>string</td>
+                    <td>Metadata type, including ATTRIBUTE, EVENT, SERVICE and SUBSCRIPTION.</td>
+                    </tr>
+                    <tr>
+                    <td>excludeMetadata</td>
+                    <td>boolean</td>
+                    <td>Whether to exclude all labels of the metadata. Used together with metadataType.</td>
+                    </tr>
+                    <tr>
+                    <td>templateName</td>
+                    <td>string</td>
+                    <td>Template alias. Input with templateNamespace and used together with metadataType.</td>
+                    </tr>
+                    <tr>
+                    <td>templateNamespace</td>
+                    <td>string</td>
+                    <td>Template namespace. Input with templateName.</td>
+                    </tr>
+                    <tr>
+                    <td>instanceName</td>
+                    <td>string</td>
+                    <td>Instance alias. Used with metadataType.</td>
+                    </tr>
+                    </tbody>
+                    </table>
+</div>
+    <div class="leftCol">Response</div>
+    <div class="rightCol">
+200: Successful.
+
+```json
+{
+  "code": 200,
+  "data": {
+    "data": [
+      {
+        "appAccessMode": "PUBLIC",
+        "appName": "system",
+        "comment": "this is a test label",
+        "displayName": "category1",
+        "enName": "labelCategory1",
+        "namespace": "system",
+        "id": 17777
+      }
+    ],
+    "pageIndex": 1,
+    "pageSize": 20,
+    "total": 100
+  },
+  "detail": "string",
+  "message": "ok"
+}
+```
+
+</div>
+  </div>
+</div>
+
+<div class="div">
+  <div class="title">
+
+## ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/openAPI/1.png) Create Label
+
+</div>
+  <div class="grid">
+    <div class="leftCol">Path</div>
+    <div class="rightCol">
+
+```
+http://{supOS ip:port}/open-api/supos/oodm/v2/model-labels
+```
+
+</div>
+    <div class="leftCol">Request Body</div>
+<div class="rightCol">
+
+```json
+{
+  "appAccessMode": "PUBLIC", //whether can be seen in other apps (PUBLIC or PRIVATE). Required.
+  "appName": "system",
+  "comment": "this is a test label",
+  "displayName": "category1",
+  "enName": "labelCategory1",
+  "namespace": "system",
+  "categoryId": 17777 //interger. Required.
+}
+```
+
+</div>
+    <div class="leftCol">Response</div>
+    <div class="rightCol">
+    <ul>
+<li>200: Successful.
+
+```json
+{
+  "code": 200,
+  "data": 19999,
+  "detail": "string",
+  "message": "ok"
+}
+```
+
+</li>
+<li>500: General internal error of OODM.
+
+```json
+{
+  "code": 10001001,
+  "data": {},
+  "detail": "string",
+  "message": "string"
+}
+```
+
+</li>
+</ul>
+</div>
+  </div>
+</div>
+
+<div class="div">
+  <div class="title">
+
+## ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/openAPI/2.png) Cancel Instance Label
+
+</div>
+  <div class="grid">
+    <div class="leftCol">Path</div>
+    <div class="rightCol">
+
+```
+http://{supOS ip:port}/open-api/supos/oodm/v2/model-labels/{templateNamespace}/{templateName}/instance-labels
+```
+
+</div>
+    <div class="leftCol">Request Body</div>
+    <div class="rightCol">
+
+```json
+{
+  "instanceNames": [ //instance name list
+    "instance1"
+  ],
+  "labelIds": [
+    14444
+  ]
+}
+```
+
+</div>
+    <div class="leftCol">Response</div>
+    <div class="rightCol">
+<ul>
+<li>200: Successful.
+
+```json
+{
+  "code": 200,
+  "message": "ok",
+  "data": null,
+  "detail": null
+}
+```
+
+</li>
+<li>500: General internal error of OODM.
+
+```json
+{
+  "code": 10001001,
+  "data": {},
+  "detail": "string",
+  "message": "string"
+}
+```
+
+</li>
+</ul>
+</div>
+  </div>
+</div>
+
+<div class="div">
+  <div class="title">
+
+## ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/openAPI/2.png) Add Instance Label
+
+</div>
+  <div class="grid">
+    <div class="leftCol">Path</div>
+    <div class="rightCol">
+
+```
+http://{supOS ip:port}/open-api/supos/oodm/v2/model-labels/{templateNamespace}/{templateName}/{instanceName}/instance-labels
+```
+
+</div>
+    <div class="leftCol">Request Body</div>
+    <div class="rightCol">
+
+```json
+{
+  "instanceId": "10001",
+  "labelIds": [
+    12222
+  ],
+  "relationId": 12333,
+  "templateId": 12332
+}
+```
+
+</div>
+    <div class="leftCol">Response</div>
+    <div class="rightCol">
+<ul>
+<li>200: Successful.
+
+```json
+{
+  "code": 200,
+  "message": "ok",
+  "data": null,
+  "detail": null
+}
+```
+
+</li>
+<li>500: General internal error of OODM.
+
+```json
+{
+  "code": 10001001,
+  "data": {},
+  "detail": "string",
+  "message": "string"
+}
+```
+
+</li>
+</ul>
+</div>
+  </div>
+</div>

@@ -1,0 +1,507 @@
+---
+hide_title: true
+---
+
+## Enabling CDC for MySQL
+:::info
+MySQL version must be 5.7 or newer.
+:::
+
+1. Open the configuration file of MySQL.
+2. Under **mysqld**, add the following content.
+```
+[mysqld]
+log-bin=binlog
+log-bin-index=binlog.index
+binlog_format=row
+server_id=1 
+binlog_row_image = full
+gtid_mode = on
+expire_logs_days = 10
+```
+- server_id: An integer larger than 1, and make sure it is different from the server id you set when creating data integration tasks.
+- expire_logs_days: Reserve duration of Binlog, and make sure it lasts for at least 2 days.
+- **gtid_mode = on/enforce_gtid_consistency = on** is only needed for newer version than 5.6.5.
+3. Grant following permissions.
+```
+grant replication client,replication slave,select on DATABASE NAME.TABLE NAME to 'USERNAME'@'DOMAIN NAME';
+```
+:::info
+- Make the **TABLE NAME** to ***** to grant permissions to all tables in the database.
+- Change the **DOMAIN NAME** to **%** to contain all IPs.
+:::
+
+<table>
+  <thead>
+    <tr>
+      <th>Permission</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>replication client</td>
+      <td>Permission to view master/salve/binery log status.</td>
+    </tr>
+    <tr>
+      <td>replication slave</td>
+      <td>Main/slave copy.</td>
+    </tr>
+    <tr>
+      <td>select</td>
+      <td>Permission query.</td>
+    </tr>
+  </tbody>
+</table>
+
+
+## Enabling CDC for Oracle
+:::info
+All operations need to be done with **sysdba** permission.
+:::
+
+Check whether the archive mode is enabled.
+```
+SQL> select log_mode from v$database;
+LOG_MODE
+ARCHIVELOG
+```
+### Archive Mode Enabled
+1. Check whether the redo log is created.
+```
+show parameter DB_RECOVERY_FILE_DEST
+```
+2. Check whether the tablespace of the current user is permanent tablespace.
+:::info
+To enable CDC, the tablespace must be permanent tablespace.
+:::
+- Check the current user tablespace
+```
+select default_tablespace from dba_users where username='you_user_name';
+```
+- Check all tablespace
+```
+select * from dba_tablespaces;
+```
+3. Create permanent tablespace file.
+:::info
+The default created tablespace is **USERS** tablespace. To avoid it being too large, we recommend new users create their own tablespace.
+:::
+```
+CREATE TABLESPACE logminer_tbs DATAFILE
+'/opt/oracle/oradata/SID/logminer_tbs.dbf' SIZE 25M REUSE AUTOEXTEND ON
+MAXSIZE UNLIMITED;
+```
+- **/opt/oracle/oradata/SID** needs to be created under root and given read&write permission.
+- You can use the following statement to check whether **logminer_tbs.dbf** exists.
+```
+SELECT t1.name, t2.name FROM v$tablespace t1, v$datafile t2 WHERE
+t1.ts#=t2.ts# order by t1.name;
+```
+
+4. Check whether the supplemental log is enabled.
+```
+SELECT supplemental_log_data_min, supplemental_log_data_pk,
+supplemental_log_data_all FROM v$database;
+```
+5. (optional) When the result of the last step is **NO NO**, run the following statement to enable supplymental log.
+```
+ALTER DATABASE ADD SUPPLEMENTAL LOG DATA (ALL) COLUMNS;
+```
+6. Grant CDC permission.
+- Oracle 11g
+```
+ALTER USER [YOU_USER_NAME] DEFAULT TABLESPACE LOGMINER_TBS QUOTA UNLIMITED
+ON LOGMINER_TBS;
+GRANT CREATE SESSION TO [YOU_USER_NAME];
+GRANT SET CONTAINER TO [YOU_USER_NAME];
+GRANT SELECT ON V_$DATABASE to [YOU_USER_NAME];
+GRANT FLASHBACK ANY TABLE TO [YOU_USER_NAME];
+GRANT SELECT ANY TABLE TO [YOU_USER_NAME];
+GRANT SELECT_CATALOG_ROLE TO [YOU_USER_NAME];
+GRANT EXECUTE_CATALOG_ROLE TO [YOU_USER_NAME];
+GRANT SELECT ANY TRANSACTION TO [YOU_USER_NAME];
+GRANT LOGMINING TO [YOU_USER_NAME];
+GRANT CREATE TABLE TO [YOU_USER_NAME];
+GRANT LOCK ANY TABLE TO [YOU_USER_NAME];
+GRANT ALTER ANY TABLE TO [YOU_USER_NAME];
+GRANT CREATE SEQUENCE TO [YOU_USER_NAME];
+GRANT EXECUTE ON DBMS_LOGMNR TO [YOU_USER_NAME];
+GRANT EXECUTE ON DBMS_LOGMNR_D TO [YOU_USER_NAME];
+GRANT SELECT ON V_$LOG TO [YOU_USER_NAME];
+GRANT SELECT ON V_$LOG_HISTORY TO [YOU_USER_NAME];
+GRANT SELECT ON V_$LOGMNR_LOGS TO [YOU_USER_NAME];
+GRANT SELECT ON V_$LOGMNR_CONTENTS TO [YOU_USER_NAME];
+GRANT SELECT ON V_$LOGMNR_PARAMETERS TO [YOU_USER_NAME];
+GRANT SELECT ON V_$LOGFILE TO [YOU_USER_NAME];
+GRANT SELECT ON V_$ARCHIVED_LOG TO [YOU_USER_NAME];
+GRANT SELECT ON V_$ARCHIVE_DEST_STATUS TO [YOU_USER_NAME];
+```
+- Oracle 12c standard databases
+```
+ALTER USER [YOU_USER_NAME] DEFAULT TABLESPACE LOGMINER_TBS QUOTA UNLIMITED
+ON LOGMINER_TBS;
+GRANT CREATE SESSION TO [YOU_USER_NAME];
+GRANT SET CONTAINER TO [YOU_USER_NAME];
+GRANT SELECT ON V_$DATABASE to [YOU_USER_NAME];
+GRANT FLASHBACK ANY TABLE TO [YOU_USER_NAME];
+GRANT SELECT ANY TABLE TO [YOU_USER_NAME];
+GRANT SELECT_CATALOG_ROLE TO [YOU_USER_NAME];
+GRANT EXECUTE_CATALOG_ROLE TO [YOU_USER_NAME];
+GRANT SELECT ANY TRANSACTION TO [YOU_USER_NAME];
+GRANT LOGMINING TO [YOU_USER_NAME];
+GRANT CREATE TABLE TO [YOU_USER_NAME];
+GRANT LOCK ANY TABLE TO [YOU_USER_NAME];
+GRANT ALTER ANY TABLE TO [YOU_USER_NAME];
+GRANT CREATE SEQUENCE TO [YOU_USER_NAME];
+GRANT EXECUTE ON DBMS_LOGMNR TO [YOU_USER_NAME];
+GRANT EXECUTE ON DBMS_LOGMNR_D TO [YOU_USER_NAME];
+GRANT SELECT ON V_$LOG TO [YOU_USER_NAME];
+GRANT SELECT ON V_$LOG_HISTORY TO [YOU_USER_NAME];
+GRANT SELECT ON V_$LOGMNR_LOGS TO [YOU_USER_NAME];
+GRANT SELECT ON V_$LOGMNR_CONTENTS TO [YOU_USER_NAME];
+GRANT SELECT ON V_$LOGMNR_PARAMETERS TO [YOU_USER_NAME];
+GRANT SELECT ON V_$LOGFILE TO [YOU_USER_NAME];
+GRANT SELECT ON V_$ARCHIVED_LOG TO [YOU_USER_NAME];
+GRANT SELECT ON V_$ARCHIVE_DEST_STATUS TO [YOU_USER_NAME];
+```
+
+### Archive Mode Disabled
+:::info
+- CDC currently only supports acquiring data from physical tables.
+- Database version must be Oracle 11g enterprise or standard or newer.
+:::
+#### Not CDB database
+:::info
+We recommend the CDC configuration to be done by database administrator.
+:::
+
+1. Connect to the database with sys user and then enable archive log.
+```
+sqlplus /nolog
+CONNECT sys/sys_password@host_IP:port AS SYSDBA;
+archive log list;
+```
+2. (optional) Enable archive log if it is not enabled.
+
+<ol>
+<ol>
+<li>Configure parameters of archived redo log.
+
+```
+alter system set db_recovery_file_dest_size = 100G;  --space for stroing log
+alter system set db_recovery_file_dest = '/opt/oracle/oradata/recovery_area' scope=spfile;  --/opt/oracle/oradata/recovery_area is log storage path
+```
+
+:::caution
+- Storage path must be created in advance and granted read&write permission through `chmod 777 /opt/oracle/oradata/recovery_area`.
+- Enabling archive redo log requires restarting database. Please proceed with caution.
+- Archive redo log will take up relatively large space. Please clear log regularly.
+:::
+
+</li>
+<li>Create tablespace.
+
+```
+CREATE TABLESPACE logminer_tbs DATAFILE
+'/opt/oracle/oradata/SID/logminer_tbs.dbf' SIZE 25M REUSE AUTOEXTEND ON --path must be created with read&write permission in advance 
+```
+
+</li>
+<li>Enable archive redo log.
+
+```
+shutdown immediate;
+startup mount;
+alter database archivelog;
+alter database open;
+```
+
+</li>
+<li>Check whether it is enabled successfully.
+
+```
+archive log list;
+```
+
+</li>
+</ol>
+</ol>
+
+3. Create a user specifically for CDC, and then grant permissions.
+```
+CREATE USER flinkuser IDENTIFIED BY flinkpw DEFAULT TABLESPACE LOGMINER_TBS --custom username and password
+QUOTA UNLIMITED ON LOGMINER_TBS;
+GRANT CREATE SESSION TO flinkuser;
+GRANT SET CONTAINER TO flinkuser;
+GRANT SELECT ON V_$DATABASE to flinkuser;
+GRANT FLASHBACK ANY TABLE TO flinkuser;
+GRANT SELECT ANY TABLE TO flinkuser;
+GRANT SELECT_CATALOG_ROLE TO flinkuser;
+GRANT EXECUTE_CATALOG_ROLE TO flinkuser;
+GRANT SELECT ANY TRANSACTION TO flinkuser;
+GRANT LOGMINING TO flinkuser;
+GRANT CREATE TABLE TO flinkuser;
+GRANT LOCK ANY TABLE TO flinkuser;
+GRANT ALTER ANY TABLE TO flinkuser;
+GRANT CREATE SEQUENCE TO flinkuser;
+GRANT EXECUTE ON DBMS_LOGMNR TO flinkuser;
+GRANT EXECUTE ON DBMS_LOGMNR_D TO flinkuser;
+GRANT SELECT ON V_$LOG TO flinkuser;
+GRANT SELECT ON V_$LOG_HISTORY TO flinkuser;
+GRANT SELECT ON V_$LOGMNR_LOGS TO flinkuser;
+GRANT SELECT ON V_$LOGMNR_CONTENTS TO flinkuser;
+GRANT SELECT ON V_$LOGMNR_PARAMETERS TO flinkuser;
+GRANT SELECT ON V_$LOGFILE TO flinkuser;
+GRANT SELECT ON V_$ARCHIVED_LOG TO flinkuser;
+GRANT SELECT ON V_$ARCHIVE_DEST_STATUS TO flinkuser;
+```
+
+4. Start supplemental logging to get data from log.
+:::info
+Supplemental logging contains **Identification key logging** which only covers primary key and changed fields, and **Full supplemental logging** which includes all fields.
+:::
+- Enable **Identification key logging**
+
+<ul>
+<ul>
+<li>Enable for all tables:
+<pre><code>
+ALTER DATABASE ADD SUPPLEMENTAL LOG DATA (PRIMARY KEY) COLUMNS;
+</code></pre>
+</li>
+<li>Enable for specific table:
+
+```
+ALTER DATABASE ADD SUPPLEMENTAL LOG DATA;
+ALTER TABLE <schema name>.<table name> ADD SUPPLEMENTAL LOG DATA (PRIMARY
+KEY) COLUMNS;
+```
+
+</li>
+</ul>
+</ul>
+
+- Enable **Full supplemental logging**
+
+<ul>
+<ul>
+<li>Enable fro all tables:
+
+```
+ALTER DATABASE ADD SUPPLEMENTAL LOG DATA (ALL) COLUMNS;
+```
+
+</li>
+<li>Enable fro specific table:
+
+```
+ALTER DATABASE ADD SUPPLEMENTAL LOG DATA;
+ALTER TABLE <schema name>.<table name> ADD SUPPLEMENTAL LOG DATA (ALL)
+COLUMNS;
+```
+
+</li>
+</ul>
+</ul>
+
+#### CDB Database
+1. Connect to the database with sys user and then enable archive log.
+```
+sqlplus /nolog
+CONNECT sys/sys_password@host_IP:port AS SYSDBA;
+archive log list;
+```
+2. (optional) Enable archive log if it is not enabled.
+
+<ol>
+<ol>
+<li>Configure parameters of archived redo log.
+
+```
+alter system set db_recovery_file_dest_size = 100G;
+alter system set db_recovery_file_dest = '/opt/oracle/oradata/recovery_area' scope=spfile;  --/opt/oracle/oradata/recovery_area is log storage path
+```
+
+:::caution
+- Storage path must be created in advance and granted read&write permission through `chmod 777 /opt/oracle/oradata/recovery_area`.
+- Enabling archive redo log requires restarting database. Please proceed with caution.
+- Archive redo log will take up relatively large space. Please clear log regularly.
+:::
+
+</li>
+<li>Enable archive redo log.
+
+```
+shutdown immediate;
+startup mount;
+alter database archivelog;
+alter database open;
+```
+
+</li>
+<li>Check whether it is enabled successfully.
+
+```
+archive log list;
+```
+
+</li>
+</ol>
+</ol>
+
+3. Exit from database.
+```
+exit;
+```
+4. Connect to the database with sys user.
+```
+sqlplus sys/password@host:port/SID as sysdba --SID is the instance name from which the data is synchronized
+```
+5. Check whether LogMiner is installed.
+```
+desc DBMS_LOGMNR
+desc DBMS_LOGMNR_D
+```
+6. Install LogMiner if no result from the last step.
+```
+@$ORACLE_HOME/rdbms/admin/dbmslm.sql
+@$ORACLE_HOME/rdbms/admin/dbmslmd.sql
+```
+7. Create tablespace.
+
+```
+CREATE TABLESPACE logminer_tbs DATAFILE
+'/opt/oracle/oradata/SID/logminer_tbs.dbf' SIZE 25M REUSE AUTOEXTEND ON --path must be created with read&write permission in advance 
+MAXSIZE UNLIMITED; 
+```
+8. Create a user specifically for CDC, and then grant permissions.
+```
+CREATE USER flinkuser IDENTIFIED BY flinkpw DEFAULT TABLESPACE logminer_tbs --custom username and password
+QUOTA UNLIMITED ON logminer_tbs CONTAINER=ALL;
+GRANT CREATE SESSION TO flinkuser CONTAINER=ALL;
+GRANT SET CONTAINER TO flinkuser CONTAINER=ALL;
+GRANT SELECT ON V_$DATABASE to flinkuser CONTAINER=ALL;
+GRANT FLASHBACK ANY TABLE TO flinkuser CONTAINER=ALL;
+GRANT SELECT ANY TABLE TO flinkuser CONTAINER=ALL;
+GRANT SELECT_CATALOG_ROLE TO flinkuser CONTAINER=ALL;
+GRANT EXECUTE_CATALOG_ROLE TO flinkuser CONTAINER=ALL;
+GRANT SELECT ANY TRANSACTION TO flinkuser CONTAINER=ALL;
+GRANT LOGMINING TO flinkuser CONTAINER=ALL;
+GRANT CREATE TABLE TO flinkuser CONTAINER=ALL;
+GRANT LOCK ANY TABLE TO flinkuser CONTAINER=ALL;
+GRANT CREATE SEQUENCE TO flinkuser CONTAINER=ALL;
+GRANT EXECUTE ON DBMS_LOGMNR TO flinkuser CONTAINER=ALL;
+GRANT EXECUTE ON DBMS_LOGMNR_D TO flinkuser CONTAINER=ALL;
+GRANT SELECT ON V_$LOG TO flinkuser CONTAINER=ALL;
+GRANT SELECT ON V_$LOG_HISTORY TO flinkuser CONTAINER=ALL;
+GRANT SELECT ON V_$LOGMNR_LOGS TO flinkuser CONTAINER=ALL;
+GRANT SELECT ON V_$LOGMNR_CONTENTS TO flinkuser CONTAINER=ALL;
+GRANT SELECT ON V_$LOGMNR_PARAMETERS TO flinkuser CONTAINER=ALL;
+GRANT SELECT ON V_$LOGFILE TO flinkuser CONTAINER=ALL;
+GRANT SELECT ON V_$ARCHIVED_LOG TO flinkuser CONTAINER=ALL;
+GRANT SELECT ON V_$ARCHIVE_DEST_STATUS TO flinkuser CONTAINER=ALL;
+```
+
+## Enabling CDC for SQL Server
+1. Check the SQL Server version.
+```
+SELECT @@VERSION
+```
+:::info
+CDC is only available for versions newer than 2008, and 2017 is used as an example in this section.
+:::
+2. Check the permission of the current account.
+```
+exec sp_helpsrvrolemember 'sysadmin'
+```
+:::info
+Only account with **sysadmin** role can enable CDC.
+:::
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supETL/45.png)
+
+3. Check whether the database has enabled CDC.
+```
+select is_cdc_enabled, name from sys.databases
+```
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supETL/46.png)
+
+- 0: Not enabled.
+- 1: Enabled.
+
+4. Enable CDC on a database you want to synchronize from.
+```
+USE suposrzx
+GO
+EXEC sys.sp_cdc_enable_db
+GO
+```
+
+5. Check CDC status again.
+```
+select is_cdc_enabled, name from sys.databases
+```
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supETL/47.png)
+
+6. Check whether the tables you want to synchronize data from have enabled CDC.
+```
+select name,is_tracked_by_cdc from sys.tables
+```
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supETL/48.png)
+
+- 0: Not enabled.
+- 1: Enabled.
+
+7. Enable CDC and CDC agent.
+```
+EXEC sys.sp_cdc_enable_table
+@source_schema = 'dbo',
+@source_name = 'rzxtest',
+@role_name = NULL,
+@supports_net_changes = 0;
+```
+<table>
+  <thead>
+    <tr>
+      <th>Permission</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>source_schema</td>
+      <td>The schema under which the table is located.</td>
+    </tr>
+    <tr>
+      <td>source_name</td>
+      <td>Table name.</td>
+    </tr>
+    <tr>
+      <td>role_name</td>
+      <td>Access restrictions on the set role name. <b>NULL</b> means no access restrictions.</td>
+    </tr>
+    <tr>
+      <td>supports_net_changes</td>
+      <td>Whether to generate a net change function for the captured instance. 0 means no and 1 means yes.</td>
+    </tr>
+  </tbody>
+</table>
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supETL/49.png)
+
+8. Check the status again.
+```
+select name,is_tracked_by_cdc from sys.tables
+```
+
+9. Enable CDC proxy.
+- On docker.
+```
+docker exec -it sqlserver bash
+/opt/mssql/bin/mssql-conf set sqlagent.enabled true
+docker stop sqlserver
+docker start sqlserver
+```
+- On Windows.
+Open **Services** on Windows, and then find the **SQL Server proxy** service and start it.

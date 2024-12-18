@@ -1,0 +1,624 @@
+---
+hide_title: true
+---
+
+
+<div className='div'>
+
+<div className='title'>
+
+## ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/openAPI/1.png) Create Instance
+
+</div>
+
+<div className='grid'>
+<div className='leftCol'>Path</div>
+<div className='rightCol'>
+
+```
+http://{supOS ip:port}/open-api/supos/oodm/v2/template/{templateNamespace}/{templateName}/instance
+```
+
+
+</div>
+<div className='leftCol'>Request body</div>
+<div className='rightCol'>
+
+```json
+{
+"appAccessMode": "PUBLIC", //whether can be seen in all applications (PUBLIC or PRIVATE). Required
+"appName": "system", //application name. Required
+"attributeValues": [ //array of objects. Existing attributes of the parent template
+{
+"attributeName": "p1",
+"attributeNamespace": "system",
+"attributeValue": "123"
+}
+],
+"code": "xxxxx", //string. Instance code
+"comment": "create test instance", //string. Instance description
+"displayName": "instance1", //string. Display name of the instance. Required for entity instance
+"enName": "instance1", //string. Instance alias. Required
+"functionSetIds": [
+12222
+],
+"iconPath": "/api/config/download?fileName=2021-03-02/1614673872183/boatxxx.png", //path of the instance icon
+"labelIds": [
+13333
+]
+}
+```
+
+</div>
+
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+
+- 200: Successful.
+
+```json
+{
+  "code" : 200,
+  "data" : "13456",
+  "detail" : "string",
+  "message" : "ok"
+}
+```
+
+- code: Return code when the request is successful
+- data: ID of the created instance
+- detail: Details
+- message: Message
+
+
+- 500: General internal error of OODM.
+
+</div>
+</div>
+</div>
+
+<div className='div'>
+
+<div className='title'>
+
+## ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/openAPI/1.png) Incementally Update Instance
+
+</div>
+Update properties of template instances when the instance exists, if not, create a new instance. The API can update up to 1000 instances at the same time. Situations such as non-existing template properties, 
+unmatch value types and unique identifier of form is null, trigger an error and rollback data. If exceptions happen during setting real-time values, error pops up and request is terminated.
+
+<div className='grid'>
+<div className='leftCol'>Path</div>
+<div className='rightCol'>
+
+```
+http://{supOS ip:port}/open-api/supos/oodm/v2/templates/{templateNamespace}/{templateName}/instances/create-or-update
+```
+- templateNamespace: Namespace of the template under which the instance is located.
+- templateName: Name of the template under which the instance is located.
+
+
+</div>
+<div className='leftCol'>Request body</div>
+<div className='rightCol'>
+
+```
+[
+{
+  //attributeNameapce.attributeEnName:attributeValue
+"system.en_name": "zhangsan"
+}
+]
+```
+
+</div>
+
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+
+- 200: Successful.
+- 400: General internal error of OODM.
+```json
+{
+  "code": 10001001,
+  "data": {},
+  "detail": "string",
+  "message": "string"
+}
+```
+
+</div>
+</div>
+</div>
+
+
+<div className='div'>
+
+<div className='title'>
+
+## ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/openAPI/1.png) Inquire Instances under General Template
+
+</div>
+
+<div className='grid'>
+<div className='leftCol'>Path</div>
+<div className='rightCol'>
+
+```
+http://{supOS ip:port}/open-api/supos/oodm/v2/template/{templateNamespace}/{templateName}/instance/query
+```
+- templateNamespace: Namespace of the template under which the instance is located.
+- templateName: Name of the template under which the instance is located.
+
+</div>
+<div className='leftCol'>Query parameters</div>
+<div className='rightCol'>
+
+
+- pageIndex: Integer. Page number
+- pageSize: Integer. Pieces of data on one page. At most 500.
+- needExtAttribute: Boolean. Whether need to extend property static values
+
+
+</div>
+<div className='leftCol'>Request body</div>
+<div className='rightCol'>
+
+```json
+{
+  "distinct": true, //boolean. Whether to deduplicate data
+  "orderBys": [ //array of objects. Set the sorting order of data
+    {
+      "by": [
+        "time"
+      ],
+      "order": "ASC"
+    }
+  ],
+  "selectAttributeNames": [ //array of attribute name strings
+    "p1"
+  ],
+  "where": { //object. Search conditions
+    "conditions": [
+      {
+        "attributeName": "p1",
+        "operator": "=",
+        "value": {}
+      }
+    ],
+    "logicOperator": "AND"
+  }
+}
+```
+
+</div>
+
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+
+- 200: Successful.
+
+```json
+{
+  "code": 200,
+  "data": {
+    "data": [
+      {
+        "system_app_name": "system",
+        "system_last_modified_time": "2021-03-02 03:15:24"
+      }
+    ],
+    "pageIndex": 1,
+    "pageSize": 20,
+    "total": 100
+  },
+  "detail": "string",
+  "message": "ok"
+}
+```
+- 500: General internal error of OODM.
+
+```json
+{
+  "code": 10001001,
+  "data": {},
+  "detail": "string",
+  "message": "string"
+}
+```
+
+
+</div>
+</div>
+</div>
+
+<div className='div'>
+<div className='title'>
+
+## ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/openAPI/2.png) Change Instance under General Template
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Path</div>
+<div className='rightCol'>
+
+```
+http://{supOS ip:port}/open-api/supos/oodm/v2/template/{templateNamespace}/{templateName}/instance/{instanceName}
+```
+- templateNamespace: Namespace of the template under which the instance is located.
+- templateName: Name of the template under which the instance is located.
+- instanceName: Name of the instance to be changed.
+
+</div>
+<div className='leftCol'>Request body</div>
+<div className='rightCol'>
+
+```json
+{
+  "appAccessMode": "PUBLIC", ////whether can be seen in all applications (PUBLIC or PRIVATE). Required
+  "attributeValues": [ //existing attributes of the parent template
+    {
+      "attributeName": "p1",
+      "attributeNamespace": "system",
+      "attributeValue": "123"
+    }
+  ],
+  "code": "xxxxx",
+  "comment": "modify entity instance",
+  "displayName": "updateInsatnce1",
+  "functionSetIds": [
+    12222
+  ],
+  "iconPath": "/api/config/download?fileName=2021-03-02/1614673872183/boatxxx.png",
+  "labelIds": [
+    12223
+  ],
+  "needSetPropertyVqtValue": false, //boolean. Whether to set real-time values. When set it to true, you can get corresponding value on pages and services. The default is only update values in the database
+  "needSetMetadata": false //boolean. Whether to only update metadata. When set it to false, functionSetIDs and labelIds and other instance field avlues will be invalid and all be written under attributeValues
+}
+```
+
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+
+- 200: Successful.
+
+```json
+{
+  "code" : 200, //Return code when the request is successful
+  "data" : "13456", //ID of the created instance
+  "detail" : "string",
+  "message" : "ok"
+}
+```
+
+- 500: General internal error of OODM.
+
+```json
+{
+  "code": 10001001,
+  "data": {},
+  "detail": "string",
+  "message": "string"
+}
+```
+
+</div>
+</div>
+</div>
+
+<div className='div'>
+<div className='title'>
+
+## ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/openAPI/3.png) Delete Entity Instance
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Path</div>
+<div className='rightCol'>
+
+```
+http://{supOS ip:port}/open-api/supos/oodm/v2/template/{templateNamespace}/{templateName}/instance/{instanceName}
+```
+- templateNamespace: Namespace of the template under which the instance is located.
+- templateName: Name of the template under which the instance is located.
+- instanceName: Name of the instance to be deleted.
+
+</div>
+
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+
+- 200: Successful.
+
+```json
+{
+  "code": 200,
+  "message": "ok",
+  "data": null,
+  "detail": null
+}
+```
+- 500: General internal error of OODM.
+
+```json
+{
+  "code": 10001001,
+  "data": {},
+  "detail": "string",
+  "message": "string"
+}
+```
+
+</div>
+</div>
+</div>
+
+
+<div className='div'>
+<div className='title'>
+
+## ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/openAPI/4.png) Get Instance under General Template
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Path</div>
+<div className='rightCol'>
+
+```
+http://{supOS ip:port}/open-api/supos/oodm/v2/template/{templateNamespace}/{templateName}/instances
+```
+- templateNamespace: Namespace of the template under which the instance is located.
+- templateName: Name of the template under which the instance is located.
+
+</div>
+<div className='leftCol'>Query parameters</div>
+<div className='rightCol'>
+
+labelIds: Array of integers. Page number
+- keyword: String
+- pageIndex: Integer. Page number. Required
+- pageSize: Integer. Pieces of data on one page. At most 500. Required
+- searchAttributeId: Integer. Searching field
+- containDerivedInstances: Boolean. Whether contains derived instances
+- needSystemSttributeValues: Boolean. Whether need system property value
+- needNormalSttributeValues: Boolean. Whether need normal property value (non-system, non primary key). The default is only primary key field
+
+</div>
+
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+
+- 200: Successful.
+
+```json
+{
+  "code": 200,
+  "data": {
+    "data": [
+      {
+        "system_app_name": "system",
+        "system_last_modified_time": "2021-03-02 03:15:24"
+      }
+    ],
+    "titles": [
+      {
+        "name": "system_en_name",
+        "value": "alias",
+        "namespace": "system",
+        "enName": "enName"
+      }
+    ],
+    "total": 1000,
+    "pageIndex": 1,
+    "pageSize": 20
+  },
+  "detail": "string",
+  "message": "ok"
+}
+```
+- 500: General internal error of OODM.
+
+```json
+{
+  "code": 10001001,
+  "data": {},
+  "detail": "string",
+  "message": "string"
+}
+```
+
+</div>
+</div>
+</div>
+
+<div className='div'>
+<div className='title'>
+
+## ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/openAPI/4.png) Get Instance Details by Alias
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Path</div>
+<div className='rightCol'>
+
+```
+http://supOS platform IP/open-api/supos/oodm/v2/templates/{templateNamespace}/{templateName}/instances/{instanceName}/value
+```
+- templateNamespace: Namespace of the template under which the instance is located.
+- templateName: Name of the template under which the instance is located.
+- instanceName: Nameof the instance.
+
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+
+- 200: Successful.
+
+```json
+{ //attributeNameapce.attributeEnName:attributeValue
+  "system.enName": "zhangsan"
+}
+```
+- 400: General internal error of OODM.
+
+```json
+{
+  "code": 10001001,
+  "data": {},
+  "detail": "string",
+  "message": "string"
+}
+```
+
+</div>
+</div>
+</div>
+
+<div className='div'>
+<div className='title'>
+
+## ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/openAPI/4.png) Get Instance Details under General Template
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Path</div>
+<div className='rightCol'>
+
+```
+http://{supOS ip:port}/open-api/supos/oodm/v2/template/{templateNamespace}/{templateName}/instances/{instanceName}
+```
+- templateNamespace: Namespace of the template under which the instance is located.
+- templateName: Name of the template under which the instance is located.
+- instanceName: Nameof the instance.
+
+</div>
+<div className='leftCol'>Query parameters</div>
+<div className='rightCol'>
+
+
+
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+
+- 200: Successful.
+
+```json
+{
+  "code": 200,
+  "data": {
+    "appAccessMode": "PUBLIC", //whether can be seen in all applications (PUBLIC or PRIVATE). Required
+    "appName": "system",
+    "displayAttributeValues": [ //value of primary key field
+      "456"
+    ],
+    "id": "11111",
+    "labels": [ //label name and id
+      {
+        "displayName": "data1",
+        "id": 11119
+      }
+    ],
+    "template": { //template basic information
+      "editable": true, //whether enable user to change template metadata
+      "deletable": true, //whether enable user to delete template metadata
+      "instanceCreatable": true, //whether enable user to create instances
+      "instanceQueryable": true, //whether enable user to inquire instances
+      "supportInstanceMetadata": true, //whether enable user to operate on instance metadata
+      "templateCreatable": true, //whether enable user to create templates
+      "templateEditable": true, //whether enable user to edit template metadata
+      "templateQueryable": true, //whether enable user to inquire templates
+      "comment": "this is a test template",
+      "displayName": "t1", //Required
+      "enName": "t1", //alias. Required
+      "id": 12345,
+      "namespace": "system"
+    }
+  },
+  "detail": "string",
+  "message": "ok"
+}
+```
+- 500: General internal error of OODM.
+
+</div>
+</div>
+</div>
+
+<div className='div'>
+<div className='title'>
+
+## ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/openAPI/4.png) Get Instance under Relation Template
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Path</div>
+<div className='rightCol'>
+
+```
+http://{supOS ip:port}/open-api/supos/oodm/v2alpha/templates/{templateNamespace}/{templateName}/relations/{relationNamespace}/{relationName}/instances
+```
+templateNamespace: Namespace of the template under which the instance is located.
+- templateName: Name of the template under which the instance is located.
+- relationNamespace: Name of the relation template under which the instance is located.
+- relationName: Alias of the relation template under which the instance is located.
+
+</div>
+<div className='leftCol'>Query parameters</div>
+<div className='rightCol'>
+
+labelFullName: Array of strings. label namespace.label alias
+- keyword: String. Used together with searchAttributeNameWithNamespace to fuzzy match values of the set attribute.
+
+:::info
+- 0 timezone is saved when dateTime type of data is doing fuzzy match. You need to manually convert the timezone.
+- This field does not support fuzzy match for boolean type of data.
+:::
+
+
+
+- pageIndex: Integer. Page number. Required
+- pageSize: Integer. Pieces of data on one page. At most 500. Required
+- searchAttributeNameWithNamespace: String. Searching field namespace.alias
+- containDerivedInstances: Boolean. Whether contains derived instances
+- needSystemSttributeValues: Boolean. Whether need system property value
+- needNormalSttributeValues: Boolean. Whether need normal property value (non-system, non primary key). The default is only primary key field
+
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+
+- 200: Successful.
+
+```json
+{
+  "data": [
+    {
+      "system_app_name": "system",
+      "system_last_modified_time": "2021-03-02 03:15:24"
+    }
+  ],
+  "titles": [ //search result in a form
+    {
+      "name": "system_en_name",
+      "value": "alias",
+      "namespace": "system",
+      "enName": "enName"
+    }
+  ],
+  "total": 1000, //instance number
+  "pageIndex": 1,
+  "pageSize": 20
+}
+```
+- 400: General internal error of OODM.
+
+</div>
+</div>
+</div>
+
+
+
+

@@ -1,0 +1,73 @@
+---
+openapi: 3.0.0
+info:
+  title: Configuration Information
+  version:
+  description: |-
+    Provides querying functionality for supOS-related configuration information
+
+    # Authentication
+
+    <!-- ReDoc-Inject: <security-definitions> -->
+servers:
+- url: "/open-api/supos/config/v2"
+tags:
+- name: config
+paths:
+  "/version":
+    get:
+      summary: supOS Version Details
+      tags:
+      - config
+      security: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Version"
+      operationId: getVersion
+      description: Query supOS's version
+security:
+- Sign: []
+components:
+  securitySchemes:
+    Sign:
+      type: apiKey
+      name: Authorization
+      in: header
+  schemas:
+    Version:
+      title: Version
+      type: object
+      x-examples:
+        example:
+          majorVersion: 2.80.00.00-C
+          minorVersion: 2.80.00.00-C
+          buildDate: '190610'
+          commitID: b93ed39360978e90bbf9f29b133fb3574c8b50bd
+          copyright: Bluetron Technology Co., Ltd.
+      description: supOS version details
+      properties:
+        majorVersion:
+          type: string
+          description: Major version number
+        minorVersion:
+          type: string
+          description: Minor version number
+        buildDate:
+          type: string
+          description: Build date
+        commitId:
+          type: string
+          description: Commit ID
+        copyright:
+          type: string
+          description: Copyright holder
+      required:
+      - majorVersion
+      - minorVersion
+      - buildDate
+      - commitId
+      - copyright

@@ -1,0 +1,78 @@
+supLink can be installed directly on server by command lines or through visual installation tools.
+:::info
+supLink can be installed on the supOS server. Installation on a different server is highly recommended.
+- Changes on supOS may cause supLink to crash.
+- Resource contention between supOS and supLink may cause issues.
+:::
+
+## Server Installation
+### Installing on Server
+1. Copy and decompress the installation package.
+```
+sudo tar -xvf supLink-xxx-x-xxx.tar.gz
+```
+2. Access the package directory, install supLink.
+```
+sudo bash install_supLink.sh
+```
+3. Check whether the service is started.
+```
+sudo docker-compose ps
+```
+
+### Enabling Kafka
+:::info
+Enable Kafka service to activate alarm function. For details, see <a href='#'>Kafka Configuration</a>.
+:::
+
+### Specifying Authorization
+
+1. log in to http://&lt;supLink server IP&gt;:8042/admin/tenant with username and password as **supLink** and **supLink**.
+2. Click **Set URL**, and then change the address of supOS, kafka and authorization.
+- supOS address: The IP and port of the supOS to which supLink connects.
+- Kafka address: The IP and port of the kafka service with which supLink can receive alarms pushed by supOS.
+- Authorized address: The IP of the authorization dongle server.
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supLink/3.png)
+
+3. Click **OK**, and then click **Restart Service** at the upper-left corner.
+
+## Visual Installation
+:::info
+Visual installation is available for V3.10.02.00-E and later version.
+:::
+
+1. Double-click the installation file to start installation.
+2. Select supLink version you want to install and then enter the supOS information to connect supLink with it, and then click **Next**.
+
+
+
+<img width={450} src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supLink/1.png" />
+
+3. Enter the server information on which the supLink will be installed.
+
+
+<img width={450} src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supLink/2.png" />
+
+4. Select and upload the installation file, and then click **Next** to install.
+
+## Accessing supLink
+- Access http://&lt;supLink server IP&gt;:8042/admin through a browser, and log in with the same username and password as supOS.
+- Access supLink mobile application by entering server information as http://&lt;supLink server IP&gt;:8042 on your mobile app, and using the same account as supOS.
+:::info
+Mobile application connections need to be authorized by admin.
+:::
+- Access supLink tenant management by logging in to http://&lt;supLink server IP&gt;:8042/admin/tenant with username and password as **supLink** and **supLink**.
+:::tip
+If supOS account cannot log in to supLink, use **supLink** and **supLink** to log in and configure.
+:::
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supLink/4.png)
+
+
+## Uninstalling supLink
+- Run the following command in the installation path.
+```
+sudo bash uninstall_supLink.sh
+```
+- Uninstall supLink through the visual installation file by specifying supLink server information.

@@ -1,0 +1,106 @@
+---
+sidebar_position: 6
+---
+
+
+You can either collect data from edge devices through X-Collector, or connect a third-party database to the supOS platform and call data through template services.
+## Connecting Database
+1. Log in to supOS, and then click ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/platform/7.png) to enter the design center.
+2. Select **Global Configuration** > **Data Source Management** on the left side in design center, and then click **New**.<br/>
+
+:::info
+Multiple data sources are available. MySQL is used as an example in this chapter.
+:::
+3. Select **mySQL**, and then enter the basic information of the database.
+
+<img width={450} src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/platform/79.png" />
+
+4. Click **Connection Test** to check whether the database is correctly connected.
+5. Click **Confirm**.
+## Creating Service
+Databased added under **Global Configuration** cannot be directly used. An object template is needed to introduce data from the connected third-party databases.
+1. In the design center of supOS platform, select **Object Model Management** > **Object Template**.
+2. Select **Form Template**, and then click ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/platform/28.png).
+    - **Entity Template** is often used to describe data collected through X-Collector.
+    - **Form Template** is frequently used to introduce data from third-party databases.
+3. Enter information of the template, and then click **Save**.
+:::tip
+You can leave optional parameters as default.
+:::
+4. Click **Services** tab, and then click **New** under **My Services**.
+<ul><li>Enter basic information of the service. Make sure the alias is unique.</li>
+<li>Under <strong>Information Input</strong>, you can add fields as input parameters of the service. You can also leave it empty and then define input parameters in the script.</li>
+<li>Set <strong>Type</strong> to <strong>JSON</strong> under <strong>Information Output</strong>.</li>
+<li>Enter <strong>{}</strong> in <strong>Return Format</strong> for now.</li>
+</ul>
+
+
+<img width={450} src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/platform/81.png" />
+
+5. Click **Script** tab, and then enter the script.
+<ul><li> No input parameters are added under <strong>Service Information</strong>.</li></ul>
+
+:::info
+Value of **sourceId** and **sql** variables in the code below are for reference only.
+:::
+
+```javascript
+var JsonObject = Java.type("io.vertx.core.json.JsonObject")
+var httpService = services["HttpClientService"];
+var ArrayList = Java.type("java.util.ArrayList");
+
+var sourceId = "<em>database id</em>";
+var sql = "<em>sql command</em>";
+
+var param = {
+    id: sourceId,
+    sql: sql,
+    enableTotal: true,
+    pageSize: 10000
+}
+
+res = httpService.post("http://compose-manage:8080/api/compose/manage/datatable/exec", JSON.stringify(param), 10000);
+list = JSON.parse(res).body.data.dataSource;
+
+result = {
+    list: new ArrayList(list)
+}
+```
+
+<ul><ul><li> Added input parameters under <strong>Service Information</strong>.
+
+:::info
+You need to manually enter information of the database, including sourceId, sql command and page size.
+:::
+
+</li></ul></ul>
+
+```javascript
+var JsonObject = Java.type("io.vertx.core.json.JsonObject")
+var httpService = services["HttpClientService"];
+if(!pageSize || pageSize <0) {
+    pageSize = 2000;
+}
+var param = {
+	id:sourceId,
+	sql:sql,
+	enableTotal: true,
+	pageSize:pageSize
+}
+var header = {
+    "X-Tenant-Id":"dt"
+}
+var res = httpService.post("http://compose-manage:8080/api/compose/manage/datatable/exec",JSON.stringify(param),header,10000)
+res
+```
+6. Click **OK**.
+## Obtaining Database ID
+To get data from the connected database, its ID is necessary.
+1. In the design center, select **Global Configuration** > **Data Source Management** to enter the database connection page.
+2. Press F12 to bring out the console, and then press F5 to refresh the page.
+3. Under **Network** on the console, click the **query** tab.<br/>
+All information of the listed databases are displayed under **infos** in order.
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/platform/80.png)
+5. Copy the id of corresponding database and then paste it to the service.
+
+

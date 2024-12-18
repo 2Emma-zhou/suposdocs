@@ -1,0 +1,159 @@
+---
+
+hide_title: true
+
+---
+
+# Overview
+Set supOS to be a modbus substation, and then you can connect with it through a modbus main station to get object data in the platform.
+:::info
+- Only Number and Boolean type of data is supported.
+- Modbus server can only output data, and write back to supOS is not available.
+:::
+
+# Preparation
+Before installing modbus server, you need to prepare the following items.
+## Configuration File
+### devices.json
+The slave list provided by modbus service. Name and port need to be specified.
+```json
+{
+"devices": [{
+"name": "TestDevice", //device name
+"port": 502 //device port, range from 1-65535
+}]
+}
+```
+
+### tags.csv
+Address and value source of registers under the specified slaves.
+- Lines start with # is description.
+- Column heads must be TagName, DeviceName, Type, DataSection, Offset and in order.
+<ul>
+<li>TagName: Data name obtained from supOS in the format of <b>template namespace.template alias.instance alias.attribute namespace.attribute alias</b>. Cannot duplicate.</li>
+<li>DeviceName: Must match with what you entered in <b>devices.json</b> (case sensitive). If not, the corresponding tag information will not be obtained.</li>
+<li>Type: boolean/byte/uint8/int16/uint16/nt32/uint32/int64/uint64/float/double.</li>
+<li>DataSection: Specifies where the data locates.
+:::info
+1: Read-write switch quantity, 2: Read-only switch quantity, 3: Read-write register, 4: Read-only register. 
+Sections 1 and 2 can only define boolean variables; Sections 3 and 4 can only define 1-byte (signed, unsigned), 2-byte (signed, unsigned), 4-byte (signed, unsigned), 8-byte (signed, unsigned), float, and double.
+:::
+
+<table>
+  <thead>
+    <tr>
+      <th>Data Type</th>
+      <th>Byte</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>int16</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>int32</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <td>int64</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <td>uint8</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>uint16</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>uint32</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <td>uint64</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <td>Byte</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>Float</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <td>Double</td>
+      <td>8</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>Offset: Byte offset in the register.
+
+:::info
+The address ranges of all tags occupying the register area cannot overlap.
+ If the address is duplicated, the tag cannot be obtained. Except for the 1-byte types uint8 and Byte, the offset addresses corresponding to the types int16/int32/int64/uint16/uint32/uint64/Float/Double in sections 3 and 4 must be even numbers.
+:::
+
+</li>
+</ul>
+
+## AK/SK Credential
+Get a set of AK/SK from supOS platform under <strong>System Management</strong> > <strong>System Configuration</strong> > <strong>AK/SK credential</strong>
+
+# Configuration Process
+## Configuring Modbus Middleware
+Find the Modbus middleware installaion file in supOS package and install it on the same server as the supOS.
+1. Install the middleware.
+```
+dpkg -i supOS-VXXXX-C-XX-XXXXXX-modbusserver.deb
+```
+2. Start the service.
+```
+systemctl daemon-reload
+```
+3. Copy the devices.json and tags.csv files to the server /opt/supos/modbusserver directory.
+4. Under /opt/supos/modbusserver, open the start-service.sh file.
+```
+cd /opt/supos/modbusserver
+vi start-service.sh
+```
+5. Edit the information according to the actual situation.
+```
+$CWD/modbusserver --regserver --tenant-id=dt   
+--supos-api-ip=x.x.x.x  // supOS server IP
+--supos-api-port=x    // supOS server port
+--supos-access-key=3abfd581dca03d1f39e9f5587f3a4141  // AK
+--supos-secret-key=02ef6aebca290843d7cfdcd1d47fa68c  // SK
+--tenant-id=dt  //tenant name for multi-tenant version, otherwise 'dt'
+--cfgfile=/opt/supos/modbusserver/devices.json  //absolute path of modbus device configuration file
+--tagfile=/opt/supos/modbusserver/tags.csv --logconsole-level=2  //absolute path of tag configuration file
+--logfile=/opt/supos/modbusserver/modbusserver.log --logfile-level=2
+```
+
+4. Save the file, and then start the service.
+```
+:wq
+service modbusserver start
+```
+:::info
+- Restart the service after each change on devices.json and tags.csv files.
+- Make copies of devices.json, tags.csv and start-service.sh manually.
+:::
+
+
+# Other Operations
+- Restart the service.
+```
+service modbusserver restart
+```
+- Stop the service.
+```
+service modbusserver stop
+```
+- Uninstall the service.
+```
+dpkg -P modbusserver
+```

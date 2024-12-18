@@ -1,0 +1,16 @@
+If X-Collector is installed on a system of Windows7（32-bit）or Windows Server 2008, you need to install .Net Framework manually. For other systems, it will be automatically installed by default.
+1. Get the root certificate file MicrosoftRootCertificateAuthority2011.cer under **tools** folder on the installation package.
+2. Press Windows + R keys to open **Running** window, enter **mmc** and then click **OK** to open Microsoft **Console**.
+3. Select **File** > **Add/Remove Snap-in**, and then add **Certificate**.
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supCollector/7.png)
+
+4. Select the **Local Computer** to manage the snap-in.
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supCollector/8.png)
+
+5. Go back to the console, click **Certificates (Local Computer)** and then right-click **Trusted Root Certification Authorities** on the list.
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supCollector/9.png)
+
+6. Select **All Tasks** > **Import**, and then import the MicrosoftRootCertificateAuthority2011.cer certificate.
+:::tip
+If there is no **Import** option, cancel the selection and then select again.
+:::

@@ -1,0 +1,26 @@
+Environment dependencies for running algorithm models can be uploaded and managed on X-BD.
+1. Log in to supOS, and then select **Data Intelligence** > **Data Science** > **Env Resources** > **Packages**.
+2. Search for the dependencies you need to run the model to see if it already exists.
+3. For non-existing dependencies, upload them to X-BD.
+- For single dependency file, make sure it is .whl or .tar.gz file downloaded from pypi source, corresponds to specific Python version, and can be run under Linux.
+- For multiple dependency files, pack them into a .zip file with a **requirements.text** stating the dependency package name and version number.
+- Check the dependencies for the package before upload, and pack them together with a requirements file.
+
+:::info
+For the following dependencies, the requirements file content should be:
+cvxopt==1.3.0 dpipdeptree==2.2.1
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supBD/30.png)
+:::
+
+4. Click **Add**, select the file from local, and then click **OK**.
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supBD/31.png)
+
+:::tip
+X-BD runs a test for the uploading package, and indicates necessary information in its error message for unsuccessful cases.
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supBD/120.png)
+:::
+
+5. Search for the dependencies after upload, check whether the file is uploaded and parsed successfully.

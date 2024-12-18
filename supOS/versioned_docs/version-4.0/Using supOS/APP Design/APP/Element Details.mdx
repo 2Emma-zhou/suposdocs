@@ -1,0 +1,7053 @@
+---
+hide_title: true
+---
+
+## Chart Overview
+
+:::info
+Properties of chart elements might be different depending on different layouts.
+:::
+
+<table >
+<colgroup>
+<col style={{ width: "20%" }} />
+<col style={{ width: "20%" }} />
+<col style={{ width: "20%" }} />
+<col style={{ width: "20%" }} />
+<col style={{ width: "20%" }} />
+</colgroup>
+<thead>
+<tr>
+<th>Chart Type</th>
+<th>Data Type</th>
+<th>Data Source</th>
+<th>Max. Number of Data Source</th>
+<th>Linkage</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Dashboard
+</td>
+<td rowSpan={2}>
+Number, real-time data
+</td>
+<td rowSpan={2}>
+Object property
+</td>
+<td>1</td>
+<td>-</td>
+</tr>
+<tr>
+<td>
+Speedometer
+</td>
+<td>1</td>
+<td>-</td>
+</tr>
+<tr>
+<td>
+Line Chart
+</td>
+<td rowSpan={11}>
+Two-dimensional array (one of them must be number), history data or relational data
+</td>
+<td rowSpan={11}>
+Numeric object property, service and form template
+</td>
+<td>
+20
+</td>
+<td rowSpan={12}>
+Links with input boxes, drop-down boxes, date controls, radios and checkboxes.
+</td>
+</tr>
+<tr>
+<td>
+Spline Chart
+</td>
+<td>8</td>
+</tr>
+<tr>
+<td>
+Bar Chart
+</td>
+<td>8</td>
+</tr>
+<tr>
+<td>
+Area Chart
+</td>
+<td>8</td>
+</tr>
+<tr>
+<td>
+Scatter Chart
+</td>
+<td>8</td>
+</tr>
+<tr>
+<td>
+Histogram
+</td>
+<td>1</td>
+</tr>
+<tr>
+<td>
+Spc Diagram
+</td>
+<td>1</td>
+</tr>
+<tr>
+<td>
+Funnel Chart
+</td>
+<td>1</td>
+</tr>
+<tr>
+<td>
+Spider Chart
+</td>
+<td>8</td>
+</tr>
+<tr>
+<td>
+Pie Chart
+</td>
+<td>2</td>
+</tr>
+<tr>
+<td>
+Donut Chart
+</td>
+<td>2</td>
+</tr>
+<tr>
+<td>
+Bubble Chart
+</td>
+<td>
+Three-dimensional array (two of them must be number), history
+data or relational data
+</td>
+<td>
+Object property, service and form template
+</td>
+<td>8</td>
+</tr>
+</tbody>
+</table>
+
+## Free Layout
+
+This section introduces general properties of charts, and for special properties of each chart, refer to specific chapters.
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/appDesign/63.png" />
+
+- ID: Automatically generated. You can use it for writing scripts.
+- Data source
+
+<table >
+<colgroup>
+<col style={{ width: "34%" }} />
+<col style={{ width: "66%" }} />
+</colgroup>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>
+Description
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Object Selector
+</td>
+<td>
+Select properties or services of object instances to be the data source of the chart.
+
+:::info
+- Make sure the X axis uses the same data in one chart.
+- Multiple data sources are available.
+:::
+
+</td>
+</tr>
+<tr>
+<td>
+Object Name
+</td>
+<td>
+The name of the bound data source.
+</td>
+</tr>
+<tr>
+<td>
+Display Name
+</td>
+<td>
+The name displayed on data notification prompts in operation center. Object and data source aliases are displayed by default without specific configuration.
+</td>
+</tr>
+<tr>
+<td>Type</td>
+<td>
+Switch display types of the chart between spline chart, line chart, bar chart and area chart.
+</td>
+</tr>
+<tr>
+<td>
+Data Color
+</td>
+<td>
+Change the display color of data sources.
+</td>
+</tr>
+<tr>
+<td>
+X Axis
+</td>
+<td>
+Data parameters displayed on X/Y axis. You can hide both axises parameters.
+
+:::info
+If the data source is an object service, make sure to set the return value type to JSON. Otherwise, X/Y axis cannot be customized.
+:::
+
+</td>
+</tr>
+<tr>
+<td>
+Add Column
+</td>
+<td>
+Add a field to Y axis without changing X axis. You can add multiple fields.
+</td>
+</tr>
+<tr>
+<td>
+Parameter Configuration
+</td>
+<td>
+Bind the input parameter of the data source with other elements for data linkage. For details, see <a href="Free Layout/Data Linkage in Free Layout">Data Linkage</a>.
+</td>
+</tr>
+</tbody>
+</table>
+
+- Title
+
+<table >
+<colgroup>
+<col style={{ width: "25%" }} />
+<col style={{ width: "75%" }} />
+</colgroup>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>
+Description
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Component ID
+</td>
+<td>
+Automatically generated. You can use it for writing scripts.
+</td>
+</tr>
+<tr>
+<td>
+Display
+</td>
+<td>
+Set whether to display chart title.
+</td>
+</tr>
+<tr>
+<td>
+Main Title
+</td>
+<td>
+Set the chart main title.
+</td>
+</tr>
+<tr>
+<td>
+Text Style
+</td>
+<td>
+Set the main title styles, such as font, font size, color, and more.
+</td>
+</tr>
+<tr>
+<td>
+Alignment
+</td>
+<td>
+Set the main title alignment.
+</td>
+</tr>
+<tr>
+<td>
+Sub Title
+</td>
+<td>
+Set the sub title similar to configurations of the main title.
+</td>
+</tr>
+</tbody>
+</table>
+
+- Style: Set styles of charts based on specific requirements.
+- Basic settings
+
+<table >
+<colgroup>
+<col style={{ width: "35%" }} />
+<col style={{ width: "65%" }} />
+</colgroup>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>
+Description
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Switch Type
+</td>
+<td>
+The drop-down list at the upper-right corner of the chart. You can switch chart types to view the same data source.
+
+:::info
+The data source might not be displayed correctly if the chart does not match the data source.
+:::
+
+</td>
+</tr>
+<tr>
+<td>
+Border
+</td>
+<td>
+Set the border style of the chart, including border width, corner and color.
+</td>
+</tr>
+<tr>
+<td>
+Padding
+</td>
+<td>
+Set the distance between data and border.
+</td>
+</tr>
+<tr>
+<td>
+Background Color
+</td>
+<td>
+Set the background color of the chart by setting RGBA values..
+</td>
+</tr>
+<tr>
+<td>
+Chart Color
+</td>
+<td>
+Set the background color of the chart area.
+</td>
+</tr>
+<tr>
+<td>
+Display Level
+</td>
+<td>
+Set the relative display priority of the element. The higher the level, the more front the chart is displayed.
+</td>
+</tr>
+</tbody>
+</table>
+
+- Legend
+
+<table >
+<colgroup>
+<col style={{ width: "33.003300330033%" }} />
+<col style={{ width: "66.996699669967%" }} />
+</colgroup>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>
+Description
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Display
+</td>
+<td>
+Set whether to display chart legend.
+</td>
+</tr>
+<tr>
+<td>
+Border
+</td>
+<td>
+Set the border style of the legend, including width, corner and color.
+</td>
+</tr>
+<tr>
+<td>
+Alignment
+</td>
+<td>
+Set the legend alignment corresponding to the chart.
+</td>
+</tr>
+<tr>
+<td>
+Layout
+</td>
+<td>
+Set the legend layout corresponding to the chart.
+</td>
+</tr>
+<tr>
+<td>
+Text Style
+</td>
+<td>
+Set the legend text style. such as font, size, color and more.
+</td>
+</tr>
+<tr>
+<td>
+Background Color
+</td>
+<td>
+Set the background color of the legend.
+</td>
+</tr>
+</tbody>
+</table>
+
+- X axis
+
+<table >
+<colgroup>
+<col style={{ width: "33.003300330033%" }} />
+<col style={{ width: "66.996699669967%" }} />
+</colgroup>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>
+Description
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Type</td>
+<td>
+Select the data of X axis from <strong>Default</strong> and <strong>Timeline</strong>.
+</td>
+</tr>
+<tr>
+<td>
+Format
+</td>
+<td>
+Format the X axis data when setting <strong>Timeline</strong> as <strong>Type</strong>.
+</td>
+</tr>
+<tr>
+<td>
+Display X Axis
+</td>
+<td>
+Set whether to display X axis scales.
+</td>
+</tr>
+<tr>
+<td>
+Crosshair
+</td>
+<td>
+Set whether to display crosshairs when mouse moves.
+</td>
+</tr>
+<tr>
+<td>
+Scale
+</td>
+<td>
+Set the origin value and interval of the X axis scales when X coordinates are numbers.
+</td>
+</tr>
+<tr>
+<td>
+Title
+</td>
+<td>
+Enter the X axis title.
+</td>
+</tr>
+<tr>
+<td>
+Text Style
+</td>
+<td>
+Set the title text style.
+</td>
+</tr>
+<tr>
+<td>
+Title Position
+</td>
+<td>
+Set the title position.
+</td>
+</tr>
+<tr>
+<td>
+Axis Color
+</td>
+<td>
+Set the line and scale color of X axis.
+</td>
+</tr>
+<tr>
+<td>
+Axis Font Color
+</td>
+<td>
+Set the scale value color of X axis.
+</td>
+</tr>
+<tr>
+<td>
+Rotation Angle
+</td>
+<td>
+Set the angle of scale values. When the value is long and cannot be fully displayed, you can set an angle to tilt it.
+</td>
+</tr>
+<tr>
+<td>
+Vertical Text
+</td>
+<td>
+Set whether to display scale values vertically.
+</td>
+</tr>
+</tbody>
+</table>
+
+- Y axis
+
+<table >
+
+<colgroup>
+<col style={{ width: "33.003300330033%" }} />
+<col style={{ width: "66.996699669967%" }} />
+</colgroup>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>
+Description
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Type</td>
+<td>
+Select the Y axis type from <strong>Single Axis</strong> and <strong>Multi-Axis</strong>. For <strong>Multi-Axis</strong>, each data source is independent.
+</td>
+</tr>
+<tr>
+<td>
+Display Y Axis
+</td>
+<td>
+Set whether to display Y axis scales.
+</td>
+</tr>
+<tr>
+<td>Unit</td>
+<td>
+Set the unit of Y axis scales.
+</td>
+</tr>
+<tr>
+<td>Grid</td>
+<td>
+Set whether to display Y axis grid lines.
+</td>
+</tr>
+<tr>
+<td>
+Crosshair
+</td>
+<td>
+Set whether to display crosshairs when mouse moves.
+</td>
+</tr>
+<tr>
+<td>
+Scale
+</td>
+<td>
+Set the origin value and interval of the Y axis scales.
+</td>
+</tr>
+<tr>
+<td>
+Title
+</td>
+<td>
+Enter the Y axis title.
+</td>
+</tr>
+<tr>
+<td>
+Text Style
+</td>
+<td>
+Set the title text style.
+</td>
+</tr>
+<tr>
+<td>
+Title Position
+</td>
+<td>
+Set the title position.
+</td>
+</tr>
+<tr>
+<td>
+Axis Font Color
+</td>
+<td>
+Set the scale value color of Y axis.
+</td>
+</tr>
+<tr>
+<td>
+Rotation Angle
+</td>
+<td>
+Set the angle of scale values. When the value is long and cannot be fully displayed, you can set an angle to tilt it.
+</td>
+</tr>
+<tr>
+<td>Max</td>
+<td>
+Set the maximum value of Y axis. The maximum value of the data source is displayed without specific configuration.
+</td>
+</tr>
+</tbody>
+</table>
+
+- Label
+
+<table >
+
+<colgroup>
+<col style={{ width: "33.003300330033%" }} />
+<col style={{ width: "66.996699669967%" }} />
+</colgroup>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>
+Description
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Display
+</td>
+<td>
+Set whether to display chart label.
+</td>
+</tr>
+<tr>
+<td>
+Border
+</td>
+<td>
+Set the border style of the label, including width, corner and color.
+</td>
+</tr>
+<tr>
+<td>
+Label Color
+</td>
+<td>
+Set the label color.
+</td>
+</tr>
+<tr>
+<td>
+Background Color
+</td>
+<td>
+Set the background color of the label.
+</td>
+</tr>
+<tr>
+<td>
+Alignment
+</td>
+<td>
+Set the label alignment corresponding to the chart.
+</td>
+</tr>
+<tr>
+<td>Data</td>
+<td>
+The display content of the label. When it is numbers, you can set decimal places.
+</td>
+</tr>
+<tr>
+<td>
+Font Size
+</td>
+<td>
+Set the font size of the label.
+</td>
+</tr>
+<tr>
+<td>
+Spacing
+</td>
+<td>
+Se the line spacing of the label.
+</td>
+</tr>
+</tbody>
+</table>
+
+- Notes
+
+<ul>
+<ul>
+<li>
+Display: Set whether to display notes at the lower-right corner of the chart area.
+</li>
+<li>Content: Enter the note content.</li>
+</ul>
+</ul>
+
+- Interact: Set interaction events, including <strong>Click</strong>, <strong>Load Complete</strong>, <strong>Click Data Point</strong> and <strong>Double-click Data Point</strong>.
+
+### Line Chart
+
+Line charts are often used to display continuous data changes along time. Applicable for viewing data changing trends.
+
+:::info
+Spline chart is similar to line chart.
+:::
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/appDesign/64.png" />
+
+<ul >
+<li>
+Drill-down column: When the data source is relational data, you
+can add a drill-down column field, and then by clicking a data
+point on the chart, more detailed data is displayed.
+</li>
+<li>
+Backend name: Enable it and then you can use values returned
+from the backend as data name.
+</li>
+<li>
+Style: Change line width and type, node icon, size and color.
+</li>
+<li>
+Alarm: Set the maximum and minimum values to form an alarm
+range, and two red lines are displayed on the chart for easy
+recognition of data out of range.
+</li>
+<li>Grid: Enable it to display grids.</li>
+</ul>
+
+
+### Bar Chart
+
+Often used to compare values at different times or under different conditions.
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/appDesign/65.png" />
+
+<ul >
+<li>
+Start/end color: The color at the bottom/top of the bar.
+Together they form a gradient.
+</li>
+<li>
+Drill-down column: Add a data field to the bar chart, and then
+you can click the data point and view more detailed data.
+</li>
+<li>Overlapped ID: Overlap data columns with the same ID.</li>
+<li>
+Stack: Stack data columns in ways such as no stacking, general
+stacking and stacking by percentage.
+</li>
+<li>
+Alarm: Set the maximum and minimum values to form an alarm
+range, and two red lines are displayed on the chart for easy
+recognition of data out of range.
+</li>
+<li>Bar width: Set the bar width.</li>
+<li>Rounded corner: Set the radius of rounded corners.</li>
+<li>Grid: Enable it to display grids.</li>
+<li>
+Coordinate reverse: Reverse the X and Y axis, and a bar chart
+changes to a horizontal bar chart.
+</li>
+</ul>
+
+### Area Chart
+
+Emphasizes the extent to which the data changes during a period.
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/appDesign/66.png" />
+
+<ul >
+<li>
+Start/end color: The color at the bottom/top of the area.
+Together they form a gradient.
+</li>
+<li>Type: Select the area chart type.</li>
+<li>
+Stack: Stack data columns in ways such as no stacking, general
+stacking and stacking by percentage.
+</li>
+<li>
+Style: Change line width and type, node icon, size and color.
+</li>
+<li>
+Alarm: Set the maximum and minimum values to form an alarm
+range, and two red lines are displayed on the chart for easy
+recognition of data out of range.
+</li>
+<li>
+Mark max. value: Enable it to highlight the maximum value of the
+area chart.
+</li>
+<li>
+Border: Set the border width, rounded corner radius and color.
+</li>
+<li>
+font color/background color: Set the font and background color
+of the labeled maximum value.
+</li>
+<li>Grid: Enable it to display grids.</li>
+<li>Coordinate reverse: Reverse the X and Y axis.</li>
+</ul>
+
+### Dash Chart
+
+Dash chart binds with numeric real-time data.
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/appDesign/67.png" />
+
+<ul >
+<li>
+Start/end color: The color at the bottom/top of the dial.
+Together they form a gradient.
+</li>
+<li>Dial color: Set the dial background color.</li>
+<li>Dial border color: Set the color of dial border.</li>
+<li>Dial border width: Set the width of dial border.</li>
+<li>
+Scale split: Set the number of splits of the dial. The higher
+the value, the smaller the interval between scales.
+</li>
+<li>Max/min: Set the maximum and minimum value of the dial.</li>
+<li>
+Start/end angle: Set angles of the dial start and end scales.
+</li>
+<li>Scale color: Set the color of the dial scales.</li>
+<li>Font color: Set the color pf dial scale values.</li>
+<li>Dial bore: Set the dial bore.</li>
+</ul>
+
+### Speedometer
+
+Speedometer binds with numeric real-time data.
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/appDesign/68.png" />
+
+<ul >
+<li>Dial color: Set the dial background color.</li>
+<li>Dial border color: Set the color of dial border.</li>
+<li>Dial border width: Set the width of dial border.</li>
+<li>
+Scale split: Set the number of splits of the dial. The higher
+the value, the smaller the interval between scales.
+</li>
+<li>Max/min: Set the maximum and minimum value of the dial.</li>
+<li>
+Start/end angle: Set angles of the dial start and end scales.
+</li>
+<li>Scale color: Set the color of the dial scales.</li>
+<li>Scale length: Set the length of scale lines.</li>
+<li>Font color: Set the color pf dial scale values.</li>
+<li>
+Lateral/vertical deviation: The horizontal and vertical position
+of the dial. 50 means horizontally and vertically centered.
+</li>
+<li>
+Marking area: Click <strong>Add</strong> to
+add more ranges on which you can add colors and set width to
+display different level of notifications.
+</li>
+<li>
+Origin color/radius: Set color and radius of the origin point.
+</li>
+<li>
+Border color/width: Set color and width of the dial border.
+</li>
+<li>Tail length: Set the tail length of the hand.</li>
+<li>Dial bore: Set the dial bore.</li>
+<li>
+Display name: Set whether to display the data source value under
+the origin.
+</li>
+<li>
+Connect scale: Set whether to connect the start and end of the
+speedometer border.
+</li>
+</ul>
+
+### Bubble Chart
+
+Displays data distribution.
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/appDesign/69.png" />
+
+<ul>
+<li>Bubble size: Select a field to be the bubble size.</li>
+<li>Bubble ratio: Display ratio of bubbles.</li>
+<li>
+Alarm: Set the maximum and minimum values to form an alarm
+range, and two red lines are displayed on the chart for easy
+recognition of data out of range.
+</li>
+<li>Grid: Enable it to display grids.</li>
+</ul>
+
+### Scatter Chart
+
+Displays data distribution.
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/appDesign/70.png" />
+
+<ul>
+<li>Bubble size: Select a field to be the bubble size.</li>
+<li>
+Style
+<ul >
+<li>Point radius: Set the radius of scattering points.</li>
+<li>
+Connection point: Set whether to connect adjacent points.
+</li>
+</ul>
+</li>
+<li>
+Alarm: Set the maximum and minimum values to form an alarm
+range, and two red lines are displayed on the chart for easy
+recognition of data out of range.
+</li>
+<li>Grid: Enable it to display grids.</li>
+<li>
+Regression line: Set whether to display the regression line of
+scattering points.
+</li>
+</ul>
+
+### Pie Chart
+
+Displays the ratio between each section of data and the whole.
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/appDesign/71.png" />
+
+<ul >
+<li>
+Type: Select between normal pie chart and pie chart with
+different section radius based on the data source.
+</li>
+<li>
+Style
+<ul >
+<li>
+Distance: Set the distance between the pie chart and the
+chart area border.
+</li>
+<li>
+Interval: Set the distance between each section of the pie
+chart.
+</li>
+<li>
+Inner radius: Set the radius of the inner circle around the
+origin.
+</li>
+</ul>
+</li>
+<li>Color: Select a color plan for the pie chart.</li>
+</ul>
+
+### Funnel Chart
+
+Often used to display the data decreasing. Funnel chart
+ automatically sorts the data, and for different sorting sequence,
+ you can convert the funnel chart to a pyramid.
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/appDesign/72.png" />
+
+<ul >
+<li>Type: Select between funnel chart and pyramid.</li>
+<li>
+Style: Set the width and height of the funnel or pyramid neck.
+</li>
+<li>
+Border: Set the border width and color of the funnel chart.
+</li>
+</ul>
+
+### Spider Chart
+
+Mainly used to evaluate each index of a data set. X axis
+ represents index variables and Y axis stands for the distance
+ between the origin to each data point, which indicates the
+ evaluation of each index.
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/appDesign/73.png" />
+
+<ul >
+<li>Style: Set line width, type, node icon, size and color.</li>
+<li>Opacity: Set the opacity of the spider chart.</li>
+<li>Mesh color: Set the color of each spider web line.</li>
+</ul>
+
+
+### Donut Chart
+
+Similar to pie chart. For details, see <a href="#pie_chart">Pie Chart</a>.
+
+### Spc Diagram
+
+Analyzes and judges whether the procedure is stable. The spc
+ diagram has uppr and lower limits.
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/appDesign/74.png" />
+
+<ul >
+<li>
+Line width/style: Set the line width and style such as solid,
+dotted and more.
+</li>
+<li>
+Node size/style: Set the node size and style such as round,
+square and more.
+</li>
+<li>
+Type
+<ul >
+<li>
+Single-value: Displays history data points.
+<table>
+<colgroup>
+<col style={{ width: "31.545741324921135%" }} />
+<col style={{ width: "68.45425867507886%" }} />
+</colgroup>
+<thead>
+<tr>
+<th>
+Part
+</th>
+<th>
+Description
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Broken line
+</td>
+<td>
+Value of history data points.
+</td>
+</tr>
+<tr>
+<td>
+UCL/LCL
+</td>
+<td>
+Sigma line added 3 to/deducted 3 from mean value.
+</td>
+</tr>
+<tr>
+<td>
+Middle line
+</td>
+<td>
+Numeric average value of a set of data.
+</td>
+</tr>
+<tr>
+<td>
+Node
+</td>
+<td>
+Displays normal and abnormal nodes (consecutive 7
+nodes going up or down).
+</td>
+</tr>
+<tr>
+<td>
+API
+</td>
+<td>
+Supports open API and obtain corresponding data from
+APIs.
+</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+Range
+<table>
+<colgroup>
+<col style={{ width: "31.545741324921135%" }} />
+<col style={{ width: "68.45425867507886%" }} />
+</colgroup>
+<thead>
+<tr>
+<th>
+Part
+</th>
+<th>
+Description
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Broken line
+</td>
+<td>
+Absolute value of the difference between the maximum
+and minimum value.
+
+:::info
+You need to select a mobile parameter <strong>n (<em>moving range</em>)</strong>.
+:::
+
+</td>
+</tr>
+<tr>
+<td>
+Middle line
+</td>
+<td>
+Numeric average value of a set of data.
+</td>
+</tr>
+<tr>
+<td>
+UCL
+</td>
+<td>
+Sigma line added 3 to mean value.
+</td>
+</tr>
+<tr>
+<td>
+LCL
+</td>
+<td>
+0
+</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+</li>
+<li>n: Leave it as default.</li>
+<li>Decimal: Set decimal places of the data.</li>
+<li>Abnormal color: Set the marking color of abnormal data.</li>
+<li>UCL: Set the width, color and type of upper limit line.</li>
+<li>XBar: Set the width, color and type of middle line.</li>
+<li>LCL: Set the width, color and type of lower limit line.</li>
+<li>Grid: Enable it to display grids.</li>
+</ul>
+
+### Histogram
+
+Accurately displays data distribution. You can distribute data to
+ multiple sections, and integrate data distribution in each
+ section.
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/appDesign/75.png" />
+
+<ul >
+<li>
+Alarm: Set the maximum and minimum values to form an alarm
+range, and two red lines are displayed on the chart for easy
+recognition of data out of range.
+</li>
+<li>Grid: Enable it to display grids.</li>
+<li>
+Fitted line: Set whether to display the fitted line (normal
+distribution line).
+</li>
+</ul>
+
+## Grid Layout
+
+
+This section introduces general properties of charts, and for special properties of each chart, refer to specific chapters.
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/appDesign/63.png"/>
+
+<ul >
+<li>
+ ID: Automatically generated. You can use it for writing scripts.
+</li>
+<li>
+ Absolute position: Set fixed width and height, you can move the
+ element anywhere.
+</li>
+<li>
+ Default position: The element is at the upper-left corner of the
+ column and adapts to screen resolution; Data source
+</li>
+<li>
+ Fixed width and height/Adapt to window: Select whether to set
+ fixed width and height for the element or let it adapt to actual
+ window it displays on.
+</li>
+<li>
+ Display level: Set the relative display priority of the element.
+ The higher the level, the more front it is displayed.
+</li>
+<li>Data source</li>
+</ul>
+<table>
+<colgroup>
+<col style={{ width: "33.003300330033%" }} />
+<col style={{ width: "66.996699669967%" }} />
+</colgroup>
+<thead>
+<tr>
+<th>
+Parameter
+</th>
+<th>
+Description
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Object Selector
+</td>
+<td>
+Select properties or services of object instances to be the
+data source of the chart.
+
+:::info
+Multiple data
+sources are available and each data source matches with a
+set of Y axis configuration.
+:::
+
+</td>
+</tr>
+<tr>
+<td>
+Dimension
+</td>
+<td>
+X axis field.
+</td>
+</tr>
+<tr>
+<td>
+Data
+</td>
+<td>
+Y axis field. Click <img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/appDesign/76.png"/> to add more Y axis fields.
+</td>
+</tr>
+<tr>
+<td>
+Display Name
+</td>
+<td>
+The name displayed on data notification prompts in operation
+center. Object and data source aliases are displayed by
+default without specific configuration.
+</td>
+</tr>
+<tr>
+<td>
+Data Color
+</td>
+<td>
+Change the display color of data sources.
+
+:::info
+If the data
+source is an object service, make sure to set the return
+value type to JSON. Otherwise, X/Y axis cannot be
+customized.
+:::
+
+</td>
+</tr>
+</tbody>
+</table>
+
+- Title
+
+<table>
+<colgroup>
+<col style={{ width: "25.510204081632654%" }} />
+<col style={{ width: "74.48979591836735%" }} />
+</colgroup>
+<thead>
+<tr>
+<th>
+Parameter
+</th>
+<th>
+Description
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Title
+</td>
+<td>
+Select whether to display chart title.
+</td>
+</tr>
+<tr>
+<td>
+Main Title
+</td>
+<td>
+Set the chart main title.
+</td>
+</tr>
+<tr>
+<td>
+Text Style
+</td>
+<td>
+Set the main title styles, such as font, font size, color, and
+more.
+</td>
+</tr>
+<tr>
+<td>
+Alignment
+</td>
+<td>
+Set the main title alignment.
+</td>
+</tr>
+<tr>
+<td>
+Sub Title
+</td>
+<td>
+Set the sub title similar to configurations of the main title.
+</td>
+</tr>
+</tbody>
+</table>
+
+- Style: Set styles of charts based on specific requirements.
+
+
+- Legend
+
+<table>
+<colgroup>
+<col style={{ width: "33.003300330033%" }} />
+<col style={{ width: "66.996699669967%" }} />
+</colgroup>
+<thead>
+<tr>
+<th>
+Parameter
+</th>
+<th>
+Description
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Legend
+</td>
+<td>
+Select whether to display chart legend.
+</td>
+</tr>
+<tr>
+<td>
+Position
+</td>
+<td>
+Set the display position of the legend.
+</td>
+</tr>
+<tr>
+<td>
+Size
+</td>
+<td>
+Set the legend size.
+</td>
+</tr>
+<tr>
+<td>
+Text Style
+</td>
+<td>
+Set the legend text style. such as font, size, color and more.
+</td>
+</tr>
+</tbody>
+</table>
+
+- X axis
+
+<table>
+<colgroup>
+<col style={{ width: "33.003300330033%" }} />
+<col style={{ width: "66.996699669967%" }} />
+</colgroup>
+<thead>
+<tr>
+<th>
+Parameter
+</th>
+<th>
+Description
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+X Axis
+</td>
+<td>
+Select whether to display X axis scales.
+</td>
+</tr>
+<tr>
+<td>
+Type
+</td>
+<td>
+Select the data of X axis from <strong>Categorized</strong> and <strong>Timeline</strong>.
+</td>
+</tr>
+<tr>
+<td>
+Format
+</td>
+<td>
+Format the X axis data when setting <strong>Timeline</strong> as <strong>Type</strong>.
+</td>
+</tr>
+<tr>
+<td>
+Axis Color
+</td>
+<td>
+Set the line and scale color of X axis.
+</td>
+</tr>
+<tr>
+<td>
+Interval
+</td>
+<td>
+Set the interval between X axis scales. For example, set it to
+5, meaning that an X scale is displayed every 5 pieces of
+data.
+</td>
+</tr>
+<tr>
+<td>
+Text Style
+</td>
+<td>
+Set the title text style.
+</td>
+</tr>
+<tr>
+<td>
+Title Position
+</td>
+<td>
+Set the title position.
+</td>
+</tr>
+<tr>
+<td>
+Vertical Grid
+</td>
+<td>
+Set the style, color and width of the grid lines.
+</td>
+</tr>
+</tbody>
+</table>
+
+- Y axis
+
+<table>
+
+<colgroup>
+<col style={{ width: "33.003300330033%" }} />
+<col style={{ width: "66.996699669967%" }} />
+</colgroup>
+<thead>
+<tr>
+<th>
+Parameter
+</th>
+<th>
+Description
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Axis Font Color
+</td>
+<td>
+Set the scale value color of Y axis.
+</td>
+</tr>
+<tr>
+<td>
+Title Style
+</td>
+<td>
+Set the title text style, including font, size, color and
+more.
+</td>
+</tr>
+<tr>
+<td>
+Y axis-N
+</td>
+<td>
+Y axis sequence when there are multiple Y axises.
+</td>
+</tr>
+<tr>
+<td>
+Range
+</td>
+<td>
+Set the range of Y axis.
+</td>
+</tr>
+<tr>
+<td>
+Interval
+</td>
+<td>
+Set the interval between Y axis scales. For example, set it to
+5, meaning that an X scale is displayed every 5 pieces of
+data.
+</td>
+</tr>
+<tr>
+<td>
+Unit
+</td>
+<td>
+Set the unit of Y axis scales.
+</td>
+</tr>
+<tr>
+<td>
+Title Position
+</td>
+<td>
+Set the title position.
+</td>
+</tr>
+<tr>
+<td>
+Alarm
+</td>
+<td>
+Set the maximum and minimum values to form an alarm range, and
+two red lines are displayed on the chart for easy recognition
+of data out of range.
+</td>
+</tr>
+<tr>
+<td>
+Horizontal Grid
+</td>
+<td>
+Set the styles of horizontal grid lines, including line width,
+style and color.
+</td>
+</tr>
+</tbody>
+</table>
+
+- Background
+
+<table>
+
+<colgroup>
+<col style={{ width: "33.003300330033%" }} />
+<col style={{ width: "66.996699669967%" }} />
+</colgroup>
+<thead>
+<tr>
+<th>
+Parameter
+</th>
+<th>
+Description
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Color
+</td>
+<td>
+Set the background color of charts.
+</td>
+</tr>
+<tr>
+<td>
+Rounded Corner
+</td>
+<td>
+Set the value of rounded corners of charts.
+</td>
+</tr>
+<tr>
+<td>
+Border
+</td>
+<td>
+Set the border style of the chart, including width and color.
+</td>
+</tr>
+<tr>
+<td>
+Padding
+</td>
+<td>
+Set the distance between data and chart border.
+</td>
+</tr>
+</tbody>
+</table>
+
+- Label
+
+<table>
+
+<colgroup>
+<col style={{ width: "33.003300330033%" }} />
+<col style={{ width: "66.996699669967%" }} />
+</colgroup>
+<thead>
+<tr>
+<th>
+Parameter
+</th>
+<th>
+Description
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Display
+</td>
+<td>
+Set whether to display chart label.
+</td>
+</tr>
+<tr>
+<td>
+Data
+</td>
+<td>
+Set the data type, value and decimal places of the label data.
+</td>
+</tr>
+<tr>
+<td>
+Font Size
+</td>
+<td>
+Set the font size of the label.
+</td>
+</tr>
+<tr>
+<td>
+Alignment
+</td>
+<td>
+Set the label alignment corresponding to the chart.
+</td>
+</tr>
+<tr>
+<td>
+Background
+</td>
+<td>
+Set the background color, rounded corner, border width and
+color of the label.
+</td>
+</tr>
+<tr>
+<td>
+Shadow
+</td>
+<td>
+Set whether to display label shadow.
+</td>
+</tr>
+</tbody>
+</table>
+<ul >
+<li>
+ Tooltip
+<table>
+
+<colgroup>
+<col style={{ width: "33.003300330033%" }} />
+<col style={{ width: "66.996699669967%" }} />
+</colgroup>
+<thead>
+<tr>
+<th>
+Parameter
+</th>
+<th>
+Description
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Display
+</td>
+<td>
+Set whether to display tooltip on chart area.
+</td>
+</tr>
+<tr>
+<td>
+Font Size
+</td>
+<td>
+Set the font size of the tooltip.
+</td>
+</tr>
+<tr>
+<td>
+Alignment
+</td>
+<td>
+Set the tooltip alignment corresponding to the chart.
+</td>
+</tr>
+<tr>
+<td>
+Background
+</td>
+<td>
+Set the background color, rounded corner, border width and
+color of the tooltip.
+</td>
+</tr>
+<tr>
+<td>
+Shadow
+</td>
+<td>
+Set whether to display tooltip shadow.
+</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+<ul >
+<li>
+ Notes
+<ul >
+<li>
+Display: Set whether to display notes at the lower-right
+corner of the chart area.
+</li>
+<li>Content: Enter the note content.</li>
+</ul>
+</li>
+</ul>
+<ul >
+<li>
+ Interact: Set interaction events, including <strong>Click</strong>,<strong>Load Complete</strong>, <strong>Click Data Point</strong> and <strong>Double-click Data Point</strong>.
+</li>
+</ul>
+
+### Line Chart
+
+Line charts are often used to display continuous data changes
+ along time. Applicable for viewing data changing trends.
+
+:::info
+Spline chart is similar to line chart.
+:::
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/appDesign/64.png" />
+
+<ul >
+<li>
+Style: Change line width and type, node icon, size and color.
+</li>
+<li>Refresh: Refresh the chat by seconds.</li>
+<li>
+Full screen: Set whether to enable full screen function for the
+chart. After enabled, you can click the icon to display the
+chart in full screen in operation center.
+</li>
+<li>
+Horizontal display: Enable to switch X and Y axis, and the chart
+changes to horizontal view.
+</li>
+<li>
+Crosshair: Set whether to display crosshairs when mouse moves.
+</li>
+</ul>
+
+
+### Bar Chart
+
+Often used to compare values at different times or under different
+ conditions.
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/appDesign/65.png" />
+
+<ul >
+<li>
+Stack: Stack data columns in ways such as no stacking, general
+stacking and stacking by percentage.
+</li>
+<li>Rounded corner: Set the radius of rounded corners.</li>
+<li>Refresh: Refresh the chat by seconds.</li>
+<li>
+Full screen: Set whether to enable full screen function for the
+chart. After enabled, you can click the icon to display the
+chart in full screen in operation center.
+</li>
+<li>
+Horizontal display: Enable to switch X and Y axis, and the chart
+changes to horizontal view.
+</li>
+<li>
+Crosshair: Set whether to display crosshairs when mouse moves.
+</li>
+</ul>
+
+
+### Area Chart
+
+Emphasizes the extent to which the data changes during a period.
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/appDesign/66.png" />
+
+<ul >
+<li>
+Style: Change line width and type, node icon, size and color.
+</li>
+<li>Refresh: Refresh the chat by seconds.</li>
+<li>
+Full screen: Set whether to enable full screen function for the
+chart. After enabled, you can click the icon to display the
+chart in full screen in operation center.
+</li>
+<li>
+Horizontal display: Enable to switch X and Y axis, and the chart
+changes to horizontal view.
+</li>
+<li>
+Crosshair: Set whether to display crosshairs when mouse moves.
+</li>
+</ul>
+
+
+### Dash Chart
+
+Dash chart binds with numeric real-time data.
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/appDesign/67.png" />
+
+<ul >
+<li>Dial color: Set the dial background color.</li>
+<li>
+Color of dial, scale lines and values and border can be
+configured.
+</li>
+<li>Range: Set the dial range.</li>
+<li>
+Interval: Set the interval between dial scales. For example, set
+it to 5, meaning that a dial scale is displayed every 5 pieces
+of data.
+</li>
+<li>Angle range: Set angles of the dial start and end scales.</li>
+<li>Scale text style: Set the color pf dial scale values.</li>
+<li>
+Lateral/vertical deviation: The horizontal and vertical position
+of the dial. 50 means horizontally and vertically centered.
+</li>
+<li>Dial bore: Set the dial bore.</li>
+<li>Dial border width: Set the width of dial border.</li>
+<li>Scale length: Set the length of scale lines.</li>
+<li>
+Full screen: Set whether to enable full screen function for the
+chart. After enabled, you can click the icon to display the
+chart in full screen in operation center.
+</li>
+</ul>
+
+
+### Speedometer
+
+Speedometer binds with numeric real-time data.
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/appDesign/68.png" />
+
+<ul >
+<li>
+Color of dial, scale lines and values and border can be
+configured.
+</li>
+<li>Range: Set the dial range.</li>
+<li>
+Interval: Set the interval between dial scales. For example, set
+it to 5, meaning that a dial scale is displayed every 5 pieces
+of data.
+</li>
+<li>Angle range: Set angles of the dial start and end scales.</li>
+<li>Scale text style: Set the color pf dial scale values.</li>
+<li>
+Lateral/vertical deviation: The horizontal and vertical position
+of the dial. 50 means horizontally and vertically centered.
+</li>
+<li>Dial bore: Set the dial bore.</li>
+<li>Dial border width: Set the width of dial border.</li>
+<li>Main scale length: Set the length of main scale lines.</li>
+<li>Sub scale length: Set the length of sub scale lines.</li>
+<li>
+Scales: Set the number of scales of the dial. The dial splits
+according to the set value.
+</li>
+<li>
+Scale deviation: Standard deviation of scales. The higher the
+value, the bigger the dial.
+</li>
+<li>
+Connect scale: Set whether to connect the start and end of the
+speedometer border.
+</li>
+</ul>
+
+
+### Bubble Chart
+
+Displays data distribution.
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/appDesign/69.png" />
+
+<ul>
+<li>
+Full screen: Set whether to enable full screen function for the
+chart. After enabled, you can click the icon to display the
+chart in full screen in operation center.
+</li>
+<li>
+Horizontal display: Enable to switch X and Y axis, and the chart
+changes to horizontal view.
+</li>
+<li>
+Crosshair: Set whether to display crosshairs when mouse moves.
+</li>
+</ul>
+
+
+### Scatter Chart
+
+Displays data distribution.
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/appDesign/70.png"/>
+
+<ul >
+<li>
+Full screen: Set whether to enable full screen function for the
+chart. After enabled, you can click the icon to display the
+chart in full screen in operation center.
+</li>
+<li>
+Horizontal display: Enable to switch X and Y axis, and the chart
+changes to horizontal view.
+</li>
+<li>
+Crosshair: Set whether to display crosshairs when mouse moves.
+</li>
+</ul>
+
+
+### Pie Chart
+
+Displays the ratio between each section of data and the whole.
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/appDesign/71.png" />
+
+<ul >
+<li>Color: Select a color plan for the pie chart.</li>
+<li>
+Inner radius: Set the radius of the inner circle around the
+origin.
+</li>
+<li>
+Interval: Set the distance between each section of the pie
+chart.
+</li>
+<li>
+Section ratio: Set the sum of section ratios. It is 100% by
+default.
+</li>
+<li >
+Refresh: Refresh the chat by seconds.
+</li>
+<li >
+Full screen: Set whether to enable full screen function for the
+chart. After enabled, you can click the icon to display the
+chart in full screen in operation center.
+</li>
+</ul>
+
+
+### Funnel Chart
+
+Often used to display the data decreasing. Funnel chart
+ automatically sorts the data, and for different sorting sequence,
+ you can convert the funnel chart to a pyramid.
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/appDesign/72.png" />
+
+<ul >
+<li>Type: Select between funnel chart and pyramid.</li>
+<li>
+Style: Set the width and height of the funnel or pyramid neck.
+</li>
+<li>
+Border: Set the border width and color of the funnel chart.
+</li>
+<li>Refresh: Refresh the chat by seconds.</li>
+<li>
+Full screen: Set whether to enable full screen function for the
+chart. After enabled, you can click the icon to display the
+chart in full screen in operation center.
+</li>
+</ul>
+
+
+### Spider Chart
+
+Mainly used to evaluate each index of a data set. X axis
+ represents index variables and Y axis stands for the distance
+ between the origin to each data point, which indicates the
+ evaluation of each index.
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/appDesign/73.png" />
+
+<ul >
+<li>Style: Set line width, type, node icon, size and color.</li>
+<li>Refresh: Refresh the chat by seconds.</li>
+<li>
+Full screen: Set whether to enable full screen function for the
+chart. After enabled, you can click the icon to display the
+chart in full screen in operation center.
+</li>
+</ul>
+
+
+### Donut Chart
+
+Similar to pie chart. For details, see <a href="#pie_chart">Pie Chart</a>.
+
+
+### Spc Diagram
+
+Analyzes and judges whether the procedure is stable. The spc
+ diagram has upper and lower limits.
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/appDesign/74.png" />
+
+<ul >
+<li>
+Chart Format
+<ul >
+<li>
+<strong>Individual Value Chart:</strong> Displays history
+data points.
+<table>
+
+<colgroup>
+<col style={{ width: "31.545741324921135%" }} />
+<col style={{ width: "68.45425867507886%" }} />
+</colgroup>
+<thead>
+<tr>
+<th>
+Part
+</th>
+<th>
+Description
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Chart line
+</td>
+<td>
+Value of history data points.
+</td>
+</tr>
+<tr>
+<td>
+UCL/LCL
+</td>
+<td>
+Sigma line added 3 to/deducted 3 from mean value.
+</td>
+</tr>
+<tr>
+<td>
+XBar
+</td>
+<td>
+Numeric average value of a set of data.
+</td>
+</tr>
+<tr>
+<td>
+Node
+</td>
+<td>
+Displays normal and abnormal nodes (consecutive 7
+nodes going up or down).
+</td>
+</tr>
+<tr>
+<td>
+API
+</td>
+<td>
+Supports open API and obtain corresponding data from
+APIs.
+</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<strong>Range Map</strong>
+<table>
+
+<colgroup>
+<col style={{ width: "31.545741324921135%" }} />
+<col style={{ width: "68.45425867507886%" }} />
+</colgroup>
+<thead>
+<tr>
+<th>
+Part
+</th>
+<th>
+Description
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Chart line
+</td>
+<td>
+Absolute value of the difference between the maximum
+and minimum value.
+
+:::info
+You need to select a mobile parameter <strong>n (<em>moving range</em>)</strong>.
+:::
+
+</td>
+</tr>
+<tr>
+<td>
+MR
+</td>
+<td>
+Numeric average value of a set of data.
+</td>
+</tr>
+<tr>
+<td>
+UCL
+</td>
+<td>
+Sigma line added 3 to mean value.
+</td>
+</tr>
+<tr>
+<td>
+LCL
+</td>
+<td>
+0
+</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+</li>
+<li>
+Line style: Set the line width and style such as solid, dotted
+and more.
+</li>
+<li>UCL: Set the width, color and type of upper limit line.</li>
+<li>XBar: Set the width, color and type of middle line.</li>
+<li>LCL: Set the width, color and type of lower limit line.</li>
+<li>
+Node style: Set the node size, color and style such as round,
+square and more.
+</li>
+<li>
+Full screen: Set whether to enable full screen function for the
+chart. After enabled, you can click the icon to display the
+chart in full screen in operation center.
+</li>
+</ul>
+
+
+### Histogram
+
+Accurately displays data distribution. You can distribute data to
+ multiple sections, and integrate data distribution in each
+ section.
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/appDesign/75.png" />
+
+<ul >
+<li>
+Fitted line: Set whether to display the fitted line (normal
+distribution line).
+</li>
+<li>
+Full screen: Set whether to enable full screen function for the
+chart. After enabled, you can click the icon to display the
+chart in full screen in operation center.
+</li>
+</ul>
+
+
+### Progress Bar
+
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/appDesign/75-1.png" />
+
+<ul >
+<li>
+Data source: Includes <strong>title</strong>, <strong>sum</strong>,<strong>cur</strong> and <strong>percent</strong> (optional).
+<ul >
+<li>title: Title of each progress bar.</li>
+<li>sum: Data sum.</li>
+<li>cur: Current data value.</li>
+<li>percent: cur/sum = percent.</li>
+</ul>
+</li>
+<li>
+Data: Enter the title and color of the progress bar to be
+displayed.
+</li>
+<li>
+Style: Select from horizontal, vertical, waterdrop and circular
+progress bars.
+
+:::info
+Waterdrop and annular progress bars are only for single bar of data display.
+:::
+
+</li>
+</ul>
+
+
+## Form Library
+
+This section describes general properties of form elements.
+
+- Property
+
+<table >
+
+<colgroup>
+<col style={{ width: "25.510204081632654%" }} />
+<col style={{ width: "74.48979591836735%" }} />
+</colgroup>
+<thead>
+<tr>
+<th>
+Parameter
+</th>
+<th>
+Description
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Component ID
+</td>
+<td>
+Automatically generated. You can use it for writing scripts.
+</td>
+</tr>
+<tr>
+<td>
+Component Name
+</td>
+<td>
+Component name. It cannot be repeated.
+</td>
+</tr>
+<tr>
+<td>
+Required
+</td>
+<td>
+Set whether it is required. If it is, a red * is displayed in
+front.
+</td>
+</tr>
+<tr>
+<td>
+Display Level
+</td>
+<td>
+Set the relative display priority of the element. The higher
+the level, the more front the chart is displayed.
+</td>
+</tr>
+<tr>
+<td>
+Width/Height
+</td>
+<td>
+Set the width and height of the element.
+</td>
+</tr>
+<tr>
+<td>
+Display Loading
+</td>
+<td>
+Set whether to display loading animation in operation center.
+</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>
+ Interact: Refer to the designing process under each layout for
+ interaction details.
+</li>
+</ul>
+
+
+### Line
+
+Used only for static display. The line is horizontal by default.
+
+<table >
+
+<colgroup>
+<col style={{ width: "25.510204081632654%" }} />
+<col style={{ width: "74.48979591836735%" }} />
+</colgroup>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Line Direction
+</td>
+<td>
+Select to display one side line of the rectangle you drew on
+the canvas after selecting <strong>Line</strong> from the left side.
+For example, you used <strong>Line</strong> element to draw a horizontal line on the canvas, and then set <strong>Line Direction</strong> to <strong>Left</strong>, a point on the left side of the line is displayed only.
+</td>
+</tr>
+<tr>
+<td>Line Type</td>
+<td>
+Select line types from <strong>Solid Line</strong>,<strong>Point Line</strong>,<strong>Dotted Line</strong> and <strong>Double Solid</strong>.
+</td>
+</tr>
+<tr>
+<td>Line Size</td>
+<td>
+Set the line size. You can click <img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/appDesign/77.png" /> to reset to defaults.
+</td>
+</tr>
+<tr>
+<td>
+Line Color
+</td>
+<td>
+Set the line color. You can click <img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/appDesign/77.png" /> to reset to defaults.
+</td>
+</tr>
+</tbody>
+</table>
+
+
+### Label
+
+Mainly displays text and background.
+<table>
+<colgroup>
+<col style={{ width: "25.510204081632654%" }} />
+<col style={{ width: "74.48979591836735%" }} />
+</colgroup>
+<thead>
+<tr>
+<th>
+Parameter
+</th>
+<th>
+Description
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Content Source
+</td>
+<td>
+<ul >
+<li>
+<strong>Static</strong>: Manually
+ enter the label content.
+</li>
+<li>
+<strong>Dynamic</strong>: Link a
+ dynamic data source.
+</li>
+</ul>
+</td>
+</tr>
+<tr>
+<td>
+Label Content
+</td>
+<td>
+Enter the label content when setting <strong>Content Source</strong> to <strong>Static</strong>.
+</td>
+</tr>
+<tr>
+<td>
+Dynamic Data
+</td>
+<td rowSpan={2}>
+Select a dynamic label data source and relation fields to
+display when setting <strong>Content Source</strong> to <strong>Dynamic</strong>.
+
+:::info
+Non-relation data cannot be displayed.
+:::
+ 
+</td>
+</tr>
+<tr>
+<td>
+Display Field
+</td>
+</tr>
+<tr>
+<td>
+Data Index
+</td>
+<td>
+Index of returned data. For example, the data is
+['a','b','c','d'], when returning 'a', the index is 0, and
+index is 1 when the returned data is 'b'.
+</td>
+</tr>
+<tr>
+<td>
+Link Object
+</td>
+<td>
+Configure data linkages through input parameters of the data
+source.
+</td>
+</tr>
+<tr>
+<td>
+Time Format
+</td>
+<td>
+Enable it to convert the label content to time format.
+</td>
+</tr>
+<tr>
+<td>
+Font Size
+</td>
+<td rowSpan={7}>
+Set size, unit, color, weight, alignment and vertical
+alignment of the font.
+</td>
+</tr>
+<tr>
+<td>
+Font Unit
+</td>
+</tr>
+<tr>
+<td>
+Font Color
+</td>
+</tr>
+<tr>
+<td>
+Font
+</td>
+</tr>
+<tr>
+<td>
+Bold
+</td>
+</tr>
+<tr>
+<td>
+Alignment
+</td>
+</tr>
+<tr>
+<td>
+Vertical Alignment
+</td>
+</tr>
+<tr>
+<td>
+Border Width
+</td>
+<td>
+Set label border width.
+</td>
+</tr>
+<tr>
+<td>
+Background Color
+</td>
+<td>
+Set label background color.
+</td>
+</tr>
+<tr>
+<td>
+Cursor Style
+</td>
+<td>
+Set cursor style when it hovers over the label in operation
+center.
+</td>
+</tr>
+<tr>
+<td>
+Required
+</td>
+<td>
+Set whether it is required. If it is, a red * is displayed
+in front.
+</td>
+</tr>
+<tr>
+<td>
+Border Color
+</td>
+<td rowSpan={2}>
+Set color and type of the label border.
+</td>
+</tr>
+<tr>
+<td>
+Border Type
+</td>
+</tr>
+<tr>
+<td>
+Padding
+</td>
+<td>
+Set the distance between data and border.
+</td>
+</tr>
+</tbody>
+</table>
+
+
+### Hidden Field
+
+Visible in design center but not in operation center. Hidden area
+ is often used for collecting or sending information and data
+ delivery.
+
+<table >
+
+<colgroup>
+<col style={{ width: "25.510204081632654%" }} />
+<col style={{ width: "74.48979591836735%" }} />
+</colgroup>
+<thead>
+<tr>
+<th>
+Parameter
+</th>
+<th>
+Description
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Default
+</td>
+<td>
+Set the default value of the hidden area with a data type of
+string.
+</td>
+</tr>
+</tbody>
+</table>
+
+
+### Input Box
+
+As input parameters, often used to be linked with tables or
+ reports for associated query.
+
+<table >
+<colgroup>
+<col style={{ width: "25.510204081632654%" }} />
+<col style={{ width: "74.48979591836735%" }} />
+</colgroup>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>
+Description
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Title
+</td>
+<td>
+Enter the input box title.
+</td>
+</tr>
+<tr>
+<td>
+Placeholder
+</td>
+<td>
+Enter placeholder of the input box.
+</td>
+</tr>
+<tr>
+<td>
+Title Width
+</td>
+<td rowSpan={4}>
+Set the title width, font size, font and color.
+
+:::info
+Title automatically wraps when exceeding the set width.
+:::
+
+</td>
+</tr>
+<tr>
+<td>
+Title Size
+</td>
+</tr>
+<tr>
+<td>
+Title Color
+</td>
+</tr>
+<tr>
+<td>
+Title Font
+</td>
+</tr>
+<tr>
+<td>
+Content Size
+</td>
+<td rowSpan={3}>
+Set size, color and font of entered text in the box.
+</td>
+</tr>
+<tr>
+<td>
+Content Color
+</td>
+</tr>
+<tr>
+<td>
+Content Font
+</td>
+</tr>
+<tr>
+<td>
+Background Color
+</td>
+<td>
+Set background color of the element.
+</td>
+</tr>
+<tr>
+<td>
+Border Width
+</td>
+<td rowSpan={3}>
+Set width, color and type of the border.
+</td>
+</tr>
+<tr>
+<td>
+Border Type
+</td>
+</tr>
+<tr>
+<td>
+Border Color
+</td>
+</tr>
+<tr>
+<td>
+Verification Time
+</td>
+<td>
+Set whether to apply verification to the element and time.
+</td>
+</tr>
+<tr>
+<td>
+Format
+</td>
+<td>
+Data format of the input box. The supOS platform verifies
+the format based on the set verification time.
+</td>
+</tr>
+<tr>
+<td>
+Multi-line
+</td>
+<td>
+Select input text lines between <strong>Single Line</strong> or <strong>Multi-line</strong>.
+</td>
+</tr>
+<tr>
+<td>
+Box Type
+</td>
+<td rowSpan={3}>
+Set width, color and type of the input box border.
+</td>
+</tr>
+<tr>
+<td>
+Box Color
+</td>
+</tr>
+<tr>
+<td>
+Box Width
+</td>
+</tr>
+<tr>
+<td>
+Background Color
+</td>
+<td>
+Set background color of the input box.
+</td>
+</tr>
+<tr>
+<td>
+Max. Length
+</td>
+<td>
+The maximum length of entered text.
+</td>
+</tr>
+<tr>
+<td>
+Read Only
+</td>
+<td>
+Set the read and write status of the element. When set to <strong>Read Only</strong>, you cannot
+edit it in operation center.
+</td>
+</tr>
+<tr>
+<td>
+Fix on Top/Right/Bottom/Left
+</td>
+<td>
+Fix the element position based on its size and
+top/right/bottom/left edge, and it does not change due to
+resolution or page position changes.
+</td>
+</tr>
+</tbody>
+</table>
+
+
+### Drop Down Box
+
+As input parameters, often used to be linked with tables or
+ reports for associated query.
+
+<table >
+<colgroup>
+<col style={{ width: "25.510204081632654%" }} />
+<col style={{ width: "74.48979591836735%" }} />
+</colgroup>
+<thead>
+<tr>
+<th>
+Parameter
+</th>
+<th>
+Description
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Title
+</td>
+<td>
+Enter the input box title.
+</td>
+</tr>
+<tr>
+<td>
+Placeholder
+</td>
+<td>
+Enter placeholder of the input box.
+</td>
+</tr>
+<tr>
+<td>
+Title Width
+</td>
+<td rowSpan={4}>
+Set the title width, font size, font and color.
+
+:::info
+Title automatically wraps when exceeding the set width.
+:::
+
+</td>
+</tr>
+<tr>
+<td>
+Title Size
+</td>
+</tr>
+<tr>
+<td>
+Title Color
+</td>
+</tr>
+<tr>
+<td>
+Title Font
+</td>
+</tr>
+<tr>
+<td>
+Content Size
+</td>
+<td rowSpan={3}>
+Set size, color and font of entered text in the box.
+</td>
+</tr>
+<tr>
+<td>
+Content Color
+</td>
+</tr>
+<tr>
+<td>
+Content Font
+</td>
+</tr>
+<tr>
+<td>
+Background Color
+</td>
+<td>
+Set background color of the element.
+</td>
+</tr>
+<tr>
+<td>
+Border Width
+</td>
+<td rowSpan={3}>
+Set width, color and type of the border.
+</td>
+</tr>
+<tr>
+<td>
+Border Type
+</td>
+</tr>
+<tr>
+<td>
+Border Color
+</td>
+</tr>
+<tr>
+<td>
+Verification Time
+</td>
+<td>
+Set whether to apply verification to the element and time.
+</td>
+</tr>
+<tr>
+<td>
+Options
+</td>
+<td>
+Select data source between <strong>Static</strong> or <strong>Dynamic</strong>.
+<ul >
+<li>
+<strong>Static</strong>: Manually
+ enter options to be the drop-down list.
+</li>
+<li>
+<strong>Dynamic</strong>: Displays
+ data through binding object services.
+</li>
+</ul>
+</td>
+</tr>
+<tr>
+<td>
+Multi Selection
+</td>
+<td>
+Whether to enable multiple selections.
+</td>
+</tr>
+<tr>
+<td>
+Read Only
+</td>
+<td>
+Set the read and write status of the element. When set to <strong>Read Only</strong>, you cannot
+edit it in operation center.
+</td>
+</tr>
+<tr>
+<td>
+Fix on Top/Right/Bottom/Left
+</td>
+<td>
+Fix the element position based on its size and
+top/right/bottom/left edge, and it does not change due to
+resolution or page position changes.
+</td>
+</tr>
+</tbody>
+</table>
+
+
+### Cascade Selection
+
+Provides related data sets for selection.
+<table>
+<colgroup>
+<col style={{ width: "25.510204081632654%" }} />
+<col style={{ width: "74.48979591836735%" }} />
+</colgroup>
+<thead>
+<tr>
+<th>
+Parameter
+</th>
+<th>
+Description
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Title
+</td>
+<td>
+Enter the input box title.
+</td>
+</tr>
+<tr>
+<td>
+Title Width
+</td>
+<td rowSpan={4}>
+Set the title width, font size, font and color.
+
+:::info
+Title automatically wraps when exceeding the set width.
+:::
+
+</td>
+</tr>
+<tr>
+<td>
+Title Size
+</td>
+</tr>
+<tr>
+<td>
+Title Color
+</td>
+</tr>
+<tr>
+<td>
+Title Font
+</td>
+</tr>
+<tr>
+<td>
+Content Size
+</td>
+<td rowSpan={3}>
+Set size, color and font of entered text in the box.
+</td>
+</tr>
+<tr>
+<td>
+Content Color
+</td>
+</tr>
+<tr>
+<td>
+Content Font
+</td>
+</tr>
+<tr>
+<td>
+Background Color
+</td>
+<td>
+Set background color of the element.
+</td>
+</tr>
+<tr>
+<td>
+Border Width
+</td>
+<td rowSpan={3}>
+Set width, color and type of the border.
+</td>
+</tr>
+<tr>
+<td>
+Border Type
+</td>
+</tr>
+<tr>
+<td>
+Border Color
+</td>
+</tr>
+<tr>
+<td>
+Verification Time
+</td>
+<td>
+Set whether to apply verification to the element and time.
+</td>
+</tr>
+<tr>
+<td>
+Data Source
+</td>
+<td>
+Bind an object service for data display.
+</td>
+</tr>
+<tr>
+<td>
+Read Only
+</td>
+<td>
+Set the read and write status of the element. When set to <strong>Read Only</strong>, you cannot
+edit it in operation center.
+</td>
+</tr>
+</tbody>
+</table>
+
+
+### Radio and Checkbox
+
+Contains multiple options. You can only select one option when it
+ is a radio element, and can select multiple options when it is a
+ checkbox.
+
+- Property of radio
+
+<table >
+<colgroup>
+<col style={{ width: "25.510204081632654%" }} />
+<col style={{ width: "74.48979591836735%" }} />
+</colgroup>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Title</td>
+<td>
+Enter the input box title.
+</td>
+</tr>
+<tr>
+<td>
+Placeholder
+</td>
+<td>
+Enter placeholder of the input box.
+</td>
+</tr>
+<tr>
+<td>
+Title Width
+</td>
+<td rowSpan={4}>
+Set the title width, font size, font and color.
+
+:::info
+Title automatically wraps when exceeding the set width.
+:::
+
+</td>
+</tr>
+<tr>
+<td>
+Title Size
+</td>
+</tr>
+<tr>
+<td>
+Title Color
+</td>
+</tr>
+<tr>
+<td>
+Title Font
+</td>
+</tr>
+<tr>
+<td>
+Content Size
+</td>
+<td rowSpan={3}>
+Set size, color and font of entered text in the box.
+</td>
+</tr>
+<tr>
+<td>
+Text Color
+</td>
+</tr>
+<tr>
+<td>
+Content Font
+</td>
+</tr>
+<tr>
+<td>
+Border Color
+</td>
+<td>
+Set border color of the element.
+</td>
+</tr>
+<tr>
+<td>
+Verification Time
+</td>
+<td>
+Set whether to apply verification to the element and time.
+</td>
+</tr>
+<tr>
+<td>
+Button Style
+</td>
+<td>
+Enable it to display options as buttons,
+</td>
+</tr>
+<tr>
+<td>
+Vertical Alignment
+</td>
+<td>
+Set radio options to align vertically.
+</td>
+</tr>
+<tr>
+<td>
+Button Background
+</td>
+<td>
+Set the button background color.
+</td>
+</tr>
+<tr>
+<td>
+Selected Button Color
+</td>
+<td>
+Set the button background color when it is selected.
+</td>
+</tr>
+<tr>
+<td>
+Selected Text Color
+</td>
+<td>
+Set the option text color when it is selected.
+</td>
+</tr>
+<tr>
+<td>Options</td>
+<td>
+Select data source between <strong>Static</strong> or <strong>Dynamic</strong>.
+<ul >
+<li>
+<strong>Static</strong>: Manually
+ enter options to be the drop-down list.
+</li>
+<li>
+<strong>Dynamic</strong>: Displays
+ data through binding dynamic data sources.
+ 
+:::info
+If fields
+are not specified, the first field is option title and
+the second is option value by default.
+:::
+
+</li>
+</ul>
+</td>
+</tr>
+<tr>
+<td>
+Link Object
+</td>
+<td>
+Configure data linkages through input parameters of the data
+source.
+</td>
+</tr>
+<tr>
+<td>
+Read Only
+</td>
+<td>
+Set the read and write status of the element. When set to <strong>Read Only</strong>, you cannot
+edit it in operation center.
+</td>
+</tr>
+<tr>
+<td>
+Fix on Top/Right/Bottom/Left
+</td>
+<td>
+Fix the element position based on its size and
+top/right/bottom/left edge, and it does not change due to
+resolution or page position changes.
+</td>
+</tr>
+</tbody>
+</table>
+<ul >
+<li>
+Properties of checkbox: Refer to the table above. Other
+properties are listed as follows:
+<ul >
+<li>Background Color: Se the option button color.</li>
+<li>
+Select All: Set whether to display <strong>Select All</strong>
+option.
+</li>
+<li>
+Checkbox: Set whether to display checkboxes. Without it, you
+can directly select option text.
+</li>
+</ul>
+</li>
+<li>
+Linkage: For data linkage in free layout, see <a href="Free Layout/Data Linkage">Data Linkage</a>, and in grid layout, see <a href="Grid Layout/Data Linkage">Data Linkage</a>.
+</li>
+</ul>
+
+
+### Date Picker
+
+As input parameters, often used to be linked with tables or
+ reports for associated query. Input format can be date, time or
+ date and time.
+
+
+ 
+
+:::info
+In free layout , the
+ element is <strong>Date</strong> and in grid
+ layout, it is <strong>Date Picker</strong>. Their functions
+ are the same.
+:::
+
+<table >
+
+<colgroup>
+<col style={{ width: "25.510204081632654%" }} />
+<col style={{ width: "74.48979591836735%" }} />
+</colgroup>
+<thead>
+<tr>
+<th>
+Parameter
+</th>
+<th>
+Description
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Title
+</td>
+<td>
+Enter the input box title.
+</td>
+</tr>
+<tr>
+<td>
+Title Width
+</td>
+<td rowSpan={4}>
+Set the title width, font size, font and color.
+
+:::info
+Title automatically wraps when exceeding the set width.
+:::
+
+</td>
+</tr>
+<tr>
+<td>
+Title Size
+</td>
+</tr>
+<tr>
+<td>
+Title Color
+</td>
+</tr>
+<tr>
+<td>
+Title Font
+</td>
+</tr>
+<tr>
+<td>
+Content Size
+</td>
+<td rowSpan={3}>
+Set size, color and font of entered text in the box.
+</td>
+</tr>
+<tr>
+<td>
+Content Color
+</td>
+</tr>
+<tr>
+<td>
+Content Font
+</td>
+</tr>
+<tr>
+<td>
+Background Color
+</td>
+<td>
+Set background color of the element.
+</td>
+</tr>
+<tr>
+<td>
+Border Width
+</td>
+<td rowSpan={3}>
+Set width, color and type of the border.
+</td>
+</tr>
+<tr>
+<td>
+Border Type
+</td>
+</tr>
+<tr>
+<td>
+Border Color
+</td>
+</tr>
+<tr>
+<td>
+Verification Time
+</td>
+<td>
+Set whether to apply verification to the element and time.
+</td>
+</tr>
+<tr>
+<td>
+Date Type
+</td>
+<td rowSpan={2}>
+Select the date type and format.
+</td>
+</tr>
+<tr>
+<td>
+Date Format
+</td>
+</tr>
+<tr>
+<td>
+Default Value
+</td>
+<td>
+Set default value when setting <strong>Date Type</strong> to <strong>Date</strong>.
+</td>
+</tr>
+<tr>
+<td>
+Initial Value
+</td>
+<td>
+Set the initial date. It can be empty.
+</td>
+</tr>
+<tr>
+<td>
+Read Only
+</td>
+<td>
+Set the read and write status of the element. When set to <strong>Read Only</strong>, you cannot
+edit it in operation center.
+</td>
+</tr>
+<tr>
+<td>
+Fix on Top/Right/Bottom/Left
+</td>
+<td>
+Fix the element position based on its size and
+top/right/bottom/left edge, and it does not change due to
+resolution or page position changes.
+</td>
+</tr>
+</tbody>
+</table>
+
+
+### Button
+
+Triggers click events, such as click to search and click to open
+ another page.
+
+**Property Configuration**
+
+<table >
+<colgroup>
+<col style={{ width: "25.510204081632654%" }} />
+<col style={{ width: "74.48979591836735%" }} />
+</colgroup>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>
+Description
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Button Title
+</td>
+<td>
+Enter the input box title.
+</td>
+</tr>
+<tr>
+<td>
+Title Size
+</td>
+<td rowSpan={4}>
+Set the title font size, color, weight and type.
+</td>
+</tr>
+<tr>
+<td>
+Title Color
+</td>
+</tr>
+<tr>
+<td>Bold</td>
+</tr>
+<tr>
+<td>
+Title Font
+</td>
+</tr>
+<tr>
+<td>
+Width/Height
+</td>
+<td>
+Set the width and height of the element.
+</td>
+</tr>
+<tr>
+<td>
+Border Width
+</td>
+<td rowSpan={3}>
+Set width, color and type of the border.
+</td>
+</tr>
+<tr>
+<td>
+Border Type
+</td>
+</tr>
+<tr>
+<td>
+Border Color
+</td>
+</tr>
+<tr>
+<td>
+Corner Radius
+</td>
+<td>
+Set the radius of button rounded corners.
+</td>
+</tr>
+<tr>
+<td>
+Button Icon
+</td>
+<td>
+Select whether to display icons before button title and
+the icon.
+</td>
+</tr>
+<tr>
+<td>
+Custom Icon
+</td>
+<td>
+Customize icon.
+</td>
+</tr>
+<tr>
+<td>
+Icon Position
+</td>
+<td rowSpan={2}>
+Set position and size of the icon.
+</td>
+</tr>
+<tr>
+<td>
+Icon Size
+</td>
+</tr>
+<tr>
+<td>
+Background Color
+</td>
+<td>
+Set background color of the element.
+</td>
+</tr>
+<tr>
+<td>
+Hide when Print
+</td>
+<td>
+Enable it to hide the button when printing.
+</td>
+</tr>
+<tr>
+<td>
+Unavailable
+</td>
+<td>
+Set whether to make the button unavailable. After enabled,
+it will be grayed out.
+</td>
+</tr>
+<tr>
+<td>
+Fix on Top/Right/Bottom/Left
+</td>
+<td>
+Fix the element position based on its size and
+top/right/bottom/left edge, and it does not change due to
+resolution or page position changes.
+</td>
+</tr>
+</tbody>
+</table>
+
+**Button Group Configuration**
+
+
+By switching between multiple buttons, you can use one process
+workflow or graphic group to display different data.
+
+ 
+
+
+:::info
+The button group function is only available for graphic elements.
+:::
+
+<ol >
+<li>
+Select graphic elements and then set their dynamic effects.
+For details, see <a href="Dynamic Effect">Dynamic Effect</a>.
+</li>
+<li>
+Select those graphic elements, and then right-click to group
+them.
+</li>
+<li>Add a button on the canvas.</li>
+<li>
+Click the button, and then click <strong>Configure Point Groups</strong> under <strong>Interact</strong>.
+</li>
+<li>
+Click <strong>Configure</strong> in the
+pop-up window, and then select a data source to replace the
+original one. Do the same for multiple buttons.
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/appDesign/97.png" />
+</li>
+<li>
+After configuration, you can click different buttons to view
+corresponding data and dynamic effects in operation center.
+</li>
+</ol>
+
+
+### Tree
+
+Displays hierarchical relations between equipment. Generally the
+ tree element is used together with factory models. You need to
+ write script for each node on the tree to link with designed
+ pages.
+
+
+ 
+
+:::info
+Make sure you have
+ installed factory model APP in the supOS platform before binding a
+ tree element with a factory model.
+:::
+
+<table >
+<colgroup>
+<col style={{ width: "25.510204081632654%" }} />
+<col style={{ width: "74.48979591836735%" }} />
+</colgroup>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Title</td>
+<td>
+Enter the input box title.
+</td>
+</tr>
+<tr>
+<td>
+Search Box
+</td>
+<td>
+Whether to add a search box for the tree element.
+</td>
+</tr>
+<tr>
+<td>Collapse</td>
+<td>
+Whether to collapse the tree when opening the page in
+operation center.
+</td>
+</tr>
+<tr>
+<td>
+Select by Default
+</td>
+<td>
+Whether to select the root node of the tree by default.
+</td>
+</tr>
+<tr>
+<td>
+Selected Background
+</td>
+<td>
+Set background color of a tree node when it is selected.
+</td>
+</tr>
+<tr>
+<td>
+Selected Text Color
+</td>
+<td rowSpan={2}>
+Set text color and size of a tree node when it is selected.
+</td>
+</tr>
+<tr>
+<td>
+Selected Text Size
+</td>
+</tr>
+<tr>
+<td>
+Data Source
+</td>
+<td>
+Displays data by binding a factory model or object service.
+</td>
+</tr>
+<tr>
+<td>
+Cancel Permission
+</td>
+<td>
+Enable it, and the tree node content is not restricted by
+data group management permission under <strong>User Security Management</strong>.
+</td>
+</tr>
+<tr>
+<td>
+Fix on Top/Right/Bottom/Left
+</td>
+<td>
+Fix the element position based on its size and
+top/right/bottom/left edge, and it does not change due to
+resolution or page position changes.
+</td>
+</tr>
+</tbody>
+</table>
+
+
+### Single List
+
+Switch and display multiple pages in the form of parallel menus.
+
+<table >
+<colgroup>
+<col style={{ width: "25.510204081632654%" }} />
+<col style={{ width: "74.48979591836735%" }} />
+</colgroup>
+<thead>
+<tr>
+<th>
+Parameter
+</th>
+<th>
+Description
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Title
+</td>
+<td>
+Enter the input box title.
+</td>
+</tr>
+<tr>
+<td>
+Title Size
+</td>
+<td rowSpan={3}>
+Set the title font size, font and color.
+</td>
+</tr>
+<tr>
+<td>
+Title Color
+</td>
+</tr>
+<tr>
+<td>
+Title Font
+</td>
+</tr>
+<tr>
+<td>
+Border Width
+</td>
+<td rowSpan={3}>
+Set width, color and type of the border.
+</td>
+</tr>
+<tr>
+<td>
+Border Type
+</td>
+</tr>
+<tr>
+<td>
+Border Color
+</td>
+</tr>
+<tr>
+<td>
+Line Height
+</td>
+<td>
+Set the line height of the single list.
+</td>
+</tr>
+<tr>
+<td>
+Selected Color
+</td>
+<td>
+The background color when the list is selected.
+</td>
+</tr>
+<tr>
+<td>
+Background Color
+</td>
+<td>
+Set background color of the element.
+</td>
+</tr>
+<tr>
+<td>
+Confirm Icon
+</td>
+<td>
+Whether to display the confirm icon before the list.
+</td>
+</tr>
+<tr>
+<td>
+Custom Icon
+</td>
+<td>
+Customize the confirm icon.
+</td>
+</tr>
+<tr>
+<td>
+Data Source
+</td>
+<td>
+Bind an object service for data display.
+</td>
+</tr>
+<tr>
+<td>
+Link Object
+</td>
+<td>
+Configure data linkages through input parameters of the data
+source.
+</td>
+</tr>
+<tr>
+<td>
+Field Binding
+</td>
+<td>
+Bind a field in the data source of an element on the canvas,
+and display it on the list.
+</td>
+</tr>
+<tr>
+<td>
+Field
+</td>
+<td>
+Select a field to be bound for display on the list.
+</td>
+</tr>
+</tbody>
+</table>
+
+
+### Table
+
+Displays large amount of structured data and often linked with
+ buttons, input boxes for data linkage. The data source can be
+ database tables or services of the bound object properties. You
+ can integrate, search for and export important system and on-site
+ data.
+
+:::info
+Data inside table cells
+ can be links, buttons, images or time.
+:::
+
+- Property
+
+<table >
+<colgroup>
+<col style={{ width: "25.510204081632654%" }} />
+<col style={{ width: "74.48979591836735%" }} />
+</colgroup>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Title</td>
+<td rowSpan={3}>
+Enter the table title and set the title font size and color.
+</td>
+</tr>
+<tr>
+<td>
+Font Size
+</td>
+</tr>
+<tr>
+<td>
+Font Color
+</td>
+</tr>
+<tr>
+<td>Required</td>
+<td>
+Set whether it is required. If it is, a red * is displayed
+in front.
+</td>
+</tr>
+<tr>
+<td>
+Fixed Header
+</td>
+<td>
+Freeze the table head.
+</td>
+</tr>
+<tr>
+<td>
+Column Adjustment
+</td>
+<td>
+Enable it, and then you can adjust the column width in
+operation center and the width will return to default after
+refresh. Only manual adjustment is available.
+</td>
+</tr>
+<tr>
+<td>
+Selectable
+</td>
+<td>
+Select it to add a checkbox in front of the first column.
+</td>
+</tr>
+<tr>
+<td>Border</td>
+<td>
+Set whether to display the inner border of table cells.
+</td>
+</tr>
+<tr>
+<td>Outline</td>
+<td>
+Set whether to display the table outline
+</td>
+</tr>
+<tr>
+<td>
+Outline Type
+</td>
+<td rowSpan={3}>
+Set width, color and type of all borders.
+</td>
+</tr>
+<tr>
+<td>
+Outline Color
+</td>
+</tr>
+<tr>
+<td>
+Outline Width
+</td>
+</tr>
+<tr>
+<td>
+Display Head
+</td>
+<td>
+Set whether to allow user to adjust head field display and
+field sequence.
+</td>
+</tr>
+<tr>
+<td>
+Head Background
+</td>
+<td>
+Set the background color of the table head.
+</td>
+</tr>
+<tr>
+<td>
+Font Color
+</td>
+<td rowSpan={4}>
+Set the font color. size, type and weight of the table head.
+</td>
+</tr>
+<tr>
+<td>
+Font Size
+</td>
+</tr>
+<tr>
+<td>Font</td>
+</tr>
+<tr>
+<td>Bold</td>
+</tr>
+<tr>
+<td>
+Table Background
+</td>
+<td>
+Set the background color of the table body.
+</td>
+</tr>
+<tr>
+<td>
+Font Color
+</td>
+<td rowSpan={3}>
+Set the font color. size and type of the table body.
+</td>
+</tr>
+<tr>
+<td>
+Font Size
+</td>
+</tr>
+<tr>
+<td>Font</td>
+</tr>
+<tr>
+<td>
+Table Height
+</td>
+<td>
+Set the table cell height.
+</td>
+</tr>
+<tr>
+<td>
+Odd Line Color
+</td>
+<td>
+Background color of odd lines in the table.
+</td>
+</tr>
+<tr>
+<td>
+Even Line Color
+</td>
+<td>
+Background color of even lines in the table.
+</td>
+</tr>
+<tr>
+<td>
+Fix on Top/Right/Bottom/Left
+</td>
+<td>
+Fix the table position based on its size and
+top/right/bottom/left edge, and it does not change due to
+resolution or page position changes.
+</td>
+</tr>
+<tr>
+<td>
+Scroll Bar Background
+</td>
+<td>
+Select the scroll bar background.
+</td>
+</tr>
+<tr>
+<td>
+Scroll Width
+</td>
+<td>
+Set the table width, and a scroll bar appears when the
+element width is exceeded.
+</td>
+</tr>
+<tr>
+<td>
+Data Source
+</td>
+<td>
+Bind an object property or service for data display.
+</td>
+</tr>
+<tr>
+<td>
+Pagination
+</td>
+<td>
+Set whether to display data in multiple pages.
+</td>
+</tr>
+<tr>
+<td>
+Lines Per Page
+</td>
+<td>
+When data is displayed in multiple pages, set the number of
+data columns in each page.
+</td>
+</tr>
+<tr>
+<td>Export</td>
+<td>
+Enable it, and then an export button and toolbar are
+displayed on the table. You can export the selected range of
+table data.
+</td>
+</tr>
+<tr>
+<td>Import</td>
+<td>
+Enable it, and then an import button and toolbar are
+displayed on the table. You can export the template before
+import.
+
+:::info
+- For tables that have primary keys, with same keys, the
+import data replace the original data. Enter NULL for
+primary key, corresponding data will be deleted.
+- For tables that have no primary keys, the import data
+will be added to the corresponding database.
+- Make sure fields in the import file are the same as
+that in the corresponding database. Otherwise, the
+import will fail.
+:::
+
+</td>
+</tr>
+<tr>
+<td>
+Import/Export Style
+</td>
+<td>
+Select the export and import icon from image or button.
+</td>
+</tr>
+<tr>
+<td>
+Toolbar Color
+</td>
+<td>
+Set the background color of table toolbar.
+</td>
+</tr>
+<tr>
+<td>
+Link Object
+</td>
+<td>
+Configure data linkages through input parameters of the data
+source.
+</td>
+</tr>
+<tr>
+<td>
+Head Config
+</td>
+<td>
+Set the table head content that is linked with the data
+source field. Click <strong>New</strong> or the drop-down box after linking data source (fields) to
+add table head.
+</td>
+</tr>
+<tr>
+<td>Field</td>
+<td>
+Field name of the table head, must be the same as that of
+the data source.
+</td>
+</tr>
+<tr>
+<td>
+Display Name
+</td>
+<td>
+Name of the table head.
+</td>
+</tr>
+<tr>
+<td>Width</td>
+<td>
+Set the column width where the current field belongs. All
+columns are split evenly when it is empty.
+</td>
+</tr>
+<tr>
+<td>
+Alignment
+</td>
+<td>
+Set the alignment of table data.
+</td>
+</tr>
+<tr>
+<td>Tips</td>
+<td>
+Set whether to display tips. When it is enabled, hover over
+a cell where cell content exceeds the cell width, you can
+see a tip window that displays the full content.
+</td>
+</tr>
+<tr>
+<td>
+Data Type
+</td>
+<td>
+Select data type of the column.
+</td>
+</tr>
+<tr>
+<td>
+Data Rendering
+</td>
+<td>
+Enter functions to render original data. Input parameters
+can be <strong>text</strong> (current data), <strong>row</strong> (current row), <strong>index</strong> (subscript of
+current row), <strong>table</strong> (all data of
+current table). For example,
+
+```js
+ function(text,row,index,table){"\n"}
+ {"{"}return text; //return the rendered data{"}"}
+```
+
+</td>
+</tr>
+<tr>
+<td>Filter</td>
+<td>
+Enable filter and a filter icon is displayed on the table.
+When the bound data source is a form template, fuzzy match
+is applied, and for object services, results are subject to
+the script.
+
+:::info
+If a field
+configured with data linkage is filtered, the results are
+subject to filter conditions.
+:::
+
+</td>
+</tr>
+<tr>
+<td>Sorting</td>
+<td>
+Enable it and then you can click table head to sort the
+column. Only available when data source is a form template.
+</td>
+</tr>
+<tr>
+<td>
+Timed Refresh
+</td>
+<td>
+Enable it and the table data refreshes at the set frequency.
+</td>
+</tr>
+<tr>
+<td>
+Refresh Frequency
+</td>
+<td>
+Set the frequency at which the table data refreshes.
+</td>
+</tr>
+</tbody>
+</table>
+<ul >
+<li>
+Data linkage: For details, see <a href="Free Layout/Data Linkage">Data Linkage</a>.
+
+:::info
+When the data
+source is object services, you need to set input parameters
+when configuring service. For details, see<a href="../../Factory Modeling/Introduction">Factory Modeling</a>.
+:::
+
+</li>
+</ul>
+
+
+### Picture
+
+Uploads pictures for display. General image types are supported
+ and you can directly drag them to the designer.
+
+<table >
+<colgroup>
+<col style={{ width: "25%" }} />
+<col style={{ width: "75%" }} />
+</colgroup>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Type</td>
+<td>
+Select between picture and pure color.
+</td>
+</tr>
+<tr>
+<td>Upload</td>
+<td>
+Upload new pictures one by one or in batches and they are
+automatically saved to static resources. You can delete
+uploaded pictures one by one but cannot delete picture
+directory.
+
+:::info
+Pictures are
+exported when exporting APP for easy migration, and when
+exporting a page, pictures on the page will not be
+exported.
+:::
+
+</td>
+</tr>
+<tr>
+<td>
+Picture URL
+</td>
+<td>
+Automatically generated when uploading pictures. You can
+also manually enter corresponding URL.
+</td>
+</tr>
+<tr>
+<td>
+Aspect Ratio
+</td>
+<td>
+Select the background image display.
+<ul >
+<li>
+<strong>No Zoom</strong>: Displays the
+ image as it is.
+</li>
+<li>
+<strong>Subject to Width</strong>:
+ Stretches the image in equal proportion with the same
+ width as the block.
+</li>
+<li>
+<strong>Subject to Height</strong>:
+ Stretches the image in equal proportion with the same
+ height as the block.
+</li>
+<li>
+<strong>Covered with</strong>: The
+ background image covers the whole block.
+</li>
+</ul>
+</td>
+</tr>
+<tr>
+<td>
+Read Only
+</td>
+<td>
+Set the read and write status of the element. When set to <strong>Read Only</strong>, you cannot
+edit it in operation center.
+</td>
+</tr>
+</tbody>
+</table>
+
+
+### Bookmark Page
+
+Used for switching between multiple tabs.
+<table >
+<colgroup>
+<col style={{ width: "25%" }} />
+<col style={{ width: "75%" }} />
+</colgroup>
+<thead>
+<tr>
+<th>
+Parameter
+</th>
+<th>
+Description
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Options
+</td>
+<td>
+Select data source between <strong>Static</strong> or <strong>Dynamic</strong>.
+<ul >
+<li>
+<strong>Static</strong>: Manually
+ enter options to be the drop-down list.
+</li>
+<li>
+<strong>Dynamic</strong>: Displays
+ data through binding object services.
+</li>
+</ul>
+</td>
+</tr>
+<tr>
+<td>
+Link Object
+</td>
+<td>
+Configure data linkages through input parameters of the data
+source.
+</td>
+</tr>
+</tbody>
+</table>
+
+
+### Upload
+
+Set the interaction event of the element to <strong>Upload Complete</strong>, and write
+ corresponding script. In operation center, you can directly click
+ the <strong>Upload</strong> button to upload files.
+
+<table >
+
+<colgroup>
+<col style={{ width: "25%" }} />
+<col style={{ width: "75%" }} />
+</colgroup>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Title</td>
+<td>
+Enter the element title.
+</td>
+</tr>
+<tr>
+<td>
+Multi Select
+</td>
+<td>
+Whether to allow user to upload multiple files at one
+upload.
+</td>
+</tr>
+<tr>
+<td>
+Display List
+</td>
+<td>
+Whether to display the list of uploaded files.
+</td>
+</tr>
+<tr>
+<td>
+Upload Type
+</td>
+<td>
+Types of files that can be uploaded.
+</td>
+</tr>
+<tr>
+<td>
+List Type
+</td>
+<td>
+Styles of uploaded file list.
+</td>
+</tr>
+<tr>
+<td>
+Max. Upload
+</td>
+<td>
+The maximum number of uploading files. The default is
+unlimited.
+</td>
+</tr>
+<tr>
+<td>
+Read Only
+</td>
+<td>
+Set the read and write status of the element. When set to <strong>Read Only</strong>, you cannot
+edit it in operation center.
+</td>
+</tr>
+</tbody>
+</table>
+
+
+### Bread Crumbs
+
+Displays the current page hierarchy. Generally used in multi-level
+ navigation.
+
+:::info
+Bread crumbs depend on
+ script configuration to render and interaction events to interact.
+:::
+
+
+### Search
+
+Allows user to search for contents in need. Fuzzy match is
+ available.
+
+<table >
+<colgroup>
+<col style={{ width: "25%" }} />
+<col style={{ width: "75%" }} />
+</colgroup>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Data Port
+</td>
+<td>
+Data source port of the element. It can be <strong>Object Service</strong> or <strong>Data Link</strong>.
+</td>
+</tr>
+<tr>
+<td>
+Request Address
+</td>
+<td>
+Port address called by the element.
+</td>
+</tr>
+<tr>
+<td>
+Request Method
+</td>
+<td>
+Request method corresponding to the request address.
+</td>
+</tr>
+<tr>
+<td>
+Search Field
+</td>
+<td rowSpan={3}>
+Key of search field and search result field, and number of
+search results that corresponds to the request.
+</td>
+</tr>
+<tr>
+<td>
+Item Field
+</td>
+</tr>
+<tr>
+<td>
+Display Volume
+</td>
+</tr>
+<tr>
+<td>
+Display Field
+</td>
+<td>
+The corresponding field of search results.
+</td>
+</tr>
+<tr>
+<td>
+Field Value
+</td>
+<td>
+The actual value of the current selected search result.
+</td>
+</tr>
+<tr>
+<td>Title</td>
+<td>
+Enter the element title.
+</td>
+</tr>
+<tr>
+<td>
+Placeholder
+</td>
+<td>
+Enter placeholder of the search box.
+</td>
+</tr>
+<tr>
+<td>
+Title Width
+</td>
+<td rowSpan={4}>
+Set the title width, font size, font and color.
+
+:::info
+Title
+automatically wraps when exceeding the set width.
+:::
+
+</td>
+</tr>
+<tr>
+<td>
+Title Size
+</td>
+</tr>
+<tr>
+<td>
+Title Color
+</td>
+</tr>
+<tr>
+<td>
+Title Font
+</td>
+</tr>
+<tr>
+<td>
+Border Type
+</td>
+<td rowSpan={3}>
+Set width, color and type of the border.
+</td>
+</tr>
+<tr>
+<td>
+Border Color
+</td>
+</tr>
+<tr>
+<td>
+Border Width
+</td>
+</tr>
+<tr>
+<td>
+Background Color
+</td>
+<td>
+Set background color of the element.
+</td>
+</tr>
+</tbody>
+</table>
+
+ 
+:::info
+Make sure the
+ corresponding fields used in request address, method, search
+ field, item field, display volume, display field, field value and
+ the called port are the same.
+:::
+
+
+### Time
+
+Displays the current time.
+<table >
+<colgroup>
+<col style={{ width: "25%" }} />
+<col style={{ width: "75%" }} />
+</colgroup>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Text</td>
+<td>
+Set the font, font size and color of the time.
+</td>
+</tr>
+<tr>
+<td>Format</td>
+<td>
+Display format and mode of time.
+</td>
+</tr>
+<tr>
+<td>
+Background
+</td>
+<td>
+Background color, rounder corner angle, stroke width and
+color of the element.
+</td>
+</tr>
+<tr>
+<td>Border</td>
+<td>
+Rounded corner, width and color of the border.
+</td>
+</tr>
+</tbody>
+</table>
+
+### Date
+
+Displays the current date. Only available in grid layout.
+<table >
+<colgroup>
+<col style={{ width: "25%" }} />
+<col style={{ width: "75%" }} />
+</colgroup>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Language</td>
+<td>
+Select between Chinese and English.
+</td>
+</tr>
+<tr>
+<td>Format</td>
+<td>
+Display format of date.
+</td>
+</tr>
+<tr>
+<td>Text</td>
+<td>
+Set the font, font size and color of the date.
+</td>
+</tr>
+<tr>
+<td>
+Background
+</td>
+<td>
+Background color, rounder corner angle, stroke width and
+color of the element.
+</td>
+</tr>
+</tbody>
+</table>
+
+
+## Controls Library
+
+### Real-Time Alarm and History Alarm
+
+Both alarm elements automatically link with the set alarms in
+ object instances.
+
+<ul >
+<li>
+Real-time alarm: When an alarm is triggered, you can confirm the
+alarm information in operation center.
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/appDesign/98.png"/>
+</li>
+<li>
+History alarm: You can view all history alarms in time
+descending order.
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/appDesign/99.png"/>
+</li>
+</ul>
+
+
+### Drive Video and H.265 Video
+
+Displays real-time video and video playback is available.
+
+:::info
+Only one H.265 video
+ element is support on one page.
+:::
+
+**Property Configuration**
+
+<ul >
+<li>
+Component ID: Automatically generated. You can use it for
+writing scripts.
+</li>
+<li>
+Real time video:
+<ul >
+<li>
+Auto play: Automatically plays the video when opening the
+page.
+</li>
+<li>
+Video cycle: Add 5 video sources at most to play them
+repeatedly in the set period.
+</li>
+<li>
+Collector: Select the collector that delivers the set
+video source.
+</li>
+<li>
+Video object: Select the object instance of real-time
+video.
+</li>
+</ul>
+</li>
+<li>
+Playback: You can select video sources different from that of
+real-time video.
+<ul >
+<li>
+Collector: Select the collector that delivers the set
+video source.
+</li>
+<li>
+Video object: Select the object instance of playback
+video, and the corresponding collector source type is
+HCNETSDK.
+</li>
+</ul>
+</li>
+</ul>
+
+
+**Configuration Process**
+
+<ol >
+<li>
+Configure source points and tags of video drive types in
+collector software.
+</li>
+<li>
+Object instances with the same name as collector tags are
+automatically generated in supOS platform.
+</li>
+<li>
+In business designer, select corresponding object instances to
+be data sources bound with video elements.
+</li>
+</ol>
+
+
+
+### video Wall
+
+Binds with multiple video elements and arranges them. You can
+ switch real-time video and history video on each video element in
+ operation center.
+
+:::info
+H.265 video sources are
+ not supported.
+:::
+
+<ul >
+<li>
+Property
+<ul >
+<li>
+Component ID: Automatically generated. You can use it for
+writing scripts.
+</li>
+<li>Layout: Set the layout of the bound video sources.</li>
+</ul>
+</li>
+<li>
+Title
+<ul >
+<li>Display: Display or hide the video wall title.</li>
+<li>Title: Set the video wall title.</li>
+<li>
+Text style: Set the font, size, color, weight and style of
+the title.
+</li>
+<li>Alignment: Title alignment.</li>
+<li>Background color: Title background color.</li>
+</ul>
+</li>
+<li>
+Real time: Same as <strong>Drive Video</strong>.
+</li>
+<li>
+Playback: Same as <strong>Drive Video</strong>.
+</li>
+</ul>
+
+
+### Timer
+
+<table >
+<colgroup>
+<col style={{ width: "25.510204081632654%" }} />
+<col style={{ width: "74.48979591836735%" }} />
+</colgroup>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Component ID
+</td>
+<td>
+Automatically generated. You can use it for writing scripts.
+</td>
+</tr>
+<tr>
+<td>
+Component Name
+</td>
+<td>
+Component name. It cannot be repeated.
+</td>
+</tr>
+<tr>
+<td>
+Time Interval
+</td>
+<td>
+Timer interval. The default is the timer refreshes every
+second.
+</td>
+</tr>
+<tr>
+<td>
+Immediate Run
+</td>
+<td>
+Run the script after elements load completely.
+</td>
+</tr>
+<tr>
+<td>
+Run Times
+</td>
+<td>
+Set the times of running the script. If <strong>Immediate Run</strong> is enabled,
+it takes up one run time.
+</td>
+</tr>
+<tr>
+<td>Script</td>
+<td>
+The system provides refresh script. You can also customize.
+</td>
+</tr>
+</tbody>
+</table>
+
+
+### Trend
+
+Binds multiple data sources and records data points at a set time
+ interval to form a trend chart. The trend is dynamically
+ refreshed.
+
+:::info
+In free layout, trend
+ parameters configured in operation center are saved, but not in
+ grid layout.
+:::
+
+<table >
+<colgroup>
+<col style={{ width: "25.510204081632654%" }} />
+<col style={{ width: "74.48979591836735%" }} />
+</colgroup>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Component ID
+</td>
+<td>
+Automatically generated. You can use it for writing scripts.
+</td>
+</tr>
+<tr>
+<td>
+Data Source
+</td>
+<td>
+Select a numeric data source. You can select up to 8 data
+sources and configure different line styles and colors for
+them.
+</td>
+</tr>
+<tr>
+<td>
+Upper Limit/Lower Limit
+</td>
+<td>
+Based on the set alarm value of the data source, on the
+trend chart, the upper and lower limit are displayed in red.
+
+:::info
+If there are
+multiple sets of alarm rules, the upper limit takes the
+lowest value and the lower limit takes the highest.
+:::
+
+</td>
+</tr>
+<tr>
+<td>
+Single Y Axis
+</td>
+<td>
+Enable it to display only one range of Y axis and it
+integrates all data sources, meaning the upper/lower limit
+of a single Y axis is the highest/lowest limit from all data
+sources.
+
+:::info
+When it is
+disabled, ranges of all data sources will be displayed on
+the Y axis interchangeably according to the current
+selected data source.
+:::
+
+</td>
+</tr>
+<tr>
+<td>
+Axis Color
+</td>
+<td>
+Set Y axis color when <strong>Single Y Axis</strong> is enabled.
+</td>
+</tr>
+<tr>
+<td>
+Range Adaptation
+</td>
+<td>
+The Y axis adapts its range according to tags value.
+</td>
+</tr>
+<tr>
+<td>
+Y Axis Value
+</td>
+<td>
+Select from <strong>Quantity</strong> and <strong>Percentage</strong>. Percentage
+converts from quantity automatically.
+</td>
+</tr>
+<tr>
+<td>
+Time Period
+</td>
+<td>
+Time period that the trend chart covers. The default is 8
+hours.
+</td>
+</tr>
+<tr>
+<td>
+Display Toolbar
+</td>
+<td>
+Enable it to display toolbar.
+</td>
+</tr>
+<tr>
+<td>
+Display Mode
+</td>
+<td>
+Select to display multiple properties that are currently
+opened in tiles or lists.
+
+:::info
+By default,
+only two rows are displayed, and you can scroll to view
+more.
+:::
+
+</td>
+</tr>
+<tr>
+<td>Colors</td>
+<td>
+Set colors of background, table, border and slide bar.
+</td>
+</tr>
+</tbody>
+</table>
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/appDesign/37-1.png" />
+
+
+### To Do List
+
+Automatically links with workflows of the current APP, and you can
+ manage all your to-do items through this element.
+
+
+**List Description**
+
+<ul >
+<li>To Do: Displays to do tasks of user.</li>
+<li>Submitted: Displays tasks submitted by user.</li>
+<li>
+Initiated: Displays tasks initiated by user and the current
+progress can be viewed.
+</li>
+<li>
+Concerned: Displays tasks concerned by user and the current
+progress can be viewed.
+</li>
+<li>
+Entrusted: Displays tasks entrusted by user and it can be
+cancelled.
+</li>
+</ul>
+ 
+:::info
+Click to-do item link
+to go to the corresponding workflow details page.
+:::
+
+**Data Configuration**
+
+You can set the content displayed on each list. The table below
+takes to do list as an example.
+
+<ul >
+<li>
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/appDesign/78.png" />: Display the corresponding item on the list.
+</li>
+<li>
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/appDesign/79.png" />: Set the font, font color and size of the corresponding
+field, and whether to prompt.
+</li>
+<li>
+Add custom property: Display other custom properties of the
+APP on the list. Make sure to enter <strong>Component ID</strong> of an element
+on the APP in <strong>Value</strong> box to
+link corresponding data.
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/appDesign/100.png"/>
+
+</li>
+</ul>
+
+
+**Property Configuration**
+Configure element styles of the to do list.
+<table >
+<colgroup>
+<col style={{ width: "25.510204081632654%" }} />
+<col style={{ width: "74.48979591836735%" }} />
+</colgroup>
+<thead>
+<tr>
+<th>
+Parameter
+</th>
+<th>
+Description
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Component ID
+</td>
+<td>
+Automatically generated. You can use it for writing
+scripts.
+</td>
+</tr>
+<tr>
+<td>
+Component Name
+</td>
+<td>
+Component name. It cannot be repeated.
+</td>
+</tr>
+<tr>
+<td>
+Articles per Page
+</td>
+<td>
+Set the number items displayed on each page.
+</td>
+</tr>
+<tr>
+<td>
+Border
+</td>
+<td rowSpan={4}>
+Set whether border exists and its width, color and type.
+</td>
+</tr>
+<tr>
+<td>
+Border Type
+</td>
+</tr>
+<tr>
+<td>
+Border Color
+</td>
+</tr>
+<tr>
+<td>
+Border Size
+</td>
+</tr>
+<tr>
+<td>
+Head Background
+</td>
+<td>
+Set the background color of the table head.
+</td>
+</tr>
+<tr>
+<td>
+Font Color
+</td>
+<td rowSpan={3}>
+Set the font color. size and type of the table head.
+</td>
+</tr>
+<tr>
+<td>
+Font Size
+</td>
+</tr>
+<tr>
+<td>
+Font
+</td>
+</tr>
+<tr>
+<td>
+Table Background
+</td>
+<td>
+Set the background color of the table body.
+</td>
+</tr>
+<tr>
+<td>
+Font Color
+</td>
+<td rowSpan={3}>
+Set the font color. size and type of the table body.
+</td>
+</tr>
+<tr>
+<td>
+Font Size
+</td>
+</tr>
+<tr>
+<td>
+Font
+</td>
+</tr>
+<tr>
+<td>
+Odd Line Color
+</td>
+<td>
+Background color of odd lines on the list.
+</td>
+</tr>
+<tr>
+<td>
+Even Line Color
+</td>
+<td>
+Background color of even lines on the list.
+</td>
+</tr>
+</tbody>
+</table>
+
+
+
+### Report
+
+Data sources of report element can be object instances, templates,
+service real-time data or relational database, and database can
+either be from third-party or manually creation. The report element
+is often linked with buttons, search boxes, input boxes to search
+for and export important data.
+
+#### Property Configuration
+
+<ul >
+<li>
+Property
+<table>
+<colgroup>
+<col style={{ width: "25.510204081632654%" }} />
+<col style={{ width: "74.48979591836735%" }} />
+</colgroup>
+<thead>
+<tr>
+<th>
+Parameter
+</th>
+<th>
+Description
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Component ID
+</td>
+<td>
+Automatically generated. You can use it for writing
+scripts.
+</td>
+</tr>
+<tr>
+<td>
+Component Name
+</td>
+<td>
+Component name. It cannot be repeated.
+</td>
+</tr>
+<tr>
+<td>
+Fill Type
+</td>
+<td>
+<ul >
+<li>
+<strong>Replace</strong>:
+Original data is replaced when filling the bound
+data source.
+</li>
+<li>
+<strong>Insert</strong>: A new
+column or row is added when filling the bound data
+source.
+</li>
+</ul>
+</td>
+</tr>
+<tr>
+<td>
+Scroll Bar
+</td>
+<td>
+Set display mode of the scroll bar. When setting to <strong>Automatic</strong>, data
+inside the report exceeds the element width and the
+scroll bar is displayed.
+</td>
+</tr>
+<tr>
+<td>
+Fix on Top/Right/Bottom/Left
+</td>
+<td>
+Fix the element position based on its size and
+top/right/bottom/left edge, and it does not change due
+to resolution or page position changes.
+</td>
+</tr>
+<tr>
+<td>
+Run Edit
+</td>
+<td>
+You can edit the report in operation center. Often
+used when you need to fill in the report.
+</td>
+</tr>
+<tr>
+<td>
+Zoom (Small)/Zoom (Large)
+</td>
+<td>
+Font size in the report adapts to the resolution when
+it increases/decreases.
+</td>
+</tr>
+<tr>
+<td>
+Sheet Page
+</td>
+<td>
+Displays sheets on the bottom.
+</td>
+</tr>
+<tr>
+<td>
+Background Color
+</td>
+<td>
+Set background color of the element.
+</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+Parameter: Input parameters of the report. Insert sql commands
+or object services into the report in design center, and then
+you can link the report with other elements through sql
+commands or input parameters of services. For details, see <a href="#report_linkage">Report Linkage</a>.
+</li>
+<li>
+Mobile: Set the display mode of the report on mobile clients,
+and it adapts to the client resolution.
+</li>
+<li>
+Interact: Refer to the designing process under each layout for
+interaction details.
+</li>
+</ul>
+
+#### Toolbar Configuration
+
+Functions of the report are similar to excel and only special
+features are listed in this section.
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/appDesign/80.png"/>
+
+<ul >
+<li>
+<strong>Cell Format</strong>: Aside from
+general functions, under <strong>Authority</strong> tab, you can
+grant different permissions of the selected cells to different
+users in operation center, such as read only, read and write
+and hide.
+</li>
+<li>
+<strong>Right-Click Menu</strong>: Click the <strong>Customize</strong>
+tab, and then click <strong>Right-Click Menu</strong> to add
+options to a right-click menu on the report.
+
+You can select actions and edit its script, import, and
+export the menu to JSON file and call it in other report
+elements.
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/appDesign/81.png"/>
+
+</li>
+<li>
+<strong>Event Extensions</strong>: Click the <strong>Customize</strong> tab, and then click <strong>Event Extensions</strong> customize
+events such as edit cell, click and finish editing.
+
+You can export the event to JSON file and call it in other
+report elements.
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/appDesign/82.png"/>
+
+:::info
+<strong>Right-Click Menu</strong> and <strong>Event Extensions</strong> are only
+available in grid layout.
+:::
+
+</li>
+</ul>
+
+#### Data Source Management
+Add object instances, templates, services or data query
+commands, and then you can directly drag corresponding
+properties, fields or parameters into the report.
+
+:::info
+A <strong>key</strong> field is generated after adding object
+data. It adds a column of index number for those data. Time
+series data will not generate <strong>key</strong>.
+:::
+
+**Add Object Instance**
+
+You can add object template, instance and service by selecting <img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/appDesign/43.png" /> > <strong>Object Instance</strong> under <strong>Data Source Management</strong>.
+Data type can be real-time and history.
+
+:::info
+- Only the first 200 properties can be displayed of each
+instance. You can right-click the cell, select <strong>Insert Formula</strong> > <strong>Data Source</strong> to add more.
+- Right-click a cell and select <strong>Insert Formula</strong> > <strong>Built-in Function</strong>, enter related information to add a date function to the cell.
+:::
+
+<ul >
+<li>
+Add object instance
+<ol >
+<li>
+Select <img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/appDesign/43.png"/> > <strong>Object Instance</strong> under <strong>Data Source Management</strong>.
+</li>
+<li>
+Select an object instance under the <strong>
+Object instance-property
+</strong>  tab in the pop-up window, and then click <strong>Save</strong>.
+</li>
+<li>
+Drag the added instance from the list to the report, and then select the cell, configure its properties under <strong>Property Configuration</strong> at the lower-right corner.
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/appDesign/83.png"/>
+
+<table>
+<colgroup>
+<col style={{ width: "24.509803921568626%" }} />
+<col style={{ width: "75.49019607843137%" }} />
+</colgroup>
+<thead>
+<tr>
+<th>
+Parameter
+</th>
+<th>
+Description
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Display Type
+</td>
+<td>
+Select whether to display time or value of the
+history data in the cell.
+</td>
+</tr>
+<tr>
+<td>
+Time Granularity
+</td>
+<td>
+Time interval at which the history data is
+integrated and analyzed.
+</td>
+</tr>
+<tr>
+<td>
+Numeric Type
+</td>
+<td>
+Select calculation methods which are applied to
+the data collected according to the set <strong>Time Granularity</strong>.
+</td>
+</tr>
+<tr>
+<td>
+Fill Type
+</td>
+<td>
+Select the data to fill in the report.
+<ul >
+<li>
+Autofill: Select fill direction and maximum
+number (1-500) of data to be displayed.
+</li>
+<li>
+Fixed: Get the data of a fixed index from 1
+to 500.
+</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ol>
+</li>
+<li>
+Add object property or service
+<ol >
+<li>
+Select <img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/appDesign/43.png"/> > <strong>Object Instance</strong> under <strong>Data Source Management</strong>.
+</li>
+<li>
+Select an object property or service under the <strong>Object Template</strong> or <strong>Object Instance-Service
+</strong> tab in the pop-up window, and then click <strong>Save</strong>.
+</li>
+<li>
+ Drag the added property or service from the list to the
+ report, and then click the cell, configure its
+ properties under <strong>Property Configuration</strong> at the lower-right corner.
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/appDesign/84.png"/>
+
+<table>
+<colgroup>
+<col style={{ width: "24.509803921568626%" }} />
+<col style={{ width: "75.49019607843137%" }} />
+</colgroup>
+<thead>
+<tr>
+<th>
+Parameter
+</th>
+<th>
+Description
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Data Source
+</td>
+<td>
+Switch to other output parameters of the data
+source.
+</td>
+</tr>
+<tr>
+<td>
+Filling Orientation
+</td>
+<td>
+Select data filling direction.
+</td>
+</tr>
+<tr>
+<td>
+Maximum Number
+</td>
+<td>
+The maximum number of data that can be
+displayed. It ranges from 0-200.
+</td>
+</tr>
+<tr>
+<td>
+Fill and Merge
+</td>
+<td>
+Enable it and then when filling a cell, adjacent
+cells on the filling direction will be merged
+together.
+</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ol>
+</li>
+</ul>
+
+**Add Data Query**
+
+Search results of third party data sources such as mysql,
+oracle, sqlserver and AHNA.
+
+<ol >
+<li>
+Select <img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/appDesign/43.png"/> > <strong>Data Search</strong> under <strong>Data Source Management</strong>.
+</li>
+<li>
+Select a data source from databases that have been added
+under <strong>Global Configuration</strong>.
+</li>
+<li>
+Enter SQL commands.You can preview search results.
+
+:::info
+${<em>param</em>} can be used as a unspecific parameter when entering SQL commands. Make sure the ${<em>param</em>} is displayed the same as the real parameter. For
+example, the original parameter is 'zhangsan' (string),
+and the command can be 
+<code>
+select * from<em>tablename</em> where user='${<em>param</em>}'
+</code>.
+:::
+
+</li>
+<li>
+Enter <strong>Data Source Name</strong> as
+the data set for search results.
+</li>
+<li>
+Click <strong>OK</strong>, and then the
+result data set is displayed under <strong>Data Source Management</strong>.
+</li>
+<li>
+Drag a field to the report, and then click the cell to
+configure properties.
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/appDesign/101.png"/>
+
+<table>
+<colgroup>
+<col style={{ width: "24.509803921568626%" }} />
+<col style={{ width: "75.49019607843137%" }} />
+</colgroup>
+<thead>
+<tr>
+<th>
+Parameter
+</th>
+<th>
+Description
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Assign Primary Key
+</td>
+<td>
+Set a filed in the table to be the primary key. You
+can also select and combine multiple fields to be a
+primary key to ensure its uniqueness.
+</td>
+</tr>
+<tr>
+<td>
+Type Conversion
+</td>
+<td>
+Convert time data in Oracle. Placeholder <strong>$$</strong> is used as
+column name, and <strong>$$$</strong> is value.
+
+:::tip
+Input format example
+- `to_timestamp($$$,’yyyy-MM-dd HH24:MI:ss.ff’)`: Single cell conversion of data type.
+- `cast($$ as decimal(10,2))`: Columndata type conversion.
+:::
+
+</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ol>
+
+**Parent Cell**
+Bind the selected cell with custom parent cell.
+<ul >
+<li>
+Set one parent cell: Set only one parent cell, the sub cells
+copy filling direction and number of parent cell and the
+relative position stays the same.
+</li>
+<li>
+Set both cells: Data generated on sub cells will be filtered
+according to its parent cell to produce result sets that
+conform to report logics.
+</li>
+</ul>
+Following operations use left parent cell as an example.
+<ol >
+<li>
+Set the <strong>Fill Type</strong> of the
+report to <strong>Insert</strong>.
+</li>
+<li>
+Select a cell to be the sub cell, and then select <strong>Customize</strong> under <strong>Left Parent Cell</strong>.
+</li>
+<li>
+Select a parent cell for the set sub cell, and enter the cell
+row and column number.
+
+Generally, select a parent cell with formulas, such as
+formulas of history data, table data, service data and date
+function.
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/appDesign/85.png"/>
+
+:::info
+After setting
+parent cells, data on the table is automatically
+deduplicated and reorganized evenly. No relations between
+columns by default and relational data can only be correctly
+displayed after parent cell settings.
+:::
+
+</li>
+</ol>
+
+**Aggregation Formula**
+
+Calculate cells set with formulas.
+<ol >
+<li>
+Drag data into a cell, and set the <strong>Data Type</strong> to <strong>History Data</strong> under <strong>Property Configuration</strong>.
+</li>
+<li>
+Select another cell, and then set a formula to it which
+relates to the cell with history data.
+</li>
+<li>
+Click <strong>Aggregation Formula</strong> at the lower-right corner.
+</li>
+<li>
+Select <strong>Customize</strong>, and then
+enter the location of the cell with a formula.
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/appDesign/86.png"/>
+</li>
+<li>
+Save settings, and then click <strong>Preview</strong>.
+
+You can see the cell with a formula is displaying
+calculation results of corresponding formula and hirtory
+data.
+
+</li>
+</ol>
+
+**Operation**
+
+You can update and delete data in relational database through
+setting a cell as a save or delete button under <strong>Operation</strong>.
+
+<ol >
+<li>
+Select an empty cell on the report, select <strong>Data Search</strong> and enter sql
+commands to obtain a data source for the cell with execution
+results.
+
+For details, see <a href="#data_source_management">Data Source Management</a>.
+</li>
+<li>Select another empty cell to be the operation button.</li>
+<li>
+Click <strong>Operation</strong> at the
+power-right corner, and then set the operation.
+
+:::info
+The operation
+button can only be correctly displayed after setting it
+parent cells.
+:::
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/appDesign/87.png"/>
+
+<table>
+<colgroup>
+<col style={{ width: "25.510204081632654%" }} />
+<col style={{ width: "74.48979591836735%" }} />
+</colgroup>
+<thead>
+<tr>
+<th>
+Parameter
+</th>
+<th>
+Description
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Table Name
+</td>
+<td>
+The table name corresponding to fields you want to
+change.
+</td>
+</tr>
+<tr>
+<td>
+Data Source
+</td>
+<td>
+The data source corresponding to fields you want to
+change.
+</td>
+</tr>
+<tr>
+<td>
+Operation Type
+</td>
+<td>
+<ul>
+<li>
+<strong>Renew</strong>: You can
+save the edited cell in operation center.
+</li>
+<li>
+<strong>Delete</strong>: You can
+delete the selected cell in operation center.
+</li>
+</ul>
+</td>
+</tr>
+<tr>
+<td>
+Operating Range
+</td>
+<td>
+Select ranges for the operation to apply to.
+</td>
+</tr>
+<tr>
+<td>
+Text
+</td>
+<td>
+The text for the operation button.
+</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+Select <strong>Format</strong> > <strong>Cell Format</strong> > <strong>Authority</strong> on the report, and then grant read and write permission of the
+selected cell to users.
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/appDesign/88.png"/>
+
+</li>
+<li>
+Enable <strong>Run Edit</strong> for the
+report under <strong>Property</strong>.
+</li>
+<li>
+Save settings, and then click <strong>Preview</strong>.
+
+Now you can update or delete the report data by operation
+buttons.
+
+:::info
+If the primary
+key of the data source is changed and saved, you need to
+refresh the current page for further changes.
+:::
+
+</li>
+</ol>
+<span id="report_linkage"></span>
+
+**Report Linkage**
+
+
+You can link the report to other elements such as button, search
+box and input box to integrate, search for and export important
+data. In the report, each data source has a corresponding
+linkage button.
+
+:::info
+This chapter demonstrates data linkage of report in free layout.
+:::
+
+- History Data Linkage
+
+According to the linked date element range, the report
+displays corresponding history data.
+
+<ol >
+<li>Add a data source.</li>
+<li>
+Add two date elements and set them to start and end date
+respectively.
+
+:::info
+Make sure to
+change the name of both elements. Otherwise, they cannot
+be bound to the report.
+:::
+
+</li>
+<li>
+Select the report and then click <strong>Open</strong> next
+to <strong>Date Binding</strong> under <strong>Parameter</strong>.
+</li>
+<li>
+Bind <strong>minDate</strong> and <strong>maxDate</strong> to corresponding start and end date elements, and then click <strong>Save</strong>.
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/appDesign/102.png"/>
+
+</li>
+</ol>
+
+- Form Data Linkage
+
+This section uses <strong>Data Search</strong> to be the data
+source as an example.
+
+<ol >
+<li>
+Double-click the report, and then under <strong>Data Source Management</strong>, click <strong>Data Search</strong> to add a data source with the
+result of the sql commands.
+</li>
+<li>
+
+Write a sql command and use `${"{"}parameter{"}"}` as the input field that can link with the report.
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/appDesign/103.png"/>
+
+</li>
+<li>
+Drag data fields to the report, and then save the table and
+go back to the page canvas.
+</li>
+<li>
+Add an input box to the canvas, and the click <strong>Open</strong> next to the data source name you set
+after writing sql commands, to link the input box to the
+report.
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/appDesign/104.png"/>
+
+</li>
+<li>
+Click <strong>Save</strong>, and then preview the page.
+
+Enter a parameter in the input box, and then the report
+displays data filtered based on the input content.
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/appDesign/105.png"/>
+
+</li>
+</ol>
+
+
+**Report Group**
+
+Group the report to display data by time or field.
+ 
+:::info
+Available in grid
+layout only.
+:::
+
+<ol >
+<li>
+Drag object properties to cells from the data source list, and
+then set cells that contain the property based on which the
+report data is grouped to be the parent cell and join them.
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/appDesign/90.png"/>
+</li>
+<li>
+Use the parent cell data as the general time period, set its
+property at the lower-right corner.
+<ul >
+<li>
+Set <strong>Data Type</strong> to <strong>History Data</strong>.
+</li>
+<li>
+Set <strong>Display Type</strong> to <strong>Display Time</strong>.
+</li>
+<li>
+Set <strong>Time Granularity</strong> to <strong>1 Week</strong>.
+</li>
+<li>
+Set <strong>Group Key Value</strong> to <strong>Time</strong>.
+</li>
+<li>
+Set <strong>Fill Type</strong> to <strong>Autofill</strong>
+and <strong>Filling Orientation</strong> to <strong>Horizontal Padding</strong>.
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/appDesign/91.png"/>
+
+</li>
+</ul>
+</li>
+<li>
+Similarly, set the property of the first sub cell, which is
+the time period of groups.
+<ul >
+<li>
+Set <strong>Data Type</strong> to <strong>History Data</strong>.
+</li>
+<li>
+Set <strong>Display Type</strong> to <strong>Display Time</strong>.
+</li>
+<li>
+Set <strong>Time Granularity</strong> to <strong>1 Day</strong>.
+</li>
+<li>
+Set <strong>Group Key Value</strong> to <strong>Time</strong>.
+</li>
+<li>
+Set <strong>Fill Type</strong> to <strong>Autofill</strong>
+and <strong>Filling Orientation</strong> to <strong>Vertical Padding</strong>.
+</li>
+</ul>
+</li>
+<li>
+Set the property of the second sub cell, which is the average
+flow.
+<ul >
+<li>
+Set <strong>Data Type</strong> to <strong>History Data</strong>.
+</li>
+<li>
+Set <strong>Display Type</strong> to <strong>Display Value</strong>.
+</li>
+<li>
+Set <strong>Time Granularity</strong> to <strong>1 Day</strong>.
+</li>
+<li>
+Set <strong>Numeric Type</strong> to <strong>Average Value</strong>.
+</li>
+<li>
+Set <strong>Group Key Value</strong> to <strong>Time</strong>.
+</li>
+<li>
+Set <strong>Fill Type</strong> to <strong>Autofill</strong>
+and <strong>Filling Orientation</strong> to <strong>Vertical Padding</strong>.
+</li>
+</ul>
+</li>
+<li>
+Set the property of the third sub cell, which is the maximum
+temperature.
+<ul >
+<li>
+Set <strong>Data Type</strong> to <strong>History Data</strong>.
+</li>
+<li>
+Set <strong>Display Type</strong> to <strong>Display Time</strong>.
+</li>
+<li>
+Set <strong>Time Granularity</strong> to <strong>1 Day</strong>.
+</li>
+<li>
+Set <strong>Numeric Type</strong> to <strong>Maximum Value</strong>.
+</li>
+<li>
+Set <strong>Group Key Value</strong> to <strong>Time</strong>.
+</li>
+<li>
+Set <strong>Fill Type</strong> to <strong>Autofill</strong>
+and <strong>Filling Orientation</strong> to <strong>Vertical Padding</strong>.
+</li>
+</ul>
+</li>
+<li>
+Save settings and then click <strong>Preview</strong>.
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/appDesign/92.png"/>
+
+</li>
+</ol>
+
+**Related Operations**
+
+- Print Report
+
+Add a button in the design center, add a click event and write
+a script for the button to print the report in the operation
+center.
+
+```js
+var report = scriptUtil.getRegisterReactDom('
+{component ID}').report;{"\n"}report.doPrint();
+```
+
+- Export Report
+
+Add a button in the design center, add a click event and write
+a script for the button to export the report in the operation
+center.
+
+```js
+var report = scriptUtil.getRegisterReactDom('
+{component ID}').report;{"\n"}
+report.doExport('xlsx');
+```
+
+- Filter Report
+
+Advanced filter for service or relational data. You can add
+one or more filtering conditions to view the filtered data in
+the operation center.
+
+<ol >
+<li>
+Select a cell with data, and then select <strong>Filter</strong> > <strong>Advanced Filter</strong> from the toolbar.
+</li>
+<li>
+Set filtering conditions in the pop-up window.
+<ol>
+<li>
+ Select whether to apply filtering conditions of the
+ parent cell to the selected cell. If applied, the result
+ conforms to filtering conditions of both cells.  
+
+:::info
+This is only available when both cells using data from
+the same data set.
+:::
+
+</li>
+<li>
+ Select condition types.
+<ul >
+<li>
+<strong>General</strong>: Define
+filtering conditions to data columns.
+</li>
+<li>
+<strong>Formula</strong>: Use
+formulas to set filtering conditions. Presently not
+available.
+</li>
+</ul>
+</li>
+<li>
+Set filtering conditions, and then click <strong>OK</strong>.
+
+You can add more conditions and set their relations.
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/appDesign/89.png"/>
+
+</li>
+</ol>
+</li>
+</ol>
+
+
+
+### Web Page
+
+Displays other web pages, design pages through property or service
+ and supOS static resource links. You can also link the web page
+ with other elements to display different page contents.
+
+<table >
+
+<colgroup>
+<col style={{ width: "20.32520325203252%" }} />
+<col style={{ width: "20.32520325203252%" }} />
+<col style={{ width: "59.34959349593496%" }} />
+</colgroup>
+<thead>
+<tr>
+<th colSpan={2}>
+Parameter
+</th>
+<th>
+Description
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td rowSpan={3}>
+Basic Settings
+</td>
+<td>
+Component ID
+</td>
+<td>
+Automatically generated. You can use it for writing scripts.
+</td>
+</tr>
+<tr>
+<td>
+Position
+</td>
+<td>
+Position of the element.
+</td>
+</tr>
+<tr>
+<td>Size</td>
+<td>
+Width and height of the element.
+</td>
+</tr>
+<tr>
+<td colSpan={2}>
+Title
+</td>
+<td>
+Set the content, font, color and margin of the web page
+title.
+</td>
+</tr>
+<tr>
+<td rowSpan={9}>
+Web Page
+</td>
+<td>Url</td>
+<td>
+Set the element url.
+</td>
+</tr>
+<tr>
+<td>
+Sandbox
+</td>
+<td>
+Whether to enable a sandbox to test the web page.
+</td>
+</tr>
+<tr>
+<td>
+De-Iframe
+</td>
+<td>
+Enable it and the set pop-up windows are prompted in local
+browser; if disabled, they are prompted inside the element.
+</td>
+</tr>
+<tr>
+<td>
+Margin
+</td>
+<td rowSpan={2}>
+Set the margin and padding of the element.
+</td>
+</tr>
+<tr>
+<td>
+Padding
+</td>
+</tr>
+<tr>
+<td>
+Background
+</td>
+<td>
+Background color of the web page.
+</td>
+</tr>
+<tr>
+<td>
+Border
+</td>
+<td>
+Border color, style and width of the web page.
+</td>
+</tr>
+<tr>
+<td>
+Data Source
+</td>
+<td>
+Set web page address by binding object property or service.
+Format is <code>{"{"}url:'<em>address link</em>'{"}"}.</code>
+</td>
+</tr>
+<tr>
+<td>
+Linkage Object
+</td>
+<td>
+Configure data linkages through input parameters of the data
+source.
+</td>
+</tr>
+</tbody>
+</table>
+
+
+### Carousel
+
+Binds multiple web pages or images by url and play them in cycles
+ at the set time interval.
+
+<table>
+
+<colgroup>
+<col style={{ width: "20.32520325203252%" }} />
+<col style={{ width: "20.32520325203252%" }} />
+<col style={{ width: "59.34959349593496%" }} />
+</colgroup>
+<thead>
+<tr>
+<th colSpan={2}>
+Parameter
+</th>
+<th>
+Description
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td rowSpan={4}>
+Basic Settings
+</td>
+<td>
+Component ID
+</td>
+<td>
+Automatically generated. You can use it for writing scripts.
+</td>
+</tr>
+<tr>
+<td>
+Component Name
+</td>
+<td>
+Component name. It cannot be repeated.
+</td>
+</tr>
+<tr>
+<td>
+Position
+</td>
+<td>
+Position of the element.
+</td>
+</tr>
+<tr>
+<td>
+Size
+</td>
+<td>
+Width and height of the element.
+</td>
+</tr>
+<tr>
+<td rowSpan={2}>
+Settings
+</td>
+<td>
+Carousel Frequency
+</td>
+<td>
+Time interval at which the carousel plays.
+</td>
+</tr>
+<tr>
+<td>
+Source
+</td>
+<td>
+Select data sources from images, web pages and supOS
+embedded pages.
+</td>
+</tr>
+<tr>
+<td rowSpan={4}>
+Style
+</td>
+<td>
+Border
+</td>
+<td>
+Border width, style and color of the element.
+</td>
+</tr>
+<tr>
+<td>
+Page Turn Arrow
+</td>
+<td>
+Whether to display the arrow for page turning which allows
+user to flip pages by clicking the arrow in operation
+center.
+</td>
+</tr>
+<tr>
+<td>
+Carousel Page Numbers
+</td>
+<td>
+Whether to display page symbols in operation center. You can
+click the symbol to turn pages.
+</td>
+</tr>
+<tr>
+<td>
+Preloading
+</td>
+<td>
+Enable it and all pages will be loaded during initialization
+in operation center. If not enabled, only the first two
+pages are loaded.
+</td>
+</tr>
+</tbody>
+</table>
+
+
+### Calendar
+
+Bind with object services and you can link announcements with the
+ calendar element to remind users. The announcements can be to do
+ tasks or other notifications.
+
+<table >
+<colgroup>
+<col style={{ width: "19.9203187250996%" }} />
+<col style={{ width: "20.71713147410359%" }} />
+<col style={{ width: "59.36254980079681%" }} />
+</colgroup>
+<thead>
+<tr>
+<th colSpan={2}>
+Parameter
+</th>
+<th>
+Description
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td rowSpan={2}>
+Basic Settings
+</td>
+<td>
+Position
+</td>
+<td>
+Position of the element.
+</td>
+</tr>
+<tr>
+<td>Size</td>
+<td>
+Width and height of the element.
+</td>
+</tr>
+<tr>
+<td rowSpan={5}>
+Data Source
+</td>
+<td>
+Data Source
+</td>
+<td>
+Data source of the element.
+</td>
+</tr>
+<tr>
+<td>
+Weekly Calendar
+</td>
+<td rowSpan={3}>
+Set whether user can switch between weekly, monthly and
+yearly calendars in operation center. Monthly calendar
+cannot be hidden.
+</td>
+</tr>
+<tr>
+<td>
+Monthly Calendar
+</td>
+</tr>
+<tr>
+<td>
+Almanac
+</td>
+</tr>
+<tr>
+<td>
+Selected By Default
+</td>
+<td>
+Set the calendar display mode in operation center. Monthly
+calendar is displayed by default.
+</td>
+</tr>
+<tr>
+<td colSpan={2}>
+Notice
+</td>
+<td>
+Set the name and color of each notification events.
+</td>
+</tr>
+<tr>
+<td colSpan={2}>
+Property
+</td>
+<td>
+Refer to the following figure to set properties of the
+element.
+</td>
+</tr>
+<tr>
+<td colSpan={2}>
+Interact
+</td>
+<td>
+Refer to the designing process under each layout for
+interaction details.
+</td>
+</tr>
+</tbody>
+</table>
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/appDesign/93.png" />
+
+### Programmable Component
+
+Design custom elements by writing scripts.
+
+## Graphic Library
+
+The supOS platform provides multiple graphic elements to form
+different industrial process flowchart. With dynamic effects, you can
+directly view equipment status through flowcharts.
+
+
+### Shapes
+
+Contains irregular shape, circle, rectangle, oval, rounded
+ rectangle, regular polygon, custom shape, triangle, star and arc.
+
+:::tip
+For irregular shapes,
+ double-click the last point and then double-click the canvas to
+ finish drawing.
+:::
+
+<table>
+<colgroup>
+<col style={{ width: "19.9203187250996%" }} />
+<col style={{ width: "20.71713147410359%" }} />
+<col style={{ width: "59.36254980079681%" }} />
+</colgroup>
+<thead>
+<tr>
+<th colSpan={2}>
+Parameter
+</th>
+<th>
+Description
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td rowSpan={7}>
+Basic Settings
+</td>
+<td>
+Position
+</td>
+<td>
+Position of the element.
+</td>
+</tr>
+<tr>
+<td>
+Size
+</td>
+<td>
+Width and height of the element.
+</td>
+</tr>
+<tr>
+<td>
+Rotate
+</td>
+<td>
+Rotation angle of the shape. You can also click icons to
+turn the shape upside down or flip it.
+</td>
+</tr>
+<tr>
+<td>
+Number of Sides
+</td>
+<td>
+Number of sides of the shape. Only available for regular
+polygon.
+</td>
+</tr>
+<tr>
+<td>
+Graphics
+</td>
+<td>
+Style of the shape. Only available for custom shape.
+</td>
+</tr>
+<tr>
+<td>
+Layer
+</td>
+<td>
+Layer of the shape. You can select different layers under <strong>Layer</strong> at the lower-right
+corner to view corresponding shapes.
+</td>
+</tr>
+<tr>
+<td>
+Visible
+</td>
+<td>
+Whether the shape is displayed.
+</td>
+</tr>
+<tr>
+<td colSpan={2}>
+Filling
+</td>
+<td>
+Enable it and select a color to fill the shape.
+</td>
+</tr>
+<tr>
+<td colSpan={2}>
+Border
+</td>
+<td>
+Enable it and set the border color, style and width of the
+shape.
+</td>
+</tr>
+<tr>
+<td colSpan={2}>
+Mark
+</td>
+<td>
+Enable it and set the content, background color, border
+style and font style of the mark that shows at the
+upper-right corner of the shape.
+</td>
+</tr>
+<tr>
+<td colSpan={2}>
+Hot Area
+</td>
+<td>
+Enable it and select a color. When hovering over the shape
+in operation center, its border is highlighted and fill
+color does not take effect.
+
+:::info
+Only available
+for irregular shapes.
+:::
+
+</td>
+</tr>
+<tr>
+<td colSpan={2}>
+Right-click Menu
+</td>
+<td>
+Customize a right-click menu for the shape.
+</td>
+</tr>
+<tr>
+<td colSpan={2}>
+Interact
+</td>
+<td>
+Refer to the designing process under each layout for
+interaction details.
+</td>
+</tr>
+</tbody>
+</table>
+
+:::info
+You can set dynamic
+ effects for shapes. For details, see<a href="Dynamic Effect">Dynamic Effect</a>.
+:::
+
+
+### Text
+
+
+<table >
+<colgroup>
+<col style={{ width: "25.125628140703515%" }} />
+<col style={{ width: "74.87437185929649%" }} />
+</colgroup>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Basic Settings/Filling/Mark/Right-click Menu/Interact
+</td>
+<td>
+Similar to shapes. For details, see <a href="#irregular_shape">Shapes</a>.
+</td>
+</tr>
+<tr>
+<td>Character</td>
+<td>
+Enter the text content and set its font styles, line height
+and whether to display text vertically.
+</td>
+</tr>
+</tbody>
+</table>
+
+
+### Connect
+
+Connects two graphic elements together. You can click the <strong>Connect</strong> element and then click two elements you want to connect.
+
+Configurations of property and dynamic effect are similar to shapes. For details, see<a href="#irregular_shape">Shapes</a> and <a href="Dynamic Effect">Dynamic Effect</a>.
+
+
+### Image
+
+For details, see <a href="#picture">Picture</a>.
+
+### Pipeline
+
+Select the pipeline element, and then click on the canvas, double-click the last point to finish drawing.
+
+<ul >
+<li>
+Basic settings/border/mark//right-click menu: Refer to <a href="#irregular_shape">Shapes</a>for details.
+
+<strong>Thickness</strong> under <strong>Basic Settings</strong> defines the pipeline thickness.
+
+</li>
+<li>Filling: Enable it and set its color and specular color.</li>
+<li>
+Dynamic effect: Refer to <a href="topic/application_creation.html#dynamic_configuration">Dynamic Effect Configuration</a> for details.
+</li>
+</ul>
+
+
+### Data Connection
+
+Binds with numeric object property or expressions to display the
+ real-time data of tags. When bound with an object property, you
+ can right-click the element to view the trend chart of tag data in
+ operation center.
+
+
+ Draw a data connection element on the canvas, and then set the
+ properties in the pop-up window.
+
+**Data Source Configuration**
+
+<ul >
+<li>
+Select an object property or write an expression to be the
+data source.
+</li>
+<li>Set the data integer digits and decimal places.</li>
+<li>
+
+:::info
+When the set <strong>Integer Digits</strong> are more
+than that of the selected data, the data will be compensated
+with 0. If less, the data will be displayed as it is. For
+example, the data is 352.69, <strong>Integer Digits</strong> is set to
+5, the data is displayed as 00352.69. If <strong>Integer Digits</strong> is set to
+2, the data is displayed as 352.69.
+:::
+
+</li>
+<li>
+Select the display name of the data in operation center.
+</li>
+<li>
+Select whether to display data value, unit and tag status in
+operation center.
+</li>
+</ul>
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/appDesign/94.png"/>
+
+**General Property Configuration**
+
+Under <strong>Equipment Vibration Analysis</strong>,
+enter the link of third party spectrogram of equipment vibration
+analysis, and then you can view the corresponding spectrogram
+when checking the single point trend of the connected tag in
+operation center.
+
+
+### Line Segment
+
+Draw line segments on the canvas. You can only draw a horizontal
+ line and turn it around through <img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/appDesign/24.png" />.
+
+<ul >
+<li>
+Basic settings/border/mark//right-click menu: Refer to <a href="#irregular_shape">Shapes</a> for details.
+</li>
+<li>
+Dynamic effect: Refer to <a href="topic/application_creation.html#dynamic_configuration">Dynamic Effect Configuration</a> for details.
+</li>
+</ul>
+

@@ -1,0 +1,135 @@
+---
+hide_title: true
+---
+
+:::info
+Before the installation starts, make sure you have installed Ubuntu18.04 server operating system.
+:::
+# Preparation
+## Installing docker and docker-compose
+1. Get following installation packages from https://download.docker.com/linux/ubuntu/dists/bionic/pool/stable/amd64/.
+- docker-ce_19.03.9_3-0_ubuntu-bionic_amd64.deb
+- containerd.io_1.2.6-3_amd64.deb
+- docker-ce-cli_19.03.9_3-0_ubuntu-bionic_amd64.deb
+2. Install docker and verify the results by checking its version.
+```
+sudo dpkg -i docker-ce-cli_19.03.9_3-0_ubuntu-bionic_amd64.deb
+sudo dpkg -i containerd.io_1.2.6-3_amd64.deb
+sudo dpkg -i docker-ce_19.03.9_3-0_ubuntu-bionic_amd64.deb
+docker --version
+```
+3. Install docker-compose online and check the installation result.
+```
+sudo apt-get install curl
+sudo curl -L
+"https://github.com/docker/compose/releases/download/1.23.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+sudo chmod +x /usr/local/bin/docker-compose
+docker-compose --version
+```
+
+## Installing Grapgic Driver
+This section focuses on the installation of Nvidia graphic driver. Make sure you have prepared corresponding installation package.
+1. Open the blacklist.
+```
+sudo vi /etc/modprobe.d/blacklist.conf
+```
+2. Add the following content to disable nouveau, and then save the file.
+```
+blacklist nouveau
+options nouveau modeset=0
+```
+3. Update the initial ram file system and reboot the system for the blacklist to take effect,
+```
+sudo update-initramfs -u -k all
+sudo reboot
+```
+4. Check the result.
+```
+sudo lsmod | grep nouveau
+```
+5. Download the .run file of the driver you need and put it under <b>/home</b>, make the file executable and then install the driver.
+```
+sudo chmod a+x NVIDIA-Linux-x86_64-460.84.run
+sudo ./NVIDIA-Linux-x86_64-460.84.run –no-opengl-files -no-x-check -no-nouveau-check
+```
+:::info
+During the installation, when the nvidia-xconfig is propmted, install it if your computer has only one graphic card. You can use `lshw -numeric -c display` to check the graphic cards.
+:::
+6. Check whether the installation is complete.
+```
+nvidia-smi
+```
+
+<img href="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supEdge/17.png"/>
+
+:::info
+If any issues come up during the installation, use `sudo ./NVIDIA-Linux-x86_64-430.40.run –uninstall` to uninstall the driver.
+:::
+7. Follow the instructions to install nvidia-docker2.
+```
+curl -s -L https://nvidia.github.io/nvidia-docker/gpgkey | sudo apt-key add - distribution=$(. /etc/os-release;echo $ID$VERSION_ID)
+curl -s -L https://nvidia.github.io/nvidia-docker/$distribution/nvidia-docker.list | sudo tee /etc/apt/sources.list.d/nvidia-docker.list
+sudo apt-get update
+sudo apt-get install -y nvidia-docker2
+sudo pkill -SIGHUP dockerd
+```
+## Installing Algorithm Image
+1. Get the algorithm image packages from technical support based on your graphic card.
+<table>
+<colgroup>
+<col style={{width:"40%"}}/>
+<col style={{width:"60%"}}/>
+</colgroup>
+  <thead>
+    <tr>
+      <th>Grahic Card</th>
+      <th>Algorithm Image Package</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>GTX10, RTX20, Tesla T4, Quadro P series</td>
+      <td>X-Edge-cuda10.tar</td>
+    </tr>
+    <tr>
+      <td>RTX30, RTX40, Tesla A40，Tesla A100</td>
+      <td>X-Edge-cuda11.tar</td>
+    </tr>
+  </tbody>
+</table>
+
+2. Copy the algorithm image package and load it.
+```
+sudo docker load -i X-Edge-cuda11.tar
+```
+3. Check and make sure the system time is correct.
+
+# Installing X-Edge
+1. Copy the X-Edge installation package to your server and decompress it.
+```
+sudo tar xvf X-EdgeVXXXX-C-XX-XXX.tar
+```
+2. Enter the directory after decompression, and then access the <b>bin</b> file.
+```
+cd X-EdgeVXXXX-C-XX/bin
+```
+3. Copy <b>env.sh.template</b> file and paste it to be <b>env.sh</b>.
+```
+cp env.sh.template env.sh
+```
+4. Install X-Edge.
+```
+bash install.sh
+```
+:::info
+- After installation, you can use `stop.sh` or `start.sh` to disable or enable X-Edge.
+- Run `uninstall.sh` to uninstall X-Edge when needed.
+:::
+
+# Accessing X-Edge
+Now you can access X-Edge by entering the address <b>http://server IP:8181</b> in the browser.
+
+:::info
+Initial username and password are <b>admin</b> and <b>Supedge1234</b>.
+:::
+

@@ -1,0 +1,68 @@
+---
+sidebar_position: 3
+
+---
+
+## Overview
+This demo demonstrates the workflow of adding new order and approve the adding in supOS platform.
+## Operation Process
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/demo/13.png)
+## Creating Object Service
+Create a service under an entity template to add the data to a set database after approving the sales order workflow.
+1. Log in to supOS platform, and then click ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/platform/7.png) to go to the design center.
+2. Select **Object Model Management** > **Object Template** > **Entity Template**, and then click ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/factoryModeling/26.png) to add a sales order template.<br/>
+3. Under the template, add a new service, set input and output parameters and write the script below.
+:::tip
+The service can also be created under an entity instance or a form template.
+:::
+```javascript
+var formDataJson = JSON.parse(data);
+var auditDataJson = JSON.parse(auditData)
+
+delete formDataJson.ctrlIndex;
+delete formDataJson.ctrlType;
+
+if(auditDataJson.reject===false){  //save approved data
+    templates["{template_namespace.template_alias}"].addDataTableEntry(formDataJson);
+}
+
+var result = {
+    "code":200,
+    "message":"Success"
+}
+result;
+```
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/demo/14.gif)
+
+## Creating Sales Order Page
+Create a page to add new sales order. For details, see <a href="Sales Order Demo#add_order">Add Sales Order</a>.
+
+## Creating Sales Order Workflow
+Create the workflow to contain steps such as add a new sales order and approve the order, and after the approval, new order data is added to the database.
+1. On supOS platform, select **Business Designer** and then enter the application you created which contains the **Add Order** page.
+2. Inside the application, click **Workflow Management** and then add a sales order workflow.
+:::info
+The workflow here is a simple example. Actual workflow might requires more complex steps.
+:::
+- Draw the workflow.
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/demo/15.gif)
+- Add the **Add Order** page to the first step.
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/demo/16.gif)
+- Add the **Add Order** page to the second step for review and the object service for approval.
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/demo/17.gif)
+3. Click **Publish** at the upper-right corner to publish the workflow.
+
+## Creating Workflow Page
+Create a page to link and execute the workflow.
+1. Inside the same application, add a new page named **Initiate Workflow**.
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/demo/14.png)
+2. Add a button and a to-do list to the page and set their properties.
+- Set the button style.
+- Link the workflow you created to be the click event of the button.
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/demo/18.gif)
+3. Save the page.
+
+## Demo Effect
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/demo/19.gif)
+
+

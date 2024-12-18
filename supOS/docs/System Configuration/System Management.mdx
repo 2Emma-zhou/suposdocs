@@ -1,0 +1,239 @@
+---
+hide_title: true
+---
+
+### Adding User Directory
+
+Configure a user directory to sync with the user in supOS, and then you can log in to the platform through the user account of the active directory domain.
+
+:::info
+- The username of the active directory domain and the supOS platform must be the same.
+- After synchronization, you cannot reset the password through the supOS platform.
+:::
+
+1. Log in to supOS, and then click <img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/platform/7.png"/> at the upper-right corner to go to the design center.
+2. Select <strong>System Management</strong> > <strong>System Configuration</strong> > <strong>Active directory</strong>, and then click <strong>New</strong>.
+3. Enter the information of the user directory and then click <strong>OK</strong>.
+
+<ul>
+<ul>
+<li>
+<strong>Host</strong>/<strong>Port</strong>: The IP/port of the host where the active directory runs.
+</li>
+<li><strong>Username</strong>/<strong>Password</strong>: Any username and the corresponding password on the active directory.
+</li>
+</ul>
+</ul>
+
+<img width={450} src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/platform/49.png"/>
+
+4. Click <strong>Quick Test</strong> to check whether the connection with the server is complete.
+5. On the user directory list, click <img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/platform/50.png"/> to enable the directory.
+
+:::info
+Only one user directory can be enabled at the same time.
+:::
+
+6. Create a user on the supOS platform with the same name as that of the user directory.
+:::info
+For details, see <a href="User Security Management#adding-user">Adding User</a>.
+
+### Getting Print Authorization
+
+For third party plug-ins that are available after authorization, you can copy the license key in the supOS platform to get authorization.
+
+:::info
+The default authorization key of printing service in this chapter is only available on the 192.* or 10.* segment. You need to apply for other segments.
+:::
+
+1. Click <b>Printing service authorization</b>.
+2. Get the license key from the third party plug-in, and then copy it to the supOS platform.
+3. Click <strong>Save</strong>.
+
+### Managing AK/SK Authentication
+
+Third parties can access supOS and obtain specified data through openAPI with AK/SK key as auhthorization.
+
+1. Click <strong>AK/SK credential</strong>, and the click <strong>New</strong>.
+2. Enter the information and then click <strong>OK</strong>.
+3. Click <strong>Download</strong> in the pop-up window to download the key.
+
+
+### Managing Basic Image
+
+When the basic image file does not meet the requirements of APP development, you can upload the needed image file.
+
+1. Click <strong>Basic Image Management</strong>, and the click <strong>New</strong>.
+2. Click <strong>Upload</strong> to select the image file, enter the file name and version, and then click <strong>OK</strong>.
+:::info
+The file extension name must be .tar.
+:::
+
+### Setting Password
+
+Set the password rules.
+
+1. Click <strong>Password Configuration</strong>.
+2. Set the rules.
+
+<ul>
+<ul>
+<li>
+The account is locked out when the number of wrong attempts reached the limit.
+</li>
+<li>
+Select <strong>Yes</strong> under <strong>Encrypted Transfer</strong>, the password will be encrypted under AES.
+</li>
+</ul>
+</ul>
+
+<img width={450} src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/platform/53.png"/>
+
+3. Click <strong>Save</strong>.
+
+
+### Configuring Business Log
+
+Set whether to enable business log display and management in operation center.
+
+
+1. Click <strong>Log Configuration</strong>.
+2. Select whether to enable business logs.
+3. Click <strong>Save</strong>.
+
+
+### Configuring Resource Permission
+
+Set whether to display resource permission on permission lists.
+
+1. Click <strong>Resource permission config</strong>.
+2. Select whether to enable resource permission display.
+3. Click <strong>Save</strong>.
+
+### Converting PPT
+
+Select a conversion method for converting PPTs on the platform.
+
+1. Click <strong>PPT conversion tool</strong>.
+2. Select a converting method.
+3. Click <strong>Save</strong>.
+
+
+### Setting File Size
+
+Set the maximum file size for preview. Any file that is bigger than the set size cannot be previewed.
+
+1. Click <strong>Preview file size limit</strong>.
+2. Set the file size limit.
+3. Click <strong>Save</strong>.
+
+### Displaying Company for Multi-organization
+
+Set whether to display the <strong>company</strong> filed when there are multiple organizations.
+
+1. Click <strong>Multi organization configuration</strong>.
+2. Set whether to display the <strong>company</strong> field.
+3. Click <strong>Save</strong>.
+
+
+### Setting Watermark
+
+Set whether to add watermark to PDFs that are uploaded or converted
+during preview.
+
+1. Click <strong>Watermark configuration</strong>.
+2. Select whether to enable watermark, and then enter the watermark text and image according to specific requirements that you can see by clicking <img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/platform/75.png" />.
+3. Click <strong>Save</strong>.
+
+
+### Configuring Login
+
+1. Click <strong>Login Config</strong>.
+2. Set the login rules.
+
+<ul>
+<ul>
+<li>
+When the supOS platform on web clients or mobile clients
+stays inactive for a period that exceeds the set duration,
+you need to log in again.
+
+:::info
+- The login expiration settings take effect upon second login.
+- You can set the platform to stay logged in on the APP setting page.
+:::
+
+</li>
+<li>
+You can only Log in to supOS on one browser or
+start one session on supMobile at the same time when the <strong>Unique Login</strong> is enabled.
+
+:::info
+The unique login does not apply to admin.
+:::
+
+</li>
+</ul>
+</ul>
+
+<img width={200} src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/platform/54.png"/>
+
+3. Click <strong>Save</strong>.
+
+
+### Setting Organization Reference
+
+Set whether to take reference of organization information across companies.
+
+1. <strong>Org info reference config</strong>.
+2. Select whether to take reference of organization information across companies.
+3. Click <strong>Save</strong>.
+
+### Configuring Theme
+
+Set the theme of the supOS platform, and the change takes effect upon
+second login.
+
+:::info
+The theme changes apply to all users.
+:::
+
+1. <strong>Theme Configuration</strong>.
+2. Select a theme, and then click <strong>Save</strong>.
+
+### Configuring Log Policy
+
+Various logs build up with the use of the supOS platform, set a strategy to clean the log data for free storage space and improve the platform performance.
+
+1. <strong>Log policy configuration</strong>.
+2. Set the strategy for each type of logs.
+
+<ul>
+<ul>
+<li>The logs can be kept for up to 7300 days.</li>
+<li>10 million pieces of logs can be saved at most.</li>
+<li>
+Set the time for clearing log data separately to prevent
+server from overload.
+</li>
+</ul>
+</ul>
+
+:::info
+The supOS platform keeps all logs permanently by default.
+:::
+
+<img width={450} src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/platform/55.png"/>
+
+3. Click <strong>Save</strong>.
+
+:::info
+The supOS platform clears the earliest log data when the set
+limit is reached.
+:::
+
+
+### Configuring APP Setting
+
+If the business file <em>ocd.xml</em> is included in the micro service module installed from maintenance management, you can see the configuration information under  <strong>System Management</strong> > <strong>System Configuration</strong> > <strong>APP Config</strong>.
+

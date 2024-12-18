@@ -1,0 +1,203 @@
+---
+hide_title: true
+---
+
+## Introduction
+The X-Edge platform loads custom vision algorithms of third-party developers through internal function calls. The platform has functions such as
+- Timing map collection
+- Task scheduling
+- Task management
+- Data interaction. 
+## Calling Method
+The X-Edge platform executes vision algorithms defined by third-party developers by calling standard functions. You need to override the algorithm function templates provided by the platform to implement your own algorithm.<br/>
+1. Provide the standard algorithm initialization function <b>algorithmInitialization</b> and the algorithm execution main function <b>algorithmDetect</b>.
+2. X-Edge platform uses python scripts to call these two functions.
+
+:::info
+The provided standard functions must be written in python, and the internal execution code can be written in other languages and compiled for python calling.
+:::
+
+## Vision Algorithm Execution Structure
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supEdge/1.png)
+
+## Module Instruction
+### Algorithm Initialization (arguments, configs)
+This function initializes your algorithms. It will only be executed once when the program starts running to load the algorithm model and auxiliary classes, and register basic parameters.
+:::info
+This function has no return parameters, and you are free to define the initialization content.
+:::
+
+<table>
+<colgroup>
+<col style={{ width: "20%" }} />
+<col style={{ width: "80%" }} />
+</colgroup>
+<thead>
+<tr>
+<th>Input Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>arguments</td>
+<td><ul><li>Calls initializeArgument(attribute_name, value) to register parameters for all tasks. For example: <code>arguments.initializeArgument('time', 0)</code>
+</li>
+<li>The function will create a time parameter for all polling tasks, with an initial value of 0, and store it in the public buffer.</li></ul>
+</td>
+</tr>
+<tr>
+<td>configs</td>
+<td>A JSON file contains preset input parameters when configuring the algorithm task, converted into a python dict dictionary object in the program. It is a list of dictionaries, and each element in the list is a configuration dictionary for a task.
+<ul>
+<li>Contains task-related information and some additional configuration parameters required by the algorithm.</li>
+<li>Task-related information will be automatically loaded by platform components.</li>
+<li>Does not contain global configuration, and each list element corresponds to a task. If global configuration is required, the same configuration information can be added to each task.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+
+### Send, data_map= algorithmDetect(image, timestamp, config, argument)
+The <b>algorithmDetect</b> function will be executed when the current task is being called, and the calling process will automatically read the picture, timestamp, configuration, and parameters of the current task and pass them to the function.
+- Input parameters:
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>image</td>
+<td>RGB image for identification.</td>
+</tr>
+<tr>
+<td>timestamp</td>
+<td>The host timestamp when the image was acquired.</td>
+</tr>
+<tr>
+<td>config</td>
+<td>The configuration related to the current task.
+<ul>
+<li>A dictionary, used to obtain the configuration parameters defined when configuring the task.</li>
+<li>The additional configuration can be read through the key defined by the developer, and the key and value can be configured on the front end.</li>
+</ul>
+</td>
+</tr>
+<tr>
+<td>argument</td>
+<td>Parameters related to the current task, including standard parameters, such as the detection area detectArea, and the parameters actively registered during initialization.
+<ul>
+<li>You can use config.time to directly get the time parameter registered during initialization.</li>
+<li>It supports adding parameters dynamically. For example, use config.newAttribute = value, a parameter named newAttribute with value value will be automatically created.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+
+- Return value:
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>send</td>
+<td>Boolean, indicating whether to send data currently. If send=True, the communication component will organize the result data and send it to the platform.</td>
+</tr>
+<tr>
+<td>data_map</td>
+<td>Data dictionary, the structure requirements are:
+
+```json
+{ 
+'tag': string, 
+'data': list or dict, 
+'areas':[[top_left_x, top_left_y, bottom_right_x, bottom_right_y],[...]] 
+}
+```
+<ul>
+<li>tag: 'alarm': alarm data, 'normal': information data, no alarm is required.</li>
+<li>data: Data returned by the algorithm. Contact technical support of the platform for returning specific data information.  When no additional data, the value is an empty dictionary.</li>
+<li>areas: Optional field. If this field exists, a rectangular frame will be drawn on the alarm image, and the required format is [[top_left_x, top_left_y, bottom_right_x, bottom_right_y],[...]], currently only supports drawing rectangular frame in red by default.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+
+## Algorithm Installation Instructions
+After the algorithm is developed, you need to compress and upload it to the platform.
+- For python developers, a requirements.txt file is necessary in the algorithm package, which is convenient for the platform to build an operating environment.
+- For developers of other compilable languages, put the required link libraries and algorithm packages together to prevent problems such as missing libraries.
+Attach a runtime.json file to the package to describe the running environment. For example:
+```json
+{ 
+'algorithmName': helmet, 
+'algorithmShowName': helmet algorithm, 
+'algorithmCode': 3fxda44gf5a3m, 
+'algorithmDescription': helmet detection algorithm, 
+'algorithmVersion': 1.0.0, 
+'algorithmTarget': 2, 
+'device': 'gpu', 
+'CUDA_version': '10.2' 
+}
+```
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>algorithmName</td>
+<td>Algorithm name. required. English lowercase name. Length limit 1~50.</td>
+</tr>
+<tr>
+<td>algorithmShowName</td>
+<td>Algorithm display name.</td>
+</tr>
+<tr>
+<td>algorithmCode</td>
+<td>Algorithm code, unique identification code. required. Combination of English letters and numbers. Length limit 8~32.</td>
+</tr>
+<tr>
+<td>algorithmDescription</td>
+<td>Algorithm short description.</td>
+</tr>
+<tr>
+<td>algorithmVersion</td>
+<td>Custom algorithm version.</td>
+</tr>
+<tr>
+<td>algorithmTarget</td>
+<td>Detection targets of the algorithm. 0-person, 1-car, 2-other.</td>
+</tr>
+<tr>
+<td>device</td>
+<td>Select form gpu and cpu.</td>
+</tr>
+<tr>
+<td>CUDA_version</td>
+<td>If the device is gpu, CUDA version needs to be specified.</td>
+</tr>
+</tbody>
+</table>
+	
+	
+	
+	
+	
+	

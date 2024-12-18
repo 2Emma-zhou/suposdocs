@@ -1,0 +1,81 @@
+---
+hide_title: true
+---
+
+Each template and instance contain items such as basic information, attribute, service, event and subscription.
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Basic Information</td>
+<td>
+Model name, aliases, parent templates, function sets, and details.
+
+:::info
+Alias must be unique under one namespace (APP or system).
+:::
+
+</td>
+</tr>
+<tr>
+<td>Attributes</td>
+<td>
+Model features.
+<ul>
+<li>
+<strong>Attribute Info</strong>: Model features.
+</li>
+<li>
+<strong>Alarm rules</strong>: Defines rules of alarm events relating to the current attribute. When an alarm is triggered, notifications will be sent to your mobile application.
+</li>
+</ul>
+</td>
+</tr>
+<tr>
+<td>Services</td>
+<td>
+Simple functions realized by writing Javascript scripts under <b>Service</b>.
+
+:::info
+- Arrays in JS change to map when converting to JSON in the backend. When arrays exist in parameters or returned results:
+
+<ul>
+<ul>
+<li>Convert arrays to string.</li>
+<li>Use <code>Java.type(“java.util.ArrayList”)</code> to convert.</li>
+</ul>
+</ul>
+
+- Embedded services can be called in scripts. For detailed calling methods, see <a href="../../API/Embedded Service">Embedded Service</a>.
+:::
+
+</td>
+</tr>
+<tr>
+<td>Events</td>
+<td>
+Events related to object attributes. For example, attribute value change event is triggered when the set attribute value changes.
+
+:::tip
+You can create custom events through scripts under **Subscription**, **Services** or applications in **Business Designer** after defining events under **Event**.
+:::
+
+</td>
+</tr>
+<tr>
+<td>Subscriptions</td>
+<td>
+Subscribes from events, write JS scripts to meet complicated business requirements after triggering.
+<ul>
+<li>Subscribers should be created during modeling.</li>
+<li>The same event can be subscribed by multiple subscribers.</li>
+</ul></td>
+</tr>
+</tbody>
+</table>

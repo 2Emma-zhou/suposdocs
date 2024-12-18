@@ -1,0 +1,1066 @@
+---
+openapi: 3.0.0
+info:
+  description: |-
+    API description
+
+    # Authentication
+
+    <!-- ReDoc-Inject: <security-definitions> -->
+  version:
+  title: Notification Center
+  contact:
+    name: Contact developers
+    email: openapi@supos.com
+tags:
+- name: V1
+  description: Version 1
+- name: V2
+  description: Version 2
+security:
+- Sign: []
+paths:
+  "/api/openapi/notification/v1/message":
+    post:
+      tags:
+      - V1
+      summary: Message Sending V1 API
+      operationId: sendMessageV1
+      description: When calling this API to send a message, you can specify the sending
+        of a certain type of message (type), or you can simultaneously specify multiple
+        types of messages (multipleType) to send. When sending with a specified type,
+        the content field takes effect and is mandatory. For example, when sending
+        an email (type=email), the content={title='', text=''} is used, where 'email'
+        is taken as the sending type, and content.title and content.text are taken
+        as the sending content. When sending an internal letter (type=stationLetter),
+        the content={text=''} is used, where 'stationLetter' is taken as the sending
+        type, and content.text is taken as the sending content. When sending with
+        multiple types specified, the text and title fields take effect and are mandatory.
+        For example, multipleType=[['email',''], ['stationLetter','']], title='',
+        text='' is used, where 'email' and 'stationLetter' are taken as the sending
+        types, and title and text are taken as the sending content. When both type
+        and multipleType are specified simultaneously, only the value of type is taken.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/SendMessageRequestV1"
+      responses:
+        '200':
+          "$ref": "#/components/responses/SendSuccess"
+        '400':
+          description: |
+            Errors
+            * 100000001 Message sender cannot be empty {"code":100000001,"message":"Message sender cannot be empty"}
+            * 100000001 Message source cannot be empty {"code":100000001,"message":"Message source cannot be empty"}
+            * 100000001 Receiver cannot be empty {"code":100000001,"message":"Receiver cannot be empty"}
+            * 100102002 Receiver does not exist {"code":100102002,"message":"Receiver does not exist"}
+          content:
+            application/json:
+              schema:
+                properties:
+                  code:
+                    type: integer
+                    enum:
+                    - 100000001
+                    description: Error code
+                  message:
+                    type: string
+                    enum:
+                    - Message sender cannot be empty
+                    - Message source cannot be empty
+                    - Receiver cannot be empty
+                    description: Error details
+        '500':
+          "$ref": "#/components/responses/GeneralError"
+  "/open-api/p/notification/v2/messages":
+    post:
+      tags:
+      - V2
+      summary: Message Sending V2 API
+      operationId: sendMessageV2
+      description: |
+        * Send messages based on specified recipient range and message content list.
+        * Required fields: Sender business number, Sender business name, Recipient range, Message content list.
+        * Email sending supports attachments, where the fileUrls parameter represents the absolute path to the downloadable file on the internet or the file address on the attachment server.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/SendMessageRequestV2"
+      responses:
+        '200':
+          "$ref": "#/components/responses/SendSuccess"
+        '400':
+          description: "Errors\n* 100000001 Sender business number cannot be empty
+            \n* 100000001 Sender business name cannot be empty \n* 100000001 Recipient
+            range cannot be empty \n* 100000001 Message content list cannot be empty
+            \n* 100102009 Recipient does not exist \n* 100102012 Protocol does not
+            exist\n"
+          content:
+            application/json:
+              schema:
+                properties:
+                  code:
+                    type: integer
+                    enum:
+                    - 100000001
+                    - 100102009
+                    - 100102012
+                    description: Error code
+                  message:
+                    type: string
+                    enum:
+                    - Sender business number cannot be empty
+                    - Sender business name cannot be empty
+                    - Recipient range cannot be empty
+                    - Message content list cannot be empty
+                    - Recipient does not exist
+                    - Protocol does not exist
+                    description: Error details
+        '500':
+          description: |
+            Errors
+            * 100000001 Internal server error
+          content:
+            application/json:
+              schema:
+                properties:
+                  code:
+                    type: integer
+                    enum:
+                    - 100000001
+                    description: Error code
+                  message:
+                    type: string
+                    enum:
+                    - Internal server error
+                    description: Error details
+  "/open-api/p/notification/v2/topic/messages":
+    post:
+      tags:
+      - V2
+      summary: Send Messages Based on a Topic
+      operationId: sendMessageByTopic
+      description: |
+        * Required fields: Sender business number, Sender business name, Topic number.
+        * If the recipient range and protocol type are specified in the input parameters, they will override the original recipient range and protocol type of the topic.
+        * Template parameters: The variables enclosed in ${} in the topic template are template variables, and the actual values corresponding to the message template variables should be specified when sending. If not specified, the message template will default to empty values.
+        * Email sending supports attachments, where the fileUrls parameter represents the absolute path to the downloadable file on the internet or the file address on the attachment server.
+        * Built-in template parameters:
+         * openWith: Only applicable to internal messages, optional values are window_open and window_modal.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/SendMessageByTopicRequest"
+      responses:
+        '200':
+          "$ref": "#/components/responses/SendSuccess"
+        '400':
+          description: "Errors\n* 100000001 Sender business number cannot be empty
+            \n* 100000001 Sender business name cannot be empty \n* 100000001 Topic
+            code cannot be empty \n* 100102007 Topic does not exist \n* 100102008
+            Topic is not associated with a template \n* 100102009 Recipient does not
+            exist \n* 100102011 Topic does not include this protocol \n* 100102012
+            Protocol does not exist \n* 100102013 openWith can only be window_open
+            or window_modal\n"
+          content:
+            application/json:
+              schema:
+                properties:
+                  code:
+                    type: integer
+                    enum:
+                    - 100000001
+                    - 100102007
+                    - 100102008
+                    - 100102009
+                    - 100102011
+                    - 100102012
+                    - 100102013
+                    description: Error code
+                  message:
+                    type: string
+                    enum:
+                    - Sender business number cannot be empty
+                    - Sender business name cannot be empty
+                    - Topic code cannot be empty
+                    - Topic does not exist
+                    - Topic is not associated with a template
+                    - Recipient does not exist
+                    - Topic does not include this protocol
+                    - Protocol does not exist
+                    - openWith can only be window_open or window_modal
+                    description: Error details
+        '500':
+          description: |
+            Errors
+            * 100000001 Internal server error
+          content:
+            application/json:
+              schema:
+                properties:
+                  code:
+                    type: integer
+                    enum:
+                    - 100000001
+                    description: Error code
+                  message:
+                    type: string
+                    enum:
+                    - Internal server error
+                    description: Error details
+  "/open-api/p/notification/v2alpha1/users/{username}/messages":
+    get:
+      tags:
+      - V2
+      summary: Query Messages Received by the User
+      deprecated: false
+      description: |
+        * Query messages received by the user within a specific time range, with notification methods such as email, internal messages, etc.
+        * This interface is a trial interface and may not be compatible in the future.
+      operationId: queryUserMessages
+      parameters:
+      - name: username
+        in: path
+        required: true
+        description: username
+        schema:
+          type: string
+      - name: startTime
+        in: query
+        required: true
+        description: 'Start time of the time range to query (the time format must
+          include the time zone), format:"yyyy-MM-dd''T''HH:mm:ss.SSZ,for example:
+          UTC time:"2021-01-26T16:02:15.666+0000"; UTC+8 time:"2021-01-26T16:02:15.666+0800"'
+        schema:
+          type: string
+        example: '2021-01-26T16:02:15.666+0800'
+      - name: endTime
+        in: query
+        required: true
+        description: 'End time of the time range to query (the time format must include
+          the time zone), format:"yyyy-MM-dd''T''HH:mm:ss.SSZ, for example: UTC time:"2021-01-26T16:02:15.666+0000"; UTC+8
+          time:"2021-01-26T16:02:15.666+0800".'
+        schema:
+          type: string
+        example: '2021-07-01T16:02:15.666+0800'
+      - name: noticeProtocol
+        in: query
+        required: true
+        description: 'Notification method for messages, e.g., email: email, internal
+          message: stationLetter; specific notification methods can be viewed in the
+          system.'
+        schema:
+          type: string
+        example: stationLetter
+      - name: current
+        in: query
+        required: false
+        description: Current default page number for pagination query is 1 (first
+          page), and page number must be greater than or equal to 1.
+        schema:
+          type: integer
+          default: 1
+        example: 1
+      - name: pageSize
+        in: query
+        required: false
+        description: Default number of items per page for pagination query is 20,
+          and page size range is 1~500.
+        schema:
+          type: integer
+          default: 20
+        example: 20
+      responses:
+        '200':
+          description: Response result of messages received by the user
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  list:
+                    type: array
+                    items:
+                      "$ref": "#/components/schemas/noticeMessageResponse"
+              example:
+                pagination:
+                  current: 1
+                  pageSize: 20
+                  total: 3
+                list:
+                - sender: work_flow
+                  topic: Pending tasks
+                  param: '{"creator":"Zhang San","creationTime":"2021-07-26 09:36:49","extendcontent":"","title":"Regression
+                    testing","content":"Personnel - Receive notification","url":"/project/flow/#/workflowPage?todoId=1531845319510608&processId=1531845294377552&appId=App_93549d29f01ca145d916fd72c1dd6ac6"}'
+                  staffCode: zhangsan
+                  staffName: Zhang San
+                  sendStatus: 1
+                  readStatus: 1
+                  noticeProtocol: stationLetter
+                  errorResult:
+                - sender: work_flow
+                  topic: Pending tasks
+                  param: '{"creator":"Zhang San","creationTime":"2021-07-26 09:36:49","extendcontent":"","title":"Regression
+                    testing","content":"Personnel - Receive notification","url":"/project/flow/#/workflowPage?todoId=1531845319510608&processId=1531845294377552&appId=App_93549d29f01ca145d916fd72c1dd6ac6"}'
+                  staffCode: zhangsan
+                  staffName: Zhang San
+                  sendStatus: 1
+                  readStatus: 0
+                  noticeProtocol: stationLetter
+                  errorResult:
+                - sender: work_flow
+                  topic: Pending tasks
+                  param: '{"creator":"Zhang San","creationTime":"2021-07-26 09:36:49","extendcontent":"","title":"Regression
+                    testing","content":"Personnel - Receive notification","url":"/project/flow/#/workflowPage?todoId=1531845319510608&processId=1531845294377552&appId=App_93549d29f01ca145d916fd72c1dd6ac6"}'
+                  staffCode: zhangsan
+                  staffName: Zhang San
+                  sendStatus: 0
+                  readStatus: 0
+                  noticeProtocol: stationLetter
+                  errorResult: no channel
+        '400':
+          description: |
+            Errors
+            * 100000001 Start time cannot be empty {"code":100000001,"message":"Start time cannot be empty"}
+            * 100000001 End time cannot be empty {"code":100000001,"message":"End time cannot be empty"}
+            * 100102022 User does not exist {"code":100102022,"message":"User does not exist"}
+            * 100102023 Incorrect start time format {"code":100102023,"message":"Incorrect start time format"}
+            * 100102024 Incorrect end time format {"code":100102024,"message":"Incorrect end time format"}
+            * 100102025 Page number must be greater than or equal to 1 {"code":100102025,"message":"Page number must be greater than or equal to 1"}
+            * 100102026 Page size must be greater than or equal to 1 and less than or equal to 500 {"code":100102025,"message":"Page size must be greater than or equal to 1 and less than or equal to 500"}
+            * 100102012 Protocol does not exist {"code":100102012,"message":"Protocol does not exist"}
+          content:
+            application/json:
+              schema:
+                properties:
+                  code:
+                    type: integer
+                    description: Error code
+                    example: 100000001
+                  message:
+                    type: string
+                    description: Error details
+                    example: Start time cannot be empty
+        '500':
+          "$ref": "#/components/responses/GeneralError"
+  "/open-api/p/notification/v2/messages/standard":
+    post:
+      tags:
+      - V2
+      summary: Message Sending V2 API 
+      operationId: sendMessageV2ByStandard
+      description: It will be migrated to /open-api/p/notification/v2/messages. Send
+        messages based on specified recipient range and message content list. Returns
+        the task code for the current sending if successful.
+      deprecated: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/SendMessageRequestV2ByStandard"
+      responses:
+        '200':
+          "$ref": "#/components/responses/SendSuccess"
+        '400':
+          description: |
+            Errors
+            * 100000001 Sender's business code cannot be empty  {"code":100000001,"message":"Sender's business code cannot be empty "}
+            * 100000001 Sender's business name cannot be empty {"code":100000001,"message":"Sender's business name cannot be empty"}
+            * 100000001 Recipient range cannot be empty {"code":100000001,"message":"Recipient range cannot be empty"}
+            * 100000001 Message content list cannot be empty {"code":100000001,"message":"Message content list cannot be empty"}
+            * 100102009 Recipient does not exist {"code":100102009,"message":"Recipient does not exist"}
+            * 100102012 Protocol does not exist {"code":100102012,"message":"Protocol does not exist"}
+          content:
+            application/json:
+              schema:
+                properties:
+                  code:
+                    type: integer
+                    enum:
+                    - 100000001
+                    - 100102009
+                    - 100102012
+                    description: Error code
+                  message:
+                    type: string
+                    enum:
+                    - 'Sender''s business code cannot be empty '
+                    - Sender's business name cannot be empty
+                    - Recipient range cannot be empty
+                    - Message content list cannot be empty
+                    - Recipient does not exist
+                    - Protocol does not exist
+                    - Topic does not exist
+                    description: Error details
+        '500':
+          description: |
+            Errors
+            * 100000001 Internal server error {"code":100000001,"message":"Internal server error"}
+          content:
+            application/json:
+              schema:
+                properties:
+                  code:
+                    type: integer
+                    enum:
+                    - 100000001
+                    description: Error code
+                  message:
+                    type: string
+                    enum:
+                    - Internal server error
+                    description: Error details
+  "/open-api/p/notification/v2/topic/messages/standard":
+    post:
+      tags:
+      - V2
+      summary: Send Messages Based on a Topic 
+      operationId: sendMessageByTopicByStandard
+      description: It will be migrated to /open-api/p/notification/v2/topic/messages.
+        Send messages based on a Topic. If the recipient range and protocol type are
+        specified in the input parameters, they will override the original recipient
+        range and protocol type of the topic.
+      deprecated: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/SendMessageByTopicRequestByStandard"
+      responses:
+        '200':
+          "$ref": "#/components/responses/SendSuccess"
+        '400':
+          description: |
+            Errors
+            * 100000001 Sender's business code cannot be empty  {"code":100000001,"message":"Sender's business code cannot be empty "}
+            * 100000001 Sender's business name cannot be empty {"code":100000001,"message":"Sender's business name cannot be empty"}
+            * 100000001 Topic code cannot be empty {"code":100000001,"message":"Topic code cannot be empty"}
+            * 100102007 Topic does not exist {"code":100102007,"message":"Topic does not exist"}
+            * 100102008 Topic is not associated with a template {"code":100102008,"message":"Topic is not associated with a template"}
+            * 100102009 Recipient does not exist {"code":100102009,"message":"Recipient does not exist"}
+            * 100102011 Topic does not include this protocol {"code":100102011,"message":"Topic does not include this protocol"}
+            * 100102012 Protocol does not exist {"code":100102012,"message":"Protocol does not exist"}
+            * 100102015 Protocol does not support {"code":100102015,"message":"Protocol does not support"}
+          content:
+            application/json:
+              schema:
+                properties:
+                  code:
+                    type: integer
+                    enum:
+                    - 100000001
+                    - 100102007
+                    - 100102008
+                    - 100102009
+                    - 100102011
+                    - 100102012
+                    - 100102015
+                    description: Error code
+                  message:
+                    type: string
+                    enum:
+                    - 'Sender''s business code cannot be empty '
+                    - Sender's business name cannot be empty
+                    - Topic code cannot be empty
+                    - Topic does not exist
+                    - Topic is not associated with a template
+                    - Recipient does not exist
+                    - Topic does not include this protocol
+                    - Protocol does not exist
+                    - Protocol does not support
+                    description: Error details
+        '500':
+          description: |
+            Errors
+            * 100000001 Internal server error {"code":100000001,"message":"Internal server error"}
+          content:
+            application/json:
+              schema:
+                properties:
+                  code:
+                    type: integer
+                    enum:
+                    - 100000001
+                    description: Error code
+                  message:
+                    type: string
+                    enum:
+                    - Internal server error
+                    description: Error details
+  "/open-api/p/notification/v2alpha1/users/{username}/messages/standard":
+    get:
+      tags:
+      - V2
+      summary: Query Messages Received by the User 
+      deprecated: true
+      description: 'It will be migrated to /open-api/p/notification/v2alpha1/users/{username}/messages*
+        Query Messages Received by the User within a certain time range
+
+        '
+      operationId: queryUserMessagesByStandard
+      parameters:
+      - name: username
+        in: path
+        required: true
+        description: username
+        schema:
+          type: string
+      - name: startTime
+        in: query
+        required: true
+        description: 'Start time of the time range to query (the time format must
+          include the time zone), format:"yyyy-MM-dd''T''HH:mm:ss.SSZ,for example:
+          UTC time:"2021-01-26T16:02:15.666+0000"; UTC+8 time:"2021-01-26T16:02:15.666+0800".'
+        schema:
+          type: string
+        example: '2021-01-26T16:02:15.666+0800'
+      - name: endTime
+        in: query
+        required: true
+        description: 'End time of the time range to query (the time format must include
+          the time zone), format:"yyyy-MM-dd''T''HH:mm:ss.SSZ, for example: UTC time:"2021-01-26T16:02:15.666+0000"; UTC+8
+          time:"2021-01-26T16:02:15.666+0800".'
+        schema:
+          type: string
+        example: '2021-07-01T16:02:15.666+0800'
+      - name: noticeProtocol
+        in: query
+        required: true
+        description: 'Notification method for messages, e.g., email: email, internal
+          message: stationLetter; specific notification methods can be viewed in the
+          system.'
+        schema:
+          type: string
+        example: stationLetter
+      - name: current
+        in: query
+        required: false
+        description: Current default page number for pagination query is 1 (first
+          page), and page number must be greater than or equal to 1.
+        schema:
+          type: integer
+          default: 1
+        example: 1
+      - name: pageSize
+        in: query
+        required: false
+        description: Default number of items per page for pagination query is 20,
+          and page size range is 1~500.
+        schema:
+          type: integer
+          default: 20
+        example: 20
+      responses:
+        '200':
+          description: Response result of messages received by the user
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  list:
+                    type: array
+                    items:
+                      "$ref": "#/components/schemas/noticeMessageResponseByStandard"
+              example:
+                pagination:
+                  current: 1
+                  pageSize: 20
+                  total: 3
+                list:
+                - sender: work_flow
+                  topic: Pending tasks
+                  param: '{"creator":"Zhang San","creationTime":"2021-07-26 09:36:49","extendcontent":"","title":"Regression
+                    testing","content":"Personnel - Receive notification","url":"/project/flow/#/workflowPage?todoId=1531845319510608&processId=1531845294377552&appId=App_93549d29f01ca145d916fd72c1dd6ac6"}'
+                  staffCode: zhangsan
+                  staffName: Zhang San
+                  sendStatus: 1
+                  readStatus: 1
+                  noticeProtocol: stationLetter
+                  errorResult:
+                - sender: work_flow
+                  topic: Pending tasks
+                  param: '{"creator":"Zhang San","creationTime":"2021-07-26 09:36:49","extendcontent":"","title":"Regression
+                    testing","content":"Personnel - Receive notification","url":"/project/flow/#/workflowPage?todoId=1531845319510608&processId=1531845294377552&appId=App_93549d29f01ca145d916fd72c1dd6ac6"}'
+                  staffCode: zhangsan
+                  staffName: Zhang San
+                  sendStatus: 1
+                  readStatus: 0
+                  noticeProtocol: stationLetter
+                  errorResult:
+                - sender: work_flow
+                  topic: Pending tasks
+                  param: '{"creator":"Zhang San","creationTime":"2021-07-26 09:36:49","extendcontent":"","title":"Regression
+                    testing","content":"Personnel - Receive notification","url":"/project/flow/#/workflowPage?todoId=1531845319510608&processId=1531845294377552&appId=App_93549d29f01ca145d916fd72c1dd6ac6"}'
+                  staffCode: zhangsan
+                  staffName: Zhang San
+                  sendStatus: 0
+                  readStatus: 0
+                  noticeProtocol: stationLetter
+                  errorResult: no channel
+        '400':
+          description: |
+            Errors
+            * 100000001 Start time cannot be empty {"code":100000001,"message":"Start time cannot be empty"}
+            * 100000001 End time cannot be empty {"code":100000001,"message":"End time cannot be empty"}
+            * 100102022 User does not exist {"code":100102022,"message":"User does not exist"}
+            * 100102023 Incorrect start time format {"code":100102023,"message":"Incorrect start time format"}
+            * 100102024 Incorrect end time format {"code":100102024,"message":"Incorrect end time format"}
+            * 100102025 Page number must be greater than or equal to 1 {"code":100102025,"message":"Page number must be greater than or equal to 1"}
+            * 100102026 Page size must be greater than or equal to 1 and less than or equal to 500 {"code":100102025,"message":"Page size must be greater than or equal to 1 and less than or equal to 500"}
+            * 100102012 Protocol does not exist {"code":100102012,"message":"Protocol does not exist"}
+          content:
+            application/json:
+              schema:
+                properties:
+                  code:
+                    type: integer
+                    description: Error code
+                    example: 100000001
+                  message:
+                    type: string
+                    description: Error details
+                    example: Start time cannot be empty
+        '500':
+          "$ref": "#/components/responses/GeneralError"
+components:
+  securitySchemes:
+    Sign:
+      type: apiKey
+      name: Authorization
+      in: header
+  schemas:
+    SendMessageRequestV1:
+      type: object
+      required:
+      - receivers
+      - sender
+      - source
+      properties:
+        content:
+          type: object
+          description: Message content, required when type is specified
+          properties:
+            title:
+              type: string
+              description: Message title, effective when type is specified as email
+              example: title
+            text:
+              type: string
+              description: Message content, effective when type is specified as email
+                or stationLetter
+              example: text
+        multipleType:
+          type: array
+          description: Specify multiple sending methods simultaneously
+          example:
+          - - email
+            - ''
+          - - stationLetter
+            - ''
+          items:
+            type: array
+            items:
+              type: string
+        receivers:
+          type: array
+          description: Required, message recipients (supOS username), admin cannot
+            be the recipient
+          example:
+          - userName
+          items:
+            type: string
+        sender:
+          type: string
+          description: Required, message sender
+          example: sender
+        source:
+          type: string
+          description: Required, message source
+          example: source
+        text:
+          type: string
+          description: Message content, required when specifying multiple sending
+            methods
+          example: text
+        title:
+          type: string
+          description: Message title, required when specifying multiple sending methods
+          example: title
+        type:
+          type: string
+          description: Sending method, can be specified as email or stationLetter
+          example: email
+    SendMessageRequestV2:
+      type: object
+      required:
+      - businessCode
+      - businessName
+      - receivers
+      - contents
+      properties:
+        businessCode:
+          type: string
+          description: Required, sender's business code
+          example: businessCode
+          maxLength: 200
+        businessName:
+          type: string
+          description: Required, sender's business name
+          example: businessName
+          maxLength: 200
+        receivers:
+          type: array
+          description: Required, recipient range (multiple selection possible)
+          items:
+            type: object
+            properties:
+              rangeType:
+                type: string
+                enum:
+                - STAFF
+                - POSITION
+                - DEPARTMENT
+                - ROLE
+                - EMAIL
+                description: 'Required, recipient range type: STAFF=Staff, POSITION=Position,
+                  DEPARTMENT=Department, ROLE=Role, EMAIL=Email'
+                example: STAFF
+              codes:
+                type: array
+                items:
+                  type: string
+                  description: Required, corresponding codes when rangeType is specified
+                    as STAFF, POSITION, DEPARTMENT, ROLE. For EMAIL, it is the recipient's
+                    email address
+                  example: STAFF_CODE
+          example:
+          - rangeType: EMAIL
+            codes:
+            - admin@supos.com
+          - rangeType: STAFF
+            codes:
+            - zhangsan
+        contents:
+          type: array
+          description: Required. List of message contents
+          example:
+          - protocol: email
+            content: '{"subject":"title","text":"body"}'
+            fileUrls:
+            - http://file-server/a/b.zip
+          - protocol: stationLetter
+            content: '{"text":"body"}'
+          items:
+            type: object
+            required:
+            - protocol
+            - content
+            properties:
+              protocol:
+                type: string
+                description: Required. Protocol type
+              content:
+                type: string
+                description: Required. Message content
+              fileUrls:
+                type: array
+                items:
+                  type: string
+                  example: http://file-server/a/b.zip
+                description: Only effective when the protocol is 'email'. File URLs
+                  of email attachments, either absolute paths to downloadable files
+                  on the internet or file addresses on the attachment server.
+    SendMessageRequestV2ByStandard:
+      type: object
+      required:
+      - businessCode
+      - businessName
+      - receivers
+      - contents
+      properties:
+        businessCode:
+          type: string
+          description: Required, sender's business code
+          example: businessCode
+        businessName:
+          type: string
+          description: Required, sender's business name
+          example: businessName
+        receivers:
+          type: array
+          description: Required, recipient range (multiple selection possible)
+          items:
+            type: object
+            properties:
+              rangeType:
+                type: string
+                enum:
+                - STAFF
+                - ROLE
+                description: 'Required. Recipient range type: STAFF=user, ROLE=role'
+                example: STAFF
+              codes:
+                type: array
+                items:
+                  type: string
+                  description: Required. Codes corresponding to STAFF or ROLE when
+                    specified
+                  example: STAFF_CODE
+        contents:
+          type: array
+          description: Required. List of message contents
+          example:
+          - protocol: stationLetter
+            content: '{"text":"body"}'
+          items:
+            type: object
+            properties:
+              protocol:
+                type: string
+                description: Required. Notification method (stationLetter for internal
+                  messages)
+              content:
+                type: string
+                description: Required. Message content
+    SendMessageByTopicRequestByStandard:
+      type: object
+      required:
+      - businessCode
+      - businessName
+      - topicCode
+      properties:
+        businessCode:
+          type: string
+          description: Required, sender's business code
+          example: businessCode
+        businessName:
+          type: string
+          description: Required, sender's business name
+          example: businessName
+        topicCode:
+          type: string
+          description: Required, topic code
+          example: topicCode
+        protocols:
+          type: array
+          items:
+            type: string
+            enum:
+            - stationLetter
+            description: Optional. Send the message using the specified protocol type
+              (can only choose from the protocols available for the current topic;
+              an error will occur if it's out of range)
+        receivers:
+          type: array
+          description: Optional. Send the message to the specified recipients (can
+            choose multiple)
+          items:
+            type: object
+            properties:
+              rangeType:
+                type: string
+                enum:
+                - STAFF
+                - ROLE
+                description: 'Required. Recipient range type: STAFF=user, ROLE=role'
+                example: STAFF
+              codes:
+                type: string
+                description: Required. Codes corresponding to STAFF or ROLE when specified
+                example: STAFF_CODE
+        param:
+          type: object
+          description: Optional. Topic keywords (template variables)
+    SendMessageByTopicRequest:
+      type: object
+      required:
+      - businessCode
+      - businessName
+      - topicCode
+      properties:
+        businessCode:
+          type: string
+          description: Required, sender's business code
+          example: businessCode
+          maxLength: 50
+        businessName:
+          type: string
+          description: Required, sender's business name
+          example: businessName
+          maxLength: 50
+        topicCode:
+          type: string
+          description: Required, topic code
+          example: topicCode
+          maxLength: 50
+        protocols:
+          type: array
+          items:
+            type: string
+            enum:
+            - stationLetter
+            - email
+          description: |
+            Optional. Use the current specified protocol type to send the message.
+              * If the protocol type is specified in the input parameters, it will override the original protocol type of the topic.
+              * If the protocol type is not specified in the input parameters, the message will be sent according to the original protocol type of the topic.
+          example:
+          - stationLetter
+          - email
+        receivers:
+          type: array
+          description: |
+            Optional. Use the current specified recipient range to send the message (multiple selections allowed).<br>
+              * If the recipient range and protocol type are specified in the input parameters, they will override the original recipient range and protocol type of the topic.
+              *  If the recipient range and protocol type are not specified in the input parameters, the message will be sent according to the original recipient range and protocol type of the topic. If the recipient range is not configured in the topic, an error will be returned: Receiver cannot be empty.
+          items:
+            type: object
+            required:
+            - rangeType
+            - codes
+            properties:
+              rangeType:
+                type: string
+                enum:
+                - STAFF
+                - POSITION
+                - DEPARTMENT
+                - ROLE
+                - EMAIL
+                description: 'Required, recipient range type: STAFF=Staff, POSITION=Position,
+                  DEPARTMENT=Department, ROLE=Role, EMAIL=Email'
+                example: STAFF
+              codes:
+                type: array
+                items:
+                  type: string
+                description: Required, corresponding codes when rangeType is specified
+                  as STAFF, POSITION, DEPARTMENT, ROLE. For EMAIL, it is the recipient's
+                  email address
+                example:
+                - STAFF_CODE
+          example:
+          - rangeType: EMAIL
+            codes:
+            - admin@supos.com
+          - rangeType: STAFF
+            codes:
+            - zhangsan
+        param:
+          type: object
+          example:
+            openWith: window_open
+            receiveTime: '2020-12-02'
+            orderName: Order 1
+            orderMaker: Zhang San
+            orderNumber: '23011231235452'
+            orderStatus: Initiated
+          description: |
+            Optional. Topic keywords (template variables) <br>
+            * For example, the default template for a to-do message topic: You have received a ${orderName} created by ${orderMaker} on ${receiveTime}, with order number ${orderNumber}. The order is currently in ${orderStatus} status. Please check it in a timely manner.
+              * Template parameters are the variables inside ${}: receiveTime、orderMaker、orderName、orderNumber、orderStatus.
+              * When sending the message, the actual values corresponding to the message template variables should be specified. If not specified, the message template will be filled with empty values by default.
+            * Built-in template variables include [openWith]
+              * openWith: This field is only applicable when the protocol is stationLetter and is used to set the open method of the station letter. The openWith field should not be defined in the station letter template.
+                * window_open: Indicates that the station letter should be opened in a new window.
+                * window_modal: Indicates that the station letter should be opened in a modal dialog.
+                * If not specified, the default value is the configuration value in the station letter template. If the template is not configured, the station letter will default to open in a new window.
+        fileUrls:
+          type: array
+          items:
+            type: string
+            example: http://file-server/a/b.zip
+          description: Only effective when the protocol is 'email'. File URLs of email
+            attachments, either absolute paths to downloadable files on the internet
+            or file addresses on the attachment server.
+    noticeMessageResponse:
+      type: object
+      properties:
+        sender:
+          type: string
+          description: Sender of the message
+        topic:
+          type: string
+          description: Name of the topic
+        noticeProtocol:
+          type: string
+          description: Notification method (email, stationLetter)
+        param:
+          type: string
+          description: Original JSON parameter from the business side
+        staffCode:
+          type: string
+          description: Personnel code of the current recipient of the message
+        staffName:
+          type: string
+          description: Name of the current recipient of the message
+        sendStatus:
+          type: integer
+          description: 'Message sending status (0: failed, 1: successful, 2: unknown)'
+        readStatus:
+          type: integer
+          description: 'Message read status (0: unread, 1: read, 2: unknown)'
+        errorResult:
+          type: string
+          description: Error returned in case of sending failure
+    noticeMessageResponseByStandard:
+      type: object
+      properties:
+        sender:
+          type: string
+          description: Sender of the message
+        topic:
+          type: string
+          description: Name of the topic
+        noticeProtocol:
+          type: string
+          description: Notification method (email, stationLetter)
+        param:
+          type: string
+          description: Original JSON parameter from the business side
+        staffCode:
+          type: string
+          description: Username of the current recipient of the message
+        staffName:
+          type: string
+          description: Name of the current recipient of the message
+        sendStatus:
+          type: integer
+          description: 'Message sending status (0: failed, 1: successful, 2: unknown)'
+        readStatus:
+          type: integer
+          description: 'Message read status (0: unread, 1: read, 2: unknown)'
+        errorResult:
+          type: string
+          description: Error returned in case of sending failure
+  responses:
+    GeneralError:
+      description: Common error 100000001 Internal server error
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                type: integer
+                description: Error code, e.g., 100000001
+                example: 100000001
+              message:
+                type: string
+                description: Error details
+                example: Internal server error
+    SendSuccess:
+      description: Return task code if the message is sent successfully
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              taskCode:
+                type: string
+                description: task code
+                example: taskCode
+                maxLength: 22

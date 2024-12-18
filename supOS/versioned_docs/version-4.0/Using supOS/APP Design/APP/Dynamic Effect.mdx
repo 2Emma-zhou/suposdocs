@@ -1,0 +1,264 @@
+---
+sidebar_position: 7
+---
+
+Dynamic effects display real-time status of equipment to simulate production process going inside the plant.
+
+
+## Visible
+
+Controls whether the graphic element is visible when the collected data changes.
+1. Double-click a graphic element or right-click a grouped element, and then click <strong>Dynamic</strong> to open dynamic effect configuration window.
+2. Click <strong>Visible</strong>, and then click <img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/appDesign/18.png" /> to select an object.
+:::info
+You can also select <strong>Expression</strong> from the drop-down list next to <strong>Data Source</strong> and write a script.
+:::
+3. Select <strong>Type of Data</strong>.
+
+<ul>
+<ul>
+<li>
+  <strong>Analog</strong>: Select between <strong>Quantities</strong> and <strong>Percentage</strong>. You need to set
+  lower and upper limits as conditions for dynamic effect of the
+  graphic element.
+</li>
+<li>
+  <strong>Switch</strong>: Only{" "}
+  <strong>True</strong> and <strong>False</strong>. Set effect for each
+  value and the element displays as configured when the
+  collected data changes.
+</li>
+  </ul>
+  </ul>
+
+4. Set limits and corresponding visible effects, or switch value and corresponding visible effects, and then click <strong>OK</strong>.<br/>
+As shown in the following figure, when the collected value is between 0-20, the element is visible, and when it is between 20-40, it is invisible.
+
+:::info
+<strong>True</strong> and <strong>False</strong> configurations are for <strong>Switch</strong> only.
+:::
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/appDesign/53.png" />
+
+## Movement
+
+Controls the horizontal or vertical movement of an element.
+
+:::info
+In this section, <strong>Horizontal Movement</strong> is used as an example.
+:::
+
+1. Double-click a graphic element or right-click a grouped element, and then click <strong>Dynamic</strong> to open dynamic effect configuration window.
+2. Click <strong>Horizontal Move</strong>, and then click <img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/appDesign/18.png"/> to select an object.
+3. Select <strong>Positioning</strong>.
+- <strong>Absolute</strong>: Use the current position of the element as position 0. It is selected by default.
+- <strong>Relative</strong>: Presently unavailable.
+4. Select <strong>Value Type</strong> between <strong>Quantities</strong> and <strong>Percentage</strong>, and then set the minimum and maximum values and corresponding positions of the element.
+:::info
+When the set data range is exceeded, the element can only move between the set position range.
+:::
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/appDesign/54.png"/>
+
+5. Click <strong>OK</strong>.
+
+## Flicker
+
+Controls the dynamic flashing and flashing color of the element.
+1. Double-click a graphic element or right-click a grouped element, and then click <strong>Dynamic</strong> to open dynamic effect configuration window.
+2. Click <strong>Flicker</strong>, and then click <img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/appDesign/18.png" /> to select an object.
+3. Select <strong>Type of Data</strong>.
+- <strong>Analog</strong>: Select between <strong>Quantities</strong> and <strong>Percentage</strong>. You need to set lower and upper limits as conditions for flashing effect of
+  the element.
+- <strong>Switch</strong>: Only <strong>True</strong> and <strong>False</strong>. Set flashing effect for each value and the element displays as configured when the collected data changes.
+4. Set limits and corresponding flashing effects, or switch value and corresponding flashing effects, and then click <strong>OK</strong>.<br/>
+As shown in the following figure, when the collected value is between 0-20, the element is flashing between green and red at a frequency of 500, and when it is between 20-40, it is flashing red and green at a frequency of .
+
+:::info
+<strong>True</strong> and <strong>False</strong> configurations are for <strong>Switch</strong> only.
+:::
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/appDesign/55.png" />
+
+5. Click <strong>OK</strong>.
+
+
+## Filling
+ 
+Controls the dynamic filling and filling color of the element.
+1. Double-click a graphic element or right-click a grouped element, and then click <strong>Dynamic</strong> to open dynamic effect configuration window.
+2. Click <strong>Filling</strong>, and then click <img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/appDesign/18.png" /> to select an object.
+3. Select <strong>Value Type</strong> between <strong>Quantities</strong> and <strong>Percentage</strong>, and then set the minimum and maximum values and corresponding filling percentage and direction.
+- The filling percentage moves along with the set value. For example, set <strong>Minimum Value</strong> to 20, and <strong>Minimum Fill Percentage</strong> to 0, meaning the element starts filling the set color when the data value reaches 20.
+- Select <strong>Fill Direction</strong>, and the element fills from the set direction.
+4. Set ranges and corresponding colors in different levels for clear notification.
+
+:::info
+- We recommend set multiple ranges to improve alarm effect. Fro example, when the data value reaches a dangerous range, set the filling color to red.
+- When the set data range is exceeded, the element filling is in default color.
+:::
+
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/appDesign/56.png" />
+
+5. Click <strong>OK</strong>.
+
+## Zoom
+
+Controls the dynamic zoom ratio of the element.
+1. Double-click a graphic element or right-click a grouped element, and then click <strong>Dynamic</strong> to open dynamic effect configuration window.
+2. Click <strong>Zoom</strong>, and then click <img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/appDesign/18.png" /> to select an object.
+3. Select <strong>Value Type</strong> between <strong>Quantities</strong> and <strong>Percentage</strong>, and then set <strong>Zoom Direction</strong>.
+:::info
+The element zooms from the set direction.
+:::
+4. Set the minimum and maximum values and corresponding zoom ratios.<br/>
+The zoom ratio changes along with the set value. For example, set <strong>Minimum Value</strong> to 20, and corresponding <strong>Zoom Ratio</strong> to 0, meaning the element starts zooming in when the data value reaches 20.
+
+:::info
+The element can only be zoomed in based on the set ratio in equal proportions.
+:::
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/appDesign/57.png" />
+
+5. Click <strong>OK</strong>.
+
+<span id="color"></span>
+
+## Color
+
+Controls the dynamic color of the graphic element.
+1. Double-click a graphic element or right-click a grouped element, and then click <strong>Dynamic</strong> to open dynamic effect configuration window.
+2. Click <strong>Color</strong>, and then click <img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/appDesign/18.png" /> to select an object.
+3. Select <strong>Type of Data</strong>.
+- <strong>Analog</strong>: Select between <strong>Quantities</strong> and <strong>Percentage</strong>. You need to set lower and upper limits as conditions for dynamic effect of the graphic element.
+- <strong>Switch</strong>: Only <strong>True</strong> and <strong>False</strong>. Set effect for each value and the element displays as configured when the collected data changes.
+4. Set limits and corresponding colors, or switch value and corresponding colors, and then click <strong>OK</strong>.<br/>
+As shown in the following figure, when the collected value is between 0-20, the element is green, and when it is between 20-40, it is red.
+
+:::info
+<strong>True</strong> and <strong>False</strong> configurations are for <strong>Switch</strong> only.
+:::
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/appDesign/58.png" />
+
+
+## Line
+Controls the line color or border color of the graphic element.
+:::info
+The configuration of line or border color is similar to that of the element color. For details, see <a href="#color">Color</a>.
+:::
+
+## Tooltip
+
+Indicates data source information. You can point to the element and the tooltip appears in operation center.
+1. Double-click a graphic element or right-click a grouped element, and then click <strong>Dynamic</strong> to open dynamic effect configuration window.
+2. Click <strong>Tooltip</strong>, and then select <strong>Value Type</strong> between <strong>Dynamic Data</strong> and <strong>Static Data</strong>.
+- <strong>Dynamic Data</strong>: Select a data source, and the tooltip displays the selected data.
+- <strong>Static Data</strong>: Set a tip and the tooltip displays the entered tip.
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/appDesign/60.png" />
+
+3. Click <strong>OK</strong>.
+
+## Turn
+
+Controls the dynamic turning angle of the element.
+1. Double-click a graphic element or right-click a grouped element, and then click <strong>Dynamic</strong> to open dynamic effect configuration window.
+2. Click <strong>Turn</strong>, and then click <img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/appDesign/18.png" /> to select an object.
+3. Select <strong>Type of Data</strong>.
+- <strong>Analog</strong>: Set the minimum and maximum values and corresponding turning angles. For example, set <strong>Minimum Value</strong> and <strong>Maximum Value</strong> to 20 and 100 respectively, and corresponding <strong>Angle</strong> to 0 and 180, meaning the element stays the same when the data value reaches 20 and turns upside down when it reaches 100.
+- <strong>Switch</strong>: Set <strong>Spinning Speed</strong>, and then select <strong>Rotation Timing</strong> and <strong>Rotate Direction</strong>. For example, in the figure below, the element rotates in clockwise at a speed of 30 seconds a cycle when the switch value is <strong>On</strong>.
+
+:::info
+<strong>Zoom</strong> and <strong>Turn</strong> cannot be enabled at the same time.
+:::
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/appDesign/61.png" />
+
+4. Click <strong>OK</strong>.
+
+## Flow
+
+Controls the dynamic flow effect of the pipeline element.
+1. Double-click a pipeline, and then click <strong>Dynamic</strong> to open dynamic effect configuration window.
+2. Click <strong>Flow</strong>, and then click <img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/appDesign/18.png" /> to select an object.
+3. Select <strong>Type of Data</strong>.
+- <strong>Analog</strong>: Set value ranges, corresponding color, flow speed and direction.
+- <strong>Switch</strong>: Set corresponding color, flow speed and direction for <strong>True</strong> and <strong>False</strong>
+4. Set <strong>Line Length</strong> and <strong>Interval</strong>, and then click <strong>OK</strong>.
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/appDesign/62.png"/>
+
+5. Click <strong>OK</strong>.
+
+## Text Dynamic Effect
+
+Controls the dynamic display effect of text element.
+1. Double-click a text element, and then click <strong>Dynamic</strong> to open dynamic effect configuration window.
+- Word
+
+<ol>
+<ol>
+  <li>
+Click <strong>Word</strong>, and then click <img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/appDesign/18.png"/> to select an object and enter an expression.
+  </li>
+  <li>
+Set ranges and corresponding text contents, and then click <strong>OK</strong>.
+<p>
+  When the data reaches the set limits, corresponding texts are
+  displayed.
+</p>
+  </li>
+</ol>
+</ol>
+
+- Text display
+
+<ol>
+<ol>
+  <li>Click <strong>Text Display</strong>, and then click <img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/appDesign/18.png"/> to select an object or enter an expression.
+  </li>
+  <li>
+Select a color of the text, and then click <strong>OK</strong>.
+<p>The text is displayed in the set color.</p>
+  </li>
+</ol>
+</ol>
+
+- Analog display
+
+<ol>
+<ol>
+  <li>
+Click <strong>Analog Display</strong>, and
+then click <img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/appDesign/18.png"/> to select an object and enter an expression.
+  </li>
+  <li>
+Set ranges and corresponding text colors, and then click <strong>OK</strong>.
+<p>
+  When the data reaches the set limits, texts are displayed in
+  set colors.
+</p>
+  </li>
+</ol>
+</ol>
+
+- Switch display
+
+<ol>
+<ol>
+  <li>
+Click <strong>Switch Display</strong>, and
+then click <img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/appDesign/18.png"/> to select an object and enter an expression.
+  </li>
+  <li>
+Set corresponding texts and colors for <strong>TRUE</strong> and <strong>False</strong>, and then click <strong>OK</strong>.
+<p>
+  When the value is <strong>TRUE</strong> or{" "}
+  <strong>False</strong>, set texts are
+  displayed in set colors.
+</p>
+  </li>
+</ol>
+</ol>

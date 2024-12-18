@@ -1,0 +1,27 @@
+After creating models, such as experiment model and rule model, you can use them to run specific data.
+1. Log in to supOS, and then select **Data Intelligence** > **Data Science** > **Model Scheduling** > **Single Model**.
+2. Click **Add** to set a model calling schedule.
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supBD/13.png)
+
+<ol>
+<ol>
+<li>Set the name and execution schedule of the model calling.</li>
+<li>Select a model, and the input and output data of the model is listed.
+
+:::info
+All published rule models and experiment models that are created in **Model Management** are available.
+:::
+
+</li>
+<li>Select the input and output fields from the object model in supOS.
+
+- **Cache amount**: The number of input data entries before model calling. For example, set it to 3, the model calling will not be triggered until 3 entries of input data is cached.
+- **Statistic interval**: Set the interval for input data update. For example, set it to 10 seconds, the input value will be the lastest or average value of the selected object data in 10 seconds.
+- **Statistic type**: Average value is available for float type.
+
+</li>
+</ol>
+</ol>
+
+3. Click **Submit**.

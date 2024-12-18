@@ -1,0 +1,1752 @@
+---
+openapi: 3.0.0
+info:
+  description: |-
+    Service interface provided by user management:
+
+    # Authentication
+
+    <!-- ReDoc-Inject: <security-definitions> -->
+  version:
+  title: User Management Interface Definition
+  contact:
+    name: Contact Developer
+    email: openapi@supos.com
+servers:
+- url: "/open-api/"
+tags:
+- name: users
+  description: User Management
+- name: V2.8.1
+  description: supOS V2.8.1 dedicated authentication interface, which will be discarded
+    soon
+security:
+- Sign: []
+- Token: []
+components:
+  securitySchemes:
+    Sign:
+      type: apiKey
+      name: Authorization
+      in: header
+    Token:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    AddUser:
+      type: object
+      properties:
+        username:
+          type: string
+          maxLength: 50
+          description: |
+            * Username rules: only letters, numbers, special symbols *()-_. and their combinations are supported, no more than 50 characters.
+            * Username only supports the 6 special characters *()-_., others Special symbols such as +/?%#&=space{} "':,\[], etc. are compatible and are not supported for now, please be informed!
+          example: zhangsan
+        password:
+          type: string
+          description: User Password
+          example: xxxxx
+        userDesc:
+          type: string
+          description: User Description
+          example: Normal User
+        timeZone:
+          type: string
+          description: Time Zone
+          example: GMT+0800
+          default: GMT+0800
+        personCode:
+          type: string
+          description: Personnel Code
+          example: person01
+        companyCode:
+          type: string
+          description: Company Code
+          example: default
+          default: Default Company
+        accountType:
+          type: integer
+          enum:
+          - 0
+          description: 0 normal users
+          example: 0
+        roleNameList:
+          type: array
+          description: Character code set
+          items:
+            type: string
+            example: role1
+        recoveryDeleted:
+          type: boolean
+          enum:
+          - false
+          - true
+          description: Whether to restore deleted users, the default value is false,
+            do not restore deleted users.
+          default: false
+      required:
+      - username
+      - password
+      - personCode
+      - companyCode
+      - accountType
+      - timeZone
+    AddUserByStandard:
+      type: object
+      properties:
+        username:
+          type: string
+          description: username
+          example: test
+        password:
+          type: string
+          description: User Password
+          example: xxxxx
+        userFullName:
+          type: string
+          description: User Full Name
+          example: Normal User
+        userDesc:
+          type: string
+          description: User Description
+          example: Normal User
+        timeZone:
+          type: string
+          description: Time Zone
+          example: GMT+0800
+          default: GMT+0800
+        roleNameList:
+          type: array
+          description: Character code set
+          items:
+            type: string
+            example: role1
+      required:
+      - username
+      - password
+      - timeZone
+    UpdateUser:
+      type: object
+      properties:
+        userDesc:
+          type: string
+          description: User Description
+          example: Company Director
+        timeZone:
+          type: string
+          description: Time Zone
+          example: GMT+0000
+        personCode:
+          type: string
+          description: personnel code
+          example: person01
+        lockStatus:
+          type: integer
+          enum:
+          - 0
+          - 1
+          description: Lock status 0 not locked 1 is locked
+          example: 0
+    UpdateUserByStandard:
+      type: object
+      properties:
+        userDesc:
+          type: string
+          description: User Description
+          example: Company Director
+        timeZone:
+          type: string
+          description: Time Zone
+          example: GMT+0000
+        userFullName:
+          type: string
+          description: User Full Name
+          example: Zhang Daming
+        lockStatus:
+          type: integer
+          enum:
+          - 0
+          - 1
+          description: Lock status 0 not locked 1 is locked
+          example: 0
+    UpdateRoles:
+      type: object
+      properties:
+        roleCodes:
+          type: array
+          description: Character code set
+          items:
+            type: string
+            example: role1
+      required:
+      - roleCodes
+    UserDatail:
+      type: object
+      properties:
+        username:
+          type: string
+          description: username
+          example: admin
+          maxLength: 50
+        userDesc:
+          type: string
+          description: User Description
+          example: Super System Administrator
+          maxLength: 255
+        accountType:
+          type: integer
+          description: User Type 0 Ordinary User 1 System Administrator
+          example: 0
+        lockStatus:
+          type: integer
+          description: Lock status 0 not locked 1 is locked
+          example: 0
+        valid:
+          type: integer
+          description: User Status 0 Deleted 1 Valid
+          example: 1
+        personCode:
+          type: string
+          description: personnel code
+          example: person01
+          maxLength: 50
+        personName:
+          type: string
+          description: Person Name
+          example: person01
+          maxLength: 200
+        modifyTime:
+          type: string
+          description: yyyy-MM-dd'T'HH:mm:ss.SSSZ
+          example: '2020-09-22T07:38:13.893+0800'
+          maxLength: 28
+        createTime:
+          type: string
+          description: yyyy-MM-dd'T'HH:mm:ss.SSSZ
+          example: '2020-09-22T07:38:13.893+0800'
+          maxLength: 28
+        userRoleList:
+          type: array
+          description: The collection of roles the user belongs to
+          items:
+            "$ref": "#/components/schemas/RoleInfo"
+        avatar:
+          type: string
+          description: profile picture
+          example: "/auth/v2/users/admin/avatar"
+          maxLength: 256
+    UserDatailByStandard:
+      type: object
+      properties:
+        username:
+          type: string
+          description: Username
+          example: admin
+        userFullName:
+          type: string
+          description: User Full Name
+          example: Super System Administrator
+        userDesc:
+          type: string
+          description: User Description
+          example: Super System Administrator
+        accountType:
+          type: integer
+          description: User Type 0 Ordinary User 1 System Administrator
+          example: 0
+        lockStatus:
+          type: integer
+          description: Lock status 0 not locked 1 is locked
+          example: 0
+        modifyTime:
+          type: string
+          description: yyyy-MM-dd'T'HH:mm:ss.SSSZ
+          example: '2020-09-22T07:38:13.893+0800'
+        createTime:
+          type: string
+          description: yyyy-MM-dd'T'HH:mm:ss.SSSZ
+          example: '2020-09-22T07:38:13.893+0800'
+        userRoleList:
+          type: array
+          description: The collection of roles the user belongs to
+          items:
+            "$ref": "#/components/schemas/RoleInfo"
+    RoleInfo:
+      type: object
+      properties:
+        name:
+          type: string
+          description: role number
+          example: systemRole
+          maxLength: 50
+        showname:
+          type: string
+          description: Role Name
+          example: Administrator Role
+          maxLength: 50
+        description:
+          type: string
+          description: Role description, the current version does not support
+          deprecated: true
+          maxLength: 255
+    Pagination:
+      description: Pagination Information
+      type: object
+      properties:
+        total:
+          type: integer
+          description: Total Number of Items
+          example: 100
+        pageSize:
+          type: integer
+          description: Number of entries per page
+          example: 20
+          default: 20
+        pageIndex:
+          type: integer
+          description: Current page number
+          example: 1
+    Password:
+      type: object
+      properties:
+        password:
+          type: string
+          description: admin user password
+          example: 9Bo0JPnIfi0A9tptjB/pwisHnom1gSPm/OLyuPDXldM=
+    2.8.1-AddUser:
+      type: object
+      properties:
+        username:
+          type: string
+          description: username
+          example: test
+        password:
+          type: string
+          description: User Password
+          example: xxxxx
+        languageType:
+          type: string
+          description: Language type, not supported by the current version
+          deprecated: true
+        userDesc:
+          type: string
+          description: User Description
+        email:
+          type: string
+          description: Email
+        timeZone:
+          type: string
+          description: Time zone
+        accountType:
+          type: integer
+          description: 'Account type 0: normal user 1: APP user, the current version
+            does not support accountType=1'
+        roleNameList:
+          type: array
+          description: The collection of roles the user belongs to
+          items:
+            type: string
+        noticeConfigList:
+          type: array
+          description: A collection of user notification types, not supported by the
+            current version
+          items:
+            type: integer
+          deprecated: true
+      required:
+      - username
+      - password
+    2.8.1-resources:
+      type: object
+      properties:
+        resourceOrder:
+          type: string
+          description: Permission Sort Number
+        name:
+          type: string
+          description: Permission name
+        description:
+          type: string
+          description: Permission Description
+        resourceType:
+          type: string
+          description: Resource type, not supported by the current version
+          deprecated: true
+        resourceFunctionType:
+          type: string
+          description: Resource function type (folder/page/button)
+        resource:
+          type: string
+          description: Resource value, not supported by current version
+        resourceCode:
+          type: string
+          description: Resource Business Code
+        parentId:
+          type: string
+          description: Parent Permission ID
+        hide:
+          type: integer
+          description: Whether to hide 0 no 1 yes
+        platformType:
+          type: string
+          description: Platform type, not supported by current version
+    2.8.1-UpdateRole:
+      type: object
+      properties:
+        showName:
+          type: string
+          description: Role Name
+        description:
+          type: string
+          description: Role Description
+        underControlled:
+          type: boolean
+          description: In terms of data permissions, whether the role is controllable,
+            the current version does not support
+          deprecated: true
+      required:
+      - showName
+    2.8.1-RoleBaseInfo:
+      type: object
+      properties:
+        name:
+          type: string
+          description: role number
+        showName:
+          type: string
+          description: Role Name
+        description:
+          type: string
+          description: Role Description
+        underControlled:
+          type: boolean
+          description: In terms of data permissions, whether the role is controllable,
+            the current version does not support
+          deprecated: true
+      required:
+      - name
+      - showName
+    2.8.1-UpdateUser:
+      type: object
+      properties:
+        languageType:
+          type: string
+          description: Language type, the current version does not support
+          deprecated: true
+        userDesc:
+          type: string
+          description: User Description
+        email:
+          type: string
+          description: Email
+        timeZone:
+          type: string
+          description: Time zone
+        roleNameList:
+          type: array
+          description: The collection of roles the user belongs to
+          items:
+            type: string
+    2.8.1-QueryUser:
+      type: object
+      properties:
+        username:
+          type: string
+          description: username
+        password:
+          type: string
+          description: Password, not supported in current version
+        languageType:
+          type: string
+          description: Language type, not supported by the current version
+        userDesc:
+          type: string
+          description: User Description
+        email:
+          type: string
+          description: Email
+        uploadUrl:
+          type: string
+          description: Avatar path, the current version does not support
+        userRoleList:
+          type: array
+          description: The collection of roles the user belongs to
+          items:
+            "$ref": "#/components/schemas/2.8.1-RoleInfo"
+        noticeConfig:
+          type: array
+          description: User receiving notification configuration, the current version
+            does not support
+          items:
+            type: integer
+          deprecated: true
+    2.8.1-QueryUserByStandard:
+      type: object
+      properties:
+        username:
+          type: string
+          description: Username
+        userFullName:
+          type: string
+          description: User Full Name
+        userDesc:
+          type: string
+          description: User Description
+        userRoleList:
+          type: array
+          description: The collection of roles the user belongs to
+          items:
+            "$ref": "#/components/schemas/2.8.1-RoleInfo"
+        noticeConfig:
+          type: array
+          description: User receiving notification configuration, the current version
+            does not support
+          items:
+            type: integer
+          deprecated: true
+    2.8.1-RoleInfo:
+      type: object
+      allOf:
+      - "$ref": "#/components/schemas/2.8.1-Role"
+      - "$ref": "#/components/schemas/2.8.1-TableCommonInfo"
+    2.8.1-Role:
+      type: object
+      properties:
+        name:
+          type: string
+          description: role number
+        showName:
+          type: string
+          description: Role Name
+        description:
+          type: string
+          description: Role Description
+        underControlled:
+          type: boolean
+          description: In terms of data permissions, whether the role is controllable,
+            the current version does not support
+          deprecated: true
+    2.8.1-TableCommonInfo:
+      type: object
+      properties:
+        createTime:
+          type: string
+          description: Creation time
+        createUsername:
+          type: string
+          description: founder
+        modifyTime:
+          type: string
+          description: Modification time
+        modifyUsername:
+          type: string
+          description: Modified by
+    MenuTree:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Menu unique number
+        name:
+          type: string
+          description: Menu Name
+        url:
+          type: string
+          description: menu url
+        sort:
+          type: number
+          description: Menu sorting field (the order value is determined by the creator
+            when the menu is created)
+        scope:
+          type: integer
+          description: 0 means configuration menu; 1 means runtime menu
+        children:
+          type: array
+          items:
+            "$ref": "#/components/schemas/MenuTree"
+  responses:
+    GeneralError:
+      description: General error 100000001 Service internal exception
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                type: integer
+                description: 'Error code, example: 100000001'
+                example: 100000001
+              message:
+                type: string
+                description: Error message
+                example: Service Internal Exception
+    Created:
+      description: The background has successfully accepted the command and processed
+        it successfully
+    Updated:
+      description: The background has successfully accepted the command and processed
+        it successfully
+      headers:
+        Location:
+          description: URL of the accessed resource
+          schema:
+            type: string
+    Accepted:
+      description: The background has successfully accepted the command, but it has
+        not been processed yet
+      headers:
+        Location:
+          description: URL of query processing result
+          schema:
+            type: string
+paths:
+  "/auth/v2/users":
+    post:
+      tags:
+      - users
+      summary: Add new user
+      description: "* Optional: user description, role, fill in role code for role.\n*
+        Mandatory items: user name, password, personnel code, time zone, user type
+        userType, company code companyCode, the current value of accountType is 0
+        , common user.\n* Username rules: only letters, numbers, special symbols *()-_.
+        special characters, and other special symbols such as +/?%#&=space{} \"':,\\[],
+        etc., are related to compatibility and are not supported for now. Please note!\n*
+        User descriptions can contain up to 255 characters. \n* Username uniqueness
+        rule: uniqueness under the group, after the user is deleted, the user cannot
+        be recreated with this name. \n* Time zone format: GMT+0800. \n* Added recoveryDeleted
+        field, when recoveryDeleted=true, it supports adding deleted users, if recoveryDeleted
+        is not passed or false, deleted users cannot be added\n"
+      operationId: addUser
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/AddUser"
+      responses:
+        '200':
+          "$ref": "#/components/responses/Created"
+        '400':
+          description: |
+            Error prompt
+            * 100106500 Parameter verification error, {"code":100106500,"message":"The user name only supports letters, numbers, special symbols *()-_. and their combinations" }
+            * 100106004 User name is duplicated, {"code":100106004,"message":"User name is duplicated"}
+            * 100106005 Personnel has been bound to user{"code":100106005, "message":"The person has been bound to the user"}
+            * 100106012 The person does not exist, {"code":100106012,"message":"{personCode} The corresponding person does not exist" }
+            * 100106013 The role does not exist, {"code":100106013,"message":"{roleCode}, {roleCode} corresponds to a role that does not exist"}
+            * 100106021 The password complexity does not meet the system requirements Requirements, {"code":100106021,"message":"Return specific requirements according to the current system password complexity"}
+            * 100106014 Company does not exist{"code":100106014,"message ":"The company corresponding to {compangCode} does not exist"}
+            * 100106020 The person does not belong to the company, {"code":100106020,"message":"{personCode} The person does not belong to { compangCode} corresponds to the company"}
+            * 100106022 The role does not belong to this company, {"code":100106022,"message":"{roleCode}, {roleCode} corresponds to a role that does not belong to {compangCode} corresponding company "}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    description: |
+                      Error code
+                      * 100106500 Parameter verification error
+                      * 100106004 Duplicate user name
+                      * 100106005 Personnel has bound user
+                      * 100106012 Personnel does not exist
+                      * 100106013 Role does not exist
+                      * 100106021 Password The complexity does not meet the system requirements
+                      * 100106014 The company does not exist
+                      * 100106020 The person does not belong to the company
+                      * 100106022 The role does not belong to the company
+                    example: 100106021
+                  message:
+                    type: string
+                    description: Error Prompt
+                    example: 'Password rule: 6 to 8-digit password containing uppercase
+                      and lowercase numbers'
+        '500':
+          "$ref": "#/components/responses/GeneralError"
+    get:
+      tags:
+      - users
+      summary: Get user list by page
+      description: |
+        * Mandatory items: current page number, number of records per page, and company code
+        * Optional items: role code, modification time, whether the query has been deleted; when the role code is passed, only the specified code is queried and bound Role users
+        * Sorting rule: Sort in descending order according to modification time
+        * Typical scenario: In the user synchronization scenario, when you want to query all users, you can not pass the modification time (modifyTime) parameter, so as to obtain all user data; When you want to obtain incremental users after a certain time, you can pass the modification time (modifyTime) as a certain time to obtain user data that has been modified after this time
+        * Support querying deleted user data through the includeDeleted parameter
+      operationId: getUsers
+      parameters:
+      - name: keyword
+        in: query
+        required: false
+        description: |
+          Fuzzy matching keywords, support fuzzy matching parameters include:
+           **User name (userName)**
+           **User description (userDesc)**
+          * For example: input "user01", Match and query all the data containing "user01" in the above parameters;
+          * does not support case-sensitive query;
+          * does not support multiple query conditions, the input data will be used as a single value to match the query;
+           * If the relevant data matching the query does not exist, the returned data structure is an empty collection.
+        schema:
+          type: string
+          maxLength: 50
+      - name: pageIndex
+        in: query
+        required: true
+        description: Current page number
+        schema:
+          type: integer
+          default: 1
+          minimum: 1
+      - name: pageSize
+        in: query
+        description: Number of records per page
+        required: true
+        schema:
+          type: integer
+          default: 20
+          minimum: 10
+          maximum: 500
+      - name: companyCode
+        in: query
+        description: Company Code
+        required: true
+        schema:
+          type: string
+      - name: roleCode
+        in: query
+        description: Role Code
+        required: false
+        schema:
+          type: string
+      - name: modifyTime
+        in: query
+        description: "Modification time: \n* UTC time, with time zone, the format
+          is: yyyy-MM-dd'T'HH:mm:ss.SSSZ\"\n"
+        required: false
+        schema:
+          type: string
+          example: '2020-12-07T18:07:44.000+0800'
+      - name: includeDeleted
+        in: query
+        description: |
+          Whether to filter deleted users
+          * true: Query deleted users
+          * false: Do not query deleted users
+          * When the passed parameter is empty, the system defaults to false
+        schema:
+          type: boolean
+          default: false
+        required: false
+        example: false
+      responses:
+        '200':
+          description: Find what the object returns
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  list:
+                    type: array
+                    items:
+                      "$ref": "#/components/schemas/UserDatail"
+                  pagination:
+                    "$ref": "#/components/schemas/Pagination"
+        '400':
+          description: |
+            Error prompt
+            * 100106500 Parameter verification error {"code":100106500,"message":"The number of records per page (pageSize) must be greater than or equal to 10 and less than or equal to 500"}
+            * 100106500 Parameter verification error {"code":100106500,"message":"The page number (pageIndex) cannot be less than 1! "}
+            * 100106500 Parameter verification error {"code":100106500,"message":"The page number (pageIndex) cannot be less than 1! "}
+            * 100106014 The company does not exist{"code":100106014,"message":"The company corresponding to the code [{companyCode}] does not exist"}
+            * 100106014 The corresponding role does not exist{ "code":100106014,"message":"The role corresponding to {roleCode} does not exist"}
+            * 100106500 The date format is wrong, {"code":100106500,"message":"The date format is wrong, please use the date format of "yyyy-MM-dd'T'HH:mm:ss.SSSZ""}
+            * 100101701 The keyword parameter length cannot be greater than 50! ,{"code":100101701,"message":"The length of the fuzzy matching keyword (keyword) cannot be greater than 50! "}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    description: |
+                      Error prompt
+                      * 100106500 Parameter format error
+                      * 100106014 Company does not exist"
+                    example: 100106500
+                  message:
+                    type: string
+                    description: Error message
+                    example: pageSize exceeds the maximum size of 500
+        '500':
+          "$ref": "#/components/responses/GeneralError"
+    delete:
+      tags:
+      - users
+      summary: Batch delete users
+      description: |
+        * Maximum number of deletions: 100
+        * Minimum number of deletions: 1
+        * Delete user names that do not exist in the system: By default, the user will not be prompted that the user name does not exist, and the system will regard the deletion as successful
+        * Transaction behavior: Either all deletions are successful, or all deletions are not successful, and partial deletions will not occur
+        * Unable to delete pending users
+        * System administrator users cannot be deleted
+      operationId: batchDeleteUsers
+      parameters:
+      - name: usernames
+        in: query
+        required: true
+        description: User Name Collection
+        schema:
+          type: string
+          example: user1,user2
+      responses:
+        '200':
+          description: Successfully processed, but nothing to return
+        '400':
+          description: |
+            Error prompt
+            * 100106500 Parameter verification error{"code":100106500,"message":"The number of deletions exceeds the maximum value of 100"}
+            * 100106017 The user has something to do Delete {"code":100106017,"message":"{name}, {name} has pending and cannot be deleted"}
+            * 100106018 System administrator cannot delete{"code":100106018, "message":"{name}, {name} system administrator user cannot be deleted"}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    description: |
+                      Error prompt
+                      * 100106500 Parameter verification error
+                    example: 100106017
+                  message:
+                    type: string
+                    description: Error message
+                    example: "{name},{name} has something to do and cannot be deleted"
+        '500':
+          "$ref": "#/components/responses/GeneralError"
+  "/auth/v2/users/{username}":
+    get:
+      tags:
+      - users
+      summary: Get user details
+      description: Query the detailed information of the specified user, username
+        is required
+      operationId: getUserInfo
+      parameters:
+      - name: username
+        in: path
+        description: User name, required
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Query the detailed information of the specified user
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/UserDatail"
+        '500':
+          "$ref": "#/components/responses/GeneralError"
+    put:
+      tags:
+      - users
+      summary: Modify user
+      operationId: updateUser
+      description: |
+        * Time zone format: GMT+0800,
+        * User description, time zone, bound personnel, and locked user can be modified
+        * User description can be up to 255 characters.
+      parameters:
+      - name: username
+        in: path
+        description: User name, required
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/UpdateUser"
+      responses:
+        '200':
+          "$ref": "#/components/responses/Created"
+        '400':
+          description: |
+            Error prompt
+            * 100106500 Parameter verification error{"code":100106500,"message":"Time zone format error"}
+            * 100106012 Person does not exist, {"code":100106012 ,"message":"The person corresponding to {personCode} does not exist"}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    description: 'Error code, for example: "100106500 Parameter verification
+                      error, 100106012 The person does not exist"'
+                    example: 100106500
+                  message:
+                    type: string
+                    description: Error message
+                    example: timeZone time zone format error
+        '500':
+          "$ref": "#/components/responses/GeneralError"
+  "/auth/v2/users/{username}/role":
+    put:
+      tags:
+      - users
+      summary: Unbind role
+      description: |
+        * Unbind up to 10 roles
+        * System administrators cannot edit roles
+      operationId: unbindUserRole
+      parameters:
+      - name: username
+        in: path
+        description: User name, required
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/UpdateRoles"
+      responses:
+        '200':
+          "$ref": "#/components/responses/Created"
+        '400':
+          description: |
+            Error prompt
+            * 100106013 The role does not exist, {"code":100106013,"message":"{roleCode}, {roleCode} corresponds to a role that does not exist"}
+            * 100106019 System administrator user The role cannot be edited,{"code":100106019,"message":"The system administrator user cannot edit the role"}
+            * 100106500 Parameter verification error{"code":100106500," message":"Unbind up to 10 characters"}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    description: 'Error encoding, for example: "100106013 The role
+                      does not exist"'
+                    example: 100106013
+                  message:
+                    type: string
+                    description: Error message
+                    example: role1, role2 does not exist
+        '500':
+          "$ref": "#/components/responses/GeneralError"
+    post:
+      tags:
+      - users
+      summary: Bind role
+      description: |
+        * The maximum number of bound roles is 10
+        * System administrator users cannot edit roles
+      operationId: bindUserRole
+      parameters:
+      - name: username
+        in: path
+        description: User name, required
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/UpdateRoles"
+      responses:
+        '200':
+          "$ref": "#/components/responses/Created"
+        '400':
+          description: |
+            Error prompt
+            * 100106013 The role does not exist, {"code":100106013,"message":"{roleCode}, {roleCode} corresponds to a role that does not exist"}
+            * 100106019 System administrator user The role cannot be edited,{"code":100106019,"message":"The system administrator user cannot edit the role"}
+            * 100106500 Parameter verification error{"code":100106500," message":"The maximum number of binding roles is 10"}
+            * 100106022 The role does not belong to the company, {"code":100106022,"message":"{roleCode},{roleCode} corresponds The role does not belong to the company that the {username} user is bound to"}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    description: 'Error encoding, for example: "100106013 The role
+                      does not exist"'
+                    example: 100106013
+                  message:
+                    type: string
+                    description: Error message
+                    example: role1, role2 does not exist
+        '500':
+          "$ref": "#/components/responses/GeneralError"
+  "/auth/v2/users/admin/password":
+    put:
+      summary: Reset system default administrator password
+      tags:
+      - users
+      security: []
+      description: |
+        * This interface only resets the password of the admin user
+        * Before using this interface, please contact the administrator to enable permissions
+        * The returned password is encrypted by base64, and base64 reverse solution is required before decryption. The decryption algorithm is as follows
+         * The symmetric decryption algorithm is AES-128-ECB, and the data uses the padding method PKCS5Padding
+        * The symmetric decryption key is aeskey=md5(sk), and the aeskey is 16 bytes
+      operationId: adminPasswordReset
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Password"
+  "/auth/v2/users/{username}/third/identity":
+    delete:
+      tags:
+      - users
+      summary: Unbind third-party identity binding
+      description: |
+        * Unbind third-party identities
+        * The maximum number of unbinds: 10
+        * The minimum number of unbinds: 1
+        * Unbind identities that do not exist in the system: By default, this will not be prompted The binding does not exist, and the system regards the unbinding as successful
+      operationId: unbindThirdIdentity
+      parameters:
+      - name: username
+        in: path
+        description: User name, required
+        required: true
+        schema:
+          type: string
+      - name: identityIds
+        in: query
+        required: true
+        description: A collection of unique identifiers
+        schema:
+          type: string
+          example: '12131231,123123123'
+      responses:
+        '200':
+          "$ref": "#/components/responses/Created"
+        '400':
+          description: |
+            Error prompt
+            * 100106500 Parameter verification error {"code":100106500,"message":"The number of deletions exceeds the maximum value of 10"}
+  "/supos/auth/v2/user":
+    post:
+      tags:
+      - V2.8.1
+      summary: Add new user, will be discarded soon
+      description: |
+        * username is required, password is required.
+        * Username rules: letters, numbers or underscores and combinations thereof, no more than 50 characters.
+        * E-mail format such as: user001@163.com.
+        * n* Time zone format such as: GMT+0800.
+      deprecated: true
+      operationId: addOldUse
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/2.8.1-AddUser"
+      responses:
+        '200':
+          "$ref": "#/components/responses/Created"
+        '400':
+          "$ref": "#/components/responses/GeneralError"
+  "/supos/auth/v2/users":
+    get:
+      tags:
+      - V2.8.1
+      summary: Get user list, will be obsolete
+      description: "* Fuzzy matching keywords, query by username, userDesc fuzzy matching\n"
+      deprecated: true
+      operationId: getOldUsers
+      parameters:
+      - name: keyword
+        in: query
+        required: false
+        description: Keyword Search
+        schema:
+          type: string
+      - name: pageIndex
+        in: query
+        required: false
+        description: Number of pages to turn, starting from 1
+        schema:
+          type: integer
+          default: 1
+      - name: pageSize
+        in: query
+        description: Number of elements returned per page
+        required: false
+        schema:
+          type: integer
+          default: 20
+      responses:
+        '200':
+          description: Find what the object returns
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  list:
+                    type: array
+                    items:
+                      "$ref": "#/components/schemas/2.8.1-QueryUser"
+                  pagination:
+                    "$ref": "#/components/schemas/Pagination"
+        '400':
+          "$ref": "#/components/responses/GeneralError"
+  "/supos/auth/v2/users/{username}":
+    get:
+      tags:
+      - V2.8.1
+      summary: Get user details, will be deprecated soon
+      deprecated: true
+      description: Query the detailed information of the specified user
+      operationId: getOldUserInfo
+      parameters:
+      - name: username
+        in: path
+        description: Username
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Query the detailed information of the specified user
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/2.8.1-QueryUser"
+        '400':
+          "$ref": "#/components/responses/GeneralError"
+  "/supos/auth/v2/user/{username}":
+    put:
+      tags:
+      - V2.8.1
+      summary: Modify the user, it will be discarded
+      deprecated: true
+      operationId: updateOldUser
+      description: |
+        * E-mail format such as: user@163.com;
+        * Time zone format such as: GMT+0800;
+      parameters:
+      - name: username
+        in: path
+        description: Username
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/2.8.1-UpdateUser"
+      responses:
+        '200':
+          "$ref": "#/components/responses/Created"
+        '400':
+          "$ref": "#/components/responses/GeneralError"
+  "/supos/auth/v2/delete/users":
+    post:
+      tags:
+      - V2.8.1
+      summary: Delete users in batches and will be discarded soon
+      deprecated: true
+      description: Delete users in batches
+      operationId: batchOldDeleteUser
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              description: 'A collection of user names, the format is: list:["user01","user02"]'
+              type: object
+              properties:
+                list:
+                  type: array
+                  items:
+                    type: string
+      responses:
+        '204':
+          description: Processed successfully, but there is nothing to return
+        '400':
+          "$ref": "#/components/responses/GeneralError"
+  "/supos/auth/v2/users/queryUsersByName/{name}":
+    get:
+      tags:
+      - V2.8.1
+      summary: Get the user list associated with the role, which will be obsolete
+      deprecated: true
+      operationId: getOldUserByRoleCode
+      parameters:
+      - name: name
+        in: path
+        required: true
+        description: role number
+        schema:
+          type: string
+      responses:
+        '200':
+          description: The result found and returned
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  list:
+                    type: array
+                    items:
+                      "$ref": "#/components/schemas/2.8.1-QueryUser"
+                  pagination:
+                    "$ref": "#/components/schemas/Pagination"
+        '400':
+          "$ref": "#/components/responses/GeneralError"
+  "/supos/auth/v2/roles":
+    post:
+      tags:
+      - V2.8.1
+      summary: A new character will be discarded soon
+      deprecated: true
+      description: |
+        * name is required, showName is required.
+        * Role numbering rules: letters, numbers or underscores and their combinations, cannot exceed 50 characters.
+        * Role name cannot exceed 50 characters.
+        * The character description cannot exceed 255 characters.
+      operationId: addOldRole
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/2.8.1-RoleBaseInfo"
+      responses:
+        '200':
+          "$ref": "#/components/responses/Created"
+        '400':
+          "$ref": "#/components/responses/GeneralError"
+    get:
+      tags:
+      - V2.8.1
+      summary: Get character list, will be obsolete
+      description: "* Use character number name, character name showName, description
+        keyword fuzzy matching query\n"
+      deprecated: true
+      operationId: getOldRoles
+      parameters:
+      - name: keyword
+        in: query
+        required: false
+        description: Keyword Search
+        schema:
+          type: string
+      - name: pageIndex
+        in: query
+        required: false
+        description: Number of pages to turn, starting from 1
+        schema:
+          type: integer
+          default: 1
+      - name: pageSize
+        in: query
+        description: Number of elements returned per page (maximum 100)
+        required: false
+        schema:
+          type: integer
+          default: 20
+          maximum: 100
+      responses:
+        '200':
+          description: Find what the object returns
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  list:
+                    type: array
+                    items:
+                      "$ref": "#/components/schemas/2.8.1-RoleInfo"
+                  pagination:
+                    "$ref": "#/components/schemas/Pagination"
+        '400':
+          "$ref": "#/components/responses/GeneralError"
+  "/supos/auth/v2/roles/{name}":
+    put:
+      tags:
+      - V2.8.1
+      summary: Update character information, will be obsolete
+      deprecated: true
+      description: |
+        * role name cannot exceed 50 characters;
+        * role description cannot exceed 255 characters
+      operationId: updateOldRoles
+      parameters:
+      - name: name
+        in: path
+        description: Character Number
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/2.8.1-UpdateRole"
+      responses:
+        '200':
+          "$ref": "#/components/responses/Created"
+        '400':
+          "$ref": "#/components/responses/GeneralError"
+    get:
+      tags:
+      - V2.8.1
+      summary: Get character details, will be obsolete
+      description: Query the detailed information of the specified role
+      operationId: getOldRoleInfo
+      deprecated: true
+      parameters:
+      - name: name
+        in: path
+        description: Character Number
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Find what the object returns
+          content:
+            application/json:
+              schema:
+                allOf:
+                - type: object
+                  properties:
+                    resources:
+                      type: array
+                      items:
+                        "$ref": "#/components/schemas/2.8.1-resources"
+                - "$ref": "#/components/schemas/2.8.1-RoleInfo"
+        '400':
+          "$ref": "#/components/responses/GeneralError"
+  "/supos/auth/v2/delete/roles":
+    post:
+      tags:
+      - V2.8.1
+      summary: Delete roles in batches and will be discarded soon
+      description: Delete roles in batches. If a role is bound by a user or position,
+        it cannot be deleted, and a deletion failure message will be prompted;
+      operationId: batchOldDeleteRole
+      deprecated: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              description: 'A collection of role numbers, the format is: list:["role01","role02"]'
+              properties:
+                list:
+                  type: array
+                  items:
+                    type: string
+      responses:
+        '200':
+          description: Processed successfully, but there is nothing to return
+        '400':
+          "$ref": "#/components/responses/GeneralError"
+  "/auth/v2/users/standard":
+    post:
+      tags:
+      - users
+      summary: New user, will be discarded soon, migrated to /auth/v2/users
+      description: |
+        * Optional: user description, role, fill in the role code.
+        * Mandatory items: user name, password, user name, time zone, only ordinary users can be added.
+        * User name rules: Letters, numbers or underscores and their combinations, no more than 50 characters.
+        * User descriptions can be up to 255 characters.
+        * Username uniqueness rules: uniqueness under the group, after the user is deleted, the name cannot be recreated User.
+        * Time zone format: GMT+0800.
+      operationId: addUserByStandard
+      deprecated: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/AddUserByStandard"
+      responses:
+        '200':
+          "$ref": "#/components/responses/Created"
+        '400':
+          description: |
+            Error prompt
+            * 100106500 Parameter verification error, {"code":100106500,"message":"The user name supports letters, numbers or underscores and their combinations"}
+            * 100106004 User name is duplicated ，{"code":100106004,"message":"Duplicate user name"}
+            * 100106013 The role does not exist,{"code":100106013,"message":"{ The role corresponding to roleCode}, {roleCode} does not exist"}
+            * 100106021 The password complexity does not meet the system requirements, {"code":100106021,"message":"Returns the specific password according to the current system password complexity Requires"}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    description: |
+                      Error encoding
+                      * 100106500 Parameter verification error
+                      * 100106004 Duplicate user name
+                      * 100106013 The role does not exist
+                      * 100106021 The password complexity does not meet the system requirements
+                    example: 100106021
+                  message:
+                    type: string
+                    description: Error Prompt
+                    example: 'Password rule: 6 to 8-digit password containing uppercase
+                      and lowercase numbers'
+        '500':
+          "$ref": "#/components/responses/GeneralError"
+    get:
+      tags:
+      - users
+      summary: Paging to get user list, will be discarded soon, migrate to /auth/v2/users
+      description: |
+        * Mandatory items: current page number, size of each page
+        * Optional: role code, when the user list needs to be obtained according to the role code, the role code is required
+        * Sorting rule: according to user modifyTime Descending order of time
+        * Synchronize users: leave modifyTime blank for the first time, get full data, fill in to get modified users whose time is greater than modifyTime
+        * The user list is a valid user (deleted users will not be returned)
+      operationId: getUsersByStandard
+      deprecated: true
+      parameters:
+      - name: keyword
+        in: query
+        required: false
+        description: Fuzzy matching keywords, query by username, userDesc fuzzy matching
+        schema:
+          type: string
+      - name: pageIndex
+        in: query
+        required: true
+        description: The number of pages to turn, starting from 1
+        schema:
+          type: integer
+      - name: pageSize
+        in: query
+        description: Number of elements returned per page
+        required: false
+        schema:
+          type: integer
+          default: 20
+          minimum: 10
+          maximum: 500
+      - name: roleCode
+        in: query
+        description: Role Code
+        required: false
+        schema:
+          type: string
+      - name: modifyTime
+        in: query
+        description: Modification time
+        required: false
+        schema:
+          type: string
+          description: yyyy-MM-dd'T'HH:mm:ss.SSSZ
+          example: '2020-12-07T18:07:44.000+0800'
+      responses:
+        '200':
+          description: Find what the object returns
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  list:
+                    type: array
+                    items:
+                      "$ref": "#/components/schemas/UserDatailByStandard"
+                  pagination:
+                    "$ref": "#/components/schemas/Pagination"
+        '400':
+          description: |
+            Error prompt
+            * 100106500 Parameter verification error {"code":100106500,"message":"pageSize exceeds the maximum value of 500"}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    description: |
+                      Error prompt
+                      * 100106500 Parameter format error
+                    example: 100106500
+                  message:
+                    type: string
+                    description: Error Message
+                    example: pageSize exceeds the maximum size of 500
+        '500':
+          "$ref": "#/components/responses/GeneralError"
+    delete:
+      tags:
+      - users
+      summary: Delete users in batches, will be discarded soon, migrate to /auth/v2/users
+      description: |
+        * Maximum number of deletions: 100
+        * Minimum number of deletions: 1
+        * Delete user names that do not exist in the system: By default, the user will not be prompted that the user name does not exist, and the system will regard the deletion as successful
+        * Transaction behavior: Either all deletions are successful, or all deletions are not successful, and partial deletions will not occur
+        * System administrator users cannot delete
+      operationId: batchDeleteUsersByStandard
+      deprecated: true
+      parameters:
+      - name: usernames
+        in: query
+        required: true
+        description: User Name Collection
+        schema:
+          type: string
+          example: user1,user2
+      responses:
+        '200':
+          description: Successfully processed, but nothing to return
+        '400':
+          description: |
+            Error prompt
+            * 100106500 Parameter verification error{"code":100106500,"message":"The number of deletions exceeds the maximum value of 100"}
+            * 100106018 System administrators are not allowed Delete {"code":100106018,"message":"{name}, {name} system administrator user cannot be deleted"}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    description: |
+                      Error prompt
+                      * 100106500 Parameter verification error
+                      * 100106018 System administrator cannot delete
+                    example: 100106018
+                  message:
+                    type: string
+                    description: Error message
+                    example: "{name}, {name} system administrator user cannot be deleted"
+        '500':
+          "$ref": "#/components/responses/GeneralError"
+  "/auth/v2/users/{username}/standard":
+    get:
+      tags:
+      - users
+      summary: Get user details, will be deprecated, migrate to /auth/v2/users/{username}
+      description: Query the detailed information of the specified user
+      operationId: getUserInfoByStandard
+      deprecated: true
+      parameters:
+      - name: username
+        in: path
+        description: User name, required
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Query the detailed information of the specified user
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/UserDatailByStandard"
+        '500':
+          "$ref": "#/components/responses/GeneralError"
+    put:
+      tags:
+      - users
+      summary: Modify the user, which will be discarded and migrated to /auth/v2/users/{username}
+      operationId: updateUserByStandard
+      description: |
+        * Time zone format: GMT+0800,
+        * can modify user name, description, time zone, and lock user
+        * User description can be up to 255 characters.
+      deprecated: true
+      parameters:
+      - name: username
+        in: path
+        description: User name, required
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/UpdateUserByStandard"
+      responses:
+        '200':
+          "$ref": "#/components/responses/Created"
+        '400':
+          description: |
+            Error prompt
+            * 100106500 Parameter verification error {"code":100106500,"message":"Time zone format error"}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    description: 'Error encoding, for example: "100106500 Parameter
+                      verification error"'
+                    example: 100106500
+                  message:
+                    type: string
+                    description: Error message
+                    example: timeZone time zone format error
+        '500':
+          "$ref": "#/components/responses/GeneralError"
+  "/supos/auth/v2/users/queryUsersByName/{name}/standard":
+    get:
+      tags:
+      - V2.8.1
+      summary: Get the list of users associated with roles, which will be discarded
+        and migrated to /supos/auth/v2/users/queryUsersByName/{name}
+      deprecated: true
+      operationId: getOldUserByRoleCodeByStandard
+      parameters:
+      - name: name
+        in: path
+        required: true
+        description: Character Number
+        schema:
+          type: string
+      responses:
+        '200':
+          description: The result found and returned
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  list:
+                    type: array
+                    items:
+                      "$ref": "#/components/schemas/2.8.1-QueryUserByStandard"
+                  pagination:
+                    "$ref": "#/components/schemas/Pagination"
+        '400':
+          "$ref": "#/components/responses/GeneralError"
+  "/auth/v2/users/{username}/avatar":
+    post:
+      tags:
+      - users
+      summary: Upload User Avatar
+      description: Upload User Avatar
+      operationId: authUserUploadAvatar
+      parameters:
+      - name: username
+        in: path
+        description: User name, required
+        required: true
+        schema:
+          type: string
+      - name: fileName
+        in: query
+        description: File name, required
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: string
+              format: binary
+      responses:
+        '200':
+          description: Return the corresponding avatar information after uploading
+            the avatar successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  fileName:
+                    type: string
+                    description: Avatar name
+                  fileFullPath:
+                    type: string
+                    description: Avatar path
+                  fileDownloadUrl:
+                    type: string
+                    description: Avatar access path
+        '400':
+          description: |
+            Error prompt
+            * 100106111 The maximum length of the file name cannot exceed 20 {"code":100106111,"message":"The maximum length of the file name cannot exceed 20"}
+            * 100106112 file The type only supports jpg, gif, and png {"code":100106112,"message":"The file type only supports jpg, gif, and png"}
+            * 100106113 The file size exceeds the limit, currently supports a maximum of 5 Mega{"code":100106113,"message":"The file size exceeds the limit, currently supports up to 5 megabytes"}
+          content:
+            application/json:
+              schema:
+                properties:
+                  code:
+                    type: integer
+                    description: Error Encoding
+                    example: 100106112
+                  message:
+                    type: string
+                    description: Error message
+                    example: The file type only supports jpg, gif and png
+    get:
+      tags:
+      - users
+      summary: Load User Avatar
+      description: Load User Avatar
+      operationId: authUserLoadAvatar
+      parameters:
+      - name: username
+        in: path
+        description: User name, required
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: The content returned after the request is successful
+          content:
+            image/*:
+              schema:
+                type: string
+                description: The download interface returns the avatar image
+        '400':
+          description: |
+            Error prompt
+            * 100106114 Avatar file does not exist {"code":100106114,"message":"Avatar file does not exist"}
+          content:
+            application/json:
+              schema:
+                properties:
+                  code:
+                    type: integer
+                    description: Error encoding
+                    example: 100106114
+                  message:
+                    type: string
+                    description: Error Message
+                    example: Avatar file does not exist

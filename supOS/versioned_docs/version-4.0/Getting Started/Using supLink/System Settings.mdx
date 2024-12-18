@@ -1,0 +1,121 @@
+---
+hide_title: true
+---
+
+### Configuring Message
+
+1. Log in to supLink by accessing <b>http://&lt;supLink server IP&gt;:8042/admin</b> with the same username and password as supOS.
+2. Select **System Settings** > **Message Config**.
+3. Configure message settings, and then click **Save**.
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supLink/5.png)
+
+<table>
+    <thead>
+      <tr>
+        <th>Parameter</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Message language</td>
+        <td>The language of the pushed alarm messages.</td>
+      </tr>
+      <tr>
+        <td>Enable the UMENG push</td>
+        <td>Whether to enable alarm messages pushed from UMENG.</td>
+      </tr>
+      <tr>
+        <td>Personalized alarm sound</td>
+        <td>Whether to enable custom alarm sound. Presently only available for iOS.</td>
+      </tr>
+      <tr>
+        <td>Alarm push frequency</td>
+        <td>Set the minimum interval for pushing alarm messages, and during the set period, alarm messages will only be sent once.</td>
+      </tr>
+    </tbody>
+</table>
+
+### Configuring Login
+
+1. Select **System Settings** > **Login Config**.
+2. Configure login information, and then click **Save**.
+- **Need auth**: Enable it, and you need to apply for anthorization for first-time login on mobile.
+- **Login expire time**: Set the period after which the account will be logged out.
+:::info
+Changing the login expire time will forcibly log out all accounts.
+:::
+
+<img width={450} src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supLink/6.png" />
+
+### Configuring Workbench
+
+1. Select **System Settings** > **Workbench Config**.
+2. Under **Basic Settings**, configure workbench.
+- **Custom workbench**: Enable it, and select a page from published applications to be the front page on mobile.
+- **One-touch call**: Set the number to call when you tap the **Emergency Call** at the upper-left corner on mobile.
+- **Organization enabled**: Diable it, and the **Contacts** tab on mobile will be hidden.
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supLink/7.png)
+3. Click **Carousel Settings**, set the carousel content on top of the front page on mobile.
+
+<ol>
+<ol>
+<li>Click <b>New Carousel</b>, and enter the basic information.</li>
+<li>Click <b>App selection</b> text box to select an application to be linked with the carousel content.</li>
+<li>Select an app, and then click <b>Next step</b> to select the content under the app. When you tap the carousel on mobile, the linked app page will be displayed.</li>
+<li>Click <b>Confirm</b>, and then click <b>Publish</b>.</li>
+</ol>
+</ol>
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supLink/9.png)
+
+4. Click **Basic Settings**, and then click **Save**.
+
+
+### Configuring Enterprise
+
+1. Select **System Settings** > **Enterprise Config**.
+2. Configure enterprise, and then click **Save**.
+- **Company name/Company short name**: Set the company name that displays on mobile.
+- **Custom image**: The image shows on top of the login page.
+- **Start picture**: The image shows when the mobile app is starting.
+
+<img width={450} src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supLink/8.png" />
+
+### Viewing System Information
+
+Select **System Settings** > **System Info** to view system information.
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supLink/11.png)
+
+### Configuring APP
+
+1. Select **System Settings** > **APP Config**.
+2. Configure app, and then click **Save**.
+- **Page operation authorization**: Grant the permission for operations to be done on mobile.
+- **Load/Submit timeout**: Set the timeout duration for mobile app loading and submitting.
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supLink/12.png)
+
+### Configuring Version
+
+1. Select **System Settings** > **Version Config**, and you can see the version of the current supLink server.
+2. Click **Upload** to upload the Android installation package.
+- You can click the package to download and install supLink mobile app.
+- Scan the QR code to install supLink mobile app.
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supLink/13.png)
+
+### Other Configuration
+
+Select **System Settings** > **Other Config**.
+- **IM file save time**: Set the time period for saving the instant messages on mobile.
+- **Scan for IP address replacement**:
+
+<ul>
+<ul>
+<li>Enable it, and when using supLink mobile app to scan QR codes which are linked with supOS pages, you will be redirected to supLink web login page.</li>
+<li>When using supLink mobile app to scan QR codes which link with addresses having <b>localhost</b> as keyword, you will be redirected to supLink web login page whether the function is enabled or not.</li>
+<li>supLink mobile app scan function can be used for general QR codes.</li>
+</ul>
+</ul>
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supLink/14.png)

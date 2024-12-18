@@ -1,0 +1,42 @@
+OpenAPI can be called in object services on supOS. For details on the OpenAPI, see **API Reference**.
+
+:::info
+The following are example code of the most frequently used types of HTTP requests.
+:::
+
+## ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/openAPI/4.png) GET
+```javascript
+var baseUrl = "http://App_c22ea5a725264786b1c873febe2dfd7c.apps:8080/health";
+var httpservice= services["HttpClientService"];// create hidden service object
+//3000 is the maximum timeout period with millisecond as unit. When no data returned after the set time, the request is timed out
+var result = httpservice.getString(baseUrl,3000);
+result;    
+```
+## ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/openAPI/2.png) PUT
+```javascript
+var param = {
+    "name": 'Emma',
+    "age": 12
+}
+var headers = {}
+var httpService= services["HttpClientService"];
+httpService.put("http://metadata-service:8080/api/metadata/objects/", JSON.stringify(param), headers, 10000)
+```
+## ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/openAPI/1.png) POST
+```javascript
+var param = {
+    "name": 'Emma',
+    "age": 12
+}
+var headers = {}
+var httpService= services["HttpClientService"];
+httpService.post("http://metadata-service:8080/api/metadata/features", JSON.stringify(param), headers, 10000)
+```
+## ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/openAPI/3.png) DELETE
+```javascript
+var baseUrl = "http://App_c22ea5a725264786b1c873febe2dfd7c.apps:8080/health";
+var httpservice= services["HttpClientService"];// create hidden service object
+//3000 is the maximum timeout period with millisecond as unit. When no data returned after the set time, the request is timed out
+var result = httpservice.delete(baseUrl,3000);
+result;    
+```

@@ -1,0 +1,16987 @@
+---
+hide_title: true
+---
+
+
+## General Property Configuration of Charts
+
+The supOS platform enables you to configure charts in business
+designer through scripts, which can be helpful when the provided
+configuration items do not meet your requirements.
+
+### General Property
+
+- Data Source and Others
+
+<table>
+<colgroup>
+<col style={{ width: "16.666666666666664%" }} />
+<col style={{ width: "16.666666666666664%" }} />
+<col style={{ width: "16.666666666666664%" }} />
+<col style={{ width: "16.666666666666664%" }} />
+<col style={{ width: "16.666666666666664%" }} />
+<col style={{ width: "16.666666666666664%" }} />
+</colgroup>
+<thead>
+<tr>
+<th>
+Property
+</th>
+<th>
+Description
+</th>
+<th>
+Type
+</th>
+<th>
+Default
+</th>
+<th>
+Set Value
+</th>
+<th>
+Get Value
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Data source
+</td>
+<td />
+<td>
+array
+</td>
+<td />
+<td>
+setDataSource
+</td>
+<td>
+getDataSource
+</td>
+</tr>
+<tr>
+<td>
+Time format
+</td>
+<td>
+Do not convert (cannot convert when data source is object property)
+</td>
+<td>
+boolean
+</td>
+<td>
+false
+</td>
+<td>
+setInitFormat
+</td>
+<td>
+getInitFormat
+</td>
+</tr>
+<tr>
+<td>
+Component ID
+</td>
+<td />
+<td>
+string
+</td>
+<td />
+<td />
+<td>
+getCtrlId
+</td>
+</tr>
+</tbody>
+</table>
+
+- Title
+
+<ul>
+<ul>
+<li>Main title
+<table>
+<colgroup>
+<col style={{ width: "16.666666666666664%" }} />
+<col style={{ width: "16.666666666666664%" }} />
+<col style={{ width: "16.666666666666664%" }} />
+<col style={{ width: "16.666666666666664%" }} />
+<col style={{ width: "16.666666666666664%" }} />
+<col style={{ width: "16.666666666666664%" }} />
+</colgroup>
+<thead>
+<tr>
+<th>
+Property
+</th>
+<th>
+Description
+</th>
+<th>
+Type
+</th>
+<th>
+Default
+</th>
+<th>
+Set Value
+</th>
+<th>
+Get Value
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Display
+</td>
+<td>
+Whether to display title
+</td>
+<td>
+boolean
+</td>
+<td>
+true
+</td>
+<td>
+setTitleVisibility
+</td>
+<td>
+getTitleVisibility
+</td>
+</tr>
+<tr>
+<td>
+Main title
+</td>
+<td />
+<td>
+string
+</td>
+<td />
+<td>
+setTitle
+</td>
+<td>
+getTitle
+</td>
+</tr>
+<tr>
+<td>
+Text style
+</td>
+<td />
+<td>
+object
+</td>
+<td>
+
+```js
+{ fontSize = 16, fontFamily = 'Arial', color ='#333333', fontWeight, fontStyle }
+```
+
+</td>
+<td>
+setChartTitle
+</td>
+<td>
+getChartTitle
+</td>
+</tr>
+<tr>
+<td>
+Alignment
+</td>
+<td />
+<td>
+string
+</td>
+<td>
+
+`'center'('center'|'left'|'right')`
+
+</td>
+<td>
+setChartAlign
+</td>
+<td>
+getChartAlign
+</td>
+</tr>
+</tbody>
+</table>
+</li>
+
+<li>Subtitle
+<table>
+<colgroup>
+<col style={{ width: "16.666666666666664%" }} />
+<col style={{ width: "16.666666666666664%" }} />
+<col style={{ width: "16.666666666666664%" }} />
+<col style={{ width: "16.666666666666664%" }} />
+<col style={{ width: "16.666666666666664%" }} />
+<col style={{ width: "16.666666666666664%" }} />
+</colgroup>
+<thead>
+<tr>
+<th>
+Property
+</th>
+<th>
+Description
+</th>
+<th>
+Type
+</th>
+<th>
+Default
+</th>
+<th>
+Set Value
+</th>
+<th>
+Get Value
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Display
+</td>
+<td>
+Whether to display sub title
+</td>
+<td>
+boolean
+</td>
+<td>
+true
+</td>
+<td>
+setSubtitleVisibility
+</td>
+<td>
+getSubtitleVisibility
+</td>
+</tr>
+<tr>
+<td>
+Sub title
+</td>
+<td />
+<td>
+string
+</td>
+<td />
+<td>
+setSubtitle
+</td>
+<td>
+getSubtitle
+</td>
+</tr>
+<tr>
+<td>
+Text style
+</td>
+<td />
+<td>
+object
+</td>
+<td>
+
+```js
+{ fontSize = 12, fontFamily = 'Arial', color ='#333333', fontWeight, fontStyle }
+```
+
+</td>
+<td>
+setSubChartTitle
+</td>
+<td>
+getSubChartTitle
+</td>
+</tr>
+<tr>
+<td>
+Alignment
+</td>
+<td />
+<td>
+string
+</td>
+<td>
+
+`'center'('center'|'left'|'right')`
+
+</td>
+<td>
+setSubChartAlign
+</td>
+<td>
+getSubChartAlign
+</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+</ul>
+
+- Basic Property
+
+<table>
+<colgroup>
+<col style={{ width: "20%" }} />
+<col style={{ width: "20%" }} />
+<col style={{ width: "20%" }} />
+<col style={{ width: "20%" }} />
+<col style={{ width: "20%" }} />
+</colgroup>
+<thead>
+<tr>
+<th>
+Property
+</th>
+<th>
+Type
+</th>
+<th>
+Default
+</th>
+<th>
+Set Value
+</th>
+<th>
+Get Value
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Border
+</td>
+<td>
+object
+</td>
+<td>
+
+```js
+{borderWidth:0, borderColor:'#ddd', borderRadius:0
+}
+```
+
+</td>
+<td>
+setBaseBorderStyle
+</td>
+<td>
+getBaseBorderStyle
+</td>
+</tr>
+<tr>
+<td>
+Margin
+</td>
+<td>
+object
+</td>
+<td>
+
+```js
+{spacingTop:10, spacingBottom:10, spacingLeft:10,
+spacingRight:10}
+```
+
+</td>
+<td>
+setBaseBoxSpacing
+</td>
+<td>
+getBaseBoxSpacing
+</td>
+</tr>
+<tr>
+<td>
+Background color
+</td>
+<td>
+string
+</td>
+<td>
+
+`'rgba(0, 0, 0, 0)'`
+
+</td>
+<td>
+setBackgroundColor
+</td>
+<td>
+getBackgroundColor
+</td>
+</tr>
+<tr>
+<td>
+Chart color
+</td>
+<td>
+string
+</td>
+<td>
+
+`'rgba(0, 0, 0, 0)'`
+
+</td>
+<td>
+setPlotBackgroundColor
+</td>
+<td>
+getPlotBackgroundColor
+</td>
+</tr>
+<tr>
+<td>
+Display level
+</td>
+<td>
+number
+</td>
+<td>
+100
+</td>
+<td>
+setChartZIndex
+</td>
+<td>
+getChartZIndex
+</td>
+</tr>
+<tr>
+<td>
+Full screen
+</td>
+<td>
+boolean
+</td>
+<td>
+false
+</td>
+<td>
+setFullscreenIco
+</td>
+<td>
+getFullscreenIcon
+</td>
+</tr>
+</tbody>
+</table>
+
+- Legend
+
+<table>
+<colgroup>
+<col style={{ width: "20%" }} />
+<col style={{ width: "20%" }} />
+<col style={{ width: "20%" }} />
+<col style={{ width: "20%" }} />
+<col style={{ width: "20%" }} />
+</colgroup>
+<thead>
+<tr>
+<th>
+Property
+</th>
+<th>
+Type
+</th>
+<th>
+Default
+</th>
+<th>
+Set Value
+</th>
+<th>
+Get Value
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Display
+</td>
+<td>
+boolean
+</td>
+<td>
+false
+</td>
+<td>
+setLegendEnabled
+</td>
+<td>
+getLegendEnabled
+</td>
+</tr>
+<tr>
+<td>
+Border
+</td>
+<td>
+object
+</td>
+<td>
+
+```js
+{borderWidth:0, borderColor:'#ddd', borderRadius:0
+}
+```
+
+</td>
+<td>
+setLegendBorderStyle
+</td>
+<td>
+getLegendBorderStyle
+</td>
+</tr>
+<tr>
+<td>
+Alignment
+</td>
+<td>
+string
+</td>
+<td>
+
+`'bottom-center'`
+
+</td>
+<td>
+setLegendAlign
+</td>
+<td>
+getLegendAlign
+</td>
+</tr>
+<tr>
+<td>
+Layout
+</td>
+<td>
+string
+</td>
+<td>
+
+`'horizontal'`
+
+</td>
+<td>
+setLegendLayout
+</td>
+<td>
+getLegendLayout
+</td>
+</tr>
+<tr>
+<td>
+Text style
+</td>
+<td>
+object
+</td>
+<td>
+
+```js
+{fontSize:16, fontFamily:'Arial', color:'#333333',
+fontWeight, fontStyle}
+```
+
+</td>
+<td>
+setLegendText
+</td>
+<td>
+getLegendText
+</td>
+</tr>
+<tr>
+<td>
+Background color
+</td>
+<td>
+string
+</td>
+<td>
+
+`'#fff'`
+
+</td>
+<td>
+setLegendItemBackgroundColor
+</td>
+<td>
+getLegendItemBackgroundColor
+</td>
+</tr>
+</tbody>
+</table>
+
+- Label
+
+:::info
+Dash chart and speedometer are excluded.
+:::
+
+<table>
+<colgroup>
+<col style={{ width: "20%" }} />
+<col style={{ width: "20%" }} />
+<col style={{ width: "20%" }} />
+<col style={{ width: "20%" }} />
+<col style={{ width: "20%" }} />
+</colgroup>
+<thead>
+<tr>
+<th>
+Property
+</th>
+<th>
+Type
+</th>
+<th>
+Default
+</th>
+<th>
+Set Value
+</th>
+<th>
+Get Value
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Display
+</td>
+<td>
+boolean
+</td>
+<td>
+false
+</td>
+<td>
+setDataLabelsEnabled
+</td>
+<td>
+getDataLabelsEnabled
+</td>
+</tr>
+<tr>
+<td>
+Border
+</td>
+<td>
+object
+</td>
+<td>
+
+```js
+{borderWidth:0, borderColor:'#ddd', borderRadius:0
+}
+```
+
+</td>
+<td>
+setDataLabelsBorderStyle
+</td>
+<td>
+getDataLabelsBorderStyle
+</td>
+</tr>
+<tr>
+<td>
+Label color
+</td>
+<td>
+string
+</td>
+<td>
+
+`'#000'`
+
+</td>
+<td>
+setDataLabelsColor
+</td>
+<td>
+getDataLabelsColor
+</td>
+</tr>
+<tr>
+<td>
+Background color
+</td>
+<td>
+string
+</td>
+<td>
+
+`'#ddd'`
+
+</td>
+<td>
+setDataLabelsBackgroundColor
+</td>
+<td>
+getDataLabelsBackgroundColor
+</td>
+</tr>
+<tr>
+<td>
+Alignment
+</td>
+<td>
+string
+</td>
+<td>
+
+`'center'`
+
+</td>
+<td>
+setDataLabelsAlign
+</td>
+<td>
+getDataLabelsAlign
+</td>
+</tr>
+<tr>
+<td>
+Data
+</td>
+<td>
+object
+</td>
+<td>
+
+```js
+{formatType:'0',dataDecimals:2}
+```
+
+</td>
+<td>
+setDataLabelsDateFormat
+</td>
+<td>
+getDataLabelsDateFormat
+</td>
+</tr>
+<tr>
+<td>
+Font size
+</td>
+<td>
+number
+</td>
+<td>
+12
+</td>
+<td>
+setDataLabelsFontSize
+</td>
+<td>
+getDataLabelsFontSize
+</td>
+</tr>
+<tr>
+<td>
+Padding
+</td>
+<td>
+number
+</td>
+<td>
+0
+</td>
+<td>
+setDataLabelsPadding
+</td>
+<td>
+getDataLabelsPadding
+</td>
+</tr>
+</tbody>
+</table>
+
+- Remark
+
+<table>
+<colgroup>
+<col style={{ width: "20%" }} />
+<col style={{ width: "20%" }} />
+<col style={{ width: "20%" }} />
+<col style={{ width: "20%" }} />
+<col style={{ width: "20%" }} />
+</colgroup>
+<thead>
+<tr>
+<th>
+Property
+</th>
+<th>
+Type
+</th>
+<th>
+Default
+</th>
+<th>
+Set Value
+</th>
+<th>
+Get Value
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Display
+</td>
+<td>
+boolean
+</td>
+<td>
+false
+</td>
+<td>
+setCreditsEnabled
+</td>
+<td>
+getCreditsEnabled
+</td>
+</tr>
+<tr>
+<td>
+Remark
+</td>
+<td>
+string
+</td>
+<td>
+undefined
+</td>
+<td>
+setCreditsText
+</td>
+<td>
+getCreditsText
+</td>
+</tr>
+</tbody>
+</table>
+
+### General Script
+
+:::info
+The following examples do not include all supported configuration items. You can go to https://api.highcharts.com.cn/highcharts/index.html to check all items.
+:::
+
+- <strong>updateConfigNew</strong>
+
+```js
+/**\n * @desc: General packed functions to change
+charts property
+ * @param {String} property:
+Property level
+ * @param {String} serviceName:
+Property value
+ */
+
+var chart = scriptUtil.getRegisterReactDom('componentId');
+
+chart.updateConfigNew('chart->options3d->enabled',
+true);
+```
+
+- <strong>deleteAllSeries</strong>
+
+```js
+/**
+ * @desc: Packed function to clear all series on
+current chart
+ */
+
+var chart = scriptUtil.getRegisterReactDom('componentId');
+
+chart.deleteAllSeries();
+```
+
+- <strong>getCurrentInstance</strong>
+```js
+
+/**
+ * @desc Packed function to get highchart instance,
+used to call embedded highchart function
+ * @return {Object}: Highchart object
+ */
+
+var chart = scriptUtil.getRegisterReactDom('componentId');
+
+var hchart = chart.getCurrentInstance();
+
+// add a data entry
+
+hchart.addSeries({
+name: 'name',
+data: [
+{ y: 123, name: 'Emma' },
+{ y: 123, name: 'Jason' },
+]
+})
+```
+
+
+## Chart Scripts
+
+### Line Chart
+
+<img width={450} height={300} src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/elementProperty/64.png" />
+
+<table>
+<colgroup>
+<col style={{ width: "11.990407673860911%" }} />
+<col style={{ width: "13.189448441247004%" }} />
+<col style={{ width: "12.470023980815348%" }} />
+<col style={{ width: "12.470023980815348%" }} />
+<col style={{ width: "12.470023980815348%" }} />
+<col style={{ width: "12.470023980815348%" }} />
+<col style={{ width: "12.470023980815348%" }} />
+<col style={{ width: "12.470023980815348%" }} />
+</colgroup>
+<thead>
+<tr>
+<th>
+Type
+</th>
+<th>
+Property
+</th>
+<th>
+Description
+</th>
+<th>
+Type
+</th>
+<th>
+Default
+</th>
+<th>
+Set Value
+</th>
+<th>
+Get Value
+</th>
+<th>
+Script Use
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td rowSpan={2}>
+Base
+</td>
+<td>
+Toggle type
+</td>
+<td>
+Change the chart line type
+</td>
+<td>
+boolean
+</td>
+<td>
+false
+</td>
+<td>
+setCutType
+</td>
+<td>
+getCutType
+</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>
+Timed refresh
+</td>
+<td />
+<td>
+number
+</td>
+<td>0</td>
+<td>
+setTimer
+</td>
+<td>
+getTimer
+</td>
+<td />
+</tr>
+<tr>
+<td rowSpan={4}>
+Chart style
+</td>
+<td>
+Backend name
+</td>
+<td>
+Display name of the data source (trailingShowName)
+</td>
+<td>
+boolean
+</td>
+<td>
+false
+</td>
+<td>
+setGetSourceName
+</td>
+<td>
+getGetSourceName
+</td>
+<td />
+</tr>
+<tr>
+<td>
+Style
+</td>
+<td>
+Line style
+</td>
+<td>
+object
+</td>
+<td>
+
+```js
+{lineWidth: 2, dashStyle: 'solid', symbol:'circle',
+radius:4, fillColor:'#fff'}
+```
+
+</td>
+<td>
+setChartDataLine
+</td>
+<td>
+getChartDataLine
+</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>
+Warning
+</td>
+<td />
+<td>
+object
+</td>
+<td>
+
+```js
+{ min: undefined, max: undefined, color:'red',
+enabled:false
+}
+```
+
+</td>
+<td>
+setChartEarly
+</td>
+<td>
+getChartEarly
+</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>
+Grid
+</td>
+<td />
+<td>
+number
+</td>
+<td>0</td>
+<td>
+setShowGrid
+</td>
+<td>
+getShowGrid
+</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td rowSpan={12}>
+X axis
+</td>
+<td>
+X axis type
+</td>
+<td />
+<td>
+string
+</td>
+<td>
+
+`'category'`
+
+</td>
+<td>
+setXAxisType
+</td>
+<td>
+getXAxisType
+</td>
+<td />
+</tr>
+<tr>
+<td>
+Format
+</td>
+<td />
+<td>
+string
+</td>
+<td>
+
+`'{value}'`
+
+</td>
+<td>
+setDateFormat
+</td>
+<td>
+getDateFormat
+</td>
+<td />
+</tr>
+<tr>
+<td>
+Show X axis
+</td>
+<td />
+<td>
+boolean
+</td>
+<td>
+true
+</td>
+<td>
+setXAxisVisible
+</td>
+<td>
+getXAxisVisible
+</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>
+Cross hair
+</td>
+<td />
+<td>
+boolean
+</td>
+<td>
+false
+</td>
+<td>
+setXAxisCrosshair
+</td>
+<td>
+getXAxisCrosshair
+</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>
+Scale
+</td>
+<td />
+<td>
+object
+</td>
+<td>
+
+```js
+{ min: null, tickInterval: undefined }
+```
+
+</td>
+<td>
+setXAxisScale
+</td>
+<td>
+getXAxisScale
+</td>
+<td />
+</tr>
+<tr>
+<td>
+Title
+</td>
+<td />
+<td>
+string
+</td>
+<td>
+undefined
+</td>
+<td>
+setXAxisTitle
+</td>
+<td>
+getXAxisTitle
+</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>
+Text style
+</td>
+<td />
+<td>
+object
+</td>
+<td>
+
+```js
+{fontSize:12, fontFamily:'Arial', color:'#000',
+fontWeight:'normal', fontStyle:'initial'}
+```
+
+</td>
+<td>
+setXAxisTitleStyle
+</td>
+<td>
+getXAxisTitleStyle
+</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>
+Title position
+</td>
+<td />
+<td>
+string
+</td>
+<td>
+
+`'middle'`
+
+</td>
+<td>
+setXAxisTitleAlign
+</td>
+<td>
+getXAxisTitleAlign
+</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>
+Axis line color
+</td>
+<td />
+<td>
+string
+</td>
+<td>
+
+`'#ccd6eb'`
+
+</td>
+<td>
+setxAxisColor
+</td>
+<td>
+getxAxisColor
+</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>
+Axis text color
+</td>
+<td />
+<td>
+string
+</td>
+<td>
+
+`'#666'`
+
+</td>
+<td>
+setXAxisLablesStyle
+</td>
+<td>
+getXAxisLablesStyle
+</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>
+Rotation angle
+</td>
+<td />
+<td>
+number
+</td>
+<td>0</td>
+<td>
+setXAxisRotation
+</td>
+<td>
+getXAxisRotation
+</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>
+Vertical text
+</td>
+<td />
+<td>
+boolean
+</td>
+<td>
+false
+</td>
+<td>
+setXAxisWritingMode
+</td>
+<td>
+getXAxisWritingMode
+</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td rowSpan={12}>
+Y axis
+</td>
+<td>
+Show multiple Y axis
+</td>
+<td />
+<td>
+string
+</td>
+<td>
+
+`'one'`
+
+</td>
+<td>
+setIsMoreYAxis
+</td>
+<td>
+getIsMoreYAxis
+</td>
+<td />
+</tr>
+<tr>
+<td>
+Show Y axis
+</td>
+<td />
+<td>
+boolean
+</td>
+<td>
+true
+</td>
+<td>
+setYAxisVisible
+</td>
+<td>
+getYAxisVisible
+</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>
+Unit
+</td>
+<td />
+<td>
+string
+</td>
+<td>
+undefined
+</td>
+<td>
+setYAxisFormat
+</td>
+<td>
+getYAxisFormat
+</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>
+Grid
+</td>
+<td />
+<td>
+boolean
+</td>
+<td>
+true
+</td>
+<td>
+setYGrid
+</td>
+<td>
+getYGrid
+</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>
+Cross hair
+</td>
+<td />
+<td>
+boolean
+</td>
+<td>
+false
+</td>
+<td>
+setYAxisCrosshair
+</td>
+<td>
+getYAxisCrosshair
+</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>
+Scale
+</td>
+<td />
+<td>
+object
+</td>
+<td>
+
+```js
+{ min: null, tickInterval: undefined }
+```
+
+</td>
+<td>
+setYAxisScale
+</td>
+<td>
+getYAxisScale
+</td>
+<td />
+</tr>
+<tr>
+<td>
+Title
+</td>
+<td />
+<td>
+string
+</td>
+<td>
+undefined
+</td>
+<td>
+setYAxisTitle
+</td>
+<td>
+getYAxisTitle
+</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>
+Text style
+</td>
+<td />
+<td>
+object
+</td>
+<td>
+
+```js
+{fontSize:12, fontFamily:'Arial', color:'#000',
+fontWeight:'normal', fontStyle:'initial'}
+```
+
+</td>
+<td>
+setYAxisTitleStyle
+</td>
+<td>
+getYAxisTitleStyle
+</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>
+Title position
+</td>
+<td />
+<td>
+string
+</td>
+<td>
+
+`'middle'`
+
+</td>
+<td>
+setYAxisTitleAlign
+</td>
+<td>
+getYAxisTitleAlign
+</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>
+Axis text color
+</td>
+<td />
+<td>
+string
+</td>
+<td>
+
+`'#666'`
+
+</td>
+<td>
+setYAxisLablesStyle
+</td>
+<td>
+getYAxisLablesStyle
+</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>
+Rotation angle
+</td>
+<td />
+<td>
+number
+</td>
+<td>0</td>
+<td>
+setYAxisRotation
+</td>
+<td>
+getYAxisRotation
+</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>
+Maximum value
+</td>
+<td />
+<td>
+number
+</td>
+<td>
+undefined
+</td>
+<td>
+setYAxisMax
+</td>
+<td>
+getYAxisMax
+</td>
+<td />
+</tr>
+</tbody>
+</table>
+
+ 
+- Simulate data
+
+```js
+// trailingShowName: Backend name > data source name
+during designing > none on priority
+
+var ArrayList = Java.type("java.util.ArrayList");
+
+var arr = [
+
+{total:22,woman:41,month:"Jan",man:55, trailingShowName:
+"Backend name"},
+
+{total:44,woman:21,month:"Feb",man:55},
+
+{total:109,woman:64,month:"Mar",man:55},
+
+{total:108,woman:43,month:"Apr",man:65},
+
+{total:117,woman:34,month:"May",man:83},
+
+{total:111,woman:76,month:"Jun",man:34},
+
+{total:111,woman:72,month:"Jul",man:38},
+
+{total:111,woman:72,month:"Aug",man:84},
+
+{total:98,woman:72,month:"Sep",man:26},
+
+{total:98,woman:72,month:"Oct",man:45},
+
+{total:98,woman:16,month:"Nov",man:73},
+
+{total:98,woman:76,month:"Dec",man:15}
+
+];
+
+var list = new ArrayList(arr);
+var result = {　list:list　}
+
+result;
+```
+
+- Example code
+
+```js
+// get the element with an Id as LineChart-1
+
+var LineChart1 =
+scriptUtil.getRegisterReactDom('LineChart-1'); 
+
+// line style
+LineChart1.setChartDataLine({lineWidth: 5, dashStyle:
+'solid', symbol:'circle', radius:10, fillColor:'red'});
+
+// warning
+LineChart1.setChartEarly({ min: 20, max: 50,
+color:'red', enabled:false });
+```
+
+### Spline Chart
+
+
+<img width={450} height={300} src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/elementProperty/106.png" />
+
+<table>
+
+<colgroup>
+<col style={{ width: "11.990407673860911%" }} />
+<col style={{ width: "13.189448441247004%" }} />
+<col style={{ width: "12.470023980815348%" }} />
+<col style={{ width: "12.470023980815348%" }} />
+<col style={{ width: "12.470023980815348%" }} />
+<col style={{ width: "12.470023980815348%" }} />
+<col style={{ width: "12.470023980815348%" }} />
+<col style={{ width: "12.470023980815348%" }} />
+</colgroup>
+<thead>
+<tr>
+<th>
+Type
+</th>
+<th>
+Property
+</th>
+<th>
+Description
+</th>
+<th>
+Type
+</th>
+<th>
+Default
+</th>
+<th>
+Set Value
+</th>
+<th>
+Get Value
+</th>
+<th>
+Script Use
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td rowSpan={2}>
+Base
+</td>
+<td>
+Toggle type
+</td>
+<td>
+Change the chart line type
+</td>
+<td>
+boolean
+</td>
+<td>
+false
+</td>
+<td>
+setCutType
+</td>
+<td>
+getCutType
+</td>
+<td />
+</tr>
+<tr>
+<td>
+Timed refresh
+</td>
+<td />
+<td>
+number
+</td>
+<td>
+0
+</td>
+<td>
+setTimer
+</td>
+<td>
+getTimer
+</td>
+<td />
+</tr>
+<tr>
+<td rowSpan={4}>
+Chart style
+</td>
+<td>
+Style
+</td>
+<td>
+Line style
+</td>
+<td>
+object
+</td>
+<td>
+
+```js
+{lineWidth: 2, dashStyle: 'solid', symbol:'circle',
+radius:4, fillColor:'#fff'}
+```
+
+</td>
+<td>
+setChartDataLine
+</td>
+<td>
+getChartDataLine
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr>
+<td>
+Warning
+</td>
+<td />
+<td>
+object
+</td>
+<td>
+
+```js
+{ min: undefined, max: undefined, color:'red',
+enabled:false
+}
+```
+
+</td>
+<td>
+setChartEarly
+</td>
+<td>
+getChartEarly
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr>
+<td>
+Grid
+</td>
+<td />
+<td>
+number
+</td>
+<td>
+0
+</td>
+<td>
+setShowGrid
+</td>
+<td>
+getShowGrid
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr>
+<td>
+Coordinate inversion
+</td>
+<td />
+<td>
+number
+</td>
+<td>
+0
+</td>
+<td>
+setAxisReversal
+</td>
+<td>
+getAxisReversal
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr>
+<td rowSpan={12}>
+X axis
+</td>
+<td>
+X axis type
+</td>
+<td />
+<td>
+string
+</td>
+<td>
+
+`'category'`
+
+</td>
+<td>
+setXAxisType
+</td>
+<td>
+getXAxisType
+</td>
+<td />
+</tr>
+<tr>
+<td>
+Format
+</td>
+<td />
+<td>
+string
+</td>
+<td>
+
+`{value}`
+
+</td>
+<td>
+setDateFormat
+</td>
+<td>
+getDateFormat
+</td>
+<td />
+</tr>
+<tr>
+<td>
+Show X axis
+</td>
+<td />
+<td>
+boolean
+</td>
+<td>
+true
+</td>
+<td>
+setXAxisVisible
+</td>
+<td>
+getXAxisVisible
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr>
+<td>
+Cross hair
+</td>
+<td />
+<td>
+boolean
+</td>
+<td>
+false
+</td>
+<td>
+setXAxisCrosshair
+</td>
+<td>
+getXAxisCrosshair
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr>
+<td>
+Scale
+</td>
+<td />
+<td>
+object
+</td>
+<td>
+
+```js
+{ min: null, tickInterval: undefined }
+```
+
+</td>
+<td>
+setXAxisScale
+</td>
+<td>
+getXAxisScale
+</td>
+<td />
+</tr>
+<tr>
+<td>
+Title
+</td>
+<td />
+<td>
+string
+</td>
+<td>
+undefined
+</td>
+<td>
+setXAxisTitle
+</td>
+<td>
+getXAxisTitle
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr>
+<td>
+Text style
+</td>
+<td />
+<td>
+object
+</td>
+<td>
+
+```js
+{fontSize:12, fontFamily:'Arial', color:'#000',
+fontWeight:'normal', fontStyle:'initial'}
+```
+
+</td>
+<td>
+setXAxisTitleStyle
+</td>
+<td>
+getXAxisTitleStyle
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr>
+<td>
+Title position
+</td>
+<td />
+<td>
+string
+</td>
+<td>
+
+`'middle'`
+
+</td>
+<td>
+setXAxisTitleAlign
+</td>
+<td>
+getXAxisTitleAlign
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr>
+<td>
+Axis line color
+</td>
+<td />
+<td>
+string
+</td>
+<td>
+
+`'#ccd6eb'`
+
+</td>
+<td>
+setxAxisColor
+</td>
+<td>
+getxAxisColor
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr>
+<td>
+Axis text color
+</td>
+<td />
+<td>
+string
+</td>
+<td>
+
+`'#666'`
+
+</td>
+<td>
+setXAxisLablesStyle
+</td>
+<td>
+getXAxisLablesStyle
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr>
+<td>
+Rotation angle
+</td>
+<td />
+<td>
+number
+</td>
+<td>
+0
+</td>
+<td>
+setXAxisRotation
+</td>
+<td>
+getXAxisRotation
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr>
+<td>
+Vertical text
+</td>
+<td />
+<td>
+boolean
+</td>
+<td>
+false
+</td>
+<td>
+setXAxisWritingMode
+</td>
+<td>
+getXAxisWritingMode
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr>
+<td rowSpan={11}>
+Y axis
+</td>
+<td>
+Show Y axis
+</td>
+<td />
+<td>
+boolean
+</td>
+<td>
+true
+</td>
+<td>
+setYAxisVisible
+</td>
+<td>
+getYAxisVisible
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr>
+<td>
+Unit
+</td>
+<td />
+<td>
+string
+</td>
+<td>
+undefined
+</td>
+<td>
+setYAxisFormat
+</td>
+<td>
+getYAxisFormat
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr>
+<td>
+Grid
+</td>
+<td />
+<td>
+boolean
+</td>
+<td>
+true
+</td>
+<td>
+setYGrid
+</td>
+<td>
+getYGrid
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr>
+<td>
+Cross hair
+</td>
+<td />
+<td>
+boolean
+</td>
+<td>
+false
+</td>
+<td>
+setYAxisCrosshair
+</td>
+<td>
+getYAxisCrosshair
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr>
+<td>
+Scale
+</td>
+<td />
+<td>
+object
+</td>
+<td>
+
+```js
+{ min: null, tickInterval: undefined }
+```
+
+</td>
+<td>
+setYAxisScale
+</td>
+<td>
+getYAxisScale
+</td>
+<td />
+</tr>
+<tr>
+<td>
+Title
+</td>
+<td />
+<td>
+string
+</td>
+<td>
+undefined
+</td>
+<td>
+setYAxisTitle
+</td>
+<td>
+getYAxisTitle
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr>
+<td>
+Text style
+</td>
+<td />
+<td>
+object
+</td>
+<td>
+
+```js
+{fontSize:12, fontFamily:'Arial', color:'#000',
+fontWeight:'normal', fontStyle:'initial'}
+```
+
+</td>
+<td>
+setYAxisTitleStyle
+</td>
+<td>
+getYAxisTitleStyle
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr>
+<td>
+Title position
+</td>
+<td />
+<td>
+string
+</td>
+<td>
+
+`'middle'`
+
+</td>
+<td>
+setYAxisTitleAlign
+</td>
+<td>
+getYAxisTitleAlign
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr>
+<td>
+Axis text color
+</td>
+<td />
+<td>
+string
+</td>
+<td>
+
+`'#666'`
+
+</td>
+<td>
+setYAxisLablesStyle
+</td>
+<td>
+getYAxisLablesStyle
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr>
+<td>
+Rotation angle
+</td>
+<td />
+<td>
+number
+</td>
+<td>
+0
+</td>
+<td>
+setYAxisRotation
+</td>
+<td>
+getYAxisRotation
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr>
+<td>
+Maximum value
+</td>
+<td />
+<td>
+number
+</td>
+<td>
+undefined
+</td>
+<td>
+setYAxisMax
+</td>
+<td>
+getYAxisMax
+</td>
+<td />
+</tr>
+</tbody>
+</table>
+
+- Simulate data
+
+```js
+// trailingShowName: Backend name > data source name
+during designing > none on priority
+
+var ArrayList = Java.type("java.util.ArrayList");
+
+vararr = [
+
+{total:22,woman:41,month:"Jan",man:55, trailingShowName:
+"Backend name"},
+
+{total:44,woman:21,month:"Feb",man:55},
+
+{total:109,woman:64,month:"Mar",man:55},
+
+{total:108,woman:43,month:"Apr",man:65},
+
+{total:117,woman:34,month:"May",man:83},
+
+{total:111,woman:76,month:"Jun",man:34},
+
+{total:111,woman:72,month:"Jul",man:38},
+
+{total:111,woman:72,month:"Aug",man:84},
+
+{total:98,woman:72,month:"Sep",man:26},
+
+{total:98,woman:72,month:"Oct",man:45},
+
+{total:98,woman:16,month:"Nov",man:73},
+
+{total:98,woman:76,month:"Dec",man:15}
+
+
+];
+
+var list = new ArrayList(arr);
+var result = {　list:list　}
+
+result;
+```
+
+- Example code
+
+```js
+// get the element with an Id as LineChart-1
+
+var LineChart1 =
+scriptUtil.getRegisterReactDom('LineChart-1'); 
+
+
+
+// line style
+
+LineChart1.setChartDataLine({lineWidth: 5, dashStyle:
+'solid', symbol:'circle', radius:10, fillColor:'red'});
+
+
+// warning
+
+LineChart1.setChartEarly({ min: 20, max: 50,
+color:'red', enabled:false });
+```
+
+### Bar Chart
+
+<img width={450} height={300} src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/elementProperty/65.png" />
+
+<table>
+<colgroup>
+<col style={{ width: "13.698630136986301%" }} />
+<col style={{ width: "15.068493150684933%" }} />
+<col style={{ width: "14.246575342465754%" }} />
+<col style={{ width: "14.246575342465754%" }} />
+<col style={{ width: "14.246575342465754%" }} />
+<col style={{ width: "14.246575342465754%" }} />
+<col style={{ width: "14.246575342465754%" }} />
+</colgroup>
+<thead>
+<tr>
+<th>
+Type
+</th>
+<th>
+Property
+</th>
+<th>
+Type
+</th>
+<th>
+Default
+</th>
+<th>
+Set Value
+</th>
+<th>
+Get Value
+</th>
+<th>
+Script Use
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td rowSpan={2}>
+Base
+</td>
+<td>
+Toggle type
+</td>
+<td>
+boolean
+</td>
+<td>
+false
+</td>
+<td>
+setCutType
+</td>
+<td>
+getCutType
+</td>
+<td />
+</tr>
+<tr>
+<td>
+Timed refresh
+</td>
+<td>
+number
+</td>
+<td>0</td>
+<td>
+setTimer
+</td>
+<td>
+getTimer
+</td>
+<td />
+</tr>
+<tr>
+<td rowSpan={6}>
+Chart style
+</td>
+<td>
+Stack
+</td>
+<td>
+string
+</td>
+<td>null</td>
+<td>
+setStacking
+</td>
+<td>
+getStacking
+</td>
+<td />
+</tr>
+<tr>
+<td>
+Warning
+</td>
+<td>
+object
+</td>
+<td>
+
+```js
+{ min: undefined, max: undefined, color:'red',
+enabled:false
+}
+```
+
+</td>
+<td>
+setChartEarly
+</td>
+<td>
+getChartEarly
+</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>
+Column width
+</td>
+<td>
+number
+</td>
+<td>20</td>
+<td>
+setPointWidth
+</td>
+<td>
+getPointWidth
+</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>
+Rounded corner
+</td>
+<td>
+number
+</td>
+<td>0</td>
+<td>
+setSeriesBorderRadius
+</td>
+<td>
+getSeriesBorderRadius
+</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Grid</td>
+<td>
+number
+</td>
+<td>0</td>
+<td>
+setShowGrid
+</td>
+<td>
+getShowGrid
+</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>
+Coordinate inversion
+</td>
+<td>
+number
+</td>
+<td>0</td>
+<td>
+setAxisReversal
+</td>
+<td>
+getAxisReversal
+</td>
+<td />
+</tr>
+<tr>
+<td rowSpan={8}>
+X axis
+</td>
+<td>
+Show X axis
+</td>
+<td>
+boolean
+</td>
+<td>true</td>
+<td>
+setXAxisVisible
+</td>
+<td>
+getXAxisVisible
+</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>
+Title
+</td>
+<td>
+string
+</td>
+<td>
+undefined
+</td>
+<td>
+setXAxisTitle
+</td>
+<td>
+getXAxisTitle
+</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>
+Text style
+</td>
+<td>
+object
+</td>
+<td>
+
+```js
+{fontSize:12, fontFamily:'Arial', color:'#000',
+fontWeight:'normal', fontStyle:'initial'}
+```
+
+</td>
+<td>
+setXAxisTitleStyle
+</td>
+<td>
+getXAxisTitleStyle
+</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>
+Title position
+</td>
+<td>
+string
+</td>
+<td>
+
+`'middle'`
+
+</td>
+<td>
+setXAxisTitleAlign
+</td>
+<td>
+getXAxisTitleAlign
+</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>
+Axis line color
+</td>
+<td>
+string
+</td>
+<td>
+
+`'#ccd6eb'`
+
+</td>
+<td>
+setxAxisColor
+</td>
+<td>
+getxAxisColor
+</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>
+Axis text color
+</td>
+<td>
+string
+</td>
+<td>
+
+`'#666'`
+
+</td>
+<td>
+setXAxisLablesStyle
+</td>
+<td>
+getXAxisLablesStyle
+</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>
+Rotation angle
+</td>
+<td>
+number
+</td>
+<td>0</td>
+<td>
+setXAxisRotation
+</td>
+<td>
+getXAxisRotation
+</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>
+Vertical text
+</td>
+<td>
+boolean
+</td>
+<td>
+false
+</td>
+<td>
+setXAxisWritingMode
+</td>
+<td>
+getXAxisWritingMode
+</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td rowSpan={11}>
+Y axis
+</td>
+<td>
+Show Y axis
+</td>
+<td>
+boolean
+</td>
+<td>true</td>
+<td>
+setYAxisVisible
+</td>
+<td>
+getYAxisVisible
+</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Unit</td>
+<td>
+string
+</td>
+<td>
+undefined
+</td>
+<td>
+setYAxisFormat
+</td>
+<td>
+getYAxisFormat
+</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Grid</td>
+<td>
+boolean
+</td>
+<td>true</td>
+<td>
+setYGrid
+</td>
+<td>
+getYGrid
+</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>
+Cross hair
+</td>
+<td>
+boolean
+</td>
+<td>
+false
+</td>
+<td>
+setYAxisCrosshair
+</td>
+<td>
+getYAxisCrosshair
+</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>
+Scale
+</td>
+<td>
+object
+</td>
+<td>
+
+```js
+{ min: null, tickInterval: undefined }
+```
+
+</td>
+<td>
+setYAxisScale
+</td>
+<td>
+getYAxisScale
+</td>
+<td />
+</tr>
+<tr>
+<td>
+Title
+</td>
+<td>
+string
+</td>
+<td>
+undefined
+</td>
+<td>
+setYAxisTitle
+</td>
+<td>
+getYAxisTitle
+</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>
+Text style
+</td>
+<td>
+object
+</td>
+<td>
+
+```js
+{fontSize:12, fontFamily:'Arial', color:'#000',
+fontWeight:'normal', fontStyle:'initial'}
+```
+
+</td>
+<td>
+setYAxisTitleStyle
+</td>
+<td>
+getYAxisTitleStyle
+</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>
+Title position
+</td>
+<td>
+string
+</td>
+<td>
+
+`'middle'`
+
+</td>
+<td>
+setXAxisTitleAlign
+</td>
+<td>
+getXAxisTitleAlign
+</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>
+Axis text color
+</td>
+<td>
+string
+</td>
+<td>
+
+`'#666'`
+
+</td>
+<td>
+setYAxisLablesStyle
+</td>
+<td>
+getYAxisLablesStyle
+</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>
+Rotation angle
+</td>
+<td>
+number
+</td>
+<td>0</td>
+<td>
+setYAxisRotation
+</td>
+<td>
+getYAxisRotation
+</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>
+Maximum value
+</td>
+<td>
+number
+</td>
+<td>
+undefined
+</td>
+<td>
+setYAxisMax
+</td>
+<td>
+getYAxisMax
+</td>
+<td />
+</tr>
+</tbody>
+</table>
+
+### Area Chart
+
+<img width={450} height={300} src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/elementProperty/66.png" />
+
+<table>
+
+<colgroup>
+<col style={{ width: "12.048192771084336%" }} />
+<col style={{ width: "13.253012048192772%" }} />
+<col style={{ width: "12.048192771084336%" }} />
+<col style={{ width: "12.530120481927709%" }} />
+<col style={{ width: "12.530120481927709%" }} />
+<col style={{ width: "12.530120481927709%" }} />
+<col style={{ width: "12.530120481927709%" }} />
+<col style={{ width: "12.530120481927709%" }} />
+</colgroup>
+<thead>
+<tr>
+<th>
+Type
+</th>
+<th>
+Property
+</th>
+<th>
+Description
+</th>
+<th>
+Type
+</th>
+<th>
+Default
+</th>
+<th>
+Set Value
+</th>
+<th>
+Get Value
+</th>
+<th>
+Script Use
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Base
+</td>
+<td>
+Toggle type
+</td>
+<td />
+<td>
+boolean
+</td>
+<td>
+false
+</td>
+<td>
+setCutType
+</td>
+<td>
+getCutType
+</td>
+<td />
+</tr>
+<tr>
+<td rowSpan={9}>
+Chart style
+</td>
+<td>
+Style
+</td>
+<td>
+Line style
+</td>
+<td>
+object
+</td>
+<td>
+
+```js
+{lineWidth: 2, dashStyle: 'solid', symbol:'circle',
+radius:4, fillColor:'#fff'}
+```
+
+</td>
+<td>
+setChartDataLine
+</td>
+<td>
+getChartDataLine
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr>
+<td>
+Warning
+</td>
+<td />
+<td>
+object
+</td>
+<td>
+
+```js
+{ min: undefined, max: undefined, color:'red',
+enabled:false
+}
+```
+
+</td>
+<td>
+setChartEarly
+</td>
+<td>
+getChartEarly
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr>
+<td>
+Grid
+</td>
+<td />
+<td>
+number
+</td>
+<td>
+0
+</td>
+<td>
+setShowGrid
+</td>
+<td>
+getShowGrid
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr>
+<td>
+Coordinate inversion
+</td>
+<td />
+<td>
+number
+</td>
+<td>
+0
+</td>
+<td>
+setAxisReversal
+</td>
+<td>
+getAxisReversal
+</td>
+<td />
+</tr>
+<tr>
+<td>
+Stack
+</td>
+<td />
+<td>
+string
+</td>
+<td>
+
+```js
+{ stacking:null, type:'area' }
+```
+
+</td>
+<td>
+setStacking
+</td>
+<td>
+getStacking
+</td>
+<td />
+</tr>
+<tr>
+<td>
+Mark Max
+</td>
+<td />
+<td>
+boolean
+</td>
+<td>
+false
+</td>
+<td>
+setPointWidth
+</td>
+<td>
+getPointWidth
+</td>
+<td />
+</tr>
+<tr>
+<td>
+Border
+</td>
+<td>
+Label border
+</td>
+<td>
+object
+</td>
+<td>
+false
+</td>
+<td />
+<td />
+<td />
+</tr>
+<tr>
+<td>
+Font color
+</td>
+<td>
+Label font color
+</td>
+<td>
+string
+</td>
+<td>
+
+```js
+{borderWidth:1, borderRadius:5,
+borderColor:'#48D1CC'}
+```
+
+</td>
+<td />
+<td />
+<td />
+</tr>
+<tr>
+<td>
+Background color
+</td>
+<td>
+Label background color
+</td>
+<td>
+string
+</td>
+<td>
+
+`#000`
+
+</td>
+<td />
+<td />
+<td />
+</tr>
+<tr>
+<td rowSpan={12}>
+X axis
+</td>
+<td>
+X axis type
+</td>
+<td />
+<td>
+string
+</td>
+<td>
+
+`'category'`
+
+</td>
+<td>
+setXAxisType
+</td>
+<td>
+getXAxisType
+</td>
+<td />
+</tr>
+<tr>
+<td>
+Format
+</td>
+<td />
+<td>
+string
+</td>
+<td>
+
+`{value}`
+
+</td>
+<td>
+setDateFormat
+</td>
+<td>
+getDateFormat
+</td>
+<td />
+</tr>
+<tr>
+<td>
+Show X axis
+</td>
+<td />
+<td>
+boolean
+</td>
+<td>
+true
+</td>
+<td>
+setXAxisVisible
+</td>
+<td>
+getXAxisVisible
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr>
+<td>
+Cross hair
+</td>
+<td />
+<td>
+boolean
+</td>
+<td>
+false
+</td>
+<td>
+setXAxisCrosshair
+</td>
+<td>
+getXAxisCrosshair
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr>
+<td>
+Scale
+</td>
+<td />
+<td>
+object
+</td>
+<td>
+
+```js
+{ min: null, tickInterval: undefined }
+```
+
+</td>
+<td>
+setXAxisScale
+</td>
+<td>
+getXAxisScale
+</td>
+<td />
+</tr>
+<tr>
+<td>
+Title
+</td>
+<td />
+<td>
+string
+</td>
+<td>
+undefined
+</td>
+<td>
+setXAxisTitle
+</td>
+<td>
+getXAxisTitle
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr>
+<td>
+Text style
+</td>
+<td />
+<td>
+object
+</td>
+<td>
+
+```js
+{fontSize:12, fontFamily:'Arial', color:'#000',
+fontWeight:'normal', fontStyle:'initial'}
+```
+
+</td>
+<td>
+setXAxisTitleStyle
+</td>
+<td>
+getXAxisTitleStyle
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr>
+<td>
+Title position
+</td>
+<td />
+<td>
+string
+</td>
+<td>
+
+`'middle'`
+
+</td>
+<td>
+setXAxisTitleAlign
+</td>
+<td>
+getXAxisTitleAlign
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr>
+<td>
+Axis line color
+</td>
+<td />
+<td>
+string
+</td>
+<td>
+
+`'#ccd6eb'`
+
+</td>
+<td>
+setxAxisColor
+</td>
+<td>
+getxAxisColor
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr>
+<td>
+Axis text color
+</td>
+<td />
+<td>
+string
+</td>
+<td>
+
+`'#666'`
+
+</td>
+<td>
+setXAxisLablesStyle
+</td>
+<td>
+getXAxisLablesStyle
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr>
+<td>
+Rotation angle
+</td>
+<td />
+<td>
+number
+</td>
+<td>
+0
+</td>
+<td>
+setXAxisRotation
+</td>
+<td>
+getXAxisRotation
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr>
+<td>
+Vertical text
+</td>
+<td />
+<td>
+boolean
+</td>
+<td>
+false
+</td>
+<td>
+setXAxisWritingMode
+</td>
+<td>
+getXAxisWritingMode
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr>
+<td rowSpan={11}>
+Y axis
+</td>
+<td>
+Show Y axis
+</td>
+<td />
+<td>
+boolean
+</td>
+<td>
+true
+</td>
+<td>
+setYAxisVisible
+</td>
+<td>
+getYAxisVisible
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr>
+<td>
+Unit
+</td>
+<td />
+<td>
+string
+</td>
+<td>
+undefined
+</td>
+<td>
+setYAxisFormat
+</td>
+<td>
+getYAxisFormat
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr>
+<td>
+Grid
+</td>
+<td />
+<td>
+boolean
+</td>
+<td>
+true
+</td>
+<td>
+setYGrid
+</td>
+<td>
+getYGrid
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr>
+<td>
+Cross hair
+</td>
+<td />
+<td>
+boolean
+</td>
+<td>
+false
+</td>
+<td>
+setYAxisCrosshair
+</td>
+<td>
+getYAxisCrosshair
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr>
+<td>
+Scale
+</td>
+<td />
+<td>
+object
+</td>
+<td>
+
+```js
+{ min: null, tickInterval: undefined }
+```
+
+</td>
+<td>
+setYAxisScale
+</td>
+<td>
+getYAxisScale
+</td>
+<td />
+</tr>
+<tr>
+<td>
+Title
+</td>
+<td />
+<td>
+string
+</td>
+<td>
+undefined
+</td>
+<td>
+setYAxisTitle
+</td>
+<td>
+getYAxisTitle
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr>
+<td>
+Text style
+</td>
+<td />
+<td>
+object
+</td>
+<td>
+
+```js
+{fontSize:12, fontFamily:'Arial', color:'#000',
+fontWeight:'normal', fontStyle:'initial'}
+```
+
+</td>
+<td>
+setYAxisTitleStyle
+</td>
+<td>
+getYAxisTitleStyle
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr>
+<td>
+Title position
+</td>
+<td />
+<td>
+string
+</td>
+<td>
+
+`'middle'`
+
+</td>
+<td>
+setXAxisTitleAlign
+</td>
+<td>
+getXAxisTitleAlign
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr>
+<td>
+Axis text color
+</td>
+<td />
+<td>
+string
+</td>
+<td>
+
+`'#666'`
+
+</td>
+<td>
+setYAxisLablesStyle
+</td>
+<td>
+getYAxisLablesStyle
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr>
+<td>
+Rotation angle
+</td>
+<td />
+<td>
+number
+</td>
+<td>
+0
+</td>
+<td>
+setYAxisRotation
+</td>
+<td>
+getYAxisRotation
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr>
+<td>
+Maximum value
+</td>
+<td />
+<td>
+number
+</td>
+<td>
+undefined
+</td>
+<td>
+setYAxisMax
+</td>
+<td>
+getYAxisMax
+</td>
+<td />
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+
+
+### Dash Chart
+
+<img width={450} height={300} src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/elementProperty/67.png" />
+
+<table>
+<colgroup>
+<col style={{ width: "17.46031746031746%" }} />
+<col style={{ width: "16.507936507936506%" }} />
+<col style={{ width: "16.507936507936506%" }} />
+<col style={{ width: "16.507936507936506%" }} />
+<col style={{ width: "16.507936507936506%" }} />
+<col style={{ width: "16.507936507936506%" }} />
+</colgroup>
+<thead>
+<tr>
+<th>
+Property
+</th>
+<th>
+Type
+</th>
+<th>
+Default
+</th>
+<th>
+Set Value
+</th>
+<th>
+Get Value
+</th>
+<th>
+Script Use
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Dial color
+</td>
+<td>
+string
+</td>
+<td>
+
+`'#fff'`
+
+</td>
+<td>
+setPanelBackgroundColor
+</td>
+<td>
+getPanelBackgroundColor
+</td>
+<td />
+</tr>
+<tr>
+<td>
+Border style
+</td>
+<td>
+object
+</td>
+<td>
+
+```js
+{borderColor: '#ddd', borderWidth: 1}
+```
+
+</td>
+<td>
+setPanelBorderColorWidth
+</td>
+<td>
+getPanelBorderColorWidth
+</td>
+<td />
+</tr>
+<tr>
+<td>
+Scale interval/Max/Start/end angle
+</td>
+<td>
+object
+</td>
+<td>
+
+```js
+{tickAmount:4, max:200, startAngle:-90, endAngle:90}
+```
+
+</td>
+<td>
+setDialCof
+</td>
+<td>
+getDialCof
+</td>
+<td />
+</tr>
+<tr>
+<td>
+Scale color
+</td>
+<td>
+string
+</td>
+<td>
+
+`'#333'`
+
+</td>
+<td>
+setTickColor
+</td>
+<td>
+getTickColor
+</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>
+Font color
+</td>
+<td>
+string
+</td>
+<td>
+
+`'#666'`
+
+</td>
+<td>
+setYAxisLablesStyle
+</td>
+<td>
+getYAxisLablesStyle
+</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>
+Bore
+</td>
+<td>
+number
+</td>
+<td>60</td>
+<td>
+setPaneWidth
+</td>
+<td>
+getPaneWidth
+</td>
+<td>Yes</td>
+</tr>
+</tbody>
+</table>
+
+
+### Speedometer
+
+<img width={450} height={300} src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/elementProperty/68.png" />
+
+<table>
+<colgroup>
+<col style={{ width: "17.46031746031746%" }} />
+<col style={{ width: "16.507936507936506%" }} />
+<col style={{ width: "16.507936507936506%" }} />
+<col style={{ width: "16.507936507936506%" }} />
+<col style={{ width: "16.507936507936506%" }} />
+<col style={{ width: "16.507936507936506%" }} />
+</colgroup>
+<thead>
+<tr>
+<th>
+Property
+</th>
+<th>
+Type
+</th>
+<th>
+Default
+</th>
+<th>
+Set Value
+</th>
+<th>
+Get Value
+</th>
+<th>
+Script Use
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Timed refresh
+</td>
+<td>
+number
+</td>
+<td>
+undefined
+</td>
+<td>
+setTimer
+</td>
+<td>
+getTimer
+</td>
+<td />
+</tr>
+<tr>
+<td>
+Dial color
+</td>
+<td>
+string
+</td>
+<td>
+
+`'#fff'`
+
+</td>
+<td>
+setPanelBackgroundColor
+</td>
+<td>
+getPanelBackgroundColor
+</td>
+<td />
+</tr>
+<tr>
+<td>
+Border style
+</td>
+<td>
+object
+</td>
+<td>
+
+```js
+{borderColor: '#ddd', borderWidth: 1}
+```
+
+</td>
+<td>
+setPanelBorderColorWidth
+</td>
+<td>
+getPanelBorderColorWidth
+</td>
+<td />
+</tr>
+<tr>
+<td>
+Scale interval/Max/Start/end angle
+</td>
+<td>
+object
+</td>
+<td>
+
+```js
+{tickAmount:4, max:200, startAngle:-90, endAngle:90}
+```
+
+</td>
+<td>
+setDialCof
+</td>
+<td>
+getDialCof
+</td>
+<td />
+</tr>
+<tr>
+<td>
+Scale color
+</td>
+<td>
+string
+</td>
+<td>
+
+`'#333'`
+
+</td>
+<td>
+setTickColor
+</td>
+<td>
+getTickColor
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr>
+<td>
+Scale length
+</td>
+<td>
+number
+</td>
+<td>10</td>
+<td>
+setTickExtent
+</td>
+<td>
+getTickExtent
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr>
+<td>
+Font color
+</td>
+<td>
+string
+</td>
+<td>
+
+`'#666'`
+
+</td>
+<td>
+setYAxisLablesStyle
+</td>
+<td>
+getYAxisLablesStyle
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr>
+<td>
+Horizontal/lateral offset
+</td>
+<td>
+object
+</td>
+<td>
+
+```js
+{xAxisDeviation:50, yAxisDeviation:50}
+```
+
+</td>
+<td>
+setPanelCenterPostion
+</td>
+<td>
+getPanelCenterPostion
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr>
+<td>
+Mark area
+</td>
+<td>
+object
+</td>
+<td>[]</td>
+<td>
+setPlotBands
+</td>
+<td>
+getPlotBands
+</td>
+<td />
+</tr>
+<tr>
+<td>
+Origin color/radius
+</td>
+<td>
+object
+</td>
+<td>
+
+```js
+{backgroundColor:'#000', radius:5}
+```
+
+</td>
+<td>
+setPivotColorRadius
+</td>
+<td>
+getPivotColorRadius
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr>
+<td>
+Border color/radius
+</td>
+<td>
+object
+</td>
+<td>
+
+```js
+{ borderColor:'#000000', borderWidth:2 }
+```
+
+</td>
+<td>
+setGaugeBorderColorWidth
+</td>
+<td>
+getGaugeBorderColorWidth
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr>
+<td>
+Tail length
+</td>
+<td>
+number
+</td>
+<td>
+undefined
+</td>
+<td>
+setRearLength
+</td>
+<td>
+getRearLength
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr>
+<td>
+Bore diameter
+</td>
+<td>
+number
+</td>
+<td>60</td>
+<td>
+setPaneWidth
+</td>
+<td>
+getPaneWidth
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr>
+<td>
+Display name
+</td>
+<td>
+boolean
+</td>
+<td>
+true
+</td>
+<td>
+setGaugeLabelsEnabled
+</td>
+<td>
+getGaugeLabelsEnabled
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr>
+<td>
+Link scale
+</td>
+<td>
+boolean
+</td>
+<td>
+true
+</td>
+<td>
+setBackgroundShape
+</td>
+<td>
+getBackgroundShape
+</td>
+<td>
+Yes
+</td>
+</tr>
+</tbody>
+</table>
+
+
+### Bubble Chart
+
+<img width={450} height={300} src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/elementProperty/69.png" />
+
+<table>
+<colgroup>
+<col style={{ width: "13.698630136986301%" }} />
+<col style={{ width: "15.068493150684933%" }} />
+<col style={{ width: "14.246575342465754%" }} />
+<col style={{ width: "14.246575342465754%" }} />
+<col style={{ width: "14.246575342465754%" }} />
+<col style={{ width: "14.246575342465754%" }} />
+<col style={{ width: "14.246575342465754%" }} />
+</colgroup>
+<thead>
+<tr>
+<th>
+Type
+</th>
+<th>
+Property
+</th>
+<th>
+Type
+</th>
+<th>
+Default
+</th>
+<th>
+Set Value
+</th>
+<th>
+Get Value
+</th>
+<th>
+Script Use
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td rowSpan={3}>
+Chart style
+</td>
+<td>
+Bubble size
+</td>
+<td>
+number
+</td>
+<td>
+100
+</td>
+<td>
+setBubbleSize
+</td>
+<td>
+getBubbleSize
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr>
+<td>
+Warning
+</td>
+<td>
+object
+</td>
+<td>
+
+```js
+{ min: undefined, max: undefined, color:'red',
+enabled:false
+}
+```
+
+</td>
+<td>
+setChartEarly
+</td>
+<td>
+getChartEarly
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr>
+<td>
+Grid
+</td>
+<td>
+number
+</td>
+<td>0</td>
+<td>
+setShowGrid
+</td>
+<td>
+getShowGrid
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr>
+<td rowSpan={10}>
+X axis
+</td>
+<td>
+Show X axis
+</td>
+<td>
+boolean
+</td>
+<td>
+true
+</td>
+<td>
+setXAxisVisible
+</td>
+<td>
+getXAxisVisible
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr>
+<td>
+Cross hair
+</td>
+<td>
+boolean
+</td>
+<td>
+false
+</td>
+<td>
+setXAxisCrosshair
+</td>
+<td>
+getXAxisCrosshair
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr>
+<td>
+Scale
+</td>
+<td>
+object
+</td>
+<td>
+
+```js
+{ min: null, tickInterval: undefined }
+```
+
+</td>
+<td>
+setXAxisScale
+</td>
+<td>
+getXAxisScale
+</td>
+<td />
+</tr>
+<tr>
+<td>
+Title
+</td>
+<td>
+string
+</td>
+<td>
+undefined
+</td>
+<td>
+setXAxisTitle
+</td>
+<td>
+getXAxisTitle
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr>
+<td>
+Text style
+</td>
+<td>
+object
+</td>
+<td>
+
+```js
+{fontSize:12, fontFamily:'Arial', color:'#000',
+fontWeight:'normal', fontStyle:'initial'}
+```
+
+</td>
+<td>
+setXAxisTitleStyle
+</td>
+<td>
+getXAxisTitleStyle
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr>
+<td>
+Title position
+</td>
+<td>
+string
+</td>
+<td>
+
+`'middle'`
+
+</td>
+<td>
+setXAxisTitleAlign
+</td>
+<td>
+getXAxisTitleAlign
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr>
+<td>
+Axis line color
+</td>
+<td>
+string
+</td>
+<td>
+
+`'#ccd6eb'`
+
+</td>
+<td>
+setxAxisColor
+</td>
+<td>
+getxAxisColor
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr>
+<td>
+Axis text color
+</td>
+<td>
+string
+</td>
+<td>
+
+`'#666'`
+
+</td>
+<td>
+setXAxisLablesStyle
+</td>
+<td>
+getXAxisLablesStyle
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr>
+<td>
+Rotation angle
+</td>
+<td>
+number
+</td>
+<td>0</td>
+<td>
+setXAxisRotation
+</td>
+<td>
+getXAxisRotation
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr>
+<td>
+Vertical text
+</td>
+<td>
+boolean
+</td>
+<td>
+false
+</td>
+<td>
+setXAxisWritingMode
+</td>
+<td>
+getXAxisWritingMode
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr>
+<td rowSpan={12}>
+Y axis
+</td>
+<td>
+Show multiple Y axis
+</td>
+<td>
+string
+</td>
+<td>
+
+`'one'`
+
+</td>
+<td>
+setIsMoreYAxis
+</td>
+<td>
+getIsMoreYAxis
+</td>
+<td />
+</tr>
+<tr>
+<td>
+Show Y axis
+</td>
+<td>
+boolean
+</td>
+<td>
+true
+</td>
+<td>
+setYAxisVisible
+</td>
+<td>
+getYAxisVisible
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr>
+<td>
+Unit
+</td>
+<td>
+string
+</td>
+<td>
+undefined
+</td>
+<td>
+setYAxisFormat
+</td>
+<td>
+getYAxisFormat
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr>
+<td>
+Grid
+</td>
+<td>
+boolean
+</td>
+<td>
+true
+</td>
+<td>
+setYGrid
+</td>
+<td>
+getYGrid
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr>
+<td>
+Cross hair
+</td>
+<td>
+boolean
+</td>
+<td>
+false
+</td>
+<td>
+setYAxisCrosshair
+</td>
+<td>
+getYAxisCrosshair
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr>
+<td>
+Scale
+</td>
+<td>
+object
+</td>
+<td>
+
+```js
+{ min: null, tickInterval: undefined }
+```
+
+</td>
+<td>
+setYAxisScale
+</td>
+<td>
+getYAxisScale
+</td>
+<td />
+</tr>
+<tr>
+<td>
+Title
+</td>
+<td>
+string
+</td>
+<td>
+undefined
+</td>
+<td>
+setYAxisTitle
+</td>
+<td>
+getYAxisTitle
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr>
+<td>
+Text style
+</td>
+<td>
+object
+</td>
+<td>
+
+```js
+{fontSize:12, fontFamily:'Arial', color:'#000',
+fontWeight:'normal', fontStyle:'initial'}
+```
+
+</td>
+<td>
+setYAxisTitleStyle
+</td>
+<td>
+getYAxisTitleStyle
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr>
+<td>
+Title position
+</td>
+<td>
+string
+</td>
+<td>
+
+`'middle'`
+
+</td>
+<td>
+setYAxisTitleAlign
+</td>
+<td>
+getYAxisTitleAlign
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr>
+<td>
+Axis text color
+</td>
+<td>
+string
+</td>
+<td>
+
+`'#666'`
+
+</td>
+<td>
+setYAxisLablesStyle
+</td>
+<td>
+getYAxisLablesStyle
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr>
+<td>
+Rotation angle
+</td>
+<td>
+number
+</td>
+<td>0</td>
+<td>
+setYAxisRotation
+</td>
+<td>
+getYAxisRotation
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr>
+<td>
+Maximum value
+</td>
+<td>
+number
+</td>
+<td>
+undefined
+</td>
+<td>
+setYAxisMax
+</td>
+<td>
+getYAxisMax
+</td>
+<td />
+</tr>
+</tbody>
+</table>
+
+
+### Scatter Chart
+
+<img width={450} height={300} src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/elementProperty/70.png" />
+
+<table>
+
+<colgroup>
+<col style={{ width: "13.698630136986301%" }} />
+<col style={{ width: "15.068493150684933%" }} />
+<col style={{ width: "14.246575342465754%" }} />
+<col style={{ width: "14.246575342465754%" }} />
+<col style={{ width: "14.246575342465754%" }} />
+<col style={{ width: "14.246575342465754%" }} />
+<col style={{ width: "14.246575342465754%" }} />
+</colgroup>
+<thead>
+<tr>
+<th>
+Type
+</th>
+<th>
+Property
+</th>
+<th>
+Type
+</th>
+<th>
+Default
+</th>
+<th>
+Set Value
+</th>
+<th>
+Get Value
+</th>
+<th>
+Script Use
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td rowSpan={4}>
+Chart style
+</td>
+<td>
+Style
+</td>
+<td>
+number
+</td>
+<td>
+100
+</td>
+<td>
+setPointSizeLink
+</td>
+<td>
+getPointSizeLink
+</td>
+<td />
+</tr>
+<tr>
+<td>
+Warning
+</td>
+<td>
+object
+</td>
+<td>
+
+```js
+{ min: undefined, max: undefined, color:'red',
+enabled:false
+}
+```
+
+</td>
+<td>
+setChartEarly
+</td>
+<td>
+getChartEarly
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr>
+<td>
+Grid
+</td>
+<td>
+number
+</td>
+<td>
+0
+</td>
+<td>
+setShowGrid
+</td>
+<td>
+getShowGrid
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr>
+<td>
+Regression line
+</td>
+<td>
+boolean
+</td>
+<td>
+boolean
+</td>
+<td>
+setRegressionLine
+</td>
+<td>
+getRegressionLine
+</td>
+<td />
+</tr>
+<tr>
+<td rowSpan={10}>
+X axis
+</td>
+<td>
+Show X axis
+</td>
+<td>
+boolean
+</td>
+<td>
+true
+</td>
+<td>
+setXAxisVisible
+</td>
+<td>
+getXAxisVisible
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr>
+<td>
+Cross hair
+</td>
+<td>
+boolean
+</td>
+<td>
+false
+</td>
+<td>
+setXAxisCrosshair
+</td>
+<td>
+getXAxisCrosshair
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr>
+<td>
+Scale
+</td>
+<td>
+object
+</td>
+<td>
+
+```js
+{ min: null, tickInterval: undefined }
+```
+
+</td>
+<td>
+setXAxisScale
+</td>
+<td>
+getXAxisScale
+</td>
+<td />
+</tr>
+<tr>
+<td>
+Title
+</td>
+<td>
+string
+</td>
+<td>
+undefined
+</td>
+<td>
+setXAxisTitle
+</td>
+<td>
+getXAxisTitle
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr>
+<td>
+Text style
+</td>
+<td>
+object
+</td>
+<td>
+
+```js
+{fontSize:12, fontFamily:'Arial', color:'#000',
+fontWeight:'normal', fontStyle:'initial'}
+```
+
+</td>
+<td>
+setXAxisTitleStyle
+</td>
+<td>
+getXAxisTitleStyle
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr>
+<td>
+Title position
+</td>
+<td>
+string
+</td>
+<td>
+
+`'middle'`
+
+</td>
+<td>
+setXAxisTitleAlign
+</td>
+<td>
+getXAxisTitleAlign
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr>
+<td>
+Axis line color
+</td>
+<td>
+string
+</td>
+<td>
+
+`'#ccd6eb'`
+
+</td>
+<td>
+setxAxisColor
+</td>
+<td>
+getxAxisColor
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr>
+<td>
+Axis text color
+</td>
+<td>
+string
+</td>
+<td>
+
+`'#666'`
+
+</td>
+<td>
+setXAxisLablesStyle
+</td>
+<td>
+getXAxisLablesStyle
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr>
+<td>
+Rotation angle
+</td>
+<td>
+number
+</td>
+<td>
+0
+</td>
+<td>
+setXAxisRotation
+</td>
+<td>
+getXAxisRotation
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr>
+<td>
+Vertical text
+</td>
+<td>
+boolean
+</td>
+<td>
+false
+</td>
+<td>
+setXAxisWritingMode
+</td>
+<td>
+getXAxisWritingMode
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr>
+<td rowSpan={12}>
+Y axis
+</td>
+<td>
+Show multiple Y axis
+</td>
+<td>
+string
+</td>
+<td>
+
+`'one'`
+
+</td>
+<td>
+setIsMoreYAxis
+</td>
+<td>
+getIsMoreYAxis
+</td>
+<td />
+</tr>
+<tr>
+<td>
+Show Y axis
+</td>
+<td>
+boolean
+</td>
+<td>
+true
+</td>
+<td>
+setYAxisVisible
+</td>
+<td>
+getYAxisVisible
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr>
+<td>
+Unit
+</td>
+<td>
+string
+</td>
+<td>
+undefined
+</td>
+<td>
+setYAxisFormat
+</td>
+<td>
+getYAxisFormat
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr>
+<td>
+Grid
+</td>
+<td>
+boolean
+</td>
+<td>
+true
+</td>
+<td>
+setYGrid
+</td>
+<td>
+getYGrid
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr>
+<td>
+Cross hair
+</td>
+<td>
+boolean
+</td>
+<td>
+false
+</td>
+<td>
+setYAxisCrosshair
+</td>
+<td>
+getYAxisCrosshair
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr>
+<td>
+Scale
+</td>
+<td>
+object
+</td>
+<td>
+
+```js
+{ min: null, tickInterval: undefined }
+```
+
+</td>
+<td>
+setYAxisScale
+</td>
+<td>
+getYAxisScale
+</td>
+<td />
+</tr>
+<tr>
+<td>
+Title
+</td>
+<td>
+string
+</td>
+<td>
+undefined
+</td>
+<td>
+setYAxisTitle
+</td>
+<td>
+getYAxisTitle
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr>
+<td>
+Text style
+</td>
+<td>
+object
+</td>
+<td>
+
+```js
+{fontSize:12, fontFamily:'Arial', color:'#000',
+fontWeight:'normal', fontStyle:'initial'}
+```
+
+</td>
+<td>
+setYAxisTitleStyle
+</td>
+<td>
+getYAxisTitleStyle
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr>
+<td>
+Title position
+</td>
+<td>
+string
+</td>
+<td>
+
+`'middle'`
+
+</td>
+<td>
+setYAxisTitleAlign
+</td>
+<td>
+getYAxisTitleAlign
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr>
+<td>
+Axis text color
+</td>
+<td>
+string
+</td>
+<td>
+
+`'#666'`
+
+</td>
+<td>
+setYAxisLablesStyle
+</td>
+<td>
+getYAxisLablesStyle
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr>
+<td>
+Rotation angle
+</td>
+<td>
+number
+</td>
+<td>
+0
+</td>
+<td>
+setYAxisRotation
+</td>
+<td>
+getYAxisRotation
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr>
+<td>
+Maximum value
+</td>
+<td>
+number
+</td>
+<td>
+undefined
+</td>
+<td>
+setYAxisMax
+</td>
+<td>
+getYAxisMax
+</td>
+<td />
+</tr>
+</tbody>
+</table>
+
+
+### Pie Chart
+
+<img width={450} height={300} src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/elementProperty/71.png" />
+
+<table>
+
+<colgroup>
+<col style={{ width: "17.46031746031746%" }} />
+<col style={{ width: "16.507936507936506%" }} />
+<col style={{ width: "16.507936507936506%" }} />
+<col style={{ width: "16.507936507936506%" }} />
+<col style={{ width: "16.507936507936506%" }} />
+<col style={{ width: "16.507936507936506%" }} />
+</colgroup>
+<thead>
+<tr>
+<th>
+Property
+</th>
+<th>
+Type
+</th>
+<th>
+Default
+</th>
+<th>
+Set Value
+</th>
+<th>
+Get Value
+</th>
+<th>
+Script Use
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Timed refresh
+</td>
+<td>
+number
+</td>
+<td>
+undefined
+</td>
+<td>
+setTimer
+</td>
+<td>
+getTimer
+</td>
+<td />
+</tr>
+<tr>
+<td>Type</td>
+<td>
+string
+</td>
+<td>
+
+`'pie'`
+
+</td>
+<td>
+setType
+</td>
+<td>
+getType
+</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>
+Style
+</td>
+<td>
+object
+</td>
+<td>
+
+```js
+{ borderWidth:1, innerSize:'0%', slicedOffset:10 }
+```
+
+</td>
+<td>
+setPiePeculiarity
+</td>
+<td>
+getPiePeculiarity
+</td>
+<td />
+</tr>
+<tr>
+<td>
+Color
+</td>
+<td>
+string
+</td>
+<td>
+
+`'1'`
+
+</td>
+<td>
+setColourMatch
+</td>
+<td>
+getColourMatch
+</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>
+Legend-Mark
+</td>
+<td>
+string
+</td>
+<td>
+
+`'circular'`
+
+</td>
+<td>
+setMarkSelect
+</td>
+<td>
+getMarkSelect
+</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>
+Label-Label position
+</td>
+<td>
+number
+</td>
+<td>30</td>
+<td>
+setDistance
+</td>
+<td>
+getDistance
+</td>
+<td>Yes</td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+### Funnel Chart
+
+
+<img width={450} height={300} src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/elementProperty/72.png" />
+
+<table>
+
+<colgroup>
+<col style={{ width: "17.46031746031746%" }} />
+<col style={{ width: "16.507936507936506%" }} />
+<col style={{ width: "16.507936507936506%" }} />
+<col style={{ width: "16.507936507936506%" }} />
+<col style={{ width: "16.507936507936506%" }} />
+<col style={{ width: "16.507936507936506%" }} />
+</colgroup>
+<thead>
+<tr>
+<th>
+Property
+</th>
+<th>
+Type
+</th>
+<th>
+Default
+</th>
+<th>
+Set Value
+</th>
+<th>
+Get Value
+</th>
+<th>
+Script Use
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Timed refresh
+</td>
+<td>
+number
+</td>
+<td>
+undefined
+</td>
+<td>
+setTimer
+</td>
+<td>
+getTimer
+</td>
+<td />
+</tr>
+<tr>
+<td>
+Type
+</td>
+<td>
+string
+</td>
+<td>
+
+`'funnel'`
+
+</td>
+<td>
+setType
+</td>
+<td>
+getType
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr>
+<td>
+Style
+</td>
+<td>
+object
+</td>
+<td>
+
+```js
+{ neckWidth:'30%, neckHeight:'30% }
+```
+
+</td>
+<td>
+setFunnelNeckSet
+</td>
+<td>
+getFunnelNeckSet
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr>
+<td>
+Border color
+</td>
+<td>
+object
+</td>
+<td>
+
+```js
+{borderColor: '#fff', borderWidth: 2}
+```
+
+</td>
+<td>
+setFunnelBorderColorWidth
+</td>
+<td>
+getFunnelBorderColorWidth
+</td>
+<td>
+Yes
+</td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+### Spider Chart
+
+
+<img width={450} height={300} src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/elementProperty/73.png" />
+
+<table>
+
+<colgroup>
+<col style={{ width: "17.46031746031746%" }} />
+<col style={{ width: "16.507936507936506%" }} />
+<col style={{ width: "16.507936507936506%" }} />
+<col style={{ width: "16.507936507936506%" }} />
+<col style={{ width: "16.507936507936506%" }} />
+<col style={{ width: "16.507936507936506%" }} />
+</colgroup>
+<thead>
+<tr>
+<th>
+Property
+</th>
+<th>
+Type
+</th>
+<th>
+Default
+</th>
+<th>
+Set Value
+</th>
+<th>
+Get Value
+</th>
+<th>
+Script Use
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Style
+</td>
+<td>
+object
+</td>
+<td>
+
+```js
+{lineWidth: 2, dashStyle: 'solid', symbol:'circle',
+radius:4, fillColor:'#fff'}
+```
+
+</td>
+<td>
+setChartDataLine
+</td>
+<td>
+getChartDataLine
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr>
+<td>
+Opacity
+</td>
+<td>
+number
+</td>
+<td />
+<td>
+setRegionTransparency
+</td>
+<td>
+getRegionTransparency
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr>
+<td>
+Mesh color
+</td>
+<td>
+string
+</td>
+<td>
+
+`'#ddd'`
+
+</td>
+<td>
+setGridLineColor
+</td>
+<td>
+getGridLineColor
+</td>
+<td>
+Yes
+</td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+### Donut Chart
+
+
+<img width={400} height={300} src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/elementProperty/107.png" />
+
+<table>
+
+<colgroup>
+<col style={{ width: "17.46031746031746%" }} />
+<col style={{ width: "16.507936507936506%" }} />
+<col style={{ width: "16.507936507936506%" }} />
+<col style={{ width: "16.507936507936506%" }} />
+<col style={{ width: "16.507936507936506%" }} />
+<col style={{ width: "16.507936507936506%" }} />
+</colgroup>
+<thead>
+<tr>
+<th>
+Property
+</th>
+<th>
+Type
+</th>
+<th>
+Default
+</th>
+<th>
+Set Value
+</th>
+<th>
+Get Value
+</th>
+<th>
+Script Use
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Timed refresh
+</td>
+<td>
+number
+</td>
+<td>
+undefined
+</td>
+<td>
+setTimer
+</td>
+<td>
+getTimer
+</td>
+<td />
+</tr>
+<tr>
+<td>
+Type
+</td>
+<td>
+string
+</td>
+<td>
+
+`'pie'`
+
+</td>
+<td>
+setType
+</td>
+<td>
+getType
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr>
+<td>
+Style
+</td>
+<td>
+object
+</td>
+<td>
+
+```js
+{ borderWidth:1, innerSize:'0%', slicedOffset:10 }
+```
+
+</td>
+<td>
+setPiePeculiarity
+</td>
+<td>
+getPiePeculiarity
+</td>
+<td />
+</tr>
+<tr>
+<td>
+Label-Label position
+</td>
+<td>
+number
+</td>
+<td>30</td>
+<td>
+setDistance
+</td>
+<td>
+getDistance
+</td>
+<td>
+Yes
+</td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+### Spc Diagram
+
+
+<img width={450} height={300} src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/elementProperty/74.png" />
+
+<table>
+
+<colgroup>
+<col style={{ width: "13.698630136986301%" }} />
+<col style={{ width: "15.068493150684933%" }} />
+<col style={{ width: "14.246575342465754%" }} />
+<col style={{ width: "14.246575342465754%" }} />
+<col style={{ width: "14.246575342465754%" }} />
+<col style={{ width: "14.246575342465754%" }} />
+<col style={{ width: "14.246575342465754%" }} />
+</colgroup>
+<thead>
+<tr>
+<th>
+Type
+</th>
+<th>
+Property
+</th>
+<th>
+Type
+</th>
+<th>
+Default
+</th>
+<th>
+Set Value
+</th>
+<th>
+Get Value
+</th>
+<th>
+Script Use
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td rowSpan={6}>
+Chart style
+</td>
+<td>
+Line width
+</td>
+<td>
+number
+</td>
+<td>1</td>
+<td>
+setSeriesLineWidth
+</td>
+<td>
+getSeriesLineWidth
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr>
+<td>
+Line style
+</td>
+<td>
+string
+</td>
+<td>
+
+`'Solid'`
+
+</td>
+<td>
+setSeriesDashStyle
+</td>
+<td>
+getSeriesDashStyle
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr>
+<td>
+Mark size
+</td>
+<td>
+number
+</td>
+<td>4</td>
+<td>
+setMarkerSymbolSize
+</td>
+<td>
+getMarkerSymbolSize
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr>
+<td>
+Mark symbol
+</td>
+<td>
+string
+</td>
+<td>
+
+`'circle'`
+
+</td>
+<td>
+setSeriesMarkerSymbol
+</td>
+<td>
+getSeriesMarkerSymbol
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr>
+<td>
+Type
+</td>
+<td>
+object
+</td>
+<td>
+
+```js
+{ key, config, type, objKey, value }
+```
+
+</td>
+<td>
+setSpcType
+</td>
+<td>
+getSpcType
+</td>
+<td />
+</tr>
+<tr>
+<td>
+Grid
+</td>
+<td>
+number
+</td>
+<td>0</td>
+<td>
+setShowGrid
+</td>
+<td>
+getShowGrid
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr>
+<td rowSpan={12}>
+X axis
+</td>
+<td>
+X axis type
+</td>
+<td>
+string
+</td>
+<td>
+
+`'category'`
+
+</td>
+<td>
+setXAxisType
+</td>
+<td>
+getXAxisType
+</td>
+<td />
+</tr>
+<tr>
+<td>
+Format
+</td>
+<td>
+string
+</td>
+<td>
+
+`'{value}'`
+
+</td>
+<td>
+setDateFormat
+</td>
+<td>
+getDateFormat
+</td>
+<td />
+</tr>
+<tr>
+<td>
+Show X axis
+</td>
+<td>
+boolean
+</td>
+<td>
+true
+</td>
+<td>
+setXAxisVisible
+</td>
+<td>
+getXAxisVisible
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr>
+<td>
+Cross hair
+</td>
+<td>
+boolean
+</td>
+<td>
+false
+</td>
+<td>
+setXAxisCrosshair
+</td>
+<td>
+getXAxisCrosshair
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr>
+<td>
+Scale
+</td>
+<td>
+object
+</td>
+<td>
+
+```js
+{ min: null, tickInterval: undefined }
+```
+
+</td>
+<td>
+setXAxisScale
+</td>
+<td>
+getXAxisScale
+</td>
+<td />
+</tr>
+<tr>
+<td>
+Title
+</td>
+<td>
+string
+</td>
+<td>
+undefined
+</td>
+<td>
+setXAxisTitle
+</td>
+<td>
+getXAxisTitle
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr>
+<td>
+Text style
+</td>
+<td>
+object
+</td>
+<td>
+
+```js
+{fontSize:12, fontFamily:'Arial', color:'#000',
+fontWeight:'normal', fontStyle:'initial'}
+```
+
+</td>
+<td>
+setXAxisTitleStyle
+</td>
+<td>
+getXAxisTitleStyle
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr>
+<td>
+Title position
+</td>
+<td>
+string
+</td>
+<td>
+
+`'middle'`
+
+</td>
+<td>
+setXAxisTitleAlign
+</td>
+<td>
+getXAxisTitleAlign
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr>
+<td>
+Axis line color
+</td>
+<td>
+string
+</td>
+<td>
+
+`'#ccd6eb'`
+
+</td>
+<td>
+setxAxisColor
+</td>
+<td>
+getxAxisColor
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr>
+<td>
+Axis text color
+</td>
+<td>
+string
+</td>
+<td>
+
+`'#666'`
+
+</td>
+<td>
+setXAxisLablesStyle
+</td>
+<td>
+getXAxisLablesStyle
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr>
+<td>
+Rotation angle
+</td>
+<td>
+number
+</td>
+<td>0</td>
+<td>
+setXAxisRotation
+</td>
+<td>
+getXAxisRotation
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr>
+<td>
+Vertical text
+</td>
+<td>
+boolean
+</td>
+<td>
+false
+</td>
+<td>
+setXAxisWritingMode
+</td>
+<td>
+getXAxisWritingMode
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr>
+<td rowSpan={11}>
+Y axis
+</td>
+<td>
+Show Y axis
+</td>
+<td>
+boolean
+</td>
+<td>
+true
+</td>
+<td>
+setYAxisVisible
+</td>
+<td>
+getYAxisVisible
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr>
+<td>
+Unit
+</td>
+<td>
+string
+</td>
+<td>
+undefined
+</td>
+<td>
+setYAxisFormat
+</td>
+<td>
+getYAxisFormat
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr>
+<td>
+Grid
+</td>
+<td>
+boolean
+</td>
+<td>
+true
+</td>
+<td>
+setYGrid
+</td>
+<td>
+getYGrid
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr>
+<td>
+Cross hair
+</td>
+<td>
+boolean
+</td>
+<td>
+false
+</td>
+<td>
+setYAxisCrosshair
+</td>
+<td>
+getYAxisCrosshair
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr>
+<td>
+Scale
+</td>
+<td>
+object
+</td>
+<td>
+
+```js
+{ min: null, tickInterval: undefined }
+```
+
+</td>
+<td>
+setYAxisScale
+</td>
+<td>
+getYAxisScale
+</td>
+<td />
+</tr>
+<tr>
+<td>
+Title
+</td>
+<td>
+string
+</td>
+<td>
+undefined
+</td>
+<td>
+setYAxisTitle
+</td>
+<td>
+getYAxisTitle
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr>
+<td>
+Text style
+</td>
+<td>
+object
+</td>
+<td>
+
+```js
+{fontSize:12, fontFamily:'Arial', color:'#000',
+fontWeight:'normal', fontStyle:'initial'}
+```
+
+</td>
+<td>
+setYAxisTitleStyle
+</td>
+<td>
+getYAxisTitleStyle
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr>
+<td>
+Title position
+</td>
+<td>
+string
+</td>
+<td>
+
+`'middle'`
+
+</td>
+<td>
+setYAxisTitleAlign
+</td>
+<td>
+getYAxisTitleAlign
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr>
+<td>
+Axis text color
+</td>
+<td>
+string
+</td>
+<td>
+
+`'#666'`
+
+</td>
+<td>
+setYAxisLablesStyle
+</td>
+<td>
+getYAxisLablesStyle
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr>
+<td>
+Rotation angle
+</td>
+<td>
+number
+</td>
+<td>0</td>
+<td>
+setYAxisRotation
+</td>
+<td>
+getYAxisRotation
+</td>
+<td>
+Yes
+</td>
+</tr>
+<tr>
+<td>
+Maximum value
+</td>
+<td>
+number
+</td>
+<td>
+undefined
+</td>
+<td>
+setYAxisMax
+</td>
+<td>
+getYAxisMax
+</td>
+<td />
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+### Histogram
+
+
+<img width={450} height={300} src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/elementProperty/75.png" />
+
+<table>
+
+<colgroup>
+<col style={{ width: "13.698630136986301%" }} />
+<col style={{ width: "15.068493150684933%" }} />
+<col style={{ width: "14.246575342465754%" }} />
+<col style={{ width: "14.246575342465754%" }} />
+<col style={{ width: "14.246575342465754%" }} />
+<col style={{ width: "14.246575342465754%" }} />
+<col style={{ width: "14.246575342465754%" }} />
+</colgroup>
+<thead>
+<tr>
+<th>
+Type
+</th>
+<th>
+Property
+</th>
+<th>
+Type
+</th>
+<th>
+Default
+</th>
+<th>
+Set Value
+</th>
+<th>
+Get Value
+</th>
+<th>
+Script Use
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td rowSpan={3}>
+Chart style
+</td>
+<td>
+Warning
+</td>
+<td>
+object
+</td>
+<td>
+
+```js
+{ min: undefined, max: undefined, color:'red',
+enabled:false
+}
+```
+
+</td>
+<td>
+setChartEarly
+</td>
+<td>
+getChartEarly
+</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Grid</td>
+<td>
+string
+</td>
+<td>null</td>
+<td>
+setCuLine
+</td>
+<td>
+getCuLine
+</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>
+Fitted line
+</td>
+<td>
+number
+</td>
+<td>4</td>
+<td>
+setMarkerSymbolSize
+</td>
+<td>
+getMarkerSymbolSize
+</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td rowSpan={12}>
+X axis
+</td>
+<td>
+X axis type
+</td>
+<td>
+string
+</td>
+<td>
+
+`'category'`
+
+</td>
+<td>
+setXAxisType
+</td>
+<td>
+getXAxisType
+</td>
+<td />
+</tr>
+<tr>
+<td>
+Format
+</td>
+<td>
+string
+</td>
+<td>
+
+`'{value}'`
+
+</td>
+<td>
+setDateFormat
+</td>
+<td>
+getDateFormat
+</td>
+<td />
+</tr>
+<tr>
+<td>
+Show X axis
+</td>
+<td>
+boolean
+</td>
+<td>true</td>
+<td>
+setXAxisVisible
+</td>
+<td>
+getXAxisVisible
+</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>
+Cross hair
+</td>
+<td>
+boolean
+</td>
+<td>
+false
+</td>
+<td>
+setXAxisCrosshair
+</td>
+<td>
+getXAxisCrosshair
+</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>
+Scale
+</td>
+<td>
+object
+</td>
+<td>
+
+```js
+{ min: null, tickInterval: undefined }
+```
+
+</td>
+<td>
+setXAxisScale
+</td>
+<td>
+getXAxisScale
+</td>
+<td />
+</tr>
+<tr>
+<td>
+Title
+</td>
+<td>
+string
+</td>
+<td>
+undefined
+</td>
+<td>
+setXAxisTitle
+</td>
+<td>
+getXAxisTitle
+</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>
+Text style
+</td>
+<td>
+object
+</td>
+<td>
+
+```js
+{fontSize:12, fontFamily:'Arial', color:'#000',
+fontWeight:'normal', fontStyle:'initial'}
+```
+
+</td>
+<td>
+setXAxisTitleStyle
+</td>
+<td>
+getXAxisTitleStyle
+</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>
+Title position
+</td>
+<td>
+string
+</td>
+<td>
+
+`'middle'`
+
+</td>
+<td>
+setXAxisTitleAlign
+</td>
+<td>
+getXAxisTitleAlign
+</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>
+Axis line color
+</td>
+<td>
+string
+</td>
+<td>
+
+`'#ccd6eb'`
+
+</td>
+<td>
+setxAxisColor
+</td>
+<td>
+getxAxisColor
+</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>
+Axis text color
+</td>
+<td>
+string
+</td>
+<td>
+
+`'#666'`
+
+</td>
+<td>
+setXAxisLablesStyle
+</td>
+<td>
+getXAxisLablesStyle
+</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>
+Rotation angle
+</td>
+<td>
+number
+</td>
+<td>0</td>
+<td>
+setXAxisRotation
+</td>
+<td>
+getXAxisRotation
+</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>
+Vertical text
+</td>
+<td>
+boolean
+</td>
+<td>
+false
+</td>
+<td>
+setXAxisWritingMode
+</td>
+<td>
+getXAxisWritingMode
+</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td rowSpan={11}>
+Y axis
+</td>
+<td>
+Show Y axis
+</td>
+<td>
+boolean
+</td>
+<td>true</td>
+<td>
+setYAxisVisible
+</td>
+<td>
+getYAxisVisible
+</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Unit</td>
+<td>
+string
+</td>
+<td>
+undefined
+</td>
+<td>
+setYAxisFormat
+</td>
+<td>
+getYAxisFormat
+</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Grid</td>
+<td>
+boolean
+</td>
+<td>true</td>
+<td>
+setYGrid
+</td>
+<td>
+getYGrid
+</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>
+Cross hair
+</td>
+<td>
+boolean
+</td>
+<td>
+false
+</td>
+<td>
+setYAxisCrosshair
+</td>
+<td>
+getYAxisCrosshair
+</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>
+Scale
+</td>
+<td>
+object
+</td>
+<td>
+
+```js
+{ min: null, tickInterval: undefined }
+```
+
+</td>
+<td>
+setYAxisScale
+</td>
+<td>
+getYAxisScale
+</td>
+<td />
+</tr>
+<tr>
+<td>
+Title
+</td>
+<td>
+string
+</td>
+<td>
+undefined
+</td>
+<td>
+setYAxisTitle
+</td>
+<td>
+getYAxisTitle
+</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>
+Text style
+</td>
+<td>
+object
+</td>
+<td>
+
+```js
+{fontSize:12, fontFamily:'Arial', color:'#000',
+fontWeight:'normal', fontStyle:'initial'}
+```
+
+</td>
+<td>
+setYAxisTitleStyle
+</td>
+<td>
+getYAxisTitleStyle
+</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>
+Title position
+</td>
+<td>
+string
+</td>
+<td>
+
+`'middle'`
+
+</td>
+<td>
+setYAxisTitleAlign
+</td>
+<td>
+getYAxisTitleAlign
+</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>
+Axis text color
+</td>
+<td>
+string
+</td>
+<td>
+
+`'#666'`
+
+</td>
+<td>
+setYAxisLablesStyle
+</td>
+<td>
+getYAxisLablesStyle
+</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>
+Rotation angle
+</td>
+<td>
+number
+</td>
+<td>0</td>
+<td>
+setYAxisRotation
+</td>
+<td>
+getYAxisRotation
+</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>
+Maximum value
+</td>
+<td>
+number
+</td>
+<td>
+undefined
+</td>
+<td>
+setYAxisMax
+</td>
+<td>
+getYAxisMax
+</td>
+<td />
+</tr>
+</tbody>
+</table>
+
+
+## Controls Library
+
+### History Alarm
+
+
+<img width={450} height={300} src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/elementProperty/99.png"/>
+
+<table>
+<colgroup>
+<col style={{ width: "20.91254752851711%" }} />
+<col style={{ width: "19.77186311787072%" }} />
+<col style={{ width: "19.77186311787072%" }} />
+<col style={{ width: "19.77186311787072%" }} />
+<col style={{ width: "19.77186311787072%" }} />
+</colgroup>
+<thead>
+<tr>
+<th>
+Property
+</th>
+<th>
+Type
+</th>
+<th>
+Default
+</th>
+<th>
+Set Value
+</th>
+<th>
+Get Value
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Component background
+</td>
+<td>
+string
+</td>
+<td>
+
+`'#f7f8fa'`
+
+</td>
+<td>
+setConpontBackground
+</td>
+<td>
+getConpontBackground
+</td>
+</tr>
+<tr>
+<td>
+List background
+</td>
+<td>
+string
+</td>
+<td>
+
+`'#222734'`
+
+</td>
+<td>
+setListBackground
+</td>
+<td>
+getListBackground
+</td>
+</tr>
+<tr>
+<td>
+Title background
+</td>
+<td>
+string
+</td>
+<td>
+
+`'#b4bdd1'`
+
+</td>
+<td>
+setTitleBackground
+</td>
+<td>
+getTitleBackground
+</td>
+</tr>
+<tr>
+<td>
+Title color
+</td>
+<td>
+string
+</td>
+<td>
+
+`'#ffffff'`
+
+</td>
+<td>
+setTitleColor
+</td>
+<td>
+getTitleColor
+</td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+### Drive Video
+
+- Property Description
+
+
+<table>
+
+<colgroup>
+<col style={{ width: "20.91254752851711%" }} />
+<col style={{ width: "19.77186311787072%" }} />
+<col style={{ width: "19.77186311787072%" }} />
+<col style={{ width: "19.77186311787072%" }} />
+<col style={{ width: "19.77186311787072%" }} />
+</colgroup>
+<thead>
+<tr>
+<th>
+Property
+</th>
+<th>
+Type
+</th>
+<th>
+Default
+</th>
+<th>
+Set Value
+</th>
+<th>
+Get Value
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Auto play
+</td>
+<td>
+Boolean
+</td>
+<td>
+true
+</td>
+<td>
+setAutoPlay(Boolean)
+</td>
+<td>
+getAutoPlay()
+</td>
+</tr>
+<tr>
+<td>
+Video carousel
+</td>
+<td>
+Boolean
+</td>
+<td>
+false
+</td>
+<td>
+setCarousel(Boolean)
+</td>
+<td>
+getCarousel()
+</td>
+</tr>
+<tr>
+<td>
+Real-time video
+</td>
+<td>
+Object
+</td>
+<td />
+<td>
+setStreamSource(Object)
+</td>
+<td>
+getStreamSource()
+</td>
+</tr>
+<tr>
+<td>
+Video playback
+</td>
+<td>
+Object
+</td>
+<td />
+<td>
+setHistorySource(Object)
+</td>
+<td>
+getHistorySource()
+</td>
+</tr>
+</tbody>
+</table>
+
+
+
+- Example Code
+
+:::info
+
+No scripts supported in operation center.
+
+:::
+
+
+```js
+
+// set data for video carousel
+
+scriptUtil.getRegisterReactDom("componentId").setStreamSource({
+
+
+carousel: false, // whether to run video carousel
+
+maxchannel: null, // maximum number of channels
+
+chooseChannel: undefined, // select a channel
+
+cameramodel: null, // video mode
+
+manufacturer: null, // manufacturer
+
+videoSource: "", // video source data
+
+});
+// set data for real-time playback
+
+scriptUtil.getRegisterReactDom("componentId").setHistorySource({
+
+
+videoSource: "", // video source data
+
+});
+```
+
+
+
+
+
+### video Wall
+
+- Property Description
+
+<table>
+
+<colgroup>
+<col style={{ width: "20.91254752851711%" }} />
+<col style={{ width: "19.77186311787072%" }} />
+<col style={{ width: "19.77186311787072%" }} />
+<col style={{ width: "19.77186311787072%" }} />
+<col style={{ width: "19.77186311787072%" }} />
+</colgroup>
+<thead>
+<tr>
+<th>
+Property
+</th>
+<th>
+Type
+</th>
+<th>
+Default
+</th>
+<th>
+Set Value
+</th>
+<th>
+Get Value
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Layout
+</td>
+<td>
+Object
+</td>
+<td>
+
+```js
+{row: 1,col:1}
+```
+
+</td>
+<td>
+setLayout(Object)
+</td>
+<td>
+getLayout()
+</td>
+</tr>
+<tr>
+<td>
+Display title
+</td>
+<td>
+Boolean
+</td>
+<td>
+true
+</td>
+<td>
+setTitleVisibility(Boolean)
+</td>
+<td>
+getTitleVisibility()
+</td>
+</tr>
+<tr>
+<td>
+Title
+</td>
+<td>
+string
+</td>
+<td />
+<td>
+setTitle(string)
+</td>
+<td>
+getTitle()
+</td>
+</tr>
+<tr>
+<td>
+Text style
+</td>
+<td>
+Object
+</td>
+<td />
+<td>
+setChartTitle(Object)
+</td>
+<td>
+getChartTitle()
+</td>
+</tr>
+<tr>
+<td>
+Alignment
+</td>
+<td>
+string
+</td>
+<td>
+
+`'center'`
+
+</td>
+<td>
+setTitleAlign(string)
+</td>
+<td>
+getTitleAlign()
+</td>
+</tr>
+<tr>
+<td>
+Background color
+</td>
+<td>
+string
+</td>
+<td>
+
+`'#e3e3e3'`
+
+</td>
+<td>
+setBgColor(string)
+</td>
+<td>
+getBgColor()
+</td>
+</tr>
+<tr>
+<td>
+Auto play
+</td>
+<td>
+Boolean
+</td>
+<td>
+true
+</td>
+<td>
+setAutoPlay(Boolean)
+</td>
+<td>
+getAutoPlay()
+</td>
+</tr>
+<tr>
+<td>
+Video carousel
+</td>
+<td>
+Boolean
+</td>
+<td>
+false
+</td>
+<td>
+setCarousel(Boolean)
+</td>
+<td>
+getCarousel()
+</td>
+</tr>
+<tr>
+<td>
+Real-time video
+</td>
+<td>
+Object
+</td>
+<td />
+<td>
+setStreamSource(Object)
+</td>
+<td>
+getStreamSource()
+</td>
+</tr>
+<tr>
+<td>
+Video playback
+</td>
+<td>
+Object
+</td>
+<td />
+<td>
+setHistorySource(Object)
+</td>
+<td>
+getHistorySource()
+</td>
+</tr>
+</tbody>
+</table>
+
+- Example Code
+
+
+```js
+// set title style
+
+scriptUtil.getRegisterReactDom("component id").setChartTitle(
+{
+
+
+fontSize: 12, // font size
+
+fontFamily: "Arial", // font
+
+color: "#333333", // font color
+
+fontWeight: "", // font weight
+
+fontStyle: "", // font style
+
+});
+```
+
+
+
+
+
+
+
+### Timer
+
+- Property Description
+
+<table>
+
+<colgroup>
+<col style={{ width: "13.447432762836186%" }} />
+<col style={{ width: "35.69682151589242%" }} />
+<col style={{ width: "12.71393643031785%" }} />
+<col style={{ width: "12.71393643031785%" }} />
+<col style={{ width: "12.71393643031785%" }} />
+<col style={{ width: "12.71393643031785%" }} />
+</colgroup>
+<thead>
+<tr>
+<th>
+Property
+</th>
+<th>
+Description
+</th>
+<th>
+Type
+</th>
+<th>
+Default
+</th>
+<th>
+Set Value
+</th>
+<th>
+Get Value
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Component ID
+</td>
+<td>
+Automatically generated.
+</td>
+<td>
+string
+</td>
+<td />
+<td />
+<td />
+</tr>
+<tr>
+<td>
+Component Name
+</td>
+<td>
+ID for setting value.
+</td>
+<td>
+string
+</td>
+<td />
+<td>
+setFormItemId(value)
+</td>
+<td>
+getFormItemId()
+</td>
+</tr>
+<tr>
+<td>
+Time Interval
+</td>
+<td>
+Interval for executing the timer.
+</td>
+<td>
+number
+</td>
+<td>
+1
+</td>
+<td>
+setSecond(value)
+</td>
+<td>
+getSecond()
+</td>
+</tr>
+<tr>
+<td>
+Immediate Run
+</td>
+<td>
+Run the script after elements load completely.
+</td>
+<td>
+boolean
+</td>
+<td>
+false
+</td>
+<td>
+setStartNow(value)
+</td>
+<td>
+getStartNow()
+</td>
+</tr>
+<tr>
+<td>
+Run Times
+</td>
+<td>
+Set the times of running the script. If <b>Immediate Run</b> is enabled, it takes up one run time.
+</td>
+<td>
+number
+</td>
+<td>
+no limit
+</td>
+<td>
+setTimesRun(value)
+</td>
+<td>
+getTimesRun()
+</td>
+</tr>
+<tr>
+<td>
+Script
+</td>
+<td>
+Execution script of the timer.
+</td>
+<td>
+script
+</td>
+<td />
+<td>
+setIntervalScript(value)
+</td>
+<td>
+getIntervalScript()
+</td>
+</tr>
+</tbody>
+</table>
+
+
+
+- Example Code
+
+<ul>
+<ul>
+<li>Script data format
+
+```js
+{
+type, //script type (reload/custom)
+script //script content
+}
+```
+
+</li>
+
+
+<li>Clear timer
+
+```js
+var Interval = scriptUtil.getRegisterReactDom('componentId');
+Interval.clearTimer();
+```
+
+</li>
+<li>Start timer
+
+```js
+var Interval = scriptUtil.getRegisterReactDom('componentId');
+Interval.startTimer();
+```
+
+</li>
+</ul>
+</ul>
+
+
+
+
+
+### Trend
+
+
+<img width={450} height={300} src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/elementProperty/37-1.png" />
+
+
+
+- Property Description
+
+<table>
+
+<colgroup>
+<col style={{ width: "20.91254752851711%" }} />
+<col style={{ width: "19.77186311787072%" }} />
+<col style={{ width: "19.77186311787072%" }} />
+<col style={{ width: "19.77186311787072%" }} />
+<col style={{ width: "19.77186311787072%" }} />
+</colgroup>
+<thead>
+<tr>
+<th>
+Property
+</th>
+<th>
+Type
+</th>
+<th>
+Default
+</th>
+<th>
+Set Value
+</th>
+<th>
+Get Value
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Data source
+</td>
+<td>
+array
+</td>
+<td>
+[]
+</td>
+<td>
+setDataSource
+</td>
+<td>
+getDataSource
+</td>
+</tr>
+<tr>
+<td>
+Range
+</td>
+<td>
+boolean
+</td>
+<td>
+true
+</td>
+<td>
+setDataSource
+</td>
+<td>
+getDataSource
+</td>
+</tr>
+<tr>
+<td>
+Display Y axis
+</td>
+<td>
+string
+</td>
+<td>
+
+`'1'`
+
+</td>
+<td>
+setDataSource
+</td>
+<td>
+getDataSource
+</td>
+</tr>
+<tr>
+<td>
+Time period
+</td>
+<td>
+number
+</td>
+<td>
+28800000
+</td>
+<td>
+setDataSource
+</td>
+<td>
+getDataSource
+</td>
+</tr>
+<tr>
+<td>
+Display toolbar
+</td>
+<td>
+boolean
+</td>
+<td>
+TRUE
+</td>
+<td>
+setToolBarShow
+</td>
+<td>
+getToolBarShow
+</td>
+</tr>
+<tr>
+<td>
+List type
+</td>
+<td>
+string
+</td>
+<td>
+
+`'1'`
+
+</td>
+<td>
+setShowListType
+</td>
+<td>
+getShowListType
+</td>
+</tr>
+<tr>
+<td>
+Background color
+</td>
+<td>
+string
+</td>
+<td>
+
+`'#FFFFFF'`
+
+</td>
+<td>
+setDivBackgroundColor
+</td>
+<td>
+getDivBackgroundColor
+</td>
+</tr>
+<tr>
+<td>
+Chart color
+</td>
+<td>
+string
+</td>
+<td>
+rgba(159,194,255,0.12)
+</td>
+<td>
+setChartBackgroundColor
+</td>
+<td>
+getChartBackgroundColor
+</td>
+</tr>
+<tr>
+<td>
+Border color
+</td>
+<td>
+string
+</td>
+<td>
+
+`'#cccccc'`
+
+</td>
+<td>
+setBorderColor
+</td>
+<td>
+getBorderColor
+</td>
+</tr>
+<tr>
+<td>
+Slider color
+</td>
+<td>
+string
+</td>
+<td>
+
+`'#666666'`
+
+</td>
+<td>
+setCrosshairColor
+</td>
+<td>
+getCrosshairColor
+</td>
+</tr>
+<tr>
+<td>
+Font color
+</td>
+<td>
+string
+</td>
+<td>
+
+`'#666666'`
+
+</td>
+<td>
+setTextColor
+</td>
+<td>
+getTextColor
+</td>
+</tr>
+</tbody>
+</table>
+
+
+
+- Example Code
+
+
+```js
+// mock data source
+var obj = [
+    {
+    color:"#009DD7",name:"system:Template_2:aa_5:system:Property_20",
+    primitiveType:"DOUBLE"},
+    {
+    color:"#39435A",name:"system:Template_2:aa_5:system:Property_19",
+    primitiveType:"FLOAT"}
+]
+
+// get the element with an ID as TrendChart-1
+var TrendChart1 =
+scriptUtil.getRegisterReactDom('TrendChart-1'); 
+
+// display too;bar
+TrendChart1.setToolBarShow(true);
+
+// select list type
+TrendChart1.setShowListType("2");
+
+// background color
+TrendChart1.setDivBackgroundColor('red');
+
+// chart color
+TrendChart1.setChartBackgroundColor('red');
+
+// border color
+TrendChart1.setBorderColor('red');
+
+// clider color
+TrendChart1.setCrosshairColor('red');
+
+// font color
+TrendChart1.setTextColor('red');
+
+// add data source (less than 8 entries are allowed to insert and excessed data is invalid)
+
+// single data source{} multple data source[] name&amp;primitiveType&amp;color are required
+TrendChart1.setObjectData(obj)
+
+// set starting time
+TrendChart1.setRegularTime(start,end);
+
+// change time and data source (up to 8 entries) at the same time
+TrendChart1.changeTimeAndSource(start, end, type, dataSourceObj);
+
+/* ************following examples are for
+changeTimeAndSource************ */
+
+// no data source repalcement, no time->call setRegularTime->prompts no start/end time and no subsequent operation
+TrendChart1.changeTimeAndSource();
+
+// no data source repalcement, start time->call setRegularTime->prompts no start/end time and no subsequentoperation
+TrendChart1.changeTimeAndSource('2019-10-16 08:30:00')
+
+// no data source repalcement, end time->call setRegularTime->prompts no start/end time and no subsequent operation
+TrendChart1.changeTimeAndSource(undefined,'2019-10-16 08:30:00')
+
+// no data source repalcement, start time->call setRegularTime->replace time period of current trend chart
+TrendChart1.changeTimeAndSource('2019-10-16 08:30:00','2019-10-16 08:30:30')
+
+// data source repalcement (object)->replace time period of current trend chart and data source
+var obj = { color:"#009DD7",name:"mock_demo:mock1", primitiveType:"Float"}
+TrendChart1.changeTimeAndSource('2019-10-16 08:30:00','2019-10-16 08:30:30','all',obj)
+
+// data source repalcement (array)->replace time period of current trend chart and data source
+TrendChart1.changeTimeAndSource('2019-10-16 08:30:00','2019-10-16 08:30:30','all',obj)
+
+// data source repalcement (array), no time->prompts no start/end time and no subsequent operation
+TrendChart1.changeTimeAndSource('dfd','2019-10-16 08:30:30','all', obj)
+```
+
+
+
+### To Do List
+
+- Property Description
+
+<table>
+
+<colgroup>
+<col style={{ width: "17.57188498402556%" }} />
+<col style={{ width: "15.974440894568689%" }} />
+<col style={{ width: "16.61341853035144%" }} />
+<col style={{ width: "16.61341853035144%" }} />
+<col style={{ width: "16.61341853035144%" }} />
+<col style={{ width: "16.61341853035144%" }} />
+</colgroup>
+<thead>
+<tr>
+<th>
+Property
+</th>
+<th>
+Description
+</th>
+<th>
+Type
+</th>
+<th>
+Default
+</th>
+<th>
+Set Value
+</th>
+<th>
+Get Value
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Data
+</td>
+<td>
+Workflow data
+</td>
+<td />
+<td />
+<td>
+setTabs(value)
+</td>
+<td>
+getTabs()
+</td>
+</tr>
+<tr>
+<td>
+Articles per Page
+</td>
+<td>
+Set the number items displayed on each page.
+</td>
+<td>
+number
+</td>
+<td>
+10
+</td>
+<td>
+setPageSize(value)
+</td>
+<td>
+getPageSize()
+</td>
+</tr>
+<tr>
+<td>
+Border
+</td>
+<td rowSpan={4}>
+Set whether border exists and its width, color and type.
+</td>
+<td>
+string 'true' 'false
+</td>
+<td>
+true
+</td>
+<td>
+setBorder(value)
+</td>
+<td>
+getBorder()
+</td>
+</tr>
+<tr>
+<td>
+Border Size
+</td>
+<td>
+number
+</td>
+<td>
+1
+</td>
+<td>
+setBorderWidth(value)
+</td>
+<td>
+getBorderWidth()
+</td>
+</tr>
+<tr>
+<td>
+Border Type
+</td>
+<td>
+string
+</td>
+<td>
+solid
+</td>
+<td>
+setBorderStyle(value)
+</td>
+<td>
+getBorderStyle()
+</td>
+</tr>
+<tr>
+<td>
+Border Color
+</td>
+<td>
+string
+</td>
+<td>
+#e8e8e8
+</td>
+<td>
+setBorderColor(value)
+</td>
+<td>
+getBorderColor()
+</td>
+</tr>
+<tr>
+<td>
+Column width
+</td>
+<td>
+Whether to enable column width to adjust based on content
+</td>
+<td>
+boolean
+</td>
+<td>
+true
+</td>
+<td>
+setAutoWidth(value)
+</td>
+<td>
+getAutoWidth()
+</td>
+</tr>
+<tr>
+<td>
+Head Background
+</td>
+<td>
+Set the background color of the table head.
+</td>
+<td>
+string
+</td>
+<td>
+#6c748d
+</td>
+<td>
+setTheadBackgroundColor(value)
+</td>
+<td>
+getTheadBackgroundColor()
+</td>
+</tr>
+<tr>
+<td>
+Font Color
+</td>
+<td rowSpan={3}>
+Set the font color. size and type of the table head.
+</td>
+<td>
+string
+</td>
+<td>
+#fff
+</td>
+<td>
+setTheadFontColor(value)
+</td>
+<td>
+getTheadFontColor()
+</td>
+</tr>
+<tr>
+<td>
+Font Size
+</td>
+<td>
+number
+</td>
+<td>
+14
+</td>
+<td>
+setTheadFontSize(value)
+</td>
+<td>
+getTheadFontSize()
+</td>
+</tr>
+<tr>
+<td>
+Font
+</td>
+<td>
+string
+</td>
+<td>
+Arial
+</td>
+<td>
+setTheadFontFamily(value)
+</td>
+<td>
+getTheadFontFamily()
+</td>
+</tr>
+<tr>
+<td>
+Table Background
+</td>
+<td>
+Set the background color of the table body.
+</td>
+<td>
+string
+</td>
+<td>
+#fff
+</td>
+<td>
+setTbodyBackgroundColor(value)
+</td>
+<td>
+getTbodyBackgroundColor()
+</td>
+</tr>
+<tr>
+<td>
+Font Color
+</td>
+<td rowSpan={3}>
+Set the font color. size and type of the table body.
+</td>
+<td>
+string
+</td>
+<td>
+#000
+</td>
+<td>
+setTbodyFontColor(value)
+</td>
+<td>
+getTbodyFontColor()
+</td>
+</tr>
+<tr>
+<td>
+Font Size
+</td>
+<td>
+number
+</td>
+<td>
+14
+</td>
+<td>
+setTbodyFontSize(value)
+</td>
+<td>
+getTbodyFontSize()
+</td>
+</tr>
+<tr>
+<td>
+Font
+</td>
+<td>
+string
+</td>
+<td>
+Arial
+</td>
+<td>
+setTbodyFontFamily(value)
+</td>
+<td>
+getTbodyFontFamily()
+</td>
+</tr>
+<tr>
+<td>
+Odd Line Color
+</td>
+<td>
+Background color of odd lines on the list.
+</td>
+<td>
+string
+</td>
+<td>
+#fff
+</td>
+<td>
+setSingleRowColor(value)
+</td>
+<td>
+getSingleRowColor
+</td>
+</tr>
+<tr>
+<td>
+Even Line Color
+</td>
+<td>
+Background color of even lines on the list.
+</td>
+<td>
+string
+</td>
+<td>
+#fff
+</td>
+<td>
+setDoubleRowColor(value)
+</td>
+<td>
+setDoubleRowColor()
+</td>
+</tr>
+</tbody>
+</table>
+
+
+
+- Example Code
+
+```js
+[ //data format
+    {
+    value: 'todo', //todo/done/request/attention/delegate/
+    label: 'to-do',
+    isShow: true, // whether to display it
+    children: [ // table content
+        { 
+        label: 'index', 
+        value: 'index', 
+        isShow: true, // whether to display the item
+        showModal: false, // click to display pop-up
+        url: '', // propmt url
+        modalWidth: 1200, // prompt width
+        modalHeight: 800, // prompt height
+        style: { 
+            color: '#000', // item style
+            fontSize: 14,
+            fontFamily: 'Arial'
+            }
+        },
+
+    ...
+
+    ]
+    },
+
+...
+]
+```
+
+
+
+
+
+
+
+### Report
+
+- Property Description
+
+<table>
+
+<colgroup>
+<col style={{ width: "17.57188498402556%" }} />
+<col style={{ width: "15.974440894568689%" }} />
+<col style={{ width: "16.61341853035144%" }} />
+<col style={{ width: "16.61341853035144%" }} />
+<col style={{ width: "16.61341853035144%" }} />
+<col style={{ width: "16.61341853035144%" }} />
+</colgroup>
+<thead>
+<tr>
+<th>
+Property
+</th>
+<th>
+Description
+</th>
+<th>
+Type
+</th>
+<th>
+Default
+</th>
+<th>
+Set Value
+</th>
+<th>
+Get Value
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Component Name
+</td>
+<td>
+ID of linked component
+</td>
+<td>
+string
+</td>
+<td />
+<td>
+setFormItemId
+</td>
+<td>
+getFormItemId
+</td>
+</tr>
+<tr>
+<td>
+Fill Type
+</td>
+<td>
+Data source fill type (insert/replace)
+</td>
+<td>
+string
+</td>
+<td>
+insert
+</td>
+<td>
+setFillDataType
+</td>
+<td>
+getFillDataType
+</td>
+</tr>
+<tr>
+<td>
+Scroll Bar
+</td>
+<td>
+Whether ti display scrollbar (auto/visible/hidden)
+</td>
+<td>
+string
+</td>
+<td>
+auto
+</td>
+<td>
+setScrollbarVisible
+</td>
+<td>
+getScrollbarVisible
+</td>
+</tr>
+<tr>
+<td>
+Fix on Top
+</td>
+<td />
+<td>
+boolean
+</td>
+<td>
+false
+</td>
+<td>
+setPosition('topEnable', value)
+</td>
+<td>
+getPosition
+</td>
+</tr>
+<tr>
+<td>
+Fix on Right
+</td>
+<td />
+<td>
+boolean
+</td>
+<td>
+false
+</td>
+<td>
+setPosition('rightEnable', value)
+</td>
+<td>
+getPosition
+</td>
+</tr>
+<tr>
+<td>
+Fix on Bottom
+</td>
+<td />
+<td>
+boolean
+</td>
+<td>
+false
+</td>
+<td>
+setPosition('bottomEnable', value)
+</td>
+<td>
+getPosition
+</td>
+</tr>
+<tr>
+<td>
+Fix on Left
+</td>
+<td />
+<td>
+boolean
+</td>
+<td>
+false
+</td>
+<td>
+setPosition('leftEnable', value)
+</td>
+<td>
+getPosition
+</td>
+</tr>
+<tr>
+<td>
+Run Edit
+</td>
+<td>
+Whether to enable edit in operation center
+</td>
+<td>
+boolean
+</td>
+<td>
+false
+</td>
+<td>
+setRunTimeEdit
+</td>
+<td>
+getRunTimeEdit
+</td>
+</tr>
+<tr>
+<td>
+Zoom (Small)
+</td>
+<td>
+Zoom out to fit small screen in flow layout
+</td>
+<td>
+boolean
+</td>
+<td>
+true
+</td>
+<td>
+setRunTimeZoomSheet
+</td>
+<td>
+getRunTimeZoomSheet
+</td>
+</tr>
+<tr>
+<td>
+Zoom (Large)
+</td>
+<td>
+Zoom in to fill the report in flow layout
+</td>
+<td>
+boolean
+</td>
+<td>
+true
+</td>
+<td>
+setRunTimeZoomLargeSheet
+</td>
+<td>
+getRunTimeZoomLargeSheet
+</td>
+</tr>
+<tr>
+<td>
+Sheet Page
+</td>
+<td>
+Whether to display sheet page in operation center
+</td>
+<td>
+boolean
+</td>
+<td>
+true
+</td>
+<td>
+setRunTimeShowSheet
+</td>
+<td>
+getRunTimeShowSheet
+</td>
+</tr>
+<tr>
+<td>
+Initial Load
+</td>
+<td>
+Whether to request for data when initialization
+</td>
+<td>
+boolean
+</td>
+<td>
+true
+</td>
+<td>
+setInitLoadData
+</td>
+<td>
+getInitLoadData
+</td>
+</tr>
+<tr>
+<td>
+Background Color
+</td>
+<td>
+Report background color
+</td>
+<td>
+string
+</td>
+<td>
+#F5F5F5
+</td>
+<td>
+setBackgroundColor
+</td>
+<td>
+getBackgroundColor
+</td>
+</tr>
+</tbody>
+</table>
+
+
+
+- Example Code
+
+```js
+// get element with an Id as htDiv-k8tj6ada0-704
+var reporterCtrl =
+scriptUtil.getRegisterReactDom('htDiv-k8tj6ada0-704');
+
+// component name
+reporterCtrl.setFormItemId('ReporterCtrl');
+const reporterName = reporterCtrl.getFormItemId();
+
+// fill type
+reporterCtrl.setFillDataType('replace');
+const fillDataType = reporterCtrl.getFillDataType();
+
+//scroll bar
+reporterCtrl.setScrollbarVisible('auto');
+const scrollbarVisible =
+reporterCtrl.getScrollbarVisible();
+
+// fix on top
+reporterCtrl.setPosition('topEnable', true);
+const topEnable =
+reporterCtrl.getPosition()['topEnable'];
+
+// fix on bottom
+reporterCtrl.setPosition('bottomEnable', true);
+const bottomEnable =
+reporterCtrl.getPosition()['bottomEnable'];
+
+// fix on left
+reporterCtrl.setPosition('leftEnable', true);
+const leftEnable =
+reporterCtrl.getPosition()['leftEnable'];
+
+// fix on right
+reporterCtrl.setPosition('rightEnable', true);
+const rightEnable =
+reporterCtrl.getPosition()['rightEnable'];
+
+//run edit 
+reporterCtrl.setRunTimeEdit(true);
+const runTimeEdit = reporterCtrl.getRunTimeEdit();
+
+//zoom out
+reporterCtrl.setRunTimeZoomSheet(true);
+const runTimeZoomSheet =
+reporterCtrl.getRunTimeZoomSheet();
+
+//zoom in
+reporterCtrl.setRunTimeZoomLargeSheet(true);
+const runTimeZoomLargeSheet =
+reporterCtrl.getRunTimeZoomLargeSheet();
+
+//Sheet page
+reporterCtrl.setRunTimeShowSheet(true);
+const runTimeShowSheet =
+reporterCtrl.getRunTimeShowSheet();
+
+//initial load
+reporterCtrl.setInitLoadData(true);
+const initLoadData = reporterCtrl.getInitLoadData();
+
+
+//background color
+reporterCtrl.setBackgroundColor('#f5f5f5');
+const backgroundColor = reporterCtrl.getBackgroundColor();
+```
+
+
+
+
+
+
+
+### Web Page
+
+- Property Description
+
+<table>
+
+<colgroup>
+<col style={{ width: "17.57188498402556%" }} />
+<col style={{ width: "15.974440894568689%" }} />
+<col style={{ width: "16.61341853035144%" }} />
+<col style={{ width: "16.61341853035144%" }} />
+<col style={{ width: "16.61341853035144%" }} />
+<col style={{ width: "16.61341853035144%" }} />
+</colgroup>
+<thead>
+<tr>
+<th>
+Property
+</th>
+<th>
+Description
+</th>
+<th>
+Type
+</th>
+<th>
+Default
+</th>
+<th>
+Set Value
+</th>
+<th>
+Get Value
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Component name
+</td>
+<td>
+ID for setting value.
+</td>
+<td>
+string
+</td>
+<td />
+<td>
+setFormItemId
+</td>
+<td>
+getFormItemId
+</td>
+</tr>
+<tr>
+<td>
+Title content
+</td>
+<td />
+<td>
+string
+</td>
+<td>
+title
+</td>
+<td>
+setLabelContent(value)
+</td>
+<td>
+getLabelContent()
+</td>
+</tr>
+<tr>
+<td>
+Title font
+</td>
+<td />
+<td />
+<td>
+
+```js
+{fontFamily: "Arial", fontSize: 14, fontWeight:
+"normal", fontStyle: "normal", textAlign: "left"}
+```
+
+</td>
+<td>
+setTitleFont(value)
+</td>
+<td>
+getTitleFont()
+</td>
+</tr>
+<tr>
+<td>
+Title color
+</td>
+<td />
+<td>
+string
+</td>
+<td>
+
+`#000`
+
+</td>
+<td>
+setTitleColor(value)
+</td>
+<td>
+getTitleColor()
+</td>
+</tr>
+<tr>
+<td>
+Title margin
+</td>
+<td />
+<td />
+<td>
+
+```js
+{left: 0, top: 0, right: 0, bottom: 0}
+```
+
+</td>
+<td>
+setTitleMargin(value)
+</td>
+<td>
+getTitleMargin()
+</td>
+</tr>
+<tr>
+<td>
+Url
+</td>
+<td />
+<td>
+string
+</td>
+<td />
+<td>
+setUrl(value)
+</td>
+<td>
+getUrl()
+</td>
+</tr>
+<tr>
+<td>
+De-Iframe
+</td>
+<td>
+Whether to disable I-frame
+</td>
+<td>
+boolean
+</td>
+<td>
+false
+</td>
+<td>
+setIsNoIframeMode(value)
+</td>
+<td>
+getIsNoIframeMode()
+</td>
+</tr>
+<tr>
+<td>
+Margin
+</td>
+<td />
+<td />
+<td>
+
+```js
+{left: 0, top: 0, right: 0, bottom: 0}
+```
+
+</td>
+<td>
+setIframeMargin(value)
+</td>
+<td>
+getIframeMargin()
+</td>
+</tr>
+<tr>
+<td>
+Padding
+</td>
+<td />
+<td />
+<td>
+
+```js
+{left: 0, top: 0, right: 0, bottom: 0}
+```
+
+</td>
+<td>
+setIframePadding(value)
+</td>
+<td>
+getIframePadding()
+</td>
+</tr>
+<tr>
+<td>
+Background
+</td>
+<td />
+<td>
+string
+</td>
+<td>
+
+`#f5f4f4`
+
+</td>
+<td>
+setBackColor(value)
+</td>
+<td>
+getBackColor()
+</td>
+</tr>
+<tr>
+<td>
+Border
+</td>
+<td />
+<td />
+<td>
+
+```js
+{color: "#dedede", width: 1, borderStyle: "solid"}
+```
+
+</td>
+<td>
+setIframeBorder(value)
+</td>
+<td>
+getIframeBorder()
+</td>
+</tr>
+<tr>
+<td>
+Data source
+</td>
+<td>
+Set data source for reminders through property or service
+</td>
+<td />
+<td />
+<td>
+setObject(object)
+
+:::info
+
+We recommend not to change data source through script
+
+:::
+
+</td>
+<td>
+getObject()
+</td>
+</tr>
+</tbody>
+</table>
+
+
+
+- Example Code
+
+```js
+var instance =
+scriptUtil.getRegisterReactDom("htDiv-kki3is7u0-1409");
+instance.setUrl("https://cn.bing.com/");
+```
+
+
+### Carousel
+
+<table
+id="carousel_flow_chart__table_u12_2bk_hvb"
+className="frame-all"
+>
+
+<colgroup>
+<col style={{ width: "17.57188498402556%" }} />
+<col style={{ width: "15.974440894568689%" }} />
+<col style={{ width: "16.61341853035144%" }} />
+<col style={{ width: "16.61341853035144%" }} />
+<col style={{ width: "16.61341853035144%" }} />
+<col style={{ width: "16.61341853035144%" }} />
+</colgroup>
+<thead>
+<tr>
+<th>
+Property
+</th>
+<th>
+Description
+</th>
+<th>
+Type
+</th>
+<th>
+Default
+</th>
+<th>
+Set Value
+</th>
+<th>
+Get Value
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Carousel Frequency
+</td>
+<td>
+Time interval at which the carousel plays.
+</td>
+<td>
+number
+</td>
+<td>
+5
+</td>
+<td>
+setSpeed
+</td>
+<td>
+getSpeed
+</td>
+</tr>
+<tr>
+<td>
+Type
+</td>
+<td />
+<td>
+string
+</td>
+<td>
+
+`'image'`
+
+</td>
+<td>
+setPageType
+</td>
+<td>
+getPageType
+</td>
+</tr>
+<tr>
+<td>
+Source
+</td>
+<td />
+<td>
+array
+</td>
+<td>
+[]
+</td>
+<td>
+setSource
+</td>
+<td>
+getSource
+</td>
+</tr>
+<tr>
+<td>
+Border
+</td>
+<td />
+<td>
+object
+</td>
+<td>
+
+```js
+{ width: 1, color: '#272C3D', borderStyle: 'solid' }
+```
+
+</td>
+<td>
+setBorderStyles
+</td>
+<td>
+getBorderStyles
+</td>
+</tr>
+<tr>
+<td>
+Page Turn Arrow
+</td>
+<td>
+Whether to display the arrow for page turning
+</td>
+<td>
+boolean
+</td>
+<td>
+true
+</td>
+<td>
+setShowArrow
+</td>
+<td>
+getShowArrow
+</td>
+</tr>
+<tr>
+<td>
+Carousel Page Numbers
+</td>
+<td>
+Whether to display page symbols
+</td>
+<td>
+boolean
+</td>
+<td>
+true
+</td>
+<td>
+setShowPoint
+</td>
+<td>
+getShowPoint
+</td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+### Calendar
+
+
+<img width={450} height={300} src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/elementProperty/93.png" />
+
+
+
+- Property Description
+
+
+<table>
+
+<colgroup>
+<col style={{ width: "17.57188498402556%" }} />
+<col style={{ width: "15.974440894568689%" }} />
+<col style={{ width: "16.61341853035144%" }} />
+<col style={{ width: "16.61341853035144%" }} />
+<col style={{ width: "16.61341853035144%" }} />
+<col style={{ width: "16.61341853035144%" }} />
+</colgroup>
+<thead>
+<tr>
+<th>
+Property
+</th>
+<th>
+Description
+</th>
+<th>
+Type
+</th>
+<th>
+Default
+</th>
+<th>
+Set Value
+</th>
+<th>
+Get Value
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Position
+</td>
+<td>
+Element position
+</td>
+<td />
+<td />
+<td>
+
+`setPosition({x:100,y:100})`
+
+</td>
+<td>
+getPosition()
+</td>
+</tr>
+<tr>
+<td>
+Size
+</td>
+<td>
+Element size
+</td>
+<td />
+<td />
+<td>
+
+`setSize({width:100,height:100})`
+
+</td>
+<td>
+getSize()
+</td>
+</tr>
+<tr>
+<td>
+Data source
+</td>
+<td>
+Reminder data through property/service
+</td>
+<td />
+<td />
+<td>
+setDataSource(object)
+
+:::info
+We recommend not to change data source through script
+:::
+
+</td>
+<td>
+setDataSource()
+</td>
+</tr>
+<tr>
+<td>
+Default value
+</td>
+<td>
+Key of default value (cannot modify)
+</td>
+<td>
+string
+</td>
+<td>
+
+`init`
+
+</td>
+<td>
+setInitValue(value)
+</td>
+<td>
+getInitValue()
+</td>
+</tr>
+<tr>
+<td>
+Default name
+</td>
+<td>
+Title of default reminder
+</td>
+<td>
+string
+</td>
+<td>
+default
+</td>
+<td>
+setInitName(value)
+</td>
+<td>
+getInitName()
+</td>
+</tr>
+<tr>
+<td>
+Default color
+</td>
+<td>
+Font color of default reminder
+</td>
+<td />
+<td>
+
+`#979797`
+
+</td>
+<td>
+setInitColor(value)
+</td>
+<td>
+getInitColor()
+</td>
+</tr>
+<tr>
+<td>
+Normal value
+</td>
+<td>
+Key of normal value (cannot modify)
+</td>
+<td>
+string
+</td>
+<td>
+
+`success`
+
+</td>
+<td>
+setSuccessValue(value)
+</td>
+<td>
+getSuccessValue()
+</td>
+</tr>
+<tr>
+<td>
+Normal name
+</td>
+<td>
+Title of normal reminder
+</td>
+<td>
+string
+</td>
+<td>
+normal
+</td>
+<td>
+setSuccessName(value)
+</td>
+<td>
+getSuccessName()
+</td>
+</tr>
+<tr>
+<td>
+Normal color
+</td>
+<td>
+Font color of normal reminder
+</td>
+<td />
+<td>
+
+`#4a68ea`
+
+</td>
+<td>
+setSuccessColor(value)
+</td>
+<td>
+getSuccessColor()
+</td>
+</tr>
+<tr>
+<td>
+Overdue value
+</td>
+<td>
+Key of overdue value (cannot modify)
+</td>
+<td>
+string
+</td>
+<td>
+
+`error`
+
+</td>
+<td>
+setErrorValue(value)
+</td>
+<td>
+getErrorValue()
+</td>
+</tr>
+<tr>
+<td>
+Overdue name
+</td>
+<td>
+Title of overdue reminder
+</td>
+<td>
+string
+</td>
+<td>
+overdue
+</td>
+<td>
+setErrorName(value)
+</td>
+<td>
+getErrorName()
+</td>
+</tr>
+<tr>
+<td>
+Overdue color
+</td>
+<td>
+Font color of overdue reminder
+</td>
+<td>
+string
+</td>
+<td>
+
+`#ee1111`
+
+</td>
+<td>
+setErrorColor(value)
+</td>
+<td>
+getErrorColor()
+</td>
+</tr>
+<tr>
+<td>
+Context font
+</td>
+<td>
+Font of element context
+</td>
+<td />
+<td />
+<td>
+setContextFontFamily(value)
+</td>
+<td>
+getContextFontFamily()
+</td>
+</tr>
+<tr>
+<td>
+Head font size
+</td>
+<td>
+Font size of head date
+</td>
+<td>
+number
+</td>
+<td>
+13
+</td>
+<td>
+setHeaderDateFontSize(value)
+</td>
+<td>
+getHeaderDateFontSize()
+</td>
+</tr>
+<tr>
+<td>
+Head font color
+</td>
+<td>
+Font color of head date
+</td>
+<td>
+string
+</td>
+<td>
+
+`#000`
+
+</td>
+<td>
+setHeaderDateColor(value)
+</td>
+<td>
+getHeaderDateColor()
+</td>
+</tr>
+<tr>
+<td>
+Button size
+</td>
+<td>
+Head button size
+</td>
+<td>
+number
+</td>
+<td>
+13
+</td>
+<td>
+setButtonFontSize(value)
+</td>
+<td>
+getButtonFontSize()
+</td>
+</tr>
+<tr>
+<td>
+Button color
+</td>
+<td>
+Head button color
+</td>
+<td>
+string
+</td>
+<td>
+
+`#000`
+
+</td>
+<td>
+setButtonColor(value)
+</td>
+<td>
+setButtonColor()
+</td>
+</tr>
+<tr>
+<td>
+Button background
+</td>
+<td>
+Head button background
+</td>
+<td>
+string
+</td>
+<td>
+
+`#fff`
+
+</td>
+<td>
+setButtonBackgroundColor(value)
+</td>
+<td>
+getButtonBackgroundColor()
+</td>
+</tr>
+<tr>
+<td>
+Button selected color
+</td>
+<td>
+Selected head button size
+</td>
+<td>
+string
+</td>
+<td>
+
+`#fff`
+
+</td>
+<td>
+setButtonSelectedColor(value)
+</td>
+<td>
+getButtonSelectedColor()
+</td>
+</tr>
+<tr>
+<td>
+Button selected background
+</td>
+<td>
+Selected head button background
+</td>
+<td>
+string
+</td>
+<td>
+
+`#4a68ea`
+
+</td>
+<td>
+setButtonSelectedBackgroundColor(value)
+</td>
+<td>
+getButtonSelectedBackgroundColor()
+</td>
+</tr>
+<tr>
+<td>
+Title size
+</td>
+<td>
+Title font size
+</td>
+<td>
+number
+</td>
+<td>
+14
+</td>
+<td>
+setTitleFontSize(value)
+</td>
+<td>
+getTitleFontSize()
+</td>
+</tr>
+<tr>
+<td>
+Title color
+</td>
+<td>
+Title font color
+</td>
+<td>
+string
+</td>
+<td>
+
+`#000`
+
+</td>
+<td>
+setTitleColor(value)
+</td>
+<td>
+getTitleColor()
+</td>
+</tr>
+<tr>
+<td>
+Title font
+</td>
+<td>
+Title font type
+</td>
+<td>
+string
+</td>
+<td />
+<td>
+setTitleFontFamily(value)
+</td>
+<td>
+getTitleFontFamily()
+</td>
+</tr>
+<tr>
+<td>
+Title background
+</td>
+<td>
+Title background
+</td>
+<td>
+string
+</td>
+<td>
+
+`#eff3f6`
+
+</td>
+<td>
+setTitleBackgroundColor(value)
+</td>
+<td>
+getTitleBackgroundColor()
+</td>
+</tr>
+<tr>
+<td>
+Content size
+</td>
+<td>
+Content font size
+</td>
+<td>
+number
+</td>
+<td>
+14
+</td>
+<td>
+setContextFontSize(value)
+</td>
+<td>
+getContextFontSize()
+</td>
+</tr>
+<tr>
+<td>
+Content color
+</td>
+<td>
+Content font color
+</td>
+<td>
+string
+</td>
+<td>
+
+`#000000a6`
+
+</td>
+<td>
+setContextColor(value)
+</td>
+<td>
+getContextColor()
+</td>
+</tr>
+<tr>
+<td>
+Content background
+</td>
+<td>
+Content font background
+</td>
+<td>
+string
+</td>
+<td>
+
+`#fff`
+
+</td>
+<td>
+setContextBackgroundColor(value)
+</td>
+<td>
+getContextBackgroundColor()
+</td>
+</tr>
+<tr>
+<td>
+Selected size
+</td>
+<td>
+Selected content font size
+</td>
+<td>
+number
+</td>
+<td>
+14
+</td>
+<td>
+setSelectedFontSize(value)
+</td>
+<td>
+getSelectedFontSize()
+</td>
+</tr>
+<tr>
+<td>
+Selected color
+</td>
+<td>
+Selected content font color
+</td>
+<td>
+string
+</td>
+<td>
+
+`#000000a6`
+
+</td>
+<td>
+setSelectedColor(value)
+</td>
+<td>
+getSelectedColor()
+</td>
+</tr>
+<tr>
+<td>
+Selected background
+</td>
+<td>
+Selected content background
+</td>
+<td>
+string
+</td>
+<td>
+
+`#fff9ea`
+
+</td>
+<td>
+setSelectedBackgroundColor(value)
+</td>
+<td>
+getSelectedBackgroundColor()
+</td>
+</tr>
+<tr>
+<td>
+Current day color
+</td>
+<td>
+Font color of current day content
+</td>
+<td>
+string
+</td>
+<td>
+
+`#fff`
+
+</td>
+<td>
+setTodayColor(value)
+</td>
+<td>
+getTodayColor()
+</td>
+</tr>
+<tr>
+<td>
+Current day background
+</td>
+<td>
+Background of current day content
+</td>
+<td>
+string
+</td>
+<td>
+
+`#f00`
+
+</td>
+<td>
+setTodayBackgroundColor(value)
+</td>
+<td>
+getTodayBackgroundColor()
+</td>
+</tr>
+<tr>
+<td>
+interact
+</td>
+<td>
+Execute selected event by script
+</td>
+<td>
+string
+</td>
+<td />
+<td />
+<td>
+Output <code>date</code> Format: Weekly/Monthly：
+<code>2020-03-27</code>
+Yearly：<code>2020-3</code>
+</td>
+</tr>
+</tbody>
+</table>
+
+
+
+- Example Code
+```js
+{
+    list:[
+        {
+        date:'2019-11-11',
+        children:[
+            { 
+            type:'init',
+            content:'to-do list'
+            url:'http://www.xxx.com' // URL
+            (optional)
+            },
+            {
+            type:'success',
+            content:'to-do list'
+            url:'http://www.xxx.com' // URL
+            (optional)
+            },
+            { 
+            type:'error',
+            content:'to-do list'
+            url:'http://www.xxx.com' // URL
+            (optional)
+            }
+        ]
+        },
+        {
+        date:'2019-11-12',
+        children:[
+            { 
+            type:'init',
+            content:'to-do list'
+            url:'http://www.xxx.com' // URL
+            (optional)
+            },
+            { 
+            type:'success',
+            content:'to-do list'
+            url:'http://www.xxx.com' // URL
+            (optional)
+            },
+            { 
+            type:'error',
+            content:'to-do list'
+            url:'http://www.xxx.com' // URL
+            (optional)
+            }
+        ]
+        }
+    ]
+}
+```
+
+
+### Programmable Component
+
+<p>Design custom elements by writing scripts.</p>
+<p>
+For details of building development environment for programmable
+component, see <a href="Programmable Component">Programmable Component</a>.
+</p>
+
+
+## Form Library
+
+### Line
+
+<table>
+<colgroup>
+<col style={{ width: "20.91254752851711%" }} />
+<col style={{ width: "19.77186311787072%" }} />
+<col style={{ width: "19.77186311787072%" }} />
+<col style={{ width: "19.77186311787072%" }} />
+<col style={{ width: "19.77186311787072%" }} />
+</colgroup>
+<thead>
+<tr>
+<th>
+Property
+</th>
+<th>
+Type
+</th>
+<th>
+Default
+</th>
+<th>
+Set Value
+</th>
+<th>
+Get Value
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Line Direction
+</td>
+<td>
+
+`'top' / 'right' / 'bottom' / 'left'`
+
+</td>
+<td>
+
+`'top'`
+
+</td>
+<td>
+setDirection
+</td>
+<td>
+getDirection
+</td>
+</tr>
+<tr>
+<td>Line Type</td>
+<td>
+
+`'solid' / 'dotted' / 'dashed' / 'double'`
+
+</td>
+<td>
+
+`'solid'`
+
+</td>
+<td>
+setLineStyle
+</td>
+<td>
+getLineStyle
+</td>
+</tr>
+<tr>
+<td>Line Size</td>
+<td>number</td>
+<td>1</td>
+<td>setSize</td>
+<td>getSize</td>
+</tr>
+<tr>
+<td>
+Line Color
+</td>
+<td>string</td>
+<td>30</td>
+<td>
+setLineColor
+</td>
+<td>
+getLineColor
+</td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+### Label
+
+- Property Description
+
+<table>
+
+<colgroup>
+<col style={{ width: "17.57188498402556%" }} />
+<col style={{ width: "15.974440894568689%" }} />
+<col style={{ width: "16.61341853035144%" }} />
+<col style={{ width: "16.61341853035144%" }} />
+<col style={{ width: "16.61341853035144%" }} />
+<col style={{ width: "16.61341853035144%" }} />
+</colgroup>
+<thead>
+<tr>
+<th>
+Property
+</th>
+<th>
+Description
+</th>
+<th>
+Type
+</th>
+<th>
+Default
+</th>
+<th>
+Set Value
+</th>
+<th>
+Get Value
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Content Source
+</td>
+<td>
+Whether the source is dynamic or static
+</td>
+<td>
+
+`'hand' / 'select'`
+
+
+`'hand'`
+
+</td>
+<td>
+setValueConfig()
+</td>
+<td>
+getValueConfig().source
+</td>
+</tr>
+<tr>
+<td>
+Label Content
+</td>
+<td>
+Set static data
+</td>
+<td>
+
+`'input' / 'textarea'`
+
+
+`'input'`
+
+</td>
+<td>
+setValueConfig()
+</td>
+<td>
+getValueConfig().valueType
+</td>
+</tr>
+<tr>
+<td>
+Font Size
+</td>
+<td rowSpan={7}>
+Font style of the content
+</td>
+<td>
+number
+</td>
+<td>
+16
+</td>
+<td>
+setFontSize()
+</td>
+<td />
+</tr>
+<tr>
+<td>
+Font Color
+</td>
+<td>
+string
+</td>
+<td>
+#000000
+</td>
+<td>
+setFontColor()
+</td>
+<td>
+getFontColor()
+</td>
+</tr>
+<tr>
+<td>
+Font Unit
+</td>
+<td>
+tring: 'px' / 'em'
+</td>
+<td>
+
+`'px'`
+
+</td>
+<td>
+setFontSizeUnit()
+</td>
+<td>
+getFontSizeUnit()
+</td>
+</tr>
+<tr>
+<td>
+Font
+</td>
+<td>
+string
+</td>
+<td>
+Arial
+</td>
+<td>
+setFontFamily()
+</td>
+<td>
+getFontFamily()
+</td>
+</tr>
+<tr>
+<td>
+Bold
+</td>
+<td>
+
+`'normal' / 'bold'`
+
+</td>
+<td>
+normal
+</td>
+<td>
+setFontWeight()
+</td>
+<td>
+getFontWeight()
+</td>
+</tr>
+<tr>
+<td>
+Alignment
+</td>
+<td>
+
+`'left' / 'center' / 'right'`
+
+</td>
+<td>
+left
+</td>
+<td>
+setTextAlign()
+</td>
+<td>
+getTextAlign()
+</td>
+</tr>
+<tr>
+<td>
+Vertical Alignment
+</td>
+<td>
+
+`'top' / 'middle' / 'bottom'`
+
+</td>
+<td>
+top
+</td>
+<td>
+setVerticalAlign()
+</td>
+<td>
+getVerticalAlign()
+</td>
+</tr>
+<tr>
+<td>
+Border Width
+</td>
+<td rowSpan={4}>
+Border style of the search box
+</td>
+<td>
+number
+</td>
+<td>
+0
+</td>
+<td>
+setBorderWidth()
+</td>
+<td>
+getBorderWidth()
+</td>
+</tr>
+<tr>
+<td>
+Border Color
+</td>
+<td>
+string
+</td>
+<td>
+#000000
+</td>
+<td>
+setBorderColor()
+</td>
+<td>
+getBorderColor()
+</td>
+</tr>
+<tr>
+<td>
+Border Type
+</td>
+<td>
+
+`'solid' / 'dotted'/ 'dashed'`
+
+</td>
+<td>
+solid
+</td>
+<td>
+setBorderStyle()
+</td>
+<td>
+getBorderStyle()
+</td>
+</tr>
+<tr>
+<td>
+Background Color
+</td>
+<td>
+string
+</td>
+<td>
+#ffffff
+</td>
+<td>
+setBackgroundColor()
+</td>
+<td>
+getBackgroundColor()
+</td>
+</tr>
+<tr>
+<td>
+Cursor Style
+</td>
+<td>
+Cursor style when hovering
+</td>
+<td>
+
+`'auto' / 'crosshair' / 'pointer' / 'move' / 'text' /
+'help'`
+
+</td>
+<td>
+auto
+</td>
+<td>
+setCursor()
+</td>
+<td>
+getCursor()
+</td>
+</tr>
+<tr>
+<td>
+Required
+</td>
+<td>
+Whether there is a required mark
+</td>
+<td>
+
+`'no' / 'yes'`
+
+</td>
+<td>
+no
+</td>
+<td>
+setIsRequired()
+</td>
+<td>
+getIsRequired()
+</td>
+</tr>
+<tr>
+<td>
+Top Padding
+</td>
+<td />
+<td>
+object
+</td>
+<td>
+
+```js
+{ spacingTop: 0 }
+```
+
+</td>
+<td>
+setBaseBoxSpacing()
+</td>
+<td>
+getBaseBoxSpacing().spacingTop
+</td>
+</tr>
+<tr>
+<td>
+Bottom Padding
+</td>
+<td />
+<td>
+object
+</td>
+<td>
+
+```js
+{ spacingBottom: 0 }
+```
+
+</td>
+<td>
+setBaseBoxSpacing()
+</td>
+<td>
+getBaseBoxSpacing().spacingBottom
+</td>
+</tr>
+<tr>
+<td>
+Left Padding
+</td>
+<td />
+<td>
+object
+</td>
+<td>
+
+```js
+{ spacingLeft: 0 }
+```
+
+</td>
+<td>
+setBaseBoxSpacing()
+</td>
+<td>
+getBaseBoxSpacing().spacingLeft
+</td>
+</tr>
+<tr>
+<td>
+Right Padding
+</td>
+<td />
+<td>
+object
+</td>
+<td>
+
+```js
+{ spacingRight: 0 }
+```
+
+</td>
+<td>
+setBaseBoxSpacing()
+</td>
+<td>
+getBaseBoxSpacing().spacingRight
+</td>
+</tr>
+</tbody>
+</table>
+
+
+
+- Example Code
+
+<ul>
+<ul>
+<li>Set value
+
+
+```js
+var labelCtrl = scriptUtil.getRegisterReactDom('component Id');
+
+// set the label content to labelValue
+labelCtrl.setLabelContent('labelValue');
+```
+
+</li>
+<li>Get value
+
+```js
+var labelCtrl = scriptUtil.getRegisterReactDom('component Id');
+
+// get the label content
+var value = getLabelContent();
+```
+
+</li>
+</ul>
+</ul>
+
+
+
+### Hidden Field
+
+- Property Description
+
+<table>
+
+<colgroup>
+<col style={{ width: "17.57188498402556%" }} />
+<col style={{ width: "15.974440894568689%" }} />
+<col style={{ width: "16.61341853035144%" }} />
+<col style={{ width: "16.61341853035144%" }} />
+<col style={{ width: "16.61341853035144%" }} />
+<col style={{ width: "16.61341853035144%" }} />
+</colgroup>
+<thead>
+<tr>
+<th>
+Property
+</th>
+<th>
+Description
+</th>
+<th>
+Type
+</th>
+<th>
+Default
+</th>
+<th>
+Set Value
+</th>
+<th>
+Get Value
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Default
+</td>
+<td>
+Set the default value
+</td>
+<td>
+string
+</td>
+<td />
+<td>
+setDefaultValue()
+</td>
+<td>
+getDefaultValue()
+</td>
+</tr>
+</tbody>
+</table>
+
+
+
+- Example Code
+
+<ul>
+<ul>
+<li>Set value
+
+```js
+var HiddenField =
+scriptUtil.getRegisterReactDom('component Id');
+
+// set to string: 1
+HiddenField.setValue("1");
+
+// set to boolean type: true/false
+HiddenField.setValue(true);
+
+// set to obkect {}
+HiddenField.setValue({name: 1});
+
+// set values in batches through component name
+scriptUtil.setFormData({ component name 1: 'labelValue', component name 2: 'labelValue2' })
+```
+
+</li>
+<li>Get value
+
+```js
+var HiddenField = scriptUtil.getRegisterReactDom('componentId');
+var value = HiddenField.getValue();
+// get values in batches through component name
+var data =
+scriptUtil.getFormData(['component name 1','component name2']);
+```
+
+</li>
+</ul>
+</ul>
+
+
+
+### Input Box
+
+- Property Description
+
+<table>
+
+<colgroup>
+<col style={{ width: "17.57188498402556%" }} />
+<col style={{ width: "15.974440894568689%" }} />
+<col style={{ width: "16.61341853035144%" }} />
+<col style={{ width: "16.61341853035144%" }} />
+<col style={{ width: "16.61341853035144%" }} />
+<col style={{ width: "16.61341853035144%" }} />
+</colgroup>
+<thead>
+<tr>
+<th>
+Property
+</th>
+<th>
+Description
+</th>
+<th>
+Type
+</th>
+<th>
+Default
+</th>
+<th>
+Set Value
+</th>
+<th>
+Get Value
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Component Name
+</td>
+<td />
+<td>
+string
+</td>
+<td />
+<td>
+setFormItemId
+</td>
+<td>
+getFormItemId
+</td>
+</tr>
+<tr>
+<td>
+Placeholder
+</td>
+<td>
+Placeholder in input box
+</td>
+<td>
+string
+</td>
+<td>
+
+`''`
+
+</td>
+<td>
+setPlaceHolder
+</td>
+<td>
+getPlaceHolder()
+</td>
+</tr>
+<tr>
+<td>
+Content Size
+</td>
+<td rowSpan={3}>
+Font style of the input box content
+</td>
+<td>
+number
+</td>
+<td>
+14
+</td>
+<td>
+setContextFontSize
+</td>
+<td>
+getContextFontSize
+</td>
+</tr>
+<tr>
+<td>
+Content Color
+</td>
+<td>
+string
+</td>
+<td>
+#000000
+</td>
+<td>
+setContextColor
+</td>
+<td>
+getContextColor()
+</td>
+</tr>
+<tr>
+<td>
+Content Font
+</td>
+<td>
+string
+</td>
+<td>
+
+`''`
+
+</td>
+<td>
+setContextFontFamily
+</td>
+<td>
+getContextFontFamily()
+</td>
+</tr>
+<tr>
+<td>
+Verification Time
+</td>
+<td>
+Whether to verify the input box or when in operation
+center
+</td>
+<td>
+Object
+</td>
+<td />
+<td>
+setValidityCheck
+</td>
+<td>
+getValidityCheck()
+</td>
+</tr>
+<tr>
+<td>
+Required
+</td>
+<td>
+Whether the input box content is required
+</td>
+<td>
+
+`'true' / 'false'`
+
+</td>
+<td>
+
+`'false'`
+
+</td>
+<td>
+setValidityCheck
+</td>
+<td>
+getValidityCheck().isRequired
+</td>
+</tr>
+<tr>
+<td>
+Format
+</td>
+<td>
+Content format, such as 'none' / 'mobilePhone' /
+'telephone' /'zipCode' / 'idCard' / 'number' / 'email' /
+'ip' / 'custom'
+</td>
+<td>
+string
+</td>
+<td>
+
+`'none'`
+
+</td>
+<td>
+setValidityCheck
+</td>
+<td>
+getValidityCheck().customReg
+</td>
+</tr>
+<tr>
+<td>
+Multi-line
+</td>
+<td>
+Whether to enable multiple lines
+</td>
+<td>
+
+`'no' / 'yes`
+
+</td>
+<td>
+
+`'no`
+
+</td>
+<td>
+setIsMultipleLine
+</td>
+<td>
+getIsMultipleLine()
+</td>
+</tr>
+<tr>
+<td>
+Border Width
+</td>
+<td rowSpan={4}>
+Input box style
+</td>
+<td>
+number
+</td>
+<td>
+1
+</td>
+<td>
+setBorderWidth
+</td>
+<td>
+getBorderWidth()
+</td>
+</tr>
+<tr>
+<td>
+Border Color
+</td>
+<td>
+string
+</td>
+<td>
+#fff
+</td>
+<td>
+setBorderColor
+</td>
+<td>
+getBorderColor()
+</td>
+</tr>
+<tr>
+<td>
+Border Type
+</td>
+<td>
+
+`'solid' / 'dotted' / 'dashed'`
+
+`'solid'`
+
+</td>
+<td>
+setBorderStyle
+</td>
+<td>
+getBorderStyle()
+</td>
+</tr>
+<tr>
+<td>
+Background Color
+</td>
+<td>
+string
+</td>
+<td>
+#fff
+</td>
+<td>
+setBackgroundColor()
+</td>
+<td>
+getBackgroundColor()
+</td>
+</tr>
+<tr>
+<td>
+Max. Length
+</td>
+<td>
+Input box content length
+</td>
+<td>
+number
+</td>
+<td>
+500
+</td>
+<td>
+setMaxLength
+</td>
+<td>
+getMaxLength()
+</td>
+</tr>
+</tbody>
+</table>
+
+
+- Example Code
+
+<ul>
+<ul>
+<li>Set value
+
+```js
+var Input = scriptUtil.getRegisterReactDom('componentId');
+
+Input.setValue('XXXX');
+
+// set data in batches to change form data at once
+
+scriptUtil.setFormData({ component name 1: 'xxx', component name 2: 'xxx' })
+```
+
+</li>
+<li>Get value
+
+```js
+var HiddenField =
+scriptUtil.getRegisterReactDom('component Id');
+
+Input.getValue();
+// get values in batches through component name
+var data =
+scriptUtil.getFormData(['component name 1','component name2']);
+```
+
+</li>
+</ul>
+</ul>
+
+### Drop Down Box
+
+- Property Description
+
+<table>
+
+<colgroup>
+<col style={{ width: "17.57188498402556%" }} />
+<col style={{ width: "15.974440894568689%" }} />
+<col style={{ width: "16.61341853035144%" }} />
+<col style={{ width: "16.61341853035144%" }} />
+<col style={{ width: "16.61341853035144%" }} />
+<col style={{ width: "16.61341853035144%" }} />
+</colgroup>
+<thead>
+<tr>
+<th>
+Property
+</th>
+<th>
+Description
+</th>
+<th>
+Type
+</th>
+<th>
+Default
+</th>
+<th>
+Set Value
+</th>
+<th>
+Get Value
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Component Name
+</td>
+<td />
+<td>
+string
+</td>
+<td />
+<td>
+setFormItemId
+</td>
+<td>
+getFormItemId
+</td>
+</tr>
+<tr>
+<td>
+Placeholder
+</td>
+<td>
+Placeholder in drop-down box
+</td>
+<td>
+string
+</td>
+<td>
+
+`''`
+
+</td>
+<td>
+setPlaceHolder
+</td>
+<td>
+getPlaceHolder()
+</td>
+</tr>
+<tr>
+<td>
+Content Size
+</td>
+<td rowSpan={4}>
+Font style of the drop-down box content
+</td>
+<td>
+number
+</td>
+<td>
+14
+</td>
+<td>
+setContextFontSize
+</td>
+<td>
+getContextFontSize
+</td>
+</tr>
+<tr>
+<td>
+Content Color
+</td>
+<td>
+string
+</td>
+<td>
+#000000
+</td>
+<td>
+setContextColor
+</td>
+<td>
+getContextColor()
+</td>
+</tr>
+<tr>
+<td>
+Content Font
+</td>
+<td>
+string
+</td>
+<td>
+
+`''`
+
+</td>
+<td>
+setContextFontFamily
+</td>
+<td>
+getContextFontFamily()
+</td>
+</tr>
+<tr>
+<td>
+Background Color
+</td>
+<td>
+string
+</td>
+<td>
+#fff
+</td>
+<td>
+setBackgroundColor()
+</td>
+<td>
+getBackgroundColor()
+</td>
+</tr>
+<tr>
+<td>
+Border Width
+</td>
+<td rowSpan={3}>
+Drop-down box border style
+</td>
+<td>
+number
+</td>
+<td>
+1
+</td>
+<td>
+setBorderWidth
+</td>
+<td>
+getBorderWidth()
+</td>
+</tr>
+<tr>
+<td>
+Border Color
+</td>
+<td>
+string
+</td>
+<td>
+#E3E3E3
+</td>
+<td>
+setBorderColor
+</td>
+<td>
+getBorderColor()
+</td>
+</tr>
+<tr>
+<td>
+Border Type
+</td>
+<td>
+
+`'solid' / 'dotted' / 'dashed'`
+
+`'solid'`
+
+</td>
+<td>
+setBorderStyle
+</td>
+<td>
+getBorderStyle()
+</td>
+</tr>
+<tr>
+<td>
+Verification Time
+</td>
+<td>
+Whether to verify the drop-down box or when in operation
+center
+</td>
+<td>
+Object
+</td>
+<td />
+<td>
+setValidityCheck
+</td>
+<td>
+getValidityCheck()
+</td>
+</tr>
+<tr>
+<td>
+Required
+</td>
+<td>
+Whether the drop-down box content is required
+</td>
+<td>
+
+`'true' / 'false`
+
+</td>
+<td>
+
+`'false'`
+
+</td>
+<td>
+setValidityCheck
+</td>
+<td>
+getValidityCheck().isRequired
+</td>
+</tr>
+<tr>
+<td>
+Options
+</td>
+<td>
+Drop-down list options
+</td>
+<td>
+object
+</td>
+<td>
+dynamic
+</td>
+<td>
+setdataSource
+</td>
+<td>
+getdataSource().type
+</td>
+</tr>
+<tr>
+<td>
+Dynamic Data
+</td>
+<td>
+Options from binding with object models
+</td>
+<td>
+object
+</td>
+<td>
+-
+</td>
+<td>
+setdataSource
+</td>
+<td>
+getdataSource().dynamicDataSource
+</td>
+</tr>
+<tr>
+<td>
+Static Data
+</td>
+<td>
+Manually add options
+</td>
+<td>
+object
+</td>
+<td>
+-
+</td>
+<td>
+setdataSource
+</td>
+<td>
+getdataSource().staticDataSource
+</td>
+</tr>
+<tr>
+<td>
+Sort
+</td>
+<td>
+Sort options
+</td>
+<td>
+
+`'ordinary' / 'up' / 'down`
+
+</td>
+<td>
+
+`'ordinary'`
+
+</td>
+<td>
+setListOrder
+</td>
+<td>
+getListOrder()
+</td>
+</tr>
+<tr>
+<td>
+Multi Selection
+</td>
+<td>
+Whether to enable multiple selections
+</td>
+<td>
+boolean
+</td>
+<td>
+true / false
+</td>
+<td>
+setIsMultiple()
+</td>
+<td>
+getIsMultiple()
+</td>
+</tr>
+</tbody>
+</table>
+
+
+
+- Example Code
+
+<ul>
+<ul>
+<li>Get selected options
+
+```js
+var SelectCtrl =
+scriptUtil.getRegisterReactDom('component Id');
+
+SelectCtrl.getChooseOption();
+```
+
+</li>
+
+<li>Get selected option value
+
+```js
+var SelectCtrl =
+scriptUtil.getRegisterReactDom('component Id');
+
+SelectCtrl.getValue();
+```
+
+</li>
+<li>Set selected option value
+
+```js
+var SelectCtrl =
+scriptUtil.getRegisterReactDom('component Id');
+
+SelectCtrl.setValue('1');
+```
+
+</li>
+<li>Import options
+
+```js
+var data = [
+    {
+        optionText: 'M', 
+        optionValue: '1'
+    },
+    {
+        optionText: 'F',
+        optionValue: '2'
+    }
+];
+
+var SelectCtrl = scriptUtil.getRegisterReactDom('component Id');
+SelectCtrl.setObjectData(data);
+```
+
+:::info
+Only works when set data source to static under property.
+:::
+
+</li>
+<li>Set whether to enable multiple selections
+
+```js
+var SelectCtrl =
+scriptUtil.getRegisterReactDom('component Id');
+
+SelectCtrl.setIsMultiple(true);
+```
+
+</li>
+<li>Get form data
+
+```js
+// Get component value in batches after submitting forms
+// formItemId is component name [component name 1, component name 2]
+
+scriptUtil.getFormData([formItemId]);
+```
+
+</li>
+<li>Set form data
+
+```js
+// Set data in batches to change form data at once
+// formItemId is component name，value is component value
+
+scriptUtil.setFormData({
+    'formItemId'：value
+});
+```
+
+</li>
+</ul>
+</ul>
+
+
+
+
+### Cascade Selection
+
+- Property Description
+
+<table>
+
+<colgroup>
+<col style={{ width: "17.57188498402556%" }} />
+<col style={{ width: "15.974440894568689%" }} />
+<col style={{ width: "16.61341853035144%" }} />
+<col style={{ width: "16.61341853035144%" }} />
+<col style={{ width: "16.61341853035144%" }} />
+<col style={{ width: "16.61341853035144%" }} />
+</colgroup>
+<thead>
+<tr>
+<th>
+Property
+</th>
+<th>
+Description
+</th>
+<th>
+Type
+</th>
+<th>
+Default
+</th>
+<th>
+Set Value
+</th>
+<th>
+Get Value
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Title
+</td>
+<td>
+Text before the input box
+</td>
+<td>
+string
+</td>
+<td>
+title
+</td>
+<td>
+setLabelContent
+</td>
+<td>
+getLabelContent
+</td>
+</tr>
+<tr>
+<td>
+Title Width
+</td>
+<td rowSpan={4}>
+Title font style
+</td>
+<td>
+Number
+</td>
+<td>
+70
+</td>
+<td>
+setTitleWidth
+</td>
+<td>
+getTitleWidth
+</td>
+</tr>
+<tr>
+<td>
+Title Size
+</td>
+<td>
+Number
+</td>
+<td>
+14
+</td>
+<td>
+setTitleFontSize
+</td>
+<td>
+getTitleFontSize
+</td>
+</tr>
+<tr>
+<td>
+Title Color
+</td>
+<td>
+string
+</td>
+<td>
+#000000
+</td>
+<td>
+setTitleColor
+</td>
+<td>
+getTitleColor
+</td>
+</tr>
+<tr>
+<td>
+Title Font
+</td>
+<td>
+string
+</td>
+<td />
+<td>
+setFontFamily
+</td>
+<td>
+getFontFamily
+</td>
+</tr>
+<tr>
+<td>
+Content Size
+</td>
+<td rowSpan={3}>
+Content font style
+</td>
+<td>
+Number
+</td>
+<td>
+14
+</td>
+<td>
+setContextFontSize
+</td>
+<td>
+getContextFontSize
+</td>
+</tr>
+<tr>
+<td>
+Content Color
+</td>
+<td>
+string
+</td>
+<td>
+rgba(0, 0, 0, 0.65)
+</td>
+<td>
+setContextColor
+</td>
+<td>
+getContextColor
+</td>
+</tr>
+<tr>
+<td>
+Content Font
+</td>
+<td>
+string
+</td>
+<td />
+<td>
+setContextFontFamily
+</td>
+<td>
+getContextFontFamily
+</td>
+</tr>
+<tr>
+<td>
+Border Width
+</td>
+<td rowSpan={3}>
+Border style
+</td>
+<td>
+Number
+</td>
+<td>
+1
+</td>
+<td>
+setBorderWidth
+</td>
+<td>
+getBorderWidth
+</td>
+</tr>
+<tr>
+<td>
+Border Type
+</td>
+<td>
+string
+</td>
+<td>
+solid
+</td>
+<td>
+setBorderStyle
+</td>
+<td>
+getBorderStyle
+</td>
+</tr>
+<tr>
+<td>
+Border Color
+</td>
+<td>
+string
+</td>
+<td>
+#e3e3e3
+</td>
+<td>
+setBorderColor
+</td>
+<td>
+getBorderColor
+</td>
+</tr>
+<tr>
+<td>
+Background Color
+</td>
+<td>
+Input box background color
+</td>
+<td>
+string
+</td>
+<td>
+#ffffff
+</td>
+<td>
+setBackgroundColor
+</td>
+<td>
+getBackgroundColor
+</td>
+</tr>
+<tr>
+<td>
+Verification Time
+</td>
+<td>
+Set when to verify
+</td>
+<td>
+Object
+</td>
+<td>
+
+```js
+{ checkTime: 'never', isRequired: 'no' }
+```
+
+</td>
+<td>
+setValidityCheck
+</td>
+<td>
+getValidityCheck
+</td>
+</tr>
+<tr>
+<td>
+Required
+</td>
+<td>
+Set whether is required
+</td>
+<td>
+Object
+</td>
+<td>
+
+```js
+{ checkTime: 'never', isRequired: 'no' }
+```
+
+</td>
+<td>
+setValidityCheck
+</td>
+<td>
+getValidityCheck
+</td>
+</tr>
+<tr>
+<td>
+Data Source
+</td>
+<td>
+Data source to display
+</td>
+<td>
+Array
+</td>
+<td>
+[]
+</td>
+<td />
+<td />
+</tr>
+</tbody>
+</table>
+
+
+
+- Example Code
+
+<ul>
+<ul>
+<li>Set data source
+
+```js
+// data format
+var data = [{
+    value: 'zhejiang',
+    label: 'Zhejiang',
+    children: [{
+        value: 'hangzhou',
+        label: 'Hangzhou',
+        children: [{
+            value: 'xihu',
+            label: 'West Lake'
+    }]
+}]
+
+}, 
+{
+    value: 'jiangsu',
+    label: 'Jiangsu',
+    children: [{
+        value: 'nanjing',
+        label: 'Nanjing',
+        children: [{
+            value: 'zhonghuamen',
+            label: 'Zhong Hua Men'
+        }]
+}]
+
+}];
+
+var Cascader = scriptUtil.getRegisterReactDom('componentId');
+// import data source
+Cascader.setImportData(data)
+```
+
+</li>
+<li>Get component value
+
+```js
+var Cascader = scriptUtil.getRegisterReactDom('componentId');
+var value = Cascader.getChooseOption()
+```
+
+</li>
+<li>Set component value
+
+```js
+var Cascader = scriptUtil.getRegisterReactDom('componentId');
+
+var vals = ['zhejiang','hangzhou','xihu']
+
+Cascader.setValue(vals)
+```
+
+</li>
+<li>Get required verification result
+
+```js
+var Cascader = scriptUtil.getRegisterReactDom('componentId');
+var res = Cascader.getValid(); // true or false
+```
+
+</li>
+</ul>
+</ul>
+
+
+
+### Radio
+
+- Property Description
+
+<table>
+
+<colgroup>
+<col style={{ width: "17.57188498402556%" }} />
+<col style={{ width: "15.974440894568689%" }} />
+<col style={{ width: "16.61341853035144%" }} />
+<col style={{ width: "16.61341853035144%" }} />
+<col style={{ width: "16.61341853035144%" }} />
+<col style={{ width: "16.61341853035144%" }} />
+</colgroup>
+<thead>
+<tr>
+<th>
+Property
+</th>
+<th>
+Description
+</th>
+<th>
+Type
+</th>
+<th>
+Default
+</th>
+<th>
+Set Value
+</th>
+<th>
+Get Value
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Component Name
+</td>
+<td>
+ID for setting value.
+</td>
+<td>
+string
+</td>
+<td />
+<td>
+setFormItemId(value)
+</td>
+<td>
+getFormItemId()
+</td>
+</tr>
+<tr>
+<td>
+Content Size
+</td>
+<td rowSpan={2}>
+Content font style
+</td>
+<td>
+number
+</td>
+<td>
+14
+</td>
+<td>
+setContextFontSize
+</td>
+<td>
+getContextFontSize
+</td>
+</tr>
+<tr>
+<td>
+Text Color
+</td>
+<td>
+string
+</td>
+<td>
+#000000
+</td>
+<td>
+setTextCheckedColor
+</td>
+<td>
+getTextCheckedColor
+</td>
+</tr>
+<tr>
+<td>
+Background Color
+</td>
+<td>
+Selected background color
+</td>
+<td>
+string
+</td>
+<td />
+<td>
+setCheckedBackground
+</td>
+<td>
+getCheckedBackground
+</td>
+</tr>
+<tr>
+<td>
+##  Margin
+</td>
+<td>
+Distance between buttons
+</td>
+<td>
+number
+</td>
+<td />
+<td>
+setButtonMargin
+</td>
+<td>
+getButtonMargin
+</td>
+</tr>
+<tr>
+<td>
+Border Size
+</td>
+<td rowSpan={3}>
+Button border style
+</td>
+<td>
+number
+</td>
+<td />
+<td>
+setButtonBorderWidth
+</td>
+<td>
+getButtonBorderWidth
+</td>
+</tr>
+<tr>
+<td>
+Border Color
+</td>
+<td>
+string
+</td>
+<td />
+<td>
+setButtonBorderColor
+</td>
+<td>
+getButtonBorderColor
+</td>
+</tr>
+<tr>
+<td>
+Border Type
+</td>
+<td>
+
+`'solid' / 'dotted' / 'dashed'`
+
+
+`'solid'`
+
+</td>
+<td>
+setButtonBorderStyle
+</td>
+<td>
+getButtonBorderStyle
+</td>
+</tr>
+<tr>
+<td>
+Verification Time
+</td>
+<td>
+Whether to verify the input box or when in operation
+center
+</td>
+<td>
+Object
+</td>
+<td />
+<td>
+setValidityCheck
+</td>
+<td>
+getValidityCheck()
+</td>
+</tr>
+<tr>
+<td>
+Required
+</td>
+<td>
+Whether the drop-down box content is required
+</td>
+<td>
+
+`'true' / 'false`
+
+</td>
+<td>
+
+`'false'`
+
+</td>
+<td>
+setValidityCheck
+</td>
+<td>
+getValidityCheck().isRequired
+</td>
+</tr>
+<tr>
+<td>
+Button Style
+</td>
+<td>
+Whether to enable button
+</td>
+<td>
+boolean
+</td>
+<td>
+false
+</td>
+<td>
+setButtonType
+</td>
+<td>
+getButtonType
+</td>
+</tr>
+<tr>
+<td>
+Vertical Alignment
+</td>
+<td />
+<td>
+boolean
+</td>
+<td>
+false
+</td>
+<td>
+setCutLine
+</td>
+<td>
+getCutLine
+</td>
+</tr>
+<tr>
+<td>
+Button Background
+</td>
+<td>
+Button background color
+</td>
+<td>
+string
+</td>
+<td>
+#fff
+</td>
+<td>
+setButtonBackground
+</td>
+<td>
+getButtonBackground
+</td>
+</tr>
+<tr>
+<td>
+Selected Button Color
+</td>
+<td>
+Selected button background color
+</td>
+<td>
+string
+</td>
+<td>
+#5E71E9
+</td>
+<td>
+setButtonSelectBackground
+</td>
+<td>
+getButtonSelectBackground
+</td>
+</tr>
+<tr>
+<td>
+Selected Text Color
+</td>
+<td>
+Selected button font color
+</td>
+<td>
+string
+</td>
+<td>
+#fff
+</td>
+<td>
+setButtonSelectColor
+</td>
+<td>
+getButtonSelectColor
+</td>
+</tr>
+<tr>
+<td>
+Options
+</td>
+<td />
+<td>
+object
+</td>
+<td />
+<td>
+setDataSource
+</td>
+<td>
+getDataSource().type
+</td>
+</tr>
+<tr>
+<td>
+Dynamic Data
+</td>
+<td>
+Options from binding with object models
+</td>
+<td>
+object
+</td>
+<td>
+-
+</td>
+<td>
+setdataSource
+</td>
+<td>
+getdataSource().dynamicDataSource
+</td>
+</tr>
+<tr>
+<td>
+Static Data
+</td>
+<td>
+Manually add options
+</td>
+<td>
+object
+</td>
+<td>
+-
+</td>
+<td>
+setdataSource
+</td>
+<td>
+getdataSource().staticDataSource
+</td>
+</tr>
+<tr>
+<td>
+Link Object
+</td>
+<td>
+Link with other elements
+</td>
+<td />
+<td />
+<td />
+<td />
+</tr>
+<tr>
+<td>
+Time Format
+</td>
+<td>
+minData/maxData conversion as input parameter when setting
+linkage
+</td>
+<td>
+boolean
+</td>
+<td>
+false
+</td>
+<td>
+setInitFormat
+</td>
+<td>
+getInitFormat()
+</td>
+</tr>
+</tbody>
+</table>
+
+
+
+- Example Code
+
+<ul>
+<ul>
+<li>Get selected data
+
+```js
+var RadioCtrl = scriptUtil.getRegisterReactDom('component Id');
+RadioCtrl.getValue();
+```
+
+</li>
+<li>Set selected data
+
+```js
+var RadioCtrl = scriptUtil.getRegisterReactDom('component Id');
+RadioCtrl.setValue('XX');
+```
+
+</li>
+<li>Set data
+
+```js
+var data = [
+    {
+    optionText: 'M', 
+    optionValue: '1'
+    },
+    {
+    optionText: 'F',
+    optionValue: '2'
+    }
+];
+var RadioCtrl = scriptUtil.getRegisterReactDom('component Id');
+RadioCtrl.setObjectData(data);
+```
+
+</li>
+<li>Get form data
+
+```js
+// Get component value in batches after submitting forms
+// formItemId is component name [component name 1, component name 2]
+scriptUtil.getFormData([formItemId]);
+```
+
+</li>
+<li>Set form data
+
+```js
+// Set data in batches to change form data at once
+// formItemId is component name，value is component value
+
+scriptUtil.setFormData({
+    'formItemId'：value
+    });
+```
+
+
+</li>
+</ul>
+</ul>
+
+
+
+
+
+
+
+
+### Checkbox
+
+- Property Description
+
+<table>
+
+<colgroup>
+<col style={{ width: "17.57188498402556%" }} />
+<col style={{ width: "15.974440894568689%" }} />
+<col style={{ width: "16.61341853035144%" }} />
+<col style={{ width: "16.61341853035144%" }} />
+<col style={{ width: "16.61341853035144%" }} />
+<col style={{ width: "16.61341853035144%" }} />
+</colgroup>
+<thead>
+<tr>
+<th>
+Property
+</th>
+<th>
+Description
+</th>
+<th>
+Type
+</th>
+<th>
+Default
+</th>
+<th>
+Set Value
+</th>
+<th>
+Get Value
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Component Name
+</td>
+<td>
+ID for setting value.
+</td>
+<td>
+string
+</td>
+<td />
+<td>
+setFormItemId(value)
+</td>
+<td>
+getFormItemId()
+</td>
+</tr>
+<tr>
+<td>
+Content Size
+</td>
+<td rowSpan={3}>
+Content font style
+</td>
+<td>
+number
+</td>
+<td>
+14
+</td>
+<td>
+setContextFontSize
+</td>
+<td>
+getContextFontSize
+</td>
+</tr>
+<tr>
+<td>
+Content Font
+</td>
+<td>
+string
+</td>
+<td />
+<td>
+setContextFontFamily
+</td>
+<td>
+getContextFontFamily
+</td>
+</tr>
+<tr>
+<td>
+Text Color
+</td>
+<td>
+string
+</td>
+<td>
+
+`'rgba(0,0,0,0.65)'`
+
+</td>
+<td>
+setTextCheckedColor
+</td>
+<td>
+getTextCheckedColor
+</td>
+</tr>
+<tr>
+<td>
+Background Color
+</td>
+<td>
+Selected background color
+</td>
+<td>
+string
+</td>
+<td>
+
+`'' / 'purple' / 'blue'/ 'yellow' / 'green' / 'red'`
+
+</td>
+<td>
+setCheckedBackground
+</td>
+<td>
+getCheckedBackground
+</td>
+</tr>
+<tr>
+<td>
+Select All
+</td>
+<td>
+Whether to enable select all
+</td>
+<td>
+string
+</td>
+<td>
+no
+</td>
+<td>
+setHasAllChecked
+</td>
+<td>
+getHasAllChecked
+</td>
+</tr>
+<tr>
+<td>
+Checkbox
+</td>
+<td>
+Whether to display checkbox
+</td>
+<td>
+string
+</td>
+<td>
+no
+</td>
+<td>
+setHasIcon
+</td>
+<td>
+getHasIcon
+</td>
+</tr>
+<tr>
+<td>
+Selected Color
+</td>
+<td rowSpan={2}>
+Selected checkbox style
+</td>
+<td>
+string
+</td>
+<td />
+<td>
+setLabelCheckedColor
+</td>
+<td>
+getLabelCheckedColor
+</td>
+</tr>
+<tr>
+<td>
+Selected Background
+</td>
+<td>
+string
+</td>
+<td />
+<td>
+setLabelCheckedBackgroundColor
+</td>
+<td>
+getLabelCheckedBackgroundColor
+</td>
+</tr>
+<tr>
+<td>
+Verification Time
+</td>
+<td>
+Whether to verify the input box or when in operation
+center
+</td>
+<td>
+Object
+</td>
+<td />
+<td>
+setValidityCheck
+</td>
+<td>
+getValidityCheck()
+</td>
+</tr>
+<tr>
+<td>
+Required
+</td>
+<td>
+Whether the drop-down box content is required
+</td>
+<td>
+
+`'true' / 'false`
+
+</td>
+<td>
+
+`'false'`
+
+</td>
+<td>
+setValidityCheck
+</td>
+<td>
+getValidityCheck().isRequired
+</td>
+</tr>
+<tr>
+<td>
+Options
+</td>
+<td />
+<td>
+object
+</td>
+<td />
+<td>
+setDataSource
+</td>
+<td>
+getDataSource().type
+</td>
+</tr>
+<tr>
+<td>
+Dynamic Data
+</td>
+<td>
+Options from binding with object models
+</td>
+<td>
+object
+</td>
+<td>
+-
+</td>
+<td>
+setdataSource
+</td>
+<td>
+getdataSource().dynamicDataSource
+</td>
+</tr>
+<tr>
+<td>
+Static Data
+</td>
+<td>
+Manually add options
+</td>
+<td>
+object
+</td>
+<td>
+-
+</td>
+<td>
+setdataSource
+</td>
+<td>
+getdataSource().staticDataSource
+</td>
+</tr>
+<tr>
+<td>
+Link Object
+</td>
+<td>
+Link with other elements
+</td>
+<td />
+<td />
+<td />
+<td />
+</tr>
+<tr>
+<td>
+Time Format
+</td>
+<td>
+minData/maxData conversion as input parameter when setting
+linkage
+</td>
+<td>
+boolean
+</td>
+<td>
+false
+</td>
+<td>
+setInitFormat
+</td>
+<td>
+getInitFormat()
+</td>
+</tr>
+</tbody>
+</table>
+
+
+
+- Example Code
+
+<ul>
+<ul>
+<li>Checkbox data format
+
+```js
+{
+list: [
+    {
+    optionText: 'M',// display field
+    optionValue: '1'// data field
+    },
+    {
+    optionText: 'F', 
+    optionValue: '2'
+    }
+    ]
+}
+```
+
+</li>
+<li>Get selected data
+
+```js
+var RadioCtrl = scriptUtil.getRegisterReactDom('component Id');
+RadioCtrl.getValue();
+```
+
+</li>
+<li>Set selected data
+
+```js
+var RadioCtrl = scriptUtil.getRegisterReactDom('component Id');
+RadioCtrl.setValue([1]);
+```
+
+</li>
+<li>Set data
+
+```js
+var data = [
+    {
+    optionText: 'M', 
+    optionValue: '1'
+    },
+    {
+    optionText: 'F',
+    optionValue: '2'
+    }
+    ];
+var RadioCtrl = scriptUtil.getRegisterReactDom('component Id');
+RadioCtrl.setObjectData(data);
+```
+
+</li>
+<li>Get form data
+
+```js
+// Get component value in batches after submitting forms
+// formItemId is component name [component name 1, component name 2]
+scriptUtil.getFormData([formItemId]);
+```
+
+</li>
+<li>Set form data
+
+```js
+// Set data in batches to change form data at once
+
+// formItemId is component name，value is component value
+
+scriptUtil.setFormData({
+'formItemId'：value
+});
+
+```
+
+</li>
+</ul>
+</ul>
+
+
+### Date Picker
+
+- Property Description
+
+<table>
+
+<colgroup>
+<col style={{ width: "17.57188498402556%" }} />
+<col style={{ width: "15.974440894568689%" }} />
+<col style={{ width: "16.61341853035144%" }} />
+<col style={{ width: "16.61341853035144%" }} />
+<col style={{ width: "16.61341853035144%" }} />
+<col style={{ width: "16.61341853035144%" }} />
+</colgroup>
+<thead>
+<tr>
+<th>
+Property
+</th>
+<th>
+Description
+</th>
+<th>
+Type
+</th>
+<th>
+Default
+</th>
+<th>
+Set Value
+</th>
+<th>
+Get Value
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Component Name
+</td>
+<td>
+ID for setting value.
+</td>
+<td>
+string
+</td>
+<td />
+<td>
+setFormItemId(value)
+</td>
+<td>
+getFormItemId()
+</td>
+</tr>
+<tr>
+<td>
+Title
+</td>
+<td rowSpan={5}>
+Title style
+</td>
+<td>
+string
+</td>
+<td>
+title
+</td>
+<td>
+setLabelContent(value)
+</td>
+<td>
+getLabelContent()
+</td>
+</tr>
+<tr>
+<td>
+Title Width
+</td>
+<td>
+number
+</td>
+<td>
+70
+</td>
+<td>
+setTitleWidth(value)
+</td>
+<td>
+getTitleWidth()
+</td>
+</tr>
+<tr>
+<td>
+Title Size
+</td>
+<td>
+number
+</td>
+<td>
+14
+</td>
+<td>
+setTitleFontSize(value)
+</td>
+<td>
+getTitleFontSize()
+</td>
+</tr>
+<tr>
+<td>
+Title Font
+</td>
+<td>
+string
+</td>
+<td />
+<td>
+setFontFamily(value)
+</td>
+<td>
+getFontFamily()
+</td>
+</tr>
+<tr>
+<td>
+Title Color
+</td>
+<td>
+string
+</td>
+<td>
+#000
+</td>
+<td>
+setTitleColor(value)
+</td>
+<td>
+getTitleColor()
+</td>
+</tr>
+<tr>
+<td>
+Content Size
+</td>
+<td rowSpan={3}>
+Content style
+</td>
+<td>
+number
+</td>
+<td>
+14
+</td>
+<td>
+setContextFontSize(value)
+</td>
+<td>
+getContextFontSize()
+</td>
+</tr>
+<tr>
+<td>
+Content Color
+</td>
+<td>
+string
+</td>
+<td>
+#000000a6
+</td>
+<td>
+setContextColor(value)
+</td>
+<td>
+getContextColor()
+</td>
+</tr>
+<tr>
+<td>
+Content Font
+</td>
+<td>
+string
+</td>
+<td />
+<td>
+setContextFontFamily(value)
+</td>
+<td>
+getContextFontFamily()
+</td>
+</tr>
+<tr>
+<td>
+Background Color
+</td>
+<td />
+<td>
+string
+</td>
+<td>
+#fff
+</td>
+<td>
+setBackgroundColor(value)
+</td>
+<td>
+getBackgroundColor()
+</td>
+</tr>
+<tr>
+<td>
+Border Width
+</td>
+<td rowSpan={3}>
+Border style
+</td>
+<td>
+number
+</td>
+<td>
+1
+</td>
+<td>
+setBorderWidth(value)
+</td>
+<td>
+getBorderWidth()
+</td>
+</tr>
+<tr>
+<td>
+Border Color
+</td>
+<td>
+string
+</td>
+<td>
+#e3e3e3
+</td>
+<td>
+setBorderColor(value)
+</td>
+<td>
+getBorderColor()
+</td>
+</tr>
+<tr>
+<td>
+Border Type
+</td>
+<td>
+string
+</td>
+<td>
+solid
+</td>
+<td>
+setBorderStyle(value)
+</td>
+<td>
+getBorderStyle()
+</td>
+</tr>
+<tr>
+<td>
+Verification Time
+</td>
+<td>
+Set the verification time of the element
+</td>
+<td />
+<td>
+
+```js
+{checkTime: "never", isRequired: "no", validType:
+"none", customReg: ""}
+```
+
+</td>
+<td>
+setValidityCheck(value)
+</td>
+<td>
+getValidityCheck()
+</td>
+</tr>
+<tr>
+<td>
+Date Type
+</td>
+<td />
+<td>
+date
+</td>
+<td>
+
+```js
+{defaultType: "date", dateType: "date", format:
+"YYYY-MM-DD", customFormat: ""}
+```
+
+</td>
+<td>
+setDateOpts(value)
+</td>
+<td>
+getDateOpts()
+</td>
+</tr>
+<tr>
+<td>
+Initial Value
+</td>
+<td>
+Initial date
+</td>
+<td>
+timestamp
+</td>
+<td />
+<td>
+setInitValue(value)
+</td>
+<td>
+getInitValue()
+</td>
+</tr>
+</tbody>
+</table>
+
+
+
+- Example Code
+
+<ul>
+<ul>
+<li>Date data format
+
+```js
+{
+
+dateType: 'date', // date type includes date, time,datetime, dateRange and datetimeRange
+format: 'YYYY-MM-DD', // date format YYYY-MM-DD YYYY-M-D DD/MM/YYYY and custom
+customFormat: ''
+
+}
+```
+
+</li>
+<li>Convert timestamp to date
+
+```js
+// '2018-12-28 00:00:00'
+
+scriptUtil.timestampFormat(1545926400000, 'YYYY-MM-DD HH:mm:ss');
+// '2018-12-28'
+
+scriptUtil.timestampFormat('1545926400000', 'YYYY-MM-DD');
+```
+
+</li>
+<li>Convert date to timestamp
+
+```js
+// 1543939200000
+
+scriptUtil.timestampAntiFormat('2018-12-05');
+```
+
+</li>
+<li>Get selected date
+
+```js
+var DatePicker = scriptUtil.getRegisterReactDom('component Id');
+//timestamp：1545926400000
+DatePicker.getValue();
+```
+
+</li>
+<li>Set selected date
+
+```js
+var DatePicker = scriptUtil.getRegisterReactDom('component Id');
+
+// timestamp
+DatePicker.setValue(1545926400000);
+
+// date
+DatePicker.setValue(new Date());
+
+//date string
+DatePicker.setValue('2018-12-01');
+
+//date range
+DatePicker.setValue(['2018-10-10 10:10:10','2018-11-11 11:11:11']);
+```
+
+</li>
+<li>Whether date passes verification
+
+```js
+var DatePicker = scriptUtil.getRegisterReactDom('component Id');
+
+DatePicker.getValid();
+```
+
+</li>
+<li>Disable date selection
+
+```js
+/*@params {string} value disable date
+e.g. '2018-10-10' with time：'2018-10-10 10:10:10'
+ *
+@params {string} type default is start:cannot
+select date before end:cannot select date after
+ */
+
+var DatePicker = scriptUtil.getRegisterReactDom('componentId');
+DatePicker.setDisabledDate('2018-01-01 10:10:10','start')
+```
+
+</li>
+<li>Disable time selection
+
+```js
+/*@params {string} value disable time
+e.g. '10:10:10'
+ *@params {string} type
+default is start:cannot select time before end:cannot select
+time after
+ */
+var DatePicker = scriptUtil.getRegisterReactDom('component Id');
+DatePicker.setDisabledTime('10:10:10','start')
+```
+
+</li>
+<li>Get form data
+
+```js
+// Get component value in batches after submitting forms
+
+// formItemId is component name [component name 1, component name 2]
+
+scriptUtil.getFormData([formItemId]);
+```
+
+</li>
+<li>Set form data
+
+```js
+// Set data in batches to change form data at once
+// formItemId is component name，value is component value
+scriptUtil.setFormData({
+'formItemId'：value
+});
+```
+
+</li>
+</ul>
+</ul>
+
+
+### Button
+
+<table>
+<colgroup>
+<col style={{ width: "17.57188498402556%" }} />
+<col style={{ width: "15.974440894568689%" }} />
+<col style={{ width: "16.61341853035144%" }} />
+<col style={{ width: "16.61341853035144%" }} />
+<col style={{ width: "16.61341853035144%" }} />
+<col style={{ width: "16.61341853035144%" }} />
+</colgroup>
+<thead>
+<tr>
+<th>
+Property
+</th>
+<th>
+Description
+</th>
+<th>
+Type
+</th>
+<th>
+Default
+</th>
+<th>
+Set Value
+</th>
+<th>
+Get Value
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Component Name
+</td>
+<td>
+ID for setting value.
+</td>
+<td>string</td>
+<td />
+<td>
+setFormItemId(value)
+</td>
+<td>
+getFormItemId()
+</td>
+</tr>
+<tr>
+<td>
+Button Title
+</td>
+<td>
+Button title style
+</td>
+<td>string</td>
+<td>button</td>
+<td>
+setButtonName
+</td>
+<td>
+getButtonName
+</td>
+</tr>
+<tr>
+<td>
+Title Color
+</td>
+<td>string</td>
+<td>#000000</td>
+<td>
+setTitleColor
+</td>
+<td>
+getTitleColor
+</td>
+</tr>
+<tr>
+<td>
+Title Font
+</td>
+<td>string</td>
+<td>Arial</td>
+<td>
+setTitleFontFamily
+</td>
+<td>
+getTitleFontFamily
+</td>
+</tr>
+<tr>
+<td>Bold</td>
+<td>
+
+`'normal' / 'bold'`
+
+</td>
+<td>normal</td>
+<td>
+setFontWeight
+</td>
+<td>
+getFontWeight
+</td>
+</tr>
+<tr>
+<td>
+Title Size
+</td>
+<td>number</td>
+<td>16</td>
+<td>
+setTitleFontSize
+</td>
+<td>
+getTitleFontSize
+</td>
+</tr>
+<tr>
+<td>
+Border Width
+</td>
+<td>
+Button border style
+</td>
+<td>number</td>
+<td>1</td>
+<td>
+setBorderWidth
+</td>
+<td>
+getBorderWidth
+</td>
+</tr>
+<tr>
+<td>
+Border Color
+</td>
+<td>string</td>
+<td>#F5F5F5</td>
+<td>
+setBorderColor
+</td>
+<td>
+getBorderColor
+</td>
+</tr>
+<tr>
+<td>
+Border Type
+</td>
+<td>
+
+`'solid' / 'dotted' / 'dashed'`
+
+</td>
+<td>
+
+`'solid'`
+
+</td>
+<td>
+setBorderStyle
+</td>
+<td>
+getBorderStyle
+</td>
+</tr>
+<tr>
+<td>
+Corner Radius
+</td>
+<td>
+Button border corner radius
+</td>
+<td>number</td>
+<td>2</td>
+<td>
+setBorderRadius
+</td>
+<td>
+getBorderRadius
+</td>
+</tr>
+<tr>
+<td>
+Button Icon
+</td>
+<td>
+Button icon style
+</td>
+<td>string</td>
+<td>none</td>
+<td>setIcon</td>
+<td>getIcon</td>
+</tr>
+<tr>
+<td>
+Custom Icon
+</td>
+<td>string</td>
+<td>none</td>
+<td>
+setIconUpload
+</td>
+<td>
+getIconUpload
+</td>
+</tr>
+<tr>
+<td>
+Icon Position
+</td>
+<td>string</td>
+<td>left</td>
+<td>
+setIconPos
+</td>
+<td>
+getIconPos
+</td>
+</tr>
+<tr>
+<td>
+Icon Size
+</td>
+<td>string</td>
+<td>default</td>
+<td>
+setIconSize
+</td>
+<td>
+getIconSize
+</td>
+</tr>
+<tr>
+<td>
+Background Color
+</td>
+<td>
+Button background color
+</td>
+<td>string</td>
+<td>#F5F5F5</td>
+<td>
+setBackgroundColor
+</td>
+<td>
+getBackgroundColor
+</td>
+</tr>
+<tr>
+<td>
+Hide when Print
+</td>
+<td>
+Whether to hide icon when printing
+</td>
+<td>boolean</td>
+<td>false</td>
+<td>
+setPrintHidden
+</td>
+<td>
+getPrintHidden
+</td>
+</tr>
+<tr>
+<td>
+Unavailable
+</td>
+<td>
+Whether to disable when clicking
+</td>
+<td>boolean</td>
+<td>false</td>
+<td>
+setDisabled
+</td>
+<td>
+getDisabled
+</td>
+</tr>
+</tbody>
+</table>
+
+### Tree
+
+- Property Description
+
+<table>
+
+<colgroup>
+<col style={{ width: "17.57188498402556%" }} />
+<col style={{ width: "15.974440894568689%" }} />
+<col style={{ width: "16.61341853035144%" }} />
+<col style={{ width: "16.61341853035144%" }} />
+<col style={{ width: "16.61341853035144%" }} />
+<col style={{ width: "16.61341853035144%" }} />
+</colgroup>
+<thead>
+<tr>
+<th>
+Property
+</th>
+<th>
+Description
+</th>
+<th>
+Type
+</th>
+<th>
+Default
+</th>
+<th>
+Set Value
+</th>
+<th>
+Get Value
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Component Name
+</td>
+<td>
+ID for setting value.
+</td>
+<td>
+string
+</td>
+<td />
+<td>
+setFormItemId(value)
+</td>
+<td>
+getFormItemId()
+</td>
+</tr>
+<tr>
+<td>
+Title
+</td>
+<td />
+<td>
+string
+</td>
+<td>
+
+`''`
+
+</td>
+<td>
+setLabelContent
+</td>
+<td>
+getLabelContent
+</td>
+</tr>
+<tr>
+<td>
+Search Box
+</td>
+<td>
+Whether to enable search box
+</td>
+<td>
+boolean
+</td>
+<td>
+false
+</td>
+<td>
+setIsSearch
+</td>
+<td>
+getIsSearch
+</td>
+</tr>
+<tr>
+<td>
+Collapse
+</td>
+<td>
+Whether to expand the tree
+</td>
+<td>
+boolean
+</td>
+<td>
+false
+</td>
+<td>
+setIsExpended
+</td>
+<td>
+getIsExpended
+</td>
+</tr>
+<tr>
+<td>
+Cancel Permission
+</td>
+<td>
+Whether the bound object has permissions
+</td>
+<td>
+boolean
+</td>
+<td>
+false
+</td>
+<td>
+setIsPermission
+</td>
+<td>
+getIsPermission
+</td>
+</tr>
+<tr>
+<td>
+Select by Default
+</td>
+<td>
+Whether to select the first option by default
+</td>
+<td>
+boolean
+</td>
+<td>
+false
+</td>
+<td>
+setisDefaultSelected
+</td>
+<td>
+getisDefaultSelected
+</td>
+</tr>
+<tr>
+<td>
+Selected Background
+</td>
+<td rowSpan={3}>
+Selected element style
+</td>
+<td>
+string
+</td>
+<td>
+#0088CC
+</td>
+<td>
+setSelectedBgColor
+</td>
+<td>
+getSelectedBgColor
+</td>
+</tr>
+<tr>
+<td>
+Selected Text Color
+</td>
+<td>
+string
+</td>
+<td>
+#f5f5f5
+</td>
+<td>
+setSelectedFontColor
+</td>
+<td>
+getSelectedFontColor
+</td>
+</tr>
+<tr>
+<td>
+Selected Text Size
+</td>
+<td>
+string
+</td>
+<td>
+16
+</td>
+<td>
+setSelectedFontSize
+</td>
+<td>
+getSelectedFontSize
+</td>
+</tr>
+<tr>
+<td>
+Data Source
+</td>
+<td />
+<td>
+object
+</td>
+<td>
+-
+</td>
+<td>
+setDataSource
+</td>
+<td>
+getDataSource
+</td>
+</tr>
+</tbody>
+</table>
+
+
+
+- Example Code
+
+<ul>
+<ul>
+<li>Get tree node
+
+```js
+var treeCtrl = scriptUtil.getRegisterReactDom('component Id');
+```
+
+</li>
+<li>Dynamic data source format
+
+```js
+{
+list:[
+    {
+        id:'1',
+        name:'parent 1',
+        children:[
+            {
+            id:'1-1',
+            name:'child 1'
+            }
+        ]
+        },
+    {
+        id:'2',
+        name:'parent 2',
+        children:[
+            {
+            id:'2-1',
+            name:'child 2'
+            }
+        ]
+}
+]
+}
+```
+
+</li>
+<li>Set data
+
+```js
+var treeCtrl = scriptUtil.getRegisterReactDom('componentId');
+var data = [
+    {
+    id:'1',
+    name:'parent 1',
+    children:[
+        {
+        id:'1-1',
+        name:'child 1'
+        }
+    ]
+    },
+    {
+    id:'2',
+    name:'parent 2',
+    children:[
+        {
+        id:'2-1',
+        name:'child 2'
+        }
+    ]
+    }
+];
+
+treeCtrl.setImportData(data);
+```
+
+</li>
+<li>Collapse a node by default
+
+```js
+var treeCtrl =
+scriptUtil.getRegisterReactDom('component Id');
+
+var keys = [ '1' ]
+
+treeCtrl.defaultExpandedKeys(keys);
+```
+
+</li>
+<li>Select all parent nodes of the current selected node
+
+```js
+var treeCtrl =
+scriptUtil.getRegisterReactDom('component Id');
+
+treeCtrl.getParentNodes();
+
+```
+
+</li>
+<li>Manually refresh current data source
+
+```js
+var treeCtrl =
+scriptUtil.getRegisterReactDom('component Id');
+
+treeCtrl.reloadTreeData();
+```
+
+</li>
+</ul>
+</ul>
+
+
+
+
+### Single List
+
+<table>
+
+<colgroup>
+<col style={{ width: "25.510204081632654%" }} />
+<col style={{ width: "74.48979591836735%" }} />
+</colgroup>
+<thead>
+<tr>
+<th>
+Parameter
+</th>
+<th>
+Description
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Title
+</td>
+<td>
+Enter the input box title.
+</td>
+</tr>
+<tr>
+<td>
+Title Size
+</td>
+<td rowSpan={3}>
+Set the title font size, font and color.
+</td>
+</tr>
+<tr>
+<td>
+Title Color
+</td>
+</tr>
+<tr>
+<td>
+Title Font
+</td>
+</tr>
+<tr>
+<td>
+Border Width
+</td>
+<td rowSpan={3}>
+Set width, color and type of the border.
+</td>
+</tr>
+<tr>
+<td>
+Border Type
+</td>
+</tr>
+<tr>
+<td>
+Border Color
+</td>
+</tr>
+<tr>
+<td>
+Line Height
+</td>
+<td>
+Set the line height of the single list.
+</td>
+</tr>
+<tr>
+<td>
+Selected Color
+</td>
+<td>
+The background color when the list is selected.
+</td>
+</tr>
+<tr>
+<td>
+Background Color
+</td>
+<td>
+Set background color of the element.
+</td>
+</tr>
+<tr>
+<td>
+Confirm Icon
+</td>
+<td>
+Whether to display the confirm icon before the list.
+</td>
+</tr>
+<tr>
+<td>
+Custom Icon
+</td>
+<td>
+Customize the confirm icon.
+</td>
+</tr>
+<tr>
+<td>
+Data Source
+</td>
+<td>
+Bind an object service for data display.
+</td>
+</tr>
+<tr>
+<td>
+Link Object
+</td>
+<td>
+Configure data linkages through input parameters of the data
+source.
+</td>
+</tr>
+<tr>
+<td>
+Field Binding
+</td>
+<td>
+Bind a field in the data source of an element on the canvas,
+and display it on the list.
+</td>
+</tr>
+<tr>
+<td>
+Field
+</td>
+<td>
+Select a field to be bound for display on the list.
+</td>
+</tr>
+</tbody>
+</table>
+
+
+- Property Description
+
+<table>
+
+<colgroup>
+<col style={{ width: "17.57188498402556%" }} />
+<col style={{ width: "15.974440894568689%" }} />
+<col style={{ width: "16.61341853035144%" }} />
+<col style={{ width: "16.61341853035144%" }} />
+<col style={{ width: "16.61341853035144%" }} />
+<col style={{ width: "16.61341853035144%" }} />
+</colgroup>
+<thead>
+<tr>
+<th>
+Property
+</th>
+<th>
+Description
+</th>
+<th>
+Type
+</th>
+<th>
+Default
+</th>
+<th>
+Set Value
+</th>
+<th>
+Get Value
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Component Name
+</td>
+<td>
+ID for setting value. In forms, it means data key values
+</td>
+<td>
+string
+</td>
+<td />
+<td>
+setFormItemId
+</td>
+<td>
+getFormItemId
+</td>
+</tr>
+<tr>
+<td>
+Title
+</td>
+<td rowSpan={3}>
+Title font style
+</td>
+<td>
+string
+</td>
+<td />
+<td>
+setTitle
+</td>
+<td>
+getTitle
+</td>
+</tr>
+<tr>
+<td>
+Title Size
+</td>
+<td>
+string
+</td>
+<td>
+16
+</td>
+<td>
+setFontSize
+</td>
+<td>
+getFontSize
+</td>
+</tr>
+<tr>
+<td>
+Title Color
+</td>
+<td>
+string
+</td>
+<td>
+#000000
+</td>
+<td>
+setFontColor
+</td>
+<td>
+getFontColor
+</td>
+</tr>
+<tr>
+<td>
+Border Width
+</td>
+<td rowSpan={3}>
+Border style
+</td>
+<td>
+number
+</td>
+<td>
+1
+</td>
+<td>
+setBorderWidth
+</td>
+<td>
+getBorderWidth
+</td>
+</tr>
+<tr>
+<td>
+Border Type
+</td>
+<td>
+
+`'solid'`
+
+</td>
+<td>
+setBorderColor
+</td>
+<td>
+getBorderColor
+</td>
+<td />
+</tr>
+<tr>
+<td>
+Border Color
+</td>
+<td>
+string
+</td>
+<td>
+#E3E3E3
+</td>
+<td>
+setBorderColor
+</td>
+<td>
+getBorderColor
+</td>
+</tr>
+<tr>
+<td>
+Line Height
+</td>
+<td />
+<td>
+number
+</td>
+<td>
+30
+</td>
+<td>
+setLineHeightStyle
+</td>
+<td>
+getLineHeightStyle
+</td>
+</tr>
+<tr>
+<td>
+Selected Color
+</td>
+<td />
+<td>
+string
+</td>
+<td>
+#0088CC
+</td>
+<td>
+setSelectBackgroundColor
+</td>
+<td>
+getSelectBackgroundColor
+</td>
+</tr>
+<tr>
+<td>
+Background Color
+</td>
+<td />
+<td>
+string
+</td>
+<td>
+#f5f5f5
+</td>
+<td>
+setBackgroundColor
+</td>
+<td>
+getBackgroundColor
+</td>
+</tr>
+<tr>
+<td>
+Confirm Icon
+</td>
+<td />
+<td>
+boolean
+</td>
+<td>
+false
+</td>
+<td>
+setIsShowIcon
+</td>
+<td>
+getIsShowIcon
+</td>
+</tr>
+<tr>
+<td>
+Custom Icon
+</td>
+<td>
+Custom icon for the button
+</td>
+<td>
+string
+</td>
+<td>
+none
+</td>
+<td>
+setIconUpload
+</td>
+<td>
+getIconUpload
+</td>
+</tr>
+<tr>
+<td>
+Data Source
+</td>
+<td>
+Dynamic data source
+</td>
+<td>
+object
+</td>
+<td />
+<td>
+setObjectLabel
+</td>
+<td>
+getsetObjectLabel().dataSource
+</td>
+</tr>
+<tr>
+<td>
+Link Object
+</td>
+<td>
+Link with other elements
+</td>
+<td />
+<td />
+<td />
+<td />
+</tr>
+<tr>
+<td>
+Time Format
+</td>
+<td>
+minData/maxData conversion as input parameter when setting
+linkage
+</td>
+<td>
+boolean
+</td>
+<td>
+false
+</td>
+<td>
+setInitFormat(boolean)
+</td>
+<td>
+getInitFormat()
+</td>
+</tr>
+</tbody>
+</table>
+
+
+
+- Example Code
+
+<ul>
+<ul>
+<li>Dynamic data source format
+
+```js
+var data = {
+list: [
+    {
+    label: 'name',
+    value: 'showName'
+    },
+    {
+    label: 'name1',
+    value: 'showName1'
+    }
+]
+}
+```
+
+</li>
+<li>Set selected
+
+```js
+var SingleList = scriptUtil.getRegisterReactDom('componentId');
+SingleList.setValue('XXXX');
+```
+
+</li>
+</ul>
+</ul>
+
+
+
+
+
+
+
+
+
+### Table
+
+- Property Description
+
+<table>
+<caption>Table Property</caption>
+<colgroup>
+<col style={{ width: "17.57188498402556%" }} />
+<col style={{ width: "15.974440894568689%" }} />
+<col style={{ width: "16.61341853035144%" }} />
+<col style={{ width: "16.61341853035144%" }} />
+<col style={{ width: "16.61341853035144%" }} />
+<col style={{ width: "16.61341853035144%" }} />
+</colgroup>
+<thead>
+<tr>
+<th>
+Property
+</th>
+<th>
+Description
+</th>
+<th>
+Type
+</th>
+<th>
+Default
+</th>
+<th>
+Set Value
+</th>
+<th>
+Get Value
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Component Name
+</td>
+<td>
+ID for setting value. In forms, it means data key values
+</td>
+<td>
+string
+</td>
+<td />
+<td>
+setFormItemId
+</td>
+<td>
+getFormItemId
+</td>
+</tr>
+<tr>
+<td>
+Title
+</td>
+<td>
+Table title
+</td>
+<td>
+string
+</td>
+<td>
+-
+</td>
+<td>
+setLabelContent
+</td>
+<td>
+getLabelContent
+</td>
+</tr>
+<tr>
+<td>
+Font Size
+</td>
+<td rowSpan={2}>
+Table title font style
+</td>
+<td>
+string
+</td>
+<td>
+#000000
+</td>
+<td>
+setLabelContentFontColor
+</td>
+<td>
+getLabelContentFontColor
+</td>
+</tr>
+<tr>
+<td>
+Font Color
+</td>
+<td>
+number
+</td>
+<td>
+14
+</td>
+<td>
+setLabelContentFontSize
+</td>
+<td>
+getLabelContentFontSize
+</td>
+</tr>
+<tr>
+<td>
+Required
+</td>
+<td>
+Whether to verify the table when content changes
+</td>
+<td>
+
+`'yes' / 'no'`
+
+</td>
+<td>
+no
+</td>
+<td>
+setIsRequired
+</td>
+<td>
+getIsRequired
+</td>
+</tr>
+<tr>
+<td>
+Fixed Header
+</td>
+<td>
+Whether to set fixed table head
+</td>
+<td>
+
+`'true' / 'false'`
+
+</td>
+<td>
+true
+</td>
+<td>
+setIsFixedHeader
+</td>
+<td>
+getIsFixedHeader
+</td>
+</tr>
+<tr>
+<td>
+Column Adjustment
+</td>
+<td>
+Whether to manually change column width
+</td>
+<td>
+boolean
+</td>
+<td>
+false
+</td>
+<td>
+setIsDragChangeWidth
+</td>
+<td>
+getIsDragChangeWidth
+</td>
+</tr>
+<tr>
+<td>
+Selectable
+</td>
+<td>
+Whether to add a select option to the table
+</td>
+<td>
+
+`'true' / 'false'`
+
+</td>
+<td>
+false'
+</td>
+<td>
+setIsSelected
+</td>
+<td>
+getIsSelected
+</td>
+</tr>
+<tr>
+<td>
+Border
+</td>
+<td>
+Cell border
+</td>
+<td>
+
+`'true' / 'false'`
+
+</td>
+<td>
+true
+</td>
+<td>
+setBorder
+</td>
+<td>
+getBorder
+</td>
+</tr>
+<tr>
+<td>
+Outline
+</td>
+<td>
+Table border
+</td>
+<td>
+
+`'true' / 'false'`
+
+</td>
+<td>
+true
+</td>
+<td>
+setBorderOut
+</td>
+<td>
+setBorderOut
+</td>
+</tr>
+<tr>
+<td>
+Outline Type
+</td>
+<td rowSpan={3}>
+Border and outline style
+</td>
+<td>
+number
+</td>
+<td>
+1
+</td>
+<td>
+setBorderWidth
+</td>
+<td>
+getBorderWidth
+</td>
+</tr>
+<tr>
+<td>
+Outline Color
+</td>
+<td>
+string
+</td>
+<td>
+#E8E8E8
+</td>
+<td>
+setBorderColor
+</td>
+<td>
+getBorderColor
+</td>
+</tr>
+<tr>
+<td>
+Outline Width
+</td>
+<td>
+
+`'solid' / 'dotted' / 'dash' 'solid'`
+
+</td>
+<td>
+setBorderStyle
+</td>
+<td>
+getBorderStyle
+</td>
+<td />
+</tr>
+<tr>
+<td>
+Display Head
+</td>
+<td>
+Whether to display table head
+</td>
+<td>
+boolean
+</td>
+<td>
+false
+</td>
+<td>
+setHasThead
+</td>
+<td>
+getHasThead
+</td>
+</tr>
+<tr>
+<td>
+Head Background
+</td>
+<td rowSpan={4}>
+Table head style
+</td>
+<td>
+string
+</td>
+<td>
+#6C748D
+</td>
+<td>
+setTheadBackgroundColor
+</td>
+<td>
+getTheadBackgroundColor
+</td>
+</tr>
+<tr>
+<td>
+Font Color
+</td>
+<td>
+string
+</td>
+<td>
+#FFFFFF
+</td>
+<td>
+setTheadFontColor
+</td>
+<td>
+getTheadFontColor
+</td>
+</tr>
+<tr>
+<td>
+Font Size
+</td>
+<td>
+number
+</td>
+<td>
+14
+</td>
+<td>
+setTheadFontSize
+</td>
+<td>
+getTheadFontSize
+</td>
+</tr>
+<tr>
+<td>
+Font
+</td>
+<td>
+string
+</td>
+<td>
+Arial
+</td>
+<td>
+setTheadFontFamily
+</td>
+<td>
+getTheadFontFamily
+</td>
+</tr>
+<tr>
+<td>
+Table Background
+</td>
+<td rowSpan={4}>
+Table style
+</td>
+<td>
+string
+</td>
+<td>
+#FFFFFF
+</td>
+<td>
+setTbodyBackgroundColor
+</td>
+<td>
+getTbodyBackgroundColor
+</td>
+</tr>
+<tr>
+<td>
+Font Color
+</td>
+<td>
+string
+</td>
+<td>
+#000000
+</td>
+<td>
+setTbodyFontColor
+</td>
+<td>
+getTbodyFontColor
+</td>
+</tr>
+<tr>
+<td>
+Font Size
+</td>
+<td>
+number
+</td>
+<td>
+14
+</td>
+<td>
+setTbodyFontSize
+</td>
+<td>
+getTbodyFontSize
+</td>
+</tr>
+<tr>
+<td>
+Font
+</td>
+<td>
+string
+</td>
+<td>
+Arial
+</td>
+<td>
+setTbodyFontFamily
+</td>
+<td>
+getTbodyFontFamily
+</td>
+</tr>
+<tr>
+<td>
+Table Height
+</td>
+<td>
+Table cell height
+</td>
+<td>
+number
+</td>
+<td>
+44
+</td>
+<td>
+setTdHeight
+</td>
+<td>
+getTdHeight
+</td>
+</tr>
+<tr>
+<td>
+Odd Line Color
+</td>
+<td />
+<td>
+string
+</td>
+<td>
+#FFFFFF
+</td>
+<td>
+setSingleRowColor
+</td>
+<td>
+getSingleRowColor
+</td>
+</tr>
+<tr>
+<td>
+Even Line Color
+</td>
+<td />
+<td>
+string
+</td>
+<td>
+#FFFFFF
+</td>
+<td>
+setDoubleRowColor
+</td>
+<td>
+getDoubleRowColor
+</td>
+</tr>
+<tr>
+<td>
+Scroll Bar Background
+</td>
+<td>
+background color of the scroll bar
+</td>
+<td>
+boolean
+</td>
+<td>
+false
+</td>
+<td>
+setIsTransparent
+</td>
+<td>
+getIsTransparent
+</td>
+</tr>
+<tr>
+<td>
+Scroll Width
+</td>
+<td>
+Scroll bar width. Must be larger than component width
+</td>
+<td>
+number
+</td>
+<td>
+0
+</td>
+<td>
+setTableX
+</td>
+<td>
+getTableX
+</td>
+</tr>
+<tr>
+<td>
+Data Source
+</td>
+<td />
+<td>
+object
+</td>
+<td>
+-
+</td>
+<td>
+setObject
+</td>
+<td>
+getObject
+</td>
+</tr>
+<tr>
+<td>
+Pagination
+</td>
+<td>
+Whether to enable pagination
+</td>
+<td>
+
+`'true' / 'false'`
+`'true'`
+
+</td>
+<td>
+setIsPagination
+</td>
+<td>
+getIsPagination
+</td>
+</tr>
+<tr>
+<td>
+Lines Per Page
+</td>
+<td />
+<td>
+pageSize
+</td>
+<td>
+number
+</td>
+<td>
+5
+</td>
+<td>
+setPageSize
+</td>
+</tr>
+<tr>
+<td>
+Import
+</td>
+<td />
+<td>
+boolean
+</td>
+<td>
+false
+</td>
+<td>
+setIsImport
+</td>
+<td>
+getIsImport
+</td>
+</tr>
+<tr>
+<td>
+Export
+</td>
+<td />
+<td>
+boolean
+</td>
+<td>
+false
+</td>
+<td>
+setIsExport
+</td>
+<td>
+getIsExport
+</td>
+</tr>
+<tr>
+<td>
+Import/Export Style
+</td>
+<td />
+<td>
+（image/button）
+</td>
+<td>
+
+`'image' / 'button'`
+
+</td>
+<td>
+image
+</td>
+<td>
+setPortStyle
+</td>
+</tr>
+<tr>
+<td>
+Toolbar Color
+</td>
+<td>
+Toolbar of import and export color
+</td>
+<td>
+string
+</td>
+<td>
+#6C748D
+</td>
+<td>
+setImportAndExportBackground
+</td>
+<td>
+getImportAndExportBackground
+</td>
+</tr>
+<tr>
+<td>
+Import/Export Complex
+</td>
+<td>
+Whether to enable complex mode of import and export
+</td>
+<td>
+object
+</td>
+<td>
+false
+</td>
+<td>
+setComplexConfig(object)
+</td>
+<td>
+getComplexConfig().isComplex
+</td>
+</tr>
+<tr>
+<td>
+Import path
+</td>
+<td>
+Import path under complex mode
+</td>
+<td>
+string
+</td>
+<td>
+setComplexConfig(object)
+</td>
+<td>
+getComplexConfig().complexImportUrl
+</td>
+<td />
+</tr>
+<tr>
+<td>
+Export path
+</td>
+<td>
+Export path under complex mode
+</td>
+<td>
+string
+</td>
+<td>
+setComplexConfig(object)
+</td>
+<td>
+getComplexConfig().complexExportUrl
+</td>
+<td />
+</tr>
+<tr>
+<td>
+Link Object
+</td>
+<td>
+Link with other elements
+</td>
+<td />
+<td />
+<td />
+<td />
+</tr>
+<tr>
+<td>
+Time Format
+</td>
+<td>
+minData/maxData conversion as input parameter when setting
+linkage
+</td>
+<td>
+boolean
+</td>
+<td>
+false
+</td>
+<td>
+setInitFormat(boolean)
+</td>
+<td>
+getInitFormat()
+</td>
+</tr>
+<tr>
+<td>
+Head Config
+</td>
+<td />
+<td />
+<td />
+<td>
+Array
+</td>
+<td>
+All return data
+</td>
+</tr>
+<tr>
+<td>
+Timed Refresh
+</td>
+<td />
+<td>
+boolean
+</td>
+<td>
+false
+</td>
+<td>
+setIsTiming
+</td>
+<td>
+getIsTiming
+</td>
+</tr>
+<tr>
+<td>
+Refresh Frequency
+</td>
+<td>
+Frequency of timed refresh
+</td>
+<td>
+number
+</td>
+<td />
+<td>
+setDelayTime
+</td>
+<td>
+getDelayTime
+</td>
+</tr>
+</tbody>
+</table>
+
+<table>
+<caption>Page Configuration</caption>
+<colgroup>
+<col style={{ width: "21.072796934865902%" }} />
+<col style={{ width: "19.92337164750958%" }} />
+<col style={{ width: "19.157088122605366%" }} />
+<col style={{ width: "19.92337164750958%" }} />
+<col style={{ width: "19.92337164750958%" }} />
+</colgroup>
+<thead>
+<tr>
+<th>
+Property
+</th>
+<th>
+Key
+</th>
+<th>
+Description
+</th>
+<th>
+Type
+</th>
+<th>
+Default
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Field
+</td>
+<td>
+originalName
+</td>
+<td>
+Returned field key value.
+</td>
+<td>
+string
+</td>
+<td />
+</tr>
+<tr>
+<td>
+Display Name
+</td>
+<td>
+customName
+</td>
+<td>
+Display name corresponding to key
+</td>
+<td>
+string
+</td>
+<td />
+</tr>
+<tr>
+<td>
+Width
+</td>
+<td>
+width
+</td>
+<td>
+Column width
+</td>
+<td>
+number
+</td>
+<td />
+</tr>
+<tr>
+<td>
+Alignment
+</td>
+<td>
+align
+</td>
+<td>
+Alignment of table head and body
+</td>
+<td>
+string
+</td>
+<td>
+left
+</td>
+</tr>
+<tr>
+<td>
+Tips
+</td>
+<td>
+hasTips
+</td>
+<td>
+Set whether to display tips
+</td>
+<td>
+string
+</td>
+<td>
+no
+</td>
+</tr>
+<tr>
+<td>
+Data Type
+</td>
+<td>
+type
+</td>
+<td />
+<td>
+string
+</td>
+<td>
+-
+</td>
+</tr>
+<tr>
+<td>
+Data Rendering
+</td>
+<td>
+render
+</td>
+<td>
+Data after secondary rendering. Input parameter includes
+text, row, index, table
+</td>
+<td>
+
+```js
+function(text,row,index,table){ return text;}
+```
+
+</td>
+<td>
+-
+</td>
+</tr>
+<tr>
+<td>
+Filter
+</td>
+<td>
+isFilter
+</td>
+<td>
+Whether to support filtering at the backend
+</td>
+<td />
+<td />
+</tr>
+<tr>
+<td>
+Sorting
+</td>
+<td>
+sorterB
+</td>
+<td>
+Whether to support sorting at the backend
+</td>
+<td />
+<td>
+-
+</td>
+</tr>
+</tbody>
+</table>
+
+<table>
+<caption>Script Configuration</caption>
+<colgroup>
+<col style={{ width: "21.072796934865902%" }} />
+<col style={{ width: "19.92337164750958%" }} />
+<col style={{ width: "19.157088122605366%" }} />
+<col style={{ width: "19.92337164750958%" }} />
+<col style={{ width: "19.92337164750958%" }} />
+</colgroup>
+<thead>
+<tr>
+<th>
+Property
+</th>
+<th>
+Key
+</th>
+<th>
+Description
+</th>
+<th>
+Type
+</th>
+<th>
+Default
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Field
+</td>
+<td>
+originalName
+</td>
+<td>
+Returned field key value.
+</td>
+<td>
+string
+</td>
+<td />
+</tr>
+<tr>
+<td>
+Display Name
+</td>
+<td>
+customName
+</td>
+<td>
+Display name corresponding to key
+</td>
+<td>
+string
+</td>
+<td />
+</tr>
+<tr>
+<td>
+Width
+</td>
+<td>
+width
+</td>
+<td>
+Column width
+</td>
+<td>
+number
+</td>
+<td />
+</tr>
+<tr>
+<td>
+Alignment
+</td>
+<td>
+align
+</td>
+<td>
+Alignment of table head and body
+</td>
+<td>
+string
+</td>
+<td>
+left
+</td>
+</tr>
+<tr>
+<td>
+Tips
+</td>
+<td>
+hasTips
+</td>
+<td>
+Set whether to display tips
+</td>
+<td>
+string
+</td>
+<td>
+no
+</td>
+</tr>
+<tr>
+<td>
+Data Type
+</td>
+<td>
+type
+</td>
+<td />
+<td>
+string
+</td>
+<td>
+-
+</td>
+</tr>
+<tr>
+<td>
+Data Rendering
+</td>
+<td>
+render
+</td>
+<td>
+Data after secondary rendering. Input parameter includes
+text, row, index, table
+</td>
+<td>
+
+```js
+function(text,row,index,table){ return text;}
+```
+
+</td>
+<td>
+-
+</td>
+</tr>
+<tr>
+<td>
+Filter
+</td>
+<td>
+isFilter
+</td>
+<td>
+Whether to support filtering at the backend
+</td>
+<td />
+<td />
+</tr>
+<tr>
+<td>
+Inline Edit
+</td>
+<td>
+editable
+</td>
+<td>
+Whether to enable inline edit
+</td>
+<td>
+string, boolean
+</td>
+<td>
+false
+</td>
+</tr>
+<tr>
+<td>
+Inline Edit Type
+</td>
+<td>
+formType
+</td>
+<td />
+<td>
+string
+</td>
+
+`'String'`
+
+</tr>
+<tr>
+<td>
+Inline Edit Data Source
+</td>
+<td>
+formTypeSource
+</td>
+<td>
+
+When inline edit type is 'Select', data in each line is
+the same. e.g. `[{"code":"11"},{"code":"22"}]`
+
+</td>
+<td>
+
+```js
+function（）{ return Array; }
+```
+
+</td>
+<td>
+-
+</td>
+</tr>
+<tr>
+<td>
+Get Dynamic Data Inline
+</td>
+<td>
+formTypeSourceFn
+</td>
+<td>
+When inline edit type is 'Select', data in each line is
+different
+</td>
+<td>
+
+```js
+function（）{ return Array; }
+```
+
+</td>
+<td>
+-
+</td>
+</tr>
+<tr>
+<td>
+Inline Edit Callback (handleSave)
+</td>
+<td>
+handleSave
+</td>
+<td>
+Callback events when the focus is on inline edit or not
+</td>
+<td>
+
+```js
+function（originalName, row）{ // operations aftergetting or losing focus
+}
+```
+
+</td>
+<td>
+-
+</td>
+</tr>
+<tr>
+<td>
+Save Inline Edit
+</td>
+<td>
+isHandleSave
+</td>
+<td>
+Whether to execute callback events when the focus is on
+inline edit or not.
+</td>
+<td>
+
+```js
+function（originalName, row, tableData）{ // promise or return true/false
+}
+```
+
+</td>
+<td>
+return true；
+</td>
+</tr>
+<tr>
+<td>
+Enable Inline Edit
+</td>
+<td>
+isEditFn
+</td>
+<td>
+Whether to enable inline edit for rows that support inline
+edit.
+</td>
+<td>
+
+```js
+function(row){ return true;}
+```
+
+</td>
+<td>
+return true；
+</td>
+</tr>
+<tr>
+<td>
+Required Inline Edit
+</td>
+<td>
+isRequired
+</td>
+<td>
+Whether to require inline edit fields
+</td>
+<td>
+string/boolean
+</td>
+<td>
+false
+</td>
+</tr>
+</tbody>
+</table>
+
+- Example Code
+
+<ul>
+<ul>
+<li>Set table head
+
+```js
+var table = scriptUtil.getRegisterReactDom('componnetId');
+var columnHeader = [
+  {
+    customName: 'index',
+    originalName: '_index',
+    align:'left',
+    width: 100
+  },
+  {
+    customName: 'name',
+    originalName: 'name',
+    align:'left',
+    isFilter: true, // filter
+    sorterB: true,// sorting
+    // custom render
+    render: function(text,row,index,table){
+        console.log(text,row,index,table);
+        return '<span>name:'+text+'</span>';
+    }
+  },
+  {
+    customName: 'birthday',
+    originalName: 'birthday',
+    align:'left'
+  },
+  {
+    customName: 'age',
+    originalName: 'age',
+    align:'left',
+    editable: true, // inline edit
+    handleSave: function(row){
+      console.log('save inline edit', row);
+    },
+    isHandleSave: function(originalName, row, tableData) {
+        console.log('whether to save inline edit',originalName, row, tableData);
+        return true;
+    },
+    isEditFn: function(keyItem){
+      console.log('keyItem', keyItem);
+      return true;
+    },
+    isRequired: true
+  },
+  {
+    customName:'operation',
+    originalName:'operation',
+    align:'left'
+  }
+];
+
+table.setColumnHeader(columnHeader);
+```
+
+</li>
+<li>Set data source
+
+```js
+var table = scriptUtil.getRegisterReactDom('componnetId');
+var rows = {
+  list: [
+    {
+      index: '1',
+      id: 'H111',
+      name:'container',
+      nickName: 'material name',
+      request: 1
+    },
+    {
+      index: '3',
+      id: 'H112',
+      name: 'trash box',
+      nickName: 'material name',
+      request: 1
+    },
+    {
+      index: '2',
+      id: 'H110',
+      name: 'container',
+      nickName: 'material name',
+      request: 1
+    },
+    {
+      index: '4',
+      id: 'H111',
+      name: 'industrial box',
+      nickName: 'material name',
+      request: 1
+    },
+  ],
+  // pagination is optional
+  pagination:{
+    current:1,
+    pageSize:1,
+    total:5
+  }
+};
+
+table.setObjectSource(rows);
+```
+
+</li>
+<li>Set operation column
+
+```js
+var table = scriptUtil.getRegisterReactDom('component id');
+var columnOperation = [
+  {
+    name:'edit',
+    modalUrl:'page_id',
+    modalTitle:'edit',
+    modalWidth: 1000,
+    modalHeight: 700,
+    params:['id'], // url of the pop-up windows contains page id
+  },
+  {
+    name:'delete', 
+    click:function(row, index, tableData){
+      console.log('delete', row, index, tableData);
+    },
+    isRenderFn: function(row){
+     return true;
+    },
+    style: {
+      backgroundColor:'#eacd4a',
+      color:'#fff'
+    }
+  }
+];
+table.setColumnOperation(columnOperation);
+
+```
+
+</li>
+<li>Set column cell
+
+```js
+var table = scriptUtil.getRegisterReactDom('组件id');
+var cellConfig={
+ name: {
+    modalUrl:'pageId',
+    modalWidth:1000,
+    style:{
+      color:'#eacd4a'
+    },
+  },
+ age: {
+    style:{
+      backgroundColor:'#eacd4a',
+      color:'#fff'
+    },
+    // click event
+    onClick: function(row, tableData){
+      console.log('click the cell', row, tableData);
+    },
+    // jump to new page
+    hrefUrl:'http://www.baidu.com'
+  }
+};
+
+table.setCellConfig(cellConfig);
+```
+
+</li>
+<li>Set pagination
+
+```js
+var table = scriptUtil.getRegisterReactDom('componentId');
+var onChange=function(pangation,filters,sorter){
+  console.log(pangation,filters,sorter);
+  // get date through the page, update data. pangation update by page 
+  // pangation  {current: 1, pageSize: 1, total: 5}
+  // filters
+  // sorter  {column:{},field:"request",order:"descend"}
+
+  // request interface todo
+  // get data todo
+
+  // fill data into the table
+  table.setObjectSource(row);
+}
+
+table.setTableOnChange(onChange);
+```
+
+</li>
+<li>Get selected component
+
+```js
+var table = scriptUtil.getRegisterReactDom('component id');
+var selects = table.getSelectedRows();
+```
+
+</li>
+<li>Get current row
+
+```js
+var table = scriptUtil.getRegisterReactDom('component id');
+var curRow = table.getCurRow();
+```
+
+</li>
+<li>Get current data source
+
+```js
+var table = scriptUtil.getRegisterReactDom('component id');
+var tableData = table.getObjectSource();
+```
+
+</li>
+<li>Get data again
+
+```js
+// Only works when there is bound data source
+var table = scriptUtil.getRegisterReactDom('component id');
+table.reloadTableData();
+```
+
+</li>
+</ul>
+</ul>
+
+
+
+
+### Picture
+
+- Property Description
+
+<table>
+
+<colgroup>
+<col style={{ width: "20.91254752851711%" }} />
+<col style={{ width: "19.77186311787072%" }} />
+<col style={{ width: "19.77186311787072%" }} />
+<col style={{ width: "19.77186311787072%" }} />
+<col style={{ width: "19.77186311787072%" }} />
+</colgroup>
+<thead>
+<tr>
+<th>
+Property
+</th>
+<th>
+Type
+</th>
+<th>
+Default
+</th>
+<th>
+Set Value
+</th>
+<th>
+Get Value
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Type
+</td>
+<td>
+String
+</td>
+<td>
+picture
+</td>
+<td>
+setType
+</td>
+<td>
+getType
+</td>
+</tr>
+<tr>
+<td>
+Aspect Ratio
+</td>
+<td>
+String
+</td>
+<td />
+<td>
+setImgUpload
+</td>
+<td>
+getImgUpload
+</td>
+</tr>
+<tr>
+<td>
+Picture URL
+</td>
+<td>
+String
+</td>
+<td>
+width
+</td>
+<td>
+setRatio
+</td>
+<td>
+getRatio
+</td>
+</tr>
+</tbody>
+</table>
+
+
+
+- Example Code
+
+
+```js
+// get element with an Id as ImgUpload-1
+
+var ImgUpload =
+scriptUtil.getRegisterReactDom('ImgUpload-1') 
+
+// define a relative path that contains images
+
+var imgUrl =
+'https://pss.bdstatic.com/r/www/cache/static/protocol/https/global/img/bao_02f5d40.jpg'
+
+
+// manually set image path
+
+ImgUpload.setValue(imgUrl)
+```
+
+
+
+
+
+
+
+### Bookmark Page
+
+- Property Description
+
+<table>
+
+<colgroup>
+<col style={{ width: "17.57188498402556%" }} />
+<col style={{ width: "15.974440894568689%" }} />
+<col style={{ width: "16.61341853035144%" }} />
+<col style={{ width: "16.61341853035144%" }} />
+<col style={{ width: "16.61341853035144%" }} />
+<col style={{ width: "16.61341853035144%" }} />
+</colgroup>
+<thead>
+<tr>
+<th>
+Property
+</th>
+<th>
+Description
+</th>
+<th>
+Type
+</th>
+<th>
+Default
+</th>
+<th>
+Set Value
+</th>
+<th>
+Get Value
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Component Name
+</td>
+<td>
+ID of linked component
+</td>
+<td>
+string
+</td>
+<td />
+<td>
+setFormItemId
+</td>
+<td>
+getFormItemId
+</td>
+</tr>
+<tr>
+<td>
+Options
+</td>
+<td />
+<td>
+object
+</td>
+<td>
+dynamic
+</td>
+<td>
+setdataSource(Object)
+</td>
+<td>
+getdataSource().type
+</td>
+</tr>
+<tr>
+<td>
+Dynamic Data
+</td>
+<td>
+Options from binding with object models
+</td>
+<td>
+object
+</td>
+<td>
+-
+</td>
+<td>
+setdataSource(Object)
+</td>
+<td>
+getdataSource().dynamicDataSource
+</td>
+</tr>
+<tr>
+<td>
+Static Data
+</td>
+<td>
+Manually add options
+</td>
+<td>
+object
+</td>
+<td>
+-
+</td>
+<td>
+setdataSource(Object)
+</td>
+<td>
+getdataSource().staticDataSource
+</td>
+</tr>
+<tr>
+<td>
+Time Format
+</td>
+<td />
+<td>
+boolean
+</td>
+<td>
+false
+</td>
+<td>
+setInitFormat()
+</td>
+<td>
+getInitFormat
+</td>
+</tr>
+</tbody>
+</table>
+
+
+
+- Example Code
+
+<ul>
+<ul>
+<li>Data format
+
+```js
+[
+    {
+    key:'tab1',// only identifier (required)
+    optionText: 'label1',// tab name
+    optionPageValue: 'https://www.baidu.com?key=1'// tab url. you can add parameters in the url to link corresponding events. e.g. 'https://www.baidu.com?name=lisi&amp;age=18'
+    },
+    {
+    key:'tab2',
+    optionText: 'label2',
+    optionPageValue: 'https://www.baidu.com?key=2'
+    },
+    {
+    key:'tab3',
+    optionText: 'label3',
+    optionPageValue: 'https://www.baidu.com?key=3'
+    }
+];
+```
+
+</li>
+<li>Import data source
+
+```js
+//data format
+scriptUtil.getRegisterReactDom('componentId').setImportData(data)
+
+```
+
+</li>
+<li>Get selected tabs
+
+```js
+scriptUtil.getRegisterReactDom('componentId').getChooseOption()
+```
+
+</li>
+<li>Return data format
+
+```js
+{
+key:'tab2',
+optionText: 'label 2',
+optionPageValue: 'https://www.baidu.com?key=2'
+}
+```
+
+</li>
+<li>Set current tab
+
+```js
+scriptUtil.getRegisterReactDom('componentId').setActiveKey(key)// key corrsponds to the only identifier of the tab
+```
+
+</li>
+</ul>
+</ul>
+
+
+
+
+
+
+
+
+
+### Upload
+
+- Property Description
+
+<table>
+
+<colgroup>
+<col style={{ width: "17.57188498402556%" }} />
+<col style={{ width: "15.974440894568689%" }} />
+<col style={{ width: "16.61341853035144%" }} />
+<col style={{ width: "16.61341853035144%" }} />
+<col style={{ width: "16.61341853035144%" }} />
+<col style={{ width: "16.61341853035144%" }} />
+</colgroup>
+<thead>
+<tr>
+<th>
+Property
+</th>
+<th>
+Description
+</th>
+<th>
+Type
+</th>
+<th>
+Default
+</th>
+<th>
+Set Value
+</th>
+<th>
+Get Value
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Title
+</td>
+<td>
+Reminder text in the button
+</td>
+<td>
+String
+</td>
+<td>
+upload
+</td>
+<td>
+setLabelContent
+</td>
+<td>
+getLabelContent
+</td>
+</tr>
+<tr>
+<td>
+Required
+</td>
+<td />
+<td>
+String
+</td>
+<td>
+no
+</td>
+<td>
+setIsRequired
+</td>
+<td>
+getIsRequired
+</td>
+</tr>
+<tr>
+<td>
+Multi Select
+</td>
+<td>
+Whether to enable multi-selection when uploading
+</td>
+<td>
+Boolean
+</td>
+<td>
+false
+</td>
+<td>
+setMultiple
+</td>
+<td>
+getMultiple
+</td>
+</tr>
+<tr>
+<td>
+Display List
+</td>
+<td>
+Whether to display file list
+</td>
+<td>
+Boolean
+</td>
+<td>
+true
+</td>
+<td>
+setShowList
+</td>
+<td>
+getShowList
+</td>
+</tr>
+<tr>
+<td>
+Upload Type
+</td>
+<td />
+<td>
+String
+</td>
+<td>
+*
+</td>
+<td>
+setAcceptType
+</td>
+<td>
+getAcceptType
+</td>
+</tr>
+<tr>
+<td>
+List Type
+</td>
+<td />
+<td>
+String
+</td>
+<td>
+text
+</td>
+<td>
+setListType
+</td>
+<td>
+getListType
+</td>
+</tr>
+<tr>
+<td>
+Max. Upload
+</td>
+<td />
+<td>
+Number
+</td>
+<td>
+-1 (no limit)
+</td>
+<td>
+setLimitNum
+</td>
+<td>
+getLimitNum
+</td>
+</tr>
+<tr>
+<td>
+Read Only
+</td>
+<td />
+<td>
+Boolean
+</td>
+<td>
+false
+</td>
+<td>
+setReadOnly
+</td>
+<td>
+getReadOnly
+</td>
+</tr>
+</tbody>
+</table>
+
+
+
+- Example Code
+
+<ul>
+<ul>
+<li>Set value
+
+```js
+var instance = scriptUtil.getRegisterReactDom('componentId');
+var fileList = [
+  {
+    "fileDownloadUrl":"/api/config/download?fileName=2022-03-09/1646832614807/file.png",
+    "fileName": "2022-03-09/1646832614807/uploadcomponent.png"
+    },
+]
+instance.setValue(fileList);
+// set data value in batches to change form data at once
+scriptUtil.setFormData({ 'component name 1':fileList, 'component name 2': fileList })
+```
+
+</li>
+<li>Get value
+
+```js
+var instance = scriptUtil.getRegisterReactDom('componentId');
+instance.getValue();
+// get element value by element name in batches
+var data = scriptUtil.getFormData(['component name1','component name 2']);
+```
+
+</li>
+</ul>
+</ul>
+
+### Search
+
+<table>
+<colgroup>
+<col style={{ width: "17.57188498402556%" }} />
+<col style={{ width: "15.974440894568689%" }} />
+<col style={{ width: "16.61341853035144%" }} />
+<col style={{ width: "16.61341853035144%" }} />
+<col style={{ width: "16.61341853035144%" }} />
+<col style={{ width: "16.61341853035144%" }} />
+</colgroup>
+<thead>
+<tr>
+<th>
+Property
+</th>
+<th>
+Description
+</th>
+<th>
+Type
+</th>
+<th>
+Default
+</th>
+<th>
+Set Value
+</th>
+<th>
+Get Value
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Data Interface
+</td>
+<td>
+Search interface type
+</td>
+<td>String</td>
+<td />
+<td />
+<td />
+</tr>
+<tr>
+<td>
+Request Address
+</td>
+<td>
+Interface address that supports search
+</td>
+<td>Object</td>
+<td />
+<td>
+setSelectApi
+</td>
+<td>
+getSelectApi
+</td>
+</tr>
+<tr>
+<td>
+Request Method
+</td>
+<td>
+Request method of the search
+</td>
+<td>String</td>
+<td>GET</td>
+<td />
+<td />
+</tr>
+<tr>
+<td>
+Search Field
+</td>
+<td>
+Searching keyword
+</td>
+<td>String</td>
+<td>keyword</td>
+<td />
+<td />
+</tr>
+<tr>
+<td>
+Item Field
+</td>
+<td>
+Field name of pageSize
+</td>
+<td>String</td>
+<td>
+pageSize
+</td>
+<td />
+<td />
+</tr>
+<tr>
+<td>
+Display Volume
+</td>
+<td>
+Lines in a page
+</td>
+<td>Number</td>
+<td>10</td>
+<td />
+<td />
+</tr>
+<tr>
+<td>
+Display Field
+</td>
+<td>
+Display field name corresponding to return content
+</td>
+<td>String</td>
+<td />
+<td>
+setItemValue
+</td>
+<td>
+getItemValue
+</td>
+</tr>
+<tr>
+<td>
+Field Value
+</td>
+<td>
+Field identifier corresponding to return content. Must be
+unique
+</td>
+<td>String</td>
+<td />
+<td>
+setItemKey
+</td>
+<td>
+getItemKey
+</td>
+</tr>
+<tr>
+<td>Title</td>
+<td>
+Title of the input box
+</td>
+<td>String</td>
+<td>title</td>
+<td>
+setLabelContent
+</td>
+<td>
+getLabelContent
+</td>
+</tr>
+<tr>
+<td>
+Placeholder
+</td>
+<td>
+Placeholder of the input box
+</td>
+<td>String</td>
+<td />
+<td>
+setPlaceholder
+</td>
+<td>
+getPlaceholder
+</td>
+</tr>
+<tr>
+<td>
+Title Width
+</td>
+<td>
+Title style
+</td>
+<td>Number</td>
+<td>70</td>
+<td>
+setTitleWidth
+</td>
+<td>
+getTitleWidth
+</td>
+</tr>
+<tr>
+<td>
+Title Size
+</td>
+<td>Number</td>
+<td>14</td>
+<td>
+setTitleFontSize
+</td>
+<td>
+getTitleFontSize
+</td>
+</tr>
+<tr>
+<td>
+Title Color
+</td>
+<td>String</td>
+<td>#000000</td>
+<td>
+setTitleColor
+</td>
+<td>
+getTitleColor
+</td>
+</tr>
+<tr>
+<td>
+Title Font
+</td>
+<td>String</td>
+<td>Arial</td>
+<td>
+setFontFamily
+</td>
+<td>
+getFontFamily
+</td>
+</tr>
+<tr>
+<td>
+Content Size
+</td>
+<td>
+Content style
+</td>
+<td>Number</td>
+<td>14</td>
+<td>
+setContextFontSize
+</td>
+<td>
+getContextFontSize
+</td>
+</tr>
+<tr>
+<td>
+Content Color
+</td>
+<td>String</td>
+<td>
+rgba(0, 0, 0, 0.65)
+</td>
+<td>
+setContextColor
+</td>
+<td>
+getContextColor
+</td>
+</tr>
+<tr>
+<td>
+Content Font
+</td>
+<td>String</td>
+<td />
+<td>
+setContextFontFamily
+</td>
+<td>
+getContextFontFamily
+</td>
+</tr>
+<tr>
+<td>
+Border Type
+</td>
+<td>
+Border style
+</td>
+<td>Number</td>
+<td>1</td>
+<td>
+setBorderWidth
+</td>
+<td>
+getBorderWidth
+</td>
+</tr>
+<tr>
+<td>
+Border Color
+</td>
+<td>String</td>
+<td>#e3e3e3</td>
+<td>
+setBorderColor
+</td>
+<td>
+getBorderColor
+</td>
+</tr>
+<tr>
+<td>
+Border Width
+</td>
+<td>String</td>
+<td>solid</td>
+<td>
+setBorderStyle
+</td>
+<td>
+getBorderStyle
+</td>
+</tr>
+<tr>
+<td>
+Background Color
+</td>
+<td>
+Background color of the input box
+</td>
+<td>String</td>
+<td>#ffffff</td>
+<td>
+setBackgroundColor
+</td>
+<td>
+getBackgroundColor
+</td>
+</tr>
+</tbody>
+</table>
+

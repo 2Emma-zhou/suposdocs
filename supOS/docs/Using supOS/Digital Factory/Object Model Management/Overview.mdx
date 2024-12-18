@@ -1,0 +1,126 @@
+---
+hide_title: true
+---
+
+Object modeling on supOS allows you to digitalize your plant, workshop, staff and equipment into object models.
+
+## Object Model Management
+
+<img width={450} src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/4.png" />
+
+<table>
+<caption>Function description</caption>
+  <thead>
+<tr>
+<th>Function</th>
+<th>Description</th>
+</tr>
+  </thead>
+  <tbody>
+<tr>
+<td>Object Template</td>
+<td>Template of general things in your plant, such as workshop, staff.</td>
+</tr>
+<tr>
+<td>Object Instance</td>
+<td>Specific things in your plant, such as furnace, staff Zhang.</td>
+</tr>
+<tr>
+<td>Function Set</td>
+<td>Sets of general functions that can be associated with and inherited by linked templates and instances.</td>
+</tr>
+<tr>
+<td>Tag Management</td>
+<td>Model category.</td>
+</tr>
+<tr>
+<td>Data Set</td>
+<td>Manually created and maintained database on supOS.</td>
+</tr>
+<tr>
+<td>Data Group</td>
+<td>Group and manage data permission of object instance attributes.</td>
+</tr>
+  </tbody>
+</table>
+
+<table>
+<caption>Template type description</caption>
+  <thead>
+<tr>
+<th>Template Type</th>
+<th>Description</th>
+</tr>
+  </thead>
+  <tbody>
+<tr>
+<td>Entity Template</td>
+<td>Includes embedded templates that build models of data collected through X-Collector. Entity template represents entities in the real world.</td>
+</tr>
+<tr>
+<td>Form Template</td>
+<td>Models of tables on supOS.
+
+:::info
+Form templates created in X-IDE will be synchronized to supOS after publish, and they cannot be edited.
+:::
+
+</td>
+</tr>
+<tr>
+<td>Relation Template</td>
+<td>Form the relation between templates.</td>
+</tr>
+<tr>
+<td>Mapping Template</td>
+<td>Map the connected external data sources to templates for internal services calling.
+
+:::info
+- dataTable type of data updated from V2.70.x supOS will be converted to link templates, and new fields can be created.
+- Link query between updated dataTable from V2.70.x and form templates on V3.x (and newer) is only available after migrating ddataTable entirely to **supos_dt** database on X-ETL.
+:::
+
+</td>
+</tr>
+  </tbody>
+</table>
+
+## Object Template vs Object Instance
+
+Refer to the following examples to understand the relation between an object template, an instance and attributes.
+
+<table>
+  <thead>
+<tr>
+<th>Template</th>
+<th>Template Attribute</th>
+<th>Instance</th>
+<th>Instance Attribute</th>
+</tr>
+  </thead>
+  <tbody>
+<tr>
+<td>Workshop A</td>
+<td>product volume, electricity</td>
+<td>Furnace, boiler, shelf</td>
+<td>Furnace pressure, furnace humidity, boiler temperature, shelf height</td>
+</tr>
+<tr>
+<td>Furnace</td>
+<td>Temperature, pressure, humidity</td>
+<td>Furnace A</td>
+<td>Height, productivity, consumption</td>
+</tr>
+<tr>
+<td>Staff</td>
+<td>Age, gender, name</td>
+<td>Staff A</td>
+<td>Birth date, post</td>
+</tr>
+  </tbody>
+</table>
+
+:::info
+All template attributes will be inherited by the subordinate instances. For example, from the above staff example, staff A will have attributes including age, gender, name, birth date and post.
+:::
+

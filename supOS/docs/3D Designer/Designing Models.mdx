@@ -1,0 +1,181 @@
+---
+hide_title: true
+---
+
+## Adding Model
+1. Select **APP Management** > **3D Designer** > **Model Repository**, and then click **Add Model**.
+2. Select **Target category** and enter the model name.
+3. Upload a glb file in **Select model** and the source zip file in **Select source file**. 
+4. (optional) Click **Center coordinates** to place the model at the origin.
+5. Click **Confirm**.
+
+<img width={350} src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/3dDesigner/9.jpg"/> 
+
+## Designing the Model
+1. Click <img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/3dDesigner/6.png"/> to edit this model.
+2. Select a structure of the model under **Model structure** to edit model **Name**.
+3. Click **Add** next to **Animation** to add animation to the specific structure.For details, see <a href="#adding-model-animation">Adding Model Animation</a>.
+4. Click **Edit** next to **Material** to change the structure material.
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/3dDesigner/93.png"/>
+<ol>
+<ol>
+<li>Select <b>Front</b> or <b>Double</b> next to <b>Side</b> for rendering side.
+
+- **Front**: The set effect will only be displayed on the outside of the model structure.
+- **Double**: The set effect will be displayed on both the outside and the inside of the model structure.
+
+</li>
+<li>
+
+Set the **UV Repeat** of the **Color Map** you uploaded, and set the color of the model structure you selected.
+
+</li>
+<li>
+
+Adjust the **Opacity** of the selected model structure.
+
+</li>
+<li>
+
+Upload **MR Map**, and adjust its **Roughness** and **Metalness** to achieve a metal-like effect.
+
+</li>
+<li>
+
+Upload **Normal Map** to simulate the curves and ridges of the model structure surface.
+
+</li>
+<li>
+
+Upload **Emissive Map** and set **Emissive** color to simulate an emissive light effect.
+
+</li>
+</ol>
+</ol>
+
+
+### Adding Model Animation
+
+Click <img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/3dDesigner/98.png"/> next to **Model animation** to add animations to the model.
+
+<img width={450} src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/3dDesigner/90.png"/>
+<table>
+<tr>
+<th>Block</th>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+<tr>
+<td rowspan="5">Type</td>
+<td>Model animation</td>
+<td>Animation configured with the model during model construction on third-party applications.</td>
+</tr>
+<tr>
+<td>Material</td>
+<td>Change the material of the model or selected structure when the animation is triggered.</td>
+</tr>
+ <tr>
+<td>Transform</td>
+<td>Change the position, angle and size of the model or selected structure when the animation is triggered.</td>
+</tr>
+<tr>
+<td>Outline</td>
+<td>Outline the model or selected structure when the animation is triggered.</td>
+</tr>
+<tr>
+<td>Combinations</td>
+<td>Displays the effect of selected 2 or more animations in order or simutaneously on the model or selected structure.</td>
+</tr>
+<tr>
+<td rowspan="2">Select</td>
+<td>Whole</td>
+<td>Add the animation effect to the whole model.</td>
+</tr>
+<tr>
+<td>Structure</td>
+<td>Add animation effect to the selected part of the model.
+
+1. Click <img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/3dDesigner/10.png"/>, select one or more parts.
+2. Click <img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/3dDesigner/10.png"/> again to confirm.
+
+</td>
+</tr>
+</table>
+
+#### Material
+
+1. Set the **Type** to **Material**, and then slect <b>Color</b>.
+2. Select the application part of the animation next to **Select**, and then select the color.
+:::info what you can also do
+Select **Opacity**, and drag the progress bar to adjust the opacity of the model.
+:::
+3. Set the display speed and times of the animation.
+4. Set whether to allow initial color and original color of the model to show during animation next to **Advance**.
+5. Click **Preview**.
+
+<img width={450} src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/3dDesigner/94.png"/>
+
+#### Transform
+
+1. Set the **Type** to **Transform**, and then set the transform type to **Scale**.
+- **Translate**: Change model position.
+- **Rotate**: Rotate the model.
+- **Scale**: Change model size.
+2. Select the application part of the animation next to **Select**.
+3. Click <img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/3dDesigner/8.png"/> to set the original and end size of the model, and then click the icon again to finish.
+:::info
+Select **Equivalent scale**, and the size changes in the same ratio.
+:::
+4. Set the display speed and times of the animation.
+5. Set whether to allow initial status and yoyo effect of the model to show during animation next to **Advance**.
+6. Click **Preview**.
+
+<img width={450} src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/3dDesigner/95.png"/>
+
+
+#### Outline
+
+1. Set the **Type** to **Outline**, and then select the application part of the animation next to **Select**.
+2. Select the color of the outline, and the thickness, strength and intensity of the line.
+3. Set the display frequency of the animation.
+5. Click **Preview**.
+
+<img width={450} src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/3dDesigner/96.png"/>
+
+#### Combinations
+
+1. Set the **Type** to **Combinations**, and then set the display order of the selected animations.
+- **Parallel**: Play the added animations simultaneously.
+- **Serial**: Play the added animations one by one.
+2. Click **Add New** next to **Select** to select added animations for the combination.
+3. Click **Preview**.
+
+<img width={450} src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/3dDesigner/97.png"/>
+
+
+### Adding Particle Animation
+
+1. Click <img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/3dDesigner/99.png"/> next to **Particle animation** to add a particle to the current model.
+2. Select transform type and edit the corresponding values by dragging on the canvas.
+- **Translate**: Change the particle position, and the value will be displayed next to **Position**.
+- **Rotate**: Change the particle direction, and the value will be displayed next to **Rotate**.
+- **Scale**: Change the particle size, and the value will be displayed next to **Scale**.
+3. Click **Select** next to **Style** to select a particle you added to the platform. 
+4. Click <b>Preview</b>. 
+
+<img width={450} src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/3dDesigner/91.png"/>
+
+### Adding UV Animation
+
+1. Click <img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/3dDesigner/100.png"/> next to **UV animation** to overlap images to the model surface.
+2. Select parts of the model, and select a color for the selected parts.
+3. Upload an image next to **Color map**, and set values of <b>Offset</b>, <b>UV Repeat</b>, and <b>UV Speed</b>.
+4. Click <b>Preview</b>.
+
+<img width={450} src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/3dDesigner/92.png"/>
+
+
+:::note
+Remember to enable <b>Autosave</b> or click <b>Save</b> to save the current configuration.
+:::

@@ -1,0 +1,989 @@
+---
+hide_title: true
+---
+
+<div className='div'>
+<div className='title'>
+
+## ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/openAPI/4.png) Get Attribute Unit List
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Path</div>
+<div className='rightCol'>
+
+```
+http://{supOS ip:port}/open-api/supos/oodm/v2/attribute/unit/list
+```
+
+
+</div>
+<div className='leftCol'>Query parameters</div>
+<div className='rightCol'>
+
+<table>
+<caption>Table 1. Query parameter description</caption>
+                <colgroup>
+                  <col style={{ width: "25%" }} />
+                  <col style={{ width: "25%" }} />
+                  <col style={{ width: "50%" }} />
+                </colgroup>
+                <thead>
+                  <tr>
+                    <th>Parameter</th>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>type</td>
+                    <td>string</td>
+                    <td>Required. Attribute unit types, including visible and all.</td>
+                    </tr>
+                  <tr>
+                    <td>keyword</td>
+                    <td>string</td>
+                    <td>Fuzzy match the name and alias.</td>
+                    </tr>
+                    </tbody>
+                    </table>
+
+
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+
+- 200: Successful.
+
+```json
+{
+  "code" : 200,
+  "data" : [ {
+    "id" : 16667,
+    "name" : "km"
+  } ],
+  "detail" : "string",
+  "message" : "ok"
+}
+```
+- 500: General internal error of OODM.
+
+```json
+{
+  "code": 10001001,
+  "data": {},
+  "detail": "string",
+  "message": "string"
+}
+```
+
+</div>
+</div>
+</div>
+
+<div className='div'>
+<div className='title'>
+
+## ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/openAPI/4.png) Get Attributes by Search Conditions
+Comprehensive attribute query interface, and you can use it to run complex filters on attributes.
+For example: Get attributes under instance **i1**, bound with the label **system.label2**, not belong to the app **test** and return attribute values.
+```
+instanceNames=i1&labelFullNames=system.label2&
+excludeAppNames=true&appNames=test&needValue=true
+```
+
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Path</div>
+<div className='rightCol'>
+
+```
+http://{supOS ip:port}/open-api/supos/oodm/v2/attributes
+```
+
+
+</div>
+<div className='leftCol'>Query parameters</div>
+<div className='rightCol'>
+
+<table>
+<caption>Table 1. Query parameter description</caption>
+                <colgroup>
+                  <col style={{ width: "25%" }} />
+                  <col style={{ width: "25%" }} />
+                  <col style={{ width: "50%" }} />
+                </colgroup>
+                <thead>
+                  <tr>
+                    <th>Parameter</th>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>hasBindRelation</td>
+                    <td>boolean</td>
+                    <td>Whether the attributes are bound with others.</td>
+                    </tr>
+                    <tr>
+                    <td>withBindRelation</td>
+                    <td>boolean</td>
+                    <td>Whether the returned data is bound with others.</td>
+                    </tr>
+                    <tr>
+                    <td>historical</td>
+                    <td>boolean</td>
+                    <td>Whether there is historical data.</td>
+                    </tr>
+                    <tr>
+                    <td>displayable</td>
+                    <td>boolean</td>
+                    <td>Whether to display main field.</td>
+                    </tr>
+                    <tr>
+                    <td>needValue</td>
+                    <td>boolean</td>
+                    <td>Whether to return attribute values. Used together with instanceNames, and when the returned attribute is inherited by multiple instances, corresponding value is the attribute value of the last instance from the instanceNames list.</td>
+                    </tr>
+                    <tr>
+                    <td>needInstanceInfo</td>
+                    <td>boolean</td>
+                    <td>Whether to return instance name and alias. Used together with instanceNames, and when there are multiple instances, information of the last instance from the instanceNames list will be returned.</td>
+                    </tr>
+                    <tr>
+                    <td>excludeLabelFullNames</td>
+                    <td>boolean</td>
+                    <td>Whether to get data without specific labels. Used together with labelFullNames.</td>
+                    </tr>
+                    <tr>
+                    <td>excludeAppNames</td>
+                    <td>boolean</td>
+                    <td>Whether to get data that is not under specified app. Used together with appNames.</td>
+                    </tr>
+                    <tr>
+                    <td>containsInheritedMetadata</td>
+                    <td>boolean</td>
+                    <td>Whether to contain inherited metadata. Used together with specific template or instance.</td>
+                    </tr>
+                    <tr>
+                    <td>containsSelfMetadata</td>
+                    <td>boolean</td>
+                    <td>Whether to contain metadata. Used together with specific template or instance.</td>
+                    </tr>
+                    <tr>
+                    <td>needKnowAlarm</td>
+                    <td>boolean</td>
+                    <td>Whether to get alarm status. If it is true, the returned field existAlarm is valid.</td>
+                    </tr>
+                    <tr>
+                    <td>dataTypes</td>
+                    <td>array</td>
+                    <td>-</td>
+                    </tr>
+                    <tr>
+                    <td>filterNames</td>
+                    <td>array</td>
+                    <td>Filtering attribute aliases.</td>
+                    </tr>
+                    <tr>
+                    <td>filterNamespace</td>
+                    <td>string</td>
+                    <td>Filtering namespaces.</td>
+                    </tr>
+                  <tr>
+                    <td>keyword</td>
+                    <td>string</td>
+                    <td>Fuzzy match the name and alias.</td>
+                    </tr>
+                    <tr>
+                    <td>pageIndex</td>
+                    <td>integer</td>
+                    <td>Required. Page number. The default is 1.</td>
+                    </tr>
+                    <tr>
+                    <td>pageSize</td>
+                    <td>integer</td>
+                    <td>Required. The number of data on each page. The default is 20 and the maximum is 500.</td>
+                    </tr>
+                    
+                    <tr>
+                    <td>namespaces</td>
+                    <td>array</td>
+                    <td>-</td>
+                    </tr>
+                    <tr>
+                    <td>labelFullNames</td>
+                    <td>array</td>
+                    <td>Label namespace.</td>
+                    </tr>
+                    <tr>
+                    <td>appNames</td>
+                    <td>array</td>
+                    <td>-</td>
+                    </tr>
+                    <tr>
+                    <td>instanceNames</td>
+                    <td>array</td>
+                    <td>Instance alias list that contains the metadata. When it is not empty, templateNames is invalid.</td>
+                    </tr>
+                    <tr>
+                    <td>sourceFunctionSetFullNames</td>
+                    <td>array</td>
+                    <td>Source function set namespace.</td>
+                    </tr>
+                    <tr>
+                    <td>templateFullNames</td>
+                    <td>array</td>
+                    <td>Template namespace that contains the metadata.</td>
+                    </tr>
+                    <tr>
+                    <td>functionSetFullNames</td>
+                    <td>array</td>
+                    <td>Function set namespace that contains the metadata.</td>
+                    </tr>
+                    </tbody>
+                    </table>
+
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+
+- 200: Successful.
+
+```json
+{
+  "list" : [ {
+    "comment" : "this ia s test",
+    "dataType" : "LONG",
+    "subDataType" : "LONG",
+    "dataTypePrecision" : 0,
+    "dataTypeScale" : 0,
+    "defaultValue" : "666",
+    "display" : false,
+    "displayName" : "p1",
+    "enName" : "p1",
+    "hasKeyRelation" : false,
+    "historical" : false,
+    "persistent" : false,
+    "readWriteMode" : "READ_ONLY",
+    "stringMaxLength" : 0,
+    "unique" : false,
+    "valueScale" : 2,
+    "id" : 12345,
+    "templateId" : 12222,
+    "sourceFunctionSetId" : 12221,
+    "instanceId" : "12223",
+    "labelIds" : [ 11111 ],
+    "deletable" : true,
+    "editable" : true,
+    "max" : 100,
+    "min" : 0,
+    "maxValue" : 100.88,
+    "minValue" : 0.88,
+    "namespace" : "system",
+    "unit" : "kg",
+    "templateName" : "Template_12",
+    "templateNamespace" : "system",
+    "existAlarm" : false, //no existing alarms
+    "value" : "string", //attribute value
+    "instanceEnName" : "string",
+    "instanceDisplayName" : "string"
+  } ],
+  "pagination" : [ {
+    "total" : 10, //total data
+    "pageSize" : 20,
+    "current" : 1 //current page number
+  } ]
+}
+```
+- 400: General internal error of OODM.
+
+```json
+{
+  "code": 10001001,
+  "data": {},
+  "detail": "string",
+  "message": "string"
+}
+```
+
+</div>
+</div>
+</div>
+
+<div className='div'>
+<div className='title'>
+
+## ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/openAPI/4.png) Get Attribute Details by Attribute Namespace and Alias
+Get specified attributes and returns nothing when there is no required results. The results can be at most 100.
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Path</div>
+<div className='rightCol'>
+
+```
+http://{supOS ip:port}/open-api/supos/oodm/v2/instance/attributes
+```
+
+
+</div>
+<div className='leftCol'>Query parameters</div>
+<div className='rightCol'>
+
+**instanceAttributes**: Instance attribute alias. In the format of **attribute namespace.attribute alias**.
+
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+
+- 200: Successful.
+
+```
+[ {
+  "comment" : "this is a test",
+  "dataType" : "LONG",
+  "subDataType" : "LONG",
+  "dataTypePrecision" : 0,
+  "dataTypeScale" : 0,
+  "defaultValue" : "666",
+  "display" : false,
+  "displayName" : "p1",
+  "enName" : "p1",
+  "hasKeyRelation" : false,
+  "historical" : false,
+  "persistent" : false,
+  "readWriteMode" : "READ_ONLY",
+  "stringMaxLength" : 0,
+  "unique" : false,
+  "valueScale" : 2,
+  "id" : 12345,
+  "templateId" : 12222,
+  "sourceFunctionSetId" : 12221,
+  "instanceId" : "12223",
+  "labelIds" : [ 11111 ],
+  "deletable" : true,
+  "editable" : true,
+  "max" : 100,
+  "min" : 0,
+  "maxValue" : 100.88,
+  "minValue" : 0.88,
+  "namespace" : "system",
+  "unit" : "kg",
+  "templateName" : "Template_12",
+  "templateNamespace" : "system",
+  "existAlarm" : false,
+  "instanceEnName" : "instance1",
+  "instanceDisplayName" : "instance1"
+} ]
+```
+- 400: General internal error of OODM.
+
+```json
+{
+  "code": 10001001,
+  "data": {},
+  "detail": "string",
+  "message": "string"
+}
+```
+
+</div>
+</div>
+</div>
+
+<div className='div'>
+<div className='title'>
+
+## ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/openAPI/1.png) Add Template Attribute
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Path</div>
+<div className='rightCol'>
+
+```
+http://{supOS ip:port}/open-api/supos/oodm/v2/template/{templateNamespace}/{templateName}/attribute
+```
+
+
+</div>
+<div className='leftCol'>Request Body</div>
+<div className='rightCol'>
+
+```json
+{
+  "comment" : "this is a test",
+  "dataType" : "LONG",  //required
+  "subDataType" : "LONG", //required when dataType is set to SYSTEMCODE
+  "dataTypePrecision" : 0,  //required when dataType is set  to DECIMAL. leave it null for other types
+  "dataTypeScale" : 0, //required when dataType is set to DECIMAL
+  "defaultValue" : "666",
+  "display" : false, //whether is main display field
+  "displayName" : "p1",  //required
+  "enName" : "p1",  //required
+  "hasKeyRelation" : false, //whether primary or foreign key relations exist
+  "historical" : false, //required. whether to save history data. Leave it empty for DECIMAL, FILE and OBJECT data types
+  "persistent" : false,  //required
+  "readWriteMode" : "READ_ONLY",  //required
+  "stringMaxLength" : 0,   //required when dataType is set to string
+  "unique" : false,
+  "valueScale" : 2,   //required when dataType is set to FLOAT/DOUBLE/DECIMAL
+  "appAccessMode" : "PUBLIC",   //required
+  "appName" : "system",    //required
+  "appShowName" : "system",
+  "namespace" : "system",
+  "max" : 100, 
+  "min" : 0,
+  "maxValue" : 100.88,
+  "minValue" : 0.88,
+  "unit" : "kg",
+  "compress" : true, //whether to set compress parameter
+  "paramValue" : "0.2", //set when setting compress to true
+  "paramUnit" : "%", //set when setting compress to true
+  "maxRisingPeriod" : 600, //set when setting compress to true
+  "labelIds" : [ 12333 ]
+}
+```
+
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+
+- 200: Successful.
+
+```json
+{
+  "code" : 200,
+  "data" : 19999,
+  "detail" : "string",
+  "message" : "ok"
+}
+```
+- 500: General internal error of OODM.
+
+```json
+{
+  "code": 10001001,
+  "data": {},
+  "detail": "string",
+  "message": "string"
+}
+```
+
+</div>
+</div>
+</div>
+
+
+<div class="div">
+  <div class="title">
+
+## ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/openAPI/4.png) Get Created Attributes of Current Template
+
+</div>
+  <div class="grid">
+    <div class="leftCol">Path</div>
+    <div class="rightCol">
+
+```
+http://{supOS ip:port}/open-api/supos/oodm/v2/template/{templateNamespace}/{templateName}/attribute/self
+```
+
+</div>
+    <div class="leftCol">Query Parameter</div>
+    <div class="rightCol">
+<table>
+<caption>Table 1. Query parameter description</caption>
+                <colgroup>
+                  <col style={{ width: "25%" }} />
+                  <col style={{ width: "25%" }} />
+                  <col style={{ width: "50%" }} />
+                </colgroup>
+                <thead>
+                  <tr>
+                    <th>Parameter</th>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>templateNamespace</td>
+                    <td>string</td>
+                    <td>-</td>
+                    </tr>
+                    <tr>
+                    <td>templateName</td>
+                    <td>string</td>
+                    <td>-</td>
+                    </tr>
+                    <tr>
+                    <td>pageIndex</td>
+                    <td>integer</td>
+                    <td>Required. Page number. The default is 1.</td>
+                    </tr>
+                    <tr>
+                    <td>pageSize</td>
+                    <td>integer</td>
+                    <td>Required. The number of data on each page. The default is 20 and the maximum is 500.</td>
+                    </tr>
+                    </tbody>
+                    </table>
+</div>
+    <div class="leftCol">Response</div>
+    <div class="rightCol">
+<ul>
+<li>200: Successful.
+
+
+```json
+{
+  "code" : 200,
+  "data" : {
+    "data" : [ {
+      "comment" : "this is a test template",
+      "dataType" : "LONG",
+      "subDataType" : "LONG",
+      "dataTypePrecision" : 0,
+      "dataTypeScale" : 0,
+      "defaultValue" : "666",
+      "display" : false,
+      "displayName" : "p1",
+      "enName" : "p1",
+      "hasKeyRelation" : false,
+      "historical" : false,
+      "persistent" : false,
+      "readWriteMode" : "READ_ONLY",
+      "stringMaxLength" : 0,
+      "unique" : false,
+      "valueScale" : 2,
+      "id" : 12345,
+      "templateId" : 12222,
+      "sourceFunctionSetId" : 12221,
+      "instanceId" : "12223",
+      "labelIds" : [ 11111 ],
+      "deletable" : true,
+      "editable" : true,
+      "max" : 100,
+      "min" : 0,
+      "maxValue" : 100.88,
+      "minValue" : 0.88,
+      "namespace" : "system",
+      "unit" : "kg",
+      "templateName" : "Template_12",
+      "templateNamespace" : "system"
+    } ],
+    "pageIndex" : 1,
+    "pageSize" : 20,
+    "total" : 100,
+    },
+  "detail" : "string",
+  "message" : "ok"
+}
+```
+
+</li>
+<li>500: General internal error of OODM.
+
+
+```json
+{
+  "code": 10001001,
+  "data": {},
+  "detail": "string",
+  "message": "string"
+}
+```
+
+
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div class="div">
+<div class="title">
+
+## ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/openAPI/2.png) Edit Template Attribute
+
+</div>
+<div class="grid">
+<div class="leftCol">Path</div>
+<div class="rightCol">
+
+```
+http://{supOS ip:port}/open-api/supos/oodm/v2/template/{templateNamespace}/{templateName}/attribute/{attributeNamespace}/{attributeName}
+```
+
+</div>
+<div class="leftCol">Request body</div>
+<div class="rightCol">
+
+```json
+{
+  "appAccessMode" : "PUBLIC", //PUBLIC or PRIVATE
+  "comment" : "edit attribute",
+  "compress" : false,
+  "defaultValue" : "12",
+  "display" : false,
+  "displayName" : "udpateAttribute1",
+  "historical" : false,
+  "id" : 16668,
+  "labelIds" : [ 15555 ],
+  "max" : 100,
+  "maxRisingPeriod" : 900,
+  "min" : 1,
+  "maxValue" : 100.88,
+  "minValue" : 0.88,
+  "paramUnit" : "%",
+  "paramValue" : "0.2",
+  "persistent" : false,
+  "readWriteMode" : "READ_ONLY",  //READ_ONLY or READ_WRITE
+  "unique" : false,
+  "unit" : "kg",
+  "useDisplayField" : false,  //whether to enable main display field
+  "valueScale" : 2
+}
+```
+
+</div>
+<div class="leftCol">Response</div>
+<div class="rightCol">
+<ul>
+<li>200: Successful.</li>
+<li>500: General internal error of OODM.
+
+```json
+{
+  "code": 10001001,
+  "data": {},
+  "detail": "string",
+  "message": "string"
+}
+```
+
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div class="div">
+  <div class="title">
+
+## ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/openAPI/3.png) Delete Template Attribute
+
+</div>
+  <div class="grid">
+    <div class="leftCol">Path</div>
+    <div class="rightCol">
+
+```
+http://{supOS ip:port}/open-api/supos/oodm/v2/template/{templateNamespace}/{templateName}/attribute/{attributeNamespace}/{attributeName}
+```
+
+</div>
+    <div class="leftCol">Response</div>
+    <div class="rightCol">
+<ul>
+<li>200: Successful.
+</li>
+<li>500: General internal error of OODM.
+
+```json
+{
+  "code": 10001001,
+  "data": {},
+  "detail": "string",
+  "message": "string"
+}
+```
+
+</li>
+</ul>
+</div>
+  </div>
+</div>
+
+<div class="div">
+  <div class="title">
+
+## ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/openAPI/1.png) Add Entity Instance Extension Attribute
+
+</div>
+  <div class="grid">
+    <div class="leftCol">Path</div>
+    <div class="rightCol">
+
+```
+http://{supOS ip:port}/open-api/supos/oodm/v2/template/{templateNamespace}/{templateName}/entity/{instanceName}/attribute
+```
+
+</div>
+    <div class="leftCol">Request Body</div>
+    <div class="rightCol">
+
+```json
+{
+  "comment" : "this is a test template",
+  "dataType" : "LONG",
+  "subDataType" : "LONG",
+  "dataTypePrecision" : 0,
+  "dataTypeScale" : 0,
+  "defaultValue" : "666",
+  "display" : false,
+  "displayName" : "p1",
+  "enName" : "p1",
+  "hasKeyRelation" : false,
+  "historical" : false,
+  "persistent" : false,
+  "readWriteMode" : "READ_ONLY",
+  "stringMaxLength" : 0,
+  "unique" : false,
+  "valueScale" : 2,
+  "appAccessMode" : "PUBLIC",
+  "appName" : "system",
+  "appShowName" : "system",
+  "namespace" : "system",
+  "max" : 100,
+  "min" : 0,
+  "maxValue" : 100.88,
+  "minValue" : 0.88,
+  "unit" : "kg",
+  "compress" : true,
+  "paramValue" : "0.2",  //compress parameter value
+  "paramUnit" : "%", //compress parameter unit
+  "maxRisingPeriod" : 600, //compress parameter maximum rising period
+  "labelIds" : [ 12333 ]
+}
+```
+
+</div>
+    <div class="leftCol">Response</div>
+    <div class="rightCol">
+<ul>
+<li>200: Successful.
+
+```json
+{
+  "code" : 200,
+  "data" : 19999,
+  "detail" : "string",
+  "message" : "ok"
+}
+```
+
+</li>
+<li>500: General internal error of OODM.
+
+```json
+{
+  "code": 10001001,
+  "data": {},
+  "detail": "string",
+  "message": "string"
+}
+```
+
+</li>
+</ul>
+</div>
+  </div>
+</div>
+
+<div class="div">
+  <div class="title">
+
+## ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/openAPI/2.png) Edit Entity Instance Extension Attribute
+
+</div>
+  <div class="grid">
+    <div class="leftCol">Path</div>
+    <div class="rightCol">
+
+```
+http://{supOS ip:port}/open-api/supos/oodm/v2/template/{templateNamespace}/{templateName}/entity/{instanceName}/attribute/{attributeNamespace}/{attributeName}
+```
+
+</div>
+    <div class="leftCol">Request Body</div>
+    <div class="rightCol">
+
+```json
+{
+  "appAccessMode" : "PUBLIC",
+  "comment" : "edit attribute",
+  "compress" : false,
+  "defaultValue" : "12",
+  "display" : false,
+  "displayName" : "udpateAttribute1",
+  "historical" : false,
+  "id" : 16668,
+  "labelIds" : [ 15555 ],
+  "max" : 100,
+  "maxRisingPeriod" : 900,
+  "min" : 1,
+  "maxValue" : 100.88,
+  "minValue" : 0.88,
+  "paramUnit" : "%",
+  "paramValue" : "0.2",
+  "persistent" : false,
+  "readWriteMode" : "READ_ONLY",
+  "unique" : false,
+  "unit" : "kg",
+  "useDisplayField" : false,
+  "valueScale" : 2
+}
+```
+
+
+</div>
+    <div class="leftCol">Response</div>
+    <div class="rightCol">
+<ul>
+<li>200: Successful.
+</li>
+<li>500: General internal error of OODM.
+
+```json
+{
+  "code": 10001001,
+  "data": {},
+  "detail": "string",
+  "message": "string"
+}
+```
+
+</li>
+</ul>
+</div>
+  </div>
+</div>
+<div class="div">
+  <div class="title">
+
+## ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/openAPI/3.png) Delete Entity Instance Extension Attribute
+
+</div>
+  <div class="grid">
+    <div class="leftCol">Path</div>
+    <div class="rightCol">
+
+```
+http://{supOS ip:port}/open-api/supos/oodm/v2/template/{templateNamespace}/{templateName}/entity/{instanceName}/attribute/{attributeNamespace}/{attributeName}
+```
+</div>
+    <div class="leftCol">Response</div>
+    <div class="rightCol">
+<ul>
+<li>200: Successful.
+</li>
+<li>500: General internal error of OODM.
+
+```json
+{
+  "code": 10001001,
+  "data": {},
+  "detail": "string",
+  "message": "string"
+}
+```
+
+</li>
+</ul>
+</div>
+  </div>
+</div>
+<div class="div">
+  <div class="title">
+
+## ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/openAPI/4.png) Get Attribute of Current Instance
+
+</div>
+  <div class="grid">
+    <div class="leftCol">Path</div>
+    <div class="rightCol">
+
+```
+http://{supOS ip:port}/open-api/supos/oodm/v2/template/{templateNamespace}/{templateName}/instance/{instanceName}/attribute/self
+```
+
+</div>
+    <div class="leftCol">Response</div>
+    <div class="rightCol">
+<ul>
+<li>200: Successful.
+
+```json
+{
+  "code" : 200,
+  "data" : {
+    "data" : [ {
+      "comment" : "this is a test template",
+      "dataType" : "LONG",
+      "subDataType" : "LONG",
+      "dataTypePrecision" : 0,
+      "dataTypeScale" : 0,
+      "defaultValue" : "666",
+      "display" : false,
+      "displayName" : "p1",
+      "enName" : "p1",
+      "hasKeyRelation" : false,
+      "historical" : false,
+      "persistent" : false,
+      "readWriteMode" : "READ_ONLY",
+      "stringMaxLength" : 0,
+      "unique" : false,
+      "valueScale" : 2,
+      "id" : 12345,
+      "templateId" : 12222,
+      "sourceFunctionSetId" : 12221,
+      "instanceId" : "12223",
+      "labelIds" : [ 11111 ],
+      "deletable" : true,
+      "editable" : true,
+      "max" : 100,
+      "min" : 0,
+      "maxValue" : 100.88,
+      "minValue" : 0.88,
+      "namespace" : "system",
+      "unit" : "kg",
+      "templateName" : "Template_12",
+      "templateNamespace" : "system",
+      "existAlarm" : false,
+      "value" : "string",
+      "instanceEnName" : "string",
+      "instanceDisplayName" : "string"
+    } ],
+    "pageIndex" : 1,
+    "pageSize" : 20,
+    "total" : 100
+  },
+  "detail" : "string",
+  "message" : "ok"
+}
+```
+
+</li>
+<li>500: General internal error of OODM.
+
+```json
+{
+  "code": 10001001,
+  "data": {},
+  "detail": "string",
+  "message": "string"
+}
+```
+
+</li>
+</ul>
+</div>
+  </div>
+</div>
+

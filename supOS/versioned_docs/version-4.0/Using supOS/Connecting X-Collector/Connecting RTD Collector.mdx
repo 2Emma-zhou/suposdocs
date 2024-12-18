@@ -1,0 +1,199 @@
+---
+sidebar_position: 3
+
+---
+
+To connect a real-time data, video streams or alarm data to supOS, you need to perform operations shown as the figure below.
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/platform/77.png"/>
+
+:::info
+- Different collectors require different but similar configuration, and RTD collector is used as an example.
+- Add a data source under **Global Configuration** > **Local Storage** which stores alarm data before adding an alarm collector.
+:::
+
+## Adding Collector
+
+1. Log in to supOS, and then click <img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/platform/7.png"/> at the upper-right corner to go to the design center.
+2. Select **Collection Node Management** > **Authentication**.
+3. Click <img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/platform/16.png"/>, and then enter the corresponding information to add a collector.
+4. Set the <strong>Type</strong> to <strong>Common Collector</strong>, and select the <strong>Timestamp</strong> to be recorded in the data.
+
+<img width={450} src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/platform/17.png"/>
+
+5. Click <strong>OK</strong>.
+
+## Authenticating Collector
+Use the UUID generated on supOS, authenticate and connect supOS with the collector.
+
+1. Log in to X-Collector, and then select **RTD Collector** > **Connection Info**.<br />
+:::info what you might be interested
+One collector can upload data to up to 5 supOS platforms simultaneously.
+:::
+2. Click **Add**, and then enter supOS information.
+
+<img width={350} src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supCollector/Snap4.png"/> 
+
+<table>
+<colgroup>
+  <col style={{ width: "21.097046413502106%" }} />
+  <col style={{ width: "25.52742616033755%" }} />
+  <col style={{ width: "53.37552742616033%" }} />
+</colgroup>
+<thead>
+  <tr>
+    <th>Section</th>
+    <th>Parameter</th>
+    <th>Description</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td rowSpan={3}>
+      Server configuration
+    </td>
+    <td>
+      supOS server address
+    </td>
+    <td>
+
+- For standalone deployment, enter the supOS server address.
+- For cluster deployment, you can click <img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/platform/28.png"/> to add and enter up to 5 server addresses in the cluster.
+
+:::info
+Only TCP protocol is supported.
+:::
+
+</td>
+  </tr>
+  <tr>
+    <td>
+      Communication port
+    </td>
+    <td>
+      Leave it as default. Ports are different depending on data
+      upload method.
+    </td>
+  </tr>
+  <tr>
+    <td>
+      Data upload method
+    </td>
+    <td>
+      Select from <strong>TCP</strong> and <strong>UDP</strong>.
+    </td>
+  </tr>
+  <tr>
+    <td rowSpan={3}>
+      Node info
+    </td>
+    <td>
+      Authentication node name
+    </td>
+    <td>
+      Enter the collector name you created on the supOS platform.
+    </td>
+  </tr>
+  <tr>
+    <td>UUID</td>
+    <td>
+      Enter the collector UUID generated on the supOS platform.
+    </td>
+  </tr>
+  <tr>
+    <td>
+      Connection status
+    </td>
+    <td>
+      Displays the connection status between the collector and supOS. It is <b>Success</b> after authorization on supOS.
+    </td>
+  </tr>
+  <tr>
+    <td rowSpan={4}>
+      Other configuration
+    </td>
+    <td>R/W status</td>
+    <td>
+      Set the global read and write status of the collector. You can
+      set different status for each supOS.
+
+:::tip
+To write data back to equipment, set it to <strong>R/W</strong>.
+:::
+
+</td>
+  </tr>
+  <tr>
+    <td>
+      Redundancy setup
+    </td>
+    <td>
+      Set whether to enable redundancy for the collector and enter
+      group ID and number if enabled.
+
+- Redundancy ID of both collectors must be the same.
+- Redundancy number of both collectors must be different.
+
+:::info
+Make sure other information such as server address, port, authentication node and UUID are the same for both collectors.
+:::
+
+</td>
+  </tr>
+  <tr>
+    <td>Cache</td>
+    <td>
+      Automatic network replenishment. Enable it and set a path for
+      data storage during network failure.
+
+:::info
+- It is unavailable when <strong>Data upload method</strong> is set to <strong>UDP</strong>.
+- Storage path must be different for different supOS platforms.
+- Make sure the disk size is enough. For example, data that changes by the second of 10,000 tags takes up 7 GB in a day.
+:::
+
+</td>
+  </tr>
+  <tr>
+    <td>
+      Communication encryption
+    </td>
+    <td>
+      Enter the key generated after enabling encryption during adding
+      collector on supOS to encrypt communication information between
+      supOS and X-Collector.
+
+:::info
+When the key is changed on supOS, the change takes effect after changing it on X-Collector.
+:::
+
+</td>
+  </tr>
+</tbody>
+        </table>
+
+ 
+3. Click **Save**.
+
+:::info
+Deletion is prohibited when there is only one supOS platform connected.
+:::
+
+## Authorizing Collector
+
+<ol>
+<li>Log in to supOS, and then click <img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/platform/7.png"/> at the upper-right corner to go to the design center.</li>      
+<li>Select <strong>Collection Node Management</strong> > <strong>Status</strong>.</li>
+<li>Select the collector you just added, view the details and then click <strong>OK</strong>.
+<ul>
+<li>The collector is connected, and a new instance is created under <b>Object Model Management > Object Instance > Entity Template > Collector Template</b>.</li>
+<li>An <b>Online</b> property with data type as <b>Bool</b> is generated under the instance, and you can use it in APP designing to indicate collector status (true means online and false is offline).</li>
+</ul>
+</li>
+</ol>
+
+:::info
+- Video collector that is added to supOS platform generates a new instance under <b>Object Model Management > Object Instance > Entity Template > Video Template</b>.
+- Alarm collector that is added to supOS platform generates a new instance under <b>Object Model Management > Object Instance > Entity Template > AE Template</b>.
+:::
+

@@ -1,0 +1,87 @@
+---
+hide_title: true
+---
+
+Object modeling on supOS allows you to digitalize your plant, workshop, staff and equipment into object models.
+## Overview
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/factoryModeling/34.png)
+
+<table>
+  <thead>
+    <tr>
+      <th>Function</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Object Template</td>
+      <td>Template of general things in your plant, such as workshop, staff.</td>
+    </tr>
+    <tr>
+      <td>Object Instance</td>
+      <td>Specific things in your plant, such as furnace, staff Zhang.</td>
+    </tr>
+    <tr>
+      <td>Function Set</td>
+      <td>Sets of general functions that can be associated with and inherited by linked templates and instances.</td>
+    </tr>
+    <tr>
+      <td>Tag Management</td>
+      <td>Model category.</td>
+    </tr>
+    <tr>
+      <td>Data Set</td>
+      <td>Manually created and maintained database on supOS.</td>
+    </tr>
+    <tr>
+      <td>Data Group</td>
+      <td>Group and manage data permission of object instance attributes.</td>
+    </tr>
+    <tr>
+      <td>Task Management</td>
+      <td>Information of subscription tasks.</td>
+    </tr>
+  </tbody>
+</table>
+
+## Object Template vs Object Instance
+
+Refer to the following examples to understand the relation between an object template, an instance and attributes.
+
+<table>
+  <thead>
+    <tr>
+      <th>Template</th>
+      <th>Template Attribute</th>
+      <th>Instance</th>
+      <th>Instance Attribute</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Workshop A</td>
+      <td>product volume, electricity</td>
+      <td>Furnace, boiler, shelf</td>
+      <td>Furnace pressure, furnace humidity, boiler temperature, shelf height</td>
+    </tr>
+    <tr>
+      <td>Furnace</td>
+      <td>Temperature, pressure, humidity</td>
+      <td>Furnace A</td>
+      <td>Height, productivity, consumption</td>
+    </tr>
+    <tr>
+      <td>Staff</td>
+      <td>Age, gender, name</td>
+      <td>Staff A</td>
+      <td>Birth date, post</td>
+    </tr>
+  </tbody>
+</table>
+
+:::info
+All template attributes will be inherited by the subordinate instances. For example, from the above staff example, staff A will have attributes including age, gender, name, birth date and post.
+:::
+

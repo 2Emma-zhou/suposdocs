@@ -1,0 +1,555 @@
+This section lists messages you can send to supOS through MQTT.
+
+## Topic Definition
+- Topic
+`/{auth token}/{endpoint id}/{endpoint name}/{method name}/{direction}`
+- Field Description
+
+<table>
+<tr>
+<th>Field</th>
+<th>Description</th>
+<th>Remarks</th>
+</tr>
+<tr>
+<td>auth token</td>
+<td>UUID assigned by supOS under <b>Access Management</b>.</td>
+<td>-</td>
+</tr>
+<tr>
+<td>endpoint id</td>
+<td>Custom ID of the accessing device, recommended to be the MAC address of the gateway.</td>
+<td>-</td>
+</tr>
+<tr>
+<td>endpoint name</td>
+<td>Name of the accessing device as defined by supOS under <b>Access Management</b>.</td>
+<td>-</td>
+</tr>
+<tr>
+<td>direction</td>
+<td>
+
+- **push**: Request from cloud.
+- **push_reply**: Response to cloud request.
+- **get**: Gateway requests cloud.
+- **get_reply**: Cloud responds to gateway.
+- **report**: Actively send to cloud.
+- **retain**: Actively send to cloud, requesting cloud to retain the message, mainly used for synchronization of configuration, setup information with cloud.
+
+</td>
+<td>Different method names support different topic directions.</td>
+</tr>
+</table>
+
+- Method Name List
+
+<table>
+<tr>
+<th>Function</th>
+<th>Method Name/Topic Direction</th>
+<th>Description</th>
+<th>Remarks</th>
+</tr>
+<tr>
+<td>Device actively sends tag data</td>
+<td>metatag/retain</td>
+<td>Unidirectional upload, cloud does data persistence assurance</td>
+<td>Required</td>
+</tr>
+<tr>
+<td>Device actively sends real-time data</td>
+<td>rtdvalue/report</td>
+<td>Unidirectional upload</td>
+<td>Required</td>
+</tr>
+<tr>
+<td>Device actively sends cached resume data</td>
+<td>cachevalue/report</td>
+<td>Unidirectional upload</td>
+<td>Required</td>
+</tr>
+<tr>
+<td>Device actively sends events</td>
+<td>rtdevent/report</td>
+<td>Unidirectional upload</td>
+<td>Optional</td>
+</tr>
+<tr>
+<td rowSpan="2">Device actively sends requests</td>
+<td>rtdevent/get</td>
+<td>Event request</td>
+<td rowSpan="2">Optional, event support extensible, currently supports event: 1-System time synchronization</td>
+</tr>
+<tr>
+<td>rtdevent/get_reply</td>
+<td>Event response, no response is an exception, continuous no response can be considered as cloud exception</td>
+</tr>
+<tr>
+<td rowSpan="2">Cloud actively refreshes tag data</td>
+<td>metatag/push</td>
+<td>Metadata active refresh request, requesting device to actively send a full set of tag data once</td>
+<td rowSpan="2">Mandatory, cloud will only actively send refresh request when necessary</td>
+</tr>
+<tr>
+<td>metatag/push_reply</td>
+<td>Metadata active refresh response, continuous no response can be considered as device exception</td>
+</tr>
+<tr>
+<td rowSpan="2">Cloud actively refreshes real-time data</td>
+<td>rtdvalue/push</td>
+<td rowSpan="2">Real-time data active refresh request, requesting device to actively send a full set of real-time data once</td>
+<td>Mandatory, cloud will only actively send refresh request when necessary</td>
+</tr>
+<tr>
+<td>rtdvalue/push_reply</td>
+<td>Real-time data refresh response, continuous no response can be considered as device exception</td>
+</tr>
+<tr>
+<td rowSpan="2">Cloud actively sends event notifications</td>
+<td>rtdevent/push</td>
+<td>Event notification request</td>
+<td rowSpan="2">Optional</td>
+</tr>
+<tr>
+<td>rtdevent/push_reply</td>
+<td>Event notification response, continuous no response can be considered as device exception</td>
+</tr>
+<tr>
+<td rowSpan="2">Cloud actively sends write notifications</td>
+<td>rtdnotify/push</td>
+<td>Cloud write notification</td>
+<td rowSpan="2">Optional, collectors supporting write features need to subscribe</td>
+</tr>
+<tr>
+<td>rtdnotify/push_reply</td>
+<td>Gateway write response</td>
+</tr>
+</table>
+
+:::info
+Examples in this section used the following information in the topic:
+- **auth token**: 86efdf12-4f54-4691-b833-09cbaa2d50a4
+- **endpoint id**: dev1234
+- **endpoint name**: test
+:::
+
+## Metatag
+### Device Actively Refreshes Tag
+
+<div className='div'>
+<div className='grid'>
+<div className='leftCol'>Topic</div>
+<div className='rightCol'>
+/86efdf12-4f54-4691-b833-09cbaa2d50a4/dev1234/test/metatag/retain
+</div>
+<div className='leftCol'>MQTT Parameter</div>
+<div className='rightCol'>
+QoS = 0，Retain = 1
+</div>
+<div className='leftCol'>Message</div>
+<div className='rightCol'>
+MetaTagSequence
+</div>
+<div className='leftCol'>Remarks</div>
+<div className='rightCol'>
+The device will actively send tag meta data to supOS once turned on.
+</div>
+</div>
+</div>
+
+### Cloud Requires Refreshing Tag
+
+<div className='div'>
+<div className='title'>
+
+**Cloud Request**
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Topic</div>
+<div className='rightCol'>
+/86efdf12-4f54-4691-b833-09cbaa2d50a4/dev1234/test/metatag/push
+</div>
+<div className='leftCol'>MQTT Parameter</div>
+<div className='rightCol'>
+QoS = 1，Retain = 0
+</div>
+<div className='leftCol'>Message</div>
+<div className='rightCol'>
+None
+</div>
+<div className='leftCol'>Remarks</div>
+<div className='rightCol'>
+Refresh request will be automatically triggered from cloud when service restarted.
+</div>
+</div>
+</div>
+<div className='div'>
+<div className='title'>
+
+**Response**
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Topic</div>
+<div className='rightCol'>
+/86efdf12-4f54-4691-b833-09cbaa2d50a4/dev1234/test/metatag/push_reply
+</div>
+<div className='leftCol'>MQTT Parameter</div>
+<div className='rightCol'>
+QoS = 1，Retain = 0
+</div>
+<div className='leftCol'>Message</div>
+<div className='rightCol'>
+MetaTagSequence
+</div>
+</div>
+</div>
+
+## Real-time Data
+### Device Actively Sends Real-time Data
+
+<div className='div'>
+<div className='grid'>
+<div className='leftCol'>Topic</div>
+<div className='rightCol'>
+/86efdf12-4f54-4691-b833-09cbaa2d50a4/dev1234/test/rtdvalue/report
+</div>
+<div className='leftCol'>MQTT Parameter</div>
+<div className='rightCol'>
+QoS = 1，Retain = 0
+</div>
+<div className='leftCol'>Message</div>
+<div className='rightCol'>
+ValueSequence
+</div>
+<div className='leftCol'>Remarks</div>
+<div className='rightCol'>
+The device actively send real-time data after tag data sent.
+</div>
+</div>
+</div>
+
+### Cloud Requires Refreshing Real-time Data
+
+<div className='div'>
+<div className='title'>
+
+**Cloud Request**
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Topic</div>
+<div className='rightCol'>
+/86efdf12-4f54-4691-b833-09cbaa2d50a4/dev1234/test/rtdvalue/push
+</div>
+<div className='leftCol'>MQTT Parameter</div>
+<div className='rightCol'>
+QoS = 1，Retain = 0
+</div>
+<div className='leftCol'>Message</div>
+<div className='rightCol'>
+None
+</div>
+<div className='leftCol'>Remarks</div>
+<div className='rightCol'>
+Refresh request will be automatically triggered from cloud when service restarted.
+</div>
+</div>
+</div>
+<div className='div'>
+<div className='title'>
+
+**Response**
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Topic</div>
+<div className='rightCol'>
+/86efdf12-4f54-4691-b833-09cbaa2d50a4/dev1234/test/rtdvalue/push_reply
+</div>
+<div className='leftCol'>MQTT Parameter</div>
+<div className='rightCol'>
+QoS = 1，Retain = 0
+</div>
+<div className='leftCol'>Message</div>
+<div className='rightCol'>
+ValueSequence
+</div>
+</div>
+</div>
+
+## History Data
+### Device Actively Resumes History Data
+
+<div className='div'>
+<div className='grid'>
+<div className='leftCol'>Topic</div>
+<div className='rightCol'>
+/86efdf12-4f54-4691-b833-09cbaa2d50a4/dev1234/test/cachevalue/report
+</div>
+<div className='leftCol'>MQTT Parameter</div>
+<div className='rightCol'>
+QoS = 1，Retain = 0
+</div>
+<div className='leftCol'>Message</div>
+<div className='rightCol'>
+ValueSequence
+</div>
+<div className='leftCol'>Remarks</div>
+<div className='rightCol'>
+The device stores real-time data that failed to be sent and resumes to send the data again when network restored.
+</div>
+</div>
+</div>
+
+## Custom Event
+### Device Actively Reports Event
+
+<div className='div'>
+<div className='grid'>
+<div className='leftCol'>Topic</div>
+<div className='rightCol'>
+/86efdf12-4f54-4691-b833-09cbaa2d50a4/dev1234/test/rtdevent/report
+</div>
+<div className='leftCol'>MQTT Parameter</div>
+<div className='rightCol'>
+QoS = 1，Retain = 0
+</div>
+<div className='leftCol'>Message</div>
+<div className='rightCol'>
+RtdEvent
+</div>
+<div className='leftCol'>Remarks</div>
+<div className='rightCol'>
+
+**RtdEvent** is reserved for devices to customize data report mechanism.
+
+</div>
+</div>
+</div>
+
+### Device Requests Cloud Event
+
+<div className='div'>
+<div className='title'>
+
+**Device Request**
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Topic</div>
+<div className='rightCol'>
+/86efdf12-4f54-4691-b833-09cbaa2d50a4/dev1234/test/rtdevent/get
+</div>
+<div className='leftCol'>MQTT Parameter</div>
+<div className='rightCol'>
+QoS = 1，Retain = 0
+</div>
+<div className='leftCol'>Message</div>
+<div className='rightCol'>
+RtdEvent
+</div>
+<div className='leftCol'>Remarks</div>
+<div className='rightCol'>
+Device requests and cloud is required to response.
+</div>
+</div>
+</div>
+<div className='div'>
+<div className='title'>
+
+**Response**
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Topic</div>
+<div className='rightCol'>
+/86efdf12-4f54-4691-b833-09cbaa2d50a4/dev1234/test/rtdevent/get_reply
+</div>
+<div className='leftCol'>MQTT Parameter</div>
+<div className='rightCol'>
+QoS = 1，Retain = 0
+</div>
+<div className='leftCol'>Message</div>
+<div className='rightCol'>
+RtdEvent
+</div>
+<div className='leftCol'>Remarks</div>
+<div className='rightCol'>
+Cloud response.
+</div>
+</div>
+</div>
+
+### Cloud Event Notification
+
+<div className='div'>
+<div className='title'>
+
+**Cloud Request**
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Topic</div>
+<div className='rightCol'>
+/86efdf12-4f54-4691-b833-09cbaa2d50a4/dev1234/test/rtdevent/push
+</div>
+<div className='leftCol'>MQTT Parameter</div>
+<div className='rightCol'>
+QoS = 1，Retain = 0
+</div>
+<div className='leftCol'>Message</div>
+<div className='rightCol'>
+RtdEvent
+</div>
+<div className='leftCol'>Remarks</div>
+<div className='rightCol'>
+Cloud actively sends notifications to device according to business needs.
+</div>
+</div>
+</div>
+<div className='div'>
+<div className='title'>
+
+**Response**
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Topic</div>
+<div className='rightCol'>
+/86efdf12-4f54-4691-b833-09cbaa2d50a4/dev1234/test/rtdevent/push_reply
+</div>
+<div className='leftCol'>MQTT Parameter</div>
+<div className='rightCol'>
+QoS = 1，Retain = 0
+</div>
+<div className='leftCol'>Message</div>
+<div className='rightCol'>
+RtdEvent
+</div>
+<div className='leftCol'>Remarks</div>
+<div className='rightCol'>
+Device reponses after processing the notified event.
+</div>
+</div>
+</div>
+
+
+## System Embedded Event
+
+### System Time Synchronization
+
+<div className='div'>
+<div className='title'>
+
+**Device Request**
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Topic</div>
+<div className='rightCol'>
+/86efdf12-4f54-4691-b833-09cbaa2d50a4/dev1234/test/rtdevent/get
+</div>
+<div className='leftCol'>MQTT Parameter</div>
+<div className='rightCol'>
+QoS = 1，Retain = 0
+</div>
+<div className='leftCol'>Message</div>
+<div className='rightCol'>
+
+- RtdEvent
+- topic = SyncTime
+- payload = GatewayCoordinate
+
+</div>
+<div className='leftCol'>Remarks</div>
+<div className='rightCol'>
+Device actively sends request to cloud for time synchronization.
+</div>
+</div>
+</div>
+<div className='div'>
+<div className='title'>
+
+**Response**
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Topic</div>
+<div className='rightCol'>
+/86efdf12-4f54-4691-b833-09cbaa2d50a4/dev1234/test/rtdevent/get_reply
+</div>
+<div className='leftCol'>MQTT Parameter</div>
+<div className='rightCol'>
+QoS = 1，Retain = 0
+</div>
+<div className='leftCol'>Message</div>
+<div className='rightCol'>
+
+- RtdEvent
+- topic = SyncTime
+- payload = ServerCoordinate
+
+
+</div>
+<div className='leftCol'>Remarks</div>
+<div className='rightCol'>
+Cloud responses to time synchronization request from device.
+</div>
+</div>
+</div>
+
+### Cloud Sends Event Notification
+
+<div className='div'>
+<div className='title'>
+
+**Cloud Request**
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Topic</div>
+<div className='rightCol'>
+/86efdf12-4f54-4691-b833-09cbaa2d50a4/dev1234/test/rtdnotify/push
+</div>
+<div className='leftCol'>MQTT Parameter</div>
+<div className='rightCol'>
+QoS = 0，Retain = 1
+</div>
+<div className='leftCol'>Message</div>
+<div className='rightCol'>
+ValueSequence
+</div>
+<div className='leftCol'>Remarks</div>
+<div className='rightCol'>
+Cloud actively requests device to response.
+</div>
+</div>
+</div>
+<div className='div'>
+<div className='title'>
+
+**Response**
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Topic</div>
+<div className='rightCol'>
+/86efdf12-4f54-4691-b833-09cbaa2d50a4/dev1234/test/rtdnotify/push_reply
+</div>
+<div className='leftCol'>MQTT Parameter</div>
+<div className='rightCol'>
+QoS = 1，Retain = 0
+</div>
+<div className='leftCol'>Message</div>
+<div className='rightCol'>
+None
+</div>
+<div className='leftCol'>Remarks</div>
+<div className='rightCol'>
+Device reponses to cloud.
+</div>
+</div>
+</div>

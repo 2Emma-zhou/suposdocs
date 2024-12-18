@@ -1,0 +1,682 @@
+---
+hide_title: true
+---
+
+<div class="div">
+  <div class="title">
+
+## ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/openAPI/4.png) Get Network List
+
+</div>
+  <div class="grid">
+    <div class="leftCol">Path</div>
+    <div class="rightCol">
+
+```
+http://{supOS ip:port}/open-api/supos/oodm/v2/networks
+```
+
+</div>
+    <div class="leftCol">Query Parameter</div>
+    <div class="rightCol">
+<table>
+<caption>Table 1. Query parameter description</caption>
+                <colgroup>
+                  <col style={{ width: "25%" }} />
+                  <col style={{ width: "25%" }} />
+                  <col style={{ width: "50%" }} />
+                </colgroup>
+                <thead>
+                  <tr>
+                    <th>Parameter</th>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>keyword</td>
+                    <td>string</td>
+                    <td>Fuzzy match the name and alias.</td>
+                    </tr>
+                    <tr>
+                    <td>pageIndex</td>
+                    <td>integer</td>
+                    <td>Required. Page number. The default is 1.</td>
+                    </tr>
+                    <tr>
+                    <td>pageSize</td>
+                    <td>integer</td>
+                    <td>Required. The number of data on each page. The default is 20 and the maximum is 500.</td>
+                    </tr>
+                    </tbody>
+                    </table>
+</div>
+    <div class="leftCol">Response</div>
+    <div class="rightCol">
+<ul>
+<li>200: Successful.
+
+```json
+{
+  "code": 200,
+  "data": {
+    "data": [
+      {
+        "comment": "test query on network",
+        "displayName": "network1",
+        "enName": "network1",
+        "id": 15555
+      }
+    ],
+    "pageIndex": 1,
+    "pageSize": 20,
+    "total": 100
+  },
+  "detail": "string",
+  "message": "ok"
+}
+```
+
+</li>
+<li>500: General internal error of OODM.
+
+```json
+{
+  "code": 10001001,
+  "data": {},
+  "detail": "string",
+  "message": "string"
+}
+```
+
+</li>
+</ul>
+</div>
+  </div>
+</div>
+
+<div class="div">
+  <div class="title">
+
+## ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/openAPI/1.png) Create Network
+
+</div>
+  <div class="grid">
+    <div class="leftCol">Path</div>
+    <div class="rightCol">
+
+```
+http://{supOS ip:port}/open-api/supos/oodm/v2/networks
+```
+
+</div>
+    <div class="leftCol">Request Body</div>
+    <div class="rightCol">
+
+```json
+{
+  "comment": "newly created network",
+  "displayName": "network1",
+  "enName": "network1" //alias
+}
+```
+
+</div>
+    <div class="leftCol">Response</div>
+    <div class="rightCol">
+<ul>
+<li>200: Successful.
+
+```json
+{
+  "code": 200,
+  "data": 19999,
+  "detail": "string",
+  "message": "ok"
+}
+```
+
+</li>
+<li>500: General internal error of OODM.
+
+```json
+{
+  "code": 10001001,
+  "data": {},
+  "detail": "string",
+  "message": "string"
+}
+```
+
+</li>
+</ul>
+</div>
+  </div>
+</div>
+
+<div class="div">
+  <div class="title">
+
+## ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/openAPI/2.png) Edit Network
+
+</div>
+  <div class="grid">
+    <div class="leftCol">Path</div>
+    <div class="rightCol">
+
+```
+http://{supOS ip:port}/open-api/supos/oodm/v2/networks/{networkName}
+```
+**networkName**: Required. Network alias.
+
+</div>
+    <div class="leftCol">Request Body</div>
+    <div class="rightCol">
+
+```json
+{
+  "comment": "edited network",
+  "displayName": "edit network"
+}
+```
+
+</div>
+    <div class="leftCol">Response</div>
+    <div class="rightCol">
+<ul>
+<li>200: Successful.
+
+```json
+{
+  "code": 200,
+  "message": "ok",
+  "data": null,
+  "detail": null
+}
+```
+
+</li>
+<li>500: General internal error of OODM.
+
+```json
+{
+  "code": 10001001,
+  "data": {},
+  "detail": "string",
+  "message": "string"
+}
+```
+
+</li>
+</ul>
+</div>
+  </div>
+</div>
+
+<div class="div">
+  <div class="title">
+
+## ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/openAPI/3.png) Delete Network
+
+</div>
+  <div class="grid">
+    <div class="leftCol">Path</div>
+    <div class="rightCol">
+
+```
+http://{supOS ip:port}/open-api/supos/oodm/v2/networks/{networkName}
+```
+**networkName**: Required. Network alias.
+
+</div>
+    <div class="leftCol">Response</div>
+    <div class="rightCol">
+<ul>
+<li>200: Successful.
+
+```json
+{
+  "code": 200,
+  "message": "ok",
+  "data": null,
+  "detail": null
+}
+```
+
+</li>
+<li>500: General internal error of OODM.
+
+```json
+{
+  "code": 10001001,
+  "data": {},
+  "detail": "string",
+  "message": "string"
+}
+```
+
+</li>
+</ul>
+</div>
+  </div>
+</div>
+
+<div class="div">
+<div class="title"> 
+
+## ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/openAPI/1.png) Create Network Node 
+
+</div>
+<div class="grid">
+<div class="leftCol">Path</div>
+<div class="rightCol"> 
+
+```
+http://{supOS ip:port}/open-api/supos/oodm/v2/networks/{networkName}/nodes
+```
+**networkName**: Required. Network alias.
+
+</div>
+<div class="leftCol">Request Body</div>
+<div class="rightCol"> 
+
+```json
+{
+  "instanceName": "instance1", //instance alias of the current node
+  "networkOrder": 2.3, //sorting field
+  "parentId": -1, //Parent ID. Leave it empty or set it to -1 when it is root node
+  "templateName": "t1", //template alias of the current node
+  "templateNamespace": "system"  //template namespace of the current node
+}
+```
+
+</div>
+<div class="leftCol">Response</div>
+<div class="rightCol"> 
+<ul>
+<li>200: Successful.
+
+```json
+{
+  "code": 200,
+  "data": 19999,
+  "detail": "string",
+  "message": "ok"
+}
+```
+
+</li>
+<li>500: General internal error of OODM.
+
+```json
+{
+  "code": 10001001,
+  "data": {},
+  "detail": "string",
+  "message": "string"
+}
+```
+
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div class="div">
+  <div class="title">
+
+## ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/openAPI/4.png) Get Children Node Tree of Current Node
+  
+</div>
+<div class="grid">
+<div class="leftCol">Path</div>
+<div class="rightCol">
+
+```
+http://{supOS ip:port}/open-api/supos/oodm/v2/networks/{networkName}/nodes/{nodeId}
+```
+- networkName: Required. String. Network alias.
+- nodeId: Required. Integer. Node ID.
+
+</div>
+<div class="leftCol">Query parameters</div>
+<div class="rightCol">
+<table>
+        <caption>Table 1. Query parameter description</caption>
+        <colgroup>
+          <col style={{ width: "25%" }} />
+          <col style={{ width: "25%" }} />
+          <col style={{ width: "50%" }} />
+        </colgroup>
+        <thead>
+          <tr>
+            <th>Parameter</th>
+            <th>Type</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              needParent
+            </td>
+            <td>
+              boolean
+            </td>
+            <td>
+              Whether parent nodes are needed.
+            </td>
+          </tr>
+          <tr>
+            <td>
+              excludeTemplateName
+            </td>
+            <td>
+              array of strings
+            </td>
+            <td>
+              Exclude the specified template.
+            </td>
+          </tr>
+          <tr>
+            <td>
+              deep
+            </td>
+            <td>
+              integer
+            </td>
+            <td>
+              The depth of node to be inquired. The default is -1.
+            </td>
+          </tr>
+          <tr>
+            <td>
+              needAttributeValue
+            </td>
+            <td>
+              boolean
+            </td>
+            <td>
+              Whether need attribute values.
+            </td>
+          </tr>
+          <tr>
+            <td>
+              needLabels
+            </td>
+            <td>
+              boolean
+            </td>
+            <td>
+              Whether need labels.
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+<div class="leftCol">Response</div>
+<div class="rightCol">
+<ul>
+<li>
+200: Successful.
+
+```json
+{
+        "code": 200,
+        "data": {
+          "children": [
+            {}
+          ],
+          "content": {},
+          "hasChildren": false,
+          "instanceName": "instance1",
+          "networkOrder": 2.3,
+          "nodeId": 12456,
+          "parent": {},
+          "parentNodeId": 12455,
+          "templateName": "t1",
+          "templateNamespace": "system",
+          "labels": [
+            "label1"
+          ]
+        },
+        "detail": "string",
+        "message": "ok"
+      }
+```
+
+</li>
+<li>
+500: General internal error of OODM.
+
+```json
+{
+          "code": 10001001,
+          "data": {},
+  "detail": "string",
+  "message": "string"
+}
+```
+
+</li>
+</ul>
+    </div>
+    </div>
+    </div>
+
+
+<div class="div">
+<div class="title">
+
+  
+## ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/openAPI/2.png) Edit Network Node
+  
+</div>
+<div class="grid">
+<div class="leftCol">Path</div>
+<div class="rightCol">
+
+```
+http://{supOS ip:port}/open-api/supos/oodm/v2/networks/{networkName}/nodes/{nodeId}
+```
+- networkName: Required. String. Network alias.
+- nodeId: Required. Integer. Node ID.
+
+</div>
+<div class="leftCol">Request Body</div>
+<div class="rightCol">
+
+```json
+{
+        "networkOrder": 2.3,
+        "parentId": 16666
+      }
+```
+- networkOrder: Sorting field. Double.
+- parentId: Integer. Parent node ID.
+
+</div>
+<div class="leftCol">Response</div>
+<div class="rightCol">
+<ul>
+<li>200: Successful.
+
+```json
+{
+"code": 200,
+"message": "ok",
+ "data": null,
+"detail": null
+}
+```
+
+</li>
+<li>500: General internal error of OODM.
+
+```json
+{
+"code": 10001001,
+"data": {},
+"detail": "string",
+"message": "string"
+}
+```
+
+</li>
+</ul>
+    </div>
+  </div>
+</div>
+
+<div class="div"> 
+<div class="title">
+
+## ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/openAPI/3.png) Recursion Delete Network Node
+
+</div> 
+<div class="grid"> 
+<div class="leftCol">Path</div> 
+<div class="rightCol">
+
+```
+http://{supOS ip:port}/open-api/supos/oodm/v2/networks/{networkName}/nodes/{nodeId}
+``` 
+
+</div> 
+<div class="leftCol">Response</div> 
+<div class="rightCol"> 
+<ul> 
+<li>200: Successful. 
+
+```json
+{
+  "code": 200,
+  "message": "ok",
+  "data": null,
+  "detail": null
+}
+```
+
+</li>
+<li>500: General internal error of OODM. 
+
+```json
+{
+  "code": 10001001,
+  "data": {},
+  "detail": "string",
+  "message": "string"
+}
+```
+
+</li> 
+</ul>
+</div> 
+</div> 
+</div> 
+
+<div class="div"> 
+<div class="title">
+
+## ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/openAPI/4.png) Get Network Tree According to Network Name
+
+</div> 
+<div class="grid"> 
+<div class="leftCol">Path</div> 
+<div class="rightCol"> 
+
+```
+http://{supOS ip:port}/open-api/supos/oodm/v2/networks/{networkName}/tree
+``` 
+**networkName**: Required. Network alias. 
+
+</div> 
+<div class="leftCol">Query parameters</div> 
+<div class="rightCol">
+<table> 
+<caption>Table 2. Query parameter description</caption> 
+<colgroup> 
+<col style={{ width: "25%" }} /> 
+<col style={{ width: "25%" }} /> 
+<col style={{ width: "50%" }} /> 
+</colgroup> 
+<thead> 
+<tr> 
+<th>Parameter</th> 
+<th>Type</th> 
+<th>Description</th> 
+</tr> 
+</thead> 
+<tbody> 
+<tr> 
+<td>excludeTemplateName</td> 
+<td>array of strings</td> 
+<td>Exclude the specified template.</td> 
+</tr> 
+<tr> 
+<td>deep</td> 
+<td>integer</td> 
+<td>The depth of node to be inquired. The default is -1.</td> 
+</tr> 
+<tr> 
+<td>needAttributeValue</td> 
+<td>boolean</td> 
+<td>Whether need attribute values.</td> 
+</tr> 
+<tr> 
+<td>needLabels</td> 
+<td>boolean</td> 
+<td>Whether need labels.</td> 
+</tr> 
+</tbody> 
+</table>
+</div> 
+<div class="leftCol">Response</div> 
+<div class="rightCol"> 
+<ul> 
+<li>200: Successful. 
+
+```json
+{
+  "code": 200,
+  "data": {
+    "children": [
+      {}
+    ],
+    "content": {},
+    "hasChildren": false,
+    "instanceName": "instance1",
+    "networkOrder": 2.3,
+    "nodeId": 12456,
+    "parent": {},
+    "parentNodeId": 12455,
+    "templateName": "t1",
+    "templateNamespace": "system",
+    "labels": [
+      "label1"
+    ]
+  },
+  "detail": "string",
+  "message": "ok"
+}
+```
+
+</li>
+<li>500: General internal error of OODM.
+
+```json
+{
+  "code": 10001001,
+  "data": {},
+  "detail": "string",
+  "message": "string"
+}
+```
+
+</li>
+</ul>
+</div>
+</div>
+</div>

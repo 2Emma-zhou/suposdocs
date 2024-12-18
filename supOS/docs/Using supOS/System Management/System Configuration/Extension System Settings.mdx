@@ -1,0 +1,138 @@
+---
+hide_title: true
+---
+
+Manage extended system configurations together with i-CDS installation. 
+
+## Configuring Printing Service
+
+Set printing templates to print out pages inside SUPCON applications when necessary.
+
+1. Select <strong>System Management</strong> > <strong>System Configuration</strong> > <b>Printing service authorization</b>, copy the authorization key **spreadjs.license**.
+
+:::info
+The default authorization key is only available on the network segment of 192.* or 10.*.
+:::
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/237.png"/>
+
+2. Go back to **System Settings**, and then click <b>Print Configuration</b>.
+3. Select a function from the application list on the left, and then click **New**. 
+4. Enter the printing template information and then click <b>Confirm</b>. 
+
+<img width={450} src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/207.jpg"/>
+
+5. Click **Design** under **Operation**, drag fields from data sources to form the template content and then click **Save and exit**.
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/239.png"/>
+
+6. Click **Association** under <b>Operation</b>, and then select application functions to associate with the template.
+
+<img width={450} src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/238.png"/>
+
+7. Select the template, and then click **Release**.
+
+:::tip
+Printing permissions need to be granted before use under **User Security Management** > **User Management**.
+:::
+
+## Adding Electronic Signature
+
+Add single or dual electronic signature verification as operations of buttons on application pages.
+
+1. Select <strong>System Management</strong> > <strong>System Configuration</strong> > <strong>Electronic signature button management</strong>. 
+2. Select a function from the left side, and then click <b>Signature settings</b> under <b>Operation</b>. 
+3. Click <b>Enable e-signature</b>, and then select signature type and enter corresponding information.
+- Single signature requires only one person's signature, while dual requires two.
+- For dual signature, specify the <b>Permission type</b> and only users with permission can perform electronic signature operation.
+
+<img width={450} src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/240.png" />
+
+4. Click <b>Confirm</b>.
+
+:::info
+An electronic signature interface will pop up when saving the changes on pages configured with electronic signature.
+:::
+
+## Enabling Audit Log
+1. Select <strong>System Management</strong> > <strong>System Configuration</strong> > <b>Audit log configuration</b>.
+2. Enable business log control.
+3. Click <strong>Save</strong>.
+
+<img width={450} src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/241.png" />
+
+## Setting Watermark
+
+Set whether to add watermark to PDFs that are uploaded to supOS or converted during preview.
+
+1. Select <strong>System Management</strong> > <strong>System Configuration</strong> > <strong>Watermark configuration</strong>.
+2. Enable watermark, and then enter the watermark text and image according to requirements that you can see by clicking <img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/platform/75.png" />.
+3. Click <strong>Save</strong>.
+
+<img width={450} src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/210.jpg" />
+
+## Converting PPT
+
+Select a conversion method for converting PPTs to PDFs.
+
+1. Select <strong>System Management</strong> > <strong>System Configuration</strong> > <strong>PPT conversion tool</strong>.
+2. Select a converting method.
+3. Click <strong>Save</strong>.
+
+<img width={450} src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/242.png" />
+
+## Setting File Size
+
+Set the maximum file size for preview. Any file that is bigger than the set size cannot be previewed.
+
+1. Select <strong>System Management</strong> > <strong>System Configuration</strong> > <strong>Preview file size limit</strong>.
+2. Set the file size limit.
+3. Click <strong>Save</strong>.
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/243.png" />
+
+## Displaying Company for Multi-organization
+
+Set whether to display the company to which the current user belongs when there are multiple organizations.
+
+1. Select <strong>System Management</strong> > <strong>System Configuration</strong> > <strong>Multi organization configuration</strong>.
+2. Set whether to display the company.
+3. Click <strong>Save</strong>.
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/244.png" />
+
+## Setting Organization Reference
+
+Set whether to take reference of organization information across companies.
+
+1. Select <strong>System Management</strong> > <strong>System Configuration</strong> > <strong>Org info reference config</strong>.
+2. Select whether to take reference of organization information across companies.
+3. Click <strong>Save</strong>.
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/245.png" />
+
+## Viewing License
+1. Select <strong>System Management</strong> > <strong>System Configuration</strong> > <b>License</b>.
+2. View the name, type and code of all app models, and their authorization status.
+3. Change the authorization status, click <b>Refresh</b> under <b>Operate</b>
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/246.png" />
+
+## Platform Information
+
+Click <img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/platform/6.png" /> and then select <strong>About supOS</strong>.
+
+:::info
+The data is authorized through the dongle, and can be extended by updating dongle configurations.
+:::
+
+<img width={450} src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/platform/14.png"/>
+
+- <strong> Number of Web User Sessions </strong>: The number of users who can log in at the same time, including on web client and mobile client (supLink and supMobile).
+- <strong>Number of Collectors</strong>: The number of connected collectors. Collectors cannot connect to supOS when the limit is exceeded.
+- <strong>Timing Tag</strong>: Processing The number of connected time series tags. The attributes is hidden, timestamps are refreshed and attribute state code is 100000000000000 when the connection limit is exceeded.
+- <strong>Instance ID</strong>: The only ID of supOS instances.
+
+:::info
+Admin does not take up any quota. After the system quota is used up, only admin can log in.
+:::

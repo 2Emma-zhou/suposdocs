@@ -1,0 +1,298 @@
+---
+openapi: 3.0.0
+info:
+  description: |-
+    Service interface provided by data push:
+
+    # Authentication
+
+    <!-- ReDoc-Inject: <security-definitions> -->
+  version:
+  title: Data push interface definition
+servers:
+- url: "/open-api/webhook/v2"
+tags:
+- name: webhook
+  description: Data push
+security:
+- Sign: []
+components:
+  securitySchemes:
+    Sign:
+      type: apiKey
+      name: Authorization
+      in: header
+  schemas:
+    TopicDetail:
+      description: Business Topic Details
+      type: object
+      properties:
+        businessTopic:
+          type: string
+          description: Business Topic
+          example: myTopic
+        businessModule:
+          type: string
+          description: Business Module
+          example: Organization
+        description:
+          type: string
+          description: description
+          example: my topic
+    TopicHistoryStatus:
+      description: Status list of business topic historical data processing
+      type: object
+      properties:
+        businessTopic:
+          type: string
+          description: Business Topic
+          example: myTopic
+        historyStatus:
+          type: boolean
+          description: Whether the historical data has been processed
+          example: false
+    Pagination:
+      description: Pagination Information
+      type: object
+      properties:
+        total:
+          type: integer
+          description: Total number
+          example: 1
+        pageSize:
+          type: integer
+          description: Number of entries per page
+          example: 20
+        current:
+          type: integer
+          description: current page number
+          example: 1
+  responses:
+    GeneralError:
+      description: 100000007 Service internal exception,{"code":100000007,"message":"Service
+        internal exception"}
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                type: string
+                description: Error encoding
+              message:
+                type: string
+                description: error message
+    Created:
+      description: The background successfully accepted the command and processed
+        it successfully
+paths:
+  "/topics":
+    get:
+      tags:
+      - webhook
+      summary: Query the list of business topics available for subscription by pagination
+      description: |
+        * Query the list of business topics that the current platform supports external subscriptions
+        * Optional items: current, default 1
+        * Optional items: pageSize, default 10, pageSize maximum 500
+      operationId: getTopics
+      parameters:
+      - name: current
+        in: query
+        description: The number of pages to turn, starting from 1
+        required: false
+        schema:
+          type: integer
+          default: 1
+      - name: pageSize
+        in: query
+        description: Number of elements returned per page (default 20, maximum 500)
+        required: false
+        schema:
+          type: integer
+          default: 20
+      responses:
+        '200':
+          description: Business topic list details
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  list:
+                    type: array
+                    items:
+                      "$ref": "#/components/schemas/TopicDetail"
+                  pagination:
+                    "$ref": "#/components/schemas/Pagination"
+        '500':
+          description: |
+            Error prompt
+            * 100121001 No business topic found,{"code":100121001,"message":"No business topic found"}
+            * 100121005 The current parameter must be greater than 0,{"code ":100121005,"message":"current parameter must be greater than 0"}
+            * 100121006 pageSize parameter needs to be set between 20-500,{"code":100121006,"message" :"The pageSize parameter needs to be set between 20-500"}
+            * 100000007 Service internal exception,{"code":100000007,"message":"Service internal exception"}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    description: Error Encoding
+                    example: 100000007
+                  message:
+                    type: string
+                    description: Error Message
+                    example: Service Internal Exception
+  "/topics/subscribe":
+    post:
+      tags:
+      - webhook
+      summary: Business Topic Subscription
+      description: |
+        * Externally subscribe to business topics supported by the platform through this interface, and support batch subscription topics
+        * Mandatory items: tenantId (tenant id)
+        * Mandatory items: appId
+        * Mandatory items: webhookUrl( Registered callback interface address, used to receive data)
+        * Optional items: topicList, select the topic that needs to be subscribed, if there is a previous registration, then this registration will overwrite the previous subscription. If you leave it blank, it means no subscription, if you have registered before And if you subscribe, the previous subscription will remain unchanged
+      operationId: appSubscribe
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                tenantId:
+                  type: string
+                  description: tenant id
+                  example: dt
+                appId:
+                  type: string
+                  description: app id
+                  example: App_ca4f1aeb382142849cebadb8b780c9ed
+                webhookUrl:
+                  type: string
+                  description: Registered callback interface address, used to receive
+                    data.
+                  example: http://127.0.0.1/listen/message
+                topicList:
+                  type: array
+                  items:
+                    type: string
+                    description: Subscription Topic Name
+                    example: myTopic
+      responses:
+        '200':
+          description: Registration Status
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  appRegisterId:
+                    type: integer
+                    description: APP Registration ID
+                    example: 2646255255224320
+                  topicHistoryStatusList:
+                    type: array
+                    items:
+                      "$ref": "#/components/schemas/TopicHistoryStatus"
+        '500':
+          description: |
+            Error prompt
+            * 100000007 tenantId is not allowed to be empty, {"code":100000007,"message":"tenantId is not allowed to be empty"}
+            * 100000007 appId is not allowed to be empty,{"code":100000007,"message":"appId is not allowed to be empty"}
+            * 100000007 webhookUrl is not allowed to be empty,{"code":100000007,"message":" webhookUrl is not allowed to be empty"}
+            * 100000007 Service internal exception,{"code":100000007,"message":"Service internal exception"}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    description: Error Encoding
+                    example: 100000007
+                  message:
+                    type: string
+                    description: Error Message
+                    example: Service Internal Exception
+  "/topics/readiness":
+    put:
+      tags:
+      - webhook
+      summary: Change the history message of the specified subscribed business topic
+        to have been processed
+      description: |
+        * Usually when historyStatus=false in the parameter returned after calling the /topics/subscribe interface, the subscriber needs to call the full volume of the business topic (see the full volume synchronization interface chapter on the homepage for details). The interface synchronizes the full volume of historical data, and then Then call this interface to inform the platform that incremental business data can be pushed.
+        * Mandatory item: tenantId (tenant id)
+        * Mandatory item: appId
+        * Optional item: topicList, select the one that needs to change the status of historical messages Theme. If left blank, no theme will be changed.
+      operationId: messageNotification
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                tenantId:
+                  type: string
+                  description: tenant id
+                  example: dt
+                appId:
+                  type: string
+                  description: app id
+                  example: App_ca4f1aeb382142849cebadb8b780c9ed
+                topicList:
+                  type: array
+                  items:
+                    type: string
+                    description: Subscription Topic Name
+                    example: myTopic
+      responses:
+        '200':
+          description: Historical message processing notification
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: boolean
+                    description: Whether the history message processing notification
+                      is successful
+                    example: true
+        '500':
+          description: |
+            Error prompt
+            * 100000007 tenantId is not allowed to be empty, {"code":100000007,"message":"tenantId is not allowed to be empty"}
+            * 100000007 appId is not allowed to be empty,{"code":100000007,"message":"appId is not allowed to be empty"}
+            * 100000007 service internal exception,{"code":100000007,"message":"service internal Exception"}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    description: Error Encoding
+                    example: 100000007
+                  message:
+                    type: string
+                    description: Error Message
+                    example: Service Internal Exception
+  "/retry":
+    get:
+      tags:
+      - webhook
+      summary: Immediately activate the business topic push task that stopped running
+        due to a callback exception
+      description: Usually when the subscriber service restarts abnormally, call this
+        interface to re-push the data; or if you find that the data of the two parties
+        is inconsistent, you can try to call this interface to re-push the data.
+      operationId: failRetry
+      responses:
+        '500':
+          "$ref": "#/components/responses/GeneralError"

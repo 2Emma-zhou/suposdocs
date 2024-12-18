@@ -1,0 +1,2362 @@
+---
+openapi: 3.0.0
+info:
+  title: Workflow API Definition
+  description: "OpenAPI provided by workflow service \n\n* Task Management\n* Process
+    Management\n* To-do Center\n\n# Authentication\n\n<!-- ReDoc-Inject: <security-definitions>
+    -->"
+  version:
+servers:
+- url: "/open-api/p/workflow/v2/"
+tags:
+- name: task
+- name: process
+- name: todoCenter
+  description: to-do center
+security:
+- Sign: []
+paths:
+  "/todoCenter/processes":
+    post:
+      tags:
+      - todoCenter
+      summary: Add Workflow Data In Batches
+      description: "* Due to the possibility of historical data during initiation,
+        the input parameter for API is list to reduce excessive API calls \n* The
+        data returned generates id data, and the corresponding distributed transaction
+        is asynchronously implemented by the consumer through a deletion API\n* thirdPartyInstanceId
+        is a unique identifier for the third-party system's process instance. When
+        combined with the source, it is globally unique within the system. If duplicate
+        data exists, all submission will fail in a single request\n* Note that the
+        source of a single request must be consistent, or an error will be reported.\n*
+        The default status is operating, meaning in progress\n* The openUrl address
+        is displayed by adding a new browser tag\n* The default character set of the
+        thirdPartyInstanceId field system is case-insensitive. Take care to avoid
+        conflicts\n"
+      operationId: thirdPartyProcessesPost
+      requestBody:
+        description: send in json format
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/thirdPartyProcesses"
+        required: true
+      responses:
+        '200':
+          description: return the generated id data
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/thirdPartyProcessesRes"
+        '400':
+          description: |
+            Error message
+            * 100108601 The relevant process data already exists {"code":100108601,"message":"The relevant process data already exists"}
+            * 100108508 Data exceeds the maximum data limit {"code":100108508,"message":"Data exceeds the maximum quantity limit 200"}
+            * 100108509 The parameter processName cannot be empty  {"code":100108509,"message":"The parameter ‘processName’ cannot be empty "}
+            * 100108510 The parameter status cannot be empty {"code":100108510,"message":"The parameter ‘status’ cannot be empty"}
+            * 100108511  The parameter startTime cannot be empty {"code":100108511,"message":" The parameter startTime cannot be empty"}
+            * 100108512 The parameter startTime has an invalid format {"code":100108512,"message":"The parameter ‘startTime’ has an invalid format"}
+            * 100108513 The parameter completeTime has an invalid format {"code":100108513,"message":"The parameter completeTime has an invalid format"}
+            * 100108514 The parameter staffName cannot be empty {"code":100108514,"message":"The parameter staffName cannot be empty"}
+            * 100108515 The parameter thirdPartyInstanceId cannot be empty {"code":100108515,"message":"The parameter thirdPartyInstanceId cannot be empty"}
+            * 100108516  The parameter source cannot be empty {"code":100108516,"message":" The parameter ‘source’ cannot be empty"}
+            * 100108526 Data sources are inconsistent {"code":100108526,"message":"Data sources are inconsistent"}
+            * 100108523 The parameter openUrl cannot be empty {"code":100108523,"message":"The parameter ‘openUrl’ cannot be empty"}
+            * 100108527 Unknown user. Check whether the corresponding user exists {"code":100108527,"message":"Unknown user. Check whether the corresponding user exists"}
+            * 100108532 Duplicate data with the same primary key exists {"code":100108532,"message":"Duplicate data with the same primary key exists"}
+        '500':
+          "$ref": "#/components/responses/GeneralError"
+      deprecated: false
+    delete:
+      tags:
+      - todoCenter
+      summary: Delete Process Data In Batches
+      description: |
+        *  This API is primarily used to ensure data consistency. In distributed scenarios, this API is called during rollback processes to delete the created data when there are code or environment errors.
+        * It is not recommended to delete normally created data. For processed or invalidated statuses, please use the modification API for updates.
+        * Deletion can be performed using either the process ID [using the ids parameter] or the corresponding third-party instance ID [using the thirdPartyInstanceIds parameter].
+        * The id and thirdPartyInstanceId are combined and deleted as long as one is associated with the data.
+        * Since this API only deletes process information, it does not delete data related to process status such as completed or pending tasks. If necessary, please call the relevant API to delete it.
+        * If all parameters are empty, no content will be deleted.
+        *  This API is idempotent, meaning that multiple requests with the same parameters do not report errors, and content without the need for deletion is displayed normally.
+      operationId: thirdPartyProcessesDel
+      parameters:
+      - name: ids
+        in: query
+        description: provide the ids of the process records to be deleted, separated
+          by commas. A maximum of 200 ids are allowed.
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: array
+          items:
+            type: integer
+          maxItems: 200
+      - name: thirdPartyInstanceIds
+        in: query
+        description: provide thirdPartyInstanceId records to be deleted, separated
+          by commas. A maximum of 200 ids are allowed
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: array
+          items:
+            type: string
+          maxItems: 200
+      - name: source
+        in: query
+        description: The corresponding data source must be consistent for a single
+          request. If the thirdPartyInstanceIds parameter is not empty, the source
+          must be provided.
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: |
+            operation succeeded
+            * 100000000 operation succeeded   {"code":100000000,"message":"operation succeeded"}
+        '400':
+          description: |
+            operation failed
+            * 100108508 Data exceeds the maximum data limit {"code":100108508,"message":"Data exceeds the maximum quantity limit 200"}
+            * 100108516 The parameter source cannot be empty. {"code":100108516,"message":"The parameter 'source' cannot be empty."}
+            * 100108533 Incorrect data type for the id field {"code":100108533,"message":"Incorrect data type for the id field"}
+        '500':
+          "$ref": "#/components/responses/GeneralError"
+      deprecated: false
+    put:
+      tags:
+      - todoCenter
+      summary: Modify Process Data In Batches
+      description: "* This API is primarily used to update process data, such as changing
+        the status to completed and adding completion time.\n* Priority is given to
+        using the id to update the data. If the id does not exist, the data will be
+        modified based on the thirdPartyInstanceId. \n* If there is data that does
+        not exist in the id and thirdPartyInstanceId fields, an error rollback is
+        reported\n* When using the thirdPartyInstanceId to determine the data, the
+        source must exist.\n* If multiple records are found for the corresponding
+        thirdPartyInstanceId, an error rollback is reported.\n* Note that the source
+        of a single request must be consistent, or an error will be reported.\n*  When
+        a data error occurs, all operations are rolled back and not stored.\n"
+      operationId: updateProcessPut
+      requestBody:
+        description: send in json format
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/thirdPartyProcessesPut"
+        required: true
+      responses:
+        '200':
+          description: |
+            operation succeeded
+            * 100000000 operation succeeded   {"code":100000000,"message":"operation succeeded"}
+        '400':
+          description: |
+            Error message
+            * 100108601 The relevant process data already exists {"code":100108601,"message":"The relevant process data already exists"}
+            * 100108603 No related data found {"code":100108603,"message":"No related data found"}
+            * 100108508 Data exceeds the maximum data limit {"code":100108508,"message":"Data exceeds the maximum quantity limit 200"}
+            * 100108517 At least one of the parameters thirdPartyInstanceId or id must not be empty.{"code":100108517,"message":"At least one of the parameters thirdPartyInstanceId or id must not be empty."}
+            * 100108510 The parameter status cannot be empty {"code":100108510,"message":"The parameter 'status' cannot be empty"}
+            * 100108516 The parameter source cannot be empty {"code":100108516,"message":"The parameter 'source' cannot be empty"}
+            * 100108526 Data sources are inconsistent {"code":100108516,"message":"Data sources are inconsistent"}
+            * 100108527 Unkown user. Check whether the corresponding user exists {"code":100108527,"message":"Unkown user. Check whether the corresponding user exists"}
+            * 100108523 The parameter openUrl cannot be empty {"code":100108523,"message":"The parameter ‘openUrl’ cannot be empty"}
+            * 100108532 Duplicate data with the same primary key exists {"code":100108532,"message":"Duplicate data with the same primary key exists"}
+        '500':
+          description: |
+            Error message
+            * 100108602 Error data in the database, duplicate data found {"code":100108602,"message":"Error data in the database, duplicate data found"}
+      deprecated: false
+  "/todoCenter/tasks":
+    post:
+      tags:
+      - todoCenter
+      summary: 'Add Process Status Data In Batches '
+      description: "* Due to the possibility of historical data during initiation,
+        the input parameter for API is list to reduce excessive API calls \n* The
+        data returned generates id data, and the corresponding distributed transaction
+        is asynchronously implemented by the consumer through a deletion API\n* If
+        the third party has a unique identifer for the corresponding process node,
+        you can enter 'thirdPartyInstanceNodeId' for subsequent deletion operations\n*
+        The 'taskStatus' indicates the status information entrust completive pending\n*
+        Note that the source of a single request must be consistent, or an error will
+        be reported.\n* The default character set of the thirdPartyInstanceId and
+        thirdPartyInstanceNodeId field system is case-insensitive. Take care to avoid
+        conflicts \n"
+      operationId: thirdPartyTasksCompletivePost
+      requestBody:
+        description: send in json format
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/thirdPartyStatus"
+        required: true
+      responses:
+        '200':
+          description: return the generated id data
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/thirdPartyStatusRes"
+        '400':
+          description: |
+            Error message
+            * 100108507 Unkown process status {"code":100108507,"message":"Unkown process status"}
+            * 100108508 Data exceeds the maximum data limit {"code":100108508,"message":"Data exceeds the maximum quantity limit 200"}
+            * 100108509 The parameter processName cannot be empty {"code":100108509,"message":"The parameter 'processName' cannot be empty"}
+            * 100108533  The parameter taskStatus cannot be empty {"code":100108533,"message":" The parameter 'taskStatus' cannot be empty"}
+            * 100108511 The parameter startTime cannot be empty {"code":100108511,"message":"The parameter 'startTime' cannot be empty"}
+            * 100108512 The parameter startTime has an invalid format {"code":100108512,"message":"The parameter 'startTime' has an invalid format"}
+            * 100108513 The parameter completeTime has an invalid format {"code":100108513,"message":"The parameter 'completeTime' has an invalid format"}
+            * 100108514 The parameter staffName cannot be empty {"code":100108514,"message":"The parameter 'staffName' cannot be empty"}
+            * 100108515 The parameter thirdPartyInstanceId cannot be empty {"code":100108515,"message":"The parameter 'thirdPartyInstanceId' cannot be empty"}
+            * 100108516 The parameter source cannot be empty {"code":100108516,"message":"The parameter 'source' cannot be empty"}
+            * 100108518 The parameter comleteTime cannot be empty {"code":100108518,"message":"The parameter 'comleteTime' cannot be empty"}
+            * 100108519 The parameter initiator cannot be empty {"code":100108519,"message":"The parameter 'initiator' cannot be empty"}
+            * 100108520 The parameter endTime cannot be empty {"code":100108520,"message":"The parameter 'endTime' cannot be empty"}
+            * 100108521 The parameter mandataryName cannot be empty {"code":100108521,"message":"The parameter 'mandataryName' cannot be empty"}
+            * 100108522 The parameter entrustTime cannot be empty {"code":100108522,"message":"The parameter 'entrustTime' cannot be empty"}
+            * 100108523 The parameter openUrl cannot be empty {"code":100108523,"message":"The parameter 'openUrl' cannot be empty"}
+            * 100108524 The parameter endTime has an invalid format {"code":100108524,"message":"The parameter 'endTime' has an invalid format"}
+            * 100108525 The parameter entrustTime has an invalid format {"code":100108525,"message":"The parameter 'entrustTime' has an invalid format"}
+            * 100108526 Data sources are inconsistent {"code":100108526,"message":"Data sources are inconsistent"}
+            * 100108529 The parameter taskName cannot be empty {"code":100108529,"message":"The parameter 'taskName' cannot be empty"}
+            * 100108601 The relevant process data already exists {"code":100108601,"message":"The relevant process data already exists"}
+            * 100108532 Duplicate data with the same primary key exists {"code":100108532,"message":"Duplicate data with the same primary key exists"}
+            * 100108527 Unkown user. Check whether the corresponding user exists {"code":100108527,"message":"Unkown user. Check whether the corresponding user exists"}
+            * 100108528 The parameter thirdPartyInstanceNodeId cannot be empty {"code":100108528,"message":"The parameter 'thirdPartyInstanceNodeId' cannot be empty"}
+        '500':
+          "$ref": "#/components/responses/GeneralError"
+      deprecated: false
+    delete:
+      tags:
+      - todoCenter
+      summary: Delete Process Status Data In Batches
+      description: |
+        * The created flow is deleted to maintain data consistency in distributed scenarios. No operation is performed when empty data is transferred
+        * After a pending task is completed, this API requires to be called to delete the historical data.
+        * Deletion can be performed using either the process ID [using the ids parameter] or the corresponding third-PartyInstanceNodeId [using the thirdPartyInstanceNodeIds parameter].
+        * When using the thirdPartyInstanceNodeId for data operations, the source parameter is mandatory.
+        * If all parameters are empty, no content will be deleted.
+        * This API is idempotent, meaning that multiple requests with the same parameters do not report errors, and content without the need for deletion is displayed normally.
+      operationId: thirdPartyTasksCompletiveDel
+      parameters:
+      - name: ids
+        in: query
+        description: provide the IDs of the completive task records, separated by
+          commas. A maximum of 200 IDs are allowed.
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: array
+          items:
+            type: integer
+          maxItems: 200
+      - name: thirdPartyInstanceNodeIds
+        in: query
+        description: provide the thirdPartyInstanceNodeIds of the records to be deleted,
+          separated by commas. A maximum of 200 IDs are allowed.
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: array
+          items:
+            type: string
+          maxItems: 200
+      - name: source
+        in: query
+        description: data source
+        required: false
+        schema:
+          type: string
+      - name: taskStatus
+        in: query
+        description: process node state entrust completive pending
+        required: true
+        schema:
+          type: string
+          enum:
+          - entrust
+          - completive
+          - pending
+      responses:
+        '200':
+          description: |
+            operation succeeded
+            * 100000000 operation succeeded   {"code":100000000,"message":"operation succeeded"}
+        '400':
+          description: |
+            operation succeeded
+            * 100108508 Data exceeds the maximum data limit {"code":100108508,"message":"Data exceeds the maximum quantity limit 200"}
+            * 100108516 The parameter source cannot be empty {"code":100108516,"message":"The parameter 'source' cannot be empty"}
+            * 100108533 The id field data type is incorrect {"code":100108533,"message":"The id field data type is incorrect"}
+        '500':
+          "$ref": "#/components/responses/GeneralError"
+      deprecated: false
+  "/processes/{processKey}/startInfo":
+    get:
+      tags:
+      - process
+      summary: Query Details For The Process Initiation
+      operationId: getStartInfo
+      parameters:
+      - name: processKey
+        in: path
+        description: process number
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Return to process initiation page information
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ProcessStartInfo"
+        '400':
+          description: |
+            Error message
+            * 100108002 The process configuration does not exist {"code":100108002,"message":"The process configuration does not exist"}
+            * 100108112 Process unpublished {"code":100108112,"message":"Process unpublished"}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    enum:
+                    - 100108002
+                    - 100108112
+                    description: error code, e.g:"100108112 parameter validation error,100108112
+                      Process unpublished"
+                    example: 100108112
+                  message:
+                    type: string
+                    description: Process unpublished
+                    example: Process unpublished
+        '500':
+          "$ref": "#/components/responses/GeneralError"
+  "/processes/{processId}":
+    get:
+      tags:
+      - process
+      summary: query process details
+      operationId: getDetail
+      parameters:
+      - name: processId
+        in: path
+        description: process ID
+        required: true
+        schema:
+          type: string
+      - name: username
+        in: query
+        description: username
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Return process instance details
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Process"
+        '400':
+          description: |
+            Error message
+            * 100108502 parameter validation error {"code":100108502,"message":"The parameter 'username' cannot be empty"}
+            * 100108230 The user does not exist {"code":100108230,"message":"The user does not exist"}
+            * 100108227 The process instance does not exist {"code":100108227,"message":"The process instance does not exist"}
+            * 100108214 Permission validation {"code":100108214,"message":"Unauthorized to view"}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    enum:
+                    - 100108227
+                    - 100108214
+                    - 100108230
+                    - 100108502
+                    description: error code, e.g:"100108227 parameter validation error,100108227
+                      The process instance does not exist"
+                    example: 100108227
+                  message:
+                    type: string
+                    description: The process instance does not exist
+                    example: The process instance does not exist
+        '500':
+          "$ref": "#/components/responses/GeneralError"
+  "/processes/{processId}/logs":
+    get:
+      tags:
+      - process
+      summary: query process logs
+      operationId: queryLog
+      parameters:
+      - name: processId
+        in: path
+        description: process ID
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: return process operation logs
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ProcessLogList"
+        '400':
+          description: |
+            Error message
+            * 100108227 parameter validation error {"code":100108227,"message":"process instance does not exist"}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    enum:
+                    - 100108227
+                    description: error code, e.g:"100108227 The process instance does
+                      not exist"
+                    example: 100108227
+                  message:
+                    type: string
+                    description: The parameter 'processId' cannot be empty
+                    example: The parameter 'processId' cannot be empty
+        '500':
+          "$ref": "#/components/responses/GeneralError"
+  "/processes/{processId}/urgeInfo":
+    get:
+      tags:
+      - process
+      summary: Query reminder information
+      operationId: getUrgeInfo
+      parameters:
+      - name: processId
+        in: path
+        description: process ID
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: return reminder information
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/UrgeInfoList"
+        '400':
+          description: |
+            Error message
+            * 100108506 parameter validation error {"code":100108506,"message":"The parameter 'processId' cannot be empty"}
+            * 100108227 The process instance does not exist {"code":100108227,"message":"The process instance does not exist"}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    enum:
+                    - 100108227
+                    description: error code, e.g:"100108227 parameter validation error,100108227
+                      The process instance does not exist"
+                    example: 100108227
+                  message:
+                    type: string
+                    description: The process instance does not exist
+                    example: The process instance does not exist
+        '500':
+          "$ref": "#/components/responses/GeneralError"
+  "/processes":
+    get:
+      tags:
+      - process
+      summary: 'Query the user-initiated process list '
+      operationId: queryProcess
+      parameters:
+      - name: appId
+        in: query
+        description: application ID
+        schema:
+          type: string
+      - name: status
+        in: query
+        description: 88-operating(default), 77-suspended, 99-canceled, 66-completed
+        schema:
+          type: string
+      - name: username
+        in: query
+        description: username
+        required: true
+        schema:
+          type: string
+      - name: current
+        in: query
+        description: current page number-default 1
+        schema:
+          type: string
+      - name: pageSize
+        in: query
+        description: current page number-default 10
+        schema:
+          type: string
+      responses:
+        '200':
+          description: 'return the user-initiated process list '
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/PageResultProcess"
+        '400':
+          description: |
+            Error message
+            * 100108502 parameter validation error {"code":100108502,"message":"The parameter 'username' cannot be empty"}
+            * 100108501 parameter validation error {"code":100108501,"message":"The process status code does not exist"}
+            * 100108230 The user does not exist {"code":100108230,"message":"The user does not exist"}
+            * 100108503 parameter validation error {"code":100108503,"message":"pageSize exceeds the maximum value 500"}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    enum:
+                    - 100108501
+                    - 100108238
+                    - 100108230
+                    - 100108502
+                    description: error code,e.g:"100108501 parameter validation error,100108501
+                      The process status code does not exist"
+                    example: 100108501
+                  message:
+                    type: string
+                    description: The process status code does not exist
+                    example: The process status code does not exist
+        '500':
+          "$ref": "#/components/responses/GeneralError"
+      deprecated: false
+    put:
+      tags:
+      - process
+      summary: Save API On Process Initiation Page
+      description: After clicking save, the process will start and stay at the first
+        user section
+      operationId: save
+      requestBody:
+        description: send in json format
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/ProcessSaveRequest"
+        required: true
+      responses:
+        '200':
+          description: return save result
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ProcessSaveResponse"
+        '400':
+          description: |
+            Error message
+            * 100108502 parameter validation error {"code":100108502,"message":"The parameter 'username' cannot be empty"}
+            * 100108507 parameter validation error {"code":100108507,"message":"The parameter 'processKey' cannot be empty"}
+            * 100108230 The user does not exist {"code":100108230,"message":"The user does not exist"}
+            * 100108002 The process configuration does not exist {"code":100108002,"message":"The process configuration does not exist"}
+            * 100108112 Process unpublished {"code":100108112,"message":"Process unpublished"}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    enum:
+                    - 100108002
+                    - 100108112
+                    - 100108230
+                    - 100108502
+                    - 100108507
+                    description: error code,e.g:"100108112 parameter validation error,100108112
+                      Process unpublished"
+                    example: 100108112
+                  message:
+                    type: string
+                    description: Process unpublished
+                    example: Process unpublished
+        '500':
+          "$ref": "#/components/responses/GeneralError"
+      deprecated: false
+    post:
+      tags:
+      - process
+      summary: Initiate Process
+      operationId: startProcess
+      requestBody:
+        description: send in json format
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/ProcessStartRequest"
+        required: true
+      responses:
+        '200':
+          description: return process initiation result
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ProcessStartResponse"
+        '400':
+          description: |
+            Error message
+            * 100108502 parameter validation error {"code":100108502,"message":"The parameter 'username' can not be empty"}
+            * 100108507 parameter validation error {"code":100108507,"message":"The parameter 'procssKey' cannot be empty"}
+            * 100108002 The process configuration does not exist {"code":100108002,"message":"The process configuration does not exist"}
+            * 100108230 The user does not exist {"code":100108230,"message":"The user does not exist"}
+            * 100108112 Process unpublished {"code":100108112,"message":"Process unpublished"}
+            * 100108228 Position/department/role number can not be empty {"code":100108228,"message":"Position/department/role number can not be empty"}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    enum:
+                    - 100108002
+                    - 100108112
+                    - 100108228
+                    - 100108502
+                    - 100108230
+                    - 100108507
+                    description: error code,e.g:"100108112 parameter validation error,100108112
+                      Process unpublished"
+                    example: 100108112
+                  message:
+                    type: string
+                    description: Process unpublished
+                    example: Process unpublished
+        '500':
+          description: |
+            Error message
+            * 100108502 parameter validation error {"code":100108502,"message":"The parameter 'username' cannot be empty"}
+            * 100108507 parameter validation error {"code":100108507,"message":"The parameter 'processKey' cannot be empty"}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    enum:
+                    - 100108002
+                    - 100108112
+                    - 100108228
+                    - 100108502
+                    - 100108230
+                    - 100108507
+                    description: error code,e.g:"100108112 parameter validation error,100108112
+                      Process unpublished"
+                    example: 100108112
+                  message:
+                    type: string
+                    description: Process unpublished
+                    example: Process unpublished
+      deprecated: false
+      x-codegen-request-body-name: content request
+  "/processes/{processId}/cancellation":
+    post:
+      tags:
+      - process
+      summary: Cancel process. The interface is currently available for regular users.
+      operationId: cancel
+      parameters:
+      - name: processId
+        in: path
+        description: process instance ID
+        schema:
+          type: string
+        required: true
+      requestBody:
+        description: send in json format
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/ProcessCancelRequest"
+        required: true
+      responses:
+        '200':
+          description: cancelled successfully
+        '400':
+          description: |
+            Error message
+            * 100108502 parameter validation error {"code":100108502,"message":"he parameter 'username' cannot be empty"}
+            * 100108230 The user does not exist {"code":100108230,"message":"The user does not exist"}
+            * 100108227 The process instance does not exist {"code":100108227,"message":"The process instance does not exist"}
+            * 100108240 Unauthorized operation {"code":100108240,"message":"Unauthorized operation"}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    enum:
+                    - 100108502
+                    - 100108240
+                    - 100108230
+                    - 100108227
+                    description: error code, e.g:"100108227 The process instance does
+                      not exist"
+                    example: 100108227
+                  message:
+                    type: string
+                    description: The process instance does not exist
+                    example: The process instance does not exist
+        '500':
+          "$ref": "#/components/responses/GeneralError"
+      deprecated: false
+  "/tasks/pending":
+    get:
+      tags:
+      - task
+      summary: Query The User's Pending Task List
+      operationId: queryPending
+      parameters:
+      - name: appId
+        in: query
+        description: APP ID
+        schema:
+          type: string
+      - name: username
+        in: query
+        description: username
+        required: true
+        schema:
+          type: string
+      - name: current
+        in: query
+        description: " current page number-default 1"
+        schema:
+          type: string
+      - name: pageSize
+        in: query
+        description: " current page number-default 10"
+        schema:
+          type: string
+      responses:
+        '200':
+          description: return the user's pending task list
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/PageResultPendingTaskListResponse"
+        '400':
+          description: |
+            Error message
+            * 100108502 parameter validation error {"code":100108502,"message":"The parameter 'username' cannot be empty"}
+            * 100108503 parameter validation error {"code":100108503,"message":"pageSize exceeds the maximum value 500"}
+            * 100108230 The user does not exist {"code":100108230,"message":"The user does not exist"}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    enum:
+                    - 100108502
+                    - 100108503
+                    - 100108230
+                    description: error code,e.g:"100108503 parameter validation error,100108503
+                      pageSize exceeds the maximum value 500"
+                    example: 100108503
+                  message:
+                    type: string
+                    description: The parameter 'username' cannot be empty
+                    example: The parameter 'username' cannot be empty
+        '500':
+          "$ref": "#/components/responses/GeneralError"
+      deprecated: false
+    post:
+      tags:
+      - task
+      summary: " Submit Pending Tasks"
+      operationId: submitTask
+      requestBody:
+        description: send in json format
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/TaskSubmitRequest"
+        required: true
+      responses:
+        '200':
+          "$ref": "#/components/responses/Updated"
+        '400':
+          description: |
+            Error message
+            * 100108502 parameter validation error {"code":100108502,"message":"The parameter 'username' cannot be empty"}
+            * 100108504 parameter validation error {"code":100108504,"message":"The parameter 'taskId' cannot be empty"}
+            * 100108230 The user does not exist {"code":100108230,"message":"The user does not exist"}
+            * 100108240 Permission validation error {"code":100108240,"message":"Unauthorized operation"}
+            * 100108237 Pending tasks do not exist {"code":100108237,"message":"Pending tasks do not exist"}
+            * 100108213 Pending task executor validation {"code":100108213,"message":"Pending task executor cannot be empty"}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    enum:
+                    - 100108502
+                    - 100108504
+                    - 100108230
+                    - 100108213
+                    - 100108237
+                    description: error code, e.g:"100108502 parameter validation error,100108502
+                      The parameter username cannot be empty"
+                    example: 100108502
+                  message:
+                    type: string
+                    description: The parameter 'username' cannot be empty
+                    example: The parameter 'username' cannot be empty
+        '500':
+          "$ref": "#/components/responses/GeneralError"
+      deprecated: false
+    put:
+      tags:
+      - task
+      summary: Save form data associated with pending tasks
+      operationId: saveTaskForm
+      requestBody:
+        description: send in json format
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/FormRequest"
+        required: true
+      responses:
+        '200':
+          "$ref": "#/components/responses/Updated"
+        '400':
+          description: |
+            Error message
+            * 100108502 parameter validation error {"code":100108502,"message":"The parameter 'username' cannot be empty"}
+            * 100108504 parameter validation error {"code":100108504,"message":"The parameter 'taskId' cannot be empty"}
+            * 100108230 The user does not exist {"code":100108230,"message":"The user does not exist"}
+            * 100108240 Unauthorized operation {"code":100108240,"message":"Unauthorized operation"}
+            * 100108237 Pending tasks do not exist {"code":100108237,"message":"Pending tasks do not exist"}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    enum:
+                    - 100108237
+                    - 100108502
+                    - 100108230
+                    - 100108240
+                    - 100108504
+                    description: error code,例:"100108237 parameter validation error,100108237
+                      Pending tasks do not exist"
+                    example: 100108237
+                  message:
+                    type: string
+                    description: Pending tasks do not exist
+                    example: Pending tasks do not exist
+        '500':
+          "$ref": "#/components/responses/GeneralError"
+      deprecated: false
+  "/tasks/{taskId}/pending":
+    get:
+      tags:
+      - task
+      summary: Query Pending Task Details
+      operationId: getPendingTask
+      parameters:
+      - name: taskId
+        in: path
+        description: pending task ID
+        required: true
+        schema:
+          type: string
+      - name: username
+        in: query
+        description: username
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: return user's pending task details
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/PendingTaskResponse"
+        '400':
+          description: |
+            Error message
+            * 100108502 parameter validation error {"code":100108502,"message":"The parameter 'username' cannot be empty"}
+            * 100108237 Pending tasks do not exist {"code":100108237,"message":"Pending tasks do not exist"}
+            * 100108230 The user does not exist {"code":100108230,"message":"The user does not exist"}
+            * 100108214 Permission validation error {"code":100108214,"message":"Unauthorized to view"}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    enum:
+                    - 100108502
+                    - 100108237
+                    - 100108230
+                    - 100108214
+                    description: error code, e.g:"100108502 parameter validation error,100108502
+                      The parameter 'username' cannot be empty"
+                    example: 100108502
+                  message:
+                    type: string
+                    description: The parameter 'username' cannot be empty
+                    example: The parameter 'username' cannot be empty
+        '500':
+          "$ref": "#/components/responses/GeneralError"
+      deprecated: false
+  "/tasks/pending/total":
+    get:
+      tags:
+      - task
+      summary: Query total number of pending tasks for the user
+      operationId: queryTotal
+      parameters:
+      - name: username
+        in: query
+        description: username
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: return total number of pending tasks for the user
+          content:
+            "*/*":
+              schema:
+                type: integer
+                example: 10
+        '400':
+          description: |
+            Error message
+            * 100108502 parameter validation error {"code":100108502,"message":"The parameter 'username' cannot be empty"}
+            * 100108230 The user does not exist {"code":100108230,"message":"The user does not exist"}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    enum:
+                    - 100108502
+                    - 100108230
+                    description: error code, e.g:"100108502 parameter validation error,100108502
+                      The parameter 'username' cannot be empty"
+                    example: 100108502
+                  message:
+                    type: string
+                    description: The parameter 'username' cannot be empty
+                    example: The parameter 'username' cannot be empty
+        '500':
+          "$ref": "#/components/responses/GeneralError"
+      deprecated: false
+  "/tasks/completive":
+    get:
+      tags:
+      - task
+      summary: Query the user's completed task list
+      operationId: queryCompletive
+      parameters:
+      - name: appId
+        in: query
+        description: APP ID
+        schema:
+          type: string
+      - name: username
+        in: query
+        description: username
+        required: true
+        schema:
+          type: string
+      - name: current
+        in: query
+        description: current page number-default 1
+        schema:
+          type: string
+      - name: pageSize
+        in: query
+        description: current page number-default 10
+        schema:
+          type: string
+      responses:
+        '200':
+          description: return the user's completed task list
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/PageResultCompleteTaskListResponse"
+        '400':
+          description: |
+            Error message
+            * 100108502 parameter validation error {"code":100108502,"message":"The parameter 'username' cannot be empty"}
+            * 100108503 parameter validation error {"code":100108503,"message":"pageSize exceeds the maximum value 500"}
+            * 100108230 The user does not exist {"code":100108230,"message":"The user does not exist"}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    enum:
+                    - 100108502
+                    - 100108503
+                    - 100108230
+                    description: error code, e.g:"100108503 parameter validation error,100108503
+                      pageSize exceeds the maximum value 500"
+                    example: 100108503
+                  message:
+                    type: string
+                    description: The parameter 'username' cannot be empty
+                    example: The parameter 'username' cannot be empty
+        '500':
+          "$ref": "#/components/responses/GeneralError"
+      deprecated: false
+  "/tasks/{taskId}/completive":
+    get:
+      tags:
+      - task
+      summary: Query completed task details
+      operationId: getCompletiveTask
+      parameters:
+      - name: taskId
+        in: path
+        description: pending task ID
+        required: true
+        schema:
+          type: string
+      - name: username
+        in: query
+        description: username
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: return the user's completeted task details
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/CompletedTaskResponse"
+        '400':
+          description: |
+            Error message
+            * 100108502 parameter validation error {"code":100108502,"message":"The parameter 'username' cannot be empty"}
+            * 100108230 The user does not exist {"code":100108230,"message":"The user does not exist"}
+            * 100108238 Completed taks do not exist {"code":100108238,"message":"Completed taks do not exist"}
+            * 100108214 Permission validation error {"code":100108214,"message":"Unauthorized to view"}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    enum:
+                    - 100108502
+                    - 100108230
+                    - 100108238
+                    - 100108214
+                    description: error code, e.g:"100108502 parameter validation error,100108502
+                      The parameter 'username' cannot be empty"
+                    example: 100108502
+                  message:
+                    type: string
+                    description: The parameter 'username' cannot be empty
+                    example: The parameter 'username' cannot be empty
+        '500':
+          "$ref": "#/components/responses/GeneralError"
+      deprecated: false
+  "/tasks/entrust":
+    post:
+      tags:
+      - task
+      summary: Pending task delegation
+      operationId: entrust
+      requestBody:
+        description: send in json format
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/EntrustRequest"
+        required: true
+      responses:
+        '200':
+          "$ref": "#/components/responses/Updated"
+        '400':
+          description: |
+            Error message
+            * 100108502 parameter validation error {"code":100108502,"message":"The parameter 'username' cannot be empty"}
+            * 100108504 parameter validation error {"code":100108504,"message":"The parameter 'taskId' cannot be empty"}
+            * 100108505 parameter validation error {"code":100108505,"message":"The parameter 'mandatary' cannot be empty"}
+            * 100108230 The user does not exist {"code":100108230,"message":"The user does not exist"}
+            * 100108237 Pending tasks do not exist {"code":100108237,"message":"Pending tasks do not exist"}
+            * 100108231 Permission validation {"code":100108231,"message":"Unauthorized to delegate"}
+            * 100108218 Delegation validation {"code":100108218,"message":"No repeated delegation"}
+            * 100108220 Delegation validation {"code":100108220,"message":"The other party has permission to perform this pending task"}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    enum:
+                    - 100108502
+                    - 100108504
+                    - 100108505
+                    - 100108230
+                    - 100108218
+                    - 100108220
+                    - 100108231
+                    - 100108237
+                    description: error code, e.g:"100108502 parameter validation error,100108502
+                      The parameter 'username' cannot be empty"
+                    example: 100108502
+                  message:
+                    type: string
+                    description: The parameter 'username' cannot be empty
+                    example: The parameter 'username' cannot be empty
+        '500':
+          "$ref": "#/components/responses/GeneralError"
+      deprecated: false
+  "/tasks/revocation":
+    post:
+      tags:
+      - task
+      summary: Revoke Pending Tasks
+      operationId: revoke
+      requestBody:
+        description: send in json format
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/TaskRevokeRequest"
+        required: true
+      responses:
+        '200':
+          "$ref": "#/components/responses/Updated"
+        '400':
+          description: |
+            Error message
+            * 100108502 parameter validation error {"code":100108502,"message":"The parameter 'username' cannot be empty"}
+            * 100108504 parameter validation error {"code":100108504,"message":"The parameter 'taskId' cannot be empty"}
+            * 100108230 The user does not exist {"code":100108230,"message":"The user does not exist"}
+            * 100108222 revoke validation {"code":100108222,"message":"Process has ended"}
+            * 100108232 revoke validation {"code":100108232,"message":"Unable to revoke from parallel task"}
+            * 100108236 revoke validation {"code":100108236,"message":"Process status has changed, unable to revoke"}
+            * 100108238 Completed tasks do not exist {"code":100108238,"message":"Completed tasks do not exist"}
+            * 100108239 Permission validation {"code":100108239,"message":"Unauthorized to revoke"}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    enum:
+                    - 100108502
+                    - 100108504
+                    - 100108230
+                    - 100108222
+                    - 100108232
+                    - 100108236
+                    - 100108238
+                    - 100108239
+                    description: error code, e.g:"100108502 parameter validation error,100108502
+                      The parameter 'username' cannot be empty"
+                    example: 100108502
+                  message:
+                    type: string
+                    description: The parameter 'username' cannot be empty
+                    example: The parameter 'username' cannot be empty
+        '500':
+          "$ref": "#/components/responses/GeneralError"
+      deprecated: false
+  "/tasks/pending/all-users":
+    get:
+      tags:
+      - task
+      summary: paging query all users' pending task lists
+      operationId: queryAllPending
+      description: |
+        * Use case: When a third-party system wants to synchronize all pending task data from supOS to its own system, it can use this interface to paginate and retrieve the full set of pending task data. Incremental pending task data can be obtained by subscribing to the task change messages through the WebHook service (refer to the Data Push section for more details).
+          * When synchronizing all pending task data from the third-party service, it should first call this interface to retrieve the full historical data of pending tasks.
+          * After synchronizing the historical data, it should subscribe to the task change event topic (supOS_workflow_event) through the WebHook. Newly added pending tasks will be sent via the WebHook.
+          * Duplicate data may occur in the WebHook data push, and the subscriber should handle idempotent processing.
+          * If this interface is called multiple times, the business should handle idempotency issues on their own.
+        * This interface will paginate and return all pending task data for all users in the supOS system. Since it is a paginated interface, the calling party needs to design and query all pages to obtain the complete set of data.
+      parameters:
+      - name: current
+        in: query
+        description: current page number
+        required: true
+        schema:
+          type: integer
+          minimum: 1
+      - name: pageSize
+        in: query
+        description: pageSize
+        required: true
+        schema:
+          type: integer
+          maximum: 500
+          minimum: 1
+      responses:
+        '200':
+          description: return all users' pending task lists
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/PageResultPendingTaskListResponse"
+        '400':
+          description: |
+            Error message
+            * 100108610 parameter validation error {"code":100108610,"message":"The current page number (current) must be greater than or equal to 1"}
+            * 100108503 parameter validation error {"code":100108503,"message":"The pageSize (pageSize) must be greater than or equal to 1 and less than or equal to 500"}
+      deprecated: false
+components:
+  securitySchemes:
+    Sign:
+      type: apiKey
+      name: Authorization
+      in: header
+  schemas:
+    thirdPartyStatus:
+      title: thirdPartyStatus
+      type: array
+      maxItems: 200
+      items:
+        required:
+        - taskStatus
+        - personName
+        - processName
+        - taskName
+        - openUrl
+        - initiator
+        - source
+        - thirdPartyInstanceId
+        - thirdPartyInstanceNodeId
+        properties:
+          taskStatus:
+            type: string
+            maxLength: 20
+            description: process node state entrust completive pending
+            enum:
+            - entrust
+            - completive
+            - pending
+            example: completive
+          personName:
+            type: string
+            maxLength: 64
+            description: username handling the process node
+            example: Zhang San
+          processName:
+            type: string
+            maxLength: 200
+            description: process name
+            example: "×× process"
+          taskName:
+            type: string
+            maxLength: 128
+            description: pending task name
+            example: "**approval"
+          initiator:
+            type: string
+            maxLength: 64
+            description: username of the initiator
+            example: Zhang San
+          startTime:
+            type: string
+            description: receive pending task time, mandatory for pending tasks and
+              completed tasks, format yyyy-MM-dd'T'HH:mm:ss.SSSZ
+            example: '2020-09-22T07:38:13.893+0800'
+          endTime:
+            type: string
+            description: end time, mandatory for completed tasks, format yyyy-MM-dd'T'HH:mm:ss.SSSZ
+            example: '2020-09-22T07:38:13.893+0800'
+          mandataryName:
+            type: string
+            maxLength: 64
+            description: Name of the delegated user, mandatory for delegated tasks
+            example: Li Si
+          entrustTime:
+            type: string
+            description: Delegation time, mandatory for delegated tasks yyyy-MM-dd'T'HH:mm:ss.SSSZ
+            example: '2020-09-22T07:38:13.893+0800'
+          reason:
+            type: string
+            maxLength: 512
+            description: " Reason for delegation"
+            example: business trip, transferred to others
+          thirdPartyInstanceId:
+            type: string
+            maxLength: 50
+            description: Third-party process instance ID, a unique process identifier
+            example: '123456'
+          thirdPartyInstanceNodeId:
+            type: string
+            maxLength: 50
+            description: third-party process node ID
+            example: '123456'
+          openUrl:
+            type: string
+            maxLength: 1024
+            description: addresses displayed for different workflows, such as opening
+              the form page for a task
+            example: ''
+          source:
+            type: string
+            maxLength: 32
+            description: "* Third-party source name, such as mes.supos.com=Production
+              Manufacturing System. It is recommended to follow DNS conventions to
+              avoid conflicts, and the conventions are \n* only contain lowercase
+              letters, numbers, '-' and '.' \n* start and end with an alphanumeric
+              character.\n"
+            example: mes.supos.com
+          thirdPartyInstanceCode:
+            type: string
+            maxLength: 64
+            description: Third-party process instance code, also used to identify
+              a process, but generated according to certain business rules for display
+              on the page
+            example: '123456'
+          thirdPartyProcessEntityCode:
+            type: string
+            maxLength: 64
+            description: form model code associated with the third-party process,
+              for tasks only
+            example: code
+          thirdPartyProcessFormId:
+            type: integer
+            description: form ID associated with the third-party process, for tasks
+              only
+            example: 123456
+          thirdPartyProcessMemo:
+            type: string
+            maxLength: 2000
+            description: third-party summary data, for tasks only
+            example: This is a summary
+    thirdPartyStatusRes:
+      title: thirdPartyStatusRes
+      type: array
+      maxItems: 200
+      items:
+        properties:
+          id:
+            type: integer
+            description: primary key
+            example: 123456
+          thirdPartyInstanceNodeId:
+            type: string
+            maxLength: 50
+            description: third-party process node ID
+            example: '123456'
+          source:
+            type: string
+            maxLength: 32
+            description: |
+              * Third-party source name, such as mes.supos.com=Production Manufacturing System. It is recommended to follow DNS conventions to avoid conflicts, and the conventions are as follows:
+              * only contain lowercase letters, numbers, '-' and '.'
+              * start and end with an alphanumeric character.
+            example: mes.supos.com
+          taskStatus:
+            type: string
+            maxLength: 20
+            description: process node state entrust completive pending
+            enum:
+            - entrust
+            - completive
+            - pending
+            example: completive
+    thirdPartyProcesses:
+      title: thirdPartyProcesses
+      type: array
+      maxItems: 200
+      items:
+        required:
+        - processName
+        - status
+        - startTime
+        - staffName
+        - thirdPartyInstanceId
+        - source
+        properties:
+          processName:
+            type: string
+            maxLength: 200
+            description: process name
+            example: "***process"
+          status:
+            type: string
+            description: process status  operating(default), pause, cancellation,
+              completed
+            enum:
+            - operating
+            - pause
+            - cancellation
+            - completed
+            example: operating
+          startTime:
+            type: string
+            description: receive pending task time or process initiation time, format
+              yyyy-MM-dd'T'HH:mm:ss.SSSZ
+            example: '2020-09-22T07:38:13.893+0800'
+          completeTime:
+            type: string
+            description: end time, format yyyy-MM-dd'T'HH:mm:ss.SSSZ
+            example: '2020-09-22T07:38:13.893+0800'
+          staffName:
+            type: string
+            maxLength: 64
+            description: username of process initiator
+            example: Zhang San
+          thirdPartyInstanceId:
+            type: string
+            maxLength: 50
+            description: Third-party process instanceid, a unique process identifier
+            example: '123456'
+          thirdPartyInstanceCode:
+            type: string
+            maxLength: 64
+            description: Third-party workflow instance code, also used to identify
+              a workflow, but generated according to certain business rules for display
+              on the page
+            example: '123456'
+          source:
+            type: string
+            maxLength: 32
+            description: |
+              * Third-party source name, such as mes.supos.com=Production Manufacturing System. It is recommended to follow DNS conventions to avoid conflicts, and the conventions are as follows:
+              * only contain lowercase letters, numbers, '-' and '.'
+              * start and end with an alphanumeric character
+            example: mes.supos.com
+          openUrl:
+            type: string
+            maxLength: 1024
+            description: addresses displayed for different workflows, such as opening
+              the form page for a task
+            example: ''
+    thirdPartyProcessesPut:
+      title: thirdPartyProcesses
+      type: array
+      maxItems: 200
+      items:
+        required:
+        - processName
+        - status
+        - startTime
+        - staffName
+        - thirdPartyInstanceId
+        - source
+        properties:
+          id:
+            type: integer
+            description: primary key
+            example: 123456
+          processName:
+            type: string
+            maxLength: 200
+            description: process name
+            example: "***process"
+          status:
+            type: string
+            description: process status  operating(default), pause, cancellation,
+              completed
+            enum:
+            - operating
+            - pause
+            - cancellation
+            - completed
+            example: operating
+          startTime:
+            type: string
+            description: receive pending task time or process initiation time, format
+              yyyy-MM-dd'T'HH:mm:ss.SSSZ
+            example: '2020-09-22T07:38:13.893+0800'
+          completeTime:
+            type: string
+            description: end time, format yyyy-MM-dd'T'HH:mm:ss.SSSZ
+            example: '2020-09-22T07:38:13.893+0800'
+          staffName:
+            type: string
+            maxLength: 64
+            description: username of process initiator
+            example: Zhang San
+          thirdPartyInstanceId:
+            type: string
+            maxLength: 50
+            description: third-party process instanceid, a unique process identifier
+            example: '123456'
+          source:
+            type: string
+            maxLength: 32
+            description: |
+              * Third-party source name, such as mes.supos.com=Production Manufacturing System. It is recommended to follow DNS conventions to avoid conflicts, and the conventions are as follows
+              * only contain lowercase letters, numbers, '-' and '.'
+              * start and end with an alphanumeric character
+            example: mes.supos.com
+    thirdPartyProcessesRes:
+      title: thirdPartyProcesses
+      type: array
+      maxItems: 200
+      items:
+        properties:
+          id:
+            type: integer
+            description: primary key
+            example: 123456
+          thirdPartyInstanceId:
+            type: string
+            maxLength: 50
+            description: Third-party process instance ID, a unique process identifier
+            example: '123456'
+    AssigneeRequest:
+      title: AssigneeRequest
+      type: object
+      properties:
+        name:
+          type: string
+          description: node name
+          example: test task
+        taskDefKey:
+          type: string
+          description: node ID
+          example: userTask_123
+        users:
+          type: array
+          description: user(username)list
+          example:
+          - test
+          items:
+            type: string
+    AuditRequest:
+      title: AuditRequest
+      type: object
+      properties:
+        seqKey:
+          type: string
+          description: Migration line ID
+          example: edge_123
+        value:
+          type: string
+          description: Obtain details of the start page or task page through the query
+            interface
+          example: '1'
+    Assignee:
+      title: Assignee
+      type: object
+      properties:
+        seqKey:
+          type: string
+          description: Migration line ID
+          example: edge_123
+        name:
+          type: string
+          description: Name of the target node to which the migration line points
+          example: approval
+        taskDefKey:
+          type: string
+          description: the target node ID to which the migration line points
+          example: userTask_123
+    Audit:
+      title: Audit
+      type: object
+      properties:
+        seqKey:
+          type: string
+          description: Migration line ID
+          example: edge_123
+        name:
+          type: string
+          description: Migration line name
+          example: reject
+        order:
+          type: integer
+          description: For example, if the current approval step has two options,
+            Agree and Reject, and you want to place Agree on the right side, you can
+            set the order value to the maximum
+          format: int32
+          example: 1
+        type:
+          type: integer
+          description: 'migration line type  0: ordinary migration line 1: rejection
+            line'
+          enum:
+          - 0
+          - 1
+          example: 0
+        value:
+          type: string
+          description: When starting a process or submitting a task, you need to pass
+            this value to the backend service
+          example: '1'
+    CompleteTaskListResponse:
+      title: CompleteTaskListResponse
+      type: object
+      properties:
+        initiator:
+          type: string
+          description: process initiator
+          example: zhangsan
+        processId:
+          type: string
+          description: process instanceID
+          example: '1000492908536528'
+        processName:
+          type: string
+          description: process instance name
+          example: leave applicaton-001
+        reject:
+          type: boolean
+          description: reject or not
+          example: false
+        startTime:
+          type: string
+          description: pending task reception time
+          example: '2020-09-22T07:38:13.893+0800'
+        endTime:
+          type: string
+          description: pending task completed time
+          example: '2020-09-22T07:38:13.893+0800'
+        taskId:
+          type: string
+          description: pending task ID
+          example: '1000492908536529'
+        taskName:
+          type: string
+          description: pending task name
+          example: edit
+        url:
+          type: string
+          description: associated page for pending task
+          example: Page_0a4f3b38124142cbae4dae62f6664f5a
+      description: Data Model for Completed Task List
+    CompletedTaskResponse:
+      title: CompletedTaskResponse
+      type: object
+      properties:
+        initiator:
+          type: string
+          description: process initiator
+          example: zhangsan
+        processId:
+          type: string
+          description: process instanceID
+          example: '1000492908536528'
+        processName:
+          type: string
+          description: process instance name
+          example: leave application-001
+        formData:
+          type: string
+          description: document data
+          example: "{}"
+        reject:
+          type: boolean
+          description: reject or not
+          example: false
+        revoke:
+          type: boolean
+          description: revoke or not
+          example: false
+        showlog:
+          type: boolean
+          description: display process logs or not
+          example: true
+        startTime:
+          type: string
+          description: pending task reception time
+          example: '2020-09-22T07:38:13.893+0800'
+        endTime:
+          type: string
+          description: completed time
+          example: '2020-09-22T07:38:13.893+0800'
+        taskId:
+          type: string
+          description: pending task ID
+          example: '1000492908536529'
+        taskName:
+          type: string
+          description: pending task name
+          example: edit
+        url:
+          type: string
+          description: Associated page for pending task
+          example: Page_0a4f3b38124142cbae4dae62f6664f5a
+      description: Data model for completed task
+    EntrustRequest:
+      title: EntrustRequest
+      required:
+      - mandatary
+      - taskId
+      - username
+      type: object
+      properties:
+        mandatary:
+          type: string
+          description: trustee
+          example: zhangsan
+        username:
+          type: string
+          description: delegator
+          example: test
+        reason:
+          type: string
+          description: reason for delegation
+          example: business trip
+        taskId:
+          type: string
+          description: pending task ID
+          example: '1000492908536529'
+      description: delegation parameter model for pending task
+    FormRequest:
+      title: FormRequest
+      required:
+      - taskId
+      - username
+      type: object
+      properties:
+        taskId:
+          type: string
+          description: pending task ID
+          example: '1000492908536529'
+        username:
+          type: string
+          description: username
+          example: test
+        formData:
+          type: string
+          description: form data
+          example: "{}"
+      description: parameter model for form request
+    PageResultCompleteTaskListResponse:
+      title: PageResultCompleteTaskListResponse
+      type: object
+      properties:
+        list:
+          type: array
+          items:
+            "$ref": "#/components/schemas/CompleteTaskListResponse"
+        pagination:
+          "$ref": "#/components/schemas/Pagination"
+    PageResultPendingTaskListResponse:
+      title: PageResultPendingTaskListResponse
+      type: object
+      properties:
+        list:
+          type: array
+          items:
+            "$ref": "#/components/schemas/PendingTaskListResponse"
+        pagination:
+          "$ref": "#/components/schemas/Pagination"
+    ProcessLogList:
+      title: ProcessLogList
+      type: array
+      items:
+        "$ref": "#/components/schemas/ProcessLog"
+    PageResultProcess:
+      title: PageResultProcess
+      type: object
+      properties:
+        list:
+          type: array
+          items:
+            "$ref": "#/components/schemas/Process"
+        pagination:
+          "$ref": "#/components/schemas/Pagination"
+    UrgeInfoList:
+      title: UrgeInfoList
+      type: array
+      items:
+        "$ref": "#/components/schemas/UrgeInfo"
+    Pagination:
+      title: Pagination
+      type: object
+      properties:
+        current:
+          type: integer
+          format: int32
+        pageSize:
+          type: integer
+          format: int32
+        total:
+          type: integer
+          format: int32
+    PendingTaskListResponse:
+      title: PendingTaskListResponse
+      type: object
+      properties:
+        initiator:
+          type: string
+          description: process initiator
+          example: zhangsan
+          maxLength: 64
+        processId:
+          type: string
+          description: process instanceID
+          example: '1000492908536528'
+          maxLength: 64
+        processName:
+          type: string
+          description: process instance name
+          example: leave application-001
+          maxLength: 200
+        startTime:
+          type: string
+          description: pending task reception time
+          example: '2020-09-22T07:38:13.893+0800'
+          maxLength: 28
+        status:
+          type: integer
+          description: pending task status (77-suspended, 88-operating)
+          enum:
+          - 77
+          - 88
+          example: 88
+        taskId:
+          type: string
+          description: pending task ID
+          example: '1000492908536529'
+          maxLength: 20
+        taskName:
+          type: string
+          description: pending task name
+          example: edit
+          maxLength: 128
+        url:
+          type: string
+          description: "Access address of the task processing page \n* For Tianfang
+            Configuration Process: Return the page ID of the Configuration Process
+            form\n* For other processes: Return the specific access address of the
+            process form, such as /meService/mes/somedo.\n"
+          example: Page_0a4f3b38124142cbae4dae62f6664f5a
+          maxLength: 1024
+        type:
+          type: integer
+          format: int32
+          enum:
+          - 0
+          - 2
+          - 5
+          - 6
+          - 7
+          example: 0
+          description: 'Task type: 0-Regular task, 2-Delegated task, 5-Notification
+            task, 6-added task, 7-Proxy task.'
+        modifyTime:
+          type: string
+          example: '2020-09-22T07:38:13.893+0800'
+          description: Task update time
+          maxLength: 28
+        userName:
+          type: string
+          example: zhangsan
+          description: Task username
+          maxLength: 50
+        personCode:
+          type: string
+          example: zhangsan
+          description: Task user code
+          maxLength: 50
+      description: 'data model for pending task list '
+    PendingTaskResponse:
+      title: PendingTaskResponse
+      type: object
+      properties:
+        companyId:
+          type: string
+          description: company ID
+          example: '1000'
+        assigns:
+          type: array
+          description: reassignment
+          example:
+          - seqKey: edge_123
+            taskDefKey: userTask_123
+            name: approval
+          items:
+            "$ref": "#/components/schemas/Assignee"
+        audits:
+          type: array
+          description: approval branch
+          example:
+          - id: K1236
+            name: branch name
+            order: 1
+            value: '1'
+            type: 0
+          items:
+            "$ref": "#/components/schemas/Audit"
+        enableComment:
+          type: boolean
+          description: enable remark or not
+          example: true
+        formData:
+          type: string
+          description: document data
+          example: "{}"
+        formTempData:
+          type: string
+          description: temporary storage for document data
+          example: "{}"
+        initiator:
+          type: string
+          description: process initiator
+          example: zhangsan
+        processId:
+          type: string
+          description: process instance ID
+          example: '1000492908536528'
+        processName:
+          type: string
+          description: process instance name
+          example: leave application-001
+        readonly:
+          type: boolean
+          description: read-only or not
+          example: true
+        showlog:
+          type: boolean
+          description: display process logs or not
+          example: true
+        multiCompany:
+          type: boolean
+          description: cross-company or not
+          example: false
+        addInstance:
+          type: boolean
+          description: add task or not
+          example: false
+        startTime:
+          type: string
+          description: pending task reception time
+          example: '2020-09-22T07:38:13.893+0800'
+        status:
+          type: integer
+          description: pending task status (77-suspended, 88-operating)
+          enum:
+          - 77
+          - 88
+          example: 88
+        taskId:
+          type: string
+          description: pending task ID
+          example: '1000492908536529'
+        taskName:
+          type: string
+          description: pending task name
+          example: edit
+        url:
+          type: string
+          description: Associated page for pending task
+          example: Page_0a4f3b38124142cbae4dae62f6664f5a
+      description: data model for pending task
+    ProcessLog:
+      title: ProcessLog
+      type: object
+      properties:
+        auditResult:
+          type: string
+          description: approval result
+          example: agree
+        comment:
+          type: string
+          description: remark
+          example: business trip
+        createTime:
+          type: string
+          description: operation time
+          example: '2020-09-22T07:38:13.893+0800'
+        operateDesc:
+          type: string
+          description: Operation process description
+          example: Approved by Zhang San
+        operator:
+          type: string
+          description: operator (username)
+          example: test
+        taskName:
+          type: string
+          description: pending task name
+          example: approval
+        type:
+          type: string
+          description: operation type - task complete(TASK_COMPLETE) - task reject(TASK_REJECT)
+            - task delegate(TASK_DELEGATE) - task rollback(TASK_ROLLBACK) - task add(TASK_ADD)
+            - process terminate(PROCESS_TERMINATE)
+          enum:
+          - TASK_COMPLETE
+          - TASK_REJECT
+          - TASK_DELEGATE
+          - TASK_ROLLBACK
+          - TASK_ADD
+          - PROCESS_TERMINATE
+          example: TASK_COMPLETE
+      description: data model for process log
+    ProcessSaveRequest:
+      title: ProcessSaveRequest
+      required:
+      - processKey
+      - username
+      type: object
+      properties:
+        appId:
+          type: string
+          description: app id
+          example: App_eab56959eef74c1ea2e1a5fbe7b38ddf
+        formData:
+          type: string
+          description: form data
+          example: "{}"
+        processKey:
+          type: string
+          description: process number
+          example: K2002018123456789
+        username:
+          type: string
+          description: username
+          example: test
+      description: temporary storage of process parameter model
+    ProcessStartInfo:
+      title: ProcessStartInfo
+      type: object
+      properties:
+        companyId:
+          type: string
+          description: company ID
+          example: '1000'
+        assigns:
+          type: array
+          description: reassignment
+          example:
+          - seqKey: edge_123
+            name: approval
+          items:
+            "$ref": "#/components/schemas/Assignee"
+        audits:
+          type: array
+          description: approval branch
+          example:
+          - seqKey: edge_123
+            name: agree
+            order: 1
+            value: '1'
+            type: 0
+          items:
+            "$ref": "#/components/schemas/Audit"
+        enableComment:
+          type: boolean
+          description: enable remark or not true/false
+          example: true
+        multiCompany:
+          type: boolean
+          description: cross-company or not
+          example: true
+        enableSave:
+          type: boolean
+          description: enable save function or not true/false
+          example: false
+        processName:
+          type: string
+          description: process name
+          example: leave application process
+        readOnly:
+          type: boolean
+          description: The current page is read-only or not true/false
+          example: false
+        firstTaskName:
+          type: string
+          description: name of the first manual link
+          example: edit
+        url:
+          type: string
+          description: associated page for pending task
+          example: Page_0a4f3b38124142cbae4dae62f6664f5a
+      description: data model of the start page
+    ProcessCancelRequest:
+      title: ProcessCancelRequest
+      required:
+      - username
+      type: object
+      properties:
+        username:
+          type: string
+          description: username
+          example: test
+      description: request parameter for process cancellation
+    ProcessStartRequest:
+      title: ProcessStartRequest
+      required:
+      - processKey
+      - username
+      type: object
+      properties:
+        appId:
+          type: string
+          description: app id
+          example: App_eab56959eef74c1ea2e1a5fbe7b38ddf
+        assigns:
+          type: array
+          description: assigner(username)list
+          example:
+          - taskDefKey: userTask_123
+            users:
+            - test1
+            - test2
+          items:
+            "$ref": "#/components/schemas/AssigneeRequest"
+        audit:
+          "$ref": "#/components/schemas/AuditRequest"
+        comment:
+          type: string
+          description: remark
+          example: leave for more than 5 days, disagreed
+        formData:
+          type: string
+          description: form data
+          example: "{}"
+        processKey:
+          type: string
+          description: process number
+          example: K2002018123456789
+        processName:
+          type: string
+          description: process instance name
+          example: leave application001process
+        username:
+          type: string
+          description: username
+          example: test
+      description: start process parameter model
+    ProcessStartResponse:
+      title: ProcessStartResponse
+      type: object
+      properties:
+        processId:
+          type: string
+          description: process instance ID
+          example: '1000492908536528'
+      description: Successful response after saving the process
+    ProcessSaveResponse:
+      title: ProcessSaveResponse
+      type: object
+      properties:
+        processId:
+          type: string
+          description: process instance ID
+          example: '1000492908536528'
+        taskId:
+          type: string
+          description: pending task ID
+          example: '1000492908536529'
+      description: Successful response after saving the process
+    Process:
+      title: Process
+      type: object
+      properties:
+        appId:
+          type: string
+          description: Application ID
+          example: App_325ea305252fe5d0d1f78b1c2efe2413
+        processId:
+          type: string
+          description: process instanceID
+          example: '1000492908536528'
+        processName:
+          type: string
+          description: process name
+          example: leave application process
+        endTime:
+          type: string
+          description: process end time
+          example: '2020-09-22T07:38:13.893+0800'
+        startTime:
+          type: string
+          description: process initiation time
+          example: '2020-09-22T07:38:13.893+0800'
+        status:
+          type: integer
+          description: process status (66-completed, 77-suspended, 88-operating, 99-canceled)
+          enum:
+          - 66
+          - 77
+          - 88
+          - 99
+          example: 88
+        tasks:
+          type: array
+          description: current link
+          example:
+          - username: test
+            taskId: '1000492908536528'
+            taskName: approval
+          items:
+            "$ref": "#/components/schemas/SimpleTask"
+      description: process model
+    SimpleTask:
+      title: SimpleTask
+      type: object
+      properties:
+        taskId:
+          type: string
+        taskName:
+          type: string
+        username:
+          type: string
+    SimpleUser:
+      title: SimpleUser
+      type: object
+      properties:
+        username:
+          type: string
+        showName:
+          type: string
+    TaskRevokeRequest:
+      title: TaskRevokeRequest
+      required:
+      - username
+      type: object
+      properties:
+        taskId:
+          type: string
+          description: pending task ID
+          example: '1000492908536529'
+        username:
+          type: string
+          description: username
+          example: test
+      description: parameter model for rebvoking pending tasks
+    TaskSubmitRequest:
+      title: TaskSubmitRequest
+      required:
+      - taskId
+      - username
+      type: object
+      properties:
+        taskId:
+          type: string
+          description: pending task ID
+          example: '1000492908536529'
+        username:
+          type: string
+          description: username
+          example: test
+        assigns:
+          type: array
+          description: assigner(username)list
+          example:
+          - taskDefKey: userTask_123
+            users:
+            - test1
+            - test2
+          items:
+            "$ref": "#/components/schemas/AssigneeRequest"
+        audit:
+          "$ref": "#/components/schemas/AuditRequest"
+        comment:
+          type: string
+          description: remark
+          example: leave for more than 5 days, disagreed
+        formData:
+          type: string
+          description: form JSON data
+          example: "{}"
+      description: parameter model for pending task submission
+    UrgeInfo:
+      title: UrgeInfo
+      type: object
+      properties:
+        taskId:
+          type: string
+          description: pending task ID
+          example: '1000711857627856'
+        taskName:
+          type: string
+          description: pending task name
+          example: approval
+        url:
+          type: string
+          description: associated page for pending task
+          example: Page_3d5f89e8578f4d3796f6fb6d4bda49b6
+        users:
+          type: array
+          description: user list to remind
+          example:
+          - username: test
+            showName: test user
+          items:
+            "$ref": "#/components/schemas/SimpleUser"
+      description: remind request parameters
+  responses:
+    GeneralError:
+      description: Common errors 100000001 Internal service exception
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                type: integer
+                description: error code, e.g:100000001
+                example: 100000001
+              message:
+                type: string
+                description: error information
+                example: Internal service exception
+    Created:
+      description: " The command has been successfully received and processed by the
+        backend"
+      headers:
+        Location:
+          description: URL of the accessed resource
+          schema:
+            type: string
+    Updated:
+      description: " The command has been successfully received and processed by the
+        backend"
+      headers:
+        Location:
+          description: URL of the accessed resource
+          schema:
+            type: string

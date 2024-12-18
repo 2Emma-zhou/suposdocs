@@ -1,0 +1,74 @@
+Create table models and map data from the local data warehouse for clear management and subsequent indicator-oriented statistical data integration.
+There are 3 types of table models:
+- DIM: Dimension table.
+- DWD: Details data table.
+- DWS: Integrated data table.
+
+In this section, the following original table is used as an example to demonstrate the process of modeling.
+- **product**, **date** and **workshop** are used as dimensions.
+- DWD table contains all details on the table.
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supDAM/36.png)
+
+:::info
+Start **Entire library migration** on X-ETL to migrate the **Product** table to the local data warehouse. For details, see <a href="../../Using supETL/Migrating Database">Migrating Database</a>.
+:::
+
+### Creating DIM Model
+1. Log in to supOS, and then select **Data Intelligence** > **Data Workshop** > **Data modeling** > **Model design**.
+2. Select **DIM**, click ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supDAM/34.png),and then enter the basic information on the pop-up window.
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supDAM/37.png)
+
+3. Click <b>Attribute field</b> on the right side, and then enter the dimension attribute.
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supDAM/38.png)
+
+4. On the <b>Physicalize</b> tab, select <b>Associate physical table</b> as physicalization type.
+
+- Associate physical table: Link the DIM model with physical table in local data warehouse.
+- Generate physical table: Generate an empty physical table in the data warehouse, which can be filled through data tasks in X-ETL.
+:::info
+For details, see <a href="../../Using supETL/Configuring Data Task">Configuring Data Task</a>.
+:::
+- Sync to MQ: Sync changing data to message queue for X-ETL usage.
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supDAM/39.png)
+
+5. Select a physical table, and then map physical table fields with the DIM field.
+
+- Sequential mapping: Map same type of fields in order.
+- Name mapping: Map fields with the same name.
+- Manual manpping: Manual mapping and different types of fields can be mapped with automatically changed types.
+
+6. Click <b>Data standards</b>, select a standard to the model to link a standard field.
+
+:::info
+- **Version** tab is used to compare model difference after update.
+- **Data preview** is only available after publishing the model and it displays all mapped data from the physical data.
+:::
+
+7. Close the model detail tab, and then click **Save** and **Publish** at the top.
+8. Repeat step 2 to create 2 more DIM models with **product** and **workshop** as dimensions.
+
+### Creating DWD Model
+Click **DWD**, similar to DIM creation, add same fields as the physical table and map with it.
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supDAM/40.png)
+
+### Creating DWS Model
+1. Click **DWS**, create a DWS model, and then drag all DIM and DWD table to the canvas.
+2. Draw lines from the DWD model to all 3 DIM models, and then double-click the connection lines and set their link types.
+- Left link: Returns all data on the left table and data conforms to the association conditions.
+- Inner link: Returns data conforms to the association conditions.
+3. Click **New** to add association conditions.
+:::info
+Multiple conditions are available.
+:::
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supDAM/41.png)
+
+4. Click <b>Attribute field</b> on the left side, and then check the integrated fields and adjust as needed.
+5. On the <b>Physicalize</b> tab, leave it to <b>Local view</b>.
+:::info
+**Materialized view** is unavailable presently.
+:::
+6. Close the model detail tab, and then click **Save** and **Publish** at the top.

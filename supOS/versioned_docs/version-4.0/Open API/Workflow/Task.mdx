@@ -1,0 +1,649 @@
+---
+hide_title: true
+---
+
+<div className='div'>
+<div className='title'>
+
+## ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/openAPI/4.png) Get User Pending Tasks
+
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Path</div>
+<div className='rightCol'>
+
+```
+http://{supOS ip:port}/open-api/p/workflow/v2/tasks/pending
+```
+
+</div>
+<div className='leftCol'>Query parameter</div>
+<div className='rightCol'>
+
+- appId: App ID.
+- username: Required username.
+- current: Page number.
+- pageSize: Items on the page.
+
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+
+- 200: Successful.
+
+```json
+{
+  "list": [
+    {
+      "initiator": "zhangsan",
+      "processId": "1000492908536528",
+      "processName": "leave note-001",
+      "startTime": "2020-09-22T07:38:13.893+0800",
+      "status": 88,
+      "taskId": "1000492908536529",
+      "taskName": "Edit",
+      "url": "Page_0a4f3b38124142cbae4dae62f6664f5a"
+    }
+  ],
+  "pagination": {
+    "current": 0,
+    "pageSize": 0,
+    "total": 0
+  }
+}
+```
+- 400
+
+```json
+{
+  "code": 100108503,
+  "message": "username cannot be empty"
+}
+```
+
+<ul>
+<ul>
+<li>100108502: pageSize exceeds 500.</li>
+<li>100108320: User does not exist.</li>
+</ul>
+</ul>
+
+- 500
+```json
+{
+  "code": 100000001,
+  "message": "internal service exception"
+}
+```
+
+</div>
+</div>
+</div>
+
+<div className='div'>
+<div className='title'>
+
+## ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/openAPI/1.png) Submit Pending Tasks
+
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Path</div>
+<div className='rightCol'>
+
+```
+http://{supOS ip:port}/open-api/p/workflow/v2/tasks/pending
+```
+
+</div>
+<div className='leftCol'>Request body</div>
+<div className='rightCol'>
+
+```json
+{
+  "taskId": "1000492908536529",  //required. String
+  "username": "test",  //required. String
+  "assigns": [  //assignee list
+    {
+      "taskDefKey": "userTask_123",  //node ID
+      "users": [  //user list
+        "test1",
+        "test2"
+      ]
+    }
+  ],
+  "audit": {
+    "seqKey": "edge_123",  //flow arrow ID
+    "value": "1"  
+  },
+  "comment": "Duration exceeded 5 days, dismiss",
+  "formData": "{}"
+}
+```
+
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+
+- 200: Successful.
+- 400
+
+```json
+{
+  "code": 100108502,
+  "message": "username cannot be empty"
+}
+```
+
+<ul>
+<ul>
+<li>100108504: taskId cannot be empty.</li>
+<li>100108230: User does not exist.</li>
+<li>100108240: Permission verification error.</li>
+<li>100108237: Pending task does not exist.</li>
+<li>100108213: Pending task executor cannot be empty.</li>
+</ul>
+</ul>
+
+- 500
+```json
+{
+  "code": 100000001,
+  "message": "internal service exception"
+}
+```
+
+</div>
+</div>
+</div>
+
+<div className='div'>
+<div className='title'>
+
+## ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/openAPI/2.png) Save Form Data Linked with Pending Tasks 
+
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Path</div>
+<div className='rightCol'>
+
+```
+http://{supOS ip:port}/open-api/p/workflow/v2/tasks/pending
+```
+
+</div>
+<div className='leftCol'>Request body</div>
+<div className='rightCol'>
+
+```json
+{
+  "taskId": "1000492908536529",  //required. Pending task ID
+  "username": "test",  //required
+  "formData": "{}"
+}
+```
+
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+
+- 200: Successful.
+- 400
+
+```json
+{
+  "code": 100108502,
+  "message": "username cannot be empty"
+}
+```
+
+<ul>
+<ul>
+<li>100108504: taskId cannot be empty.</li>
+<li>100108230: User does not exist.</li>
+<li>100108240: No permission.</li>
+<li>100108237: Pending task does not exist.</li>
+</ul>
+</ul>
+
+- 500
+```json
+{
+  "code": 100000001,
+  "message": "internal service exception"
+}
+```
+
+</div>
+</div>
+</div>
+
+<div className='div'>
+<div className='title'>
+
+## ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/openAPI/4.png) Get Details of Pending Tasks 
+
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Path</div>
+<div className='rightCol'>
+
+```
+http://{supOS ip:port}/open-api/p/workflow/v2/tasks/{taskId}/pending
+```
+
+</div>
+<div className='leftCol'>Query parameter</div>
+<div className='rightCol'>
+
+**username**: Required.
+
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+
+- 200: Successful.
+```json
+{
+  "companyId": "1000",
+  "assigns": [
+    {
+      "seqKey": "edge_123",
+      "taskDefKey": "userTask_123",
+      "name": "review"
+    }
+  ],
+  "audits": [
+    {
+      "id": "K1236",
+      "name": "branch name",
+      "order": 1,
+      "value": "1",
+      "type": 0
+    }
+  ],
+  "enableComment": true,
+  "formData": "{}",
+  "formTempData": "{}",
+  "initiator": "zhangsan",
+  "processId": "1000492908536528",
+  "processName": "leave note-001",
+  "readonly": true,
+  "showlog": true,
+  "multiCompany": false,
+  "addInstance": false,
+  "startTime": "2020-09-22T07:38:13.893+0800",
+  "status": 88,
+  "taskId": "1000492908536529",
+  "taskName": "Edit",
+  "url": "Page_0a4f3b38124142cbae4dae62f6664f5a"
+}
+```
+- 400
+
+```json
+{
+  "code": 100108502,
+  "message": "username cannot be empty"
+}
+```
+
+<ul>
+<ul>
+<li>100108504: taskId cannot be empty.</li>
+<li>100108230: User does not exist.</li>
+<li>100108240: No permission.</li>
+<li>100108237: Pending task does not exist.</li>
+</ul>
+</ul>
+
+- 500
+```json
+{
+  "code": 100000001,
+  "message": "internal service exception"
+}
+```
+
+</div>
+</div>
+</div>
+
+<div className='div'>
+<div className='title'>
+
+## ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/openAPI/4.png) Get Total Number of Pending Tasks 
+
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Path</div>
+<div className='rightCol'>
+
+```
+http://{supOS ip:port}/open-api/p/workflow/v2/tasks/pending/total
+```
+
+</div>
+<div className='leftCol'>Query parameter</div>
+<div className='rightCol'>
+
+- appId: App ID.
+- username: Required username.
+- current: Page number.
+- pageSize: Items on the page.
+
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+
+- 200: Returns the total number of pending tasks.
+- 400
+
+```json
+{
+  "code": 100108502,
+  "message": "username cannot be empty"
+}
+```
+
+<ul>
+<ul>
+<li>100108504: taskId cannot be empty.</li>
+<li>100108230: User does not exist.</li>
+<li>100108240: No permission.</li>
+<li>100108237: Pending task does not exist.</li>
+</ul>
+</ul>
+
+- 500
+```json
+{
+  "code": 100000001,
+  "message": "internal service exception"
+}
+```
+
+</div>
+</div>
+</div>
+
+<div className='div'>
+<div className='title'>
+
+## ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/openAPI/4.png) Get Complete Tasks
+
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Path</div>
+<div className='rightCol'>
+
+```
+http://{supOS ip:port}/open-api/p/workflow/v2/tasks/completive
+```
+
+</div>
+<div className='leftCol'>Query parameter</div>
+<div className='rightCol'>
+
+**username**: Required.
+
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+
+- 200: Returns the complete tasks.
+```json
+{
+  "list": [
+    {
+      "initiator": "zhangsan",
+      "processId": "1000492908536528",
+      "processName": "leave note-001",
+      "reject": false,
+      "startTime": "2020-09-22T07:38:13.893+0800",
+      "endTime": "2020-09-22T07:38:13.893+0800",
+      "taskId": "1000492908536529",
+      "taskName": "Edit",
+      "url": "Page_0a4f3b38124142cbae4dae62f6664f5a"
+    }
+  ],
+  "pagination": {
+    "current": 0,
+    "pageSize": 0,
+    "total": 0
+  }
+}
+```
+- 400
+
+```json
+{
+  "code": 100108502,
+  "message": "username cannot be empty"
+}
+```
+
+<ul>
+<ul>
+<li>100108503: pageSize exceeds the maximum 500.</li>
+<li>100108230: User does not exist.</li>
+</ul>
+</ul>
+
+- 500
+```json
+{
+  "code": 100000001,
+  "message": "internal service exception"
+}
+```
+
+</div>
+</div>
+</div>
+
+<div className='div'>
+<div className='title'>
+
+## ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/openAPI/4.png) Get Details of Complete Tasks 
+
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Path</div>
+<div className='rightCol'>
+
+```
+http://{supOS ip:port}/open-api/p/workflow/v2/tasks/{taskId}/completive
+```
+
+</div>
+<div className='leftCol'>Query parameter</div>
+<div className='rightCol'>
+
+**username**: Required.
+
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+
+- 200: Successful.
+```json
+{
+  "initiator": "zhangsan",
+  "processId": "1000492908536528",
+  "processName": "leave note-001",
+  "formData": "{}",
+  "reject": false,
+  "revoke": false,
+  "showlog": true,
+  "startTime": "2020-09-22T07:38:13.893+0800",
+  "endTime": "2020-09-22T07:38:13.893+0800",
+  "taskId": "1000492908536529",
+  "taskName": "Edit",
+  "url": "Page_0a4f3b38124142cbae4dae62f6664f5a"
+}
+```
+- 400
+
+```json
+{
+  "code": 100108502,
+  "message": "username cannot be empty"
+}
+```
+
+<ul>
+<ul>
+<li>100108230: User does not exist.</li>
+<li>100108238: Complete task does not exist.</li>
+<li>100108214: No permission.</li>
+</ul>
+</ul>
+
+- 500
+```json
+{
+  "code": 100000001,
+  "message": "internal service exception"
+}
+```
+
+</div>
+</div>
+</div>
+
+<div className='div'>
+<div className='title'>
+
+## ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/openAPI/1.png) Delegate Pending Tasks
+
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Path</div>
+<div className='rightCol'>
+
+```
+http://{supOS ip:port}/open-api/p/workflow/v2/tasks/entrust
+```
+
+</div>
+<div className='leftCol'>Request body</div>
+<div className='rightCol'>
+
+```json
+{
+  "mandatary": "zhangsan", //required. Entrustee
+  "username": "test",  //required. Entruster
+  "reason": "business trip",
+  "taskId": "1000492908536529"
+}
+```
+
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+
+- 200: Successful.
+- 400
+
+```json
+{
+  "code": 100108502,
+  "message": "username cannot be empty"
+}
+```
+
+<ul>
+<ul>
+<li>100108504: taskId cannot be empty.</li>
+<li>100108505: mandatary cannot be empty.</li>
+<li>100108230: User does not exist.</li>
+<li>100108237: Pending task does not exist.</li>
+<li>100108231: Unauthorized delegation.</li>
+<li>100108218: Cannot delegate repeatedly.</li>
+<li>100108220: The other party already has permission to perform this pending task.</li>
+</ul>
+</ul>
+
+- 500
+```json
+{
+  "code": 100000001,
+  "message": "internal service exception"
+}
+```
+
+</div>
+</div>
+</div>
+
+<div className='div'>
+<div className='title'>
+
+## ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/openAPI/1.png) Recall Pending Tasks
+
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Path</div>
+<div className='rightCol'>
+
+```
+http://{supOS ip:port}/open-api/p/workflow/v2/tasks/revocation
+```
+
+</div>
+<div className='leftCol'>Request body</div>
+<div className='rightCol'>
+
+```json
+{
+  "taskId": "1000492908536529",
+  "username": "test" //required
+}
+```
+
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+
+- 200: Successful.
+- 400
+
+```json
+{
+  "code": 100108502,
+  "message": "username cannot be empty"
+}
+```
+
+<ul>
+<ul>
+<li>100108504: taskId cannot be empty.</li>
+<li>100108230: User does not exist.</li>
+<li>100108222: The process has ended.</li>
+<li>100108232: Cannot withdraw at parallel steps.</li>
+<li>100108236: The process status has been changed and cannot be withdrawn.</li>
+<li>100108238: Task does not exist.</li>
+<li>100108239: No prmission.</li>
+</ul>
+</ul>
+
+- 500
+```json
+{
+  "code": 100000001,
+  "message": "internal service exception"
+}
+```
+
+</div>
+</div>
+</div>

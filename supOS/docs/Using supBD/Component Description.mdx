@@ -1,0 +1,2253 @@
+---
+hide_title: true
+---
+
+## Data Input/Output
+
+<div className='div'>
+<div className='bdtitle'>
+
+### Input
+
+</div>
+<div className='bdcom'>Definition</div>
+<div className='rightCol'>
+Select a sample set as the data source of the algorithm.
+</div>
+<div className='bdcom'>Configuration</div>
+<div className='rightCol'>
+
+Click **Slect object**, and then select a sample set.
+
+</div>
+<div className='bdcom'>Insight</div>
+<div className='bdend'>
+
+- Data list of the sample set under **Output data**.
+- Statistical analysis of the sample set fields, including attribute, type, number of missing values, maximum, minimum and more.
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supBD/35.png)
+
+
+</div>
+</div>
+<div className='div'>
+<div className='bdtitle'>
+
+### Output
+
+</div>
+<div className='bdcom'>Definition</div>
+<div className='rightCol'>
+The end of the experiment.
+</div>
+<div className='bdcom'>Configuration</div>
+<div className='rightCol'>
+Select output object. Normally it is set to the prediction results of the algorithm. You can also select dependent and independent variables.
+
+</div>
+<div className='bdcom'>Insight</div>
+<div className='bdend'>
+None
+</div>
+</div>
+
+## Data Preprocessing
+
+<div className='div'>
+<div className='bdtitle'>
+
+### Char Conversion
+
+</div>
+<div className='bdcom'>Definition</div>
+<div className='rightCol'>
+Convert string type of fields in the sample set to numerical type based on the configuration.
+</div>
+<div className='bdcom'>Configuration</div>
+<div className='rightCol'>
+
+1. Click **Select object**, and then select fields to convert.
+2. Select a conversion type.
+3. Set the conversion rules.
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supBD/36.png)
+
+</div>
+<div className='bdcom'>Insight</div>
+<div className='bdend'>
+None
+</div>
+</div>
+<div className='div'>
+<div className='bdtitle'>
+
+### Data Balancing
+
+</div>
+<div className='bdcom'>Definition</div>
+<div className='rightCol'>
+Adjust data type distribution by increasing or decresing the number of minority or majority samples with algorithms such as SMOTE, ADASYN, Tomek Link and Near Miss.
+</div>
+<div className='bdcom'>Configuration</div>
+<div className='rightCol'>
+
+Select an enumeration field, and then select a balancing algorithm and set its related parameters.
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Balancing method</td>
+<td>Select a balancing algorithm.
+
+- SMOTE/ADASYN: Add data to the minority samples based on the existing data to balance data in each category.
+- Tomek Link/Near Miss: Reduce data from the majority samples to balance data in each category.
+
+</td>
+</tr>
+<tr>
+<td>Sampling method</td>
+<td>Select a method to set the oversampling or undersampling field.
+
+- Quantity category: Select a sample category based on its quantity. For example, select **Non-minimum class** to add or deduct data to/from the category other than the minimum for volume balance.
+- Sample size: Select a category, and manually set the target size to balance each category.
+- Sample proportion: Select a category, and manually set the amplitude/reduction percentage of the category valome.
+- For **Tomek Link**, you can set a category and reduce its data volume.
+
+</td>
+</tr>
+<tr>
+<td>K-Nearest Neighbors</td>
+<td>Set the number of KNN for algorithms to calculate.</td>
+</tr>
+<tr>
+<td>Random seed</td>
+<td>Enable it to fix the amplitude/reduction value for repeated debugging.</td>
+</tr>
+</tbody>
+</table>
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supBD/37.png)
+
+</div>
+<div className='bdcom'>Insight</div>
+<div className='bdend'>
+
+Used **SMOTE** to oversmaple the **Non-minimum** category.
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supBD/47.png)
+
+</div>
+</div>
+<div className='div'>
+<div className='bdtitle'>
+
+### Data Copy
+
+</div>
+<div className='bdcom'>Definition</div>
+<div className='rightCol'>
+Copy the input data to multiple output nodes.
+</div>
+<div className='bdcom'>Configuration</div>
+<div className='rightCol'>
+None
+</div>
+<div className='bdcom'>Insight</div>
+<div className='bdend'>
+Depends on the preprocessing elements. Without preprocessing, the output data is the same as the input data.
+</div>
+</div>
+<div className='div'>
+<div className='bdtitle'>
+
+### Data Keep
+
+</div>
+<div className='bdcom'>Definition</div>
+<div className='rightCol'>
+Keep the data unchanged for the set execution cycle.
+</div>
+<div className='bdcom'>Configuration</div>
+<div className='rightCol'>
+
+1. Enable **Data cache**.
+2. Click **Select object**, and then select comparison fields.
+3. Click **Config**, and then select fields to be kept with the **Comparison field**.
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supBD/38.png)
+
+:::info
+ONly numerical fields are available.
+:::
+
+</div>
+<div className='bdcom'>Insight</div>
+<div className='bdend'>
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supBD/39.png)
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supBD/40.png)
+
+</div>
+</div>
+<div className='div'>
+<div className='bdtitle'>
+
+### Data Merge
+
+</div>
+<div className='bdcom'>Definition</div>
+<div className='rightCol'>
+Merge multiple input data sets into one.
+</div>
+<div className='bdcom'>Configuration</div>
+<div className='rightCol'>
+
+Enable **Auto handle duplicate field names**, and duplicate field name will add a suffix **1**.
+
+:::tip
+Under **Node info**, view the input and output data structure.
+:::
+
+</div>
+<div className='bdcom'>Insight</div>
+<div className='bdend'>
+Merged data set.
+</div>
+</div>
+<div className='div'>
+<div className='bdtitle'>
+
+### Data Split
+
+</div>
+<div className='bdcom'>Definition</div>
+<div className='rightCol'>
+
+Split the original data set into **Training set** and **Validation set**. Used for regression or classifier algorithms.
+
+</div>
+<div className='bdcom'>Configuration</div>
+<div className='rightCol'>
+
+1. Set the ratio between trainning set and validation set, and during each debugging, the actual ratio will be slightly different from the set value.
+2. Select whether to enable **Random seed**.
+- Enable **Random seed**, repeat debugging the experiment and the same ratio as the last time will be used again.
+- Disable **Random seed**, repeat debugging the experiment and the ratio will be slightly different each time.
+
+:::info
+For example, the ratio is set to 80/20.
+- Enable **Random seed**, the ratio of the first debugging may be **80.21%/19.79%**, and the second debugging ratio will still be **80.21%/19.79%**.
+- Disable **Random seed**, the ratio of the first debugging may be **80.21%/19.79%**, and the second debugging ratio may be **79.91%/20.09%**.
+:::
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supBD/41.png)
+
+</div>
+<div className='bdcom'>Insight</div>
+<div className='bdend'>
+
+Displays the data of each set. Only the first 50 entries are displayed.
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supBD/42.png)
+
+</div>
+</div>
+<div className='div'>
+<div className='bdtitle'>
+
+### Data Filter
+
+</div>
+<div className='bdcom'>Definition</div>
+<div className='rightCol'>
+Eliminates the error data to improve data clearance and machine learning effect.
+</div>
+<div className='bdcom'>Configuration</div>
+<div className='rightCol'>
+
+1. Select fields for filtering.
+2. Select a filter and set the filter window size.
+:::info
+When selecting **EMA**, you can either use adaptive weight or manually set the weight. For manual set, keep 2 decimal places.
+:::
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supBD/43.png)
+
+</div>
+<div className='bdcom'>Insight</div>
+<div className='bdend'>
+
+View the effect with the **Tendency chart** element.
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supBD/44.png)
+
+</div>
+</div>
+<div className='div'>
+<div className='bdtitle'>
+
+### Lag Process
+
+</div>
+<div className='bdcom'>Definition</div>
+<div className='rightCol'>
+Applies different lag cycle to the selected feature field to analyze the time serial difference.
+</div>
+<div className='bdcom'>Configuration</div>
+<div className='rightCol'>
+
+Click **Config**, and then select the feature field and set the lag cycle.
+- Set lag cycle to a positive integer, the feature field is in advance.
+- Set lag cycle to a negative integer, the feature field is left behind.
+- Set lag cycle to 0, the feature field is at the same pace as other fields.
+
+:::caution
+The lag cycle cannot be larger than the number of data rows.
+:::
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supBD/47.png)
+
+</div>
+<div className='bdcom'>Insight</div>
+<div className='bdend'>
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supBD/45.png)
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supBD/46.png)
+
+</div>
+</div>
+<div className='div'>
+<div className='bdtitle'>
+
+### Missing Values
+
+</div>
+<div className='bdcom'>Definition</div>
+<div className='rightCol'>
+Replace the missing value of the input sample set.
+</div>
+<div className='bdcom'>Configuration</div>
+<div className='rightCol'>
+
+Click **Select object**, select fields that have missing values and set the processing methods.
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supBD/49.png)
+
+</div>
+<div className='bdcom'>Insight</div>
+<div className='bdend'>
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supBD/50.png)
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supBD/51.png)
+
+</div>
+</div>
+<div className='div'>
+<div className='bdtitle'>
+
+### Normalization
+
+</div>
+<div className='bdcom'>Definition</div>
+<div className='rightCol'>
+Limit the input data set within a certain value range, normally [0, 1], to get better effect from subsequent modeling algorithms with less running time.
+</div>
+<div className='bdcom'>Configuration</div>
+<div className='rightCol'>
+
+Click **Select object**, select fields that needs to be normalized and set the processing methods.
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supBD/52.png)
+
+</div>
+<div className='bdcom'>Insight</div>
+<div className='bdend'>
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supBD/53.png)
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supBD/54.png)
+
+</div>
+</div>
+<div className='div'>
+<div className='bdtitle'>
+
+### Num Conversion
+
+</div>
+<div className='bdcom'>Definition</div>
+<div className='rightCol'>
+Convert numerical type of fields in the sample set to string type based on the configuration.
+</div>
+<div className='bdcom'>Configuration</div>
+<div className='rightCol'>
+
+Click **Select object**, select fields that needs to be converted.
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supBD/55.png)
+
+</div>
+<div className='bdcom'>Insight</div>
+<div className='bdend'>
+
+Same values with **string** as data type.
+
+</div>
+</div>
+<div className='div'>
+<div className='bdtitle'>
+
+### Set Role
+
+</div>
+<div className='bdcom'>Definition</div>
+<div className='rightCol'>
+Define dependent and independent variables from the sample set, and subsequent algorithms can get clear data features and corresponding relations based on the role.
+</div>
+<div className='bdcom'>Configuration</div>
+<div className='rightCol'>
+
+Click **Select object**, select fields and set them to independent and dependent variables.
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supBD/56.png)
+
+</div>
+<div className='bdcom'>Insight</div>
+<div className='bdend'>
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supBD/57.png)
+
+</div>
+</div>
+<div className='div'>
+<div className='bdtitle'>
+
+### Step Limit
+
+</div>
+<div className='bdcom'>Definition</div>
+<div className='rightCol'>
+Set difference limit between fields. Normally used when connecting with DCS and involving in control process to keep the process steady by limiting the change.
+</div>
+<div className='bdcom'>Configuration</div>
+<div className='rightCol'>
+
+Click **Select object**, select fields and set them to independent and dependent variables.
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supBD/58.png)
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Comparison field</td>
+<td>Select fields to be the compared objects.</td>
+</tr>
+<tr>
+<td>Step deadband</td>
+<td>Buffer value between the difference of values of comparison field and original field, and the step limit value.</td>
+</tr>
+<tr>
+<td>Step limit</td>
+<td>Limit of the difference between values of comparison field and original field. The value must be larger than the step deadband.</td>
+</tr>
+</tbody>
+</table>
+
+:::info
+An example to demonstrate the relation betweend step deadband and limit.
+- The orginal field value is 10, comparison field value is 3, step limit is 3, step deadband is 1. After processing, the original field will be 6 (3 + 3), beacuse the difference 7 > 3.
+- The orginal field value is 10, comparison field value is 3, step limit is 10, step deadband is 8. After processing, the original field will be 3, beacuse the difference 7 < 8.
+- The orginal field value is 10, comparison field value is 3, step limit is 8, step deadband is 5. After processing, the original field will be 10, beacuse the difference 5 < 7 < 8.
+
+:::
+
+</div>
+<div className='bdcom'>Insight</div>
+<div className='bdend'>
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supBD/59.png)
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supBD/60.png)
+
+</div>
+</div>
+
+## Signal Processing
+
+<div className='div'>
+<div className='bdtitle'>
+
+### Digital Filter
+
+</div>
+<div className='bdcom'>Definition</div>
+<div className='rightCol'>
+Filter the discrete input signals according to the set filter frequency.
+</div>
+<div className='bdcom'>Configuration</div>
+<div className='rightCol'>
+
+Click **Select object**, select fields and set the filter, frequency and type.
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supBD/61.png)
+
+<table>
+<colgroup>
+<col style={{width:"20%"}}/>
+<col style={{width:"80%"}}/>
+</colgroup>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Batch Filter</td>
+<td>Select filters from <b>FIR filter</b> and <b>IIR filter</b>.</td>
+</tr>
+<tr>
+<td>Order</td>
+<td>The higher the order, the more complicated and accurate the frequency response of the filter is.</td>
+</tr>
+<tr>
+<td>Sampling frequency</td>
+<td>The number of signal sampling every second.</td>
+</tr>
+<tr>
+<td>Filter type</td>
+<td>
+
+- Low pass: Allows only low-frequency signals to pass.
+- High pass: Allows only high-frequency signals to pass.
+- Band pass: Allows only specified-frequency signals to pass.
+- Band stop: Allows only signals outside the specified-frequency range to pass.
+
+</td>
+</tr>
+<tr>
+<td>Window function</td>
+<td>Adjust and restrict the frequency response of the filter.
+
+:::info
+Only available for **FIR filter**.
+:::
+
+</td>
+</tr>
+<tr>
+<td>Coefficient normalization</td>
+<td>Zoom the filter coefficient to a specified range to assure the filter steadiness.
+
+:::info
+Only available for **FIR filter**.
+:::
+
+</td>
+</tr>
+<tr>
+<td>Cutoff frequency</td>
+<td>The frequency where the filter stops passing signals.</td>
+</tr>
+<tr>
+<td>Standard deviation</td>
+<td>Controls the window function shape and spectral characteristics. The larger the number, the wider the Guassian window. </td>
+</tr>
+<tr>
+<td>Maximum ripple</td>
+<td>The maximum amplitude of Chebyshev I filter within the band-pass frequency range.
+
+:::info
+Unavailable for **Butterworth filter**.
+:::
+
+</td>
+</tr>
+<tr>
+<td>Minimum attenuation</td>
+<td>The minimum attenuation of Chebyshev I filter within the band-stop frequency range.
+
+:::info
+Unavailable for **Butterworth filter**.
+:::
+
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div className='bdcom'>Insight</div>
+<div className='bdend'>
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supBD/62.png)
+
+</div>
+</div>
+<div className='div'>
+<div className='bdtitle'>
+
+### Wavelet Transform
+
+</div>
+<div className='bdcom'>Definition</div>
+<div className='rightCol'>
+Process the wavelet coefficient of signals with noise to reserve and restore real signals.
+</div>
+<div className='bdcom'>Configuration</div>
+<div className='rightCol'>
+
+Click **Select object**, select fields and set the filter parameters.
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supBD/63.png)
+
+<table>
+<colgroup>
+<col style={{width:"20%"}}/>
+<col style={{width:"80%"}}/>
+</colgroup>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Wavelet filter</td>
+<td>Select a wavelet filter to decompose and recompose signals.</td>
+</tr>
+<tr>
+<td>Decomposition depth</td>
+<td>The level of decomposing signals.</td>
+</tr>
+<tr>
+<td>Boundary processing</td>
+<td>The way of processing boundry signals.
+
+- **periodic**: Periodically copy or extend boundary signals.
+- **reflection**: Extend boundary signals symmetrically.
+
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div className='bdcom'>Insight</div>
+<div className='bdend'>
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supBD/64.png)
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supBD/65.png)
+
+</div>
+</div>
+
+## Feature Engineering
+
+<div className='div'>
+<div className='bdtitle'>
+
+### Correlation Matrix
+
+</div>
+<div className='bdcom'>Definition</div>
+<div className='rightCol'>
+Calculate the coorelation coefficient between each feature in a data set based on the set algorithm.
+</div>
+<div className='bdcom'>Configuration</div>
+<div className='rightCol'>
+
+Click **Select object**, select fields and algorithm type.
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supBD/66-1.png)
+
+</div>
+<div className='bdcom'>Insight</div>
+<div className='bdend'>
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supBD/66.png)
+
+</div>
+</div>
+<div className='div'>
+<div className='bdtitle'>
+
+### Feature Expression
+
+</div>
+<div className='bdcom'>Definition</div>
+<div className='rightCol'>
+Create new variables by calculating original values.
+</div>
+<div className='bdcom'>Configuration</div>
+<div className='rightCol'>
+
+1. Click **Select object**, set feature name and data type.
+2. Select a field and click **Reference**.
+3. Set the expression using the on-screen keyboard.
+4. Click **Verify** to check whether the expression is correct.
+5. Click **Save** and then click **OK**.
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supBD/67.png)
+
+</div>
+<div className='bdcom'>Insight</div>
+<div className='bdend'>
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supBD/68.png)
+
+</div>
+</div>
+<div className='div'>
+<div className='bdtitle'>
+
+### Feature Importance
+
+</div>
+<div className='bdcom'>Definition</div>
+<div className='rightCol'>
+Evaluate the influence that features have on prediction results in machine learning models.
+
+:::info
+Provided models are based on decision trees, including random forest and gradient boosting decision trees.
+:::
+
+</div>
+<div className='bdcom'>Configuration</div>
+<div className='rightCol'>
+
+:::info MUST Do
+Make sure you add a **Set Role** component before **Feature Importance**.
+:::
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supBD/69.png)
+
+<table>
+<colgroup>
+<col style={{width:"20%"}}/>
+<col style={{width:"80%"}}/>
+</colgroup>
+<caption>Random forest model parameter description</caption>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Learner type</td>
+<td>
+
+- Regression: Predict continuous numerical values.
+- Classification: Predict discrete class labels.
+
+</td>
+</tr>
+<tr>
+<td>Feature evaluation criteria</td>
+<td>
+
+- Regression: **MSE** and **Average absolute error**.
+- Classification: **Gini** and **Entropy**.
+
+</td>
+</tr>
+<tr>
+<td>Maximum number of iteration</td>
+<td>The maximum number of iterations or the maximum number of decision trees in the random forest ensemble.</td>
+</tr>
+<tr>
+<td>Maximum feature</td>
+<td>The maximum number of features considered during the construction of each decision tree in the ensemble.</td>
+</tr>
+<tr>
+<td>Maximum depth</td>
+<td>The limit set on the maximum depth or number of levels of each decision tree in the ensemble.</td>
+</tr>
+<tr>
+<td>Minimum sample size of leaf nodes</td>
+<td>Specifies the minimum number of samples required to consider further splitting a node and form a leaf node.</td>
+</tr>
+<tr>
+<td>Minimum sample size for splitting</td>
+<td>Specifies the minimum number of samples needed to consider splitting a node further.</td>
+</tr>
+<tr>
+<td>Random seed</td>
+<td>Enable it to fix the amplitude/reduction value for repeated debugging.</td>
+</tr>
+</tbody>
+</table>
+<table>
+<colgroup>
+<col style={{width:"20%"}}/>
+<col style={{width:"80%"}}/>
+</colgroup>
+<caption>GBDT model parameter description</caption>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Step length</td>
+<td>Controls the contribution of each decision tree to the overall model.</td>
+</tr>
+<tr>
+<td>Subsampling</td>
+<td>The technique of randomly selecting a subset of training samples during each iteration.</td>
+</tr>
+<tr>
+<td>Loss function</td>
+<td>
+
+- Regression: **Mean square error**, **Absolute loss**, **Huber loss** and **Quantile loss**.
+- Classification: **Log-likelihood loss function** and **Exponential loss function**.
+
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div className='bdcom'>Insight</div>
+<div className='bdend'>
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supBD/70.png)
+
+</div>
+</div>
+<div className='div'>
+<div className='bdtitle'>
+
+### Outlier Detection
+
+</div>
+<div className='bdcom'>Definition</div>
+<div className='rightCol'>
+Detect abnormal values based on feature distribution of original values. Abnormal value processing is also available.
+</div>
+<div className='bdcom'>Configuration</div>
+<div className='rightCol'>
+
+Click **Select object**, select fields and corresponding detection mode.
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supBD/71.png)
+
+</div>
+<div className='bdcom'>Insight</div>
+<div className='bdend'>
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supBD/72.png)
+
+</div>
+</div>
+<div className='div'>
+<div className='bdtitle'>
+
+### Principal Component Analysis
+
+</div>
+<div className='bdcom'>Definition</div>
+<div className='rightCol'>
+Convert multiple variables to a few principal components that contain most information and are non-linear related.
+</div>
+<div className='bdcom'>Configuration</div>
+<div className='rightCol'>
+
+Click **Select object**, select fields and set **PCA components**.
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supBD/73.png)
+
+</div>
+<div className='bdcom'>Insight</div>
+<div className='bdend'>
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supBD/74.png)
+
+</div>
+</div>
+
+<div className='div'>
+<div className='bdtitle'>
+
+### Scatter Plot
+
+</div>
+<div className='bdcom'>Definition</div>
+<div className='rightCol'>
+Displays data points on a 2D or 3D coordinate system.
+</div>
+<div className='bdcom'>Configuration</div>
+<div className='rightCol'>
+
+Click **Select object**, select chart type and corresponding fields, and the display color scheme on the coordinate system.
+:::info
+Select **Group** to group fields, and the group field must be **string**.
+:::
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supBD/75.png)
+
+</div>
+<div className='bdcom'>Insight</div>
+<div className='bdend'>
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supBD/76.png)
+
+</div>
+</div>
+<div className='div'>
+<div className='bdtitle'>
+
+### Tendency Chart
+
+</div>
+<div className='bdcom'>Definition</div>
+<div className='rightCol'>
+Displays data tendency.
+</div>
+<div className='bdcom'>Configuration</div>
+<div className='rightCol'>
+
+Click **Select object**, select fields and the display color scheme on the tendency chart.
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supBD/77.png)
+
+</div>
+<div className='bdcom'>Insight</div>
+<div className='bdend'>
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supBD/78.png)
+
+</div>
+</div>
+
+## Machine learning
+
+:::info MUST Do
+Make sure you add a **Set Role** component before machine learning operators.
+:::
+
+<div className='div'>
+<div className='bdtitle'>
+
+### Regression-BPNN Regression
+
+</div>
+<div className='bdcom'>Definition</div>
+<div className='rightCol'>
+Use neural network to build the non-linear mapping relation between input features and output, and then use the relation to predict target variables.
+</div>
+<div className='bdcom'>Configuration</div>
+<div className='rightCol'>
+
+
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supBD/79.png)
+
+<table>
+<colgroup>
+<col style={{width:"20%"}}/>
+<col style={{width:"80%"}}/>
+</colgroup>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Data normalization</td>
+<td>To ensure that the input features are within a similar range and have comparable scales.</td>
+</tr>
+<tr>
+<td>Hidden neuron</td>
+<td>Determines the complexity and representational capacity of the network.</td>
+</tr>
+<tr>
+<td>Weight decay</td>
+<td>Prevent overfitting and improve generalization performance by adding a regularization term to the loss function during training, which penalizes large weight values.</td>
+</tr>
+<tr>
+<td>Maximum number of iterations</td>
+<td>The maximum number of training iterations or epochs that the algorithm will go through during the training process.</td>
+</tr>
+<tr>
+<td>Prediction interval control</td>
+<td>Manage the uncertainty or confidence associated with the predictions made by the model.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div className='bdcom'>Insight</div>
+<div className='bdend'>
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supBD/80.png)
+
+</div>
+</div>
+<div className='div'>
+<div className='bdtitle'>
+
+### Regression-Curve Regression
+
+</div>
+<div className='bdcom'>Definition</div>
+<div className='rightCol'>
+Fit the input non-linear data to build models and predict data.
+</div>
+<div className='bdcom'>Configuration</div>
+<div className='rightCol'>
+
+Select one independent variable and one dependent variable in **Set Role**, and then set the order.
+
+</div>
+<div className='bdcom'>Insight</div>
+<div className='bdend'>
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supBD/81.png)
+
+</div>
+</div>
+<div className='div'>
+<div className='bdtitle'>
+
+### Regression-Decision Tree Regression
+
+</div>
+<div className='bdcom'>Definition</div>
+<div className='rightCol'>
+A regression analysis method based on decision trees. It uses a tree-like structure to model and predict continuous numerical outputs.
+</div>
+<div className='bdcom'>Configuration</div>
+<div className='rightCol'>
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supBD/82.png)
+
+<table>
+<colgroup>
+<col style={{width:"20%"}}/>
+<col style={{width:"80%"}}/>
+</colgroup>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Maximum depth</td>
+<td>The maximum number of levels or node depths allowed in the decision tree model.</td>
+</tr>
+<tr>
+<td>Information metrics</td>
+<td>
+
+Only supports **variance**, meaning the squared difference between real value and predicted value. The smaller the calculated value, the better the model is fitted.
+
+</td>
+</tr>
+<tr>
+<td>Pruning coefficient</td>
+<td>Reduces the complexicy of the decision tree. The larger the value, the simpler the tree gets.
+
+:::caution
+The value should be set based on data set features and actual requirements. Underfitting or overfitting might happen due to unreasonable coefficient setting.
+:::
+
+</td>
+</tr>
+<tr>
+<td>Minimum sample size of leaf nodes</td>
+<td>Specifies the minimum number of samples required to consider further splitting a node and form a leaf node.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div className='bdcom'>Insight</div>
+<div className='bdend'>
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supBD/83.png)
+
+</div>
+</div>
+<div className='div'>
+<div className='bdtitle'>
+
+### Regression-DNN Regression
+
+</div>
+<div className='bdcom'>Definition</div>
+<div className='rightCol'>
+Utilizes deep neural networks to predict continuous numerical values. The model is trained on a labeled dataset consisting of input features and corresponding target values.
+</div>
+<div className='bdcom'>Configuration</div>
+<div className='rightCol'>
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supBD/84.png)
+
+<table>
+<colgroup>
+<col style={{width:"20%"}}/>
+<col style={{width:"80%"}}/>
+</colgroup>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Data normalization</td>
+<td>Scales the feature values of input data to a suitable range, making the training process of the neural network more stable and efficient.</td>
+</tr>
+<tr>
+<td>Prediction interval control</td>
+<td>Estimates the confidence intervals or variance ranges of the predicted values, providing more comprehensive information about the prediction results.</td>
+</tr>
+<tr>
+<td>Number of hidden layers</td>
+<td>Layers between the input layer and the output layer, where the actual learning and feature extraction occur.</td>
+</tr>
+<tr>
+<td>Output layer activation function</td>
+<td>The linear activation function simply outputs the weighted sum of the input without applying any non-linear transformation.</td>
+</tr>
+<tr>
+<td>Number of batch training</td>
+<td>The number of samples used in each batch during the training of a DNN regression model.</td>
+</tr>
+<tr>
+<td>Number of iterations</td>
+<td>The number of times the entire training dataset is processed by the neural network during the training process.</td>
+</tr>
+<tr>
+<td>Validation data ratio</td>
+<td>Represents the fraction of the total dataset that is set aside for validation during the model training process.</td>
+</tr>
+<tr>
+<td>Optimizer</td>
+<td>Determines how the model's parameters (weights and biases) are updated during the training process to minimize the loss function and improve the model's performance.</td>
+</tr>
+<tr>
+<td>Loss function</td>
+<td>Measures the discrepancy between the predicted output and the actual target values.</td>
+</tr>
+<tr>
+<td>Regularization parameter</td>
+<td>Helps prevent overfitting by adding a penalty term to the loss function, discouraging the model from becoming too complex and relying too much on the training data.</td>
+</tr>
+<tr>
+<td>Kernel weight</td>
+<td>The weights represent the strength of the connections between neurons in different layers.</td>
+</tr>
+<tr>
+<td>Bias weight</td>
+<td>Used to introduce an offset or bias to the output of the neuron.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div className='bdcom'>Insight</div>
+<div className='bdend'>
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supBD/85.png)
+
+</div>
+</div>
+<div className='div'>
+<div className='bdtitle'>
+
+### Regression-Linear Regression
+
+</div>
+<div className='bdcom'>Definition</div>
+<div className='rightCol'>
+A statistical modeling technique for predicting a continuous numerical output variable based on one or more input features. It assumes a linear relationship between the input features and the target variable.
+</div>
+<div className='bdcom'>Configuration</div>
+<div className='rightCol'>
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supBD/86.png)
+
+<table>
+<colgroup>
+<col style={{width:"20%"}}/>
+<col style={{width:"80%"}}/>
+</colgroup>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Regularization parameter</td>
+<td>Prevents overfitting and improve the generalization ability of the model. It adds a regularization term to the loss function during training, which penalizes large coefficient values. The regularization parameter controls the strength of this penalty.</td>
+</tr>
+<tr>
+<td>Penalty function type</td>
+<td>
+
+- L1: Adds a penalty term that is proportional to the sum of the absolute values of the coefficients to the loss function.
+- L2: Adds a penalty term that is proportional to the sum of squared coefficients to the loss function.
+- L1+L2: Adds a penalty term to the loss function that is a linear combination of the L1 and L2 penalty terms.
+
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div className='bdcom'>Insight</div>
+<div className='bdend'>
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supBD/87.png)
+
+</div>
+</div>
+<div className='div'>
+<div className='bdtitle'>
+
+### Regression-LSTM Regression
+
+</div>
+<div className='bdcom'>Definition</div>
+<div className='rightCol'>
+Uses LSTM neural networks to predict continuous numeric values, which makes it well-suited for time series forecasting and regression tasks.
+</div>
+<div className='bdcom'>Configuration</div>
+<div className='rightCol'>
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supBD/88.png)
+
+<table>
+<colgroup>
+<col style={{width:"20%"}}/>
+<col style={{width:"80%"}}/>
+</colgroup>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Data normalization</td>
+<td>Scales the feature values of input data to a suitable range, making the training process of the neural network more stable and efficient.</td>
+</tr>
+<tr>
+<td>Prediction interval control</td>
+<td>Estimates the confidence intervals or variance ranges of the predicted values, providing more comprehensive information about the prediction results.</td>
+</tr>
+<tr>
+<td>Time step</td>
+<td>The number of past observations or data points that are considered as input to the LSTM network when making a prediction for the next time step.</td>
+</tr>
+<tr>
+<td>Number of LSTM layers</td>
+<td>The depth of the LSTM architecture used in the model. When the dataset is small and noisy, it is better to set a smaller number.</td>
+</tr>
+<tr>
+<td>Output layer activation function</td>
+<td>The linear activation function simply outputs the weighted sum of the input without applying any non-linear transformation.</td>
+</tr>
+<tr>
+<td>Number of batch training</td>
+<td>The number of samples used in each batch during the training of a DNN regression model.</td>
+</tr>
+<tr>
+<td>Number of iterations</td>
+<td>The number of times the entire training dataset is processed by the neural network during the training process.</td>
+</tr>
+<tr>
+<td>Validation data ratio</td>
+<td>Represents the fraction of the total dataset that is set aside for validation during the model training process.</td>
+</tr>
+<tr>
+<td>Optimizer</td>
+<td>Determines how the model's parameters (weights and biases) are updated during the training process to minimize the loss function and improve the model's performance.</td>
+</tr>
+<tr>
+<td>Loss function</td>
+<td>Measures the discrepancy between the predicted output and the actual target values.</td>
+</tr>
+<tr>
+<td>Regularization parameter</td>
+<td>Helps prevent overfitting by adding a penalty term to the loss function, discouraging the model from becoming too complex and relying too much on the training data.</td>
+</tr>
+<tr>
+<td>Kernel weight</td>
+<td>The weights represent the strength of the connections between neurons in different layers.</td>
+</tr>
+<tr>
+<td>Recurrent weight</td>
+<td>The set of weights that control the recurrent connections within the LSTM cells.</td>
+</tr>
+<tr>
+<td>Bias weight</td>
+<td>Used to introduce an offset or bias to the output of the neuron.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div className='bdcom'>Insight</div>
+<div className='bdend'>
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supBD/89.png)
+
+</div>
+</div>
+<div className='div'>
+<div className='bdtitle'>
+
+### Regression-Nolinear SVM Regression
+
+</div>
+<div className='bdcom'>Definition</div>
+<div className='rightCol'>
+Find a nonlinear function that can map the input features to the target variable.
+</div>
+<div className='bdcom'>Configuration</div>
+<div className='rightCol'>
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supBD/90.png)
+
+<table>
+<colgroup>
+<col style={{width:"20%"}}/>
+<col style={{width:"80%"}}/>
+</colgroup>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Kernal function type</td>
+<td>Maps the input data into a higher-dimensional space, where it becomes more suitable for linear regression.</td>
+</tr>
+<tr>
+<td>Kernal function coefficient</td>
+<td>Controls the shape and flexibility of the kernel function.</td>
+</tr>
+<tr>
+<td>Penalty factor C</td>
+<td>Controls the trade-off between maximizing the margin and minimizing the training error.</td>
+</tr>
+<tr>
+<td>Error accuracy</td>
+<td>The accuracy of the regression model in making predictions on the test or validation data.</td>
+</tr>
+<tr>
+<td>Maximum number of iterations</td>
+<td>Specifies the maximum number of times the optimization algorithm will update the model's parameters while trying to minimize the cost function or loss.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div className='bdcom'>Insight</div>
+<div className='bdend'>
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supBD/91.png)
+
+</div>
+</div>
+<div className='div'>
+<div className='bdtitle'>
+
+### Regression-Random Forest Regression
+
+</div>
+<div className='bdcom'>Definition</div>
+<div className='rightCol'>
+Combines the predictions from multiple decision trees to generate a final prediction.
+</div>
+<div className='bdcom'>Configuration</div>
+<div className='rightCol'>
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supBD/92.png)
+
+<table>
+<colgroup>
+<col style={{width:"20%"}}/>
+<col style={{width:"80%"}}/>
+</colgroup>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Number of trees</td>
+<td>The number of decision trees that are built during the training process.</td>
+</tr>
+<tr>
+<td>Maximum depth</td>
+<td>The maximum number of levels or node depths allowed in the decision tree model.</td>
+</tr>
+<tr>
+<td>Info metrics</td>
+<td>
+
+- MSE: Measures the average squared difference between the predicted values and the actual target values.
+- MAE: Measures the average absolute difference between the predicted values and the actual target values.
+
+</td>
+</tr>
+<tr>
+<td>Maximum feature</td>
+<td>The maximum number of features considered during the construction of each decision tree in the ensemble.</td>
+</tr>
+<tr>
+<td>Minimum sample size of leaf nodes</td>
+<td>Specifies the minimum number of samples required to consider further splitting a node and form a leaf node.</td>
+</tr>
+<tr>
+<td>Cost-complexity pruning</td>
+<td>Ensures that each decision tree in the Random Forest is already relatively simple and less prone to overfitting.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div className='bdcom'>Insight</div>
+<div className='bdend'>
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supBD/93.png)
+
+</div>
+</div>
+<div className='div'>
+<div className='bdtitle'>
+
+### Regression-RNN Regression
+
+</div>
+<div className='bdcom'>Definition</div>
+<div className='rightCol'>
+Utilizes recurrent neural networks to model and predict continuous numerical values.
+</div>
+<div className='bdcom'>Configuration</div>
+<div className='rightCol'>
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supBD/94.png)
+
+<table>
+<colgroup>
+<col style={{width:"20%"}}/>
+<col style={{width:"80%"}}/>
+</colgroup>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Data normalization</td>
+<td>Scales the feature values of input data to a suitable range, making the training process of the neural network more stable and efficient.</td>
+</tr>
+<tr>
+<td>Prediction interval control</td>
+<td>Estimates the confidence intervals or variance ranges of the predicted values, providing more comprehensive information about the prediction results.</td>
+</tr>
+<tr>
+<td>Time step</td>
+<td>The number of past observations or data points that are considered as input to the LSTM network when making a prediction for the next time step.</td>
+</tr>
+<tr>
+<td>Number of LSTM layers</td>
+<td>The depth of the LSTM architecture used in the model. When the dataset is small and noisy, it is better to set a smaller number.</td>
+</tr>
+<tr>
+<td>Output layer activation function</td>
+<td>The linear activation function simply outputs the weighted sum of the input without applying any non-linear transformation.</td>
+</tr>
+<tr>
+<td>Number of batch training</td>
+<td>The number of samples used in each batch during the training of a DNN regression model.</td>
+</tr>
+<tr>
+<td>Number of iterations</td>
+<td>The number of times the entire training dataset is processed by the neural network during the training process.</td>
+</tr>
+<tr>
+<td>Validation data ratio</td>
+<td>Represents the fraction of the total dataset that is set aside for validation during the model training process.</td>
+</tr>
+<tr>
+<td>Optimizer</td>
+<td>Determines how the model's parameters (weights and biases) are updated during the training process to minimize the loss function and improve the model's performance.</td>
+</tr>
+<tr>
+<td>Loss function</td>
+<td>Measures the discrepancy between the predicted output and the actual target values.</td>
+</tr>
+<tr>
+<td>Regularization parameter</td>
+<td>Helps prevent overfitting by adding a penalty term to the loss function, discouraging the model from becoming too complex and relying too much on the training data.</td>
+</tr>
+<tr>
+<td>Kernel weight</td>
+<td>The weights represent the strength of the connections between neurons in different layers.</td>
+</tr>
+<tr>
+<td>Recurrent weight</td>
+<td>The set of weights that control the recurrent connections within the LSTM cells.</td>
+</tr>
+<tr>
+<td>Bias weight</td>
+<td>Used to introduce an offset or bias to the output of the neuron.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div className='bdcom'>Insight</div>
+<div className='bdend'>
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supBD/95.png)
+
+</div>
+</div>
+<div className='div'>
+<div className='bdtitle'>
+
+### Regression-XGB Regression
+
+</div>
+<div className='bdcom'>Definition</div>
+<div className='rightCol'>
+Combines the predictions of multiple weak learners (decision trees) to create a powerful ensemble model.
+</div>
+<div className='bdcom'>Configuration</div>
+<div className='rightCol'>
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supBD/96.png)
+
+<table>
+<colgroup>
+<col style={{width:"20%"}}/>
+<col style={{width:"80%"}}/>
+</colgroup>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Weak estimator</td>
+<td>A variant of decision trees that focuses on minimizing the gradients of the loss function during training. Each weak estimator is trained to correct the errors made by the previous estimators, gradually improving the model's predictions.</td>
+</tr>
+<tr>
+<td>Objective function</td>
+<td>The loss function to be minimized during the training process. It quantifies the discrepancy between the predicted values and the true target values, guiding the optimization of the XGBoost regression model.</td>
+</tr>
+<tr>
+<td>Maximum depth</td>
+<td>The maximum number of levels or node depths allowed in the decision tree model.</td>
+</tr>
+<tr>
+<td>Learning rate</td>
+<td>Controls the contribution of each weak learner to the overall ensemble model.</td>
+</tr>
+<tr>
+<td>Minimum loss of leaf nodes</td>
+<td>Control the minimum amount of improvement required to split a leaf node further. It determines whether a further split at a leaf node will be considered based on the reduction in the loss function achieved by the split.</td>
+</tr>
+<tr>
+<td>Leaf node weight</td>
+<td>The values assigned to the leaf nodes of each decision tree in the ensemble.</td>
+</tr>
+<tr>
+<td>Maximum iteration step</td>
+<td>Specifies the maximum depth or number of levels allowed for each decision tree.</td>
+</tr>
+<tr>
+<td>L1/2 regular parameters</td>
+<td>Control the strength of L1 and L2 regularization techniques used in the model. Which prevents overfitting and improve the generalization ability of the XGBoost regression model by adding penalty terms to the loss function.</td>
+</tr>
+<tr>
+<td>Number of iterations</td>
+<td>Determines the maximum number of decision trees to be built during the training process.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div className='bdcom'>Insight</div>
+<div className='bdend'>
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supBD/97.png)
+
+</div>
+</div>
+<div className='div'>
+<div className='bdtitle'>
+
+### Classification-BPNN Classification
+
+</div>
+<div className='bdcom'>Definition</div>
+<div className='rightCol'>
+Learns to map input data to the corresponding target classes based on a labeled training dataset.
+</div>
+<div className='bdcom'>Configuration</div>
+<div className='rightCol'>
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supBD/99.png)
+
+<table>
+<colgroup>
+<col style={{width:"20%"}}/>
+<col style={{width:"80%"}}/>
+</colgroup>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Hidden neuron</td>
+<td>Represents the number of neurons in the hidden layer of the neural network, which is a crucial component that allows the network to learn complex representations and patterns from the input data.</td>
+</tr>
+<tr>
+<td>Weight decay</td>
+<td>Prevents overfitting and improve the generalization ability of the model.</td>
+</tr>
+<tr>
+<td>Maximum number of iterations</td>
+<td>Sets an upper limit on the number of times the training algorithm will update the model's weights.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div className='bdcom'>Insight</div>
+<div className='bdend'>
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supBD/100.png)
+
+</div>
+</div>
+<div className='div'>
+<div className='bdtitle'>
+
+### Classification-CART Decision Tree Classification
+
+</div>
+<div className='bdcom'>Definition</div>
+<div className='rightCol'>
+A non-parametric algorithm that builds a binary tree structure by recursively splitting the data based on the feature that provides the best separation of the target classes.
+</div>
+<div className='bdcom'>Configuration</div>
+<div className='rightCol'>
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supBD/101.png)
+
+<table>
+<colgroup>
+<col style={{width:"20%"}}/>
+<col style={{width:"80%"}}/>
+</colgroup>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Maximum depth</td>
+<td>The maximum allowed depth of a tree in the algorithm.</td>
+</tr>
+<tr>
+<td>Information metrics</td>
+<td>Evaluates the quality of a split at each node.</td>
+</tr>
+<tr>
+<td>Pruning coefficient</td>
+<td>Used in the process of cost-complexity pruning, which is a technique to prevent overfitting and improve the generalization ability of the decision tree.</td>
+</tr>
+<tr>
+<td>Maximum sample size of leaf nodes</td>
+<td>Specifies the minimum number of samples required to create a leaf node during the tree-building process.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div className='bdcom'>Insight</div>
+<div className='bdend'>
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supBD/102.png)
+
+</div>
+</div>
+<div className='div'>
+<div className='bdtitle'>
+
+### Classification-ID3 Decision Tree
+
+</div>
+<div className='bdcom'>Definition</div>
+<div className='rightCol'>
+Uses the information gain to decide which feature to split on at each node. The information gain measures how much the entropy of the target classes is reduced after the split.
+</div>
+<div className='bdcom'>Configuration</div>
+<div className='rightCol'>
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supBD/103.png)
+
+<table>
+<colgroup>
+<col style={{width:"20%"}}/>
+<col style={{width:"80%"}}/>
+</colgroup>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Maximum depth</td>
+<td>The maximum allowed depth of a tree in the algorithm.</td>
+</tr>
+<tr>
+<td>Information metrics</td>
+<td>Evaluates the quality of a split at each node.</td>
+</tr>
+<tr>
+<td>Pruning coefficient</td>
+<td>Used in the process of cost-complexity pruning, which is a technique to prevent overfitting and improve the generalization ability of the decision tree.</td>
+</tr>
+<tr>
+<td>Maximum sample size of leaf nodes</td>
+<td>Specifies the minimum number of samples required to create a leaf node during the tree-building process.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div className='bdcom'>Insight</div>
+<div className='bdend'>
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supBD/104.png)
+
+</div>
+</div>
+<div className='div'>
+<div className='bdtitle'>
+
+### Classification-KNN Classification
+
+</div>
+<div className='bdcom'>Definition</div>
+<div className='rightCol'>
+A non-parametric, lazy learning algorithm that classifies data points based on the majority class of their K nearest neighbors in the feature space.
+</div>
+<div className='bdcom'>Configuration</div>
+<div className='rightCol'>
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supBD/105.png)
+
+<table>
+<colgroup>
+<col style={{width:"20%"}}/>
+<col style={{width:"80%"}}/>
+</colgroup>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Data normalization</td>
+<td>A preprocessing step to ensure that all features have a similar scale and range.</td>
+</tr>
+<tr>
+<td>Number of nearest neighbors</td>
+<td>The value of K, which represents the number of data points or neighbors to consider when making predictions for a new data point.</td>
+</tr>
+<tr>
+<td>Measure distance</td>
+<td>Calculate the distance between data points in the feature space.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div className='bdcom'>Insight</div>
+<div className='bdend'>
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supBD/106.png)
+
+</div>
+</div>
+<div className='div'>
+<div className='bdtitle'>
+
+### Classification-Logical Regression
+
+</div>
+<div className='bdcom'>Definition</div>
+<div className='rightCol'>
+Used to predict the probability that a data point belongs to a specific class.
+</div>
+<div className='bdcom'>Configuration</div>
+<div className='rightCol'>
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supBD/107.png)
+
+<table>
+<colgroup>
+<col style={{width:"20%"}}/>
+<col style={{width:"80%"}}/>
+</colgroup>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Regularization parameter</td>
+<td>Used to control the amount of regularization applied to the logistic regression model.</td>
+</tr>
+<tr>
+<td>Penalty function type</td>
+<td>
+
+- L1: Adds a penalty term that is proportional to the sum of the absolute values of the coefficients to the loss function.
+- L2: Adds a penalty term that is proportional to the sum of squared coefficients to the loss function.
+- L1+L2: Adds a penalty term to the loss function that is a linear combination of the L1 and L2 penalty terms.
+
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div className='bdcom'>Insight</div>
+<div className='bdend'>
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supBD/108.png)
+
+</div>
+</div>
+<div className='div'>
+<div className='bdtitle'>
+
+### Classification-Random Forest Classifier
+
+</div>
+<div className='bdcom'>Definition</div>
+<div className='rightCol'>
+An extension of the decision tree algorithm and combines the predictions of multiple decision trees to make more accurate and robust predictions.
+</div>
+<div className='bdcom'>Configuration</div>
+<div className='rightCol'>
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supBD/109.png)
+
+<table>
+<colgroup>
+<col style={{width:"20%"}}/>
+<col style={{width:"80%"}}/>
+</colgroup>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Number of trees</td>
+<td>The number of decision trees that are built during the training process.</td>
+</tr>
+<tr>
+<td>Maximum depth</td>
+<td>The maximum number of levels or node depths allowed in the decision tree model.</td>
+</tr>
+<tr>
+<td>Info metrics</td>
+<td>
+
+- Gini: A measure of how often a randomly chosen element from the set would be incorrectly classified if it were randomly classified according to the distribution of labels in the set.
+- Entropy: A measure of the disorder or randomness in the data. It quantifies the uncertainty of the class distribution at a node.
+
+</td>
+</tr>
+<tr>
+<td>Maximum feature</td>
+<td>The maximum number of features considered during the construction of each decision tree in the ensemble.</td>
+</tr>
+<tr>
+<td>Minimum sample size of leaf nodes</td>
+<td>Specifies the minimum number of samples required to consider further splitting a node and form a leaf node.</td>
+</tr>
+<tr>
+<td>Cost-complexity pruning</td>
+<td>Ensures that each decision tree in the Random Forest is already relatively simple and less prone to overfitting.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div className='bdcom'>Insight</div>
+<div className='bdend'>
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supBD/110.png)
+
+</div>
+</div>
+<div className='div'>
+<div className='bdtitle'>
+
+### Classification-XGBoost Classification
+
+</div>
+<div className='bdcom'>Definition</div>
+<div className='rightCol'>
+A powerful and popular ensemble learning algorithm used for binary and multiclass classification tasks.
+</div>
+<div className='bdcom'>Configuration</div>
+<div className='rightCol'>
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supBD/111.png)
+
+<table>
+<colgroup>
+<col style={{width:"20%"}}/>
+<col style={{width:"80%"}}/>
+</colgroup>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Weak estimator</td>
+<td>A variant of decision trees that focuses on minimizing the gradients of the loss function during training. Each weak estimator is trained to correct the errors made by the previous estimators, gradually improving the model's predictions.</td>
+</tr>
+<tr>
+<td>Objective function</td>
+<td>The loss function to be minimized during the training process. It quantifies the discrepancy between the predicted values and the true target values, guiding the optimization of the XGBoost regression model.</td>
+</tr>
+<tr>
+<td>Maximum depth</td>
+<td>The maximum number of levels or node depths allowed in the decision tree model.</td>
+</tr>
+<tr>
+<td>Learning rate</td>
+<td>Controls the contribution of each weak learner to the overall ensemble model.</td>
+</tr>
+<tr>
+<td>Minimum loss of leaf nodes</td>
+<td>Control the minimum amount of improvement required to split a leaf node further. It determines whether a further split at a leaf node will be considered based on the reduction in the loss function achieved by the split.</td>
+</tr>
+<tr>
+<td>Leaf node weight</td>
+<td>The values assigned to the leaf nodes of each decision tree in the ensemble.</td>
+</tr>
+<tr>
+<td>Maximum iteration step</td>
+<td>Specifies the maximum depth or number of levels allowed for each decision tree.</td>
+</tr>
+<tr>
+<td>L1/2 regular parameters</td>
+<td>Control the strength of L1 and L2 regularization techniques used in the model. Which prevents overfitting and improve the generalization ability of the XGBoost regression model by adding penalty terms to the loss function.</td>
+</tr>
+<tr>
+<td>Number of iterations</td>
+<td>Determines the maximum number of decision trees to be built during the training process.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div className='bdcom'>Insight</div>
+<div className='bdend'>
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supBD/112.png)
+
+</div>
+</div>
+<div className='div'>
+<div className='bdtitle'>
+
+### Cluster-EM
+
+</div>
+<div className='bdcom'>Definition</div>
+<div className='rightCol'>
+Used to estimate the parameters of probabilistic models when there is incomplete information or missing data.
+</div>
+<div className='bdcom'>Configuration</div>
+<div className='rightCol'>
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supBD/113.png)
+
+<table>
+<colgroup>
+<col style={{width:"20%"}}/>
+<col style={{width:"80%"}}/>
+</colgroup>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Number of clusters</td>
+<td>Represents the number of clusters that the algorithm will attempt to identify in the data.</td>
+</tr>
+<tr>
+<td>Maximum number of iterations</td>
+<td>The maximum allowed number of iterations that the algorithm can run before it stops.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div className='bdcom'>Insight</div>
+<div className='bdend'>
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supBD/114.png)
+
+</div>
+</div>
+<div className='div'>
+<div className='bdtitle'>
+
+### Cluster-KMeans
+
+</div>
+<div className='bdcom'>Definition</div>
+<div className='rightCol'>
+Used to partition a dataset into K clusters, where each cluster is represented by its centroid (mean point).
+</div>
+<div className='bdcom'>Configuration</div>
+<div className='rightCol'>
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supBD/115.png)
+
+<table>
+<colgroup>
+<col style={{width:"20%"}}/>
+<col style={{width:"80%"}}/>
+</colgroup>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Data standard</td>
+<td>The process of scaling the features or variables in the dataset to have a mean of 0 and a standard deviation of 1.</td>
+</tr>
+<tr>
+<td>Number of clusters</td>
+<td>Determines the number of clusters the algorithm will attempt to identify in the data.</td>
+</tr>
+<tr>
+<td>Maximum number of iterations</td>
+<td>The maximum allowed number of iterations that the algorithm can run before it stops.</td>
+</tr>
+<tr>
+<td>Distance metric type</td>
+<td>The Euclidean distance is a measure of the straight-line distance between two data points in a multidimensional space.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div className='bdcom'>Insight</div>
+<div className='bdend'>
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supBD/116.png)
+
+</div>
+</div>
+<div className='div'>
+<div className='bdtitle'>
+
+### Optimization-Genetic Algorithm
+
+</div>
+<div className='bdcom'>Definition</div>
+<div className='rightCol'>
+Used to find approximate solutions to optimization and search problems, especially in cases where the search space is large and complex.
+</div>
+<div className='bdcom'>Configuration</div>
+<div className='rightCol'>
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supBD/117.png)
+
+<table>
+<colgroup>
+<col style={{width:"20%"}}/>
+<col style={{width:"80%"}}/>
+</colgroup>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Value range config</td>
+<td>Set the value range of the independent variable.</td>
+</tr>
+<tr>
+<td>Population size</td>
+<td>Represents the number of potential solutions that are evolved and evaluated in each generation.</td>
+</tr>
+<tr>
+<td>Maximum number of iterations</td>
+<td>The maximum allowed number of generations that the algorithm can run before it terminates.</td>
+</tr>
+<tr>
+<td>Number of repeated tests</td>
+<td>How many times the algorithm is executed with different random initializations or settings.</td>
+</tr>
+<tr>
+<td>Optimization direction</td>
+<td>Whether the algorithm is being used for maximization or minimization of a specific objective function.</td>
+</tr>
+<tr>
+<td>Crossover probability</td>
+<td>The probability of applying crossover to create new offspring during the reproduction step of the algorithm.</td>
+</tr>
+<tr>
+<td>Crossover factor</td>
+<td>The proportion of the population that will undergo crossover to produce offspring in the next generation.</td>
+</tr>
+<tr>
+<td>Mutation probability</td>
+<td>The probability of applying mutation to an individual's genetic information during the reproduction step of the algorithm.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div className='bdcom'>Insight</div>
+<div className='bdend'>
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supBD/118.png)
+
+</div>
+</div>
+
+## Custom
+
+<div className='div'>
+<div className='bdtitle'>
+
+### Python Script
+
+</div>
+<div className='bdcom'>Definition</div>
+<div className='rightCol'>
+Manually write python script to realize function you need.
+
+:::info
+Dependencies can be imported through **Env Resources** > **Packages**
+:::
+
+</div>
+<div className='bdcom'>Configuration</div>
+<div className='bdend'>
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supBD/119.png)
+
+<table>
+<colgroup>
+<col style={{width:"20%"}}/>
+<col style={{width:"80%"}}/>
+</colgroup>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Development note</td>
+<td>Displays input/output data and model information which will be used in your script.</td>
+</tr>
+<tr>
+<td>Algorithm type setting</td>
+<td>
+
+Select the output algorithm type from **Regression**, **Classification**, **Cluster** and **Other**.
+
+</td>
+</tr>
+<tr>
+<td>Data structure</td>
+<td>
+
+Click **Set output**, and then you can either take refrence from the input fields (**Reference input**) or create new fields (**New**) to be the output fields.
+
+</td>
+</tr>
+<tr>
+<td>Python editor</td>
+<td>
+
+Write your script of both **Training** and **Runtime**, and then click **Debug** to make sure it runs correctly before applying to the model.
+
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+## Model Assessment
+
+<table>
+<colgroup>
+<col style={{width:"20%"}}/>
+<col style={{width:"80%"}}/>
+</colgroup>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Classification Eval</td>
+<td>Evaluate classification model precision based on the applied model calculation.</td>
+</tr>
+<tr>
+<td>Cluster Eval</td>
+<td>Evaluate cluster model precision based on the applied model calculation.</td>
+</tr>
+<tr>
+<td>Model Apply</td>
+<td>Use validation data to test the applied model.</td>
+</tr>
+<tr>
+<td>Regression Eval</td>
+<td>Evaluate regression model precision based on the applied model calculation and set grading standard.</td>
+</tr>
+</tbody>
+</table>

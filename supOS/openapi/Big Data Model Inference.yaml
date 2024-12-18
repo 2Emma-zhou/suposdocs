@@ -1,0 +1,283 @@
+---
+openapi: 3.0.0
+info:
+  title: Big Data Model Inference
+  description: |-
+    # Authentication
+
+    <!-- ReDoc-Inject: <security-definitions> -->
+  version:
+servers:
+- url: /open-api/bigdata-runtime/v2
+security:
+- Sign: []
+tags:
+- name: data-mining-runtime
+  description: Data Mining Runtime
+paths:
+  /models:
+    get:
+      tags:
+      - data-mining-runtime
+      summary: Paginated Query of Algorithm Runtime Models
+      operationId: dataMiningRuntimeListAlgorithmModel
+      parameters:
+      - name: name
+        in: query
+        description: Query by model name (fuzzy search)
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+        example: model-1
+      - name: pageNo
+        in: query
+        description: Page number
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+        example: 1
+      - name: pageSize
+        in: query
+        description: Number of items per page
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+        example: 20
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataMiningModelList'
+        "400":
+          description: General error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+  /models/{modelCode}/versions:
+    get:
+      tags:
+      - data-mining-runtime
+      summary: List of Runtime Model Versions
+      operationId: dataMiningRuntimeGetModelVersion
+      parameters:
+      - name: modelCode
+        in: path
+        description: Model code
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+        example: Xsdfsfd24dfsadfsaf
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataMiningListModelVersion'
+        "400":
+          description: General error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+  /models/{modelCode}/versions/{modelVersion}/invocations:
+    post:
+      tags:
+      - data-mining-runtime
+      summary: Invoke Runtime Model
+      operationId: dataMiningRuntimeInvokedAlgorithmModel
+      parameters:
+      - name: modelCode
+        in: path
+        description: Model code
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: modelVersion
+        in: path
+        description: Model version
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DataMiningRuntimeInvokedAlgorithmModel'
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200'
+components:
+  schemas:
+    DataMiningListModelVersion:
+      type: object
+      properties:
+        list:
+          type: array
+          description: Array of model version objects
+          items:
+            $ref: '#/components/schemas/DataMiningListModelVersion_list'
+      description: JSON object representing the version of the training model
+    DataMiningModelList:
+      type: object
+      properties:
+        list:
+          type: array
+          description: Array of model objects
+          items:
+            $ref: '#/components/schemas/DataMiningModelList_list'
+        pagination:
+          $ref: '#/components/schemas/DataMiningModelList_pagination'
+      description: "Data structure for the list of training models, represented as a JSON object"
+    DataMiningRuntimeInvokedAlgorithmModel:
+      required:
+      - inputData
+      - outerId
+      type: object
+      properties:
+        outerId:
+          type: string
+          description: External ID passed in
+          example: uuiduuiduuid
+        inputData:
+          type: array
+          description: "Model input data, a two-dimensional array representing columnar data"
+          items:
+            type: array
+            description: Inner array
+            items:
+              type: number
+              description: "Data (can also be string, boolean, etc.)"
+      description: Data structure for invoking the model
+    inline_response_400:
+      properties:
+        code:
+          type: integer
+          description: "Error code, e.g., 40000404"
+          example: 40000404
+        message:
+          type: string
+          description: "Error message, e.g., \"Data not found,\" \"Failed to update corresponding data\""
+          example: Unknown error
+    inline_response_200:
+      type: object
+      properties:
+        outerId:
+          type: string
+          description: Runtime task ID
+          example: uuiduuiduuid
+        data:
+          type: array
+          description: "Result data, two-dimensional array, columnar data"
+          items:
+            type: array
+            description: Inner array
+            items:
+              type: number
+              description: "Data (can also be string, boolean, etc.)"
+      description: Model runtime result data
+    DataMiningListModelVersion_list:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Model version ID
+          example: uuiduuiduuid
+        description:
+          type: string
+          description: Model version description
+          example: Upgrade model accuracy to 99%
+        modelCode:
+          type: string
+          description: Model code
+          example: Xsdfsfd24dfsadfsaf
+        version:
+          type: string
+          description: Model version
+          example: v1.0
+        createdTime:
+          type: number
+          description: Model creation time in UTC timestamp
+          example: 15612344562000
+    DataMiningModelList_list:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Model ID (globally unique)
+          example: uuiduuiduuid
+        name:
+          type: string
+          description: Model name (globally unique)
+          example: model-1
+        description:
+          type: string
+          description: Model description
+          example: Linear regression training model
+        code:
+          type: string
+          description: Model code (globally unique)
+          example: Xsdfsfd24dfsadfsaf
+        inParams:
+          type: string
+          description: Model input parameters serialized as a JsonArray string
+          example: "[{\"name\":\"a\",\"dataType\":\"Integer\",\"description\":\"a\"},{\"name\":\"y\",\"dataType\":\"String\",\"description\":\"y\"}]"
+        outParams:
+          type: string
+          description: Model output parameters serialized as a JsonArray string
+          example: "[{\"name\":\"pre\",\"dataType\":\"Double\",\"description\":\"a\"}]"
+        createdTime:
+          type: number
+          description: Model creation time in UTC timestamp
+          example: 15612344562000
+        updateTime:
+          type: number
+          description: Model update time in UTC timestamp
+          example: 15612344562000
+    DataMiningModelList_pagination:
+      type: object
+      properties:
+        total:
+          type: integer
+          description: Total number of models
+          example: 100
+        pageSize:
+          type: integer
+          description: Number of items per page
+          example: 20
+        current:
+          type: integer
+          description: Current page number
+          example: 1
+      description: Pagination object
+  responses:
+    GeneralError:
+      description: General error response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/inline_response_400'
+  securitySchemes:
+    Sign:
+      type: apiKey
+      name: Authorization
+      in: header

@@ -1,0 +1,1095 @@
+---
+openapi: 3.0.0
+info:
+  title: APP Config
+  description: |-
+    Provides functionality for configuring pages, including CRUD operations and batch data querying.
+
+    **The request parameters for configuring pages have not been standardized. If there are any requirements in the future, relevant personnel can discuss it.**
+
+    # Authentication
+
+    <!-- ReDoc-Inject: <security-definitions> -->
+  version: 
+servers:
+- url: /open-api/p/compose/v2/
+security:
+- Sign: []
+tags:
+- name: pages
+  description: Page instances
+- name: layouts
+  description: Layout instances
+- name: objectdata
+  description: Object data
+paths:
+  /pages/tree:
+    get:
+      tags:
+      - pages
+      summary: Query Page Tree List
+      description: |-
+        1. The response does not include layout blocks.
+        2. The data structure of the response is not fixed, and the documentation cannot accurately describe the structure of the returned data.
+      operationId: queryPageTree
+      parameters:
+      - name: parentId
+        in: query
+        description: Parent ID
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: type
+        in: query
+        description: "If type is \"symbol\", query the symbol tree list; if not provided or other value, query the page tree list."
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Successful request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200'
+              examples:
+                AppTree:
+                  $ref: '#/components/examples/AppTree'
+        "400":
+          description: Request failed.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorCode'
+  /pages:
+    post:
+      tags:
+      - pages
+      summary: Create a Page
+      operationId: createPage
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreatePage'
+      responses:
+        "201":
+          description: Command sent successfully and backend processing completed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_201'
+        "400":
+          description: Request failed.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorCode'
+  /pages/{pageId}:
+    get:
+      tags:
+      - pages
+      summary: Get Page Details
+      operationId: getPage
+      parameters:
+      - name: pageId
+        in: path
+        description: Page ID
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: kind
+        in: query
+        description: Data type to retrieve; "new" for draft data
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Successful call
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PageDetail'
+        "404":
+          description: The requested page was not found.
+    put:
+      tags:
+      - pages
+      summary: Modify Page Information
+      operationId: updatePage
+      parameters:
+      - name: pageId
+        in: path
+        description: Page ID
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdatePage'
+      responses:
+        "201":
+          description: The command has been successfully received and processed by the backend.
+          headers:
+            Location:
+              description: The URL of the accessed resource.
+              style: simple
+              explode: false
+              schema:
+                type: string
+        "400":
+          description: Request failed.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorCode'
+        "404":
+          description: The requested page was not found.
+    delete:
+      tags:
+      - pages
+      summary: Delete Page
+      operationId: deletePage
+      parameters:
+      - name: pageId
+        in: path
+        description: Page ID
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "204":
+          description: "Successfully processed, but no content to return"
+        "400":
+          description: Request failed.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorCode'
+        "404":
+          description: The requested page was not found.
+  /pages/{pageId}/layouts:
+    post:
+      tags:
+      - layouts
+      summary: Create Layout
+      operationId: createLayout
+      parameters:
+      - name: pageId
+        in: path
+        description: Page ID
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateLayout'
+      responses:
+        "201":
+          description: Command sent successfully and backend processing completed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_201_1'
+        "400":
+          description: Request failed.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorCode'
+        "409":
+          description: "Conflict request, a layout with the specified name already exists and cannot be added"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorCode'
+  /pages/layouts/{layoutId}:
+    put:
+      tags:
+      - layouts
+      summary: Modify Layout Information
+      operationId: updateLayout
+      parameters:
+      - name: layoutId
+        in: path
+        description: Layout ID
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateLayout'
+      responses:
+        "201":
+          description: The command has been successfully received and processed by the backend.
+          headers:
+            Location:
+              description: The URL of the accessed resource.
+              style: simple
+              explode: false
+              schema:
+                type: string
+        "202":
+          description: The command has been successfully received by the backend but is not yet fully processed.
+          headers:
+            Location:
+              description: The URL to query for processing results.
+              style: simple
+              explode: false
+              schema:
+                type: string
+        "400":
+          description: Request failed.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorCode'
+        "404":
+          description: The requested page was not found.
+  /objectdata/batchQuery:
+    post:
+      tags:
+      - objectdata
+      summary: Batch Query Object instance data
+      operationId: dataBatchQuery
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ObjectQueryJson'
+      responses:
+        "200":
+          description: Successful call
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObjectResultJson'
+        "400":
+          description: Request failed.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorCode'
+        "404":
+          description: The requested page was not found.
+components:
+  schemas:
+    ErrorCode:
+      type: integer
+      description: |
+        Response status codes:
+        * 400: Request failed
+        * 401: Authentication failed
+        * 404: Data not found
+        * 409: Conflict request, a resource with the specified name already exists and cannot be added
+        * 500: System error
+      format: int64
+      enum:
+      - 400
+      - 401
+      - 404
+      - 409
+      - 500
+    App:
+      type: object
+      properties:
+        id:
+          type: string
+          description: ID
+          example: App_bac090d688004de9bf927b9ff66bfca7
+        name:
+          type: string
+          description: Name
+          example: desktop
+        description:
+          type: string
+          description: Description
+          example: ""
+        appName:
+          type: string
+          description: APP name
+          example: Desktop
+        appId:
+          type: string
+          description: APP ID
+          example: App_bac090d688004de9bf927b9ff66bfca7
+        templateName:
+          type: string
+          description: Template name
+          example: App
+        appSecret:
+          type: string
+          description: appSecret
+          example: cd5d7e2ac9f8d94658e0f6495cc043f1
+        appVersion:
+          type: string
+          description: Version
+          example: 1.0.0
+        hasChildren:
+          type: boolean
+          description: Indicates whether it has child nodes
+          example: true
+        allowEdit:
+          type: integer
+          example: 1
+        userAuthUrl:
+          type: string
+          description: User authorization URL
+          example: ""
+        roleAuthUrl:
+          type: string
+          description: Role authorization URL
+          example: ""
+        coverUrl:
+          type: string
+          description: LOGO
+          example: /api/app/manager/images/AppIconPreview?fileName=xxx
+        defaultDeskPageId:
+          type: string
+          description: Default home page
+          example: Page_f0d175ba73b74e2a9a17a0150b3d8849
+        defaultShowId:
+          type: string
+          example: Page_f0d175ba73b74e2a9a17a0150b3d8849
+        icon:
+          type: string
+          example: /api/app/manager/images/AppIconPreview?fileName=xxx
+        jarRunEnv:
+          type: string
+          description: Execution environment
+          example: openjdk:8-jdk-alpine
+        suposCpbVersion:
+          type: string
+          description: supOS
+          example: supOS-1.8.2
+        totalPage:
+          type: integer
+          example: 1
+        totalSymbol:
+          type: integer
+          example: 0
+        userId:
+          type: string
+          example: "1"
+        vendorName:
+          type: string
+          example: supos
+        order:
+          type: integer
+          example: 10000
+      description: Details of an application
+    FolderTree:
+      type: object
+      properties:
+        id:
+          type: string
+          description: ID
+        name:
+          type: string
+          description: Name
+        description:
+          type: string
+          description: Description
+        parentId:
+          type: string
+          description: Parent ID
+        appId:
+          type: string
+          description: APP ID
+        templateName:
+          type: string
+          description: Template name
+        menuDisplay:
+          type: boolean
+          description: Indicates whether it is displayed in the system menu bar
+        hasChildren:
+          type: boolean
+          description: Indicates whether it has child nodes
+        order:
+          type: integer
+          description: Sorting order
+        children:
+          type: array
+          items:
+            anyOf:
+            - $ref: '#/components/schemas/FolderTree'
+            - $ref: '#/components/schemas/Page'
+      description: Details of a folder
+    Folder:
+      type: object
+      properties:
+        id:
+          type: string
+          description: ID
+          example: Folder_41d355ee3641de25ac4c6e355e0c4c6e
+        name:
+          type: string
+          description: Name
+          example: New Folder 1
+        description:
+          type: string
+          description: Description
+          example: ""
+        parentId:
+          type: string
+          description: Parent ID
+          example: App_bac090d688004de9bf927b9ff66bfca7
+        appId:
+          type: string
+          description: APP ID
+          example: App_bac090d688004de9bf927b9ff66bfca7
+        templateName:
+          type: string
+          description: Template name
+          example: Folder
+        menuDisplay:
+          type: boolean
+          description: Indicates whether it is displayed in the system menu bar
+          example: true
+        hasChildren:
+          type: boolean
+          description: Indicates whether it has child nodes
+          example: false
+        order:
+          type: integer
+          description: Sorting order
+          example: 10000
+      description: Details of a folder
+    Page:
+      type: object
+      properties:
+        id:
+          type: string
+          description: ID
+          example: Page_f0d175ba73b74e2a9a17a0150b3d8849
+        name:
+          type: string
+          description: Name
+          example: page
+        description:
+          type: string
+          description: Description
+          example: ""
+        layout:
+          type: string
+          description: Page layout information in JSON format
+          example: "{\"pageConfig\":{\"platformLayoutType\":\"PC\",\"singleLayout\":true,\"lwType\":\"1\",\"lwValue\":1638,\"lhValue\":912,\"linkage\":\"0\",\"background\":\"\",\"pageId\":\"Page_f0d175ba73b74e2a9a17a0150b3d8849\"},\"layoutNodes\":[{\"kind\":\"free\",\"col\":1,\"colW\":200,\"w\":240,\"h\":44.9,\"x\":0,\"y\":0,\"i\":\"3d8849-0\",\"moved\":false,\"static\":false,\"isResizable\":false,\"minW\":1,\"minH\":1,\"type\":\"2\",\"lw\":1638,\"lh\":912,\"opacity\":1,\"id\":\"Layout_9480068bb2bb40f0b0704ec7ae515ce0\"}]}"
+        type:
+          type: integer
+          description: "页面类型： 1 indicates a blank page, 2 indicates an internal link, 3 indicates an external link"
+          example: 1
+        url:
+          type: string
+          description: "Page URL. If the type is 1, it is empty"
+          example: ""
+        parentId:
+          type: string
+          description: Parent ID
+          example: App_bac090d688004de9bf927b9ff66bfca7
+        appId:
+          type: string
+          description: APP ID
+          example: App_bac090d688004de9bf927b9ff66bfca7
+        kind:
+          type: string
+          description: "Layout mode is \"free\" for free layout, \"new\" for grid layout"
+          example: free
+          enum:
+          - free
+          - new
+        platformType:
+          type: string
+          description: "Platform type is \"PC\" for PC Web, \"mobile\" for mobile devices"
+          example: PC
+          enum:
+          - PC
+          - mobile
+        menuDisplay:
+          type: boolean
+          description: Indicates whether it is displayed in the system menu bar
+          example: true
+        mobileShowType:
+          type: string
+          description: "Display mode is \"auto\" for automatic portrait/landscape, \"portrait\" for portrait, and \"landscape\" for landscape"
+          example: auto
+          enum:
+          - auto
+          - portrait
+          - landscape
+        navbarBgColor:
+          type: string
+          description: Navigation bar background color
+          example: '#ffffff'
+        navbarFront:
+          type: string
+          description: "Navigation bar font color. Use \"dark\" when the background color is light, and \"light\" when the background color is dark"
+          example: dark
+        navbarStyle:
+          type: string
+          description: "Navigation bar style is \"fixed\" for fixed, \"suspend\" for floating"
+          example: fixed
+        extra:
+          type: string
+          example: "{}"
+        order:
+          type: number
+          example: 20000
+        userId:
+          type: string
+          example: "1"
+        originalImage:
+          type: string
+          description: Original image
+          example: /resource/App_bac090d688004de9bf927b9ff66bfca7/screenshot/original/Page_f0d175ba73b74e2a9a17a0150b3d8849.png
+        thumbnail:
+          type: string
+          description: Thumbnail image
+          example: /resource/App_bac090d688004de9bf927b9ff66bfca7/screenshot/thumbnail/Page_f0d175ba73b74e2a9a17a0150b3d8849.png
+        isWorkflow:
+          type: boolean
+          description: Indicates whether the workflow is enabled
+          example: false
+      description: Page configuration data structure
+    PageDetail:
+      type: object
+      properties:
+        layouts:
+          type: array
+          items:
+            $ref: '#/components/schemas/Layout'
+      description: Page configuration data structure
+      allOf:
+      - $ref: '#/components/schemas/Page'
+    CreatePage:
+      required:
+      - appId
+      - layouts
+      - name
+      - parentId
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name
+          example: page
+        description:
+          type: string
+          description: Description
+          example: ""
+        layout:
+          type: string
+          description: Page layout information in JSON format
+          example: ""
+        type:
+          type: integer
+          description: "Page type is 1 for a blank page, 2 for an internal link, 3 for an external link"
+          example: 1
+        url:
+          type: string
+          description: Page URL. It is empty if the type is 1
+          example: ""
+        parentId:
+          type: string
+          description: Parent ID
+          example: App_bac090d688004de9bf927b9ff66bfca7
+        appId:
+          type: string
+          description: APP ID
+          example: App_bac090d688004de9bf927b9ff66bfca7
+        kind:
+          type: string
+          description: "Layout mode is \"free\" for free layout, \"new\" for grid layout"
+          example: free
+          enum:
+          - free
+          - new
+        platformType:
+          type: string
+          description: "Platform type is \"PC\" for PC Web, \"mobile\" for mobile devices"
+          example: PC
+          enum:
+          - PC
+          - mobile
+        menuDisplay:
+          type: boolean
+          description: Indicates whether it is displayed in the system menu bar
+          example: true
+        mobileShowType:
+          type: string
+          description: "Display mode is \"auto\" for automatic portrait/landscape, \"portrait\" for portrait, \"landscape\" for landscape"
+          example: auto
+          enum:
+          - auto
+          - portrait
+          - landscape
+        navbarBgColor:
+          type: string
+          description: Navigation bar background color
+          example: '#ffffff'
+        navbarFront:
+          type: string
+          description: "Navigation bar font color. Use \"dark\" when the background color is light, and \"light\" when the background color is dark"
+          example: dark
+        navbarStyle:
+          type: string
+          description: "Navigation bar style is \"fixed\" for fixed, \"suspend\" for floating"
+          example: fixed
+        isWorkflow:
+          type: boolean
+          description: Indicates whether the workflow is enabled
+          example: false
+        layouts:
+          type: array
+          description: Layout block parameters. Required. A page must include at least one layout block
+          items:
+            $ref: '#/components/schemas/CreatePageLayout'
+      description: Data structure for creating a page
+    UpdatePage:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name
+          example: page
+        description:
+          type: string
+          description: Description
+          example: ""
+        layout:
+          type: string
+          description: Page layout information in JSON format
+          example: "{\"pageConfig\":{\"platformLayoutType\":\"PC\",\"singleLayout\":true,\"lwType\":\"1\",\"lwValue\":1638,\"lhValue\":912,\"linkage\":\"0\",\"background\":\"\",\"pageId\":\"Page_f0d175ba73b74e2a9a17a0150b3d8849\"},\"layoutNodes\":[{\"kind\":\"free\",\"col\":1,\"colW\":200,\"w\":240,\"h\":44.9,\"x\":0,\"y\":0,\"i\":\"3d8849-0\",\"moved\":false,\"static\":false,\"isResizable\":false,\"minW\":1,\"minH\":1,\"type\":\"2\",\"lw\":1638,\"lh\":912,\"opacity\":1,\"id\":\"Layout_9480068bb2bb40f0b0704ec7ae515ce0\"}]}"
+        type:
+          type: integer
+          description: "Page type is 1 for a blank page, 2 for an internal link, 3 for an external link"
+          example: 1
+        url:
+          type: string
+          description: Page URL. It is empty if the type is 1
+          example: ""
+        platformType:
+          type: string
+          description: "Platform type is \"PC\" for PC Web, \"mobile\" for mobile devices"
+          example: PC
+        menuDisplay:
+          type: boolean
+          description: Indicates whether it is displayed in the system menu bar
+          example: false
+        mobileShowType:
+          type: string
+          description: "Display mode is \"auto\" for automatic portrait/landscape, \"portrait\" for portrait, \"landscape\" for landscape"
+          example: auto
+          enum:
+          - auto
+          - portrait
+          - landscape
+        navbarBgColor:
+          type: string
+          description: Navigation bar background color
+          example: '#ffffff'
+        navbarFront:
+          type: string
+          description: "Navigation bar font color. Use \"dark\" when the background color is light, and \"light\" when the background color is dark"
+          example: dark
+        navbarStyle:
+          type: string
+          description: "Navigation bar style is \"fixed\" for fixed, \"suspend\" for floating"
+          example: fixed
+        isWorkflow:
+          type: boolean
+          description: Indicates whether the workflow is enabled
+          example: false
+      description: Data structure for updating a page
+    CreateLayout:
+      required:
+      - name
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name
+          example: 3d8849-0
+        description:
+          type: string
+          description: Description
+          example: ""
+        context:
+          type: string
+          description: Context in JSON format
+          example: "{}"
+        kind:
+          type: string
+          description: "Layout mode is \"free\" for free layout, \"new\" for grid layout"
+          example: free
+          enum:
+          - free
+          - new
+        appId:
+          type: string
+          description: APP ID
+          example: App_bac090d688004de9bf927b9ff66bfca7
+      description: Data structure for creating a layout block configuration
+    CreatePageLayout:
+      required:
+      - context
+      type: object
+      properties:
+        description:
+          type: string
+          description: Description
+          example: ""
+        context:
+          type: string
+          description: Context in JSON format
+          example: "{}"
+      description: Data structure for creating a layout block configuration in a page
+    UpdateLayout:
+      type: object
+      properties:
+        description:
+          type: string
+          description: Remark
+          example: layout
+        context:
+          type: string
+          description: Context in JSON format
+          example: "{}"
+      description: Data structure for updating a layout block
+    Layout:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Name
+          example: Layout_9480068bb2bb40f0b0704ec7ae515ce0
+        name:
+          type: string
+          description: Name
+          example: 3d8849-0
+        description:
+          type: string
+          description: Remark
+          example: layout
+        context:
+          type: string
+          description: Context in JSON format
+          example: "{}"
+        parentId:
+          type: string
+          description: Page ID
+          example: Page_f0d175ba73b74e2a9a17a0150b3d8849
+        appId:
+          type: string
+          description: APP ID
+          example: Page
+        kind:
+          type: string
+          description: "Layout mode is \"free\" for free layout, \"new\" for grid layout"
+          example: free
+          enum:
+          - free
+          - new
+      description: Layout block
+    ObjectQueryJson:
+      type: object
+      properties:
+        list:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObjectQueryItem'
+      description: List of data query requests
+    ObjectQueryItem:
+      type: object
+      properties:
+        dataSource:
+          type: string
+          description: |-
+            The requested data source, different parameters are passed based on the different types:
+            For type "network", pass {networkEnName}.
+            For type "instance.property", pass {templateNamespace.templateEnName.instanceEnName.attriubteNamespace.attributeEnName}.
+            For type "instance.service", pass {templateNamespace.templateEnName.instanceEnName.serviceNamespace.serviceEnName}.
+            For type "template.service", pass {templateNamespace.templateEnName.serviceNamespace.serviceEnName}.
+            For type "template.data", pass {templateNamespace.templateEnName}.
+            Note: When calling the API, replace the values within {} with specific query data sources.
+          example: system.template1.instance1.system.prop1
+        type:
+          type: string
+          description: |-
+            Request type:
+            network：Query factory model tree.
+            instance.property：Query property historical data.
+            instance.service：Execute service on entity instance.
+            template.service：Execute service on form template.
+            template.data：Query template instance data.
+          example: instance.property
+          enum:
+          - network
+          - instance.property
+          - instance.service
+          - template.service
+          - template.data
+        filters:
+          $ref: '#/components/schemas/ObjectQueryItem_filters'
+    ObjectResultJson:
+      type: object
+      properties:
+        list:
+          type: array
+          items:
+            type: object
+    inline_response_200:
+      allOf:
+      - $ref: '#/components/schemas/App'
+      - type: object
+        properties:
+          children:
+            type: array
+            description: Directory structure
+            items:
+              anyOf:
+              - $ref: '#/components/schemas/FolderTree'
+              - $ref: '#/components/schemas/Page'
+    inline_response_201:
+      type: object
+      properties:
+        location:
+          type: string
+          description: URL of the newly created page instance
+    inline_response_201_1:
+      type: object
+      properties:
+        location:
+          type: string
+          description: URL of the newly created layout instance
+      example:
+        location: api/layouts/Car001
+    ObjectQueryItem_filters:
+      type: object
+      properties:
+        aggrType:
+          type: string
+          description: Aggregation type.
+          example: first
+          enum:
+          - first
+          - min
+          - max
+          - sum
+          - mean
+        group:
+          type: string
+          description: Aggregation time.
+          example: "time(48s,27s) fill(previous)"
+        limit:
+          type: integer
+          description: Number of data to query.
+          example: 601
+        minDate:
+          type: string
+          description: Minimum time. Required. Time format is "yyyy-MM-ddThh:mm:ssZ".
+          example: 2021-12-22T16:00:00Z
+        maxDate:
+          type: string
+          description: Maximum time. Time format is "yyyy-MM-ddThh:mm:ssZ".
+          example: 2021-12-23T16:00:00Z
+      description: Query parameters. Required when type is "instance.property". Must provide parameters according to the following requirements.
+  responses:
+    NotFound:
+      description: The requested page was not found.
+    GeneralError:
+      description: Request failed.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorCode'
+    Created:
+      description: The command has been successfully received and processed by the backend.
+      headers:
+        Location:
+          description: The URL of the accessed resource.
+          style: simple
+          explode: false
+          schema:
+            type: string
+    Updated:
+      description: The command has been successfully received and processed by the backend.
+      headers:
+        Location:
+          description: The URL of the accessed resource.
+          style: simple
+          explode: false
+          schema:
+            type: string
+    Accepted:
+      description: The command has been successfully received by the backend but is not yet fully processed.
+      headers:
+        Location:
+          description: The URL to query for processing results.
+          style: simple
+          explode: false
+          schema:
+            type: string
+  parameters:
+    pageId:
+      name: pageId
+      in: path
+      description: Page ID
+      required: true
+      style: simple
+      explode: false
+      schema:
+        type: string
+    layoutId:
+      name: layoutId
+      in: path
+      description: Layout ID
+      required: true
+      style: simple
+      explode: false
+      schema:
+        type: string
+    parentId:
+      name: parentId
+      in: query
+      description: Parent ID
+      required: false
+      style: form
+      explode: true
+      schema:
+        type: string
+    pageNumberParam:
+      name: page
+      in: query
+      description: "Page number for pagination, starting from 1."
+      required: false
+      style: form
+      explode: true
+      schema:
+        type: integer
+        default: 1
+    perPageParam:
+      name: per_page
+      in: query
+      description: Number of elements to return per page.
+      required: false
+      style: form
+      explode: true
+      schema:
+        type: integer
+        default: 20
+  examples:
+    AppTree:
+      value:
+        id: App_bac090d688004de9bf927b9ff66bfca7
+        name: desktop
+        description: ""
+        appName: Desktop
+        appId: App_bac090d688004de9bf927b9ff66bfca7
+        templateName: App
+        appSecret: cd5d7e2ac9f8d94658e0f6495cc043f1
+        appVersion: 1.0.0
+        hasChildren: true
+        allowEdit: 1
+        userAuthUrl: ""
+        roleAuthUrl: ""
+        coverUrl: /api/app/manager/images/AppIconPreview?fileName=xxx
+        defaultDeskPageId: Page_f0d175ba73b74e2a9a17a0150b3d8849
+        defaultShowId: Page_f0d175ba73b74e2a9a17a0150b3d8849
+        icon: ""
+        jarRunEnv: openjdk:8-jdk-alpine
+        suposCpbVersion: supOS-1.8.2
+        totalPage: 1
+        totalSymbol: 0
+        userId: "1"
+        vendorName: supos
+        order: 10000
+        children:
+        - id: Folder_41d355ee3641de25ac4c6e355e0c4c6e
+          name: New Folder 1
+          description: ""
+          parentId: App_bac090d688004de9bf927b9ff66bfca7
+          appId: App_bac090d688004de9bf927b9ff66bfca7
+          templateName: Folder
+          menuDisplay: true
+          hasChildren: true
+          order: 10000
+          children:
+          - id: Folder_105a11e36d6848e4a4eb85869bfede4e
+            name: New Folder 2
+            description: ""
+            parentId: App_bac090d688004de9bf927b9ff66bfca7
+            appId: App_bac090d688004de9bf927b9ff66bfca7
+            templateName: Folder
+            menuDisplay: true
+            hasChildren: false
+            order: 10000
+          - id: Page_314e531cbcdd4faeb2174f5eb42be97e
+            name: page1
+            description: ""
+            layout: "{\"pageConfig\":{\"platformLayoutType\":\"PC\",\"singleLayout\":true,\"lwType\":\"1\",\"lwValue\":1638,\"lhValue\":912,\"linkage\":\"0\",\"background\":\"\",\"pageId\":\"Page_314e531cbcdd4faeb2174f5eb42be97e\"},\"layoutNodes\":[{\"kind\":\"free\",\"col\":1,\"colW\":200,\"w\":240,\"h\":44.9,\"x\":0,\"y\":0,\"i\":\"2be97e-0\",\"moved\":false,\"static\":false,\"isResizable\":false,\"minW\":1,\"minH\":1,\"type\":\"2\",\"lw\":1638,\"lh\":912,\"opacity\":1,\"id\":\"Layout_5a1ebebfe2bd4f18b80a24047a004962\"}]}"
+            type: 1
+            url: ""
+            parentId: Folder_41d355ee3641de25ac4c6e355e0c4c6e
+            appId: App_bac090d688004de9bf927b9ff66bfca7
+            kind: free
+            platformType: PC
+            menuDisplay: true
+            mobileShowType: auto
+            navbarBgColor: '#ffffff'
+            navbarFront: dark
+            navbarStyle: fixed
+            extra: "{}"
+            order: 20000
+            userId: "1"
+            originalImage: /resource/App_bac090d688004de9bf927b9ff66bfca7/screenshot/original/Page_314e531cbcdd4faeb2174f5eb42be97e.png
+            thumbnail: /resource/App_bac090d688004de9bf927b9ff66bfca7/screenshot/thumbnail/Page_314e531cbcdd4faeb2174f5eb42be97e.png
+            isWorkflow: false
+        - id: Page_f0d175ba73b74e2a9a17a0150b3d8849
+          name: page1
+          description: ""
+          layout: "{\"pageConfig\":{\"platformLayoutType\":\"PC\",\"singleLayout\":true,\"lwType\":\"1\",\"lwValue\":1638,\"lhValue\":912,\"linkage\":\"0\",\"background\":\"\",\"pageId\":\"Page_f0d175ba73b74e2a9a17a0150b3d8849\"},\"layoutNodes\":[{\"kind\":\"free\",\"col\":1,\"colW\":200,\"w\":240,\"h\":44.9,\"x\":0,\"y\":0,\"i\":\"3d8849-0\",\"moved\":false,\"static\":false,\"isResizable\":false,\"minW\":1,\"minH\":1,\"type\":\"2\",\"lw\":1638,\"lh\":912,\"opacity\":1,\"id\":\"Layout_9480068bb2bb40f0b0704ec7ae515ce0\"}]}"
+          type: 1
+          url: ""
+          parentId: App_bac090d688004de9bf927b9ff66bfca7
+          appId: App_bac090d688004de9bf927b9ff66bfca7
+          kind: free
+          platformType: PC
+          menuDisplay: true
+          mobileShowType: auto
+          navbarBgColor: '#ffffff'
+          navbarFront: dark
+          navbarStyle: fixed
+          extra: "{}"
+          order: 20000
+          userId: "1"
+          originalImage: /resource/App_bac090d688004de9bf927b9ff66bfca7/screenshot/original/Page_f0d175ba73b74e2a9a17a0150b3d8849.png
+          thumbnail: /resource/App_bac090d688004de9bf927b9ff66bfca7/screenshot/thumbnail/Page_f0d175ba73b74e2a9a17a0150b3d8849.png
+          isWorkflow: false
+  securitySchemes:
+    Sign:
+      type: apiKey
+      name: Authorization
+      in: header

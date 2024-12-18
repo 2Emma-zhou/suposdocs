@@ -1,0 +1,4333 @@
+---
+hide_title: true
+---
+
+:::tip
+All elements provide templates for ease use. Hover over the element, you can see templates appearing on the side, select the template and draw on the canvas to directly use the template.
+:::
+
+## Chart Overview
+
+:::info
+Properties of chart elements might be different depending on different layouts.
+:::
+
+<table>
+<colgroup>
+<col style={{ width: "20%" }} />
+<col style={{ width: "20%" }} />
+<col style={{ width: "20%" }} />
+<col style={{ width: "20%" }} />
+<col style={{ width: "20%" }} />
+</colgroup>
+<thead>
+<tr>
+<th>Chart Type</th>
+<th>Data Type</th>
+<th>Data Source</th>
+<th>Max. Number of Data Source</th>
+<th>Linkage</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Dashboard</td>
+<td rowSpan={2}>Number, real-time data</td>
+<td rowSpan={2}>Object attribute and SQL data query</td>
+<td>1</td>
+<td>-</td>
+</tr>
+<tr>
+<td>Gauge</td>
+<td>1</td>
+<td>-</td>
+</tr>
+<tr>
+<td>Line Chart</td>
+<td rowSpan={12}>Two-dimensional array (one of them must be number), history data or relational data</td>
+<td rowSpan={12}>Numeric object attribute, service and form template and SQL data query</td>
+<td>20</td>
+<td rowSpan={13}>Links with input boxes, drop-down boxes, date controls, radios and checkboxes.</td>
+</tr>
+<tr>
+<td>Spline Chart</td>
+<td>8</td>
+</tr>
+<tr>
+<td>Column</td>
+<td>8</td>
+</tr>
+<tr>
+<td>Area</td>
+<td>8</td>
+</tr>
+<tr>
+<td>Scatter</td>
+<td>8</td>
+</tr>
+<tr>
+<td>Histogram/Bar Chart</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Spc Chart</td>
+<td>1</td>
+</tr>
+<tr>
+<td>ProgressBar</td>
+<td>8</td>
+</tr>
+<tr>
+<td>Funnel</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Spider Chart</td>
+<td>8</td>
+</tr>
+<tr>
+<td>Pie</td>
+<td>2</td>
+</tr>
+<tr>
+<td>Annular Chart</td>
+<td>2</td>
+</tr>
+<tr>
+<td>Bubble</td>
+<td>Three-dimensional array (two of them must be number), history
+data or relational data</td>
+<td>Object attribute, service, form template and SQL data query</td>
+<td>8</td>
+</tr>
+<tr>
+<td>XRange</td>
+<td>Two-dimensional array (one of them must be number or date)</td>
+<td>Service, form template and SQL data query</td>
+<td>-</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+
+## Free Layout
+
+This section introduces general properties of charts, and for special properties of each chart, refer to specific chapters.
+
+<img width={300} src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/70.png" />
+
+- Basic information
+
+<table>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>ID</td>
+<td>Automatically generated. Used as identifier in scripts.</td>
+</tr>
+<tr>
+<td>X/Y</td>
+<td>Center coordinate of the element.</td>
+</tr>
+<tr>
+<td>W/H</td>
+<td>Width and height of the element.</td>
+</tr>
+<tr>
+<td>Display Level</td>
+<td>The relative display level of the element on the canvas when overlapping. The larger the number, the more front the element is displayed.</td>
+</tr>
+<tr>
+<td>Visible</td>
+<td>Set whether the element is visible in operation center.</td>
+</tr>
+<tr>
+<td>Selectable</td>
+<td>Set whether the element can be selected.</td>
+</tr>
+<tr>
+<td>Refresh</td>
+<td>Enter a number to refresh the chart at the set interval.</td>
+</tr>
+<tr>
+<td>Title</td>
+<td>Set the visibility, name and style of the chart title and subtitle.</td>
+</tr>
+<tr>
+<td>Chart Style</td>
+<td>Different according to different types of charts. For details, see descriptions under each chart element.</td>
+</tr>
+<tr>
+<td>Background</td>
+<td>
+
+- Background color of the chart element and data area.
+- Stroke width, color and filleted corner size.
+- Margins from all sides between the chart and element border.
+
+</td>
+</tr>
+<tr>
+<td>Remark</td>
+<td>Set whether to display remarks at the lower-right corner of the chart and enter the content.</td>
+</tr>
+<tr>
+<td>Custom Extension</td>
+<td>Write custom script (HighChart available) to extend chart element functions.
+
+:::info
+Configuration validity priority: Interaction script > custom script > property panel.
+:::
+
+</td>
+</tr>
+</table>
+
+
+- Data source
+
+<img width={300} src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/73.png" />
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Select data source</td>
+<td>
+Select chart data source from object template, instance attribute and SQL data query.
+
+:::info
+Click <img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/71.png" /> to add multiple data sources.
+:::
+
+</td>
+</tr>
+<tr>
+<td>Dimension</td>
+<td>X axis data of the chart.
+
+:::info
+If the data source is an object service, make sure to set the return value type to JSON. Otherwise, X/Y axis data is not optional.
+:::
+
+</td>
+</tr>
+<tr>
+<td>Data</td>
+<td>Y axis data of the chart.
+
+- Select a field from the data source to be the Y axis.
+- Select the chart type.
+- Select the display name of the field.
+- Enter the custom field diaplay name and select data display color.
+
+:::info
+Click <img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/72.png" /> to add more Y axis.
+:::
+
+</td>
+</tr>
+</tbody>
+</table>
+
+- X axis
+
+<img width={300} src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/74.png" />
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Type</td>
+<td>
+
+- <strong>Category Axis</strong>: Displays X axis based on the selected data field.
+- <strong>Timeline</strong>: Displays X axis as time. You can set the format under <b>Formatting</b>.
+
+</td>
+</tr>
+<tr>
+<td>Initial Value</td>
+<td>Set the initial display value of the X axis. For example, set it to 1, meaning the first value of X axis field will not be displayed.</td>
+</tr>
+<tr>
+<td>Interval</td>
+<td>Interval of X axis field display. For example, set it to 4, meaning every 4 data items, X axis field is displayed.</td>
+</tr>
+<tr>
+<td>Style</td>
+<td>Set the X axis display style, such as font family, size, weight, italic and italic angle.</td>
+</tr>
+<tr>
+<td>Axis Width</td>
+<td>X axis line width and color.</td>
+</tr>
+<tr>
+<td>Title</td>
+<td>X axis title and style.</td>
+</tr>
+<tr>
+<td>Vertical Grid</td>
+<td>Vertical grid on the chart and its style.</td>
+</tr>
+<tr>
+<td>Front Sight</td>
+<td>Set whether to display the front sight when mouse moves over a point. If enabled, you can set its style.</td>
+</tr>
+<tr>
+<td>Vertical Text</td>
+<td>Set whether to display scale values vertically.</td>
+</tr>
+</tbody>
+</table>
+
+- Y axis
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/75.png" />
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Axis Display</td>
+<td>Select the Y axis type from <strong>Single Axis</strong> and <strong>Multiple Axis</strong>. For <strong>Multiple Axis</strong>, each data source is independent and the range is self-adaptive based on all data sources.
+</td>
+</tr>
+<tr>
+<td>Axis Word</td>
+<td>Scale style, including font family, size, weight, italic and italic angle.</td>
+</tr>
+<tr>
+<td>Headletter</td>
+<td>Y axis title style, including font family, size, weight, italic and italic angle.</td>
+</tr>
+<tr>
+<td>Y Axis</td>
+<td>
+
+- Select whether to display axis title, set title name and the color of the title, scale line and axis line.
+- **Axis Width**: The width of the axis line.
+- **Range**: Scale range of Y axis.
+- **Interval**: Interval of Y axis field display. For example, set it to 4, meaning every 4 data items, Y axis field is displayed.
+- **Unit**: Scale value unit.
+- Set the Y axis position between left and right.
+
+</td>
+</tr>
+<tr>
+<td>Warning</td>
+<td>Enable warning value, and set multiple values and their colors for highlighted display.</td>
+</tr>
+<tr>
+<td>Horizontal Grid</td>
+<td>Horizontal grid on the chart and its style.</td>
+</tr>
+<tr>
+<td>Front Sight</td>
+<td>Set whether to display the front sight when mouse moves over a point. If enabled, you can set its style.</td>
+</tr>
+</tbody>
+</table>
+
+- Legend
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/76.png" />
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Style</td>
+<td>
+Legend style, including font family, size, weight, italic, color and color when hovered over.
+</td>
+</tr>
+<tr>
+<td>Alignment/Layout</td>
+<td>Legend alignment and position relative to the chart.</td>
+</tr>
+<tr>
+<td>Bottom margin of legend entry</td>
+<td>Distance between legend and the bottom of the chart.</td>
+</tr>
+<tr>
+<td>Background/Filleted Corner/Stroke</td>
+<td>Color, filleted corner size and stroke style of legend background.</td>
+</tr>
+</tbody>
+</table>
+
+- Label
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/77.png" />
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Format</td>
+<td>Label content, and when the label contains number, you can set the decimal digits.</td>
+</tr>
+<tr>
+<td>Style</td>
+<td>Label font family, size, color and alignment relative to the data point.</td>
+</tr>
+<tr>
+<td>Inner Spacing</td>
+<td>Distance between the label and corresponding data point.</td>
+</tr>
+<tr>
+<td>Horizontal/Vertical Offset</td>
+<td>Horizontal and vertical offset between the label and corresponding data point.</td>
+</tr>
+<tr>
+<td>Background/Filleted Corner/Stroke</td>
+<td>Color, filleted corner size and stroke style of legend background.</td>
+</tr>
+<tr>
+<td>Allow overlap</td>
+<td>Whether to allow labels to overlap.</td>
+</tr>
+</tbody>
+</table>
+
+- Tooltip: Displays data source information when mouse hovers over the element.
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/78.png" />
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Formatting</td>
+<td>Tooltip display style. When setting it to <b>Custom</b>, you can set the tooltip style.</td>
+</tr>
+<tr>
+<td>Title</td>
+<td>Tooltip title style, including font family, size, color and background color.</td>
+</tr>
+<tr>
+<td>Content</td>
+<td>Tooltip content style, including font family, size and color, tooltip background color, filleted corner size, stroke color and width.</td>
+</tr>
+</tbody>
+</table>
+
+- Interaction: Set interaction events. For details, see <a href="Free Layout/Creating%20a%20Page#interaction">Interaction</a>.
+
+- Linkage: Link the data source with other elements to achieve linkage effect. For details, see <a href="../../../demo/Low%20Code%20Development/Data%20Linkage%20in%20Free%20Layout">Data Linkage in Free Layout</a>.
+
+### Line Chart
+
+Line charts are often used to display continuous data changes along time. Applicable for viewing data changing trends.
+
+:::info
+Spline chart is similar to line chart. Spline chart supports lateral display.
+:::
+
+<img width={450} src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/appDesign/64.png" />
+
+- Drill-down column: When the data source is relational data, you can add a drill-down column field, and then by clicking a data point on the chart, more detailed data is displayed.
+- Chart Style
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/79.png" />
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ladder Type</td>
+<td>Ladder formed from data points and lines between points. Select the relative position of data points on the connection line. <b>Null</b> means direct connection between points.</td>
+</tr>
+<tr>
+<td>Line style</td>
+<td>Connection line type and width.</td>
+</tr>
+<tr>
+<td>Node</td>
+<td>Node type, size and stroke width.
+
+- Shape Loops(Between Lines): For multiple data sources. Nodes on different lines changes based on the default order.
+- Uniform Shape: All nodes are the same shape.
+
+</td>
+</tr>
+<tr>
+<td>Marker Color</td>
+<td>Node color and node border color.</td>
+</tr>
+<tr>
+<td>Enable full screen</td>
+<td>Whether to display the full screen icon at the upper-right corner to enable full screen in operation center.</td>
+</tr>
+<tr>
+<td>Switch type</td>
+<td>Whether to display the chart type switching drop-down box at the upper-right corner to enable type switching in operation center.</td>
+</tr>
+<tr>
+<td>Backend Name</td>
+<td>Whether to allow user to use the returnewd value as the data name (fixed parameter: trailingShowName).</td>
+</tr>
+</tbody>
+</table>
+
+### Column
+
+Often used to compare values at different times or under different conditions.
+
+<img width={450} src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/appDesign/65.png" />
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/80.png" />
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Column Type</td>
+<td>How columns are displayed on the canvas based on the selected data source.</td>
+</tr>
+<tr>
+<td>Column Style</td>
+<td>Column width, filleted corner and column border width.</td>
+</tr>
+<tr>
+<td>Enable full screen</td>
+<td>Whether to display the full screen icon at the upper-right corner to enable full screen in operation center.</td>
+</tr>
+<tr>
+<td>Lateral Display</td>
+<td>Switch the columns display direction between lateral and vertical.</td>
+</tr>
+<tr>
+<td>Switch type</td>
+<td>Whether to display the chart type switching drop-down box at the upper-right corner to enable type switching in operation center.</td>
+</tr>
+<tr>
+<td>Backend Name</td>
+<td>Whether to allow user to use the returnewd value as the data name (fixed parameter: trailingShowName).</td>
+</tr>
+</tbody>
+</table>
+
+### Area
+
+Emphasizes the extent to which the data changes during a period.
+
+<img width={450} src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/appDesign/66.png" />
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/81.png" />
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Area Type</td>
+<td>How area is displayed on the canvas based on the selected data source.</td>
+</tr>
+<tr>
+<td>Area Style</td>
+<td>Area line type and width.</td>
+</tr>
+<tr>
+<td>Node</td>
+<td>Node type, size and stroke width.
+
+- Shape Loops(Between Lines): For multiple data sources. Nodes on different lines changes based on the default order.
+- Uniform Shape: All nodes are the same shape.
+
+</td>
+</tr>
+<tr>
+<td>Marker Color</td>
+<td>Node color and node border color.</td>
+</tr>
+<tr>
+<td>Mark Maximum</td>
+<td>Whether to display the maximum value, and the value display style.</td>
+</tr>
+<tr>
+<td>Enable full screen</td>
+<td>Whether to display the full screen icon at the upper-right corner to enable full screen in operation center.</td>
+</tr>
+<tr>
+<td>Lateral Display</td>
+<td>Switch the columns display direction between lateral and vertical.</td>
+</tr>
+<tr>
+<td>Switch type</td>
+<td>Whether to display the chart type switching drop-down box at the upper-right corner to enable type switching in operation center.</td>
+</tr>
+<tr>
+<td>Backend Name</td>
+<td>Whether to allow user to use the returnewd value as the data name (fixed parameter: trailingShowName).</td>
+</tr>
+</tbody>
+</table>
+
+### Dashboard
+
+Dashboard binds with numeric real-time data.
+
+<img width={450} src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/83.png" />
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/82.png" />
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Data Color</td>
+<td>Data color displayed on the dashboard.</td>
+</tr>
+<tr>
+<td>Style</td>
+<td>Colors of the dashboard dial, scale, value font and edge.</td>
+</tr>
+<tr>
+<td>Range</td>
+<td>Range of the dashboard.</td>
+</tr>
+<tr>
+<td>Angle</td>
+<td>Start and end angle of the dashboard. When they add up to 360°, a circle is formed.</td>
+</tr>
+<tr>
+<td>Panel Size</td>
+<td>Dashoboard size.</td>
+</tr>
+<tr>
+<td>Lateral/Longitudinal Offset</td>
+<td>Dashboard position horizontally and vertically.</td>
+</tr>
+<tr>
+<td>Inner Dial</td>
+<td>Radius of the dashboard inner edge.</td>
+</tr>
+<tr>
+<td>Dial Width</td>
+<td>Width of the dashboard edge.</td>
+</tr>
+<tr>
+<td>Total Number of Scales</td>
+<td>The number of scales on the dashboard.</td>
+</tr>
+<tr>
+<td>Scale Length</td>
+<td>Length of the scale lines.</td>
+</tr>
+<tr>
+<td>Enable full screen</td>
+<td>Whether to display the full screen icon at the upper-right corner to enable full screen in operation center.</td>
+</tr>
+<tr>
+<td>Arc on both sides</td>
+<td>Whether to display the edge of the data part as arc.</td>
+</tr>
+</tbody>
+</table>
+
+### Guage
+
+Guage binds with numeric real-time data.
+
+<img width={450} src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/85.png" />
+
+- Chart Style
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/84.png" />
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Style</td>
+<td>Colors of the guage dial, scale, value font and edge.</td>
+</tr>
+<tr>
+<td>Range</td>
+<td>Range of the guage.</td>
+</tr>
+<tr>
+<td>Angle</td>
+<td>Start and end angle of the guage. When they add up to 360° (neither can exceed 180), a circle is formed.</td>
+</tr>
+<tr>
+<td>Panel Size</td>
+<td>Guage size.</td>
+</tr>
+<tr>
+<td>Lateral/Longitudinal Offset</td>
+<td>Guage position horizontally and vertically.</td>
+</tr>
+<tr>
+<td>Inner Dial</td>
+<td>Radius of the guage inner edge.</td>
+</tr>
+<tr>
+<td>Dial Width</td>
+<td>Width of the guage edge.</td>
+</tr>
+<tr>
+<td>Total Number of Scales</td>
+<td>The number of scales on the guage.</td>
+</tr>
+<tr>
+<td>Scale Length</td>
+<td>Length of the scale lines.</td>
+</tr>
+<tr>
+<td>Enable full screen</td>
+<td>Whether to display the full screen icon at the upper-right corner to enable full screen in operation center.</td>
+</tr>
+<tr>
+<td>Connect scale</td>
+<td>Set whether to connect the start and end of the guage border.</td>
+</tr>
+<tr>
+<td>Arc on both sides</td>
+<td>Whether to display the edge of the data part as arc.</td>
+</tr>
+</tbody>
+</table>
+
+- Pointer
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/105.png" />
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Needle Width</td>
+<td>Pointer width.</td>
+</tr>
+<tr>
+<td>Needle Tip</td>
+<td>Width of the pointer tip.</td>
+</tr>
+<tr>
+<td>Pointer</td>
+<td>Pointer length.</td>
+</tr>
+<tr>
+<td>Pin Tail</td>
+<td>Length of the pointer tail.</td>
+</tr>
+<tr>
+<td>Pointer Color</td>
+<td>Pointer color.</td>
+</tr>
+<tr>
+<td>Stroke</td>
+<td>Width and color of the pointer border.</td>
+</tr>
+<tr>
+<td>Center Diameter</td>
+<td>Diameter and color of the pointer pivot.</td>
+</tr>
+<tr>
+<td>Stroke</td>
+<td>Width and color of the pointer pivot border.</td>
+</tr>
+</tbody>
+</table>
+
+- Custom Axis
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/106.png" />
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Grid Width</td>
+<td>Axis width.</td>
+</tr>
+<tr>
+<td>Grid Color</td>
+<td>Add multiple color sections to the axis and set specific positions (0-1). For example, add a red section and set its position to 0.5, the top and bottom of the axis will be red (0 means left and 1 means right).</td>
+</tr>
+</tbody>
+</table>
+
+- Identification Area
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/107.png" />
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Start/End Value</td>
+<td>The start and end value of the identification area on the axis.</td>
+</tr>
+<tr>
+<td>Identification Area Width</td>
+<td>Area width on the axis.</td>
+</tr>
+<tr>
+<td>Gradient Position</td>
+<td>Area color. Gradual color change is available.</td>
+</tr>
+</tbody>
+</table>
+
+
+### Bubble
+
+Displays data distribution.
+
+<img width={450} src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/appDesign/69.png" />
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/86.png" />
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Bubble ratio</td>
+<td>Display size of bubbles.</td>
+</tr>
+<tr>
+<td>Node</td>
+<td>Node type, size and stroke width.
+
+- Shape Loops(Between Lines): For multiple data sources. Nodes on different lines changes based on the default order.
+- Uniform Shape: All nodes are the same shape.
+
+</td>
+</tr>
+<tr>
+<td>Enable full screen</td>
+<td>Whether to display the full screen icon at the upper-right corner to enable full screen in operation center.</td>
+</tr>
+</tbody>
+</table>
+
+### Scatter
+
+Displays data distribution.
+
+<img width={450} src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/appDesign/70.png" />
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/87.png" />
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Node</td>
+<td>Node type, size and stroke width.
+
+- Shape Loops(Between Lines): For multiple data sources. Nodes on different lines changes based on the default order.
+- Uniform Shape: All nodes are the same shape.
+
+</td>
+</tr>
+<tr>
+<td>Size</td>
+<td>Scattered point size.</td>
+</tr>
+<tr>
+<td>Enable full screen</td>
+<td>Whether to display the full screen icon at the upper-right corner to enable full screen in operation center.</td>
+</tr>
+<tr>
+<td>Regression Line</td>
+<td>Whether to display the fitted regression line between scattered data points.</td>
+</tr>
+<tr>
+<td>Connection Point</td>
+<td>Whether to connect all the data points.</td>
+</tr>
+</tbody>
+</table>
+
+### Pie
+
+Displays the ratio between each section of data and the whole.
+
+<img width={450} src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/appDesign/71.png" />
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/88.png" />
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Type</td>
+<td>Select between normal pie chart and pie chart with different section radius based on the data source.</td>
+</tr>
+<tr>
+<td>Inner Diameter</td>
+<td>Set the radius of the inner circle around the origin.</td>
+</tr>
+<tr>
+<td>Margin</td>
+<td>Distance between pie sections.</td>
+</tr>
+<tr>
+<td>Distance</td>
+<td>Set the distance between the pie chart and the chart area border.</td>
+</tr>
+<tr>
+<td>Color</td>
+<td>Color scheme of the pie chart.</td>
+</tr>
+<tr>
+<td>Enable full screen</td>
+<td>Whether to display the full screen icon at the upper-right corner to enable full screen in operation center.</td>
+</tr>
+</tbody>
+</table>
+
+### Funnel
+
+Often used to display the data decreasing. Funnel chart automatically sorts the data, and for different sorting sequence, you can convert the funnel chart to a pyramid.
+
+<img width={450} src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/appDesign/72.png" />
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/89.png" />
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Type</td>
+<td>Select between funnel chart and pyramid.</td>
+</tr>
+<tr>
+<td>Neck Width/Height</td>
+<td>The width and height of the funnel neck part.</td>
+</tr>
+<tr>
+<td>Border Width</td>
+<td>Set the border width and color of the funnel chart.</td>
+</tr>
+<tr>
+<td>Color</td>
+<td>Color scheme of the pie chart.</td>
+</tr>
+<tr>
+<td>Enable full screen</td>
+<td>Whether to display the full screen icon at the upper-right corner to enable full screen in operation center.</td>
+</tr>
+</tbody>
+</table>
+
+### Spider Chart
+
+Mainly used to evaluate each index of a data set. X axis represents index variables and Y axis stands for the distance between the origin to each data point, which indicates the evaluation of each index.
+
+<img width={450} src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/appDesign/73.png" />
+
+- Data Source
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Line Color</td>
+<td>Section border line color of the spider chart.</td>
+</tr>
+<tr>
+<td>Area Color</td>
+<td>Section color of the spider chart.</td>
+</tr>
+</tbody>
+</table>
+
+- Chart Style
+
+<img width={450} src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/90.png" />
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Line Style</td>
+<td>Line type and width.</td>
+</tr>
+<tr>
+<td>Node</td>
+<td>Node type, size and stroke width.
+
+- Shape Loops(Between Lines): For multiple data sources. Nodes on different lines changes based on the default order.
+- Uniform Shape: All nodes are the same shape.
+
+</td>
+</tr>
+<tr>
+<td>Marker Color</td>
+<td>Node color and node border color.</td>
+</tr>
+<tr>
+<td>Enable full screen</td>
+<td>Whether to display the full screen icon at the upper-right corner to enable full screen in operation center.</td>
+</tr>
+<tr>
+<td>Percentage</td>
+<td>Whether to display the data of each section in percentage.</td>
+</tr>
+</tbody>
+</table>
+
+
+### Annular Chart
+
+<img width={450} src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/91.png" />
+
+- Central Title: Unavailable for multiple data sources.
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/93.png" />
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Format</td>
+<td>Select title displayed in the center of the annular chart between value and name.</td>
+</tr>
+<tr>
+<td>Style</td>
+<td>Title style, including font family, size, weight, italic, alignment and color.</td>
+</tr>
+<tr>
+<td>Subtitle</td>
+<td>Whether to display subtitle displayed in the center of the annular chart under <b>Title</b>.</td>
+</tr>
+<tr>
+<td>Subtitle style</td>
+<td>Subtitle style, including font family, size, weight, italic, alignment and color.</td>
+</tr>
+</tbody>
+</table>
+
+- Chart Style
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/92.png" />
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Type</td>
+<td>Select between normal annular chart and pie chart with different section radius based on the data source.</td>
+</tr>
+<tr>
+<td>Inner Diameter</td>
+<td>Set the radius of the inner circle around the origin.</td>
+</tr>
+<tr>
+<td>Internal Ratio</td>
+<td></td>
+</tr>
+<tr>
+<td>Margin</td>
+<td>Distance between pie sections.</td>
+</tr>
+<tr>
+<td>Distance</td>
+<td>Set the distance between the annular chart and the chart area border.</td>
+</tr>
+<tr>
+<td>Color</td>
+<td>Color scheme of the annular chart.</td>
+</tr>
+<tr>
+<td>Enable full screen</td>
+<td>Whether to display the full screen icon at the upper-right corner to enable full screen in operation center.</td>
+</tr>
+</tbody>
+</table>
+
+### Spc Diagram
+
+Analyzes and judges whether the procedure is stable. The spc diagram has uppr and lower limits.
+
+<img width={450} src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/94.png" />
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/95.png" />
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Line Style</td>
+<td>Line type and width.</td>
+</tr>
+<tr>
+<td>Node</td>
+<td>Node type, size and stroke width.</td>
+</tr>
+<tr>
+<td>Marker Color</td>
+<td>Node color and node border color.</td>
+</tr>
+<tr>
+<td>SPC Chart Type</td>
+<td>
+
+- **Individual Value Chart**: Displays history data points.
+
+<ul>
+<ul>
+<li>Broken line: Value of history data points.</li>
+<li>UCL/LCL: Sigma line added 3 to/deducted 3 from mean value.</li>
+<li>Middle line: Numeric average value of a set of data.</li>
+<li>Supports open API and obtain corresponding data from APIs.</li>
+<li>Displays normal and abnormal nodes (consecutive 7 nodes going up or down).</li>
+</ul>
+</ul>
+
+- **Range Chart**
+
+<ul>
+<ul>
+<li>Broken line: Absolute value of the difference between the maximum and minimum value.
+
+:::info
+You need to select a mobile parameter n (moving range).
+:::
+
+</li>
+<li>Middle line: Numeric average value of a set of data.</li>
+<li>UCL: Sigma line added 3 to mean value.</li>
+<li>LCL: 0.</li>
+</ul>
+</ul>
+
+</td>
+</tr>
+<tr>
+<td>Decimal Places</td>
+<td>Secimal places of the data.</td>
+</tr>
+<tr>
+<td>Color Error</td>
+<td>Color of abnormal data.</td>
+</tr>
+<tr>
+<td>Specific Line Style</td>
+<td>Set the style for each specific line, including line type, width and color.</td>
+</tr>
+<tr>
+<td>Enable full screen</td>
+<td>Whether to display the full screen icon at the upper-right corner to enable full screen in operation center.</td>
+</tr>
+</tbody>
+</table>
+
+### Bar Chart
+
+Accurately displays data distribution. You can distribute data to multiple sections, and integrate data distribution in each section.
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/appDesign/75.png" />
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Enable full screen</td>
+<td>Whether to display the full screen icon at the upper-right corner to enable full screen in operation center.</td>
+</tr>
+<tr>
+<td>Fitted Line</td>
+<td>Set whether to display the fitted line (normal distribution line).</td>
+</tr>
+</tbody>
+</table>
+
+### Progress Bar
+
+<img width={450} src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/96.png" />
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Style</td>
+<td>Progress bar type.
+
+- **Horizontal Progress Bar** allows you to set whether to display the scales.
+- Both **Water-drop Progress Bar** and **Circular Progress Bar** require only one data source.
+
+</td>
+</tr>
+<tr>
+<td>Data Layout</td>
+<td>The way to display related information on progress bar, including title, data and progress.</td>
+</tr>
+<tr>
+<td>Chart Style</td>
+<td>Set the background color of the progress bar.</td>
+</tr>
+<tr>
+<td>Data Header</td>
+<td>Title style of the progress bar.</td>
+</tr>
+<tr>
+<td>Progress Value</td>
+<td>Progress style of the progress bar. You can also set it to be displayed inside each bar.</td>
+</tr>
+<tr>
+<td>Display Data</td>
+<td>Style of current and total data of each bar.</td>
+</tr>
+</tbody>
+</table>
+
+### Xrange
+Gantt chart tracks tasks and corresponding schedules.
+
+<img width={450} src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/97.png" />
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Data Source</td>
+<td>
+
+- Data Source: Service, SQL data query or multiple attributes of form template.
+- Range: The actual range (date or integer) of the task or plan on Gantt chart (only when data source is form template).
+- Planned Range: The planned range (date or integer) of the task or plan on Gantt chart (only when data source is form template).
+- Data: Y axis. String type of field is optional for form template data source.
+
+</td>
+</tr>
+<tr>
+<td>Chart Style</td>
+<td>
+
+- Enable full screen: Whether to display the full screen icon at the upper-right corner to enable full screen in operation center.
+- Multi-level Data: Whether to display the sub-level data.
+
+</td>
+</tr>
+<tr>
+<td>X Axis</td>
+<td>
+
+- Timeline: DATE/DATETIME type of data returned from a service or SQL query, or from template attributes.
+- Linear: Integer type of data returned from a service or SQL query, or from template attributes.
+
+</td>
+</tr>
+</tbody>
+</table>
+
+## Grid Layout
+
+This section introduces general properties of charts, and for special properties of each chart, refer to specific chapters.
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/98.png"/>
+
+- Basic information
+
+<table>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>ID</td>
+<td>Automatically generated and can be changed. Used as identifier in scripts.</td>
+</tr>
+<tr>
+<td>Position</td>
+<td>
+
+- **Default Position**: Current position and will be adjusted automatically based on screen resolution.
+- **Absolute Position**: You can drag the element to a fixed position (upper-left corner by default).
+:::info
+**Absolute Position** is recommended to work with fixed size elements.
+:::
+
+</td>
+</tr>
+<tr>
+<td>Size</td>
+<td>
+
+- **Fixed Width And Height**: Fixed element size and when it exceeds the window, scroll bar is used.
+- **Fit Window**: Element size is the same as its parent window.
+
+</td>
+</tr>
+<tr>
+<td>W/H</td>
+<td>Width and height of the element. The unit can be percentage or pixel.</td>
+</tr>
+<tr>
+<td>Z-index</td>
+<td>The relative display level of the element on the canvas when overlapping. The larger the number, the more front the element is displayed.</td>
+</tr>
+<tr>
+<td>Title</td>
+<td>Set the visibility, name and style of the chart title and subtitle.</td>
+</tr>
+<tr>
+<td>Chart Format</td>
+<td>Different according to different types of charts. For details, see descriptions under each chart element.</td>
+</tr>
+<tr>
+<td>Background</td>
+<td>
+
+- Background color of the chart.
+- Stroke width, color and filleted corner size.
+- Margins from all sides between the chart and element border.
+
+</td>
+</tr>
+<tr>
+<td>Remark</td>
+<td>Set whether to display remarks at the lower-right corner of the chart and enter the content.</td>
+</tr>
+</table>
+
+
+- Data source
+
+<img width={300} src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/99.png" />
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Select Data Source</td>
+<td>
+Select chart data source from object template, instance attribute and SQL data query.
+
+:::info
+Click <img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/71.png" /> to add multiple data sources.
+:::
+
+</td>
+</tr>
+<tr>
+<td>Dimension</td>
+<td>X axis data of the chart.
+
+:::info
+If the data source is an object service, make sure to set the return value type to JSON. Otherwise, X/Y axis data is not optional.
+:::
+
+</td>
+</tr>
+<tr>
+<td>Data</td>
+<td>Y axis data of the chart.
+
+- Select a field from the data source to be the Y axis.
+- Select the display name of the field.
+- Enter the custom field diaplay name and select data display color.
+
+:::info
+Click <img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/72.png" /> to add more Y axis.
+:::
+
+</td>
+</tr>
+</tbody>
+</table>
+
+- Legend
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/100.png" />
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Position</td>
+<td>Legend position relative to the chart.</td>
+</tr>
+<tr>
+<td>Size</td>
+<td>Legend size, including legend icon and text.</td>
+</tr>
+<tr>
+<td>Style</td>
+<td>Legend style, including font family, size and color.</td>
+</tr>
+</tbody>
+</table>
+
+- X axis
+
+<img width={300} src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/101.png" />
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Type</td>
+<td>
+
+- <strong>Category Axis</strong>: Displays X axis based on the selected data field.
+- <strong>Timeline</strong>: Displays X axis as time. You can set the format under <b>Format</b>.
+
+</td>
+</tr>
+<tr>
+<td>Axis</td>
+<td>Line color of the X axis.</td>
+</tr>
+<tr>
+<td>Interval</td>
+<td>Interval of X axis field display. For example, set it to 4, meaning every 4 data items, X axis field is displayed.</td>
+</tr>
+<tr>
+<td>Style</td>
+<td>Set the X axis display style, such as font family, size, weight, italic and italic angle.</td>
+</tr>
+<tr>
+<td>Title</td>
+<td>X axis title and style.</td>
+</tr>
+<tr>
+<td>Vertical Grid</td>
+<td>Vertical grid on the chart and its type and width.</td>
+</tr>
+<tr>
+<td>Vertical Text</td>
+<td>Set whether to display scale values vertically.</td>
+</tr>
+</tbody>
+</table>
+
+- Y axis
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/102.png" />
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Axis Label</td>
+<td>Scale style, including font family, size, weight, italic and italic angle.</td>
+</tr>
+<tr>
+<td>Title Font</td>
+<td>Y axis title style, including font family, size, weight, italic and italic angle.</td>
+</tr>
+<tr>
+<td>Y Axis-1</td>
+<td>
+
+- Select whether to display axis title, set title name and the color of the title, scale line and axis line.
+- **Range**: Scale range of Y axis.
+- **Interval**: Interval of Y axis field display. For example, set it to 4, meaning every 4 data items, Y axis field is displayed.
+- **Unit**: Scale value unit.
+- Set the Y axis position between left and right.
+
+</td>
+</tr>
+<tr>
+<td>Warning</td>
+<td>Enable warning value, and set multiple values and their colors for highlighted display.</td>
+</tr>
+<tr>
+<td>Horizontal Grid</td>
+<td>Horizontal grid on the chart and its style.</td>
+</tr>
+</tbody>
+</table>
+
+- Label
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/103.png" />
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Numerical Value</td>
+<td>Label content, and when the label contains number, you can set the decimal digits.</td>
+</tr>
+<tr>
+<td>Style</td>
+<td>Label font family, size, color and alignment relative to the data point.</td>
+</tr>
+<tr>
+<td>Background</td>
+<td>Color, filleted corner size and stroke style of label background.</td>
+</tr>
+<tr>
+<td>Shadow</td>
+<td>Whether to add shadow to the label background.</td>
+</tr>
+<tr>
+<td>Allow overlap</td>
+<td>Whether to allow labels to overlap.</td>
+</tr>
+</tbody>
+</table>
+
+- Tooltip: Displays data source information when mouse hovers over the element.
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/104.png" />
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Style</td>
+<td>Tooltip display style.</td>
+</tr>
+<tr>
+<td>Background</td>
+<td>Color, filleted corner size and stroke style of tooltip background.</td>
+</tr>
+<tr>
+<td>Shadow</td>
+<td>Whether to add shadow to the tooltip background.</td>
+</tr>
+</tbody>
+</table>
+
+- Interact: Set interaction events. For details, see <a href="Free Layout/Creating%20a%20Page#interaction">Interaction</a>.
+
+### Line Chart
+
+Line charts are often used to display continuous data changes along time. Applicable for viewing data changing trends.
+
+:::info
+Spline chart, area chart are similar to line chart.
+:::
+
+<img width={450} src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/appDesign/64.png" />
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/108.png" />
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Line style</td>
+<td>Connection line type and width.</td>
+</tr>
+<tr>
+<td>Node</td>
+<td>Node type, size and stroke width.
+
+- Shape Loops(Between Lines): For multiple data sources. Nodes on different lines changes based on the default order.
+- Uniform Shape: All nodes are the same shape.
+
+</td>
+</tr>
+<tr>
+<td>Refresh</td>
+<td>Refresh interval of the chart.</td>
+</tr>
+<tr>
+<td>Full Screen</td>
+<td>Whether to display the full screen icon at the upper-right corner to enable full screen in operation center.</td>
+</tr>
+<tr>
+<td>Landscape Display</td>
+<td>Enable to switch X and Y axis, and the chart changes to horizontal view.</td>
+</tr>
+<tr>
+<td>Crosshair</td>
+<td>Set whether to display crosshairs when mouse moves.</td>
+</tr>
+</tbody>
+</table>
+
+### Column Chart
+
+Often used to compare values at different times or under different conditions.
+
+<img width={450} src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/appDesign/65.png" />
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/109.png" />
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Column Type</td>
+<td>How columns are displayed on the canvas based on the selected data source.</td>
+</tr>
+<tr>
+<td>Rounded Corner</td>
+<td>Size of the rounded corner of columns.</td>
+</tr>
+<tr>
+<td>Refresh</td>
+<td>Refresh interval of the chart.</td>
+</tr>
+<tr>
+<td>Full Screen</td>
+<td>Whether to display the full screen icon at the upper-right corner to enable full screen in operation center.</td>
+</tr>
+<tr>
+<td>Landscape Display</td>
+<td>Enable to switch X and Y axis, and the chart changes to horizontal view.</td>
+</tr>
+<tr>
+<td>Crosshair</td>
+<td>Set whether to display crosshairs when mouse moves.</td>
+</tr>
+</tbody>
+</table>
+
+### Dashboard
+
+Dashboard binds with numeric real-time data.
+
+<img width={450} src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/83.png" />
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/110.png" />
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Data Color</td>
+<td>Data color displayed on the dashboard.</td>
+</tr>
+<tr>
+<td>Style</td>
+<td>Colors of the dashboard dial, scale, value font and edge.</td>
+</tr>
+<tr>
+<td>Range</td>
+<td>Range of the dashboard.</td>
+</tr>
+<tr>
+<td>Angle</td>
+<td>Start and end angle of the dashboard. When they add up to 360°, a circle is formed.</td>
+</tr>
+<tr>
+<td>Scale Style</td>
+<td>Font family, size, weight and italic of the scale.</td>
+</tr>
+<tr>
+<td>Lateral/Longitudinal Offset</td>
+<td>Dashboard position horizontally and vertically.</td>
+</tr>
+<tr>
+<td>Inner Radius</td>
+<td>Radius of the dashboard inner edge.</td>
+</tr>
+<tr>
+<td>Dial Width</td>
+<td>Width of the dashboard edge.</td>
+</tr>
+<tr>
+<td>Scale Length</td>
+<td>Length of the scale lines.</td>
+</tr>
+<tr>
+<td>Full Screen</td>
+<td>Whether to display the full screen icon at the upper-right corner to enable full screen in operation center.</td>
+</tr>
+</tbody>
+</table>
+
+### Speedometer
+
+Speedometer binds with numeric real-time data.
+
+<img width={450} src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/85.png" />
+
+- Chart Format
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/111.png" />
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Style</td>
+<td>Colors of the speedometer dial, scale, value font and edge.</td>
+</tr>
+<tr>
+<td>Range</td>
+<td>Range of the speedometer.</td>
+</tr>
+<tr>
+<td>Angle</td>
+<td>Start and end angle of the speedometer. When they add up to 360° (neither can exceed 180), a circle is formed.</td>
+</tr>
+<tr>
+<td>Scale Style</td>
+<td>Font family, size, weight and italic of the scale.</td>
+</tr>
+<tr>
+<td>Lateral/Longitudinal Offset</td>
+<td>speedometer position horizontally and vertically.</td>
+</tr>
+<tr>
+<td>Inner Radius</td>
+<td>Radius of the speedometer inner edge.</td>
+</tr>
+<tr>
+<td>Dial Border Width</td>
+<td>Width of the speedometer border.</td>
+</tr>
+<tr>
+<td>Scale/Minor Scale Length</td>
+<td>Length of the scale lines.</td>
+</tr>
+<tr>
+<td>Total Number of Scales</td>
+<td>The number of scales on the speedometer.</td>
+</tr>
+<tr>
+<td>Scale Offset</td>
+<td>Offset of scale size relative to standard dial size. The larger the value, the larger the dial.</td>
+</tr>
+<tr>
+<td>Refresh</td>
+<td>Refresh interval of the chart.</td>
+</tr>
+<tr>
+<td>Full Screen</td>
+<td>Whether to display the full screen icon at the upper-right corner to enable full screen in operation center.</td>
+</tr>
+<tr>
+<td>Connect Scale</td>
+<td>Set whether to connect the start and end of the speedometer border.</td>
+</tr>
+</tbody>
+</table>
+
+- Pointer
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/112.png" />
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Pointer Width</td>
+<td>Pointer body width.</td>
+</tr>
+<tr>
+<td>Pointer Tip</td>
+<td>Width of the pointer tip.</td>
+</tr>
+<tr>
+<td>Pointer</td>
+<td>Pointer length.</td>
+</tr>
+<tr>
+<td>Pointer Tail</td>
+<td>Length of the pointer tail.</td>
+</tr>
+<tr>
+<td>Pointer Color</td>
+<td>Pointer color.</td>
+</tr>
+<tr>
+<td>Stroke</td>
+<td>Width and color of the pointer border.</td>
+</tr>
+<tr>
+<td>Center Diameter</td>
+<td>Diameter and color of the pointer pivot.</td>
+</tr>
+<tr>
+<td>Stroke</td>
+<td>Width and color of the pointer pivot border.</td>
+</tr>
+</tbody>
+</table>
+
+- Identification Area
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/107.png" />
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Start/End Value</td>
+<td>The start and end value of the identification area on the axis.</td>
+</tr>
+<tr>
+<td>ID Zone Width</td>
+<td>Area width on the axis.</td>
+</tr>
+<tr>
+<td>Gradient Position</td>
+<td>Area color. Gradual color change is available.</td>
+</tr>
+</tbody>
+</table>
+
+
+### Bubble Chart
+
+Displays data distribution.
+
+<img width={450} src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/appDesign/69.png" />
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/86.png" />
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Data Source</td>
+<td>Aside from general information, select a field to be the bubble size source and set its color.</td>
+</tr>
+<tr>
+<td>Chart Format</td>
+<td>
+
+- **Full Screen**: Whether to display the full screen icon at the upper-right corner to enable full screen in operation center.
+- **Landscape Display**: Enable to switch X and Y axis, and the chart changes to horizontal view.
+- **Crosshair**: Set whether to display crosshairs when mouse moves.
+
+</td>
+</tr>
+</tbody>
+</table>
+
+### Scatter Plot
+
+Displays data distribution.
+
+<img width={450} src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/appDesign/70.png" />
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/113.png" />
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Full Screen</td>
+<td>Whether to display the full screen icon at the upper-right corner to enable full screen in operation center.</td>
+</tr>
+<tr>
+<td>Landscape Display</td>
+<td>Enable to switch X and Y axis, and the chart changes to horizontal view.</td>
+</tr>
+<tr>
+<td>Crosshair</td>
+<td>Set whether to display crosshairs when mouse moves.</td>
+</tr>
+</tbody>
+</table>
+
+### Pie
+
+Displays the ratio between each section of data and the whole.
+
+:::info
+**Annular Chart** is similar to pie chart.
+:::
+
+<img width={450} src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/appDesign/71.png" />
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/114.png" />
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Color</td>
+<td>Color scheme of the pie chart.</td>
+</tr>
+<tr>
+<td>Inner Radius</td>
+<td>Set the radius of the inner circle around the origin.</td>
+</tr>
+<tr>
+<td>Margin</td>
+<td>Distance between pie sections.</td>
+</tr>
+<tr>
+<td>Inner Cake Ratio</td>
+<td>Sum of inner section ratio. It is 100% by default.</td>
+</tr>
+<tr>
+<td>Refresh</td>
+<td>Refresh interval of the chart.</td>
+</tr>
+<tr>
+<td>Full Screen</td>
+<td>Whether to display the full screen icon at the upper-right corner to enable full screen in operation center.</td>
+</tr>
+</tbody>
+</table>
+
+### Funnel Chart
+
+Often used to display the data decreasing. Funnel chart automatically sorts the data, and for different sorting sequence, you can convert the funnel chart to a pyramid.
+
+<img width={450} src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/appDesign/72.png" />
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/115.png" />
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Type</td>
+<td>Select between funnel chart and pyramid.</td>
+</tr>
+<tr>
+<td>Neck Width/Height</td>
+<td>The width and height of the funnel neck part.</td>
+</tr>
+<tr>
+<td>Border Width</td>
+<td>Set the border width and color of the funnel chart.</td>
+</tr>
+<tr>
+<td>Refresh</td>
+<td>Refresh interval of the chart.</td>
+</tr>
+<tr>
+<td>Full Screen</td>
+<td>Whether to display the full screen icon at the upper-right corner to enable full screen in operation center.</td>
+</tr>
+</tbody>
+</table>
+
+### Spider Chart
+
+Mainly used to evaluate each index of a data set. X axis represents index variables and Y axis stands for the distance between the origin to each data point, which indicates the evaluation of each index.
+
+<img width={450} src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/appDesign/73.png" />
+<img width={450} src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/116.png" />
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Line Style</td>
+<td>Line type and width.</td>
+</tr>
+<tr>
+<td>Node</td>
+<td>Node type, size and stroke width.
+
+- Shape Loops(Between Lines): For multiple data sources. Nodes on different lines changes based on the default order.
+- Uniform Shape: All nodes are the same shape.
+
+</td>
+</tr>
+<tr>
+<td>Refresh</td>
+<td>Refresh interval of the chart.</td>
+</tr>
+<tr>
+<td>Full Screen</td>
+<td>Whether to display the full screen icon at the upper-right corner to enable full screen in operation center.</td>
+</tr>
+</tbody>
+</table>
+
+### Spc Diagram
+
+Analyzes and judges whether the procedure is stable. The spc diagram has uppr and lower limits.
+
+<img width={450} src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/94.png" />
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/117.png" />
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SPC Chart Type</td>
+<td>
+
+- **Individual Value Chart**: Displays history data points.
+
+<ul>
+<ul>
+<li>Broken line: Value of history data points.</li>
+<li>UCL/LCL: Sigma line added 3 to/deducted 3 from mean value.</li>
+<li>Middle line: Numeric average value of a set of data.</li>
+<li>Supports open API and obtain corresponding data from APIs.</li>
+<li>Displays normal and abnormal nodes (consecutive 7 nodes going up or down).</li>
+</ul>
+</ul>
+
+- **Range Chart**
+
+<ul>
+<ul>
+<li>Broken line: Absolute value of the difference between the maximum and minimum value.
+
+:::info
+You need to select a mobile parameter n (moving range).
+:::
+
+</li>
+<li>Middle line: Numeric average value of a set of data.</li>
+<li>UCL: Sigma line added 3 to mean value.</li>
+<li>LCL: 0.</li>
+</ul>
+</ul>
+</td>
+</tr>
+<tr>
+<td>Line Style</td>
+<td>Line type and width.</td>
+</tr>
+<tr>
+<td>Decimal Places</td>
+<td>Secimal places of the data.</td>
+</tr>
+<tr>
+<td>Specific Line Style</td>
+<td>Set the style for each specific line, including line type, width and color.</td>
+</tr>
+<tr>
+<td>Node</td>
+<td>Node type, size and stroke width.</td>
+</tr>
+<tr>
+<td>Full Screen</td>
+<td>Whether to display the full screen icon at the upper-right corner to enable full screen in operation center.</td>
+</tr>
+</tbody>
+</table>
+
+### Histogram
+
+Accurately displays data distribution. You can distribute data to multiple sections, and integrate data distribution in each section.
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/appDesign/75.png" />
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Fitting Line</td>
+<td>Select the fitting line type.</td>
+</tr>
+<tr>
+<td>Full Screen</td>
+<td>Whether to display the full screen icon at the upper-right corner to enable full screen in operation center.</td>
+</tr>
+</tbody>
+</table>
+
+### Progress Bar
+
+<img width={450} src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/96.png" />
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Style</td>
+<td>Progress bar type.
+
+- **Horizontal Progress Bar** allows you to set whether to display the scales.
+- Both **Waterdrop Progress Bar** and **Circular Progress Bar** require only one data source.
+
+</td>
+</tr>
+<tr>
+<td>Chart Style</td>
+<td>Set the background color of the progress bar, and whether to enable full screen.</td>
+</tr>
+<tr>
+<td>Data Title</td>
+<td>Title style of the progress bar.</td>
+</tr>
+<tr>
+<td>Progress Value</td>
+<td>Progress style of the progress bar. You can also set it to be displayed inside each bar.</td>
+</tr>
+<tr>
+<td>Show Data</td>
+<td>Style of current and total data of each bar.</td>
+</tr>
+</tbody>
+</table>
+
+## Form Library
+
+This section describes general properties of form elements.
+
+### General Attributes
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/119.png" />
+
+- Attribute
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ID</td>
+<td>Automatically generated. You can use it for writing scripts.</td>
+</tr>
+<tr>
+<td>Component Name</td>
+<td>Element name. It cannot be repeated.</td>
+</tr>
+<tr>
+<td>X/Y</td>
+<td>Center coordinate of the element.</td>
+</tr>
+<tr>
+<td>W/H</td>
+<td>Width and height of the element.</td>
+</tr>
+<tr>
+<td>Display Level</td>
+<td>Relative display priority of the element. The higher the level, the more front the chart is displayed.</td>
+</tr>
+<tr>
+<td>Visible</td>
+<td>Set whether the element is visible in operation center.</td>
+</tr>
+<tr>
+<td>Selectable</td>
+<td>Set whether the element can be selected.</td>
+</tr>
+</tbody>
+</table>
+
+- Interaction: Set interaction events. For details, see <a href="Free Layout/Creating%20a%20Page#interaction">Interaction</a>.
+
+- Linkage: Link the data source with other elements to achieve linkage effect. For details, see <a href="../../../demo/Low%20Code%20Development/Data%20Linkage%20in%20Free%20Layout">Data Linkage in Free Layout</a> and <a href="../../../demo/Low%20Code%20Development/Data%20Linkage%20in%20Grid%20Layout">Data Linkage in Grid Layout</a>.
+
+
+### Line
+
+Used only for static display. The line is horizontal by default.
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/118.png" />
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Line Direction
+</td>
+<td>Select to display one side line of the rectangle you drew on the canvas after selecting <strong>Line</strong> from the left side. For example, set <strong>Line Direction</strong> to <strong>Left</strong>, a vertical line on the left side of the rectangle you drew is displayed.
+</td>
+</tr>
+<tr>
+<td>Line Style</td>
+<td>Line type, size and color.</td>
+</tr>
+<tr>
+<td>Display Loading</td>
+<td>Set whether to display loading animation in operation center.</td>
+</tr>
+</tbody>
+</table>
+
+
+### Label
+
+Mainly displays text and background.
+
+- Component Style
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/120.png" />
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Content Source</td>
+<td>
+
+- **Static Options**: Manually enter the label content.
+- **Dynamic Options**: Link a dynamic data source.
+
+</td>
+</tr>
+<tr>
+<td>Label Content</td>
+<td>
+
+- **Static Options**: Select the content text type and enter the label content.
+- **Dynamic Options**: Select a data source, a display field and data index as content.
+:::info what is data index
+Index of returned data. For example, the returned array is ['a','b','c','d'], when setting index to 0, 'a' is the label content.
+:::
+
+</td>
+</tr>
+<tr>
+<td>Content Style</td>
+<td>Content font family, size, weight, italic, unit, text alignment and color.</td>
+</tr>
+<tr>
+<td>Mouse Style</td>
+<td>Set cursor style when it hovers over the label in operation center.</td>
+</tr>
+<tr>
+<td>Required ID</td>
+<td>Set whether it is required. If it is, a red * is displayed in front.</td>
+</tr>
+<tr>
+<td>Beyond Truncation</td>
+<td>Whether to display more content that exceeds the label as <b>...</b>.</td>
+</tr>
+<tr>
+<td>Top/Right/Bottom/Left Fixed</td>
+<td>Fix the element (size and position) based on its left/right/top/bottom border, and remains the same for different resolution and page position.</td>
+</tr>
+<tr>
+<td>Display Loading</td>
+<td>Set whether to display loading animation in operation center.</td>
+</tr>
+</tbody>
+</table>
+
+- Refresh: Select whether to allow refresh and refresh frequency.
+- Background
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/121.png" />
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Background Color</td>
+<td>Set the label background color.</td>
+</tr>
+<tr>
+<td>Margin</td>
+<td>Distance between the label content and label window border on all 4 directions.</td>
+</tr>
+<tr>
+<td>Style</td>
+<td>Label window border line type, size and color.</td>
+</tr>
+</tbody>
+</table>
+
+### Hidden Field
+
+Visible in design center but not in operation center. Hidden area is often used for collecting or sending information and data delivery.
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/122.png" />
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Default Value</td>
+<td>Set the default value of the hidden area with a data type of string.</td>
+</tr>
+</tbody>
+</table>
+
+
+### Input Box
+
+As input parameters, often used to be linked with tables or reports for associated query.
+- Title: Set the title name and style of the input box, including title width, font family, size and color.
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/124.png" />
+
+- Component Style
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/123.png" />
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Placeholder</td>
+<td>Enter placeholder of the input box, and set its style.</td>
+</tr>
+<tr>
+<td>Verification Timing</td>
+<td>Set whether to apply verification to the element and time.</td>
+</tr>
+<tr>
+<td>Background Color</td>
+<td>Set background color of the input box, and set its style.</td>
+</tr>
+<tr>
+<td>The Maximum Length</td>
+<td>The maximum length of entered text.</td>
+</tr>
+<tr>
+<td>Multi-row</td>
+<td>Select input text lines between <strong>Single Row</strong> or <strong>Multi-row</strong>.</td>
+</tr>
+<tr>
+<td>Top/Right/Bottom/Left Fixed</td>
+<td>Fix the element (size and position) based on its left/right/top/bottom border, and remains the same for different resolution and page position.</td>
+</tr>
+<tr>
+<td>Read Only</td>
+<td>Set the read and write status of the element. When set to <strong>Read Only</strong>, you cannot edit it in operation center.</td>
+</tr>
+<tr>
+<td>Display Loading</td>
+<td>Set whether to display loading animation in operation center.</td>
+</tr>
+</tbody>
+</table>
+
+### Drop-down Box
+
+As input parameters, often used to be linked with tables or reports for associated query.
+- Options
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/125.png" />
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Dynamic Options</td>
+<td>Click <b>Bind data source</b> to select a dynamic data source as the drop-down options.</td>
+</tr>
+<tr>
+<td>Static Options</td>
+<td>Click <b>Add options</b> to manually enter options to be the drop-down list.</td>
+</tr>
+</tbody>
+</table>
+
+- Title: Set the title name and style of the drop-down box, including title width, font family, size and color.
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/124.png" />
+
+- Pagination: Select whether to display pagination and set page size.
+- Refresh: Select whether to allow refresh and refresh frequency.
+- Component Style
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/126.png" />
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Placeholder</td>
+<td>Enter placeholder of the drop-down box, and set its style.</td>
+</tr>
+<tr>
+<td>Verification Timing</td>
+<td>Set whether to apply verification to the element and time.</td>
+</tr>
+<tr>
+<td>Background Color</td>
+<td>Set background color of the drop-down box, and set its style.</td>
+</tr>
+<tr>
+<td>Top/Right/Bottom/Left Fixed</td>
+<td>Fix the element (size and position) based on its left/right/top/bottom border, and remains the same for different resolution and page position.</td>
+</tr>
+<tr>
+<td>Multiple Choice</td>
+<td>Whether to allow multiple choice for the drop-down box.</td>
+</tr>
+<tr>
+<td>Dynamic Search</td>
+<td>Whther to enable fuzzy matching when searching for options.</td>
+</tr>
+<tr>
+<td>Read Only</td>
+<td>Set the read and write status of the element. When set to <strong>Read Only</strong>, you cannot edit it in operation center.</td>
+</tr>
+<tr>
+<td>Display Loading</td>
+<td>Set whether to display loading animation in operation center.</td>
+</tr>
+</tbody>
+</table>
+
+### Cascader
+
+Provides related data sets for selection.
+
+- Options：Click **Bind data source** to add a data source for the cascader.
+- Title: Set the title name and style of the cascader, including title width, font family, size and color.
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/124.png" />
+
+- Refresh: Select whether to allow refresh and refresh frequency.
+- Component Style
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/127.png" />
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Style</td>
+<td>Set the style of cascader content.</td>
+</tr>
+<tr>
+<td>Verification Timing</td>
+<td>Set whether to apply verification to the element and time.</td>
+</tr>
+<tr>
+<td>Background Color</td>
+<td>Set background color of the cascader, and set its style.</td>
+</tr>
+<tr>
+<td>Read Only</td>
+<td>Set the read and write status of the element. When set to <strong>Read Only</strong>, you cannot edit it in operation center.</td>
+</tr>
+<tr>
+<td>Display Loading</td>
+<td>Set whether to display loading animation in operation center.</td>
+</tr>
+</tbody>
+</table>
+
+### Radio
+
+- Options
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/125.png" />
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Dynamic Options</td>
+<td>Click <b>Bind data source</b> to select a dynamic data source as radio options.</td>
+</tr>
+<tr>
+<td>Static Options</td>
+<td>Click <b>Add options</b> to manually enter options to be radio options.</td>
+</tr>
+</tbody>
+</table>
+
+- Title: Set the title name and style of the drop-down box, including title width, font family, size and color.
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/124.png" />
+
+- Refresh: Select whether to allow refresh and refresh frequency.
+- Component Style
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/128.png" />
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Text Style</td>
+<td>Font family, size and color of the radio option text.</td>
+</tr>
+<tr>
+<td>Verification Timing</td>
+<td>Set whether to apply verification to the element and time.</td>
+</tr>
+<tr>
+<td>Radio Type</td>
+<td>
+
+- **Conventional**: Traditional radio icon, and you can set the selected color for the icon.
+- **Button**: Change the option icon to buttons, and set the button styles.
+
+</td>
+</tr>
+<tr>
+<td>Top/Right/Bottom/Left Fixed</td>
+<td>Fix the element (size and position) based on its left/right/top/bottom border, and remains the same for different resolution and page position.</td>
+</tr>
+<tr>
+<td>Vertical Arrangement</td>
+<td>Whether to arrange all options vertically.</td>
+</tr>
+<tr>
+<td>Read Only</td>
+<td>Set the read and write status of the element. When set to <strong>Read Only</strong>, you cannot edit it in operation center.</td>
+</tr>
+<tr>
+<td>Display Loading</td>
+<td>Set whether to display loading animation in operation center.</td>
+</tr>
+</tbody>
+</table>
+ 
+### Checkbox
+
+- Options/Title/Refresh: Same as **Radio**.
+- Component Style
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/128.png" />
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Text Style</td>
+<td>Font family, size and color of the checkbox option text.</td>
+</tr>
+<tr>
+<td>Verification Timing</td>
+<td>Set whether to apply verification to the element and time.</td>
+</tr>
+<tr>
+<td>Select All</td>
+<td>Whether to allow selecting all options.</td>
+</tr>
+<tr>
+<td>Check Box</td>
+<td>
+
+- **Null**: No checkbox icon before options, and you can set the selected text and background color for the option.
+- **Have**: Checkbox icon before options, and set the selected option color.
+
+</td>
+</tr>
+<tr>
+<td>Top/Right/Bottom/Left Fixed</td>
+<td>Fix the element (size and position) based on its left/right/top/bottom border, and remains the same for different resolution and page position.</td>
+</tr>
+<tr>
+<td>Read Only</td>
+<td>Set the read and write status of the element. When set to <strong>Read Only</strong>, you cannot edit it in operation center.</td>
+</tr>
+<tr>
+<td>Display Loading</td>
+<td>Set whether to display loading animation in operation center.</td>
+</tr>
+</tbody>
+</table>
+
+### Date Picker
+
+As input parameters, often used to be linked with tables or reports for associated query. Input format can be date, time or date and time.
+
+- Title: Set the title name and style of the drop-down box, including title width, font family, size and color.
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/124.png" />
+
+- Component Style
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/130.png" />
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Text Style</td>
+<td>Font family, size and color of the selected date text.</td>
+</tr>
+<tr>
+<td>Verification Timing</td>
+<td>Set whether to apply verification to the element and time.</td>
+</tr>
+<tr>
+<td>Date Type</td>
+<td>Select the date type, and set corresponding <b>Date Format</b> and <b>Initial Value</b>.</td>
+</tr>
+<tr>
+<td>Background Color</td>
+<td>Set background color of the date picker, and set its style.</td>
+</tr>
+<tr>
+<td>Top/Right/Bottom/Left Fixed</td>
+<td>Fix the element (size and position) based on its left/right/top/bottom border, and remains the same for different resolution and page position.</td>
+</tr>
+<tr>
+<td>Read Only</td>
+<td>Set the read and write status of the element. When set to <strong>Read Only</strong>, you cannot edit it in operation center.</td>
+</tr>
+<tr>
+<td>Display Loading</td>
+<td>Set whether to display loading animation in operation center.</td>
+</tr>
+</tbody>
+</table>
+
+### Button
+
+Triggers click events, such as click to search and click to open another page.
+
+- Component Style
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/131.png" />
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Text</td>
+<td>Enter the text displayed on the button and set its styles.</td>
+</tr>
+<tr>
+<td>Background Color</td>
+<td>Set background color of the date picker, and set its style.</td>
+</tr>
+<tr>
+<td>Icon</td>
+<td>Select the icon displayed before the button text, and set the icon size and position.</td>
+</tr>
+<tr>
+<td>Top/Right/Bottom/Left Fixed</td>
+<td>Fix the element (size and position) based on its left/right/top/bottom border, and remains the same for different resolution and page position.</td>
+</tr>
+<tr>
+<td>Print Hidden</td>
+<td>Whether to hide the button when printing.</td>
+</tr>
+<tr>
+<td>Display Loading</td>
+<td>Set whether to display loading animation in operation center.</td>
+</tr>
+<tr>
+<td>Enabled</td>
+<td>Whether to disable the button.</td>
+</tr>
+</tbody>
+</table>
+
+- Button Group Configuration
+
+By switching between multiple buttons, you can use one process
+workflow or graphic group to display different data.
+
+
+:::info
+The button group function is only available for graphic elements.
+:::
+
+1. Select graphic elements and then set their dynamic effects. For details, see <a href="Dynamic Effect">Dynamic Effect</a>.
+2. Select those graphic elements, and then right-click to group them.
+3. Add a button on the canvas.
+4. Click the button, and then click <strong>Configure Point Groups</strong> under  <strong>Interact</strong>.
+5. Click <strong>Configure</strong> in the pop-up window, and then select a data source to replace the original one. Do the same for multiple buttons.
+<img width={450} src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/appDesign/97.png" />
+
+6. After configuration, you can click different buttons to view corresponding data and dynamic effects in operation center.
+
+### Tree
+
+Displays hierarchical relations between equipment. Generally the tree element is used together with factory models. You need to write script for each node on the tree to link with designed pages.
+
+:::info
+Make sure you have installed factory model APP in the supOS platform before binding a tree element with a factory model.
+:::
+
+- Data Source: Data source for tree element display.
+- Title: Tree title.
+- Refresh: Select whether to allow refresh and refresh frequency.
+- Component Style
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/132.png" />
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Selected Background</td>
+<td>Background color of selected node.</td>
+</tr>
+<tr>
+<td>Selected Color</td>
+<td>Text color of selected node.</td>
+</tr>
+<tr>
+<td>Selected Font</td>
+<td>Text font size of selected node.</td>
+</tr>
+<tr>
+<td>Top/Right/Bottom/Left Fixed</td>
+<td>Fix the element (size and position) based on its left/right/top/bottom border, and remains the same for different resolution and page position.</td>
+</tr>
+<tr>
+<td>Search</td>
+<td>Whether to add search box for the tree element.</td>
+</tr>
+<tr>
+<td>Expand</td>
+<td>Whether to expand the tree in operation center.</td>
+</tr>
+<tr>
+<td>Selected by default</td>
+<td>Whether to select the root node by default.</td>
+</tr>
+<tr>
+<td>Display Loading</td>
+<td>Set whether to display loading animation in operation center.</td>
+</tr>
+</tbody>
+</table>
+
+### Single List
+
+Switch and display multiple pages in the form of parallel menus.
+
+- Data Source: Select a data source with multiple fields for the list, and select one field for display.
+- Title: List title and its styles.
+- Refresh: Select whether to allow refresh and refresh frequency.
+- Component Style
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/133.png" />
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Style</td>
+<td>List text style, including font family, size, weight, italic, alignment and color.</td>
+</tr>
+<tr>
+<td>Background Color</td>
+<td>Background color of the list.</td>
+</tr>
+<tr>
+<td>Selected Color</td>
+<td>Background color of selected item.</td>
+</tr>
+<tr>
+<td>Border</td>
+<td>Border line type, width and color.</td>
+</tr>
+<tr>
+<td>Row Height</td>
+<td>Height of each item row.</td>
+</tr>
+<tr>
+<td>Confirm Icon</td>
+<td>Whether to display a confirm icon, and you can upload other icons.</td>
+</tr>
+</tbody>
+</table>
+
+### Table
+
+Displays large amount of structured data and often linked with buttons, input boxes for data linkage. The data source can be database tables or services of the bound object properties. You can integrate, search for and export important system and on-site data.
+
+:::info
+Data inside table cells can be links, buttons, images or time.
+:::
+- Data Source: Data source for table display.
+- Title: Table title and its styles.
+- Header
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/134.png" />
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Background Color</td>
+<td>Header background color and header text font family, size and color.</td>
+</tr>
+<tr>
+<td>Runtime Display</td>
+<td>Whether to allow adjusting header items in operation center by displaying a drop-down list at the upper-right corner.</td>
+</tr>
+<tr>
+<td>Add Header</td>
+<td>Manullay add header or select header from the added data source fields.</td>
+</tr>
+<tr>
+<td>Fixed Header</td>
+<td>Freeze the table header.</td>
+</tr>
+</tbody>
+</table>
+
+:::info about adding header
+<img width={450} src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/138.png" />
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Field/Display name</td>
+<td>Set the field name and display name on the table.</td>
+</tr>
+<tr>
+<td>Width</td>
+<td>Column width on the table. If left empty, all columns will be the same width.</td>
+</tr>
+<tr>
+<td>Alignment</td>
+<td>The text alignment of both table header and body.</td>
+</tr>
+<tr>
+<td>Display tips</td>
+<td>Whether to display tips when cell content exceeds the column width and mouse hovering over it.</td>
+</tr>
+<tr>
+<td>Data Type</td>
+<td>Data type of the current column.</td>
+</tr>
+<tr>
+<td>Data Rendering</td>
+<td>
+
+Enter functions to render original data. Input parameters are `text` (current data), `row` (current row), `index` (subscript of current row), `tableData` (all data of current table). For example,
+```js
+ function(text,row,index,table)
+ {
+    return text; //return the rendered data
+    }
+```
+
+</td>
+</tr>
+<tr>
+<td>Filter</td>
+<td>Whether to enable filter on the table. You can add multiple keywords or conditions to specify the search.
+
+- Unavailable for data source from services or SQL query.
+- If one field is configured with both filter and data linkage, filter takes priority.
+
+</td>
+</tr>
+<tr>
+<td>Backend Sorting</td>
+<td>Whether to enable sorting. Unavailable for data source from services or SQL query.</td>
+</tr>
+<tr>
+<td>Default display at runtime</td>
+<td>Whether to display the current field by default in operation center.</td>
+</tr>
+</tbody>
+</table>
+:::
+
+- Table Body
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/135.png" />
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Background Color</td>
+<td>Set background color of the table body, and set the table content style.</td>
+</tr>
+<tr>
+<td>Single Row Color/Double-line Color</td>
+<td>Set the background color of the table odd and even rows.</td>
+</tr>
+<tr>
+<td>Selected Line Color</td>
+<td>Background color of selected rows.</td>
+</tr>
+<tr>
+<td>Scroll Bar Background</td>
+<td>Background color of the scroll bar.</td>
+</tr>
+<tr>
+<td>Border/Outer Border</td>
+<td>Select whether the table has both inner and outer border and set their styles.</td>
+</tr>
+<tr>
+<td>Table Height</td>
+<td>Height of table columns.</td>
+</tr>
+<tr>
+<td>Optional</td>
+<td>Whether to allow selecting columns on the table.</td>
+</tr>
+<tr>
+<td>Column Width Adjustment</td>
+<td>Whether to allow adjusting column width in operation center. Width will restore to the original once refreshing the page.</td>
+</tr>
+</tbody>
+</table>
+
+- Pagination
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/136.png" />
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Page Size</td>
+<td>Number of items displayed on one page.</td>
+</tr>
+<tr>
+<td>Pagination Position</td>
+<td>Where the page number is displayed.</td>
+</tr>
+<tr>
+<td>Page Jump</td>
+<td>Whether to allow jumping between pages.</td>
+</tr>
+<tr>
+<td>Dynamic Number of Items</td>
+<td>Whether to allow changing the number of items on each page in operation center.</td>
+</tr>
+<tr>
+<td>Pagination Size</td>
+<td>Size of pagination modules.</td>
+</tr>
+<tr>
+<td>Background/Text Color/Selected</td>
+<td>Color of the pagination modules, text and selected page.</td>
+</tr>
+</tbody>
+</table>
+
+- Refresh: Select whether to allow refresh and refresh frequency.
+- Component Style
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/137.png" />
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Import/Export</td>
+<td>Whether to allow import and export table data.
+
+:::info
+- For tables that have primary keys, with same keys, the import data replace the original data. Enter NULL for primary key, corresponding data will be deleted.
+- For tables that have no primary keys, the import data will be added to the corresponding database.
+- Make sure fields in the import file are the same as that in the corresponding database. Otherwise, the import will fail.
+:::
+
+</td>
+</tr>
+<tr>
+<td>Style</td>
+<td>Set the import and export button styles.</td>
+</tr>
+<tr>
+<td>Toolbar</td>
+<td>Set the background color of the toobar which contains the import and export buttons.</td>
+</tr>
+<tr>
+<td>Import and export complex mode</td>
+<td>Necessary for import and export when the data source is a service, and corresponding paths are required.</td>
+</tr>
+<tr>
+<td>Top/Right/Bottom/Left Fixed</td>
+<td>Fix the element (size and position) based on its left/right/top/bottom border, and remains the same for different resolution and page position.</td>
+</tr>
+<tr>
+<td>Display Loading</td>
+<td>Set whether to display loading animation in operation center.</td>
+</tr>
+</tbody>
+</table>
+
+### Picture
+
+Uploads pictures for display. General image types are supported and you can directly drag them to the designer.
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/139.png" />
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Type</td>
+<td>
+
+- **Image**: Upload an image.
+- **Solid Color**: Cover the element with solid color.
+
+</td>
+</tr>
+<tr>
+<td>Image Path</td>
+<td>Automatically generated when uploading pictures. You can also manually enter corresponding URL.</td>
+</tr>
+<tr>
+<td>
+Aspect Ratio
+</td>
+<td>
+Background image display.
+<ul >
+<li><strong>No Scaling</strong>: Displays the image as it is.</li>
+<li><strong>Width-based</strong>: Stretches the image in equal proportion with the same width as the block.</li>
+<li><strong>Height-based</strong>: Stretches the image in equal proportion with the same height as the block.</li>
+<li><strong>Bespread</strong>: The background image covers the whole block.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+
+### Tabs
+
+Used for switching between multiple tabs.
+- Options
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/140.png" />
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Text Style</td>
+<td>Tab name styles, including font family, size and color.</td>
+</tr>
+<tr>
+<td>Dynamic Options</td>
+<td>Click <b>Bind data source</b> to select a dynamic data source as radio options.</td>
+</tr>
+<tr>
+<td>Static Options</td>
+<td>Click <b>Add options</b> to manually enter options to be radio options.</td>
+</tr>
+</tbody>
+</table>
+
+- Refresh: Select whether to allow refresh and refresh frequency.
+- Component Style: Set whether to display loading animation in operation center.
+
+### Upload
+
+Set the interaction event of the element to <strong>Upload Complete</strong>, and write corresponding script. In operation center, you can directly click the <strong>Upload</strong> button to upload files.
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/141.png" />
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Button Text</td>
+<td>Enter the text on the button.</td>
+</tr>
+<tr>
+<td>Verification Timing</td>
+<td>Set whether to apply verification to the element and time.</td>
+</tr>
+<tr>
+<td>Upload Type</td>
+<td>Select the supported file type, and corresponding code will be displayed under <b>Format Options</b>.</td>
+</tr>
+<tr>
+<td>List Type</td>
+<td>Types of the uploaded file list.</td>
+</tr>
+<tr>
+<td>Limited Quantity</td>
+<td>The upper limit of uploaded files.</td>
+</tr>
+<tr>
+<td>Multiple Choice</td>
+<td>Whether to allow multiple choice for the drop-down box.</td>
+</tr>
+<tr>
+<td>Display List</td>
+<td>Whether to display uploaded files.</td>
+</tr>
+<tr>
+<td>Read Only</td>
+<td>Set the read and write status of the element. When set to <strong>Read Only</strong>, you cannot edit it in operation center.</td>
+</tr>
+<tr>
+<td>Display Loading</td>
+<td>Set whether to display loading animation in operation center.</td>
+</tr>
+</tbody>
+</table>
+
+### Bread Crumbs
+
+Displays the current page hierarchy. Generally used in multi-level navigation.
+
+:::info
+Bread crumbs depend on script configuration to render and interaction events to interact.
+:::
+
+### Search
+
+Allows user to search for contents in need. Fuzzy match is available.
+
+- Title: Set the title name and style of the search box, including title width, font family, size and color.
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/124.png" />
+
+- Data Source
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/142.png" />
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Data Interface</td>
+<td>
+
+- **Object Service**: Click **Add data source** to add an entity or form service, or an SQL query.
+- **Data Link**: Enter the **Request URL** and **Request Method** to get the data.
+
+</td>
+</tr>
+<tr>
+<td>Search Filed</td>
+<td>Search field key corresponding to the data source.</td>
+</tr>
+<tr>
+<td>Count Field</td>
+<td>Number of results field key corresponding to the data source.</td>
+</tr>
+<tr>
+<td>Display Count</td>
+<td>Number of results to be displayed.</td>
+</tr>
+<tr>
+<td>Display Field</td>
+<td>Field corresponding to the results.</td>
+</tr>
+</tbody>
+</table>
+
+- Component Style
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/143.png" />
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Placeholder</td>
+<td>Enter placeholder of the search box, and set its style.</td>
+</tr>
+<tr>
+<td>Background Color</td>
+<td>Set background color of the search box, and set its style.</td>
+</tr>
+<tr>
+<td>Display Loading</td>
+<td>Set whether to display loading animation in operation center.</td>
+</tr>
+</tbody>
+</table>
+
+:::info
+Make sure the corresponding fields used in request address, method, search field, count field, display count, display field are the same as the data source.
+:::
+
+### Date
+
+Displays the current date.
+
+- Style Format: Displayed date style and format.
+- Background: Background color, filleted corner size, border width and color of the element.
+
+### Time
+
+Displays the current time.
+
+- Style Format: Displayed time style and format.
+- Background: Background color, filleted corner size, border width and color of the element.
+
+## Controls Library
+
+### General Attributes
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/144.png" />
+
+- Attribute
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ID</td>
+<td>Automatically generated. You can use it for writing scripts.</td>
+</tr>
+<tr>
+<td>Component Name</td>
+<td>Element name. It cannot be repeated.</td>
+</tr>
+<tr>
+<td>X/Y</td>
+<td>Center coordinate of the element.</td>
+</tr>
+<tr>
+<td>W/H</td>
+<td>Width and height of the element.</td>
+</tr>
+<tr>
+<td>Display Level</td>
+<td>Relative display priority of the element. The higher the level, the more front the chart is displayed.</td>
+</tr>
+<tr>
+<td>Selectable</td>
+<td>Set whether the element can be selected.</td>
+</tr>
+</tbody>
+</table>
+
+- Interaction: Set interaction events. For details, see <a href="Free Layout/Creating%20a%20Page#interaction">Interaction</a>.
+
+- Linkage: Link the data source with other elements to achieve linkage effect. For details, see <a href="../../../demo/Low%20Code%20Development/Data%20Linkage%20in%20Free%20Layout">Data Linkage in Free Layout</a> and <a href="../../../demo/Low%20Code%20Development/Data%20Linkage%20in%20Grid%20Layout">Data Linkage in Grid Layout</a>.
+
+### Real-Time Alarm and History Alarm
+
+Both alarm elements automatically link with the set alarms in object instances.
+
+- Real-time alarm: When an alarm is triggered, you can confirm the alarm information in operation center.
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/appDesign/98.png"/>
+
+- History alarm: You can view all history alarms in time descending order.
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/appDesign/99.png"/>
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Basic Configuration</td>
+<td>Set the background color of the bottom control bar, alarm list and top title bar and title text color.</td>
+</tr>
+<tr>
+<td>Refresh</td>
+<td>Select whether to allow refresh and refresh frequency.</td>
+</tr>
+</tbody>
+</table>
+
+### Drive Video
+
+Displays real-time video and video playback is available.
+
+- Real Time
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/145.png" />
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Autoplay</td>
+<td>Whether to play the video automatically when browsing the page.</td>
+</tr>
+<tr>
+<td>Video Carousel</td>
+<td>Whether to enable playing added videos in turn and repeatedly. Click <b>Add video</b> to add up to 5 video sources, and set the playing peroid.</td>
+</tr>
+<tr>
+<td>Collector</td>
+<td>Select the collector that collects the video source.</td>
+</tr>
+<tr>
+<td>Video Object</td>
+<td>Object instance that represents the video source.</td>
+</tr>
+</tbody>
+</table>
+
+- Playback
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/146.png" />
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Collector</td>
+<td>Select the collector that collects the playback video source.</td>
+</tr>
+<tr>
+<td>Video Object</td>
+<td>Object instance that represents the playback video source.</td>
+</tr>
+</tbody>
+</table>
+
+### Video Wall
+
+Binds with multiple video elements and arranges them. You can switch real-time video and history video on each video element in operation center.
+
+- Layout: Set the number of rows and columns on the video wall.
+Title: Set the title name and style of the video wall.
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/147.png" />
+
+- Real Time
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/145.png" />
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Autoplay</td>
+<td>Whether to play the video automatically when browsing the page.</td>
+</tr>
+<tr>
+<td>Video Carousel</td>
+<td>Whether to enable playing added videos in turn and repeatedly. Click <b>Add video</b> to add up to 5 video sources, and set the playing peroid.</td>
+</tr>
+<tr>
+<td>Collector</td>
+<td>Select the collector that collects the video source.</td>
+</tr>
+<tr>
+<td>Video Object</td>
+<td>Object instance that represents the video source.</td>
+</tr>
+</tbody>
+</table>
+
+- Playback
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/146.png" />
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Collector</td>
+<td>Select the collector that collects the playback video source.</td>
+</tr>
+<tr>
+<td>Video Object</td>
+<td>Object instance that represents the playback video source.</td>
+</tr>
+</tbody>
+</table>
+
+### Video
+
+Plays uploaded videos.
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/148.png" />
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Autoplay</td>
+<td>Whether to play the video automatically when browsing the page.</td>
+</tr>
+<tr>
+<td>Video Carousel</td>
+<td>Whether to enable playing added videos in turn and repeatedly. Click <b>Add video</b> to add up to 5 video sources, and set the playing peroid.</td>
+</tr>
+<tr>
+<td>Select video</td>
+<td>Select or upload videos.</td>
+</tr>
+</tbody>
+</table>
+
+### Timer
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/149.png" />
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Time Interval</td>
+<td>Interval of timer execution.</td>
+</tr>
+<tr>
+<td>Execution Count</td>
+<td>Number of time execution.</td>
+</tr>
+<tr>
+<td>Run Script</td>
+<td>Select to run refresh or custom scripts to achieve certain functions.</td>
+</tr>
+<tr>
+<td>Immediate Execution</td>
+<td>The script will be immediately executed after component loading. Enable it and 1 time will be deducted from the <b>Execution Count</b>.</td>
+</tr>
+</tbody>
+</table>
+
+### Trend Chart
+
+Binds multiple data sources and records data points at a set time interval to form a trend chart. The trend is dynamically refreshed.
+
+:::info
+In free layout, trend parameters configured in operation center are saved immediately, but not in grid layout.
+:::
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/150.png" />
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Select data source</td>
+<td>Select a numeric data source. You can select up to 8 data sources and configure different line styles, colors and ranges for them.</td>
+</tr>
+<tr>
+<td>Display name</td>
+<td>Select the name for the data source displayed on the trend chart when hovered over.</td>
+</tr>
+<tr>
+<td>Y-Axis Display</td>
+<td>Select from <strong>Quantities</strong> and <strong>Percentage</strong>. Percentage converts from quantity automatically.</td>
+</tr>
+<tr>
+<td>Single Y-Axis</td>
+<td>Enable it to display only one range of Y axis and it integrates all data sources, meaning the upper/lower limit of a single Y axis is the highest/lowest limit from all data sources.
+
+:::info
+When it is disabled, ranges of all data sources will be displayed on the Y axis interchangeably according to the current selected data source.
+:::
+
+</td>
+</tr>
+<tr>
+<td>Range Adaptation</td>
+<td>The Y axis adapts its range according to data value.</td>
+</tr>
+<tr>
+<td>Time Span</td>
+<td>Time period that the trend chart covers. The default is 8 hours.</td>
+</tr>
+<tr>
+<td>List Mode</td>
+<td>Select to display multiple properties that are currently opened in tiles or lists.
+
+:::info
+By default, only two rows are displayed, and you can scroll to view more.
+:::
+
+</td>
+</tr>
+<tr>
+<td>Style</td>
+<td>Set colors of chart background, aixs line, border, slider and scale font.</td>
+</tr>
+<tr>
+<td>Display toolbar</td>
+<td>Whether to display toolbar at the bottom.</td>
+</tr>
+</tbody>
+</table>
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/151.png" />
+
+### Report
+
+Data sources of report element can be object instances, templates, service real-time data or relational database, and database can either be from third-party or manually creation. The report element is often linked with buttons, search boxes, input boxes to search for and export important data.
+
+#### Attribute Configuration
+
+- Basic Configuration
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/169.png" />
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Fill Type</td>
+<td>
+ 
+- <strong>Replace</strong>: Original data is replaced when filling the bound data source.
+- <strong>Insert</strong>: A new column or row is added when filling the bound data source.
+
+</td>
+</tr>
+<tr>
+<td>Scroll Bar</td>
+<td>Set display mode of the scroll bar. When setting to <strong>Automatic</strong>, data
+inside the report exceeds the element width and the scroll bar is displayed.</td>
+</tr>
+<tr>
+<td>Background Color</td>
+<td>Set background color of the element.</td>
+</tr>
+<tr>
+<td>Runtime Editing</td>
+<td>You can edit the report in operation center. Often used when you need to fill in the report.</td>
+</tr>
+<tr>
+<td>Initial Load</td>
+<td>Whether to enable automatic loading of the report data in operation center.</td>
+</tr>
+<tr>
+<td>Top/Right/Bottom/Left Fixed</td>
+<td>Fix the element (size and position) based on its left/right/top/bottom border, and remains the same for different resolution and page position.</td>
+</tr>
+<tr>
+<td>Scaling (Small)/Scaling (Large)</td>
+<td>Font size in the report adapts to the resolution when it increases/decreases.</td>
+</tr>
+<tr>
+<td>Sheet Page</td>
+<td>Displays sheets on the bottom.</td>
+</tr>
+<tr>
+<td>Default Pane</td>
+<td>Whether to enable default parent cell when adding data source.</td>
+</tr>
+</tbody>
+</table>
+
+- Mobile: Set the display mode of the report on mobile clients, and it adapts to the client resolution.
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/170.png" />
+
+:::info more about report
+For more operations on report, see <a href="../../../demo/Low%20Code%20Development/Operations%20on%20Report">Operations on Report</a>.
+:::
+
+### Web Page
+
+Displays other web pages, designed pages through attributes or services and supOS static resource links.
+
+- Web Page
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/152.png"/>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Dynamic Options</td>
+<td>Click <b>Bind data source</b> to select a dynamic data source as the web page link.</td>
+</tr>
+<tr>
+<td>Static Options</td>
+<td>Manually enter a web page link.</td>
+</tr>
+<tr>
+<td>Margin</td>
+<td>Distance between the webpage and the element border.</td>
+</tr>
+<tr>
+<td>Padding</td>
+<td>Distance between the webpage content and the webpage border.</td>
+</tr>
+<tr>
+<td>Background</td>
+<td>Background color, border line type, width and color of the webpage.</td>
+</tr>
+<tr>
+<td>Sandbox</td>
+<td>Whether to enable a sandbox to test the web page.</td>
+</tr>
+<tr>
+<td>De-Iframe</td>
+<td>Enable it and the set pop-up windows are prompted in local browser; if disabled, they are prompted inside the element.</td>
+</tr>
+</tbody>
+</table>
+
+- Refresh: Select whether to allow refresh and refresh frequency.
+- Title: Set whether to display title and title styles, and margin from all sides.
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/153.png"/>
+
+
+### Carousel
+
+Binds multiple web pages or images by url and play them in cycles at the set time interval.
+
+- Settings
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/154.png"/>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Carousel Frequency</td>
+<td>Time interval between turns of video carousel.</td>
+</tr>
+<tr>
+<td>Forced Carousel</td>
+<td>Whether to allow video to keep playing when hovered over.</td>
+</tr>
+<tr>
+<td>Play Source</td>
+<td>Select images, webpages or supOS internal pages to play.</td>
+</tr>
+<tr>
+<td>URL</td>
+<td>Click <img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/157.png"/> to add a URL of an image or webpage. Up to 20 URLs can be added to the carousel.</td>
+</tr>
+</tbody>
+</table>
+
+- Style
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/155.png"/>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Border</td>
+<td>Border line type, width amd color.</td>
+</tr>
+<tr>
+<td>Page-turning Arrow</td>
+<td>Whether to display the arrow for page turning which allows user to flip pages by clicking the arrow in operation center.</td>
+</tr>
+<tr>
+<td>Carousel Page Number</td>
+<td>Whether to display page symbols in operation center. You can click the symbol to turn pages.</td>
+</tr>
+<tr>
+<td>Preload</td>
+<td>Enable it and all pages will be loaded during initialization in operation center. If not enabled, only the first two pages are loaded.</td>
+</tr>
+</tbody>
+</table>
+
+### Calendar
+
+Bind with object services and you can link announcements with the calendar element to remind users. The announcements can be to do tasks or other notifications.
+
+- Basic Settings
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/156.png"/>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Calendar Type</td>
+<td>Select the displayed calendar type.</td>
+</tr>
+<tr>
+<td>Selected by default</td>
+<td>Set the calendar type that is selected and displayed by default.</td>
+</tr>
+<tr>
+<td>Background Color/Body Font</td>
+<td>Calendar background color and text font family.</td>
+</tr>
+</tbody>
+</table>
+
+- Top Style
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/158.png"/>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Date Size</td>
+<td>Size and color of the year at the upper-left corner</td>
+</tr>
+<tr>
+<td>Button Size</td>
+<td>Size and text color of the buttons at the upper-right corner.</td>
+</tr>
+<tr>
+<td>Button Style</td>
+<td>Button background color, selected button text color and selected button background color.</td>
+</tr>
+</tbody>
+</table>
+
+- Head Style: Weekday styles, including font family, size, color and background color, under weekly and monthly calendars.
+- Body Style
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/159.png"/>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Font Size/Background Color</td>
+<td>Font size and background color of each day/month on the calendar.</td>
+</tr>
+<tr>
+<td>Selected Size/Selected Background</td>
+<td>Font size and background color of the selected day/month.</td>
+</tr>
+<tr>
+<td>Background Of The Day/Color Of The Day</td>
+<td>Background color and font color of the current day.</td>
+</tr>
+</tbody>
+</table>
+
+- Notice: Set the style of notices that are linked with calendar through binding object services.
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/160.png"/>
+
+- Refresh: Select whether to allow refresh and refresh frequency.
+
+### Programmable Component
+
+Design custom elements by writing scripts. For details on building local development enviornment, see <a href="../../../demo/Low%20Code%20Development/Programmable%20Component">Progammable Component</a>.
+
+### To Do List
+
+Automatically links with workflows of the current APP, and you can manage all your to-do items through this element.
+
+
+**List Description**
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/161.png"/>
+
+- My To-do List: Displays to do tasks of user.
+- My Completed Tasks: Displays tasks submitted by user.
+- My Request: Displays tasks initiated by user and the current progress can be viewed.
+- My Subscription: Displays tasks subscribed by user and the current progress can be viewed.
+- My Consignation: Displays tasks entrusted by user and it can be cancelled.
+
+:::info
+Click process links to go to the corresponding workflow details page.
+:::
+
+**Data Configuration**
+
+- Options <br/>
+You can set the content displayed on each list. The table below takes to do list as an example.
+
+1. Under **Attribute List**, click <img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/appDesign/78.png" /> to display the item on the list.
+2. Click <img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/appDesign/79.png" /> to set the style of the corresponding field.
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/162.png" />
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Name</td>
+<td>Attribute name displayed on the list.</td>
+</tr>
+<tr>
+<td>Value</td>
+<td>Name of a component that is on pages related to a workflow.</td>
+</tr>
+<tr>
+<td>Column Width</td>
+<td>Column width of the current attribute on the list.</td>
+</tr>
+<tr>
+<td>Font</td>
+<td>Font color, size and family displayed on the list.</td>
+</tr>
+<tr>
+<td>Popup</td>
+<td>Whether to enable popup window for the current attribute, and set its title and window size.</td>
+</tr>
+<tr>
+<td>Link Page</td>
+<td>Select a page displayed on the popup window.</td>
+</tr>
+<tr>
+<td>Page Parameters</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+
+3. Click **Add custom attributes** to display other custom attributes of the APP on the list. Make sure to enter <strong>Component ID</strong> of an element on the APP in <strong>Value</strong> box to link corresponding data.
+
+- Component Style
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/163.png" />
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PageSize</td>
+<td>Set the number of items displayed on each page.</td>
+</tr>
+<tr>
+<td>Vertical Border</td>
+<td>Set whether vertical border exists and its width, color and type.</td>
+</tr>
+<tr>
+<td>Header Background</td>
+<td>Set the background color, text font family, size and color of the table header.</td>
+</tr>
+<tr>
+<td>Table Background</td>
+<td>Set the background color of the table body.</td>
+</tr>
+<tr>
+<td>Single/Double Row Color</td>
+<td>Background color of odd/even rows on the table.</td>
+</tr>
+<tr>
+<td>Adaptive Column Width</td>
+<td>Whether the column width is adaptive to its parent window.</td>
+</tr>
+</tbody>
+</table>
+
+
+## Graphic Library
+
+The supOS platform provides multiple graphic elements to form different industrial process flowchart. With dynamic effects, you can directly view equipment status through flowcharts.
+
+- General Attributes
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/165.png" />
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>X/Y</td>
+<td>Center coordinate of the element.</td>
+</tr>
+<tr>
+<td>W/H</td>
+<td>Width and height of the element.</td>
+</tr>
+<tr>
+<td>Rotate</td>
+<td>Rotation angle of the shapes, and you click icons to directly flip them.</td>
+</tr>
+<tr>
+<td>Layer</td>
+<td>The layer where the shape is displayed.</td>
+</tr>
+<tr>
+<td>Visible</td>
+<td>Set whether the element is visible in operation center.</td>
+</tr>
+<tr>
+<td>Selectable</td>
+<td>Set whether the element can be selected.</td>
+</tr>
+</tbody>
+</table>
+
+- Interaction: Set interaction events. For details, see <a href="Free Layout/Creating%20a%20Page#interaction">Interaction</a>.
+
+- Linkage: Link the data source with other elements to achieve linkage effect. For details, see <a href="../../../demo/Low%20Code%20Development/Data%20Linkage%20in%20Free%20Layout">Data Linkage in Free Layout</a>.
+
+### Shapes
+
+Contains irregular shape, circle, rectangle, oval, rounded rectangle, polygon, custom shape, triangle, star and arc.
+
+:::tip
+For irregular shapes, double-click the last point and then double-click the canvas to finish drawing.
+:::
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/164.png" />
+
+- Basic Attributes
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Diameter</td>
+<td>Circle diameter. For circles only.</td>
+</tr>
+<tr>
+<td>Graphics</td>
+<td>Shape of the custom shape element.</td>
+</tr>
+<tr>
+<td>Number of edges</td>
+<td>Edges of a polygon. For polygons only.</td>
+</tr>
+<tr>
+<td>Starting/End Angle</td>
+<td>Start and end angle of the arc. For arcs only.</td>
+</tr>
+<tr>
+<td>Fillet Radius</td>
+<td>Filleted corner size of the rounded rectangle. For rounded rectangles only.</td>
+</tr>
+</tbody>
+</table>
+
+- Fill: Select the filling color of the shape from **Solid Color** and **Gradient**. For **Gradient**, start and end colors, and gradient type are required.
+- Border: Set whether to display borders of shapes, and their width, color and type.
+- Label: Set whether to display a label at the upper-right corner of shapes, and set the content, content style and background color.
+- Hotspot: Once enabled, **Fill** color is invalid, and the set hotspot color will be displayed on shape border in operation center when hovered over. For irregular shapes only. 
+
+:::info
+You can set dynamic effects for shapes. For details, see<a href="Dynamic Effect">Dynamic Effect</a>.
+:::
+
+
+### Text
+
+- Character
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/166.png" />
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Text</td>
+<td>Content and style of the text.</td>
+</tr>
+<tr>
+<td>Row Height</td>
+<td>Line height when wrapping the text.</td>
+</tr>
+<tr>
+<td>Vertical Text</td>
+<td>Whether to display text vertically.</td>
+</tr>
+</tbody>
+</table>
+
+- Fill: Background color of the text.
+- Label: Set whether to display a label at the upper-right corner of the text box, and set the content, content style, background color and border style.
+
+### Edge
+
+Connects two graphic elements together. 
+1. Drag 2 graphic elements to the canvas.
+2. Click the **Edge** element, and then click on one graphic element and connect to another one.
+3. Select the connection line, and then set its attributes such as display layer, style and label on the right side.
+4. (optional) Double-click the connection line to add breaking points to it.
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/167.png" />
+
+### Image
+
+Click **Upload image** on the right side under **Fill** to add an image to the canvas. You can set labels for it too.
+
+### Pipe
+
+Select the pipe element, and then click on the canvas, double-click the last point to finish drawing.
+
+- Thickness: Defines the pipeline thickness.
+- Fill: Set the pipe color and center color as highlight.
+- Border: Set the pipe border width and color.
+- Label: Set whether to display a label at the upper-right corner of the pipe, and set the content, content style, background color and border style.
+
+
+### Data Connection
+
+Binds with numeric object property or expressions to display the real-time data of tags. When bound with an object property, you can right-click the element to view the trend chart of tag data in operation center.
+
+#### Attribute Configuration
+- Character: Set the data value style and line height for multiple lines.
+- Equipment Vibration Analysis: Enter the link of a third-party device vibration analysis spectrogram, and it will be displayed in operation center when viewing a single point trend from the data link element.
+- Fill: Set the pipe color and center color as highlight.
+- Label: Set whether to display a label at the upper-right corner of the element, and set the content, content style, background color and border style.
+
+#### Data Source Configuration
+
+1. Double-click the element, and then select an object property or write an expression to be the data source.
+2. Set the data integer digits and decimal places.
+
+:::info
+When the set <strong>Integer Digits</strong> are more than that of the selected data, the data will be compensated with 0. If less, the data will be displayed as it is. For example, the data is 352.69, <strong>Integer Digits</strong> is set to 5, the data is displayed as 00352.69. If <strong>Integer Digits</strong> is set to 2, the data is displayed as 352.69.
+:::
+
+3. Select the display name of the data in operation center.
+4. Select whether to display data value, unit and tag status in operation center.
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/supos/168.png"/>
+
+### Line Segment
+
+Draw line segments on the canvas. You can only draw a horizontal line and turn it around through <img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/appDesign/24.png" /> on the edge.
+
+- Length: Set the line length.
+- Style: Set the line width, typw and arrow direction.
+- Label: Set whether to display a label at the upper-right corner of the element, and set the content, content style and background color.
+

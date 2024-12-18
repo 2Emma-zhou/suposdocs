@@ -1,0 +1,63 @@
+Migrates all tables in the origin source to the target source in batches, which frees you from all the work of creating data synchronization tasks.
+
+1. On **Data Integration Exchange** page, click **Entire library migration**.
+2. Click **New**, and then enter the basic information of the task.
+3. Under **Data source**, select the input data source and migration target.
+- When input data source is MySQL, Oracle or SQL Server, the supported versions are MySQL5.6/5.7, Oracle 11g/12c and SQL Server2017 with CDC enabled.
+:::info
+If CDC is not enabled, you might encounter an error related to diabled bin-log. For details of enabling CDC, see <a href="">Enabling CDC</a>.
+:::
+- When the target is **MySQL**, only 5.6 and 5.7 versions are supported.
+- When the target is **Data warehouse**, data source can be supOS form instance, and tables starting with **ods_** will be automatically created on ODS according to the set synchronization scheme.
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supETL/41.png)
+
+4. Set the data synchronization scheme.
+- Real time
+:::info
+When the target is MySQL5.6/5.7, only real-time synchronization is available; and for data warehouse, both real-time and offline are supported.
+:::
+<ul>
+<ul>
+<li><b>Real time incremental</b>: Only table structure is synchronized for first-time execution, and when data sources update, changes will be incrementally synchronized in real time.</li>
+<li><b>One full real-time increment</b>: Synchronize table structure and all data for first-time execution, and when data sources update, changes will be incrementally synchronized in real time.</li>
+</ul>
+</ul>
+- Offline
+:::info
+For tables without primary key, only offline synchronization is available, and data is incrementally synchronized.
+:::
+<ul>
+<ul>
+<li><b>Periodic increment</b>: Synchronize all data for first-time execution, and when data sources update, changes will be incrementally synchronized as scheduled.</li>
+<li><b>Periodic full amount</b>: Synchronize all data as scheduled.</li>
+</ul>
+</ul>
+
+5. Click **Next**, and set the synchronization content.
+- Real time
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supETL/43.png)
+<ol>
+<ol>
+<li>Select to synchronize all tables or partial tables.</li>
+<li>(optional) Click <b>Add source table</b> to add tables you want to synchronize when selecting <b>Partial table</b>.</li>
+<li>Click <b>Create</b>.</li>
+</ol>
+</ol>
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supETL/44.png)
+
+- Offline
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supETL/42.png)
+
+:::info
+If the **Sync scheme** is set to **Periodic increment**, you need to add the increment field when synchronizing, and only **time** field can be the increment field.
+:::
+
+<ol>
+<ol>
+<li>Click <b>Add source table</b> to add tables you want to synchronize.</li>
+<li>Under <b>Scheduling config</b>, set the schedule on which the synchronization will be executed.</li>
+<li>Click <b>Create</b>.</li>
+</ol>
+</ol>

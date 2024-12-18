@@ -1,0 +1,4287 @@
+---
+hide_title: true
+---
+
+## Description
+@suplink/jssdk provides a series of SDKs which you can use to develop custom applications.
+:::info
+Applications used these SDKs must be running on supLink mobile.
+:::
+
+## Usage
+- Install denpendency
+```js
+npm install @suplink/jssdk -S
+```
+- Example
+
+<ul>
+<ul>
+<li>Full import
+
+```js
+import suplink from '@suplink/jssdk';
+suplink.getSystemInfo().then((res) => console.log(res))
+```
+
+</li>
+<li>Import as needed
+
+```js
+import { getSystemInfo } from '@suplink/jssdk';
+getSystemInfo().then((res) => console.log(res))
+```
+
+</li>
+<li>Import online resources
+
+```js
+// latest version of online resource
+<script src="https://devc.supos.com/suplink/jssdk/scripts/jssdk.min.js"></script>
+// specified version of online resource (jssdk-{version}.min.js)
+<script src="https://devc.supos.com/suplink/jssdk/scripts/jssdk-1.2.13.min.js"></script>
+<script type="text/javascript">
+window.suplink.getSystemInfo().then((res) => console.log(res))
+</script>
+```
+
+</li>
+</ul>
+</ul>
+
+## SDK Details-Basic
+
+<div className='div'>
+<div className='title'>
+
+### getEnvInfo
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Definition</div>
+<div className='rightCol'>
+Get environment information.
+</div>
+<div className='leftCol'>Parameter</div>
+<div className='rightCol'>
+None
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+<table>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>code</td>
+<td>string</td>
+<td>200: Success | 404: Failure</td>
+</tr>
+<tr>
+<td>msg</td>
+<td>string</td>
+<td>Response information</td>
+</tr>
+<tr>
+<td>data</td>
+<td>Object</td>
+<td>Response data</td>
+</tr>
+<tr>
+<td>data.suplink</td>
+<td>boolean</td>
+<td>Whether it is running on supLink</td>
+</tr>
+<tr>
+<td>data.iframe</td>
+<td>boolean</td>
+<td>Whether it is running on iframe</td>
+</tr>
+</table>
+</div>
+<div className='leftCol'>Example</div>
+<div className='rightCol'>
+
+```js
+import { getEnvInfo } from '@suplink/jssdk';
+getEnvInfo().then((res) => console.log(res))
+```
+
+</div>
+</div>
+</div>
+<div className='div'>
+<div className='title'>
+
+### getSystemInfo
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Definition</div>
+<div className='rightCol'>
+Get system information.
+
+:::info
+
+:::
+
+</div>
+<div className='leftCol'>Parameter</div>
+<div className='rightCol'>
+None
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+<table>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>code</td>
+<td>string</td>
+<td>200: Success | 404: Failure</td>
+</tr>
+<tr>
+<td>msg</td>
+<td>string</td>
+<td>Response information</td>
+</tr>
+<tr>
+<td>data</td>
+<td>Data</td>
+<td>Response data</td>
+</tr>
+</table>
+<table>
+<caption>Attribute data description</caption>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+<th>APP Version</th>
+</tr>
+<tr>
+<td>brand</td>
+<td>string</td>
+<td>Device brand (e.g., HUAWEI, XIAOMI, iOS: Apple)</td>
+<td></td>
+</tr>
+<tr>
+<td>currentBattery</td>
+<td>string</td>
+<td>Device battery level</td>
+<td></td>
+</tr>
+<tr>
+<td>language</td>
+<td>string</td>
+<td>User's preferred language</td>
+<td></td>
+</tr>
+<tr>
+<td>model</td>
+<td>string</td>
+<td>Phone model</td>
+<td></td>
+</tr>
+<tr>
+<td>pixelRatio</td>
+<td>number</td>
+<td>Device pixel ratio (1 for Android. For iOS, it represents screen width pixels / screen width points.)</td>
+<td></td>
+</tr>
+<tr>
+<td>pixelWidth</td>
+<td>number</td>
+<td>Device pixel width (For Android, it represents the width of the screen including virtual keys. For iOS, it represents the physical screen width in pixels, e.g., 1080.)</td>
+<td></td>
+</tr>
+<tr>
+<td>pixelHeight</td>
+<td>number</td>
+<td>Device pixel height (For Android, it represents the height of the screen including virtual keys. For iOS, it represents the physical screen height in pixels, e.g., 1920.)</td>
+<td></td>
+</tr>
+<tr>
+<td>platform</td>
+<td>string</td>
+<td>Operating system name: Android, iOS</td>
+<td></td>
+</tr>
+<tr>
+<td>storage</td>
+<td>string</td>
+<td>Device disk size</td>
+<td></td>
+</tr>
+<tr>
+<td>system</td>
+<td>string</td>
+<td>Operating system version number</td>
+<td></td>
+</tr>
+<tr>
+<td>statusBarHeight</td>
+<td>number</td>
+<td>Status bar height (This value is in points. For pixel value, please multiply it with the pixel ratio.)</td>
+<td></td>
+</tr>
+<tr>
+<td>navigationBarHeight</td>
+<td>number</td>
+<td>Navigation bar height (This value is in points. For pixel value, please multiply it with the pixel ratio.)</td>
+<td></td>
+</tr>
+<tr>
+<td>webSource</td>
+<td>number</td>
+<td>WebView opening method (0: Open normally from the homepage, 1: Open from im, 2: Open with jsapi)</td>
+<td></td>
+</tr>
+<tr>
+<td>deviceId</td>
+<td>string</td>
+<td>Unique device identifier</td>
+<td></td>
+</tr>
+<tr>
+<td>appVersion</td>
+<td>string</td>
+<td>suplinkAPP version</td>
+<td>3.3.0</td>
+</tr>
+<tr>
+<td>suposServerVersion</td>
+<td>string</td>
+<td>supos backend version</td>
+<td>3.4.0</td>
+</tr>
+<tr>
+<td>suplinkServerVersion</td>
+<td>string</td>
+<td>suplink backend version</td>
+<td>3.4.0</td>
+</tr>
+<tr>
+<td>easyMode</td>
+<td>boolean</td>
+<td>Easy Mode</td>
+<td>4.3.0</td>
+</tr>
+<tr>
+<td>highPerformance</td>
+<td>boolean</td>
+<td>High Performance Mode</td>
+<td>4.3.0</td>
+</tr>
+<tr>
+<td>darkMode</td>
+<td>boolean</td>
+<td>Dark Mode</td>
+<td>4.3.0</td>
+</tr>
+</table>
+
+:::info
+**currentBattery**, **storage** and **statusBarHeight** are unavailable in h5.
+:::
+
+</div>
+<div className='leftCol'>Example</div>
+<div className='rightCol'>
+
+```js
+import { getSystemInfo } from '@suplink/jssdk';
+getSystemInfo().then((res) => console.log(res))
+```
+
+</div>
+</div>
+</div>
+<div className='div'>
+<div className='title'>
+
+### renderFinish
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Definition</div>
+<div className='rightCol'>
+Notice for finishing rendering (only for opening and closing native toast in flowchart).
+</div>
+<div className='leftCol'>Parameter</div>
+<div className='rightCol'>
+None
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+<table>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>code</td>
+<td>string</td>
+<td>200: Success | 404: Failure</td>
+</tr>
+<tr>
+<td>msg</td>
+<td>string</td>
+<td>Response information</td>
+</tr>
+<tr>
+<td>data</td>
+<td>unknown</td>
+<td>Response data</td>
+</tr>
+</table>
+</div>
+<div className='leftCol'>Example</div>
+<div className='rightCol'>
+
+```js
+import { renderFinish } from '@suplink/jssdk';
+renderFinish().then((res) => console.log(res))
+```
+
+</div>
+</div>
+</div>
+
+## SDK Details-Device
+
+<div className='div'>
+<div className='title'>
+
+### biometrics
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Definition</div>
+<div className='rightCol'>
+Biometrics.
+</div>
+<div className='leftCol'>Parameter</div>
+<div className='rightCol'>
+None
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+<table>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>code</td>
+<td>string</td>
+<td>200: Success | 404: Failure</td>
+</tr>
+<tr>
+<td>msg</td>
+<td>string</td>
+<td>Response information</td>
+</tr>
+<tr>
+<td>data</td>
+<td>unknown</td>
+<td>Response data</td>
+</tr>
+</table>
+</div>
+<div className='leftCol'>Example</div>
+<div className='rightCol'>
+
+```js
+import { biometrics } from '@suplink/jssdk';
+biometrics().then((res) => console.log(res))
+```
+
+</div>
+</div>
+</div>
+<div className='div'>
+<div className='title'>
+
+### compass
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Definition</div>
+<div className='rightCol'>
+Compass.
+</div>
+<div className='leftCol'>Parameter</div>
+<div className='rightCol'>
+None
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+<table>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>code</td>
+<td>string</td>
+<td>200: Success | 404: Failure</td>
+</tr>
+<tr>
+<td>msg</td>
+<td>string</td>
+<td>Response information</td>
+</tr>
+<tr>
+<td>data</td>
+<td>unknown</td>
+<td>Response data</td>
+</tr>
+</table>
+</div>
+<div className='leftCol'>Example</div>
+<div className='rightCol'>
+
+```js
+import { compass } from '@suplink/jssdk';
+compass().then((res) => console.log(res))
+```
+
+</div>
+</div>
+</div>
+<div className='div'>
+<div className='title'>
+
+### connectPrinter
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Definition</div>
+<div className='rightCol'>
+Connect printer.
+</div>
+<div className='leftCol'>Parameter</div>
+<div className='rightCol'>
+<table>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+<th>Required</th>
+</tr>
+<tr>
+<td>mode</td>
+<td>number</td>
+<td>Connection mode: 0 for Bluetooth connection, 1 for WiFi connection</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>host</td>
+<td>string</td>
+<td>Host address (IP + port) for WiFi printing</td>
+<td>No</td>
+</tr>
+<tr>
+<td>mac</td>
+<td>string</td>
+<td>MAC address of the printer for Bluetooth printing</td>
+<td>No</td>
+</tr>
+</table>
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+<table>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>code</td>
+<td>string</td>
+<td>200: Success | 404: Failure</td>
+</tr>
+<tr>
+<td>msg</td>
+<td>string</td>
+<td>Response information</td>
+</tr>
+<tr>
+<td>data</td>
+<td>unknown</td>
+<td>Response data</td>
+</tr>
+</table>
+</div>
+<div className='leftCol'>Example</div>
+<div className='rightCol'>
+
+```js
+import { connectPrinter } from '@suplink/jssdk';
+connectPrinter({ mode:1, host: '127.0.0.1:2020' }).then((res) => console.log(res))
+```
+
+</div>
+</div>
+</div>
+<div className='div'>
+<div className='title'>
+
+### disconnectPrinter
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Definition</div>
+<div className='rightCol'>
+Disconnect printer.
+
+:::info
+- Only Zebra printer is supported.
+- APP version must be v3.7.0 and later.
+:::
+
+</div>
+<div className='leftCol'>Parameter</div>
+<div className='rightCol'>
+None
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+<table>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>code</td>
+<td>string</td>
+<td>200: Success | 404: Failure</td>
+</tr>
+<tr>
+<td>msg</td>
+<td>string</td>
+<td>Response information</td>
+</tr>
+<tr>
+<td>data</td>
+<td>unknown</td>
+<td>Response data</td>
+</tr>
+</table>
+</div>
+<div className='leftCol'>Example</div>
+<div className='rightCol'>
+
+```js
+import { disconnectPrinter } from '@suplink/jssdk';
+disconnectPrinter().then((res) => console.log(res))
+```
+
+</div>
+</div>
+</div>
+<div className='div'>
+<div className='title'>
+
+### flashlight
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Definition</div>
+<div className='rightCol'>
+Flashlight.
+</div>
+<div className='leftCol'>Parameter</div>
+<div className='rightCol'>
+<table>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+<th>Required</th>
+</tr>
+<tr>
+<td>open</td>
+<td>boolean</td>
+<td>Whether to turn on the flashlight.</td>
+<td>Yes</td>
+</tr>
+</table>
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+<table>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>code</td>
+<td>string</td>
+<td>200: Success | 404: Failure</td>
+</tr>
+<tr>
+<td>msg</td>
+<td>string</td>
+<td>Response information</td>
+</tr>
+<tr>
+<td>data</td>
+<td>unknown</td>
+<td>Response data</td>
+</tr>
+</table>
+</div>
+<div className='leftCol'>Example</div>
+<div className='rightCol'>
+
+```js
+import { flashlight } from '@suplink/jssdk';
+flashlight({ open: true }).then((res) => console.log(res))
+```
+
+</div>
+</div>
+</div>
+<div className='div'>
+<div className='title'>
+
+### gesture
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Definition</div>
+<div className='rightCol'>
+Gesture.
+</div>
+<div className='leftCol'>Parameter</div>
+<div className='rightCol'>
+None.
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+<table>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>code</td>
+<td>string</td>
+<td>Response code: 200 for successful gesture verification, 300 for user canceling gesture verification, 404 for failure</td>
+</tr>
+<tr>
+<td>msg</td>
+<td>string</td>
+<td>Response information</td>
+</tr>
+<tr>
+<td>data</td>
+<td>unknown</td>
+<td>Response data</td>
+</tr>
+</table>
+</div>
+<div className='leftCol'>Example</div>
+<div className='rightCol'>
+
+```js
+import { gesture } from '@suplink/jssdk';
+gesture().then((res) => console.log(res))
+```
+
+</div>
+</div>
+</div>
+<div className='div'>
+<div className='title'>
+
+### getBluetoothPairedDevices
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Definition</div>
+<div className='rightCol'>
+Get devices paired through bluetooth.
+
+:::info
+- Only Android is supported.
+- APP version must be v3.7.0 and later.
+:::
+
+</div>
+<div className='leftCol'>Parameter</div>
+<div className='rightCol'>
+None
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+<table>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>code</td>
+<td>string</td>
+<td>Response code: 200 for success, 404 for failure</td>
+</tr>
+<tr>
+<td>msg</td>
+<td>string</td>
+<td>Response information</td>
+</tr>
+<tr>
+<td>data</td>
+<td>Object</td>
+<td>Response data</td>
+</tr>
+<tr>
+<td>data.list</td>
+<td>Array.&lt;Device&gt;</td>
+<td>Response data list containing Device objects</td>
+</tr>
+</table>
+<table>
+<caption>Array.&lt;Device&gt; description</caption>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>name</td>
+<td>string</td>
+<td>Device name</td>
+</tr>
+<tr>
+<td>address</td>
+<td>string</td>
+<td>Device address used for sending print commands</td>
+</tr>
+</table>
+</div>
+<div className='leftCol'>Example</div>
+<div className='rightCol'>
+
+```js
+import { getBluetoothPairedDevices } from '@suplink/jssdk';
+getBluetoothPairedDevices().then((res) => console.log(res))
+```
+
+</div>
+</div>
+</div>
+<div className='div'>
+<div className='title'>
+
+### getNetworkInfo
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Definition</div>
+<div className='rightCol'>
+Get network status.
+</div>
+<div className='leftCol'>Parameter</div>
+<div className='rightCol'>
+None
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+<table>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>code</td>
+<td>string</td>
+<td>Response code: 200 for success, 404 for failure</td>
+</tr>
+<tr>
+<td>msg</td>
+<td>string</td>
+<td>Response information</td>
+</tr>
+<tr>
+<td>data</td>
+<td>Object</td>
+<td>Response data</td>
+</tr>
+<tr>
+<td>data.networkAvailable</td>
+<td>boolean</td>
+<td>Indicates whether the network is available</td>
+</tr>
+<tr>
+<td>data.networkType</td>
+<td>string</td>
+<td>Value representing the network type</td>
+</tr>
+</table>
+</div>
+<div className='leftCol'>Example</div>
+<div className='rightCol'>
+
+```js
+import { getNetworkInfo } from '@suplink/jssdk';
+getNetworkInfo().then((res) => console.log(res))
+```
+
+</div>
+</div>
+</div>
+<div className='div'>
+<div className='title'>
+
+### makePhoneCall
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Definition</div>
+<div className='rightCol'>
+Make phone calls.
+</div>
+<div className='leftCol'>Parameter</div>
+<div className='rightCol'>
+<table>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+<th>Required</th>
+</tr>
+<tr>
+<td>phoneNumber</td>
+<td>number or string</td>
+<td>User's phone number</td>
+<td>Yes</td>
+</tr>
+</table>
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+<table>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>code</td>
+<td>string</td>
+<td>Response code: 200 for success, 404 for failure</td>
+</tr>
+<tr>
+<td>msg</td>
+<td>string</td>
+<td>Response information</td>
+</tr>
+<tr>
+<td>data</td>
+<td>unknown</td>
+<td>Response data</td>
+</tr>
+</table>
+</div>
+<div className='leftCol'>Example</div>
+<div className='rightCol'>
+
+```js
+import { makePhoneCall } from '@suplink/jssdk';
+makePhoneCall({ phoneNumber: 110 }).then((res) => console.log(res))
+```
+
+</div>
+</div>
+</div>
+<div className='div'>
+<div className='title'>
+
+### nfc
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Definition</div>
+<div className='rightCol'>
+NFC function.
+</div>
+<div className='leftCol'>Parameter</div>
+<div className='rightCol'>
+<table>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+<th>Required</th>
+</tr>
+<tr>
+<td>type</td>
+<td>number</td>
+<td>NFC usage type: 0 for NFC verification, 1 for reading NFC data and returning it</td>
+<td>0</td>
+<td>No</td>
+</tr>
+</table>
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+<table>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>code</td>
+<td>string</td>
+<td>Response code: 200 for success, 404 for failure</td>
+</tr>
+<tr>
+<td>msg</td>
+<td>string</td>
+<td>Response information</td>
+</tr>
+<tr>
+<td>data</td>
+<td>string</td>
+<td>Response data. If the data reading function is called, it returns specific data.</td>
+</tr>
+</table>
+</div>
+<div className='leftCol'>Example</div>
+<div className='rightCol'>
+
+```js
+import { nfc } from '@suplink/jssdk';
+nfc({ type: 0 }).then((res) => console.log(res))
+```
+
+</div>
+</div>
+</div>
+<div className='div'>
+<div className='title'>
+
+### ocr
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Definition</div>
+<div className='rightCol'>
+OCR function.
+</div>
+<div className='leftCol'>Parameter</div>
+<div className='rightCol'>
+None.
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+<table>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>code</td>
+<td>string</td>
+<td>Response code: 200 for success, 404 for failure</td>
+</tr>
+<tr>
+<td>msg</td>
+<td>string</td>
+<td>Response information</td>
+</tr>
+<tr>
+<td>data</td>
+<td>string</td>
+<td>Response data</td>
+</tr>
+</table>
+</div>
+<div className='leftCol'>Example</div>
+<div className='rightCol'>
+
+```js
+import { ocr } from '@suplink/jssdk';
+ocr().then((res) => console.log(res))
+```
+
+</div>
+</div>
+</div>
+<div className='div'>
+<div className='title'>
+
+### oncePrint
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Definition</div>
+<div className='rightCol'>
+Print once.
+
+:::info
+- Only Zebra printer and Android system are supported.
+- APP version must be v3.7.0 and later.
+:::
+
+</div>
+<div className='leftCol'>Parameter</div>
+<div className='rightCol'>
+<table>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+<th>Required</th>
+</tr>
+<tr>
+<td>mode</td>
+<td>number</td>
+<td>Connection mode: 0 for Bluetooth connection, 1 for WiFi connection</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>content</td>
+<td>string</td>
+<td>Print content. If using CPCL language, newline must end with \n</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>host</td>
+<td>string</td>
+<td>Host address (IP + port) for WiFi printing</td>
+<td>No</td>
+</tr>
+<tr>
+<td>mac</td>
+<td>string</td>
+<td>MAC address of the printer for Bluetooth printing</td>
+<td>No</td>
+</tr>
+</table>
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+<table>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>code</td>
+<td>string</td>
+<td>Response code: 200 for success, 404 for failure</td>
+</tr>
+<tr>
+<td>msg</td>
+<td>string</td>
+<td>Response information</td>
+</tr>
+<tr>
+<td>data</td>
+<td>unknown</td>
+<td>Response data</td>
+</tr>
+</table>
+</div>
+<div className='leftCol'>Example</div>
+<div className='rightCol'>
+
+```js
+import { oncePrint } from '@suplink/jssdk';
+oncePrint({ mode: 0, content: '123', host: '127.0.0.1:22' }).then((res) => console.log(res))
+```
+
+</div>
+</div>
+</div>
+<div className='div'>
+<div className='title'>
+
+### print
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Definition</div>
+<div className='rightCol'>
+Print.
+
+:::info
+- Only Zebra printer and Android system are supported.
+- APP version must be v3.7.0 and later.
+- The connection does not automatically disconnect after printing, unless **disconnectPrinter** is used.
+:::
+
+</div>
+<div className='leftCol'>Parameter</div>
+<div className='rightCol'>
+<table>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+<th>Required</th>
+</tr>
+<tr>
+<td>content</td>
+<td>string</td>
+<td>Print content. If using CPCL language, newline must end with \n</td>
+<td>Yes</td>
+</tr>
+</table>
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+<table>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>code</td>
+<td>string</td>
+<td>Response code: 200 for success, 404 for failure</td>
+</tr>
+<tr>
+<td>msg</td>
+<td>string</td>
+<td>Response information</td>
+</tr>
+<tr>
+<td>data</td>
+<td>unknown</td>
+<td>Response data</td>
+</tr>
+</table>
+</div>
+<div className='leftCol'>Example</div>
+<div className='rightCol'>
+
+```js
+import { print } from '@suplink/jssdk';
+print({ content: '123' }).then((res) => console.log(res))
+```
+
+</div>
+</div>
+</div>
+<div className='div'>
+<div className='title'>
+
+### scanCode
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Definition</div>
+<div className='rightCol'>
+Scan codes.
+</div>
+<div className='leftCol'>Parameter</div>
+<div className='rightCol'>
+None.
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+<table>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>code</td>
+<td>string</td>
+<td>Response code: 200 for success, 404 for failure</td>
+</tr>
+<tr>
+<td>msg</td>
+<td>string</td>
+<td>Response information</td>
+</tr>
+<tr>
+<td>data</td>
+<td>unknown</td>
+<td>Response data</td>
+</tr>
+</table>
+</div>
+<div className='leftCol'>Example</div>
+<div className='rightCol'>
+
+```js
+import { scanCode } from '@suplink/jssdk';
+scanCode().then((res) => console.log(res))
+```
+
+</div>
+</div>
+</div>
+<div className='div'>
+<div className='title'>
+
+### scanner
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Definition</div>
+<div className='rightCol'>
+Scanner.
+
+:::info
+- Only Android is supported.
+- APP version must be v3.1.0 and later.
+- Manually set broadcast on Android. **Name: com.bluetron.suplink.login, key: loginData**.
+:::
+
+</div>
+<div className='leftCol'>Parameter</div>
+<div className='rightCol'>
+<table>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+<th>Required</th>
+</tr>
+<tr>
+<td>outputMode</td>
+<td>number</td>
+<td>Data output mode: 0 for return data mode (requires passing a second argument) | 1 for keyboard mode, directly filling the focused input box. Some devices may not support this mode.</td>
+<td>No</td>
+</tr>
+<tr>
+<td>success</td>
+<td>function</td>
+<td>Callback function to receive scanner data</td>
+<td>No</td>
+</tr>
+</table>
+
+```js
+success({
+code: 200, // response code. 200: success | 404: failed
+msg: '', // response message
+data: '', // scanned data
+})
+```
+
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+<table>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>code</td>
+<td>string</td>
+<td>Response code: 200 for success, 404 for failure</td>
+</tr>
+<tr>
+<td>msg</td>
+<td>string</td>
+<td>Response information</td>
+</tr>
+<tr>
+<td>data</td>
+<td>unknown</td>
+<td>Response data</td>
+</tr>
+</table>
+</div>
+<div className='leftCol'>Example</div>
+<div className='rightCol'>
+
+```js
+import { scanner } from '@suplink/jssdk';
+scanner({ outputMode: 1 }).then((res) => console.log(res))
+```
+
+</div>
+</div>
+</div>
+<div className='div'>
+<div className='title'>
+
+### setScreenOrientation
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Definition</div>
+<div className='rightCol'>
+Set screen orientation.
+</div>
+<div className='leftCol'>Parameter</div>
+<div className='rightCol'>
+<table>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+<th>Required</th>
+</tr>
+<tr>
+<td>mode</td>
+<td>string</td>
+<td>Rotation mode: 'auto' for automatic orientation | 'landscape' for landscape orientation | 'portrait' for portrait orientation</td>
+<td>Yes</td>
+</tr>
+</table>
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+<table>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>code</td>
+<td>string</td>
+<td>Response code: 200 for success, 404 for failure</td>
+</tr>
+<tr>
+<td>msg</td>
+<td>string</td>
+<td>Response information</td>
+</tr>
+<tr>
+<td>data</td>
+<td>unknown</td>
+<td>Response data</td>
+</tr>
+</table>
+</div>
+<div className='leftCol'>Example</div>
+<div className='rightCol'>
+
+```js
+import { setScreenOrientation } from '@suplink/jssdk';
+setScreenOrientation({ mode: 'auto' }).then((res) => console.log(res))
+```
+
+</div>
+</div>
+</div>
+<div className='div'>
+<div className='title'>
+
+### startContinuousScan
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Definition</div>
+<div className='rightCol'>
+Enable continuous code scanning.
+
+:::info
+APP version must be v3.7.0 and later.
+:::
+
+</div>
+<div className='leftCol'>Parameter</div>
+<div className='rightCol'>
+<table>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+<th>Required</th>
+<th>APP Version</th>
+</tr>
+<tr>
+<td>interval</td>
+<td>number</td>
+<td>Scanning time interval in milliseconds. Minimum value is 1000ms.</td>
+<td>1000</td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td>vibrate</td>
+<td>boolean</td>
+<td>Whether to enable vibration</td>
+<td>false</td>
+<td>No</td>
+<td>4.1.0</td>
+</tr>
+<tr>
+<td>position</td>
+<td>position</td>
+<td>Scanner position: 0 for top, 1 for middle</td>
+<td>0</td>
+<td>No</td>
+<td>4.6.0</td>
+</tr>
+<tr>
+<td>success</td>
+<td>function</td>
+<td>Callback function to receive scan data</td>
+<td></td>
+<td>Yes</td>
+<td></td>
+</tr>
+</table>
+
+```js
+success({
+code: 200, // response code. 200: success | 404: failed
+msg: '', // response message
+data: '', // scanned data
+})
+```
+
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+<table>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>code</td>
+<td>string</td>
+<td>Response code: 200 for success, 404 for failure</td>
+</tr>
+<tr>
+<td>msg</td>
+<td>string</td>
+<td>Response information</td>
+</tr>
+<tr>
+<td>data</td>
+<td>unknown</td>
+<td>Response data</td>
+</tr>
+</table>
+</div>
+<div className='leftCol'>Example</div>
+<div className='rightCol'>
+
+```js
+import { startContinuousScan } from '@suplink/jssdk';
+startContinuousScan({ success: (result) => console.log(result) }).then((res) => console.log(res))
+```
+
+</div>
+</div>
+</div>
+<div className='div'>
+<div className='title'>
+
+### stopContinuousScan
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Definition</div>
+<div className='rightCol'>
+Disable continuous code scanning.
+
+:::info
+- Only Android is supported.
+- APP version must be v3.7.0 and later.
+:::
+
+</div>
+<div className='leftCol'>Parameter</div>
+<div className='rightCol'>
+None.
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+<table>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>code</td>
+<td>string</td>
+<td>Response code: 200 for success, 404 for failure</td>
+</tr>
+<tr>
+<td>msg</td>
+<td>string</td>
+<td>Response information</td>
+</tr>
+<tr>
+<td>data</td>
+<td>unknown</td>
+<td>Response data</td>
+</tr>
+</table>
+</div>
+<div className='leftCol'>Example</div>
+<div className='rightCol'>
+
+```js
+import { stopContinuousScan } from '@suplink/jssdk';
+stopContinuousScan().then((res) => console.log(res))
+```
+
+</div>
+</div>
+</div>
+<div className='div'>
+<div className='title'>
+
+### vibrate
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Definition</div>
+<div className='rightCol'>
+Enable phone vibration.
+
+:::info
+APP version must be v4.1.0 and later.
+:::
+
+</div>
+<div className='leftCol'>Parameter</div>
+<div className='rightCol'>
+None.
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+<table>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>code</td>
+<td>string</td>
+<td>Response code: 200 for success, 404 for failure</td>
+</tr>
+<tr>
+<td>msg</td>
+<td>string</td>
+<td>Response information</td>
+</tr>
+<tr>
+<td>data</td>
+<td>unknown</td>
+<td>Response data</td>
+</tr>
+</table>
+</div>
+<div className='leftCol'>Example</div>
+<div className='rightCol'>
+
+```js
+import { vibrate } from '@suplink/jssdk';
+vibrate().then((res) => console.log(res))
+```
+
+</div>
+</div>
+</div>
+
+## SDK Details-Event
+
+<div className='div'>
+<div className='title'>
+
+### offPageHide
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Definition</div>
+<div className='rightCol'>
+Cancel the page hidden event listening.
+
+:::info
+When passing a listener, only the corresponding hidden event for that listener is canceled; otherwise, all page hidden events are canceled.
+:::
+
+</div>
+<div className='leftCol'>Parameter</div>
+<div className='rightCol'>
+<table>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+<th>Required</th>
+</tr>
+<tr>
+<td>listener</td>
+<td>function</td>
+<td>Event listener function</td>
+<td>No</td>
+</tr>
+</table>
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+None.
+</div>
+<div className='leftCol'>Example</div>
+<div className='rightCol'>
+
+```js
+import { offPageHide } from '@suplink/jssdk';
+offPageHide()
+```
+
+</div>
+</div>
+</div>
+<div className='div'>
+<div className='title'>
+
+### offPageShow
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Definition</div>
+<div className='rightCol'>
+Cancel the page visible event listening.
+
+:::info
+When passing a listener, only the corresponding visible event for that listener is canceled; otherwise, all page visible events are canceled.
+:::
+
+</div>
+<div className='leftCol'>Parameter</div>
+<div className='rightCol'>
+<table>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+<th>Required</th>
+</tr>
+<tr>
+<td>listener</td>
+<td>function</td>
+<td>Event listener function</td>
+<td>No</td>
+</tr>
+</table>
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+None.
+</div>
+<div className='leftCol'>Example</div>
+<div className='rightCol'>
+
+```js
+import { offPageShow } from '@suplink/jssdk';
+offPageShow()
+```
+
+</div>
+</div>
+</div>
+<div className='div'>
+<div className='title'>
+
+### onAppHide
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Definition</div>
+<div className='rightCol'>
+Listen for mini propgram closing or going into standby mode.
+
+:::info
+- Only Android is supported.
+- APP version must be v4.0.2 and later.
+:::
+
+</div>
+<div className='leftCol'>Parameter</div>
+<div className='rightCol'>
+<table>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+<th>Required</th>
+</tr>
+<tr>
+<td>listener</td>
+<td>function</td>
+<td>Event listener function</td>
+<td>Yes</td>
+</tr>
+</table>
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+None.
+</div>
+<div className='leftCol'>Example</div>
+<div className='rightCol'>
+
+```js
+import { onAppHide } from '@suplink/jssdk';
+onAppHide({ listener: () => console.log('hide') })
+```
+
+</div>
+</div>
+</div>
+<div className='div'>
+<div className='title'>
+
+### onAppShow
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Definition</div>
+<div className='rightCol'>
+Listen for mini propgram starting or going into active mode.
+
+:::info
+- Only Android is supported.
+- APP version must be v4.0.2 and later.
+:::
+
+</div>
+<div className='leftCol'>Parameter</div>
+<div className='rightCol'>
+<table>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+<th>Required</th>
+</tr>
+<tr>
+<td>listener</td>
+<td>function</td>
+<td>Event listener function</td>
+<td>Yes</td>
+</tr>
+</table>
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+None.
+</div>
+<div className='leftCol'>Example</div>
+<div className='rightCol'>
+
+```js
+import { onAppShow } from '@suplink/jssdk';
+onAppShow({ listener: () => console.log('show') })
+```
+
+</div>
+</div>
+</div>
+<div className='div'>
+<div className='title'>
+
+### onPageHide
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Definition</div>
+<div className='rightCol'>
+Listen for page hidden events.
+</div>
+<div className='leftCol'>Parameter</div>
+<div className='rightCol'>
+<table>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+<th>Required</th>
+</tr>
+<tr>
+<td>listener</td>
+<td>function</td>
+<td>Event listener function</td>
+<td>Yes</td>
+</tr>
+</table>
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+None.
+</div>
+<div className='leftCol'>Example</div>
+<div className='rightCol'>
+
+```js
+import { onPageHide } from '@suplink/jssdk';
+onPageHide({ listener: () => console.log('hide') })
+```
+
+</div>
+</div>
+</div>
+<div className='div'>
+<div className='title'>
+
+### onPageShow
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Definition</div>
+<div className='rightCol'>
+Listen for page visible events.
+</div>
+<div className='leftCol'>Parameter</div>
+<div className='rightCol'>
+<table>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+<th>Required</th>
+</tr>
+<tr>
+<td>listener</td>
+<td>function</td>
+<td>Event listener function</td>
+<td>Yes</td>
+</tr>
+</table>
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+None.
+</div>
+<div className='leftCol'>Example</div>
+<div className='rightCol'>
+
+```js
+import { onPageShow } from '@suplink/jssdk';
+onPageShow({ listener: () => console.log('show') })
+```
+
+</div>
+</div>
+</div>
+
+## SDK Details-File
+
+<div className='div'>
+<div className='title'>
+
+### fileConverter
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Definition</div>
+<div className='rightCol'>
+Convert file type.
+
+:::info
+APP version must be v4.3.0 and later.
+:::
+
+</div>
+<div className='leftCol'>Parameter</div>
+<div className='rightCol'>
+<table>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+<th>Required</th>
+</tr>
+<tr>
+<td>target</td>
+<td>string</td>
+<td>Converted file type: 'pdf' for PDF files</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>urls</td>
+<td>Array.&lt;string&gt;</td>
+<td>List of file URLs to be converted</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>days</td>
+<td>number</td>
+<td>Storage duration in days.
+
+- days &lt;= 0: Permanent storage,
+- days &gt; 0: Save for a specified number of days. Non-integer values will be rounded down.
+
+</td>
+<td>No</td>
+</tr>
+</table>
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+<table>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>code</td>
+<td>string</td>
+<td>Response code: 200 for success, 404 for failure</td>
+</tr>
+<tr>
+<td>msg</td>
+<td>string</td>
+<td>Response information</td>
+</tr>
+<tr>
+<td>data</td>
+<td>Object</td>
+<td>Response data</td>
+</tr>
+<tr>
+<td>data.files</td>
+<td>Array.&lt;File&gt;</td>
+<td>List of converted files</td>
+</tr>
+</table>
+<table>
+<caption>Array.&lt;File&gt; description</caption>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>previewUrl</td>
+<td>string</td>
+<td>File preview URL</td>
+</tr>
+<tr>
+<td>sourceFileUrl</td>
+<td>string</td>
+<td>File address</td>
+</tr>
+<tr>
+<td>size</td>
+<td>string</td>
+<td>File size</td>
+</tr>
+</table>
+</div>
+<div className='leftCol'>Example</div>
+<div className='rightCol'>
+
+```js
+import { fileConverter } from '@suplink/jssdk';
+fileConverter({ target: 'pdf', urls: ['http://127.0.0.1/test.xls'] }).then((res) => console.log(res))
+```
+
+</div>
+</div>
+</div>
+<div className='div'>
+<div className='title'>
+
+### previewFile
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Definition</div>
+<div className='rightCol'>
+Preview file.
+
+:::info
+Images, videos and PDF files are supported for preview.
+:::
+
+</div>
+<div className='leftCol'>Parameter</div>
+<div className='rightCol'>
+<table>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+<th>Required</th>
+</tr>
+<tr>
+<td>url</td>
+<td>string</td>
+<td>Complete path of the file to be previewed</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>title</td>
+<td>string</td>
+<td>Name of the file to be previewed</td>
+<td>No</td>
+</tr>
+</table>
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+<table>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>code</td>
+<td>string</td>
+<td>Response code: 200 for success, 404 for failure</td>
+</tr>
+<tr>
+<td>msg</td>
+<td>string</td>
+<td>Response information</td>
+</tr>
+<tr>
+<td>data</td>
+<td>unknown</td>
+<td>Response data</td>
+</tr>
+</table>
+</div>
+<div className='leftCol'>Example</div>
+<div className='rightCol'>
+
+```js
+import { previewFile } from '@suplink/jssdk';
+previewFile({ url: 'http://127.0.0.1/img/test.png' }).then((res) => console.log(res))
+```
+
+</div>
+</div>
+</div>
+
+## SDK Details-Position
+
+<div className='div'>
+<div className='title'>
+
+### getLocation
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Definition</div>
+<div className='rightCol'>
+Get location.
+
+:::info
+APP version must be v4.3.0 and later.
+:::
+
+</div>
+<div className='leftCol'>Parameter</div>
+<div className='rightCol'>
+<table>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+<th>Required</th>
+</tr>
+<tr>
+<td>inverseEnabled</td>
+<td>boolean</td>
+<td>Enable reverse geocoding to obtain more formatted information.
+
+:::info
+Reverse geocoding requires an internet connection.
+:::
+
+</td>
+<td>No</td>
+</tr>
+</table>
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+<table>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>code</td>
+<td>string</td>
+<td>Response code: 200 for success, 404 for failure</td>
+</tr>
+<tr>
+<td>msg</td>
+<td>string</td>
+<td>Response information</td>
+</tr>
+<tr>
+<td>data</td>
+<td>Data</td>
+<td>Response data</td>
+</tr>
+</table>
+<table>
+<caption>Data description</caption>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>longitude</td>
+<td>number</td>
+<td>Longitude</td>
+</tr>
+<tr>
+<td>latitude</td>
+<td>number</td>
+<td>Latitude</td>
+</tr>
+<tr>
+<td>horizontalAccuracy</td>
+<td>number</td>
+<td>Horizontal accuracy, unit: meters</td>
+</tr>
+<tr>
+<td>formattedAddress</td>
+<td>string</td>
+<td>Formatted address (requires inverseEnabled=true)</td>
+</tr>
+<tr>
+<td>country</td>
+<td>string</td>
+<td>Country (requires inverseEnabled=true)</td>
+</tr>
+<tr>
+<td>province</td>
+<td>string</td>
+<td>Province/Direct-controlled Municipality (requires inverseEnabled=true)</td>
+</tr>
+<tr>
+<td>city</td>
+<td>string</td>
+<td>City (requires inverseEnabled=true)</td>
+</tr>
+<tr>
+<td>citycode</td>
+<td>string</td>
+<td>City code (requires inverseEnabled=true)</td>
+</tr>
+<tr>
+<td>district</td>
+<td>string</td>
+<td>District/County (requires inverseEnabled=true)</td>
+</tr>
+<tr>
+<td>adcode</td>
+<td>string</td>
+<td>Area code (requires inverseEnabled=true)</td>
+</tr>
+<tr>
+<td>street</td>
+<td>string</td>
+<td>Street name (requires inverseEnabled=true)</td>
+</tr>
+<tr>
+<td>number</td>
+<td>string</td>
+<td>House number (requires inverseEnabled=true)</td>
+</tr>
+<tr>
+<td>POIName</td>
+<td>string</td>
+<td>Point of Interest (POI) name (requires inverseEnabled=true)</td>
+</tr>
+<tr>
+<td>AOIName</td>
+<td>string</td>
+<td>Area of Interest (AOI) name (requires inverseEnabled=true)</td>
+</tr>
+</table>
+</div>
+<div className='leftCol'>Example</div>
+<div className='rightCol'>
+
+```js
+import { getLocation } from '@suplink/jssdk';
+getLocation().then((res) => console.log(res))
+```
+
+</div>
+</div>
+</div>
+<div className='div'>
+<div className='title'>
+
+### startLocationUpdate
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Definition</div>
+<div className='rightCol'>
+Enable real-time positioning.
+</div>
+<div className='leftCol'>Parameter</div>
+<div className='rightCol'>
+<table>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+<th>Required</th>
+</tr>
+<tr>
+<td>success</td>
+<td>function</td>
+<td>Callback function to get real-time location data</td>
+<td>Yes</td>
+</tr>
+</table>
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+<table>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>code</td>
+<td>string</td>
+<td>Response code: 200 for success, 404 for failure</td>
+</tr>
+<tr>
+<td>msg</td>
+<td>string</td>
+<td>Response information</td>
+</tr>
+<tr>
+<td>data</td>
+<td>unknown</td>
+<td>Response data</td>
+</tr>
+</table>
+
+```js
+success({
+code: 200, // response code. 200: success | 404: failed
+msg: '', // response message
+data: {
+longitude: '', 
+latitude: '', 
+horizontalAccuracy: '', // unit: m
+},
+})
+ ```
+
+</div>
+<div className='leftCol'>Example</div>
+<div className='rightCol'>
+
+```js
+import { startLocationUpdate } from '@suplink/jssdk';
+startLocationUpdate({ success: (result) => console.log(result) }).then((res) => console.log(res))
+```
+
+</div>
+</div>
+</div>
+<div className='div'>
+<div className='title'>
+
+### stopLocationUpdate
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Definition</div>
+<div className='rightCol'>
+Disable real-time positioning.
+</div>
+<div className='leftCol'>Parameter</div>
+<div className='rightCol'>
+None.
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+<table>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>code</td>
+<td>string</td>
+<td>Response code: 200 for success, 404 for failure</td>
+</tr>
+<tr>
+<td>msg</td>
+<td>string</td>
+<td>Response information</td>
+</tr>
+<tr>
+<td>data</td>
+<td>unknown</td>
+<td>Response data</td>
+</tr>
+</table>
+</div>
+<div className='leftCol'>Example</div>
+<div className='rightCol'>
+
+```js
+import { stopLocationUpdate } from '@suplink/jssdk';
+stopLocationUpdate().then((res) => console.log(res))
+```
+
+</div>
+</div>
+</div>
+
+## SDK Details-Media
+
+<div className='div'>
+<div className='title'>
+
+### playVoiceByText
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Definition</div>
+<div className='rightCol'>
+Convert text to voice.
+
+:::info
+APP version must be v4.3.0 and later.
+:::
+
+</div>
+<div className='leftCol'>Parameter</div>
+<div className='rightCol'>
+<table>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+<th>Required</th>
+</tr>
+<tr>
+<td>text</td>
+<td>string</td>
+<td>Text to be converted</td>
+<td>Yes</td>
+</tr>
+</table>
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+<table>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>code</td>
+<td>string</td>
+<td>Response code: 200 for success, 404 for failure</td>
+</tr>
+<tr>
+<td>msg</td>
+<td>string</td>
+<td>Response information</td>
+</tr>
+<tr>
+<td>data</td>
+<td>Data</td>
+<td>Response data</td>
+</tr>
+</table>
+</div>
+<div className='leftCol'>Example</div>
+<div className='rightCol'>
+
+```js
+import { playVoiceByText } from '@suplink/jssdk';
+playVoiceByText({ text: 'Hello' }).then((res) => console.log(res))
+```
+
+</div>
+</div>
+</div>
+<div className='div'>
+<div className='title'>
+
+### previewImage
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Definition</div>
+<div className='rightCol'>
+Preview images.
+
+:::info
+- APP version must be v4.4.0 and later.
+- Switching preview between multiple images is available.
+:::
+
+</div>
+<div className='leftCol'>Parameter</div>
+<div className='rightCol'>
+<table>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+<th>Required</th>
+</tr>
+<tr>
+<td>urls</td>
+<td>Array.&lt;string&gt;</td>
+<td>Complete paths of the images</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>index</td>
+<td>number</td>
+<td>Current index of the image being displayed</td>
+<td>No</td>
+</tr>
+</table>
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+<table>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>code</td>
+<td>string</td>
+<td>Response code: 200 for success, 404 for failure</td>
+</tr>
+<tr>
+<td>msg</td>
+<td>string</td>
+<td>Response information</td>
+</tr>
+<tr>
+<td>data</td>
+<td>Data</td>
+<td>Response data</td>
+</tr>
+</table>
+</div>
+<div className='leftCol'>Example</div>
+<div className='rightCol'>
+
+```js
+import { previewImage } from '@suplink/jssdk';
+previewImage({ urls: ['http://127.0.0.1/img/test.png'] }).then((res) => console.log(res))
+```
+
+</div>
+</div>
+</div>
+<div className='div'>
+<div className='title'>
+
+### record
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Definition</div>
+<div className='rightCol'>
+Record voice.
+</div>
+<div className='leftCol'>Parameter</div>
+<div className='rightCol'>
+None.
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+<table>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>code</td>
+<td>string</td>
+<td>Response code: 200 for success, 404 for failure</td>
+</tr>
+<tr>
+<td>msg</td>
+<td>string</td>
+<td>Response information</td>
+</tr>
+<tr>
+<td>data</td>
+<td>Object</td>
+<td>Response data</td>
+</tr>
+<tr>
+<td>data.voiceUrl</td>
+<td>string</td>
+<td>Path to the audio recording file</td>
+</tr>
+</table>
+</div>
+<div className='leftCol'>Example</div>
+<div className='rightCol'>
+
+```js
+import { record } from '@suplink/jssdk';
+record().then((res) => console.log(res))
+```
+
+</div>
+</div>
+</div>
+
+## SDK Details-Redirection
+
+<div className='div'>
+<div className='title'>
+
+### exitMiniProgram
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Definition</div>
+<div className='rightCol'>
+Exit the current mini program.
+</div>
+<div className='leftCol'>Parameter</div>
+<div className='rightCol'>
+None.
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+<table>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>code</td>
+<td>string</td>
+<td>Response code: 200 for success, 404 for failure</td>
+</tr>
+<tr>
+<td>msg</td>
+<td>string</td>
+<td>Response information</td>
+</tr>
+<tr>
+<td>data</td>
+<td>Unknown</td>
+<td>Response data</td>
+</tr>
+</table>
+</div>
+<div className='leftCol'>Example</div>
+<div className='rightCol'>
+
+```js
+import { exitMiniProgram } from '@suplink/jssdk';
+exitMiniProgram().then((res) => console.log(res))
+```
+
+</div>
+</div>
+</div>
+<div className='div'>
+<div className='title'>
+
+### launchApp
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Definition</div>
+<div className='rightCol'>
+Launch an application on mobile.
+
+:::info
+APP version must be v3.1.0 and later.
+:::
+
+</div>
+<div className='leftCol'>Parameter</div>
+<div className='rightCol'>
+<table>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+<th>Required</th>
+</tr>
+<tr>
+<td>android</td>
+<td>string</td>
+<td>Schema URL or package name for the Android app</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>ios</td>
+<td>string</td>
+<td>Schema URL for the iOS app</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>message</td>
+<td>string</td>
+<td>Error message when app launch is not successful</td>
+<td>No</td>
+</tr>
+</table>
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+<table>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>code</td>
+<td>string</td>
+<td>Response code: 200 for success, 404 for failure</td>
+</tr>
+<tr>
+<td>msg</td>
+<td>string</td>
+<td>Response information</td>
+</tr>
+<tr>
+<td>data</td>
+<td>Unknown</td>
+<td>Response data</td>
+</tr>
+</table>
+</div>
+<div className='leftCol'>Example</div>
+<div className='rightCol'>
+
+```js
+import { launchApp } from '@suplink/jssdk';
+launchApp({ android: 'suplink', ios: 'schemaDemo://' }).then((res) => console.log(res))
+```
+
+</div>
+</div>
+</div>
+<div className='div'>
+<div className='title'>
+
+### launchBaseMiniProgram
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Definition</div>
+<div className='rightCol'>
+Launch a basic mini program on mobile.
+</div>
+<div className='leftCol'>Parameter</div>
+<div className='rightCol'>
+<table>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+<th>Required</th>
+</tr>
+<tr>
+<td>name</td>
+<td>string</td>
+<td>Basic mini program name: alarm/trend</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>config</td>
+<td>Alarm | Trend</td>
+<td>Configuration options</td>
+<td>Yes</td>
+</tr>
+</table>
+<table>
+<caption>Alarm description</caption>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+<th>Required</th>
+</tr>
+<tr>
+<td>pageType</td>
+<td>string</td>
+<td>Page type: list for alarm list page</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>objName</td>
+<td>string</td>
+<td>Object name of the tag, required when pageType=list</td>
+<td>No</td>
+</tr>
+<tr>
+<td>propName</td>
+<td>string</td>
+<td>Property name of the tag, required when pageType=list</td>
+<td>No</td>
+</tr>
+</table>
+<table>
+<caption>Trend description</caption>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+<th>Required</th>
+</tr>
+<tr>
+<td>pageType</td>
+<td>string</td>
+<td>Page type: detail for trend detail page</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>objName</td>
+<td>string</td>
+<td>Object name of the tag, required when pageType=detail</td>
+<td>No</td>
+</tr>
+<tr>
+<td>propName</td>
+<td>string</td>
+<td>Property name of the tag, required when pageType=detail</td>
+<td>No</td>
+</tr>
+</table>
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+<table>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>code</td>
+<td>string</td>
+<td>Response code: 200 for success, 404 for failure</td>
+</tr>
+<tr>
+<td>msg</td>
+<td>string</td>
+<td>Response information</td>
+</tr>
+<tr>
+<td>data</td>
+<td>Unknown</td>
+<td>Response data</td>
+</tr>
+</table>
+</div>
+<div className='leftCol'>Example</div>
+<div className='rightCol'>
+
+```js
+import { launchBaseMiniProgram } from '@suplink/jssdk';
+launchBaseMiniProgram({
+name: 'trend',
+config: {
+pageType: 'detail',
+objName: 'test',
+propName: 'testTAG0'
+}
+}).then((res) => console.log(res))
+```
+
+</div>
+</div>
+</div>
+<div className='div'>
+<div className='title'>
+
+### launchMiniProgram
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Definition</div>
+<div className='rightCol'>
+Launch another mini program on mobile.
+</div>
+<div className='leftCol'>Parameter</div>
+<div className='rightCol'>
+<table>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+<th>Required</th>
+</tr>
+<tr>
+<td>appId</td>
+<td>string</td>
+<td>supLink mini program's appId</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>url</td>
+<td>string</td>
+<td>Complete URL path of the mini program</td>
+<td>Yes</td>
+</tr>
+</table>
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+<table>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>code</td>
+<td>string</td>
+<td>Response code: 200 for success, 404 for failure</td>
+</tr>
+<tr>
+<td>msg</td>
+<td>string</td>
+<td>Response information</td>
+</tr>
+<tr>
+<td>data</td>
+<td>Unknown</td>
+<td>Response data</td>
+</tr>
+</table>
+</div>
+<div className='leftCol'>Example</div>
+<div className='rightCol'>
+
+```js
+import { launchMiniProgram } from '@suplink/jssdk';
+launchMiniProgram({ appId: 'abcd', url: 'www.baidu.com' }).then((res) => console.log(res))
+```
+
+</div>
+</div>
+</div>
+
+## SDK Details-Network
+
+<div className='div'>
+<div className='title'>
+
+### upload
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Definition</div>
+<div className='rightCol'>
+Upload files.
+
+:::info
+APP version must be v3.1.4 and later.
+:::
+
+
+</div>
+<div className='leftCol'>Parameter</div>
+<div className='rightCol'>
+<table>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+<th>Required</th>
+<th>APP Version</th>
+</tr>
+<tr>
+<td>type</td>
+<td>number</td>
+<td>(Deprecated, use mode) Upload method: 0 for album and shooting, 1 for files, 2 for all</td>
+<td>2</td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td>mode</td>
+<td>number or Array.&lt;number&gt;</td>
+<td>Upload method, takes priority over type. 0 for album, 1 for shooting, 2 for files</td>
+<td></td>
+<td>No</td>
+<td>3.9.0</td>
+</tr>
+<tr>
+<td>max</td>
+<td>number</td>
+<td>Maximum number of selections, negative number means no limit</td>
+<td>9</td>
+<td>No</td>
+<td>3.3.0</td>
+</tr>
+<tr>
+<td>mediaType</td>
+<td>number</td>
+<td>Media types supported in the album, 0 for Photo + Video, 1 for Photo, 2 for Video</td>
+<td>0</td>
+<td>No</td>
+<td></td>
+</tr>
+<tr>
+<td>days</td>
+<td>number</td>
+<td>Storage duration in days.
+
+- days &lt;= 0: Permanent storage
+- days &gt; 0: Save for a specified number of days. Non-integer values will be rounded down.
+
+</td>
+<td>0</td>
+<td>No</td>
+<td></td>
+</tr>
+</table>
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+<table>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>code</td>
+<td>string</td>
+<td>Response code: 200 for success, 404 for failure</td>
+</tr>
+<tr>
+<td>msg</td>
+<td>string</td>
+<td>Response information</td>
+</tr>
+<tr>
+<td>data</td>
+<td>Object</td>
+<td>Response data</td>
+</tr>
+<tr>
+<td>data.files</td>
+<td>Array.&lt;Object&gt;</td>
+<td>List of uploaded files</td>
+</tr>
+<tr>
+<td>data.files[].previewUrl</td>
+<td>string</td>
+<td>Processed file preview path (e.g., compressed, cropped, format conversion, etc.)</td>
+</tr>
+<tr>
+<td>data.files[].sourceFileUrl</td>
+<td>string</td>
+<td>File source path</td>
+</tr>
+<tr>
+<td>data.files[].size</td>
+<td>number</td>
+<td>File size in bytes</td>
+</tr>
+    </table>
+</div>
+<div className='leftCol'>Example</div>
+<div className='rightCol'>
+
+```js
+import { upload } from '@suplink/jssdk';
+upload({ mode: 0 }).then((res) => console.log(res))
+```
+
+</div>
+</div>
+</div>
+
+## SDK Details-Open SDK
+
+<div className='div'>
+<div className='title'>
+
+### departmentSelector
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Definition</div>
+<div className='rightCol'>
+Select departments.
+</div>
+<div className='leftCol'>Parameter</div>
+<div className='rightCol'>
+<table>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+<th>Required</th>
+</tr>
+<tr>
+<td>title</td>
+<td>string</td>
+<td>Selector title</td>
+<td>No</td>
+</tr>
+<tr>
+<td>max</td>
+<td>number</td>
+<td>Maximum number of selections allowed. If not passed or set to 0, it means unlimited.</td>
+<td>No</td>
+</tr>
+<tr>
+<td>selected</td>
+<td>Array.&lt;string&gt;</td>
+<td>Array of UUIDs of selected departments</td>
+<td>No</td>
+</tr>
+<tr>
+<td>selectedCode</td>
+<td>Array.&lt;string&gt;</td>
+<td>Array of codes of selected departments</td>
+<td>No</td>
+</tr>
+    </table>
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+<table>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>code</td>
+<td>string</td>
+<td>Response code: 200 for success, 404 for failure</td>
+</tr>
+<tr>
+<td>msg</td>
+<td>string</td>
+<td>Response information</td>
+</tr>
+<tr>
+<td>data</td>
+<td>Array.&lt;Department&gt;</td>
+<td>Response data</td>
+</tr>
+    </table>
+    <table>
+    <caption>Array.&lt;Department&gt; description</caption>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>uuid</td>
+<td>string</td>
+<td>Department unique ID</td>
+</tr>
+<tr>
+<td>showName</td>
+<td>string</td>
+<td>Department name</td>
+</tr>
+<tr>
+<td>description</td>
+<td>string</td>
+<td>Department description</td>
+</tr>
+<tr>
+<td>name</td>
+<td>string</td>
+<td>supOS current department number</td>
+</tr>
+<tr>
+<td>parent</td>
+<td>string</td>
+<td>supOS parent department number</td>
+</tr>
+<tr>
+<td>personsCount</td>
+<td>string</td>
+<td>Number of employees in the department</td>
+</tr>
+<tr>
+<td>layNo</td>
+<td>string</td>
+<td>Department hierarchy</td>
+</tr>
+<tr>
+<td>code</td>
+<td>string</td>
+<td>Department code</td>
+</tr>
+    </table>
+</div>
+<div className='leftCol'>Example</div>
+<div className='rightCol'>
+
+```js
+import { departmentSelector } from '@suplink/jssdk';
+departmentSelector().then((res) => console.log(res))
+```
+
+</div>
+</div>
+</div>
+<div className='div'>
+<div className='title'>
+
+### employeeSelector
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Definition</div>
+<div className='rightCol'>
+Select employees.
+</div>
+<div className='leftCol'>Parameter</div>
+<div className='rightCol'>
+<table>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+<th>Required</th>
+</tr>
+<tr>
+<td>type</td>
+<td>number</td>
+<td>Selector type: 1 for selecting without organizational structure, 2 for selecting with organizational structure</td>
+<td>1</td>
+<td>No</td>
+</tr>
+<tr>
+<td>title</td>
+<td>string</td>
+<td>Selector title</td>
+<td>empoyee selector</td>
+<td>No</td>
+</tr>
+<tr>
+<td>max</td>
+<td>number</td>
+<td>Maximum number of selections allowed. If not passed or set to 0, it means unlimited.</td>
+<td></td>
+<td>No</td>
+</tr>
+<tr>
+<td>selected</td>
+<td>Array.&lt;string&gt;</td>
+<td>Array of staffCodes of selected personnel</td>
+<td></td>
+<td>No</td>
+</tr>
+    </table>
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+<table>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>code</td>
+<td>string</td>
+<td>Response code: 200 for success, 404 for failure</td>
+</tr>
+<tr>
+<td>msg</td>
+<td>string</td>
+<td>Response information</td>
+</tr>
+<tr>
+<td>data</td>
+<td>Array.&lt;Employee&gt;</td>
+<td>Response data</td>
+</tr>
+    </table>
+    <table>
+    <caption>Array.&lt;Employee&gt; description</caption>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>staffCode</td>
+<td>string</td>
+<td>Employee unique ID</td>
+</tr>
+<tr>
+<td>phone</td>
+<td>string</td>
+<td>Phone number</td>
+</tr>
+<tr>
+<td>staffName</td>
+<td>string</td>
+<td>Employee name</td>
+</tr>
+<tr>
+<td>timeZone</td>
+<td>string</td>
+<td>Time zone</td>
+</tr>
+<tr>
+<td>email</td>
+<td>string</td>
+<td>Email address</td>
+</tr>
+<tr>
+<td>username</td>
+<td>string</td>
+<td>Account name</td>
+</tr>
+<tr>
+<td>gender</td>
+<td>string</td>
+<td>Gender: 0 for female, 1 for male</td>
+</tr>
+<tr>
+<td>portrail</td>
+<td>string</td>
+<td>Profile picture</td>
+</tr>
+<tr>
+<td>imUserJid</td>
+<td>string</td>
+<td>Corresponding IM account</td>
+</tr>
+<tr>
+<td>depts</td>
+<td>string</td>
+<td>Department list</td>
+</tr>
+<tr>
+<td>userId</td>
+<td>number</td>
+<td>Employee ID</td>
+</tr>
+    </table>
+</div>
+<div className='leftCol'>Example</div>
+<div className='rightCol'>
+
+```js
+import { employeeSelector } from '@suplink/jssdk';
+employeeSelector().then((res) => console.log(res))
+```
+
+</div>
+</div>
+</div>
+<div className='div'>
+<div className='title'>
+
+### getLoginInfo
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Definition</div>
+<div className='rightCol'>
+Get login information.
+</div>
+<div className='leftCol'>Parameter</div>
+<div className='rightCol'>
+<table>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+<th>Required</th>
+</tr>
+<tr>
+<td>type</td>
+<td>number</td>
+<td>Selector type: 1 for selecting without organizational structure, 2 for selecting with organizational structure</td>
+<td>1</td>
+<td>No</td>
+</tr>
+<tr>
+<td>title</td>
+<td>string</td>
+<td>Selector title</td>
+<td>empoyee selector</td>
+<td>No</td>
+</tr>
+<tr>
+<td>max</td>
+<td>number</td>
+<td>Maximum number of selections allowed. If not passed or set to 0, it means unlimited.</td>
+<td></td>
+<td>No</td>
+</tr>
+<tr>
+<td>selected</td>
+<td>Array.&lt;string&gt;</td>
+<td>Array of staffCodes of selected personnel</td>
+<td></td>
+<td>No</td>
+</tr>
+    </table>
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+<table>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>code</td>
+<td>string</td>
+<td>Response code: 200 for success, 404 for failure</td>
+</tr>
+<tr>
+<td>msg</td>
+<td>string</td>
+<td>Response information</td>
+</tr>
+<tr>
+<td>data</td>
+<td>Data</td>
+<td>Response data</td>
+</tr>
+    </table>
+    <table>
+    <caption>Data description</caption>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>token</td>
+<td>number</td>
+<td>suplink's token</td>
+</tr>
+<tr>
+<td>userName</td>
+<td>number</td>
+<td>Username</td>
+</tr>
+<tr>
+<td>appId</td>
+<td>number</td>
+<td>Application ID</td>
+</tr>
+<tr>
+<td>baseUrl</td>
+<td>number</td>
+<td>-</td>
+</tr>
+<tr>
+<td>appName</td>
+<td>number</td>
+<td>Application name</td>
+</tr>
+<tr>
+<td>suposToken</td>
+<td>number</td>
+<td>supOS token</td>
+</tr>
+    </table>
+
+    
+:::info
+For web apps, **baseUrl** is not available.
+:::
+
+
+</div>
+<div className='leftCol'>Example</div>
+<div className='rightCol'>
+
+```js
+import { getLoginInfo } from '@suplink/jssdk';
+getLoginInfo().then((res) => console.log(res))
+```
+
+</div>
+</div>
+</div>
+<div className='div'>
+<div className='title'>
+
+### getStepCount
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Definition</div>
+<div className='rightCol'>
+Get step count.
+</div>
+<div className='leftCol'>Parameter</div>
+<div className='rightCol'>
+None.
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+<table>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>code</td>
+<td>string</td>
+<td>Response code: 200 for success, 404 for failure</td>
+</tr>
+<tr>
+<td>msg</td>
+<td>string</td>
+<td>Response information</td>
+</tr>
+<tr>
+<td>data</td>
+<td>Object</td>
+<td>Response data</td>
+</tr>
+<tr>
+<td>data.todayStepCount</td>
+<td>number</td>
+<td>Today's step count</td>
+</tr>
+    </table>
+</div>
+<div className='leftCol'>Example</div>
+<div className='rightCol'>
+
+```js
+import { getStepCount } from '@suplink/jssdk';
+getStepCount().then((res) => console.log(res))
+```
+
+</div>
+</div>
+</div>
+<div className='div'>
+<div className='title'>
+
+### getUserInfo
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Definition</div>
+<div className='rightCol'>
+Get user information.
+
+:::info
+App version must V3.1.4 and later.
+:::
+
+</div>
+<div className='leftCol'>Parameter</div>
+<div className='rightCol'>
+None.
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+<table>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>code</td>
+<td>string</td>
+<td>Response code: 200 for success, 404 for failure</td>
+</tr>
+<tr>
+<td>msg</td>
+<td>string</td>
+<td>Response information</td>
+</tr>
+<tr>
+<td>data</td>
+<td>Data</td>
+<td>Response data</td>
+</tr>
+    </table>
+    <table>
+    <caption>Data description</caption>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+<th>APP Version</th>
+</tr>
+<tr>
+<td>supLinkToken</td>
+<td>string</td>
+<td>supLink's Token</td>
+<td></td>
+</tr>
+<tr>
+<td>suposToken</td>
+<td>string</td>
+<td>supOS's Token</td>
+<td></td>
+</tr>
+<tr>
+<td>suposTenantId</td>
+<td>string</td>
+<td>supOS tenant ID
+
+:::info
+Unavailable for web apps.
+:::
+
+</td>
+<td></td>
+</tr>
+<tr>
+<td>suposTenantDns</td>
+<td>string</td>
+<td>supOS tenant address</td>
+<td>4.1.0</td>
+</tr>
+<tr>
+<td>userId</td>
+<td>number</td>
+<td>User ID</td>
+<td></td>
+</tr>
+<tr>
+<td>userCode</td>
+<td>string</td>
+<td>Unique identifier for the user</td>
+<td></td>
+</tr>
+<tr>
+<td>username</td>
+<td>string</td>
+<td>Username</td>
+<td></td>
+</tr>
+<tr>
+<td>staffCode</td>
+<td>string</td>
+<td>Unique identifier for the staff</td>
+<td></td>
+</tr>
+<tr>
+<td>staffName</td>
+<td>string</td>
+<td>Staff name</td>
+<td></td>
+</tr>
+<tr>
+<td>gender</td>
+<td>number</td>
+<td>Gender: 0 for female, 1 for male</td>
+<td></td>
+</tr>
+<tr>
+<td>email</td>
+<td>string</td>
+<td>Email address</td>
+<td></td>
+</tr>
+<tr>
+<td>phone</td>
+<td>string</td>
+<td>Phone number</td>
+<td></td>
+</tr>
+<tr>
+<td>portrail</td>
+<td>string</td>
+<td>Profile picture</td>
+<td></td>
+</tr>
+<tr>
+<td>depts</td>
+<td>Array.&lt;string&gt;</td>
+<td>List of departments</td>
+<td></td>
+</tr>
+<tr>
+<td>imUserJid</td>
+<td>string</td>
+<td>IM account</td>
+<td></td>
+</tr>
+<tr>
+<td>timeZone</td>
+<td>string</td>
+<td>Time zone information</td>
+<td></td>
+</tr>
+<tr>
+<td>userType</td>
+<td>number</td>
+<td>User type</td>
+<td>3.9.0</td>
+</tr>
+    </table>
+</div>
+<div className='leftCol'>Example</div>
+<div className='rightCol'>
+
+```js
+import { getUserInfo } from '@suplink/jssdk';
+getUserInfo().then((res) => console.log(res))
+```
+
+</div>
+</div>
+</div>
+<div className='div'>
+<div className='title'>
+
+### openUserInfo
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Definition</div>
+<div className='rightCol'>
+Open the user information page.
+
+:::info
+App version must V3.7.0 and later.
+:::
+
+</div>
+<div className='leftCol'>Parameter</div>
+<div className='rightCol'>
+<table>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+<th>Required</th>
+</tr>
+<tr>
+<td>staffCode</td>
+<td>string</td>
+<td>Unique identifier for the staff</td>
+<td>Yes</td>
+</tr>
+    </table>
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+<table>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>code</td>
+<td>string</td>
+<td>Response code: 200 for success, 404 for failure</td>
+</tr>
+<tr>
+<td>msg</td>
+<td>string</td>
+<td>Response information</td>
+</tr>
+<tr>
+<td>data</td>
+<td>Unknown</td>
+<td>Response data</td>
+</tr>
+    </table>
+</div>
+<div className='leftCol'>Example</div>
+<div className='rightCol'>
+
+```js
+import { openUserInfo } from '@suplink/jssdk';
+openUserInfo({ staffCode: '001' }).then((res) => console.log(res))
+```
+
+</div>
+</div>
+</div>
+<div className='div'>
+<div className='title'>
+
+### signature
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Definition</div>
+<div className='rightCol'>
+Electrical signature.
+</div>
+<div className='leftCol'>Parameter</div>
+<div className='rightCol'>
+None.
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+<table>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>code</td>
+<td>string</td>
+<td>Response code: 200 for success, 404 for failure</td>
+</tr>
+<tr>
+<td>msg</td>
+<td>string</td>
+<td>Response information</td>
+</tr>
+<tr>
+<td>data</td>
+<td>Object</td>
+<td>Response data</td>
+</tr>
+<tr>
+<td>data.imageBase64</td>
+<td>number</td>
+<td>Electronic signature Base64</td>
+</tr>
+    </table>
+</div>
+<div className='leftCol'>Example</div>
+<div className='rightCol'>
+
+```js
+import { signature } from '@suplink/jssdk';
+signature().then((res) => console.log(res))
+```
+
+</div>
+</div>
+</div>
+
+## SDK Details-Data Cache
+
+<div className='div'>
+<div className='title'>
+
+### getStorage
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Definition</div>
+<div className='rightCol'>
+Get cache data.
+</div>
+<div className='leftCol'>Parameter</div>
+<div className='rightCol'>
+<table>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+<th>Required</th>
+</tr>
+<tr>
+<td>key</td>
+<td>string</td>
+<td>Key specified in the local storage</td>
+<td>Yes</td>
+</tr>
+    </table>
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+<table>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>code</td>
+<td>string</td>
+<td>Response code: 200 for success, 404 for failure</td>
+</tr>
+<tr>
+<td>msg</td>
+<td>string</td>
+<td>Response information</td>
+</tr>
+<tr>
+<td>data</td>
+<td>any</td>
+<td>Data from local storage</td>
+</tr>
+    </table>
+</div>
+<div className='leftCol'>Example</div>
+<div className='rightCol'>
+
+```js
+import { getStorage } from '@suplink/jssdk';
+getStorage({ key: 'name' }).then((res) => console.log(res))
+```
+
+</div>
+</div>
+</div>
+<div className='div'>
+<div className='title'>
+
+### setStorage
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Definition</div>
+<div className='rightCol'>
+Save cache data.
+</div>
+<div className='leftCol'>Parameter</div>
+<div className='rightCol'>
+<table>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+<th>Required</th>
+</tr>
+<tr>
+<td>key</td>
+<td>string</td>
+<td>Key specified in the local storage</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>value</td>
+<td>string</td>
+<td>Value to be stored</td>
+<td>Yes</td>
+</tr>
+    </table>
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+<table>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>code</td>
+<td>string</td>
+<td>Response code: 200 for success, 404 for failure</td>
+</tr>
+<tr>
+<td>msg</td>
+<td>string</td>
+<td>Response information</td>
+</tr>
+<tr>
+<td>data</td>
+<td>unknown</td>
+<td>Response data</td>
+</tr>
+    </table>
+</div>
+<div className='leftCol'>Example</div>
+<div className='rightCol'>
+
+```js
+import { setStorage } from '@suplink/jssdk';
+setStorage({ key: 'name', value: 'bob' }).then((res) => console.log(res))
+```
+
+</div>
+</div>
+</div>
+
+## SDK Details-Interface
+
+<div className='div'>
+<div className='title'>
+
+### datePicker
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Definition</div>
+<div className='rightCol'>
+Date picker.
+
+:::info
+App version must V3.3.0 and later.
+:::
+
+</div>
+<div className='leftCol'>Parameter</div>
+<div className='rightCol'>
+<table>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+<th>Required</th>
+</tr>
+<tr>
+<td>title</td>
+<td>string</td>
+<td>Title</td>
+<td></td>
+<td>No</td>
+</tr>
+<tr>
+<td>min</td>
+<td>number</td>
+<td>Minimum selectable date in milliseconds</td>
+<td>0</td>
+<td>No</td>
+</tr>
+<tr>
+<td>max</td>
+<td>number</td>
+<td>Maximum selectable date in milliseconds</td>
+<td>2556028800000</td>
+<td>No</td>
+</tr>
+<tr>
+<td>value</td>
+<td>number</td>
+<td>Selected date in milliseconds</td>
+<td></td>
+<td>No</td>
+</tr>
+<tr>
+<td>showTime</td>
+<td>boolean</td>
+<td>Add time selection feature</td>
+<td>true</td>
+<td>No</td>
+</tr>
+    </table>
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+<table>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>code</td>
+<td>string</td>
+<td>Response code: 200 for success, 404 for failure, 300 for cancel</td>
+</tr>
+<tr>
+<td>msg</td>
+<td>string</td>
+<td>Response information</td>
+</tr>
+<tr>
+<td>data</td>
+<td>number</td>
+<td>Selected date</td>
+</tr>
+    </table>
+</div>
+<div className='leftCol'>Example</div>
+<div className='rightCol'>
+
+```js
+import { datePicker } from '@suplink/jssdk';
+datePicker().then((res) => console.log(res))
+```
+
+</div>
+</div>
+</div>
+<div className='div'>
+<div className='title'>
+
+### dateRangePicker
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Definition</div>
+<div className='rightCol'>
+Date range picker.
+
+:::info
+App version must V3.3.0 and later.
+:::
+
+</div>
+<div className='leftCol'>Parameter</div>
+<div className='rightCol'>
+<table>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+<th>Required</th>
+</tr>
+<tr>
+<td>value</td>
+<td>Array.&lt;number&gt;</td>
+<td>Selected date range in milliseconds</td>
+<td>[0, 0]</td>
+<td>No</td>
+</tr>
+<tr>
+<td>min</td>
+<td>number</td>
+<td>Minimum selectable date in milliseconds</td>
+<td>0</td>
+<td>No</td>
+</tr>
+<tr>
+<td>max</td>
+<td>number</td>
+<td>Maximum selectable date in milliseconds</td>
+<td>2556028800000</td>
+<td>No</td>
+</tr>
+<tr>
+<td>showTime</td>
+<td>boolean</td>
+<td>Add time selection feature</td>
+<td>true</td>
+<td>No</td>
+</tr>
+<tr>
+<td>limitMin</td>
+<td>number</td>
+<td>Minimum time interval between start and end dates in milliseconds</td>
+<td></td>
+<td>No</td>
+</tr>
+<tr>
+<td>limitMax</td>
+<td>number</td>
+<td>Maximum time interval between start and end dates in milliseconds</td>
+<td></td>
+<td>No</td>
+</tr>
+    </table>
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+<table>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>code</td>
+<td>string</td>
+<td>Response code: 200 for success, 404 for failure, 300 for cancel</td>
+</tr>
+<tr>
+<td>msg</td>
+<td>string</td>
+<td>Response information</td>
+</tr>
+<tr>
+<td>data</td>
+<td>Object</td>
+<td>Response data</td>
+</tr>
+<tr>
+<td>data.resBeginDate</td>
+<td>number</td>
+<td>Selected start date</td>
+</tr>
+<tr>
+<td>data.resEndDate</td>
+<td>number</td>
+<td>Selected end date</td>
+</tr>
+    </table>
+</div>
+<div className='leftCol'>Example</div>
+<div className='rightCol'>
+
+```js
+import { dateRangePicker } from '@suplink/jssdk';
+dateRangePicker().then((res) => console.log(res))
+```
+
+</div>
+</div>
+</div>
+<div className='div'>
+<div className='title'>
+
+### setNavigationBar
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Definition</div>
+<div className='rightCol'>
+Set navigation bar.
+</div>
+<div className='leftCol'>Parameter</div>
+<div className='rightCol'>
+<table>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+<th>Required</th>
+</tr>
+<tr>
+<td>title</td>
+<td>string</td>
+<td>Navigation bar title</td>
+<td></td>
+<td>No</td>
+</tr>
+<tr>
+<td>backgroundColor</td>
+<td>string</td>
+<td>Navigation bar background color, supports only hexadecimal colors</td>
+<td>#ffffff</td>
+<td>No</td>
+</tr>
+<tr>
+<td>backButton</td>
+<td>boolean</td>
+<td>Whether the back button is displayed</td>
+<td>true</td>
+<td>No</td>
+</tr>
+<tr>
+<td>theme</td>
+<td>string</td>
+<td>Navigation bar theme, dark: dark theme | light: light theme</td>
+<td>dark</td>
+<td>No</td>
+</tr>
+<tr>
+<td>goast</td>
+<td>boolean</td>
+<td>Whether the navigation bar is floating and transparent, true: navigation bar background color is #646464 with 50% opacity, and backgroundColor is invalid (effective for SUPOS pages)</td>
+<td>false</td>
+<td>No</td>
+</tr>
+<tr>
+<td>hidden</td>
+<td>boolean</td>
+<td>Whether the navigation bar is hidden</td>
+<td>false</td>
+<td>No</td>
+</tr>
+<tr>
+<td>atomicBond</td>
+<td>boolean</td>
+<td>Whether the atomic key in the upper right corner is displayed</td>
+<td>true</td>
+<td>No</td>
+</tr>
+<tr>
+<td>underline</td>
+<td>boolean</td>
+<td>Whether the navigation bar underline is displayed</td>
+<td>true</td>
+<td>No</td>
+</tr>
+    </table>
+
+    
+:::info
+**theme** and **goast** are unavailable for web apps.
+:::
+
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+<table>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>code</td>
+<td>string</td>
+<td>Response code: 200 for success, 404 for failure</td>
+</tr>
+<tr>
+<td>msg</td>
+<td>string</td>
+<td>Response information</td>
+</tr>
+<tr>
+<td>data</td>
+<td>unknown</td>
+<td>Response data</td>
+</tr>
+    </table>
+</div>
+<div className='leftCol'>Example</div>
+<div className='rightCol'>
+
+```js
+import { setNavigationBar } from '@suplink/jssdk';
+setNavigationBar({ title: 'suplink' }).then((res) => console.log(res))
+```
+
+</div>
+</div>
+</div>

@@ -1,0 +1,127 @@
+---
+hide_title: true
+---
+
+<div className='div'>
+<div className='title'>
+
+## ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/openAPI/4.png) Get Tenant Quota
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Path</div>
+<div className='rightCol'>
+
+```
+http://{supOS ip:port}/open-api/supos/license/v1/quotas/tenants/{tenantId}
+```
+
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+
+- 200: Successful.
+
+```json
+{
+  "productQuota": {
+    "TENANT_DEADLINE": "permanent"
+  },
+  "featureQuota": {
+    "MAX_TAG_NUM": {
+      "total": 20000,
+      "used": 0
+    },
+    "MAX_COLLECTOR_NUM": {
+      "total": 50,
+      "used": 0
+    },
+    "MAX_PC_LOGIN": {
+      "total": 50,
+      "used": 0
+    }
+  }
+}
+```
+- 400/500
+
+```json
+{
+  "code": 10001004,
+  "message": "tenantId is empty"
+}
+```
+
+<ul>
+<ul>
+<li>10001001: Server exception.</li>
+<li>10001005: Tenant does not exist.</li>
+</ul>
+</ul>
+</div>
+</div>
+</div>
+
+<div className='div'>
+<div className='title'>
+
+## ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/openAPI/4.png) Get All Quota
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Path</div>
+<div className='rightCol'>
+
+```
+http://{supOS ip:port}/open-api/supos/license/v1/quotas/system
+```
+
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+
+- 200: Successful.
+
+```json
+{
+  "productQuota": {
+    "PLATFORM_DEADLINE": "permanent"
+  },
+  "featureQuota": {
+    "MAX_TAG_NUM": {
+      "total": 20000,
+      "used": 0
+    },
+    "MAX_TENANT_NUM": {
+      "total": 500,
+      "used": 0
+    },
+    "MAX_COLLECTOR_NUM": {
+      "total": 500,
+      "used": 0
+    },
+    "MAX_PC_LOGIN": {
+      "total": 500,
+      "used": 0
+    }
+  }
+}
+```
+- 400/500
+
+```json
+{
+  "code": 10001004,
+  "message": "tenantId is empty"
+}
+```
+
+<ul>
+<ul>
+<li>10001001: Server exception.</li>
+<li>10001005: Tenant does not exist.</li>
+</ul>
+</ul>
+</div>
+</div>
+</div>

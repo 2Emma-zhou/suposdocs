@@ -1,0 +1,468 @@
+---
+hide_title: true
+---
+
+<div class="div"> 
+<div class="title">
+
+## ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/openAPI/4.png) Get Real-time Alarms
+
+</div>
+<div class="grid">
+<div class="leftCol">Path</div>
+<div class="rightCol">
+
+```
+http://{supOS ip:port}/open-api/supos/oodm/v2/alert/current
+```
+
+</div>
+<div class="leftCol">Query Parameter</div>
+<div class="rightCol">
+<table>
+<caption>Table 1. Query parameter description</caption>
+<colgroup>
+<col style={{ width: "25%" }} />
+<col style={{ width: "25%" }} />
+<col style={{ width: "50%" }} />
+</colgroup>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>keyWord</td>
+<td>string</td>
+<td>Fuzzy match with the name or alias of object and object attribute.</td>
+</tr>
+<tr>
+<td>priority</td>
+<td>string</td>
+<td>Alarm priority.</td>
+</tr>
+<tr>
+<td>limitValue</td>
+<td>string</td>
+<td>LImit value of conditions that trigger the alarm.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="leftCol">Response</div>
+<div class="rightCol">
+<ul>
+<li>200: Successful.
+
+```json
+{
+"code" : 200,
+"data" : [ {
+"ackDatatimestamp" : 1614670680298, //alarm confirmation time
+"ackStatus" : 0, //alarm confirmation status. 0 means not confirmed and 1 means confirmed
+"ackUserName" : "Emma", //alarm confirmation person
+"alertName" : "uuidde2d4cfaf5af4abe830387fbfe3e0bbf",
+"alertType" : "EQ", //alarm condition. EQ=equal, LT=less than, LE=less and equal, GT=greater than, GE=greater and equal
+"description" : "this is test alarm",
+"disappearedDatatimestamp" : 1614583659860, //alarm cancellation time
+"fullName" : "10801uuidde2d4cfaf5af4abe830387fbfe3e0bbf", //instance alias + alarm alias
+"id" : 11111, //real-time alarm ID
+"newValue" : "11", //value when alarm is triggered
+"oldValue" : "9", //value before alarm is triggered
+"priority" : 5,
+"showName" : "a1", //alarm display name
+"source" : "instance1", //instance alias that triggers the alarm
+"sourcePropShowName" : "attribute1", //attribute name to which the alarm belongs
+"sourcePropertyName" : "attribute1", //attribute alias to which the alarm belongs
+"sourceShowName" : "instance1", //instance name that triggers the alarm
+"startDatatimestamp" : 1614583559860, //alarm start time
+"status" : 1,//alarm status. 1 means alarm is triggered and 0 means alarm cancelled
+"valType" : 0 //attribute type. 0=double, 1=float, 2=long, 3=int, 4=boolean and 5=string
+} ],
+"detail" : "string",
+"message" : "ok"
+}
+```
+
+</li>
+<li>500: General internal error of OODM.
+
+```json
+{
+"code": 10001001,
+"data": {},
+"detail": "string",
+"message": "string"
+}
+```
+
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div class="div"> 
+<div class="title">
+
+## ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/openAPI/2.png) Set Real-time Value of Entity Instance
+
+</div> 
+<div class="grid"> 
+<div class="leftCol">Path</div> 
+<div class="rightCol"> 
+
+``` 
+http://{supOS ip:port}/open-api/supos/oodm/v2/attributes/current 
+``` 
+
+</div> 
+<div class="leftCol">Request Body</div> 
+<div class="rightCol"> 
+
+``` 
+[ { 
+"attributeFullPath" : "system.t1.i1.system.p1", //template namespace.template alias.instance alias.attribute namespace.attribute alias 
+"value" : "666", 
+"dateTime" : "2021-04-06T16:00+08:00" 
+} ] 
+``` 
+
+</div> 
+<div class="leftCol">Response</div> 
+<div class="rightCol"> 
+<ul> 
+<li>200: Successful. 
+
+```json
+{ 
+"code" : 200, 
+"data" : [ { 
+"ackDatatimestamp" : 1614670680298, //alarm confirmation time 
+"ackStatus" : 0, //alarm confirmation status. 0 means not confirmed and 1 means confirmed 
+"ackUserName" : "Emma", //alarm confirmation person 
+"alertName" : "uuidde2d4cfaf5af4abe830387fbfe3e0bbf", 
+"alertType" : "EQ", //alarm condition. EQ=equal, LT=less than, LE=less and equal, GT=greater than, GE=greater and equal 
+"description" : "this is test alarm", 
+"disappearedDatatimestamp" : 1614583659860, //alarm cancellation time 
+"fullName" : "10801uuidde2d4cfaf5af4abe830387fbfe3e0bbf", //instance alias + alarm alias 
+"id" : 11111, //real-time alarm ID 
+"newValue" : "11", //value when alarm is triggered 
+"oldValue" : "9", //value before alarm is triggered 
+"priority" : 5, 
+"showName" : "a1", //alarm display name 
+"source" : "instance1", //instance alias that triggers the alarm 
+"sourcePropShowName" : "attribute1", //attribute name to which the alarm belongs 
+"sourcePropertyName" : "attribute1", //attribute alias to which the alarm belongs 
+"sourceShowName" : "instance1", //instance name that triggers the alarm 
+"startDatatimestamp" : 1614583559860, //alarm start time 
+"status" : 1,//alarm status. 1 means alarm is triggered and 0 means alarm cancelled 
+"valType" : 0 //attribute type. 0=double, 1=float, 2=long, 3=int, 4=boolean and 5=string 
+} ], 
+"detail" : "string", 
+"message" : "ok" 
+} 
+```
+
+</li> 
+<li>400: General internal error of OODM. 
+
+```json
+{ 
+"code": 10001001, 
+"data": {},
+"detail": "string",
+"message": "string"
+}
+```
+
+</li>
+</ul>
+</div>
+</div> 
+</div> 
+
+<div class="div">
+<div class="title">
+
+## ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/openAPI/1.png) Get Real-time Data of Object Attribute
+:::info
+You can get up to 1000 attributes.
+:::
+
+</div>
+<div class="grid">
+<div class="leftCol">Path</div>
+<div class="rightCol"> 
+
+```
+http://{supOS ip:port}/open-api/supos/oodm/v2/attribute/current
+```
+
+</div>
+<div class="leftCol">Request Body</div>
+<div class="rightCol"> 
+
+```json
+{
+"inputs" : [ "system.t1.instance.system.p1" ] //template namespace.template alias.instance alias.attribute namespace.attribute alias
+}
+```
+
+</div>
+<div class="leftCol">Response</div>
+<div class="rightCol"> 
+<ul>
+<li>200: Successful.
+
+
+```json
+{
+"code" : 200,
+"data" : {
+"additionalProp1" : {
+"name" : "system.testExcel.Instance_53.system.p1",
+"status" : "0",
+"timeStamp" : 1614736757547,
+"value" : { }
+},
+"additionalProp2" : {
+"name" : "system.testExcel.Instance_53.system.p1",
+"status" : "0",
+"timeStamp" : 1614736757547,
+"value" : { }
+},
+"additionalProp3" : {
+"name" : "system.testExcel.Instance_53.system.p1",
+"status" : "0",
+"timeStamp" : 1614736757547,
+"value" : { }
+}
+},
+"detail" : "string",
+"message" : "ok"
+}
+```
+
+</li>
+<li>500: General internal error of OODM.
+
+```json
+{
+"code": 10001001,
+"data": {},
+"detail": "string",
+"message": "string"
+}
+```
+
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div class="div">
+<div class="title"> 
+
+## ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/openAPI/1.png) Get History Data of Object Attribute 
+
+</div>
+<div class="grid">
+<div class="leftCol">Path</div>
+<div class="rightCol"> 
+
+```
+http://{supOS ip:port}/open-api/supos/oodm/v2/attribute/histories
+``` 
+
+</div>
+<div class="leftCol">Request Body</div>
+<div class="rightCol"> 
+
+```json
+{
+"fill" : { //filter conditions of history data
+"strategy" : "previous"
+},
+"groupBy" : { //grouping conditions of history data
+"time" : "5s,1s"
+},
+"limit" : 1, //number of returned data
+"offset" : 23, //start query after the set number of data
+"order" : "DESC", //sorting rule
+"select" : [ "system.testExcel.Instance_53.system.p1" ],
+"where" : { //query conditions
+"and" : {
+"timestamp" : {
+"ge" : "2021-03-04T05:04:11Z",
+"gt" : "2021-03-04T05:04:11Z",
+"le" : "2021-03-04T05:14:11Z",
+"lt" : "2021-03-04T05:14:11Z"
+}
+}
+}
+}
+``` 
+
+</div>
+<div class="leftCol">Response</div>
+<div class="rightCol"> 
+<ul>
+<li>200: Successful.
+
+```json
+{
+"code" : 200,
+"data" : {
+"results" : [ {
+"datas" : [ [ { } ] ],
+"fields" : [ "time" ],
+"function" : "first",
+"hasNext" : false,
+"name" : "system.testExcel.Instance_53.system.p1"
+} ]
+},
+"detail" : "string",
+"message" : "ok"
+}
+```
+
+</li>
+<li>500: General internal error of OODM.
+
+```json
+{
+"code": 10001001,
+"data": {},
+"detail": "string",
+"message": "string"
+}
+```
+
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div class="div">
+<div class="title"> 
+
+## ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/openAPI/1.png) Execute Entity Instance Service 
+
+</div>
+<div class="grid">
+<div class="leftCol">Path</div>
+<div class="rightCol"> 
+
+```
+http://{supOS ip:port}/open-api/supos/oodm/v2/template/{templateNamespace}/{templateName}/instance/{instanceName}/service/{serviceNamespace}/{serviceName}
+``` 
+
+</div>
+<div class="leftCol">Request Body</div>
+<div class="rightCol"> 
+
+```json
+{
+"propName" : "p1"
+}
+```
+
+</div>
+<div class="leftCol">Response</div>
+<div class="rightCol"> 
+<ul>
+<li>200: Successful.
+
+```json
+{
+"code" : 200,
+"data" : {
+"result" : 44
+},
+"detail" : "string",
+"message" : "ok"
+}
+```
+
+</li>
+<li>500: General internal error of OODM.
+
+```json
+{
+"code": 10001001,
+"data": {},
+"detail": "string",
+"message": "string"
+}
+```
+
+</li>
+</ul> 
+</div>
+</div>
+</div>
+
+<div class="div">
+<div class="title">
+
+## ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/openAPI/1.png) Execute Form Template Service
+
+</div>
+<div class="grid">
+<div class="leftCol">Path</div>
+<div class="rightCol">
+
+```
+http://{supOS ip:port}/open-api/supos/oodm/v2/template/{templateNamespace}/{templateName}/service/{serviceNamespace}/{serviceName}
+```
+
+</div>
+<div class="leftCol">Request Body</div>
+<div class="rightCol">
+
+```json
+{
+"propName" : "p1"
+}
+```
+
+</div>
+<div class="leftCol">Response</div>
+<div class="rightCol">
+<ul>
+<li>200: Successful.
+
+```json
+{
+"code" : 200,
+"data" : {
+"result" : 44
+},
+"detail" : "string",
+"message" : "ok"
+}
+```
+
+</li>
+<li>500: General internal error of OODM.
+
+```json
+{
+"code": 10001001,
+"data": {},
+"detail": "string",
+"message": "string"
+}
+```
+
+</li>
+</ul>
+</div>
+</div>
+</div>

@@ -1,0 +1,94 @@
+---
+hide_title: true
+---
+
+### Configuring on web
+:::info
+Alarm is not available for supOS-lite.
+:::
+
+1. Log in to supLink web, and then click **App Manage**.
+2. Under **Base App**, click **Edit** on **Flowchart**.
+
+<img width={450} src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supLink/18.png" />
+
+<table>
+    <thead>
+      <tr>
+        <th>Parameter</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Should make sure</td>
+        <td>Select whether to enable alarm confirmation on mobile.</td>
+      </tr>
+      <tr>
+        <td>QR code</td>
+        <td>Use supLink app to scan the code to access the application directly.</td>
+      </tr>
+      <tr>
+        <td>Visible range</td>
+        <td>Set the application visible range. Select roles to grant permissions when set <b>Visible range</b> to <b>Part visible</b> or <b>Part invisible</b>.</td>
+      </tr>
+      <tr>
+        <td>Select group</td>
+        <td>Select an app group for the application.</td>
+      </tr>
+    </tbody>
+</table>
+
+3. Click **Save**.
+
+### Viewing Effect on Mobile
+
+1. Install supLink mobile on your phone, start it and enter the supLink server address, tap **Start**.
+2. Log in with the same account as supOS.
+3. Under **Base App**, tap **Alarm**, and you can see the alarms.
+:::info
+External Kafka is needed for getting real-time alarms. For details, see <a href="Configuring External Kafka">Configuring External Kafka</a>.
+:::
+<img className="image-zoom" src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supLink/57.png" />
+
+<table>
+    <thead>
+      <tr>
+        <th>No.</th>
+        <th>Parameter</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td>Alarm history</td>
+        <td>Click to view history alarms. You can filter history alarms by priority, confirming state, active status and triggering time.</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>Statistical analysis</td>
+        <td>Displays analyzed alarm data in acspects such as total amount, frequency top10, alarm level and trend.</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>Alarm overview</td>
+        <td>Displays the number of alarms in different state and priority.</td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td>Alarm filter</td>
+        <td>Filter alarms by time or priority.</td>
+      </tr>
+      <tr>
+        <td>5</td>
+        <td>Alarm trend</td>
+        <td>Click to see the field value trend that triggers the alarm.</td>
+      </tr>
+      <tr>
+        <td>6</td>
+        <td>Alarm info</td>
+        <td>Click to view the alarm details.</td>
+      </tr>
+    </tbody>
+</table>

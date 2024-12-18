@@ -1,0 +1,62 @@
+<table>
+  <thead>
+    <tr>
+<th>Item</th>
+<th>Description</th>
+<th>Remarks</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+<td>Hardware</td>
+<td>
+
+- At least 2 physical or virtual nodes for cluster deployment.
+- For BE node, AVX2 instruction set must be available on the CPU.
+- Network connection between nodes must be through 10 Gigabit network card and 10 Gigabit switch.
+
+</td>
+<td>
+
+- For FE/BE nodes, we recommend 4 cores or more CPU and 4 GB or larger RAM.
+- Run `cat /p/proc/cpuinfo fo |grep avx2` to check the instruction set the CPU supports, and AVX2 is available when results are returned.
+
+</td>
+    </tr>
+    <tr>
+<td>Operating system</td>
+<td>
+
+- CentOS 7 or newer
+- Ubuntu16.04/20.04
+
+</td>
+<td>-</td>
+    </tr>
+    <tr>
+<td>Software</td>
+<td>
+
+- Install Jave Development Kit 1.8 or newer for all nodes.
+- Install MySQL 5.5 or newer on the client node.
+
+</td>
+<td>-</td>
+    </tr>
+    <tr>
+<td>System environment</td>
+<td>
+
+- Clock must be synchronized for cluster deployment.
+- Permission for setting `ulimit -n` must be granted to user. 
+
+</td>
+<td>-</td>
+    </tr>
+  </tbody>
+</table>
+
+:::info
+- Based on different workload complexities, StarRocks can process 10 M to 100 M rows of data per second per CPU thread. You can use this to estimate how many CPU threads your cluster needs. 
+- StarRocks uses columnar storage and compression to achieve a compression ratio of 4-10 times when storing data. You can use this information to estimate the storage capacity needed for your cluster.
+:::

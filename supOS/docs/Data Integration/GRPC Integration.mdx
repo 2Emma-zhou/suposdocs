@@ -1,0 +1,81 @@
+## Access Verification
+Based on GRPC interfaces, **Verify** is used for access verification.
+
+#### Parameter
+- Request: VerifyRequest
+- Response: VerifyResponse
+
+#### Description
+
+- When the returned `errorCode` is <b>100004</b>, the connection is complete and the returned `sessionID` can be used for future business interaction.
+- `sessionID` is used as the input parameter <b>key</b> when calling other APIs.
+
+## Business Functions
+Before calling any business functions, the returned `sessionID` must be transmitted to supOS by <b>metaData</b>.
+### Complete Metadata Refresh
+#### Parameter
+- Request: RefreshMetaRequest
+- Response: RefreshMetaResponse
+
+#### Description
+The access device should refresh current metadata completely after passed verification, to ensure the data consistancy.
+
+### Incremental Metadata Refresh
+#### Parameter
+- Add
+
+<ul>
+<ul>
+<li>Request: AddMetaRequest</li>
+<li>Response: AddMetaResponse</li>
+</ul>
+</ul>
+
+- Modify
+
+<ul>
+<ul>
+<li>Request: ModMetaRequest</li>
+<li>Response: ModMetaResponse</li>
+</ul>
+</ul>
+
+- Delete
+
+<ul>
+<ul>
+<li>Request: DelMetaRequest</li>
+<li>Response: DelMetaResponse</li>
+</ul>
+</ul>
+
+#### Description
+If metadata changes when the device is running, using incremental refresh to synchronize data is recommended.
+
+### Update 
+#### Parameter
+- Request: UpdateValueRequest
+- Response: UpdateValueResponse
+#### Description
+The device sends real-time data actively. The data will be discarded when it is inconsistant with the metadata in supOS.
+
+### Resume History Data Transmission
+#### Parameter
+- Request: RetransValueRequest
+- Response: RetransValueResponse
+#### Description
+The data will be stored to local temporarily when the device cannot upload data in real time, and be uploaded once communication restores.
+
+### Event Notification
+#### Parameter
+- Request: RtdEvent
+- Response: google.protobuf.Empty
+#### Description
+Reserved interface. It allows the device and platform application to upload specific data.
+
+### System Time Synchronization
+#### Parameter
+- Request: SyncTimeRequest
+- Response: SyncTimeResponse
+#### Description
+Used for time synchronization between the device and the platform.

@@ -1,0 +1,313 @@
+---
+openapi: 3.0.0
+info:
+  description: Provides functions such as adding, modifying, and deleting modules
+  version:
+  title: Module Management Interface Definition
+servers:
+- url: "/open-api/module-registry"
+tags:
+- name: modules
+  description: Module Management
+paths:
+  "/v1/modules":
+    get:
+      tags:
+      - modules
+      summary: Query module list
+      description: Used to query the registered module information of supOS system
+      operationId: getModules
+      parameters:
+      - in: header
+        name: Accept-Language
+        description: Internationalized language (depending on the language, the system
+          code value returns content in different languages), the default is the server
+          operating system language. English is en-us, Chinese is zh-cn.
+        required: false
+        schema:
+          type: string
+          example: zh-cn
+          maxLength: 8
+      - in: query
+        name: moduleCodes
+        required: false
+        schema:
+          type: array
+          maxItems: 10
+          items:
+            type: string
+            maxLength: 500
+        example: desktop,flow
+        style: form
+        explode: false
+        description: Multiple module codes are separated by ',', if not passed, a
+          list of all modules will be returned by default
+      responses:
+        '200':
+          description: Module Information
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  "$ref": "#/components/schemas/Module"
+        '500':
+          description: General error 100000001 Service internal exception
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ApiResponse"
+              example:
+                code: 100000001
+                message: An unknown exception occurred in the system
+    post:
+      tags:
+      - modules
+      summary: Register, modify module module
+      description: |
+        Register the basic information of the module and the internationalization information data of the module.
+
+        **Register the module by uploading the yaml file, which supports the configuration of internationalization information.**
+
+        **Related parameters For the format requirements, please refer to the detailed description of the corresponding parameters in the `YAML` file. **
+
+        Increase the version number, and judge whether to modify it according to the version number. The format of the version number adopts [SemVer 2](https://semver. org/) specification.
+
+        YAML file format is as follows:
+
+         * [v1alpha1](../modules_v1alpha1.yaml.template)
+      operationId: createModules
+      requestBody:
+        content:
+          application/octet-stream:
+            schema:
+              type: string
+              format: binary
+      responses:
+        '201':
+          description: 'Registration module successful, no content returned
+
+            '
+        '400':
+          description: |
+            Error prompt
+            * 100114002 Module already exists!,{"code":100114002,"message":"Module already exists! "}
+            * 100114003 Module code cannot be empty!,{"code":100114003,"message":"Module code cannot be empty! "}
+            * 100114004 Too many modules, more than 10!,{"code":100114004,"message":"Too many modules, more than 10! "}
+            * 100114005 The internationalization code cannot be empty, {"code": 100114005, "message": "The internationalization code cannot be empty! "}
+            * 100114006 Internationalization information registration failed, {"code": 100114006, "message": "Internationalization information registration failed!"}
+            * 100114008 Module internationalization encoding format does not conform Requirement, {"code": 100114008, "message": "The module internationalization encoding format does not meet the requirements!"}
+            * 100114009 The module encoding format does not meet the requirements, {"code": 100114009 , "message": "The module code format does not meet the requirements!"}
+            * 100114010 The module ID format does not meet the requirements, {"code": 100114010, "message": "The module ID format Does not meet the requirements!"}
+            * 100114011 The module ID cannot be empty! {"code": 100114011, "message": "The module ID cannot be empty! !"}
+            * 100114012 The module data version number cannot be empty!,{"code":100114012,"message":"The module data version number cannot be empty! "}
+            * 100114013 The module data version number does not meet the requirements!,{"code":100114013,"message":"The module data version number does not meet the requirements! "}
+            * 100114014 The module list cannot be empty!,{"code":100114014,"message":"The module list cannot be empty! "}
+            * 100114015 apiVersion cannot be empty!,{"code":100114015,"message":"apiVersion cannot be empty! "}
+            * 100114016 apiVersion format error!,{"code":100114016,"message":"apiVersion format error! "}
+            * 100114017 There is an error in the content of the yaml file!,{"code":100114017,"message":"There is an error in the content of the yaml file! "}
+            * 100114018 The parameter moduleCodes supports up to 10!,{"code":100114018,"message":"The parameter moduleCodes supports up to 10! "}
+            * 100114019 The system module is not allowed to be deleted!,{"code":100114019,"message":"The system module is not allowed to be deleted! "}
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ApiResponse"
+              example:
+                code: 100114002
+                message: Module already exists!
+        '500':
+          description: General error 100000001 Service internal exception
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ApiResponse"
+              example:
+                code: 100000001
+                message: An unknown exception occurred in the system
+  "/v1/modules/{moduleCodes}":
+    delete:
+      tags:
+      - modules
+      summary: Unregister Module
+      description: "`moduleCodes` Multiple module codes are separated by ',', system
+        built-in modules are not allowed to be deleted\n"
+      operationId: deleteModules
+      parameters:
+      - in: path
+        name: moduleCodes
+        required: true
+        schema:
+          type: array
+          maxItems: 10
+          items:
+            type: string
+            maxLength: 500
+        example: desktop,flow
+        description: Multiple module codes are separated by ','
+      responses:
+        '204':
+          description: 'Delete module successfully, return nothing
+
+            '
+        '400':
+          description: |
+            Error prompt
+            * 100114004 There are too many input modules, it should not exceed 10!,{"code":100114004,"message":"There are too many input modules, no There should be more than 10! "}
+            * 100114007 The system module is not allowed to be deleted!,{"code":100114007,"message":"The system module is not allowed to be deleted! "}
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ApiResponse"
+              example:
+                code: 100114004
+                message: The number of module inputs is too many, there should not
+                  be more than 10!
+        '500':
+          description: General error 100000001 Service internal exception
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ApiResponse"
+              example:
+                code: 100000001
+                message: An unknown exception occurred in the system
+components:
+  schemas:
+    Register:
+      type: object
+      description: Module registration upload file format
+      properties:
+        apiVersion:
+          type: string
+          description: File Format Version
+          enum:
+          - v1alpha1
+          default: v1alpha1
+          example: v1alpha1
+        dataVersion:
+          type: string
+          description: "Module data version number. Required. It is used to determine
+            whether the module data needs to be updated.\n\nFormat requirements: <main>.<secondary>.<revision>
+            Use [SemVer 2](https://semver.org /) specifications.\n\nEvery request
+            will be judged according to the version number:\n\n1), if the module has
+            not been registered before, directly add and record the version number\n\n2),
+            if the module Registered, then compare the version number:\n \n a), the
+            newly submitted version number is the same as or smaller than the currently
+            recorded version number of the module, then return success directly without
+            any operation\n \n b), the new submitted version number If the version
+            number is greater than the currently recorded version number of the module,
+            the submission is considered to be an update operation, and the modification
+            logic related to the module is executed\n"
+          maxLength: 11
+          default: 1.0.0
+          example: 1.0.0
+        modules:
+          type: array
+          description: Registered module list, the number of modules that can be registered
+            at the same time does not exceed 10
+          maxItems: 10
+          items:
+            "$ref": "#/components/schemas/ModuleInfo"
+      required:
+      - apiVersion
+      - dataVersion
+      - modules
+    ModuleInfo:
+      type: object
+      description: Module registration information
+      properties:
+        id:
+          type: string
+          description: |
+            The unique identification code of the module. It is required. It cannot be changed.
+
+            If you register in the form of APP, you can use the app id to fill in.
+
+            Support letters, numbers, and underscores. Must start with a letter, Cannot end with an underscore.
+          maxLength: 500
+          example: rbac
+        code:
+          type: string
+          description: "Module code. Required. Cannot be changed.\n\nUnless otherwise
+            specified, it can be consistent with the id.\n\nSupports letters, numbers,
+            and underscores. It must start with a letter and cannot end with an underscore.\n "
+          maxLength: 500
+          example: rbac
+        name:
+          type: string
+          description: |
+            Module name. Required.
+
+            Generally filled with the internationalized KEY of the name, the format of the encoding code is: `reg.moduleName.` + `moduleCode`, such as: reg.moduleName.rbac
+          maxLength: 500
+          example: reg.moduleName.rbac
+        i18nKeyValues:
+          type: array
+          description: Internationalization data for module names.
+          items:
+            "$ref": "#/components/schemas/I18nKeyValue"
+          minItems: 1
+          maxItems: 10
+      required:
+      - id
+      - code
+      - name
+      - i18nKeyValues
+    I18nKeyValue:
+      type: object
+      description: Internationalization Data
+      properties:
+        locale:
+          type: string
+          maxLength: 8
+          description: "Internationalization keys mainly have the following four languages,
+            and the keys correspond to:\n* `zh_CN`: Chinese\n* `zh_HK`: Traditional
+            Chinese\n* `en_US`: English\n* `id_ID`: Indonesian \n\nCurrently, the
+            platform supports four languages: Chinese, traditional Chinese, English,
+            and Indonesian. The caller must include at least Chinese when passing
+            parameters, and other languages can be added by themselves according to
+            business needs.\n"
+          example: zh_CN
+        display:
+          type: string
+          description: Internationalization reference value, set according to locale
+            value
+          example: Chinese name
+          maxLength: 500
+      required:
+      - locale
+      - display
+    Module:
+      type: object
+      description: Module Information
+      properties:
+        moduleId:
+          type: string
+          description: A unique identifier for the module.
+          maxLength: 500
+          example: auth
+        moduleCode:
+          type: string
+          description: Module encoding
+          maxLength: 500
+          example: auth
+        moduleName:
+          type: string
+          description: Module name
+          maxLength: 500
+          example: User Management
+    ApiResponse:
+      type: object
+      description: 'HTTP request response default structure {''code;: 10000, ''message'':
+        ''success''''}'
+      properties:
+        code:
+          type: integer
+          format: int32
+          example: 10000
+        message:
+          type: string
+          example: success
+      required:
+      - code
+      - message

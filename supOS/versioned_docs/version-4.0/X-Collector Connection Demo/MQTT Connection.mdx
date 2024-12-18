@@ -1,0 +1,149 @@
+---
+sidebar_position: 3
+
+---
+## Overview
+OPC is an agreement that uses Microsoft's COM/DCOM technology to achieve automatic control.
+It adopts a typical C/S mode, with a server program that conforms to OPC standards and the driver program for hardware devices is provided by the hardware manufacturer, 
+you only need to Write the client program according to the OPC standard to access the server program, so as to communicate with the hardware device.
+### OPC DA Introduction
+OPC is widely applied to factory control systems such as DCS, SIS and SCADA. OPC DA is the communication protocol that supports the highest frequency among OPC protocols.
+### OPC DA Feature
+- Large transmission volume, with stable and reliable output.
+- With DCOM configuration, trouble shooting might not ne easy.
+- Low security level comes with open permissions.
+## OPC DA Connection Process <span id="dcom"></span>
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/collectorDemo/16.jpg)
+## Configuring DCOM 
+To assure stable commnication between OPC server and client, DCOM conifguration on both sides are necesary.
+:::info
+DCOM configuration on OPC server and client is similar. In this section, we take configuration on server as an example.
+:::
+### Preparation
+- Install and configure the operating system according to installation guide and standards.
+- An administrator level of accoubt is necessary when logging in to OPC server and client systems, so as to configure user account and DCOM seetings.
+- Network connection of both OPC server and client is correct and they can be accessed by each other.
+- User account that logs in to both OPC server and client systems must be the same and not empty.
+### Configuring Component Services
+1. Search for **Component Services** in start menu, and then select **Component Services** > **Computers** > **My Computer**.
+2. Right-click **My Computer**, and then select **Properties**.<br/>
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/collectorDemo/1.jpg)
+3. Set computer properties.
+- Default Properties<br/>
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/collectorDemo/2.jpg)
+- Default Protocols<br/>
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/collectorDemo/3.jpg)
+- COM Security<br/>
+Change limit and default permissions of both access and launch and activiation. Click **Edit Default** under **Access Permissions**.
+
+:::info
+- Changing default permissions of **Access Permissions** is used as an example.
+- Following users need to be granted permissions:
+<ul>
+<li>Everyone</li>
+<li>Interactive</li>
+<li>ANONYMOUSLOGIN</li>
+<li>Administrator</li>
+<li>Administrators</li>
+<li>SYSTEM<span id="opcenum"></span></li>
+</ul>
+:::
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/collectorDemo/4.jpg)<br/>
+4. Under **My Computer** > **DCOM Config**, right-click **OpcEnum** and then select **Properties**.
+
+
+
+5. Set OpcEnum properties.
+- General<br/>
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/collectorDemo/5.jpg)
+- Location<br/>
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/collectorDemo/6.jpg)
+- Security <br/>
+Change all three types of permissions to grant to the following users.<br/>
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/collectorDemo/7.jpg)
+<ul>
+<li>Everyone</li>
+<li>Interactive</li>
+<li>ANONYMOUSLOGIN</li>
+<li>Administrator</li>
+<li>Administrators</li>
+<li>SYSTEM</li>
+</ul>
+
+
+
+- Endpoints<br/>
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/collectorDemo/8.jpg)
+- Identity<br/>
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/collectorDemo/9.jpg)
+:::tip
+If **The interactive user** is grayed out, follow the instructions to enable it.
+:::
+1. Search for **opcenum.exe**, copy its directory path.
+2. Open cmd, enter the command `cd C:\Windows\SysWOW64 //opcenum.exe directory`.
+3. Enter the command `opcenum /unregserver` to unregister the opc server.
+4. Enter the command `opcenum /regserver` to register the opc server again.<br/>
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/collectorDemo/10.jpg)
+### Configuring OPC Server Properties
+Select **Component Services** > **Computers** > **DCOM Config**, right-click **SUPCON.TCSOPCDASVR** to edit its properties.
+:::info
+- TCS OPC server is used as an example in this section.
+- Configuration of TCSOPC server is similar to that of OpcEnum. For details, see <a href="#opcenum">OpcEnum</a>.
+:::
+### Configuring FOlder Options
+1. In file explorer, select **View** > **Options**.
+2. Disable **Use Sharing Wizard(Recommended)** under **View**.<br/>
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/collectorDemo/11.jpg)
+### Configuring System Services
+1. Search for **Services** in start menu.
+2. In **Services** window, run the following services.
+- Computer Browser
+- DCOM Server Process Launcher
+- Remote Procedure Call (RPC)
+- Remote Procedure Call (RPC) Locator
+- Remote Registry
+- Routing and Remote Access
+- RPC Endpoint Mapper<br/>
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/collectorDemo/12.jpg)
+:::tip
+Double-click the service and then click **Start** if the service is not running.
+:::
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/collectorDemo/13.jpg)
+### Configuring System Security Policy
+1. Press windows + R keys at the same time, and then enter `secpol.msc` to enter **Local Security Policy**.
+2. Select **Local Policies** > **Security Options**, and then set the following options and corresponding statuses.<br/>
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/collectorDemo/14.jpg)<br/>
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/collectorDemo/15.jpg)
+### Configuring DCOM on OPC Client
+Do the same configuration as OPC server. For details, see <a href="#dcom">Configuring DCOM</a>.
+## Debugging through OPC Client
+Debug through OPC client, see if the data can be correctly collected.
+1. Download and install opc client.
+2. Run opc client, and then select **OPC** > **Connect**.
+3. Enter the opc server information.<br/>
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/collectorDemo/17.jpg)
+4. Select **OPC** > **Add Item**.<br/>
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/collectorDemo/18.jpg)
+:::info
+You can install opc client on both data collector and engineer station for testing whether the OPC server works properly and whether the connection between them is corrent respectively.
+:::
+## Connecting supOS Platform
+1. Log in to X-Collector, and then select **RTD Collector** > **Source**.<br/>
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/collectorDemo/1.gif)
+2. Synchronize tags connected to the source point.<br/>
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/collectorDemo/2.gif)
+:::info
+On the source list, check whether the state of the source point you just added is connected.
+:::
+3. Log in to supOS platform, go to design center and then select **Collection Node Management** > **Authentication** to add a collector.<br/>
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/collectorDemo/3.gif)
+4. On X-Collector, select **RTD Collector** > **Connection Info** and then connect to the supOS platform.<br/>
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/collectorDemo/4.gif)
+5. On supOS platform, select **Collection Node Management** > **Status**, find the collector you added, and then click **OK** to approve the connection.<br/>
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/collectorDemo/5.gif)
+## Checking Connection
+On supOS platform, select **Object Model Management** > **Object Instance** and see whether the tags on OPC server are displayed under **Collector Template**.<br/>
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/collectorDemo/6.gif)
+
+

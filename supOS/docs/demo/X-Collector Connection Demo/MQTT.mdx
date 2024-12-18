@@ -1,0 +1,132 @@
+Collecting data through MQTT to supOS is supported. During the process, supOS is acting as the MQTT broker and a client.
+
+## Adding Collector
+1. Log in to supOS, and then click <img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/platform/7.png"/> at the upper-right corner to go to the design center.
+2. Select **Collection Node Management** > **Authentication**.
+3. Click <img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/platform/16.png"/>, and then enter the corresponding information to add a collector.
+4. Set the <strong>Style</strong> to <strong>IOT gateway</strong>, and select the <strong>Timestamp</strong> to be recorded in the data.
+
+<img width={450} src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/demo/1.png"/>
+
+5. Click <strong>OK</strong>.
+
+## Configuring MQTT Connection
+
+### Connecting MQTT Client
+1. On the MQTT client, connect to the supOS.
+
+<img width={450} src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/demo/2.png"/>
+
+
+:::info
+The port set for supOS MQTT broker is **32566**.
+:::
+
+
+2. Set the topic `/{auth token}/{endpoint id}/{endpoint name}/{method name}/{direction}` to send tag data to supOS according to <a href="../../Data%20Integration/MQTT%20Integration">MQTT Integration</a>.
+:::info
+Different topics for different requests have been defined.
+:::
+
+### Encoding MQTT Message
+:::info
+- Data encoding protocol is using `ProtoBuf`. Only encoded data can be received and parsed by supOS.
+- Encoding program can be diversified. In this section, Python is used as an example.
+:::
+
+1. Copy the data protocol you need from <a href="../../Data%20Integration/MQTT%20Data%20Protocol">MQTT Data Protocol</a> and paste to a **XXX.proto** file in PyCharm.
+
+<img width={450} src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/demo/3.png"/>
+
+2. Download **protoc-25.1-win64.zip** file from <a href="https://github.com/protocolbuffers/protobuf/releases">Github</a>.
+3. Decompress the package and add the **.bin** path to system environment variables through **This PC** > **Properties** > **Advanced system settings**.
+:::tip
+You can use `protoc --version` in CMD to check whether it is successfully downloaded.
+:::
+4. Use protoc to compile the data protocol defined by supOS.
+```
+protoc -I=$SRC_DIR --python_out=$DST_DIR $SRC_DIR/XXX.proto
+```
+:::info
+For details, see <a href="https://protobuf.dev/getting-started/pythontutorial/">Python Tutorial</a>.
+:::
+5. Use the generated **XXX_pb2.py** file to write a script to encode the tag data.
+```python
+import binascii
+import metatag_pb2
+
+# Create a MetaTagSequence
+metatag = metatag_pb2.MetaTagSequence()
+
+# Create and add the first MetaTag
+metatag1 = metatag.tags.add()
+metatag1.version = 1
+metatag1.name = "exampleTag1"
+metatag1.showName = "exampleTag1"
+metatag1.description = "new"
+metatag1.type = metatag_pb2.ValueType.Integer
+
+# Create and add the second MetaTag
+metatag2 = metatag.tags.add()
+metatag2.version = 1
+metatag2.name = "exampleTag2"
+metatag2.showName = "exampleTag2"
+metatag2.description = "new"
+metatag2.type = metatag_pb2.ValueType.Integer
+
+# Serialize the MetaTagSequence
+serialized_data = metatag.SerializeToString()
+
+# Print the entire MetaTagSequence and the serialized data in hexadecimal format
+print(metatag)
+print(binascii.hexlify(serialized_data))
+```
+6. Copy the serialized code.
+
+<img width={450} src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/demo/4.png"/>
+
+### Authenticating Collector
+
+1. Paste the encoded code to MQTT client and send it to supOS broker.
+2. Under **Collection Node Management** > **Status**, find the collector node, and click **Agree** under **operation**. 
+3. Go to **Object Model Management** > **Object Instance**, select **Collector Template** and find the instance with the name as the collector node you authenticated.
+
+<img width={450} src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/demo/5.png"/>
+
+## Sending Real-time Data
+### Encoding Real-time Data
+1. Encode real-time tag data in Python.
+```python
+import binascii
+import metatag_pb2
+
+# Create a MetaTagSequence
+namedvalue = metatag_pb2.ValueSequence()
+
+# Create and add the first MetaTag
+rtdvalue1 = namedvalue.values.add()
+rtdvalue1.name = "exampleTag1"
+rtdvalue1.value.dblVal = 89
+rtdvalue1.value.quality = 2
+
+rtdvalue2 = namedvalue.values.add()
+rtdvalue2.name = "exampleTag2"
+rtdvalue2.value.dblVal = 32.59
+rtdvalue1.value.quality = 8
+
+# Serialize the MetaTagSequence
+serialized_data = namedvalue.SerializeToString()
+
+# Print the entire MetaTagSequence and the serialized data in hexadecimal format
+print(namedvalue)
+print(binascii.hexlify(serialized_data))
+```
+2. Copy the code and paste it to MQTT client as message.
+3. Set the topic `/{auth token}/{endpoint id}/{endpoint name}/rtdvalue/report`, and send the message to supOS.
+4. Check the instance attribute values to see if they match.
+:::tip
+Hover over the attribute value to check the quality code (**Status Code**).
+:::
+
+<img width={450} src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/4.2/demo/6.png"/>
+

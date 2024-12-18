@@ -1,0 +1,28 @@
+You can display the designed scene on third-party systems or on supOS.
+## Display on third-party system
+
+<ol>
+<li>Design the scene and preview it.</li>
+<li>Copy the page link during preview.</li>
+<li>Change part of the link from <code>/editor/scenePrev?sceneId=xxx</code> to <code>/nest/scene?sceneName=your_scene_name</code>.</li>
+<li>Iframe the URL to third-party systems.</li>
+</ol>
+
+## Display on supOS
+
+<ol>
+<li>Design the scene and preview it.</li>
+<li>Copy the page link during preview.</li>
+<li>Change part of the link from <code>/editor/scenePrev?sceneId=xxx</code> to <code>/nest/scene?sceneName=your_scene_name</code>.</li>
+<li>Go to <b>Business Designer</b>, enter an app and drag a <b>Programmable Component</b> to the page and iframe the URL inside the script.
+
+```js
+<iframe
+        id='iframe1'
+        src='http://ip:port/apps/bluetron-3dedit/3DEDIT/#/nest/scene?sceneName=your_scene_name'
+        style={{ width: '100%', height: '100%' }}
+    />
+```
+
+</li>
+</ol>

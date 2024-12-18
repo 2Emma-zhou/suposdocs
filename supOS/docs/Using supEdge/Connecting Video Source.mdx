@@ -1,0 +1,120 @@
+Add video sources, and then you can add algorithms to analyze them in real time.
+1. Log in to X-Edge, and then click <b>Designer</b> at the lower-left corner to access the design center.
+2. Select <b>Source Manager</b> > <b>Video Source</b> on the left panel, and then click <b>Add</b>.
+3. Enter the basic information of the video source you want to add, and then click <b>Submit</b>.
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supEdge/3.png)
+
+<table>
+  <thead>
+    <tr>
+      <th>Parameter</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>RTSP stream address</td>
+      <td>The RTSP address of your video stream.</td>
+    </tr>
+    <tr>
+      <td>Stream mode</td>
+      <td>Options are <b>Default</b>, <b>Hikvision SDK</b> and <b>Dahua SDK</b>.
+
+
+
+:::info
+When selecting <b>Hikvision SDK</b> and <b>Dahua SDK</b>, you need to enter the corresponding information such as device IP and port, and the account to log in to.
+:::
+
+
+</td>
+    </tr>
+  </tbody>
+</table>
+
+4. Click ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supEdge/4.png) of the video source you added, and set the algorithm to analyze it.
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supEdge/5.png)
+
+<ol>
+<ol>
+  <li>Select an algorithm on the left side.
+
+
+:::info
+For details on uploading algorithms, see <a href="Configuring Algorithm">Configuring Algorithm</a>.
+:::
+
+
+</li>
+  <li>Set related information.
+<table>
+  <thead>
+    <tr>
+      <th>Item</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Algorithm execution cycle</td>
+      <td>The time interval the algorithm analyzes the video source. Ranges from 0.04-10 seconds and the default is 1.</td>
+    </tr>
+    <tr>
+      <td>Face matching</td>
+      <td>Enable it to allow the algorithm to recognize and match faces come into the detection area with the preset face library.
+
+
+:::info
+You can add faces under **Face ID** in the design center.
+:::
+
+</td>
+    </tr>
+    <tr>
+      <td>JSON Editor</td>
+      <td>Eable it to define the input settings of the algorithm through JSON (suitable for belt deviation algorithm). For example: 
+
+```json
+{"model": {
+    "config": "im540_mobilenetv2_test_config",
+    "weight": "im540_mobilenetv2_1076_1077_map155.12.pth"
+    },
+    "source": [
+        {
+            "sourceUrl": "belt.mp4",
+            "anomalyDeadtime": 3600,
+            "attributeDeadtime": 60,
+            "sourceFps": 1,
+            "uuid": "uuide181b8d8-b165-4b67-8508-aeb90d980a71",
+            "tolerance": 50
+            
+        }
+            ]
+    }
+```
+
+</td>
+    </tr>
+    <tr>
+      <td>Detection area</td>
+      <td>Click to draw the detection area of the algorithm on the video image, and right-click to finish.
+
+
+:::info
+The algorithm analyzes the whole image when no detection area is set.
+:::
+
+</td>
+    </tr>
+    <tr>
+      <td>Output file type</td>
+      <td>The file type output when an alarm is triggered. Presently, only <b>Video</b> is available.</td>
+    </tr>
+  </tbody>
+</table>
+
+  
+  </li>
+  <li>Click <b>Submit</b>.</li>
+</ol>
+</ol>

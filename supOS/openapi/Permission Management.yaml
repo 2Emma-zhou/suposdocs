@@ -1,0 +1,2957 @@
+---
+openapi: 3.0.0
+info:
+  description: Provide functionality for adding, modifying, and deleting menus, permissions,
+    and roles
+  version:
+  title: permission management API definition
+servers:
+- url: "/open-api/rbac"
+tags:
+- name: menus
+  description: menu management
+- name: roles
+  description: role management
+- name: menu permission
+  description: menu permission management
+- name: resource collection
+  description: Data resource collection management API
+paths:
+  "/v2/menus/modules":
+    post:
+      tags:
+      - menus
+      summary: Initialization Modules, Menus, and Operation Items within Menu Page
+      description: "Initialization process includes:\n  * module registration(module
+        code and internationalization information, etc.)\n  * menu registration(basic
+        menu information, request address, menu page operation information, and internationalization
+        registration data for menus) \n\n**Initialization process is completed by
+        uploading a YAML file, which supports configuring internationalization information.**\n\n**Specific
+        format requirements for related parameters can be found in the corresponding
+        detailed description in the `YAML` file.**\n\n Based on the `dataVersion`
+        field in the `YAML` file, determine whether the submission is for new addition
+        or update operation. In the case of special scenarios during updates, the
+        following explanations are provided: \n\n* menu update strategy: \n  * update
+        strategy: menu items already exist in the system and are included in API parameters.
+        If the menu structure has been adjusted during the project period, the project-adjusted
+        data will be retained, and the adjusted menu items will not be updated. \n
+        \    * For example, if the menu has been moved to a directory outside of the
+        current app during the project period, it will not be updated.\n  * menu deletion
+        strategy: menu items already exist in the system but are not included in API
+        parameters. The menu items are hidden (soft deletion) for easy retrieval during
+        re-registration. \n    * If the menu has been assigned permissions, it will
+        not be deleted and an error message will be displayed “The menu cannot be
+        deleted because it has been assigned permissions!” \n  * If a menu operation
+        item (operateCode) under a menu is deleted, the role and user permissions
+        associated with it will be physically deleted.\n  * menu addition strategy:
+        menu items do not exist in the system but are included in API parameters.
+        \n\n During the project period, menu adjustments include the following aspects:\n
+        \ * Adjust menu positions, including sorting modification and folder arrangements
+        \n  * Enable or disable menus\n  * Modify menu basic information (note: even
+        if no changes are made, click the edit button on the page counts as a modification).\n\n
+        For example, if app A previously had 10 menus represented by `menu_01` to
+        `menu_10`and there are changes to the app and related menus, with  `menu_01`
+        to `menu_08` and `menu_11` to `menu_14` now, the API should be called to modify
+        the full set of menus for the app with the following logic: \n  * retain menus:
+        `menu_01` to `menu_08`\n  * hide menus: `menu_09`, `menu_10`\n  * add menus:
+        `menu_11` to`menu_14`\n\nYAML format is as follows \n  * [v1alpha1](../menu_v1alpha1.yaml.template)\n"
+      operationId: menusInitialization
+      requestBody:
+        content:
+          application/octet-stream:
+            schema:
+              type: string
+              format: binary
+      responses:
+        '201':
+          description: Initialization succeeded, no content to return
+        '400':
+          description: |
+            error message
+            * 100105213 Menu code already exists!,{"code":100105213,"message":"Menu code already exists!"}
+            * 100105249 The input parameters cannot form a valid menu structure. Please check the parentCode and code parameters，{"code": 100105249, "message": "The input parameters cannot form a valid menu structure. Please check the parentCode and code parameters!"}
+            * 100105251 Too many menu items, exceeding the limit of 200!,{"code":100105251,"message":"Too many menu items, exceeding the limit of 200!"}
+            * 100105252 Too many menu operation items under a single menu, exceeding the limit of 200!,{"code":100105252,"message":"Too many menu operation items under a single menu, exceeding the limit of 200!"}
+            * 100105253 Too many URL links under a single menu item, exceeding the limit of 100!,{"code":100105253,"message":"Too many URL links under a single menu item, exceeding the limit of 100!"}
+            * 100105254 File format conversion failed. Please check if the format is correct!,{"code":100105254,"message":"File format conversion failed. Please check if the format is correct!"}
+            * 100105255 Unknown file format version!,{"code":100105255,"message":"Unknown file format version!"}
+            * 100105257 Data validation failed. Please check if the format is correct!,{"code":100105257,"message":"Data validation failed. Please check if the format is correct!"}
+            * 100105261 International information loss. Both i18nDefaultValue and i18nKeyValues parameters cannot be empty at the same time, {"code": 100105261, "message": "International information loss. Both i18nDefaultValue and i18nKeyValues parameters cannot be empty at the same time!"}
+            * 100105263 Internationalization information registration failed, {"code": 100105263, "message": "Internationalization information registration failed!"}
+            * 100105207 The menu cannot be deleted because it has been assigned permissions!，{"code":100105207,"message":"The menu cannot be deleted because it has been assigned permissions!"}
+            * 100105264 The module code parameter is unmatched!，{"code":100105264,"message":"The module code parameter is unmatched!"}
+            * 100105259 Unable to modify system module configuration information!,{"code":100105259,"message":"Unable to modify system module configuration information!"}
+            * 100105272 The specified module for menu registration does not exist in the system，{"code": 100105272, "message": "The specified module for menu registration does not exist in the system!"}
+            * 100000003 Contain invalid or improperly formatted parameters!,{"code":100000003,"message":"The menu.name field exceeds the maximum length limit!"}
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ApiResponse"
+              example:
+                code: 100105213
+                message: Menu code already exists!
+        '500':
+          description: common errors 100000001 internal service exception
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ApiResponse"
+              example:
+                code: 100000001
+                message: Unknown exception occurred in the system
+  "/v2/menus/modules/{moduleCodes}":
+    delete:
+      tags:
+      - menus
+      summary: Delete Menu According To Module Code
+      description: "delete registered menu and operation items according to module
+        code. The menu item is hidden (soft deletion) for easy retrieval during re-registration.
+        \n\n Delete related menus based on specified conditions:\n  * ModuleCodes
+        refer to module codes, with multiple codes separated by commas.\n\nIf a module
+        does not have any associated menus, it is considered that the menus associated
+        with that module have been deleted successfully.\n\n All menus associated
+        with the module need to be deleted, except for menus that meet the following
+        condition:\n  * In the displayed menu list, the menu has associated menus
+        that are not related to the current module\n\n In this case, the menu should
+        not be deleted, but the 'URL' attribute on that menu should be cleared. Deleting
+        a menu does not involve deleting permissions.\n"
+      operationId: deleteMenus
+      parameters:
+      - in: path
+        name: moduleCodes
+        required: true
+        schema:
+          type: array
+          maxItems: 10
+          items:
+            type: string
+            maxLength: 500
+        example: desktop,flow
+        description: Module codes, separated by commas.
+      - in: query
+        name: clearPermission
+        required: false
+        allowEmptyValue: true
+        description: 'used to determine whether to clear the permission configuration
+          information related to the menus. The default value is true, indicating
+          that the permission configuration information is cleared.
+
+          '
+        example: false
+        schema:
+          type: boolean
+      responses:
+        '204':
+          description: Successfully deleted menu, no content to return
+        '400':
+          description: |
+            error message
+            * 100105256 The number of module codes exceeds the maximum limit!,{"code":100105256,"message":"The number of module codes exceeds the maximum limit!"}
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ApiResponse"
+              example:
+                code: 100105256
+                message: The number of module codes exceeds the maximum limit!
+        '500':
+          description: common errors 100000001 internal service exception
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ApiResponse"
+              example:
+                code: 100000001
+                message: Unknown exception occurred in the system
+    put:
+      tags:
+      - menus
+      summary: Modify Module Information
+      description: "**This API is primarily used to modify the frozen status of menus
+        associated with a module.**\n\n frozen status: \n  * Frozen menus will be
+        marked, and when users click to open the menu page, they will be notified
+        that it is frozen. For example, when a user's subscription for an app expires,
+        the platform will freeze the app's menu. As a result, the user will be unable
+        to open menu pages, and the system will display a frozen notification. \n\n
+        unfrozen status: \n  * By default, users can open the menu after the menu
+        is unfrozen. For example, after the platform is frozen, if a user renews the
+        subscription, the platform will be unfrozen and restore the original functionality.
+        \n\nIf a module code does not have any associated menu, it is considered that
+        the modification of the menu's frozen status under that module code is successful.\n"
+      operationId: freezeOrUnfreezeMenusByModuleCodes
+      parameters:
+      - in: path
+        name: moduleCodes
+        schema:
+          type: array
+          maxItems: 10
+          items:
+            type: string
+            maxLength: 500
+          example: desktop,flow
+        required: true
+        description: Module codes, separated by commas.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                "$ref": "#/components/schemas/ModuleInfo2"
+              maxItems: 10
+      responses:
+        '200':
+          description: Successfully frozen or unfrozen the menu, no content to return
+        '400':
+          description: |
+            error message
+            * 100105256 The number of module codes exceeds the maximum limit!,{"code":100105256,"message":"The number of module codes exceeds the maximum limit!"}
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ApiResponse"
+              example:
+                code: 100105256
+                message: The number of module codes exceeds the maximum limit!
+        '500':
+          description: common errors 100000001 internal service exception
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ApiResponse"
+              example:
+                code: 100000001
+                message: Unknown exception occurred in the system
+  "/v2/menus":
+    post:
+      tags:
+      - menus
+      summary: Menu Registration
+      description: |
+        **The API is deprecated!!!**
+        **Please use the `POST /open-api/rbac/v2/menus/modules` API. The new API reduces the risk of distributed transactions caused by multiple API calls and simplifies the development complexity for developers.**
+        The basic information of the registration menu, the request address, the operation information of the menu page and the international registration data of the menu
+        Attention
+        * When registering a menu, submit all menu contents under the same APP ID at the same time.* 
+        Only one APP ID's menu can be registered per request.
+      operationId: createMenusByIomc
+      deprecated: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                "$ref": "#/components/schemas/Menu"
+              maxItems: 200
+      responses:
+        '200':
+          description: |
+            Menu registration succeeded
+            * 100000000 operation succeeded   {"code":100000000,"message":"operation succeeded"}
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ApiResponse"
+              example:
+                code: 100000000
+                message: operation succeeded
+        '400':
+          description: |
+            error message
+            * 100105213 Menu code already exists!,{"code":100105213,"message":"Menu code already exists!"}
+            * 100105215 Menu code cannot be empty!,{"code":100105215,"message":"Menu code cannot be empty!"}
+            * 100105216 Parent menu cannot be found！,{"code":100105216,"message":"Parent menu cannot be found！"}
+            * 100105251 Too many menu items, exceeding the limit of 200!,{"code":100105251,"message":"Too many menu items, exceeding the limit of 200!"}
+            * 100105252 Too many menu operation items under a single menu, exceeding the limit of 200!,{"code":100105252,"message":"Too many menu operation items under a single menu, exceeding the limit of 200!"}
+            * 100105253 Too many URL links under a single menu item, exceeding the limit of 100!,{"code":100105253,"message":"Too many URL links under a single menu item, exceeding the limit of 100"}
+            * 100105233 Company does not exist，{"code":100105233,"message":"Company does not exist！"}
+            * 100105235 The scope parameter is invalid!,{"code":100105235,"message":"The scope parameter is invalid!"}
+            * 100105245 The showType parameter is invalid!,{"code":100105245,"message":"The showType parameter is invalid!"}
+            * 100105246 The target parameter is invalid!,{"code":100105246,"message":"The target parameter is invalid!"}
+            * 100105248 The menuType parameter is invalid!,{"code":100105248,"message":"The menuType parameter is invalid!"}
+            * 100105249 The httpMethodType parameter is invalid!,{"code":100105249,"message":"The httpMethodType parameter is invalid!"}
+            * 100105250 The companyCode parameter is invalid!,{"code":100105250,"message":"The companyCode parameter is invalid!"}
+            * 100105251 The APP ID of the registration menu is not unique，{"code": 100105251, "message": "The APP ID of the registration menu is not unique"}
+            * 100105260 Internationalization code cannot be empty，{"code": 100105260, "message": "Internationalization code cannot be empty！"}
+            * 100105261 internationalization information loss，Both i18nDefaultValue and i18nKeyValues parameters cannot be empty at the same time，{"code": 100105261, "message": "internationalization information loss，Both i18nDefaultValue and i18nKeyValues parameters cannot be empty at the same time!！"}
+            * 100105263 Internationalization information registration failed，{"code": 100105263, "message": "Internationalization information registration failed!"}
+            * 100105262 Module code does not exist，{"code": 100105262, "message": "Module code does not exist！"}
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ApiResponse"
+              example:
+                code: 100105213
+                message: Menu code already exists!
+        '500':
+          description: common errors 100000001 internal service exception
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ApiResponse"
+              example:
+                code: 100000001
+                message: Unknown exception occurred in the system
+    put:
+      tags:
+      - menus
+      summary: Modify All Menus
+      description:  "**The API is deprecated!!!**\n\n **Please use the`POST /open-api/rbac/v2/menus/modules`
+        API. The new API reduces the risk of distributed transactions caused by multiple
+        API calls and simplifies the development complexity for developers.\n\n Used to modify the full menu under the same app. Note that all menus need to be submitted at this time. Each menu submitted with each request must belong to the same APP ID. **\n\nFor apps installed via an installation package that want to update the app menu using this interface, please note:\n * This interface does not have the routerPrefix attribute. You need to manually concatenate the complete url parameter based on the value of this parameter. If you are unsure how to concatenate the url, it is recommended to update through the app installation package for now and avoid using this interface temporarily.\n\nThe menu modification strategy is based on the unique matching of the menu's module code and menu code. The modification policy for the menu is as follows:\n
+        \ * update strategy: menu items already exist in the system and are included
+        in API parameters. If the menu structure has been adjusted during the project
+        period, the project-adjusted data will be retained, and the adjusted menu
+        items will not be updated.\n     *  For example, if the menu has been moved
+        to a directory outside of the current app during the project period, it will
+        not be updated.\n  * menu deletion strategy: menu items already exist in the
+        system but are not included in API parameters. The menu items are hidden (soft
+        deletion) for easy retrieval during re-registration.\n    * If the menu has
+        been assigned permissions, it will not be deleted and an error message will
+        be displayed “The menu cannot be deleted because it has been assigned permissions!”\n
+        \   * If a menu operation item (operateCode) under a menu is deleted, the
+        role and user permissions associated with it will be physically deleted.\n
+        \ * Menu addition strategy: menu items do not exist in the system but are
+        included in API parameters.\n\nDuring the project period, menu adjustments
+        include the following aspects:\n  * Adjust menu positions, including sorting
+        modification and folder arrangements\n  * Enable or disable menus\n  * Modify
+        menu basic information (note: even if no changes are made, clicking the edit
+        button on the page counts as a modification).\n\n For example, if app A previously
+        had 10 menus represented by `menu_01` to `menu_10`and there are changes to
+        the app and related menus, with  `menu_01` to `menu_08` and `menu_11` to `menu_14`
+        now, the API should be called to modify the full set of menus for the app
+        with the following logic: \n  * retain menus: `menu_01` to `menu_08`\n  *
+        delete menu：`menu_09`, `menu_10`\n  * add menus: `menu_11` to`menu_14`\n"
+      operationId: updateMenusByIomc
+      deprecated: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                "$ref": "#/components/schemas/Menu"
+              maxItems: 200
+      responses:
+        '200':
+          description: |
+            Updated menu successfully
+            * 100000000 operation succeeded   {"code":100000000,"message":"operation succeeded"}
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ApiResponse"
+              example:
+                code: 100000000
+                message: operation succeeded
+        '400':
+          description: |
+            error message
+            * 100105207 The menu cannot be deleted because it has been assigned permissions!,{"code":100105207,"message":"The menu cannot be deleted because it has been assigned permissions!"}
+            * 100105213 Menu code already exists!,{"code":100105213,"message":"Menu code already exists!"}
+            * 100105215 Menu code cannot be empty!,{"code":100105215,"message":"Menu code cannot be empty!"}
+            * 100105216 Parent menu cannot be found!,{"code":100105216,"message":"Parent menu cannot be found!"}
+            * 100105251 Too many menu items, exceeding the limit of 200!,{"code":100105251,"message":"Too many menu items, exceeding the limit of 200!"}
+            * 100105252 Too many menu operation items under a single menu, exceeding the limit of 200!,{"code":100105252,"message":"Too many menu operation items under a single menu, exceeding the limit of 200!"}
+            * 100105253 Too many URL links under a single menu item, exceeding the limit of 100!,{"code":100105253,"message":"Too many URL links under a single menu item, exceeding the limit of 100!"}
+            * 100105235 Invalid scope parameter!,{"code":100105235,"message":"Invalid scope parameter!"}
+            * 100105245 Invalid showType parameter!,{"code":100105245,"message":"Invalid showType parameter!"}
+            * 100105246 Invalid target parameter!,{"code":100105246,"message":"Invalid target parameter!"}
+            * 100105248 Invalid menuType parameter!,{"code":100105248,"message":"Invalid menuType parameter!"}
+            * 100105249 Invalid httpMethodType parameter!,{"code":100105249,"message":"Invalid httpMethodType parameter!"}
+            * 100105250 Invalid companyCode parameter!,{"code":100105250,"message":"Invalid companyCode parameter!"}
+            * 100105251 The APP ID of the registration menu is not unique,{"code": 100105251, "message": "The APP ID of the registration menu is not unique"}
+            * 100105260 Internationalization code cannot be empty,{"code": 100105260, "message": "Internationalization code cannot be empty!"}
+            * 100105261 Internationalization information loss, i18nDefaultValue and i18nKeyValues parameters cannot be empty at the same time,{"code": 100105261, "message": "Internationalization information loss, i18nDefaultValue and i18nKeyValues parameters cannot be empty at the same time!"}
+            * 100105263 Internationalization information registration failed,{"code": 100105263, "message": "Internationalization information registration failed!"}
+            * 100105262 Module code does not exist,{"code": 100105262, "message": "Module code does not exist!"}
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ApiResponse"
+              example:
+                code: 100105213
+                message: Menu code already exists!
+        '500':
+          description: common errors 100000001 internal service exception
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ApiResponse"
+              example:
+                code: 100000001
+                message: Unknown exception occurred in the system
+    delete:
+      tags:
+      - menus
+      summary: Delete Menu
+      description: |
+        **The API is deprecated!!!**
+
+        **Use `DELETE /open-api/rbac/v2/menus/modules/{moduleCodes}`**
+
+        Delete related menus based on specified conditions:
+          * APP IDs IDs of the apps, separated by commas.
+        If an APP does not have any associated menus, it is considered as a successful deletion.
+        All menus associated with the APP need to be deleted, except for the menus that meet the following condition:
+          * On the displayed menu list, there are menus under this menu that are associated with other apps.
+          Deleting a menu does not involve deleting permissions.
+      operationId: deleteMenusBySaas
+      deprecated: true
+      parameters:
+      - in: query
+        name: APP IDs
+        schema:
+          type: array
+          maxItems: 10
+          items:
+            type: string
+            maxLength: 500
+        example: desktop,flow
+        style: form
+        explode: false
+        description: APP ID. Multiple ID is separated by commas.
+      responses:
+        '200':
+          description: |
+            Deleted successfully
+            * 100000000 operation succeeded   {"code":100000000,"message":"operation succeeded"}
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ApiResponse"
+              example:
+                code: 100000000
+                message: operation succeeded
+        '400':
+          description: |
+            error message
+            * 100105260 APP IDs empty!,{"code":100105222,"message":"APP IDsempty!"}
+            * 100105241 APP IDs exceed limit!,{"code":100105241,"message":"APP IDs exceed limit!"}
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ApiResponse"
+              example:
+                code: 100105260
+                message: APP IDs empty!
+        '500':
+          description: common errors 100000001 internal service exception
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ApiResponse"
+              example:
+                code: 100000001
+                message: Unknown exception occurred in the system
+  "/v2/menus/freeze":
+    put:
+      tags:
+      - menus
+      summary: Modify the freeze status of the associated menu based on the ID of the APP.
+      description: |
+        **The API is deprecated!!!**
+
+        **To freeze or unfreeze a menu, please use `PUT /open-api/rbac/v2/menus/modules/{moduleCodes}`.**
+
+        To modify the freeze status of the menu associated with an APP:
+          * Freeze status: When a menu is frozen, it will be marked, and users will be notified when they attempt to open the menu page. For example, when a subscribed APP exceeds its usage period, the platform will freeze the menu associated with that APP. As a result, users will be unable to access the menu pages and will receive a notification indicating that the menu has been frozen.
+          * Unfreeze status: This is the default status, and once unfrozen, users can access the menu pages normally. For example, if a menu is frozen and a user renews their subscription, the platform will unfreeze the menu and restore its original functionality.
+
+        When the menu is frozen, it can only be unfrozen by calling this interface. Modifying the frozen menu will not modify the frozen state of the current menu.
+
+        If an APP ID does not have an associated menu, it is directly considered that the modification of the frozen status of the APP is successful.
+      operationId: freezeMenusByAPP ID
+      deprecated: true
+      parameters:
+      - in: query
+        name: APP IDs
+        schema:
+          type: array
+          maxItems: 10
+          items:
+            type: string
+            maxLength: 500
+          example: desktop,flow
+        required: true
+        style: form
+        explode: false
+        description: APP ID, multiple IDs separated by ","
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              description: frozen state
+              properties:
+                status:
+                  type: boolean
+                  description: |
+                    frozen state:
+                      * `true`: frozen
+                      * `false`: unfreeze
+                  example: true
+              required:
+              - status
+      responses:
+        '200':
+          description: |
+            success
+            * 100000000 operation succeeded   {"code":100000000,"message":"operation succeeded"}
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ApiResponse"
+              example:
+                code: 100000000
+                message: operation succeeded
+        '400':
+          description: |
+            error message
+            * 100105222 APP ID empty!,{"code":100105222,"message":"APP ID empty!"}
+            * 100105241 APP IDs exceed limit!,{"code":100105241,"message":"APP IDs exceed limit!"}
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ApiResponse"
+              example:
+                code: 100105222
+                message: APP ID empty!
+        '500':
+          description: common errors 100000001 internal service exception
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ApiResponse"
+              example:
+                code: 100000001
+                message: Unknown exception occurred in the system
+  "/v2/roles/bulk":
+    post:
+      tags:
+      - roles
+      summary: Add roles in batches
+      description: |
+        * name、code required.
+        * The number of new batches is limited to 50.
+        * Character numbering rules: letters, numbers or underscores and their combinations, no more than 50 characters.
+        * Character name cannot exceed 50 characters.
+        * Role description cannot exceed 255 characters.
+        * Role code cannot be repeated or already exists。
+        * If the verification fails or is abnormal, all new additions will fail.
+      operationId: createRolebulk
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                "$ref": "#/components/schemas/RoleInfo"
+                maxItems: 50
+      responses:
+        '200':
+          description: 'The registered role is successful, and no content is returned
+
+            '
+        '400':
+          description: |
+            error message
+            * 100105000 Required parameters cannot be empty!,{"code":100105000,"message":"Required parameters cannot be empty!"}
+            * 100105001 Encoding is not allowed as a keyword!,{"code":100105001,"message":"Encoding is not allowed as a keyword!"}
+            * 100105004 Coding repeated!,{"code":100105004,"message":"Coding repeated!"}
+            * 100105005 Duplicate name!,{"code":100105005,"message":"Duplicate name!"}
+            * 100105008 Character encoding only supports English numbers with underscores!,{"code":100105008,"message":"Character encoding only supports English numbers with underscores!"}
+            * 100105009 The character code length cannot exceed 50!,{"code":100105009,"message":"The character code length cannot exceed 50!"}
+            * 100105010 The length of the character name cannot exceed 50!, {"code":100105010,"message":"The length of the character name cannot exceed 50!"}
+            * 100105011 The character description length cannot exceed 255 characters!,{"code":100105011,"message":"The character description length cannot exceed 255 characters!"}
+            * 100105026 The number of characters cannot exceed 50!,{"code":100105026,"message":"The number of characters cannot exceed 50!"}
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ApiResponse"
+              example:
+                code: 100105000
+                message: Required parameters cannot be empty!
+        '500':
+          description: common errors 100000001 internal service exception
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ApiResponse"
+              example:
+                code: 100000001
+                message: Unknown exception occurred in the system
+    put:
+      tags:
+      - roles
+      summary: Modify roles in batches
+      description: |
+        * name、code required.
+        * The number of batch edits is limited to 50.
+        * Character numbering rules: letters, numbers or underscores and their combinations, no more than 50 characters.
+        * Character name cannot exceed 50 characters.
+        * Role description cannot exceed 255 characters.
+        * Role encoding must exist.
+        * If the verification fails or is abnormal, all modifications will fail.
+      operationId: updateRolebulk
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                "$ref": "#/components/schemas/RoleInfo"
+                maxItems: 50
+      responses:
+        '200':
+          description: 'The role is updated successfully, no content is returned
+
+            '
+        '400':
+          description: |
+            error message
+            * 100105000 Required parameters cannot be empty!,{"code":100105000,"message":"Required parameters cannot be empty!"}
+            * 100105021 The specified role does not exist!,{"code":100105021,"message":"The specified role does not exist!"}
+            * 100105005 Duplicate name!,{"code":100105005,"message":"Duplicate name!"}
+            * 100105010 The length of the character name cannot exceed 50!, {"code":100105010,"message":"The length of the character name cannot exceed 50!"}
+            * 100105011 The character description length cannot exceed 255 characters!,{"code":100105011,"message":"The character description length cannot exceed 255 characters!"}
+            * 100105026 The number of characters cannot exceed 50!,{"code":100105026,"message":"The number of characters cannot exceed 50!"}
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ApiResponse"
+              example:
+                code: 100105000
+                message: Required parameters cannot be empty!
+        '500':
+          description: common errors 100000001 internal service exception
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ApiResponse"
+              example:
+                code: 100000001
+                message: Unknown exception occurred in the system
+  "/v2/roles":
+    get:
+      tags:
+      - roles
+      summary: query role
+      description: |
+        Query role list data.
+        * Only supports querying the role data of a certain company
+        * When the company code does not exist, the returned data is an empty collection
+        * Support pagination query
+        * Support fuzzy query according to role code (roleCode), role name (roleName), role description (description)
+        * Support query based on role creation time and update time
+        * Support for querying deleted roles
+      operationId: queryRolesByParam
+      parameters:
+      - name: Accept-Language
+        in: header
+        description: Internationalized language (depending on the language, the system encoding value returns content in different languages), the default is the language of the server operating system. English is en-us, Chinese is zh-cn.
+        required: false
+        schema:
+          type: string
+          example: zh-cn
+          maxLength: 8
+      - name: keyword
+        in: query
+        required: false
+        description: |
+          Keyword, supports fuzzy query according to role code (roleCode), role name (roleName), and role description (description). <br>
+          For example: input "personCode1" to match and query all data containing "personCode1" in the role code, role name, and role description;
+            * When querying, it is not case-sensitive. For example, if "person1" is passed in, query results containing "Person1" will be returned.
+            * Multiple query conditions are not supported, and the input data will be used as a single value to match the query;
+            * If the relevant data matching the query does not exist, the returned data structure is an empty collection.
+        schema:
+          type: string
+          maxLength: 50
+          example: systemRole
+      - name: companyCode
+        in: query
+        required: true
+        description: company code
+        schema:
+          type: string
+          maxLength: 50
+          example: default_org_company
+      - name: includeDeleted
+        in: query
+        required: false
+        description: |
+          Whether to query for deleted roles
+          * Description:
+            * true: Deleted roles are included in the returned results<br>
+            * false: Deleted roles are not included in the returned results<br>
+            * In the returned result, use the "valid" field to identify whether it is a deleted role
+        schema:
+          type: boolean
+          default: false
+          example: true
+      - name: createTimeRange
+        in: query
+        required: false
+        description: |
+          Role creation time query range;<br>
+          After passing the parameter, you can query the roles whose creation time is within this range, or query all the roles whose creation time is not passed;<br>
+          The time range is represented by time plus opening and closing intervals;
+          * For example:
+            * "[2022-11-29T00:00:00.000+0000,)": indicates that it is greater than or equal to zero o'clock on November 29, 2022.
+            * "(,2022-11-29T00:00:00.000+0000)": Indicates that it is less than midnight on November 29, 2022.
+            * "[2022-11-29T00:00:00.000+0000,2022-11-30T00:00:00.000+0000)": indicates the whole day of November 29, 2022.
+
+          The time format is (the time format must include a time zone): "yyyy-MM-dd'T'HH:mm:ss.SSSZ". <br>
+          * Example:<br>
+            * Zero time zone time: "2021-01-26T16:02:15.666+0000";<br>
+            * East Eighth District Time: "2021-01-26T16:02:15.666+0800";<br>
+        schema:
+          type: string
+          maxLength: 60
+          example: "[2022-11-29T00:00:00.000+0000,2022-11-30T00:00:00.000+0000)"
+      - name: modifyTimeRange
+        in: query
+        required: false
+        description: |
+          Role update time query scope;<br>
+          After the parameter is passed, you can query the roles whose update time is within this range, if not, you can query all the roles with update time;<br>
+          The time range is represented by time plus opening and closing intervals;
+          * For example:
+            * "[2022-11-29T00:00:00.000+0000,)": indicates that it is greater than or equal to zero o'clock on November 29, 2022.
+            * "(,2022-11-29T00:00:00.000+0000)": Indicates that it is less than midnight on November 29, 2022.
+            * "[2022-11-29T00:00:00.000+0000,2022-11-30T00:00:00.000+0000)": indicates the whole day of November 29, 2022.
+
+          The time format is (the time format must include a time zone): "yyyy-MM-dd'T'HH:mm:ss.SSSZ". <br>
+           * Example:<br>
+            * Zero time zone time: "2021-01-26T16:02:15.666+0000";<br>
+            * East Eighth District Time: "2021-01-26T16:02:15.666+0800";<br>
+        schema:
+          type: string
+          maxLength: 60
+          example: "[2022-11-29T00:00:00.000+0000,2022-11-30T00:00:00.000+0000)"
+      - name: pageSize
+        in: query
+        required: false
+        description: |
+          Number of records per page. <br>
+          Supports a maximum of 500 records per page. When the passed parameter is greater than 500, the system defaults to the maximum value of 500;<br>
+          If not passed, the default value is 20;
+        schema:
+          type: integer
+          minimum: 1
+          default: 20
+          example: 20
+          maximum: 500
+      - name: current
+        in: query
+        required: false
+        description: The current page number, starting from 1. When not passed in, the default value is 1.
+        schema:
+          type: integer
+          default: 1
+          example: 1
+      responses:
+        '200':
+          description: 'The query role is successful
+
+            '
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/pageRoles"
+        '400':
+          description: |
+            error message
+            * 100000001 Company code cannot be empty, {"code":100000001,"message":"Company code cannot be empty"}
+            * 100106330 The query time format does not meet the specification, {"code":100106330,"message":"The query time format does not meet the specification"}
+            * 100106348 The number of records per page (pageSize) must be greater than or equal to 1,{"code":100106348,"message":"The number of records per page (pageSize) must be greater than or equal to 1"}
+            * 100106349 The current page number (current) must be greater than or equal to 1,{"code":100106349,"message":"The current page number (current) must be greater than or equal to 1"}
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ApiResponse"
+              example:
+                code: 100106348
+                message: The number of records per page (pageSize) must be greater than or equal to 1
+        '500':
+          description: common errors 100000001 internal service exception
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ApiResponse"
+              example:
+                code: 100000001
+                message: Unknown exception occurred in the system
+  "/v2/roles/{roleCodes}":
+    delete:
+      tags:
+      - roles
+      summary: Batch delete roles
+      description: |
+        * The number of deleted characters is limited to 50.
+        * Do not omit when deleting a role that does not exist.
+        * The roles associated with positions and users cannot be deleted.
+        * Support idempotent operations.
+        * When the verification fails or is abnormal, all deletions will fail.
+      operationId: deleteRoles
+      parameters:
+      - name: roleCodes
+        in: path
+        required: true
+        description: Delete roles in batches through role codes, multiple role codes are connected by ","
+        schema:
+          type: string
+      responses:
+        '200':
+          description: 'The role is deleted successfully, no content is returned
+
+            '
+        '500':
+          description: common errors 100000001 internal service exception
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ApiResponse"
+              example:
+                code: 100000001
+                message: Unknown exception occurred in the system
+  "/v2/users/{username}/permissions/menus/{menuCode}/operations":
+    get:
+      tags:
+      - menu permission
+      summary: Query whether the specified user has the permission of the specified menu and its menu operation under the specified company
+      description: |
+        * Query the authority of the user to specify the menu under the specified company
+        * Returns an empty object if the user does not have permission for the menu
+        * If the user has the permission of the menu, but does not have the menu operation permission under the menu, the `operations` attribute in the returned object is an empty set
+      operationId: queryUserMenusCode
+      parameters:
+      - name: username
+        in: path
+        required: true
+        description: username
+        schema:
+          type: string
+          maxLength: 50
+        example: zhangsan
+      - name: menuCode
+        in: path
+        required: true
+        description: menu code
+        schema:
+          type: string
+          maxLength: 500
+        example: basic
+      - name: companyCode
+        in: query
+        required: false
+        description: Company code, when the parameter is empty, the system will query the default company data
+        schema:
+          type: string
+          maxLength: 50
+        example: tecCompany
+      responses:
+        '200':
+          description: Query the response result of the menu that the user has permission
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/MenuOperation"
+        '400':
+          description: |
+            error message
+            * 100105232 User does not exist {"code":100105232,"message":"User does not exist"}
+            * 100105233 Company does not exist {"code":100105233,"message":"Company does not exist"}
+            * 100105234 The user does not belong to the company {"code":100105234,"message":"The user does not belong to the company"}
+            * 100105214 Menu code does not exist! , {"code":100105214,"message":"The menu code does not exist!"}
+            * 100105266 No relevant menu found! {"code":100105266, "message": "Related menu not found!" }
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ApiResponse"
+              example:
+                code: 100105232
+                message: User does not exist!
+        '500':
+          description: common errors 100000001 internal service exception
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ApiResponse"
+              example:
+                code: 100000001
+                message: Unknown exception occurred in the system
+  "/v2/users/{username}/permissions/menus":
+    get:
+      tags:
+      - menu permission
+      summary: Query the menu that the user has access to according to the user name
+      description: |
+        * Required fields: company code and username
+        * Optional item: source, if not passed, it means full search
+      operationId: getMenu
+      parameters:
+      - name: username
+        in: path
+        required: true
+        description: Query the menu that this user has permission by user name
+        schema:
+          type: string
+      - name: companyCode
+        in: query
+        required: true
+        description: Query the authorized menu of this user in this company according to the company code of the user
+        schema:
+          type: string
+      - name: source
+        in: query
+        required: false
+        description: Query according to the menu source is source=IDE, means to only query the menus that use the APP designer as the source; if it is empty, it means to query all types of menus that users can access, without distinguishing the source
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Corresponding to the return value of the user-related permission menu
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  list:
+                    type: array
+                    items:
+                      "$ref": "#/components/schemas/MenuSimpleInfo"
+        '400':
+          description: |
+            error message
+            * 100105225 The specified user does not exist, {"code":100105225,"message":"The specified user does not exist"}
+            * 100105226 The specified user does not work in the specified company, {"code":100105226,"message":"The specified user does not work in the specified company"}
+            * 100105227 Specify Company does not exist, {"code":100105227,"message":"Specify Company does not exist"}
+            * 100000001 Source filling does not comply with the rules, example: IDE, {"code":100000001,"message":"source filling does not comply with the rules, example: IDE"}
+            * 100000001 Company code cannot be empty, {"code":100000001,"message":"Company code cannot be empty"}
+            * 100000001 internal service exception，                    {"code":100000001,"message":"internal service exception"}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    description: wrong code
+                    example: 100000001
+                  message:
+                    type: string
+                    description: error message
+                    example: internal service exception
+        '500':
+          description: common errors 100000001 internal service exception
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ApiResponse"
+              example:
+                code: 100000001
+                message: Unknown exception occurred in the system
+  "/v2alpha1/users/{username}/permissions/menus/tree":
+    get:
+      tags:
+      - menu permission
+      summary: Query the menu that the user has permission
+      deprecated: false
+      description: |
+        * Query the configuration period menu or runtime menu that the user has authority under the specified company
+        * This interface is a trial interface and may not be compatible in the future
+        * Menus at the same level are sorted in ascending order by the sort sort field
+      operationId: queryUserMenus
+      parameters:
+      - name: username
+        in: path
+        required: true
+        description: username
+        schema:
+          type: string
+        example: zhangsan
+      - name: companyCode
+        in: query
+        required: true
+        description: company code
+        schema:
+          type: string
+        example: tecCompany
+      - name: scope
+        in: query
+        required: false
+        description: If you do not pass it, you can check all the menus, whether you want to check the configuration menu (0) or the runtime menu (1)
+        schema:
+          type: integer
+        example: 0
+      responses:
+        '200':
+          description: Query the response result of the menu that the user has permission
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  list:
+                    type: array
+                    items:
+                      "$ref": "#/components/schemas/MenuTree"
+              example:
+                list:
+                - code: 6d6fea95fb7c90256c912eb1c03a1f86
+                  name: shift management
+                  url: ''
+                  sort: 1
+                  scope: 1
+                  children:
+                  - code: ed6fea95bb7c90256c912eb1c03a1f76
+                    name: team management
+                    url: "/apps/pims-schedule/Home/TeamManager"
+                    sort: 1000
+                    scope: 1
+                    children: []
+                  - code: aaafea95bb7csedcc912eb1c03adfd
+                    name: security management
+                    url: "/apps/pims-schedule/Home/SecurityManager"
+                    sort: 1000.003
+                    scope: 1
+                    children: []
+                - code: dsfeea95fb7c90256c912eb1c03a13rt
+                  name: workflow management
+                  url: "/project/flow/#/workflowManager"
+                  sort: 1
+                  scope: 1
+                  children: []
+                - code: ji768995fb7c90256c912eb1c03a4ry5
+                  name: 
+                  url: ''
+                  sort: 1
+                  scope: 1
+                  children:
+                  - code: hj89ki95bb7c90256c912eb1c03ajjjj
+                    name: condition management
+                    url: "/apps/lz-condition/"
+                    sort: 2000
+                    scope: 1
+                    children: []
+        '400':
+          description: |
+            error message
+            * 100105231 The parameter companyCode cannot be empty {"code":100105231,"message":"The parameter companyCode cannot be empty"}
+            * 100105232 User does not exist {"code":100105232,"message":"User does not exist"}
+            * 100105233 Company does not exist {"code":100105233,"message":"Company does not exist"}
+            * 100105234 The user does not belong to the company {"code":100105234,"message":"The user does not belong to the company"}
+            * 100105235 The scope parameter is invalid {"code":100105235,"message":"The scope parameter is invalid"}
+          content:
+            application/json:
+              schema:
+                properties:
+                  code:
+                    type: integer
+                    description: wrong code
+                    example: 100105231
+                  message:
+                    type: string
+                    description: error message
+                    example: The parameter companyCode cannot be empty
+        '500':
+          description: common errors 100000001 internal service exception
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ApiResponse"
+              example:
+                code: 100000001
+                message: Unknown exception occurred in the system
+  "/v2/roles/{rolecode}/permissions/menus":
+    get:
+      tags:
+      - menu permission
+      summary: Query the menu that the role has access to according to the role code
+      description: |
+        * Mandatory items: company code and role code
+        * Optional items: scope, configuration menu (0), or runtime menu (1), if not passed, it means full search
+      operationId: getMenuByRole
+      parameters:
+      - name: rolecode
+        in: path
+        required: true
+        description: Use the role code to query the menus that this role has permission, and the length is less than 150 characters
+        schema:
+          type: string
+      - name: companyCode
+        in: query
+        required: true
+        description: Query the authorized menu of this user in this company according to the company code of the user, the length is within 50 characters
+        schema:
+          type: string
+      - name: scope
+        in: query
+        required: false
+        description: Query configuration period menu 0, query runtime menu 1, if not, query all menus
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: The return value of the corresponding role-related permission menu
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  list:
+                    type: array
+                    items:
+                      "$ref": "#/components/schemas/MenuSimpleInfo"
+        '400':
+          description: |
+            error message
+            * 100105227 Specify Company does not exist, {"code":100105227,"message":"Specify Company does not exist"}
+            * 100105228 The specified role does not exist, {"code":100105228,"message":"The specified role does not exist"}
+            * 100000003 scope filling does not conform to the rules, example: 0, 1 {"code":100000003,"message":"scope filling does not conform to the rules, example: 0, 1}
+            * 100000001 Company code cannot be empty, {"code":100000001,"message":"Company code cannot be empty"}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    description: |
+                      error message
+                      * 100105228 The specified role does not exist
+                      * 100000003 scope filling does not meet the rules"
+                    example: 100105228
+                  message:
+                    type: string
+                    description: error message
+                    example: The specified role does not exist
+        '500':
+          description: common errors 100000001 internal service exception
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ApiResponse"
+              example:
+                code: 100000001
+                message: Unknown exception occurred in the system
+  "/v2/users/{username}/permissions/menus/standard":
+    get:
+      tags:
+      - menu permission
+      summary: Query the menu that the user has access to according to the user name, which will be discarded and migrated to /rbac/v2/users/{username}/permissions/menus
+      description: |
+        * Required field: username
+        * Optional item: source, if not passed, it means full search
+      operationId: getMenuByStandard
+      deprecated: true
+      parameters:
+      - name: username
+        in: path
+        required: true
+        description: Query the menu that this user has permission by user name
+        schema:
+          type: string
+      - name: source
+        in: query
+        required: false
+        description: Query according to the menu source is source=IDE, means to only query the menus that use the APP designer as the source; if it is empty, it means to query all types of menus that users can access, without distinguishing the source
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Corresponding to the return value of the user-related permission menu
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  list:
+                    type: array
+                    items:
+                      "$ref": "#/components/schemas/MenuSimpleInfo"
+        '400':
+          description: |
+            error message
+            * 100105225 The specified user does not exist, {"code":100105225,"message":"The specified user does not exist"}
+            * 100000001 Source filling does not comply with the rules, example: IDE, {"code":100000001,"message":"source filling does not comply with the rules, example: IDE"}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    description: error code, for example:"100105225"
+                    example: 100105225
+                  message:
+                    type: string
+                    description: error message
+                    example: The specified user does not exist
+        '500':
+          description: common errors 100000001 internal service exception
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ApiResponse"
+              example:
+                code: 100000001
+                message: Unknown exception occurred in the system
+  "/v2/data-permissions/resource-collections":
+    post:
+      tags:
+      - resource collection
+      summary: Save resource collections in batches
+      description: |
+        Used to add and modify resource collections. Added resource collection, save code, name, link address and company. Modify the resource collection, support to modify the resource collection name and link address.
+
+        Notice:
+        * Make a unique identifier according to the resource collection code, if it does not exist, add it, if it exists, modify it; a request can be added and modified at the same time.
+        * It is not supported to modify the resource collection code resCollectionCode and company code companyCode when modifying.
+        * A request supports up to 20 pieces of data.
+        * All resource collections in a request, either all of them are saved successfully, or all of them fail to be saved, and there will be no partial success
+      operationId: saveResCollection
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              maxItems: 20
+              minItems: 1
+              items:
+                type: object
+                description: resource collection information
+                properties:
+                  companyCode:
+                    type: string
+                    maxLength: 20
+                    description: The code of the company to which the resource collection belongs, and the passed parameter is filled with the default company code "default_org_company" for the space-time system
+                    example: default_org_company
+                  resCollectionCode:
+                    type: string
+                    description: |
+                      Resource collection encoding, only letters and numbers are supported<br>
+                      The resource collection code needs to be globally unique. You can refer to the following methods to generate the resource collection code:
+                        * 1. Use UUID to avoid repetition, such as "3b66936c37c411ed9381020017000b7b"
+                        * 2. Use a fixed string + 6-digit random number to avoid repetition, such as APP ID + 6-digit random number or serial number.
+                      The algorithm of the APP ID is MD5 (appVendorName-appName), which is obtained by encoding the developer name of the APP - the name of the APP using the MD5 algorithm. It is recommended to lowercase the value.
+                      For example, if the APP ID is "170d1e0dc2fd76604461b435c4b6d111" and the serial number is "000001", the final resource collection code generated is "170d1e0dc2fd76604461b435c4b6d111000001".
+                    example: 170d1e0dc2fd76604461b435c4b6d111000001
+                    maxLength: 200
+                  resCollectionName:
+                    type: string
+                    description: Resource collection name, required when adding
+                    example: factory model resource collection
+                    maxLength: 200
+                  resCollectionDataQueryUrl:
+                    type: string
+                    description: Call back the app to query the resource information address, and refer to Callbacks for detailed interface definitions
+                    example: 192.168.12.1:8080/app/resourceCollectionA
+                    maxLength: 500
+                required:
+                - resCollectionCode
+      callbacks:
+        queryResCollectionData:
+          resCollectionDataQueryUrl:
+            get:
+              summary: Resource collection data query interface
+              description: |
+                Resource collection data query interface definition, the third party needs to provide the interface according to the following interface definition.
+                * Interface path, the platform supports two calling formats:
+                1. Format 1: \<scheme\>://ip:port/\<path\>?<query_param> <br>
+                In this way, the resource collection data query url is the ip:port/\<path\> part, which is the content of the resCollectionDataQueryUrl field, such as "192.168.12.1:8080/app/resourceCollectionA";<br>
+                2. Format 2: \<scheme\>://vendorName-appName/\<path\>?<query_param><br>
+                In this way, the resource collection data query url is the vendorName-appName/\<path\> part, which is the content of the resCollectionDataQueryUrl field, such as "brand-app1/app/resourceCollectionA";
+                3. \<scheme\> is http by default, and the third party needs to ensure that the interface is http protocol;
+                4. The interface request type only supports GET type, and does not support PUT and POST, etc.
+              parameters:
+              - name: pageSize
+                in: query
+                required: true
+                description: Page size, up to 200
+                schema:
+                  type: integer
+                  maximum: 200
+              - name: current
+                in: query
+                required: true
+                description: page number
+                schema:
+                  type: integer
+              - name: parentId
+                in: query
+                required: false
+                description: Parent node id, if it is empty or -1, it means the root node
+                schema:
+                  type: integer
+              - name: companyCode
+                in: query
+                required: true
+                description: company code
+                schema:
+                  type: string
+                  maxLength: 20
+              - name: keyCode
+                in: query
+                required: false
+                description: Resource code, if passed in, fuzzy search based on resource code, optional
+                schema:
+                  type: string
+                  maxLength: 255
+              - name: keyName
+                in: query
+                required: false
+                description: Resource name, if passed in, fuzzy search based on the resource name, optional
+                schema:
+                  type: string
+                  maxLength: 255
+              responses:
+                '200':
+                  description: 'Query resource success
+
+                    '
+                  content:
+                    application/json:
+                      schema:
+                        "$ref": "#/components/schemas/ResDataResponse"
+                      example:
+                        pagination:
+                          pageSize: 2
+                          current: 1
+                          total: 4
+                        list:
+                        - resId: 2666299043734784
+                          resCode: A
+                          hasChild: true
+                          resType: flowChartZone
+                          resName: A
+                          hasInfo: true
+                          parentId: -1
+                        - resId: 2685048933901904
+                          resCode: c
+                          hasChild: false
+                          resType: flowChartZone
+                          resName: c
+                          hasInfo: false
+                          parentId: 2666299043734784
+                '500':
+                  description: common errors 100000001 internal service exception
+                  content:
+                    application/json:
+                      schema:
+                        "$ref": "#/components/schemas/ApiResponse"
+                      example:
+                        code: 100000001
+                        message: Unknown exception occurred in the system
+      responses:
+        '200':
+          description: |
+            Saving resource collection succeeded
+            * 100000000 operation succeeded   {"code":100000000,"message":"operation succeeded"}
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ApiResponse"
+              example:
+                code: 100000000
+                message: operation succeeded
+        '400':
+          description: |
+            error message
+            * 100105301 Resource collection code cannot be empty! ,{"code":100105301,"message":"The resource collection code cannot be empty!"}
+            * 100105303 There are too many resource collections, more than 20! ,{"code":100105303,"message":"Too many resource collections, more than 20!"}
+            * 100105304 The resource collection code is repeated! ,{"code":100105304,"message":"The resource collection code is repeated!"}
+            * 100105305 Resource collection name cannot be empty! ,{"code":100105305,"message":"The resource collection name cannot be empty!"}
+            * 100105306 Resource collection link cannot be empty! ,{"code":100105306,"message":"The resource collection link cannot be empty!"}
+            * 100105308 Company code does not exist! ,{"code":100105308,"message":"The company code does not exist!"}
+            * 100105450 Resource set code: xxxx, wrong format, only letters and numbers are supported! ,{"code":100105450,"message":"Resource set code: xxxx, the format is wrong, only letters and numbers are supported!"}
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ApiResponse"
+              example:
+                code: 100105301
+                message: Resource collection code cannot be empty!
+        '500':
+          description: common errors 100000001 internal service exception
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ApiResponse"
+              example:
+                code: 100000001
+                message: Unknown exception occurred in the system
+  "/v2/data-permissions/resource-collections/{resourceCollectionCodes}":
+    delete:
+      tags:
+      - resource collection
+      summary: Delete resource collections in batches
+      description: |
+        Used to delete resource collections.
+
+         Notice:
+          * Resource collection encodings that do not exist are ignored.
+          * The maximum number of deletions: 20
+          * The minimum number of deletions: 1
+          * For all resource collections in a request, either all deletions are successful, or all deletions fail, and there will be no partial success
+          * Support idempotence
+      operationId: deleteResCollection
+      parameters:
+      - name: resourceCollectionCodes
+        in: path
+        required: true
+        description: resource collection encoding collection
+        style: simple
+        explode: false
+        schema:
+          type: array
+          maxItems: 20
+          minItems: 1
+          items:
+            type: string
+            maxLength: 200
+          example: 1a7c29a037c411ed8087020017000b7b,3b6692ae37c411ed9381020017000b7b
+      responses:
+        '200':
+          description: |
+            Resource collection deleted successfully
+            * 100000000 operation succeeded   {"code":100000000,"message":"operation succeeded"}
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ApiResponse"
+              example:
+                code: 100000000
+                message: operation succeeded
+        '400':
+          description: |
+            error message
+            * 100105301 Resource collection code cannot be empty! ,{"code":100105301,"message":"The resource collection code cannot be empty!"}
+            * 100105303 There are too many resource collections, more than 20! ,{"code":100105303,"message":"Too many resource collections, more than 20!"}
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ApiResponse"
+              example:
+                code: 100105301
+                message: Resource collection code cannot be empty!
+        '500':
+          description: common errors 100000001 internal service exception
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ApiResponse"
+              example:
+                code: 100000001
+                message: Unknown exception occurred in the system
+  "/v2/data-permissions/resource-collections/{resourceCollectionCode}/user-permissions":
+    get:
+      tags:
+      - resource collection
+      summary: User resource permission query interface
+      description: 'Query the resource permissions assigned by the user (and the associated role) under the resource collection.
+
+        '
+      operationId: getUserResPermissions
+      parameters:
+      - name: Accept-Language
+        in: header
+        description: Internationalized language (depending on the language, the system encoding value returns content in different languages), the default is the language of the server operating system. English is en-us, Chinese is zh-cn.
+        required: false
+        schema:
+          type: string
+          example: zh-cn
+          maxLength: 8
+      - name: resourceCollectionCode
+        in: path
+        required: true
+        description: resource collection encoding
+        schema:
+          type: string
+          maxLength: 200
+          example: 3b6692ae37c411ed9381020017000b7b
+      - name: userName
+        in: query
+        required: true
+        description: username
+        schema:
+          type: string
+          maxLength: 32
+          example: admin123
+      - name: companyCode
+        in: query
+        required: false
+        description: Company code, the passed parameter is filled with the default company code "default_org_company" for the space-time system
+        schema:
+          type: string
+          maxLength: 20
+          example: default_org_company
+      - name: keyCode
+        in: query
+        required: false
+        description: Resource key, if it is empty, return the resource collection and combine all authorized resources
+        schema:
+          type: string
+          maxLength: 200
+          example: keyCode123
+      - name: resType
+        in: query
+        required: false
+        description: |
+          Resource type, used to filter resource permissions.
+          If this parameter is passed, the resource permissions will be filtered according to the incoming parameters (this field is obtained from the returned data body of the third party through the query of resCollectionDataQueryUrl by the platform).
+          If this parameter is not passed, all resource permissions under this resource collection will be queried.
+        schema:
+          type: string
+          maxLength: 200
+          example: tag_1
+      - name: pageSize
+        in: query
+        required: true
+        description: The number of data items per page, the maximum number is 500; the recommended value is 500 to reduce the calling frequency
+        schema:
+          type: integer
+          example: 500
+          maximum: 500
+      - name: current
+        in: query
+        required: true
+        description: current page number, starting from 1
+        schema:
+          type: integer
+          default: 1
+          example: 1
+      responses:
+        '200':
+          description: 'Query permissions succeeded
+
+            '
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/resPermissions"
+              example:
+                list:
+                - keyCode1
+                - keyCode2
+                pagination:
+                  total: 1
+                  current: 1
+                  pageSize: 500
+        '400':
+          description: |
+            error message
+            * 100105301 Resource collection code cannot be empty! ,{"code":100105301,"message":"The resource collection code cannot be empty!"}
+            * 100105317 Resource collection encoding does not exist! ,{"code":100105317,"message":"The resource collection code does not exist!"}
+            * 100105308 Company code does not exist! ,{"code":100105308,"message":"The company code does not exist!"}
+            * 100105309 Username does not exist! ,{"code":100105309,"message":"Username does not exist!"}
+            * 100105310 Username cannot be empty! ,{"code":100105310,"message":"Username cannot be empty!"}
+            * 100105311 pageSize cannot be empty! ,{"code":100105311,"message":"pageSize cannot be empty!"}
+            * 100105312 pageSize is illegal, it needs to be between 1-500! ,{"code":100105312,"message":"pageSize is illegal, it needs to be between 1-500!"}
+            * 100105313 current cannot be empty! ,{"code":100105313,"message":"current cannot be empty!"}
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ApiResponse"
+              example:
+                code: 100105301
+                message: Resource collection code cannot be empty!
+        '500':
+          description: common errors 100000001 internal service exception
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ApiResponse"
+              example:
+                code: 100000001
+                message: Unknown exception occurred in the system
+  "/v2/data-permissions/resource-collections/{resourceCollectionCode}/role-permissions":
+    get:
+      tags:
+      - resource collection
+      summary: Role resource permission query interface
+      description: 'Query the resource permissions assigned by the role under the resource collection.
+
+        '
+      operationId: getRoleResPermissions
+      parameters:
+      - name: Accept-Language
+        in: header
+        description: Internationalized language (depending on the language, the system encoding value returns content in different languages), the default is the language of the server operating system. English is en-us, Chinese is zh-cn.
+        required: false
+        schema:
+          type: string
+          example: zh-cn
+          maxLength: 8
+      - name: resourceCollectionCode
+        in: path
+        required: true
+        description: resource collection encoding
+        schema:
+          type: string
+          maxLength: 200
+          example: 3b6692ae37c411ed9381020017000b7b
+      - name: roleCode
+        in: query
+        required: true
+        description: role code
+        schema:
+          type: string
+          maxLength: 50
+          example: managerCode1
+      - name: keyCode
+        in: query
+        required: false
+        description: Resource key, if it is empty, all authorized resources under the resource collection will be returned
+        schema:
+          type: string
+          maxLength: 200
+          example: keyCode123
+      - name: resType
+        in: query
+        required: false
+        description: |
+          Resource type, used to filter resource permissions.
+          If this parameter is passed, the resource permission will be filtered according to the incoming parameter (this field is obtained from the returned data body of the third-party query by the platform through resCollectionDataQueryUrl. For details of the third-party interface, see the batch save resource collection interface).
+          If this parameter is not passed, all resource permissions under this resource collection will be queried。
+        schema:
+          type: string
+          maxLength: 200
+          example: tag_1
+      - name: pageSize
+        in: query
+        required: true
+        description: The number of data items per page, the maximum number is 500; the recommended value is 500 to reduce the calling frequency
+        schema:
+          type: integer
+          example: 500
+          maximum: 500
+      - name: current
+        in: query
+        required: true
+        description: current page number, starting from 1
+        schema:
+          type: integer
+          default: 1
+          example: 1
+      responses:
+        '200':
+          description: 'Query permissions succeeded
+
+            '
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/resPermissions"
+              example:
+                list:
+                - keyCode1
+                - keyCode2
+                pagination:
+                  total: 1
+                  current: 1
+                  pageSize: 500
+        '400':
+          description: |
+            error message
+            * 100105301 Resource collection code cannot be empty! ,{"code":100105301,"message":"The resource collection code cannot be empty!"}
+            * 100105317 Resource collection encoding does not exist! ,{"code":100105317,"message":"The resource collection code does not exist!"}
+            * 100105311 pageSize cannot be empty! ,{"code":100105310,"message":"pageSize cannot be empty!"}
+            * 100105312 pageSize is illegal, it needs to be between 1-500! ,{"code":100105312,"message":"pageSize is illegal, it needs to be between 1-500!"}
+            * 100105313 current cannot be empty! ,{"code":100105313,"message":"current cannot be empty!"}
+            * 100105314 The character name cannot be empty! ,{"code":100105314,"message":"Role name cannot be empty!"}
+            * 100105315 The role does not exist! ,{"code":100105315,"message":"The role does not exist!"}
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ApiResponse"
+              example:
+                code: 100105301
+                message: Resource collection code cannot be empty!
+        '500':
+          description: common errors 100000001 internal service exception
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ApiResponse"
+              example:
+                code: 100000001
+                message: Unknown exception occurred in the system
+  "/v2/data-permissions/resource-collections/{resourceCollectionCode}/keys/{keyCode}/roles":
+    get:
+      tags:
+      - resource collection
+      summary: Query role interface based on resource permissions
+      description: 'Query all roles that have permissions for this resource.
+
+        '
+      operationId: getResPermissionRoles
+      parameters:
+      - name: Accept-Language
+        in: header
+        description: Internationalized language (depending on the language, the system encoding value returns content in different languages), the default is the language of the server operating system. English is en-us, Chinese is zh-cn.
+        required: false
+        schema:
+          type: string
+          example: zh-cn
+          maxLength: 8
+      - name: resourceCollectionCode
+        in: path
+        required: true
+        description: resource collection encoding
+        schema:
+          type: string
+          maxLength: 200
+          example: 1a7c29a037c411ed8087020017000b7b
+      - name: keyCode
+        in: path
+        required: true
+        description: resource key
+        schema:
+          type: string
+          maxLength: 200
+          example: keyCode123
+      responses:
+        '200':
+          description: |
+            The query role is successful
+            * 100000000 Query success {"code":100000000,"message":"Query success"}
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/permissionRoles"
+              example:
+                code: 100000000
+                message: search successful
+                list:
+                - roleName: roleName1
+                  roleCode: roleCode1
+                - roleName: roleName2
+                  roleCode: roleCode2
+        '400':
+          description: |
+            error message
+            * 100105301 Resource collection code cannot be empty!,{"code":100105301,"message":"Resource collection code cannot be empty!"}
+            * 100105317 resource collection encoding does not exist! ,{"code":100105317,"message":"resource collection encoding does not exist!"}
+            * 100105318 Resource code cannot be empty! ,{"code":100105318,"message":"The resource code cannot be empty!"}
+            * 100105319 Resource code does not exist! ,{"code":100105319,"message":"The resource code does not exist!"}
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ApiResponse"
+              example:
+                code: 100105301
+                message: Resource collection code cannot be empty!
+        '500':
+          description: common errors 100000001 internal service exception
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ApiResponse"
+              example:
+                code: 100000001
+                message: Unknown exception occurred in the system
+  "/v2/user-permissions":
+    get:
+      tags:
+      - resource collection
+      summary: Query user menu permissions and resource permissions
+      description: |
+        Query user menu permissions and resource permissions. <br>
+        If the amount of returned data is too large, there may be performance problems. It is recommended that the total number of user menu permissions and resource permissions to be queried should not exceed 1000. <br>
+        The returned result data is 0 in the following cases:
+          * Username does not exist
+          * Company code does not exist
+          * User does not belong to current company
+      operationId: getUserOpPermissionAndResPermission
+      parameters:
+      - name: Accept-Language
+        in: header
+        description: Internationalized language (depending on the language, return content in different languages), the default is the language of the server operating system, en_us for English, zh_cn for Chinese
+        required: false
+        schema:
+          type: string
+          maxLength: 8
+      - name: username
+        in: query
+        required: true
+        description: 'Username, required
+
+          '
+        schema:
+          type: string
+          maxLength: 32
+          example: admin123
+      - name: companyCode
+        in: query
+        required: false
+        description: |
+          Company code, optional<br>
+          When the passed parameter is empty, the system uses the default value "default_org_company" to query the data of the default company
+        schema:
+          type: string
+          maxLength: 50
+          description: When the parameter is passed, the system uses the default company code "default_org_company" to fill in
+          example: default_org_company
+      responses:
+        '200':
+          description: 'search successful
+
+            '
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/UserOpPermissionAndResPermissions"
+        '400':
+          description: |
+            error message
+            * 100000003 Username can not be empty! ,{"code":100000003,"message":"Username cannot be empty!"}
+            * 100105441 The company code length cannot exceed 50! ,{"code":100105441,"message":"The company code length cannot exceed 50!"}
+            * 100105442 User name length cannot exceed 32! ,{"code":100105442,"message":"The length of the user name cannot exceed 32!"}
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ApiResponse"
+              example:
+                code: 100000003
+                message: Username can not be empty!
+        '500':
+          description: common errors 100000001 internal service exception
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ApiResponse"
+              example:
+                code: 100000001
+                message: Unknown exception occurred in the system
+  "/v2/role-permissions":
+    get:
+      tags:
+      - resource collection
+      summary: Query role menu permissions and resource permissions
+      description: |
+        Query role menu permissions and resource permissions. <br>
+        If the amount of returned data is too large, there may be performance problems. It is recommended that the total number of role menu permissions and resource permissions to be queried should not exceed 1000. <br>
+        When the role code does not exist, the returned result data is 0.
+      operationId: getRoleOpPermissionAndResPermission
+      parameters:
+      - name: Accept-Language
+        in: header
+        description: Internationalized language (depending on the language, return content in different languages), the default is the language of the server operating system, en_us for English, zh_cn for Chinese
+        required: false
+        schema:
+          type: string
+          maxLength: 8
+      - name: roleCode
+        in: query
+        required: true
+        description: role code
+        schema:
+          type: string
+          maxLength: 50
+          example: roleCode1
+      responses:
+        '200':
+          description: 'search successful
+
+            '
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/RoleOpPermissionAndResPermissions"
+        '400':
+          description: |
+            error message
+            * 100000003 role code cannot be empty! ,{"code":100000003,"message":"role code cannot be empty!"}
+            * 100105443 role code length cannot exceed 50! ,{"code":100105443,"message":"role code length cannot exceed 50!"}
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ApiResponse"
+              example:
+                code: 100105443
+                message: The length of the role code cannot exceed 50!
+        '500':
+          description: common errors 100000001 internal service exception
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ApiResponse"
+              example:
+                code: 100000001
+                message: Unknown exception occurred in the system
+components:
+  schemas:
+    pageRoles:
+      type: object
+      description: role information
+      properties:
+        list:
+          type: array
+          description: role information list
+          items:
+            type: object
+            description: role information
+            properties:
+              roleCode:
+                type: string
+                maxLength: 20
+                description: role code
+                example: systemRole
+              roleName:
+                type: string
+                maxLength: 50
+                description: role name
+                example: admin role
+              description:
+                type: string
+                maxLength: 255
+                description: role description
+                example: Roles assigned to normal users
+              createTime:
+                type: string
+                maxLength: 255
+                description: Role creation time, the format is"yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+                example: '2022-11-29T16:02:15.666+0000'
+              modifyTime:
+                type: string
+                maxLength: 255
+                description: Role update time, the format is "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+                example: '2022-11-29T16:02:15.666+0000'
+              valid:
+                type: integer
+                maxLength: 2
+                description: Role status, 1 is active, 0 is deleted.
+                example: 1
+        pagination:
+          "$ref": "#/components/schemas/Pagination"
+    resPermissions:
+      type: object
+      description: Resource permission information
+      properties:
+        list:
+          type: array
+          description: A collection of resource keys with permissions
+          items:
+            type: string
+        pagination:
+          "$ref": "#/components/schemas/Pagination"
+    permissionRoles:
+      type: object
+      description: Roles with Resource Permissions
+      properties:
+        code:
+          type: integer
+          format: int32
+          example: 100000000
+        message:
+          type: string
+          example: success
+        list:
+          type: array
+          description: Character collection, the maximum supported number is 100, the excess part cannot be returned.
+          maxItems: 100
+          items:
+            type: object
+            properties:
+              roleName:
+                type: string
+                description: role name
+                example: roleName1
+                maxLength: 50
+              roleCode:
+                type: string
+                description: role code
+                example: roleCode1
+                maxLength: 50
+      required:
+      - code
+      - message
+    UserOpPermissionAndResPermissions:
+      type: object
+      description: User Menu Permissions and Resource Permissions
+      properties:
+        username:
+          type: string
+          description: username
+          maxLength: 32
+          example: userA
+        menuPermissions:
+          "$ref": "#/components/schemas/menuPermissions"
+        resCollectionPermissions:
+          "$ref": "#/components/schemas/resCollectionPermissions"
+    RoleOpPermissionAndResPermissions:
+      type: object
+      description: Role Menu Permissions and Resource Permissions
+      properties:
+        roleCode:
+          type: string
+          description: role code
+          maxLength: 50
+          example: roleCodeA
+        menuPermissions:
+          "$ref": "#/components/schemas/menuPermissions"
+        resCollectionPermissions:
+          "$ref": "#/components/schemas/resCollectionPermissions"
+    Pagination:
+      description: paging information
+      type: object
+      properties:
+        total:
+          type: integer
+          description: total number
+          example: 100
+        pageSize:
+          type: integer
+          description: Articles per page
+          example: 20
+          default: 20
+        current:
+          type: integer
+          description: current page number
+          example: 1
+    i18nKeyValue:
+      type: object
+      description: Internationalization data
+      properties:
+        locale:
+          type: string
+          maxLength: 8
+          description: "Internationalization keys mainly have the following four languages, and the keys correspond to:\n* `zh_CN`: Chinese \n* `zh_HK`: Chinese Traditional\n*
+            `en_US`: English\n* `id_ID`: Indonesian\n\nCurrently, the platform supports four languages: Chinese, Traditional Chinese, English, and Indonesian. The caller must include at least Chinese when passing parameters, and other languages can be used according to business needs\n"
+          example: zh_CN
+        display:
+          type: string
+          description: Internationalization reference value, set according to locale value
+          example: Chinese name
+          maxLength: 500
+      required:
+      - locale
+      - display
+    MenuOperateCodeRefUrl:
+      type: object
+      description: Menu operation encoding URL association information
+      properties:
+        url:
+          type: string
+          description: The relative path of the request URL
+          example: "/api/service/demo?a=x"
+          maxLength: 500
+        httpMethodType:
+          type: integer
+          enum:
+          - 0
+          - 1
+          - 2
+          - 3
+          description: |
+            HTTP request method type:
+             * `0` - GET
+             * `1` - POST
+             * `2` - PUT
+             * `3` - DELETE
+          example: 1
+      required:
+      - url
+      - httpMethodType
+    MenuOperateCodeRefUrlNew:
+      type: object
+      description: URL address bound to the operation
+      properties:
+        url:
+          type: string
+          description: The resource access URL address of the operation
+          example: "/api/service/demo?a=x"
+          maxLength: 500
+        method:
+          type: string
+          enum:
+          - POST
+          - GET
+          - PUT
+          - DELETE
+          - PATCH
+          - HEAD
+          description: The HTTP Method value of the resource access URL.
+          example: GET
+          maxLength: 10
+      required:
+      - url
+      - method
+    MenuOperate:
+      type: object
+      description: Menu operation information
+      properties:
+        code:
+          type: string
+          description: Menu operation code
+          maxLength: 500
+        memo:
+          type: string
+          description: Remarks
+          maxLength: 500
+        i18nKeyName:
+          type: string
+          description: Internationalized encoding
+          maxLength: 500
+        i18nDefaultValue:
+          type: string
+          description: Internationalized default name
+          maxLength: 500
+        urls:
+          type: array
+          items:
+            "$ref": "#/components/schemas/MenuOperateCodeRefUrl"
+          maxItems: 100
+          example:
+          - url: xx
+            httpMethodType: 0
+        i18nKeyValues:
+          type: array
+          items:
+            "$ref": "#/components/schemas/i18nKeyValue"
+          maxItems: 50
+          example:
+          - locale: zh_CN
+            display: Chinese
+      required:
+      - code
+      - i18nKeyName
+      - urls
+    MenuOperateNew:
+      type: object
+      description: |
+        Action list.
+
+        When the menu type is not a folder, the first record in the operation list must use the url of the menu as the first default operation information.
+
+        By default, the system will generate a default action for this menu with the menu URL as the value.
+      properties:
+        code:
+          type: string
+          description: |
+            Menu operation code
+
+            When the menu is the first operation information, its value is <menuCode>_default
+
+            Letters, numbers, and underscores are supported. Must start with a letter and cannot end with an underscore.
+          maxLength: 500
+        desc:
+          type: string
+          description: Remarks
+          maxLength: 500
+        sort:
+          type: number
+          format: double
+          description: |
+            Sort code.
+
+            **Note: Each menu must be different and cannot all have the same value. **
+          minimum: 10000
+        name:
+          type: string
+          description: 'Action name. Generally, it is an internationalized KEY name. like rbac.menus.operation.xxx.name
+
+            '
+          maxLength: 500
+        i18nDefaultName:
+          type: string
+          description: The internationalized default name, when the internationalized data cannot be obtained, this value is used as the menu name for filling.
+          maxLength: 500
+        urls:
+          type: array
+          items:
+            "$ref": "#/components/schemas/MenuOperateCodeRefUrlNew"
+          maxItems: 100
+          example:
+          - url: xx
+            method: GET
+        i18nKeyValues:
+          type: array
+          items:
+            "$ref": "#/components/schemas/i18nKeyValue"
+          maxItems: 50
+          example:
+          - locale: zh_CN
+            display: Chinese
+      required:
+      - code
+      - name
+      - i18nDefaultName
+      - i18nKeyValues
+      - sort
+      - urls
+    Menu:
+      type: object
+      description: menu information
+      properties:
+        companyCode:
+          type: string
+          maxLength: 20
+          description: The code of the company to which the menu belongs, the parameter is filled by the default company code when the system is passed
+          example: default_org_company
+        code:
+          type: string
+          description: |
+            The menu code needs to be globally unique. You can refer to the following methods to generate the menu code:
+              * Use UUID to avoid duplication
+              * Use a fixed string + 6-digit random number to avoid repetition, such as APP ID + 6-digit random number or serial number
+          example: APP ID-abcdef
+          maxLength: 500
+        parentCode:
+          type: string
+          description: Encoding of the parent menu, it is the root menu when it is empty
+          example: yyyy-yyyy-yyyy
+          maxLength: 500
+        i18nKeyName:
+          type: string
+          description: Menu Internationalization Code
+          example: app.xxx.xxx
+          maxLength: 500
+        i18nDefaultValue:
+          type: string
+          description: |
+            The internationalized name of the menu. When *i18nKeyName* does not find the internationalized name of the current locale, this attribute will be used to replace it by default. If the value is not filled, it will be filled with the first item in the *i18nKeyValues* array by default.
+
+            *i18nDefaultValue* and *i18nKeyValues* cannot be empty at the same time
+          example: Menu
+          maxLength: 500
+        i18nKeyValues:
+          type: array
+          items:
+            "$ref": "#/components/schemas/i18nKeyValue"
+          maxItems: 50
+          example:
+          - locale: zh_CN
+            display: Menu
+          description: "*i18nDefaultValue* and *i18nKeyValues* cannot be empty at the same time\n"
+        sort:
+          type: number
+          format: double
+          description: 'Menu sorting, menus at the same level are sorted from small to large according to the size of the sort value. If not filled, the default is 99.
+
+            '
+          example: 1
+          default: 99
+        showType:
+          type: integer
+          enum:
+          - 0
+          - 1
+          description: |
+            Request method:
+            * `0` - Configuration link page, that is, the page designed and developed through the "Tianfang (supIDE)" platform configuration design, such as large screen, flow chart, form, etc.
+            * `1` - external link page, that is, a page that is not designed and developed through the "Tianfang (supIDE)" platform configuration, and is a page imported from the outside
+
+            Tianfang (supIDE), an efficient and low-code development system provided by the supOS platform, supports user-defined development of large screens, reports, form business and industrial flow charts. For detailed functions, please consult Lanzhuo Company.
+          example: 1
+          default: 1
+        url:
+          type: string
+          description: Menu request page URL address
+          example: "/xx/xx/xx"
+          maxLength: 500
+        target:
+          type: string
+          enum:
+          - SELF
+          - BLANK
+          description: |
+            How the menu opens on the browser page
+            * `SELF` - current tab open
+            * `BLANK` - open a new tab
+          example: SELF
+        scope:
+          type: integer
+          enum:
+          - 0
+          - 1
+          description: |
+            The scope of the menu
+            * `0` - configuration period, that is, the administrator operation terminal or the project implementation operation terminal, which can be entered through the "system configuration" button in the system
+            * `1` - Runtime, i.e. normal user operation side
+          example: 1
+        source:
+          type: string
+          description: |
+            Menu registration source, the caller uses a word to identify itself. Such as MES=manufacturing system
+              *  saas
+          example: saas
+          maxLength: 50
+        menuType:
+          type: integer
+          enum:
+          - 0
+          - 1
+          - 2
+          - 3
+          description: |
+            menu type
+            * `0` - folder menu directory type, no pages
+            * `1` - page menu page type, when clicked, the corresponding URL link can be opened
+            * `2` - flow menu flow type
+            * `3` - operation menu operation type
+          example: 1
+        iconUrl:
+          type: string
+          description: Menu icon ICON URL address, allowing absolute and relative paths
+          example: "/xx/xx/xx"
+          maxLength: 500
+        tokenType:
+          type: integer
+          enum:
+          - 0
+          - 1
+          description: |
+            Do you need to pass a temporary token? If so, you need to splice the obtained temporary token into the query part when you click the menu.
+              * `1`: required
+              * `0`: not required
+          example: 1
+          default: 0
+        memo:
+          type: string
+          description: Remarks
+          example: Remarks
+          maxLength: 500
+        extra:
+          type: string
+          description: Extra information
+          example: Extra information
+          maxLength: 500
+        moduleCode:
+          type: string
+          description: Module coding, pre-registration required
+          example: AppConfig
+          maxLength: 50
+        APP ID:
+          type: string
+          description: The unique identification ID of the APP
+          example: xxx-xxx-xxx
+          maxLength: 500
+        menuOperates:
+          type: array
+          items:
+            "$ref": "#/components/schemas/MenuOperate"
+          maxItems: 200
+          example:
+          - code: xx-xx-xx
+            url: "/xx/xx/x"
+            i18nKeyName: xx.xx.xx.xx
+            i18nDefaultValue: xxx
+            urls:
+            - url: xx
+              httpMethodType: 0
+            i18nKeyValues:
+            - locale: zh_CN
+              display: Chinese
+      required:
+      - code
+      - i18nKeyName
+      - showType
+      - target
+      - scope
+      - source
+      - menuType
+      - moduleCode
+    MenuNew:
+      type: object
+      description: Menu information
+      properties:
+        code:
+          type: string
+          description: |
+            The menu code needs to be globally unique.
+
+            Letters, numbers, and underscores are supported. Must start with a letter and cannot end with an underscore.
+
+            You can refer to the following methods to generate menu codes:
+              * 1. Use UUID to avoid duplication
+              * 2. Use a fixed string + 6-digit random number to avoid repetition, such as APP ID + 6-digit random number or serial number
+          example: APP ID-abcdef
+          maxLength: 500
+        parentCode:
+          type: string
+          description: |
+            Encoding of the parent menu, when the "menu_list" fixed string is filled, it represents the root node.
+
+            Letters, numbers, and underscores are supported. Must start with a letter and cannot end with an underscore.
+          example: yyyy-yyyy-yyyy
+          maxLength: 500
+        moduleId:
+          type: string
+          description: Parent modeule ID
+          default: rbac
+          example: AppConfig
+          maxLength: 500
+        name:
+          type: string
+          description: Menu name, generally filled with the internationalized KEY of the name. Format such as rbac.menus.xxx.name
+          example: rbac.menus.xxx.name
+          maxLength: 500
+        i18nDefaultName:
+          type: string
+          description: |
+            The internationalized name of the menu, when *name* does not find the internationalized name of the current locale, this attribute will be used by default instead.
+
+            *i18nDefaultName* and *i18nKeyValues* cannot be empty at the same time
+          example: Menu
+          maxLength: 500
+        i18nKeyValues:
+          type: array
+          items:
+            "$ref": "#/components/schemas/i18nKeyValue"
+          maxItems: 50
+          example:
+          - locale: zh_CN
+            display: Menu
+          description: Internationalization data for menu names
+        url:
+          type: string
+          description: |
+            The URL address of the menu request page, **Required when `type=1`. **
+            * On the menu page of the same domain, please fill in the absolute path starting from the root directory, such as: /project/dam/xxxx.
+            * For non-same-domain menu pages, please fill in the absolute path with host:port, such as: http://host:port/xxx.
+
+            If the menu is installed and registered in the form of a high-code (Hosted) APP, because the system will automatically add a special access path prefix /apps/<vendorName>-<appName> for the APP as the same domain access. So, please fill in /apps/<vendorName>-<appName>/<your page native path>
+          example: "/xx/xx/xx"
+          maxLength: 500
+        type:
+          type: integer
+          description: |
+            Menu type:
+            * 0=`FOLDER`=Folder
+            * 1=`PAGE`=page
+            * 2=`FLOW`= flow
+            * 3=`OPERATION`=Operation
+          enum:
+          - 0
+          - 1
+          - 2
+          - 3
+          default: 0
+          example: 0
+        openType:
+          type: integer
+          enum:
+          - 0
+          - 1
+          description: |
+           How the menu opens on the browser page
+            * 0=`SELF`=iframe embedded
+            * 1=`NEW`= Pop up a new window
+          default: 0
+          example: 0
+        showType:
+          type: integer
+          enum:
+          - 0
+          - 1
+          description: |
+            Request method:
+            * `0` - Configuration link page, refers to the page created through supOS low-code development platform.
+            * `1` - external link page, refers to the page not created through supOS low-code development platform.
+          example: 1
+          default: 1
+        scopeType:
+          type: integer
+          enum:
+          - 0
+          - 1
+          description: |
+            The scope of the menu
+            * `0` - configuration period, that is, the administrator operation terminal or the project implementation operation terminal, which can be entered through the "system configuration" button in the system
+            * `1` - Runtime, i.e. normal user operation side
+          default: 1
+          example: 1
+        tokenPass:
+          type: integer
+          enum:
+          - 0
+          - 1
+          description: |
+            Do you need to pass a temporary token when opening the page:
+              * `0` - not required
+              * `1` - required
+            Parameters are passed in the form of `query parameter` of `url`. The page can obtain this temporary token through a script, and exchange user information with the platform through this temporary token.
+          default: 0
+          example: 0
+        iconType:
+          type: integer
+          enum:
+          - 0
+          - 1
+          description: |
+            menu icon type
+            * `0` - CSS is the CSS style name
+            * `1` - URL is the image access address
+          default: 0
+          example: 0
+        icon:
+          type: string
+          description: Menu icon value, fill in the appropriate value according to iconType.
+          maxLength: 500
+          example: cssStyle
+        sort:
+          type: number
+          format: double
+          description: |
+            Sort code.
+
+            **Note: Each menu must be different and cannot all have the same value. **
+          minimum: 10000
+          example: 10000
+          default: 10000
+        desc:
+          type: string
+          description: Remarks
+          example: Remarks
+          maxLength: 500
+        hide:
+          type: boolean
+          description: whether to hide
+          enum:
+          - true
+          - false
+          example: true
+          default: false
+        operations:
+          type: array
+          description: |
+            Action list.
+
+            When the menu type is not a folder, the first record in the operation list must use the url of the menu as the first default operation information.
+
+            By default, the system will generate a default action for this menu with the menu URL as the value.
+          items:
+            "$ref": "#/components/schemas/MenuOperateNew"
+          maxItems: 200
+          example:
+          - code: xx-xx-xx
+            url: "/xx/xx/x"
+            name: xx.xx.xx.xx
+            i18nDefaultName: xxx
+            sort: 100001
+            urls:
+            - url: xx
+              method: GET
+            i18nKeyValues:
+            - locale: zh_CN
+              display: Chinese
+      required:
+      - code
+      - parentCode
+      - name
+      - i18nDefaultName
+      - i18nKeyValues
+      - type
+      - openType
+      - showType
+      - scopeType
+      - sort
+      - moduleId
+      - hide
+    ModuleInfo:
+      type: object
+      description: Module registration information
+      properties:
+        id:
+          type: string
+          description: |
+            A unique identifier for the module. Required field. Immutable.
+
+            If you register in the form of an APP, you can use the app id to fill it.
+
+            Letters, numbers, and underscores are supported. Must start with a letter and cannot end with an underscore.
+          maxLength: 500
+          example: rbac
+        code:
+          type: string
+          description: |
+            Module encoding. Required field. Immutable.
+
+            Unless otherwise specified, it can be consistent with the id.
+
+            Letters, numbers, and underscores are supported. Must start with a letter and cannot end with an underscore.
+          maxLength: 500
+          example: rbac
+        name:
+          type: string
+          description: |
+            module name. Required field.
+
+            Generally, it is filled with the internationalized KEY of the name, and the encoding code convention format is: `reg.moduleName.` + `moduleCode`, such as: reg.moduleName.rbac
+          maxLength: 500
+          example: reg.moduleName.rbac
+        freezeStatus:
+          type: boolean
+          description: Freeze state, applied to the menu that this module belongs to.
+          default: false
+        i18nKeyValues:
+          type: array
+          description: Internationalization data for module names.
+          items:
+            "$ref": "#/components/schemas/i18nKeyValue"
+          minItems: 1
+          maxItems: 10
+      required:
+      - id
+      - code
+      - name
+      - freezeStatus
+      - i18nKeyValues
+    ModuleInfo2:
+      type: object
+      description: Module registration information
+      properties:
+        code:
+          type: string
+          description: |
+            Module encoding. Required field. Immutable.
+
+            Unless otherwise specified, it can be consistent with the id.
+
+            Letters, numbers, and underscores are supported. Must start with a letter and cannot end with an underscore.
+          maxLength: 500
+          example: rbac
+        name:
+          type: string
+          description: |
+            module name.
+
+            Generally, it is filled with the internationalized KEY of the name, and the encoding code convention format is: `reg.moduleName.` + `moduleCode`, such as: reg.moduleName.rbac
+          maxLength: 500
+          example: reg.moduleName.rbac
+        freezeStatus:
+          type: boolean
+          description: Freeze state, applied to the menu that this module belongs to. Required field.
+          default: false
+        i18nKeyValues:
+          type: array
+          description: Internationalization data for module names.
+          items:
+            "$ref": "#/components/schemas/i18nKeyValue"
+          minItems: 1
+          maxItems: 10
+      required:
+      - code
+      - freezeStatus
+    MenuOperation:
+      type: object
+      properties:
+        menuCode:
+          type: string
+          description: Menu unique code
+          example: hj89ki95bb7c90256c912eb1c03ajjjj
+          maxLength: 500
+        menuName:
+          type: string
+          description: Menu name
+          example: Device management
+          maxLength: 500
+        menuUrl:
+          type: string
+          description: Menu url
+          example: "/project/compute-engine/datadump"
+          maxLength: 500
+        operations:
+          type: array
+          description: Menu operations with permissions under this menu
+          maxItems: 200
+          items:
+            properties:
+              code:
+                type: string
+                description: Menu Action Item Encoding
+                example: hj89ki95bb7c90256c912eb1c03ajjjj_subimit
+                maxLength: 500
+              name:
+                type: string
+                description: menu action name
+                example: Submit
+                maxLength: 500
+    MenuTree:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Menu unique number
+        name:
+          type: string
+          description: menu name
+        url:
+          type: string
+          description: Menu url
+        sort:
+          type: number
+          format: double
+          description: Menu sorting field (the order value is determined by the creator when the menu is created)
+        scope:
+          type: integer
+          description: 0 means configuration menu; 1 means runtime menu
+        children:
+          type: array
+          items:
+            "$ref": "#/components/schemas/MenuTree"
+    Register:
+      type: object
+      description: Module, menu registration upload file format
+      properties:
+        apiVersion:
+          type: string
+          description: file format version
+          enum:
+          - v1alpha1
+          default: v1alpha1
+          example: v1alpha1
+        dataVersion:
+          type: string
+          description: |
+            Module data version number. Required field. It is used to judge whether the module data needs to be updated.
+
+            Format requirements: <primary>.<secondary>.<revision> Use [SemVer 2](https://semver.org/) specification.
+
+            Each request will be judged according to the version number:
+
+            1) If the module has not been registered before, add it directly and record the version number
+
+            2) If the module has been registered, compare the version number:
+
+                a), the version number of the new submission is the same as or smaller than the currently recorded version number of the module, then return success without any operation
+
+                b) If the newly submitted version number is greater than the currently recorded version number of the module, the submission is considered to be an update operation, and the modification logic related to the module is executed
+          maxLength: 11
+          default: 1.0.0
+          example: 1.0.0
+        modules:
+          type: array
+          description: The list of registered modules, and the number of modules that can be registered at the same time does not exceed 10
+          maxItems: 10
+          items:
+            "$ref": "#/components/schemas/ModuleInfo"
+        menus:
+          type: array
+          description: Registered menu list, the number of registered menus does not exceed 200 at the same time
+          maxItems: 200
+          items:
+            "$ref": "#/components/schemas/MenuNew"
+      required:
+      - apiVersion
+      - dataVersion
+      - modules
+      - menus
+    RoleInfo:
+      type: object
+      properties:
+        code:
+          type: string
+          description: role code
+          example: systemRole
+          maxLength: 50
+        name:
+          type: string
+          description: role name
+          example: admin role
+          maxLength: 50
+        description:
+          type: string
+          description: role description
+          example: admin user
+          maxLength: 255
+      required:
+      - code
+      - name
+    RolePermissionInfo:
+      type: object
+      properties:
+        roleCode:
+          type: string
+          description: role code
+          example: systemRole
+          maxLength: 50
+        roleName:
+          type: string
+          description: role name
+          example: admin role
+          maxLength: 50
+        roleDescription:
+          type: string
+          description: role description
+          example: admin user
+          maxLength: 255
+        menuOperationCodes:
+          type: array
+          description: A collection of action codes for role bindings
+          items:
+            type: string
+            maxLength: 500
+          maxItems: 500
+      required:
+      - roleCode
+      - roleName
+      - menuOperationCodes
+    MenuSimpleInfo:
+      type: object
+      properties:
+        name:
+          type: string
+          description: name
+          example: device management
+        url:
+          type: string
+          description: address
+          example: "/project/compute-engine/datadump"
+        code:
+          type: string
+          description: code
+          example: bisDesigner
+    MenuFreeze:
+      type: object
+      description: menu freeze status
+      properties:
+        freezeStatus:
+          type: boolean
+          description: |
+            Frozen state:
+              * `true` frozen
+              * `false` unfreeze
+      required:
+      - freezeStatus
+    ApiResponse:
+      type: object
+      description: 'HTTP request response default structure {"code;: 10000, "message": "success""""}'
+      properties:
+        code:
+          type: integer
+          format: int32
+          example: 10000
+        message:
+          type: string
+          maxLength: 255
+          example: success
+      required:
+      - code
+      - message
+    ResDataResponse:
+      type: object
+      description: resource data
+      properties:
+        pagination:
+          "$ref": "#/components/schemas/Pagination"
+        list:
+          type: array
+          description: Resource collection data.
+          maxItems: 200
+          items:
+            type: object
+            properties:
+              resId:
+                type: integer
+                description: resource id
+                maxLength: 32
+                example: 123
+              resCode:
+                type: string
+                description: resource encoding
+                maxLength: 255
+                example: resCodeA
+              hasChild:
+                type: boolean
+                description: whether there are child nodes
+                example: true
+              resType:
+                type: string
+                description: Resource type, used to filter resource permissions, not required.
+                maxLength: 255
+                example: factoryType
+              resName:
+                type: string
+                description: Resource Name
+                maxLength: 255
+                example: roleName1
+              hasInfo:
+                type: boolean
+                description: Whether there are resource details (if yes, you can click the "resource details" of the resource on the platform resource permission page to expand, and the expanded data will also be returned by the platform calling this interface. At this time, the query_param called will pass the resource id of the resource as the parentId )
+                example: true
+              parentId:
+                type: integer
+                description: Parent node id (if it is the root node, parentId is -1)
+                maxLength: 32
+                example: -1
+            required:
+            - resId
+            - resCode
+            - hasChild
+            - resName
+            - hasInfo
+            - parentId
+    menuPermissions:
+      type: array
+      description: Menu permission information
+      maxItems: 100000
+      items:
+        type: object
+        properties:
+          menuName:
+            type: string
+            description: menu name
+            example: menu A
+            maxLength: 256
+          menuCode:
+            type: string
+            description: menu code
+            example: menuCodeA
+            maxLength: 256
+          url:
+            type: string
+            description: menu url
+            example: route/xxx/xxx
+            maxLength: 256
+          menuOpPermissions:
+            type: array
+            description: menu operation
+            maxItems: 128
+            items:
+              type: object
+              properties:
+                menuOpName:
+                  type: string
+                  description: menu action name
+                  example: menu operation A
+                  maxLength: 256
+                menuOpCode:
+                  type: string
+                  description: Menu operation code
+                  example: opCode
+                  maxLength: 256
+                url:
+                  type: string
+                  description: menu operation url
+                  example: route/operate/xxx/xxx
+                  maxLength: 256
+    resCollectionPermissions:
+      type: array
+      description: Resource permission information
+      maxItems: 100000
+      items:
+        type: object
+        properties:
+          resourceCollectionCode:
+            type: string
+            description: resource set encoding
+            example: resService1
+            maxLength: 256
+          resPermissions:
+            type: array
+            description: resource permissions
+            maxItems: 100000
+            items:
+              type: string
+              description: resource encoding
+              example: reskey1
+              maxLength: 256

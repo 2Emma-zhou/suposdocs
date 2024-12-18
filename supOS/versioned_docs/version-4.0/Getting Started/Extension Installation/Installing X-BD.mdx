@@ -1,0 +1,52 @@
+---
+hide_title: true
+---
+
+:::info
+supBD can only be installed on the same server as supOS. Make sure you have installed supOS already.
+:::
+
+## Server Installation
+1. On the supOS server, create a new path as **/home/supos/supos/opt/supbd** for supBD.
+```
+mkdir /home/supos/supos/opt/supbd
+```
+2. Copy and decompress supBD installation package to the path.
+```
+cp xxx/X-BD-V2.xx.xx.xx-C-xxxxxx.zip /home/supos/supos/downloads
+cd /home/supos/supos/downloads
+unzip X-BD-V42.xx.xx.xx-C-xxxxxx.zip -d /home/supos/supos/opt/supbd
+```
+3. Access the path, and then copy **env.sh.tmpl** file to generate **env.sh** file under **bin** folder.
+```
+cd /home/supos/supos/opt/supbd/bin
+cp env.sh.tmpl env.sh
+```
+4. Edit the **env.sh** file, and change **HASP_SERVER** to the address where the authorization dongle is registered.
+```
+vi env.sh
+```
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supBD/1.png)
+
+5. Install supBD.
+```
+sudo bash install.sh
+```
+
+## Accessing supBD
+Log in to supOS, and then select **Data Intelligence** > **Data Science**.
+:::info
+After installation, supBD permission is not granted to admin or any user be default. Make sure you access supOS and assign corresponding module permission under **User Security Management**.
+:::
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supBD/2.png)
+
+## Uninstalling supBD
+1. Access supBD installation path.
+```
+cd /home/supos/supos/opt/supbd/bin
+```
+2. Uninstall supBD.
+```
+sudo bash uninstall.sh
+```

@@ -1,0 +1,72 @@
+---
+hide_title: true
+---
+
+### Execution Records
+
+Log in to supOS, and then select **Data Intelligence** > **Data Governance** > **Data quality** > **Execution records**.
+- You can check the records of QC tasks.
+- For failed tasks, click ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supDAM/31.png) to find out the reason for subsequent correction.
+- Click **View** under **Operation** to check the details.
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supDAM/30.png)
+
+### Quality Score Details
+In record details, you can see the number of executed and failed tasks, and quality score.
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supDAM/33.png)
+- Rules disabled or without weight will not be evaluated.
+- Rule score = (Records - Number of error records)/Records*100
+- QC task quality score = Sum(rule score*weight)/Sum(rule weight)
+
+For example:
+Task A, contains Rule A1, A2 and A3. According to the following table, calculate the task quality score.
+
+<table>
+    <tr>
+      <th>Task Name</th>
+      <th>Rule</th>
+      <th>Level</th>
+      <th>Weight</th>
+      <th>Result</th>
+      <th>Records</th>
+      <th>Error Records</th>
+    </tr>
+    <tr>
+      <td>Task A</td>
+      <td>Rule A1</td>
+      <td>General</td>
+      <td>80</td>
+      <td>Abnormal</td>
+      <td>1000</td>
+      <td>100</td>
+    </tr>
+    <tr>
+      <td>Task A</td>
+      <td>Rule A2</td>
+      <td>Serious</td>
+      <td>50</td>
+      <td>Abnormal</td>
+      <td>800</td>
+      <td>100</td>
+    </tr>
+     <tr>
+      <td>Task A</td>
+      <td>Rule A3</td>
+      <td>Important</td>
+      <td>30</td>
+      <td>Success</td>
+      <td>2000</td>
+      <td>300</td>
+    </tr>
+  </table>
+
+- Rule score:
+<ul>
+<ul>
+<li>A1: (1000-100)/1000*100=90</li>
+<li>A2: (800-100)/800*100=87.5</li>
+<li>A3: (2000-300)/2000*100=85</li>
+</ul>
+</ul>
+
+- Task quality score: (90\*80+87.5\*50+85*30)/(80+50+30)=88

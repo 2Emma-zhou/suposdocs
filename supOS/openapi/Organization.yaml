@@ -1,0 +1,2859 @@
+---
+openapi: 3.0.0
+info:
+  description: |-
+    Service interface provided by organizational structure:
+
+    # Authentication
+
+    <!-- ReDoc-Inject: <security-definitions> -->
+  version:
+  title: Organizational Architecture Interface Definition
+servers:
+- url: "/open-api/organization/v2/"
+tags:
+- name: orgs
+  description: Org structure
+security:
+- Sign: []
+components:
+  parameters:
+    acceptLanguage:
+      name: Accept-Language
+      in: header
+      description: Internationalized language (depending on the language, the system
+        code value returns content in different languages), the default is the server
+        operating system language. English is en-us, Chinese is zh-cn.
+      required: false
+      schema:
+        type: string
+        example: zh-cn
+        maxLength: 8
+  securitySchemes:
+    Sign:
+      type: apiKey
+      name: Authorization
+      in: header
+  schemas:
+    UserBaseInfo:
+      type: object
+      properties:
+        username:
+          type: string
+          description: username
+          example: zhangsan
+    PersonDetailInfo:
+      description: Personnel information
+      allOf:
+      - "$ref": "#/components/schemas/PersonBaseInfo"
+      - type: object
+        properties:
+          user:
+            type: object
+            allOf:
+            - "$ref": "#/components/schemas/UserBaseInfo"
+          positions:
+            type: array
+            description: Personnel position information
+            items:
+              properties:
+                name:
+                  type: string
+                  description: Position Title
+                  example: Technical Post
+                code:
+                  type: string
+                  description: Job ID
+                  example: tecPos
+          modifyTime:
+            type: string
+            description: 'Last modification time (zero time zone time), the format
+              is: "yyyy-MM-dd''T''HH:mm:ss.SSSZ", for example: "2021-01-26T16:02:15.666+0000"'
+            example: '2021-01-26T16:02:15.666+0000'
+    PersonBaseInfo:
+      description: Personnel information
+      allOf:
+      - type: object
+        properties:
+          code:
+            type: string
+            description: Personnel number, the length is not greater than 50!
+            example: zhangsan
+          name:
+            type: string
+            description: Personnel name, the length is not greater than 200!
+            example: Zhang San
+          valid:
+            type: integer
+            description: 'Whether it is valid (delete) mark, 0: invalid; 1: valid'
+            example: 1
+          gender:
+            type: object
+            description: |
+              * gender, the system code is sys_gender
+              * the key of the gender system code value, (please refer to the corresponding gender code key in the system code, the existing code key: male, female)
+              * the value of the gender system code (according to the international The values of different system encodings are displayed in different languages, the default is the same as the encoding key), (please refer to the corresponding gender encoding values in the system encoding, the existing encoding values (Chinese): male, female)
+            properties:
+              code:
+                type: string
+                description: Key of Gender System Coded Value
+                example: male
+              name:
+                type: string
+                description: value of gender system coded value
+                example: male
+          status:
+            type: object
+            description: |-
+              * Person status, the system code is sys_person_status
+              * The key of the person status system code value, (please refer to the corresponding personnel status code key in the system code, the existing code keys: onWork, offWork)
+              * The person status system code Value (display the value of different system codes according to the internationalized language, the default is the same as the code key), (please refer to the corresponding personnel status code value in the system code, the existing code value (Chinese): on-the-job, resigned)
+               example: Working
+            properties:
+              code:
+                type: string
+                description: Key of personnel status system encoding value
+                example: onWork
+              name:
+                type: string
+                description: The value of the personnel status system code value
+                example: Working
+          mainPosition:
+            type: object
+            description: main position
+            properties:
+              code:
+                type: string
+                description: Personnel's main position code
+                example: developPosition
+              name:
+                type: string
+                description: The name of the main position to which the person belongs
+                example: R&D Post
+          entryDate:
+            type: string
+            description: 'Entry date, the format is yyyy-MM-dd: For example: "2021-05-26"'
+            example: '2021-05-28'
+          title:
+            type: object
+            description: "*Professional title, the system code is sys_person_title\n*
+              The key of the professional title system code value, (please refer to
+              the corresponding professional title code key in the system code, the
+              existing code keys: elementary (primary), intermediate (intermediate),
+              advanced (advanced)) \n* The value of the job title system code value
+              (display the value of different system codes according to the internationalized
+              language, the default is the same as the code key), (please refer to
+              the corresponding job title code value in the system code, the existing
+              code value (Chinese): primary , Intermediate, Advanced)\n"
+            properties:
+              code:
+                type: string
+                description: The key of the professional title system encoding value
+                example: primary
+              name:
+                type: string
+                description: The value of the professional title system code value
+                example: Elementary
+          qualification:
+            type: string
+            description: Qualification, the length is not greater than 200!
+          education:
+            type: object
+            description: |
+              * education, the system code is sys_education
+              * the key of the education system code value, (please refer to the corresponding education code key in the system code, the existing code keys: middleOrOther (junior high school and below), highSecondary (high school/technical secondary school), degree (college), college (undergraduate), master (master), phd (doctor))
+               example: doctor
+              * The value of the education system code (display the value of different system codes according to the international language, default and code key Same), (please refer to the corresponding education code value in the system code, the existing code value (Chinese): junior high school and below, high school/technical secondary school, junior college, undergraduate, master, doctor)
+            properties:
+              code:
+                type: string
+                description: Key of education system encoding value
+                example: doctor
+              name:
+                type: string
+                description: value of education system encoding value
+                example: Doctor
+          major:
+            type: string
+            description: Professional, no longer than 200 characters
+            example: Computer Major
+          idNumber:
+            type: string
+            description: ID card number, the length does not exceed 200 characters
+            example: '130971199809121011'
+          departments:
+            type: array
+            description: Department information of the person
+            items:
+              properties:
+                name:
+                  type: string
+                  description: Department name
+                  example: Technology Department
+                code:
+                  type: string
+                  description: Department Code
+                  example: tecDept
+          companies:
+            type: array
+            description: The company information of the person
+            items:
+              properties:
+                name:
+                  type: string
+                  description: Company Name
+                  example: Technology Company
+                code:
+                  type: string
+                  description: Company Code
+                  example: tecCom
+    DepartmentBaseInfo:
+      description: Department List Information
+      allOf:
+      - type: object
+        properties:
+          parentCode:
+            type: string
+            description: The code of the superior department
+            example: technologyDepartment
+          code:
+            type: string
+            description: Department Code
+            example: developDepartment
+          name:
+            type: string
+            description: Department Name
+            example: R&D department
+          deptType:
+            type: object
+            description: Department Type
+            properties:
+              code:
+                type: string
+                description: 'The key of the department type system code, (please
+                  refer to the corresponding department type code key in the system
+                  code, the existing code key: general, emergency)'
+                example: general
+              name:
+                type: string
+                description: 'The value of the department type system code (display
+                  the value of different system codes according to the internationalized
+                  language, the default is the same as the code key), (please refer
+                  to the corresponding department type code value in the system code,
+                  the existing code value (Chinese) ): general department, emergency
+                  department)'
+                example: Common department
+          valid:
+            type: integer
+            description: 'Whether it is valid (delete) mark, 0: invalid; 1: valid'
+            example: 1
+          company:
+            type: object
+            description: Company
+            properties:
+              code:
+                type: string
+                description: Company Code
+                example: tecCompany
+              shortName:
+                type: string
+                description: Company Abbreviation
+                example: R&D company
+              fullName:
+                type: string
+                description: Full company name
+                example: Hangzhou R&D Company
+          fullPath:
+            type: string
+            description: Full path of department name
+            example: "/technical department/R&D department"
+    DepartmentDetailInfo:
+      description: Department Information
+      allOf:
+      - type: object
+        properties:
+          parentCode:
+            type: string
+            description: The code of the superior department
+            example: technologyDepartment
+          code:
+            type: string
+            description: Department Code
+            example: developDepartment
+          name:
+            type: string
+            description: Department Name
+            example: R&D department
+          deptType:
+            type: object
+            description: Department Type
+            properties:
+              code:
+                type: string
+                description: 'The key of the department type system code, (please
+                  refer to the corresponding department type code key in the system
+                  code, the existing code key: general, emergency)'
+                example: general
+              name:
+                type: string
+                description: 'The value of the department type system code (display
+                  the value of different system codes according to the internationalized
+                  language, the default is the same as the code key), (please refer
+                  to the corresponding department type code value in the system code,
+                  the existing code value (Chinese) ): general department, emergency
+                  department)'
+                example: Common department
+          description:
+            type: string
+            description: Department Description
+            example: R&D Department of Hangzhou R&D Company
+          fullPath:
+            type: string
+            description: Full path of department name
+            example: "/technical department/R&D department"
+          layNo:
+            type: integer
+            description: Department level, from top to bottom, increasing sequentially
+              from 1
+            example: 2
+          sort:
+            type: number
+            description: The serial number of departments at the same level, increasing
+              from top to bottom
+            example: 678.23
+          valid:
+            type: integer
+            description: 'Whether it is valid (delete) mark, 0: invalid; 1: valid'
+            example: 1
+          modifyTime:
+            type: string
+            description: 'Last modification time (zero time zone time), the format
+              is: "yyyy-MM-dd''T''HH:mm:ss.SSSZ", for example: "2021-01-26T16:02:
+              15.666+0000"'
+            example: '2021-01-26T16:02:15.666+0000'
+          company:
+            type: object
+            description: Company
+            properties:
+              code:
+                type: string
+                description: Company Code
+                example: tecCompany
+              shortName:
+                type: string
+                description: Company Abbreviation
+                example: R&D company
+              fullName:
+                type: string
+                description: Full company name
+                example: Hangzhou R&D Company
+          managers:
+            type: array
+            description: Department Head
+            items:
+              properties:
+                name:
+                  type: string
+                  description: Name of person in charge
+                  example: Lisi
+                code:
+                  type: string
+                  description: Responsible person number
+                  example: lisi
+          positions:
+            type: array
+            description: The job code of the associated job
+            items:
+              properties:
+                name:
+                  type: string
+                  description: Job Title
+                  example: developPosition
+                code:
+                  type: string
+                  description: Job Code
+                  example: R&D position
+    DepartmentSynchronizationInfo:
+      description: Department Information
+      allOf:
+      - type: object
+        properties:
+          parentCode:
+            type: string
+            description: The code of the superior department
+            example: technologyDepartment
+            maxLength: 50
+          code:
+            type: string
+            description: Department Code
+            example: developDepartment
+            maxLength: 50
+          name:
+            type: string
+            description: Department Name
+            example: R&D department
+            maxLength: 200
+          deptType:
+            type: object
+            description: Department Type
+            properties:
+              code:
+                type: string
+                description: 'The key of the department type system code, (please
+                  refer to the corresponding department type code key in the system
+                  code, the existing code key: general, emergency)'
+                example: general
+                maxLength: 64
+              name:
+                type: string
+                description: 'The value of the department type system code (display
+                  the value of different system codes according to the internationalized
+                  language, the default is the same as the code key), (please refer
+                  to the corresponding department type code value in the system code,
+                  the existing code value (Chinese) ): general department, emergency
+                  department)'
+                example: Common Department
+                maxLength: 64
+          description:
+            type: string
+            description: Department Description
+            example: R&D Department of Hangzhou R&D Company
+            maxLength: 500
+          fullPath:
+            type: string
+            description: Full path of department name
+            example: "/technical department/R&D department"
+            maxLength: 4096
+          layNo:
+            type: integer
+            description: Department level, from top to bottom, increasing sequentially
+              from 1
+            example: 2
+          sort:
+            type: number
+            description: The serial number of departments at the same level, increasing
+              from top to bottom
+            example: 678.23
+          valid:
+            type: integer
+            description: 'Whether it is valid (delete) mark, 0: invalid; 1: valid'
+            example: 1
+          modifyTime:
+            type: string
+            description: 'Last modification time (zero time zone time), the format
+              is: "yyyy-MM-dd''T''HH:mm:ss.SSSZ", for example: "2021-01-26T16:02:
+              15.666+0000"'
+            example: '2021-01-26T16:02:15.666+0000'
+            maxLength: 28
+          company:
+            type: object
+            description: Company
+            properties:
+              code:
+                type: string
+                description: Company Code
+                example: tecCompany
+                maxLength: 50
+              shortName:
+                type: string
+                description: Company Abbreviation
+                example: R&D Company
+                maxLength: 50
+              fullName:
+                type: string
+                description: Full company name
+                example: Hangzhou R&D Company
+                maxLength: 200
+          managers:
+            type: array
+            description: Department Head
+            items:
+              properties:
+                name:
+                  type: string
+                  description: Name of person in charge
+                  example: Li Si
+                  maxLength: 50
+                code:
+                  type: string
+                  description: Responsible person number
+                  example: lisi
+                  maxLength: 50
+    PositionBaseInfo:
+      description: Job List Information
+      allOf:
+      - type: object
+        properties:
+          parentCode:
+            type: string
+            description: Superior position code
+            example: technologyPosition
+            maxLength: 50
+          code:
+            type: string
+            description: Job Code
+            example: developPosition
+            maxLength: 50
+          name:
+            type: string
+            description: Job Title
+            example: R&D position
+            maxLength: 200
+          department:
+            type: object
+            description: Department
+            properties:
+              code:
+                type: string
+                description: Department Code
+                example: developDept
+                maxLength: 50
+              name:
+                type: string
+                description: Department name
+                example: R&D Department
+                maxLength: 200
+          valid:
+            type: integer
+            description: 'Whether it is valid (delete) mark, 0: invalid; 1: valid'
+            example: 1
+          company:
+            type: object
+            description: Company
+            properties:
+              code:
+                type: string
+                description: Company Code
+                example: tecCompany
+                maxLength: 50
+              shortName:
+                type: string
+                description: Company Abbreviation
+                example: R&D Company
+                maxLength: 50
+              fullName:
+                type: string
+                description: company name
+                example: Hangzhou R&D Company
+                maxLength: 200
+          fullPath:
+            type: string
+            description: Full position name
+            example: "/technical position/R&D position"
+            maxLength: 4096
+    PositionDetailInfo:
+      description: Job Information
+      allOf:
+      - type: object
+        properties:
+          parentCode:
+            type: string
+            description: Superior position code
+            example: technologyPosition
+            maxLength: 50
+          code:
+            type: string
+            description: Job Code
+            example: developPosition
+            maxLength: 50
+          name:
+            type: string
+            description: Job Title
+            example: R&D position
+            maxLength: 200
+          valid:
+            type: integer
+            description: 'Is it valid (delete) flag, 0: invalid; 1: valid'
+            example: 1
+          modifyTime:
+            type: string
+            description: 'Last modification time (zero time zone time), the format
+              is: "yyyy-MM-dd''T''HH:mm:ss.SSSZ", for example: "2021-01-26T16:02:
+              15.666+0000"'
+            example: '2021-01-26T16:02:15.666+0000'
+            maxLength: 28
+          department:
+            type: object
+            description: Department
+            properties:
+              code:
+                type: string
+                description: Department Code
+                example: tecDep
+                maxLength: 50
+              name:
+                type: string
+                description: Department name
+                example: Technical Department
+                maxLength: 200
+          company:
+            type: object
+            description: Company
+            properties:
+              code:
+                type: string
+                description: Company Code
+                example: tecCompany
+                maxLength: 50
+              shortName:
+                type: string
+                description: Company Abbreviation
+                example: R&D Company
+                maxLength: 50
+              fullName:
+                type: string
+                description: company name
+                example: Hangzhou R&D Company
+                maxLength: 200
+          description:
+            type: string
+            description: Job Description
+            example: R&D positions of Hangzhou R&D Company
+            maxLength: 500
+          fullPath:
+            type: string
+            description: Full position name
+            example: "/technical position/R&D position"
+            maxLength: 4096
+          layNo:
+            type: integer
+            description: Position level, from top to bottom, increasing from 1
+            example: 2
+          sort:
+            type: number
+            description: Sequence number of positions at the same level, increasing from
+              top to bottom
+            example: 678.23
+          roles:
+            type: array
+            description: Roles associated with positions
+            items:
+              properties:
+                name:
+                  type: string
+                  description: Role Name
+                  example: System Administrator
+                  maxLength: 50
+                code:
+                  type: string
+                  description: Role Code
+                  example: systemRole
+                  maxLength: 50
+    PositionSynchronizationInfo:
+      description: Job Information
+      allOf:
+      - type: object
+        properties:
+          parentCode:
+            type: string
+            description: Superior position code
+            example: technologyPosition
+            maxLength: 50
+          code:
+            type: string
+            description: Job Code
+            example: developPosition
+            maxLength: 50
+          name:
+            type: string
+            description: Job Title
+            example: R&D position
+            maxLength: 50
+          valid:
+            type: integer
+            description: 'Whether it is valid (delete) mark, 0: invalid; 1: valid'
+            example: 1
+          modifyTime:
+            type: string
+            description: 'Last modification time (zero time zone time), the format
+              is: "yyyy-MM-dd''T''HH:mm:ss.SSSZ", for example: "2021-01-26T16:02:15.666+0000"'
+            example: '2021-01-26T16:02:15.666+0000'
+          department:
+            type: object
+            description: Department
+            properties:
+              code:
+                type: string
+                description: Department Code
+                example: tecDep
+                maxLength: 50
+              name:
+                type: string
+                description: Department Name
+                example: Technical Department
+                maxLength: 200
+          company:
+            type: object
+            description: Company
+            properties:
+              code:
+                type: string
+                description: Company Code
+                example: tecCompany
+                maxLength: 50
+              shortName:
+                type: string
+                description: Company Abbreviation
+                example: R&D Company
+                maxLength: 50
+              fullName:
+                type: string
+                description: Full company name
+                example: Hangzhou R&D Company
+                maxLength: 200
+          description:
+            type: string
+            description: Job description
+            example: R&D positions of Hangzhou R&D Company
+            maxLength: 200
+          fullPath:
+            type: string
+            description: Full position name
+            example: "/technical position/R&D position"
+            maxLength: 4096
+          layNo:
+            type: integer
+            description: Position level, from top to bottom, increasing from 1
+            example: 2
+          sort:
+            type: number
+            description: Sequence number of positions at the same level, increasing from
+              top to bottom
+            example: 678.23
+    CompanyDetailInfo:
+      description: company information
+      allOf:
+      - type: object
+        properties:
+          code:
+            type: string
+            description: Company Code
+            example: developCompany
+            maxLength: 50
+          parentCode:
+            type: string
+            description: Superior company code
+            example: default_company
+            maxLength: 50
+          fullName:
+            type: string
+            description: Full company name
+            example: Hangzhou R&D Company
+            maxLength: 200
+          shortName:
+            type: string
+            description: Company Abbreviation
+            example: R&D Company
+            maxLength: 50
+          description:
+            type: string
+            description: company description
+            example: The research and development company is located in Hangzhou,
+              Zhejiang Province
+            maxLength: 255
+          tags:
+            type: array
+            description: Company Label
+            items:
+              type: string
+            example:
+            - develop
+            - hangzhou
+          fullPath:
+            type: string
+            description: Company referred to as Quanlu
+            example: "/Group/R&D Company"
+            maxLength: 4096
+          layNo:
+            type: integer
+            description: Company hierarchy, from top to bottom, increasing from 1
+            example: 2
+          sort:
+            type: number
+            description: Sequential number of companies at the same level, increasing
+              from top to bottom
+            example: 678.23
+          valid:
+            type: integer
+            description: 'Whether it is valid (delete) mark, 0: invalid; 1: valid'
+            example: 1
+          modifyTime:
+            type: string
+            description: 'Last modification time (zero time zone time), the format
+              is: "yyyy-MM-dd''T''HH:mm:ss.SSSZ", for example: "2021-01-26T16:02:
+              15.666+0000"'
+            example: '2021-01-26T16:02:15.666+0000'
+            maxLength: 28
+    BaseOperateAddCompany:
+      description: New company information
+      allOf:
+      - type: object
+        properties:
+          code:
+            type: string
+            maxLength: 50
+            description: |
+              *Company code
+              * Globally unique identifier
+              * The length does not exceed 50 characters!
+              * A combination of letters, numbers, underscores, and dots
+          parentCode:
+            type: string
+            maxLength: 50
+            description: |
+              * The code of the parent node of the company
+              * The length does not exceed 50 characters!
+              * A combination of letters, numbers, underscores, and dots
+              * The default value is default_org_company
+            example: company_001
+            default: default_org_company
+          fullName:
+            type: string
+            maxLength: 200
+            description: |
+              * Full company name
+              * The length does not exceed 200 characters!
+            example: New Energy Testing Company
+          shortName:
+            type: string
+            maxLength: 50
+            description: |
+              *Company abbreviation
+              * The length does not exceed 50 characters!
+            example: New Energy
+          tags:
+            type: array
+            maxItems: 10
+            description: Company Label
+            items:
+              type: string
+              maxLength: 50
+              description: "* The length does not exceed 50 characters!\n"
+              example: Company label 001
+          description:
+            type: string
+            maxLength: 255
+            description: |
+              * Company description
+              * The length does not exceed 255 characters!
+            example: Description of a new energy company
+          username:
+            type: string
+            maxLength: 50
+            description: |
+              * System administrator name
+              * User name rules: only letters, numbers, special symbols *()-_. and their combinations are supported, no more than 50 characters.
+              * User name only supports *( )-_. These 6 special characters, other special symbols such as +/?%#&=space{} "':,\[], etc., are compatible and are not supported for now, please be informed!
+            example: zhangsan
+          password:
+            type: string
+            maxLength: 50
+            description: |
+              * System administrator password
+              * The length does not exceed 50 characters!
+            example: Description of a new energy company
+    BaseOperateUpdateCompany:
+      description: Company modification information
+      allOf:
+      - type: object
+        properties:
+          code:
+            type: string
+            maxLength: 50
+            description: |
+              *Company code
+              * Globally unique identifier
+              * The length does not exceed 50 characters!
+              * A combination of letters, numbers, underscores, and dots
+          fullName:
+            type: string
+            maxLength: 200
+            description: |
+              * Full company name
+              * The length does not exceed 200 characters!
+            example: New Energy Testing Company
+          shortName:
+            type: string
+            maxLength: 50
+            description: |
+              *Company abbreviation
+              * The length does not exceed 50 characters!
+            example: New Energy
+          tags:
+            type: array
+            maxItems: 10
+            description: Company Label
+            items:
+              type: string
+              maxLength: 50
+              description: "* The length does not exceed 50 characters!\n"
+              example: Company label 001
+          description:
+            type: string
+            maxLength: 255
+            description: |
+              *Company description
+              * The length does not exceed 255 characters!
+            example: Description of a new energy company
+    BaseOperateAddDepartment:
+      description: Department Added Information
+      allOf:
+      - type: object
+        properties:
+          name:
+            type: string
+            maxLength: 200
+            description: |
+              * Department name
+              * The length cannot exceed 200 characters
+            example: Test Department 001
+          type:
+            type: string
+            maxLength: 50
+            description: |
+              * Code of department type
+              * General department: general Emergency department: emergency
+            default: general
+          code:
+            type: string
+            maxLength: 50
+            description: |
+              * Department code
+              * Globally unique identifier
+              * The length does not exceed 50 characters!
+              * A combination of letters, numbers, underscores, and dots
+            example: dept_001
+          parentCode:
+            type: string
+            maxLength: 50
+            description: |
+              * The code of the parent node of the department
+              * If the superior of the department is a company, it will not be passed
+              * The length should not exceed 50 characters!
+              * A combination of letters, numbers, underscores, and dots
+            example: dept_test
+          companyCode:
+            type: string
+            maxLength: 50
+            description: |
+              * Company code
+              * The code is a combination of letters, numbers, underscores, and dots, no more than 50 characters
+              * If you don't pass it, it will be the default company code: default_org_company
+            default: default_org_company
+          description:
+            type: string
+            maxLength: 500
+            description: |
+              *Department description
+              * The length does not exceed 500 characters!
+            example: Description of testing department
+          managerCodes:
+            type: array
+            maxItems: 10
+            description: Responsible person code set
+            items:
+              type: string
+              maxLength: 50
+              description: "* Department Head\n"
+              example: zhangsan
+    BaseOperateUpdateDepartment:
+      description: Department modification information
+      allOf:
+      - type: object
+        properties:
+          name:
+            type: string
+            maxLength: 200
+            description: |
+              * Department name
+              * The length cannot exceed 200 characters
+            example: Test Department 001
+          type:
+            type: string
+            maxLength: 50
+            description: |
+              * Code of department type
+              * General department: general Emergency department: emergency
+            default: general
+          code:
+            type: string
+            maxLength: 50
+            description: |
+              * Department code
+              * Globally unique identifier
+              * The length does not exceed 50 characters!
+              * A combination of letters, numbers, underscores, and dots
+            example: dept_001
+          parentCode:
+            type: string
+            maxLength: 50
+            description: |
+              * The code of the parent node of the department
+              * If the superior of the department is a company, it will not be passed
+              * The length should not exceed 50 characters!
+              * A combination of letters, numbers, underscores, and dots
+            example: dept_test
+          description:
+            type: string
+            maxLength: 500
+            description: |
+              *Department Description
+              * The length does not exceed 500 characters!
+            example: Description of testing department
+          managerCodes:
+            type: array
+            maxItems: 10
+            description: Responsible person code set
+            items:
+              type: string
+              maxLength: 50
+              description: "* Department Head\n"
+              example: zhangsan
+    BaseOperateAddPosition:
+      description: Job Add Information
+      allOf:
+      - type: object
+        properties:
+          name:
+            type: string
+            maxLength: 200
+            description: |
+              * Job title
+              * The length cannot exceed 200 characters
+            example: Test position 001
+          code:
+            type: string
+            maxLength: 50
+            description: |
+              * Job code
+              * Globally unique identifier
+              * The length does not exceed 50 characters!
+              * A combination of letters, numbers, underscores, and dots
+            example: position_001
+          parentCode:
+            type: string
+            maxLength: 50
+            description: |
+              * The code of the parent node of the position
+              * If the superior of the position is the company, it will not be passed
+              * The length should not exceed 50 characters!
+              * A combination of letters, numbers, underscores, and dots
+            example: posi_test
+          companyCode:
+            type: string
+            maxLength: 200
+            description: "*Company code\n* The length does not exceed 200 characters!\n*
+              The code is a combination of letters, numbers, underscores, and dots,
+              and the number does not exceed 50 characters\n* If not passed, it is
+              the default company code: default_org_company \n"
+            default: default_org_company
+          departmentCode:
+            type: string
+            maxLength: 50
+            description: |
+              * The department code associated with the position
+              * The code is a combination of letters, numbers, underscores, and dots, with no more than 50 characters
+          description:
+            type: string
+            maxLength: 500
+            description: |
+              * Job Description
+              * The length does not exceed 500 characters!
+            example: Description of test position
+    BaseOperateUpdatePosition:
+      description: Position modification information
+      allOf:
+      - type: object
+        properties:
+          name:
+            type: string
+            maxLength: 200
+            description: |
+              * Job title
+              * The length cannot exceed 200 characters
+            example: Test position 001
+          code:
+            type: string
+            maxLength: 50
+            description: |
+              * Job code
+              * Globally unique identifier
+              * The length does not exceed 50 characters!
+              * A combination of letters, numbers, underscores, and dots
+            example: position_001
+          parentCode:
+            type: string
+            maxLength: 50
+            description: |
+              * The code of the parent node of the position
+              * If the superior of the position is the company, it will not be passed
+              * The length should not exceed 50 characters!
+              * A combination of letters, numbers, underscores, and dots
+            example: posi_test
+          departmentCode:
+            type: string
+            maxLength: 50
+            description: |
+              * The department code associated with the position
+              * The code is a combination of letters, numbers, underscores, and dots, with no more than 50 characters
+          description:
+            type: string
+            maxLength: 500
+            description: |
+              * Job Description
+              * The length does not exceed 500 characters!
+            example: Description of test position
+    BaseOperatePerson:
+      description: Personnel addition and modification of public information
+      allOf:
+      - type: object
+        properties:
+          code:
+            type: string
+            description: |
+              * Personnel number
+              * The length does not exceed 50 characters!
+              * Combination of numbers, letters and underscores
+            example: zhangsan
+          name:
+            type: string
+            description: Person Name
+            example: Zhang San
+          phone:
+            type: string
+            description: Mobile phone number, the length should not exceed 200
+            example: '15212428384'
+          gender:
+            type: string
+            description: |
+              * The gender system code is sys_gender
+              * The key of the gender system code value, (please refer to the key of the corresponding gender code value in the system code, the existing code keys: male (male), female (female) )
+              * This value is a combination of the gender system code and the key of the system code value
+            example: male
+          status:
+            type: string
+            description: |
+              * The system code of the person status is sys_person_status
+              * The key of the person status system code value, (please refer to the corresponding personnel status code key in the system code, the existing code keys: onWork (on-job), offWork (leave ))
+              * This value is the combination of the personnel status system code and the key of the system code value
+            example: onWork
+          email:
+            type: string
+            description: Email address, the length does not exceed 200
+            example: xxx@163.com
+          description:
+            type: string
+            description: Personnel description, the length does not exceed 500 characters
+            example: zhangsan description information
+          directLeaderCode:
+            type: string
+            description: Direct leadership number
+            example: lisi
+          grandLeaderCode:
+            type: string
+            description: Leader ID
+            example: lisi
+          entryDate:
+            type: string
+            description: 'Entry date, the format is yyyy-MM-dd: For example: "2021-05-26"'
+            example: '2021-05-26'
+          title:
+            type: string
+            description: |
+              * The professional title system code is sys_title
+              * The key of the professional title system code value, (please refer to the corresponding professional title code key in the system code, the existing code keys: elementary (primary), intermediate (intermediate), advanced ( Advanced))
+              * This value is a combination of title system code and system code value key
+            example: elementary
+          qualification:
+            type: string
+            description: Qualification, the length does not exceed 200 characters
+          education:
+            type: string
+            description: |
+              * education system code is sys_education
+              * the key of the education system code value, (please refer to the corresponding education code key in the system code, the existing code key: middleOrOther (junior high school and below), highSecondary (high school/technical secondary school), degree (college), college (undergraduate), master (master), phd (doctoral))
+              * This value is the combination of the education system code and the key of the system code value
+            example: middleOrOther
+          major:
+            type: string
+            description: Professional, no longer than 200 characters
+            example: Computer Major
+          idNumber:
+            type: string
+            description: ID card number, the length does not exceed 200 characters
+            example: '130971199809121011'
+          mainPositionCode:
+            type: string
+            description: Main position code
+            example: tecPos
+        required:
+        - code
+        - mainPositionCode
+        - gender
+        - status
+        - name
+    AddCompany:
+      description: Add company information
+      allOf:
+      - "$ref": "#/components/schemas/BaseOperateAddCompany"
+    UpdateCompany:
+      description: Modify company information
+      allOf:
+      - "$ref": "#/components/schemas/BaseOperateUpdateCompany"
+      - type: object
+    AddDepartments:
+      description: New department information
+      allOf:
+      - "$ref": "#/components/schemas/BaseOperateAddDepartment"
+    UpdateDepartments:
+      description: Modify department information
+      allOf:
+      - "$ref": "#/components/schemas/BaseOperateUpdateDepartment"
+      - type: object
+    AddPosition:
+      description: Information of new personnel
+      allOf:
+      - "$ref": "#/components/schemas/BaseOperateAddPosition"
+    UpdatePosition:
+      description: Information of new personnel
+      allOf:
+      - "$ref": "#/components/schemas/BaseOperateUpdatePosition"
+      - type: object
+    AddPerson:
+      description: Information of new personnel
+      allOf:
+      - "$ref": "#/components/schemas/BaseOperatePerson"
+    UpdatePerson:
+      description: Information of new personnel
+      allOf:
+      - "$ref": "#/components/schemas/BaseOperatePerson"
+      - type: object
+    Pagination:
+      description: Pagination Information
+      type: object
+      properties:
+        total:
+          type: integer
+          description: Total Number of Items
+          example: 1
+        pageSize:
+          type: integer
+          description: Number of entries per page
+          example: 20
+        current:
+          type: integer
+          description: Current page number
+          example: 1
+  responses:
+    GeneralError:
+      description: General Error
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                type: string
+                description: Error encoding
+              message:
+                type: string
+                description: Error message
+    Created:
+      description: The background successfully accepted the command and processed
+        it successfully
+paths:
+  "/persons/{personCode}":
+    get:
+      tags:
+      - orgs
+      summary: Query the personnel details of the specified number
+      description: Query personnel details according to the personnel number, code
+        is required, and only valid (not deleted) data can be queried
+      operationId: getPersonDetailByCode
+      parameters:
+      - "$ref": "#/components/parameters/acceptLanguage"
+      - name: personCode
+        in: path
+        description: Personnel number, required (exact match)
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Query personnel details according to personnel number
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/PersonDetailInfo"
+        '400':
+          description: |
+            Error prompt
+            * 100104020 The specified person does not exist!,{"code":100104020,"message":"The specified person does not exist! "}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    description: Error Encoding
+                    example: 100104020
+                  message:
+                    type: string
+                    description: Error message
+                    example: The specified person does not exist!
+  "/companies/{companyCode}":
+    get:
+      tags:
+      - orgs
+      summary: Query the company details of the specified code
+      description: Query company details according to company code, only valid (not
+        deleted) data can be queried
+      operationId: getCompanyDetailByCode
+      parameters:
+      - "$ref": "#/components/parameters/acceptLanguage"
+      - name: companyCode
+        in: path
+        description: Company code, required
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Query company details according to company id
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/CompanyDetailInfo"
+        '400':
+          description: |
+            Error message
+            * 100104040 The company does not exist!,{"code":100104040,"message":"The company does not exist! "}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    description: Error Encoding
+                    example: 100104040
+                  message:
+                    type: string
+                    description: Error message
+                    example: Company does not exist!
+  "/companies/{companyCode}/persons":
+    get:
+      tags:
+      - orgs
+      summary: Query the personnel list of the company with the specified code
+      description: 'Query the personnel list under the company according to the company
+        code. The personnel list supports fuzzy matching through keyword parameters
+        (personnel code or personnel name), and the query returns valid (not deleted)
+        data. Sorting method: by default, it is in reverse order of update time. '
+      operationId: getPersonsByCompanyCode
+      parameters:
+      - "$ref": "#/components/parameters/acceptLanguage"
+      - name: companyCode
+        in: path
+        description: Company code, required
+        required: true
+        schema:
+          type: string
+          maxLength: 50
+      - name: keyword
+        in: query
+        description: |
+          * Fuzzy matching keywords, support fuzzy matching parameters include:
+           **Personnel name (name)**
+           **Personnel code (code)**
+          * For example: input "person01" , to match and query all the data containing "person01" in the above parameters;
+          * does not support case-sensitive query;
+          * does not support multiple query conditions, the input data will be used as a single value to match the query;
+          * If the relevant data matching the query does not exist, the returned data structure is an empty collection.
+        required: false
+        schema:
+          type: string
+          maxLength: 50
+          example: person01
+      - name: current
+        in: query
+        description: The number of pages to turn, starting from 1
+        required: true
+        schema:
+          type: integer
+          default: 1
+          minimum: 1
+      - name: pageSize
+        in: query
+        description: Number of elements to return per page (default 20, max 500)
+        required: false
+        schema:
+          type: integer
+          default: 20
+          maximum: 500
+      responses:
+        '200':
+          description: 'Query the list of personnel under the company according to
+            the company code. Sorting method: the default is reverse order of update
+            time.'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  list:
+                    type: array
+                    items:
+                      "$ref": "#/components/schemas/PersonBaseInfo"
+                  pagination:
+                    "$ref": "#/components/schemas/Pagination"
+        '400':
+          description: |
+            Error prompt
+            * 100000003 page number cannot be less than 1!,{"code":100000003,"message":"Page number cannot be less than 1! "}
+            * 100000003 The number of entries per page cannot be less than 1!,{"code":100000003,"message":"The number of entries per page cannot be less than 1! "}
+            * 100000003 The number of entries per page cannot exceed 500!,{"code":100000003,"message":"The number of entries per page cannot exceed 500! "}
+            * 100104040 The company does not exist!,{"code":100104040,"message":"The company does not exist! "}
+            * 100101654 The company code length cannot be greater than 50! ,{"code":100101654,"message":"The company code length cannot be greater than 50!"}
+            * 100101701 keyword parameter The length cannot be greater than 50! ,{"code":100101701,"message":"keyword parameter length cannot be greater than 50!"}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    description: Error encoding
+                    example: 100000003
+                  message:
+                    type: string
+                    description: Error message
+                    example: Pagination page number cannot be less than 1!
+  "/positions/{positionCode}":
+    get:
+      tags:
+      - orgs
+      summary: Query the job details of the specified code
+      description: Query job details according to the job code, only valid (not deleted)
+        data can be queried
+      operationId: getPositionDetailByCode
+      parameters:
+      - "$ref": "#/components/parameters/acceptLanguage"
+      - name: positionCode
+        in: path
+        description: Position code, required
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Query job details according to the job code
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/PositionDetailInfo"
+        '400':
+          description: |
+            Error prompt
+            * 100104013 The specified position does not exist!,{"code":100104013,"message":"The specified position does not exist! "}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    description: Error encoding
+                    example: 100104013
+                  message:
+                    type: string
+                    description: Error message!
+                    example: The specified position does not exist!
+  "/positions/{positionCode}/persons":
+    get:
+      tags:
+      - orgs
+      summary: Query the personnel list of the position with the specified code
+      description: 'Query the list of personnel under the position according to the
+        position code. The personnel list supports fuzzy matching through keyword
+        parameters (personnel code or personnel name), and the query returns valid
+        (not deleted) data. Sorting method: by default, it is in reverse order of
+        update time. '
+      operationId: getPersonsByPositionCode
+      parameters:
+      - "$ref": "#/components/parameters/acceptLanguage"
+      - name: positionCode
+        in: path
+        description: Position code, required
+        required: true
+        schema:
+          type: string
+          maxLength: 50
+      - name: keyword
+        in: query
+        description: |
+          * Fuzzy matching keywords, support fuzzy matching parameters include:
+           **Personnel name (name)**
+           **Personnel code (code)**
+          * For example: input "person01" , to match and query all the data containing "person01" in the above parameters;
+          * does not support case-sensitive query;
+          * does not support multiple query conditions, the input data will be used as a single value to match the query;
+          * If the relevant data matching the query does not exist, the returned data structure is an empty collection.
+        required: false
+        schema:
+          type: string
+          maxLength: 50
+          example: person01
+      - name: current
+        in: query
+        description: The number of pages to turn, starting from 1
+        required: true
+        schema:
+          type: integer
+          default: 1
+          minimum: 1
+      - name: pageSize
+        in: query
+        description: Number of elements to return per page (default 20, max 500)
+        required: false
+        schema:
+          type: integer
+          default: 20
+          maximum: 500
+      responses:
+        '200':
+          description: 'Query the list of personnel under the position according to
+            the position code. Sorting method: the default is reverse order of update
+            time.'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  list:
+                    type: array
+                    items:
+                      "$ref": "#/components/schemas/PersonBaseInfo"
+                  pagination:
+                    "$ref": "#/components/schemas/Pagination"
+        '400':
+          description: |
+            Error prompt
+            * 100000003 Page number cannot be less than 1!,{"code":100000003,"message":"Page number cannot be less than 1! "}
+            * 100000003 The number of entries per page cannot be less than 1!,{"code":100000003,"message":"The number of entries per page cannot be less than 1! "}
+            * 100000003 The number of entries per page cannot exceed 500!,{"code":100000003,"message":"The number of entries per page cannot exceed 500! "}
+            * 100104013 The specified position does not exist!,{"code":100104013,"message":"The specified position does not exist! "}
+            * 100101701 keyword parameter length cannot be greater than 50! ,{"code":100101701,"message":"keyword parameter length cannot be greater than 50!"}
+            * 100101703 job code The length cannot be greater than 50! ,{"code":100101703,"message":"The length of the position code cannot be greater than 50!"}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    description: Error encoding
+                    example: 100000003
+                  message:
+                    type: string
+                    description: Error message
+                    example: Pagination page number cannot be less than 1!
+  "/departments/{departmentCode}":
+    get:
+      tags:
+      - orgs
+      summary: Query the department details of the specified code
+      description: Query department details according to department code, only valid
+        (not deleted) data can be queried
+      operationId: getDepartmentDetailByCode
+      parameters:
+      - "$ref": "#/components/parameters/acceptLanguage"
+      - name: departmentCode
+        in: path
+        description: Department code, required
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Query department details according to department code
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/DepartmentDetailInfo"
+        '400':
+          description: |
+            Error prompt
+            * 100104004 The specified department does not exist!,{"code":100104004,"message":"The specified department does not exist! "}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    description: Error Encoding
+                    example: 100104004
+                  message:
+                    type: string
+                    description: Error message
+                    example: The specified department does not exist!
+  "/departments/{departmentCode}/persons":
+    get:
+      tags:
+      - orgs
+      summary: Query the personnel list of the department with the specified code
+      description: 'Query the personnel list under the department according to the
+        department code. The personnel list supports fuzzy matching through keyword
+        parameters (personnel code or personnel name), and the query returns valid
+        (not deleted) data. Sorting method: by default, it is in reverse order of
+        update time. '
+      operationId: getPersonsByDepartmentCode
+      parameters:
+      - "$ref": "#/components/parameters/acceptLanguage"
+      - name: departmentCode
+        in: path
+        description: Department code, required
+        required: true
+        schema:
+          type: string
+          maxLength: 50
+      - name: keyword
+        in: query
+        description: |
+          * Fuzzy matching keywords, support fuzzy matching parameters include:
+           **Personnel name (name)**
+           **Personnel code (code)**
+          * For example: input "person01", to match and query all the data containing "person01" in the above parameters;
+          * does not support case-sensitive query;
+          * does not support multiple query conditions, the input data will be used as a single value to match the query;
+          * If the relevant data matching the query does not exist, the returned data structure is an empty collection.
+        required: false
+        schema:
+          type: string
+          maxLength: 50
+          example: person01
+      - name: current
+        in: query
+        description: The number of pages to turn, starting from 1
+        required: true
+        schema:
+          type: integer
+          default: 1
+          minimum: 1
+      - name: pageSize
+        in: query
+        description: Number of elements to return per page (default 20, max 500)
+        required: false
+        schema:
+          type: integer
+          default: 20
+          maximum: 500
+      responses:
+        '200':
+          description: 'Query the list of personnel under the department according
+            to the department code. Sorting method: the default is reverse order of
+            update time.'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  list:
+                    type: array
+                    items:
+                      "$ref": "#/components/schemas/PersonBaseInfo"
+                  pagination:
+                    "$ref": "#/components/schemas/Pagination"
+        '400':
+          description: |
+            Error prompt
+            * 100000003 Page number cannot be less than 1!,{"code":100000003,"message":"Page number cannot be less than 1! "}
+            * 100000003 The number of entries per page cannot be less than 1!,{"code":100000003,"message":"The number of entries per page cannot be less than 1! "}
+            * 100000003 The number of entries per page cannot exceed 500!,{"code":100000003,"message":"The number of entries per page cannot exceed 500! "}
+            * 100104004 The specified department does not exist!,{"code":100104004,"message":"The specified department does not exist! "}
+            * 100101701 The length of the keyword parameter cannot be greater than 50! ,{"code":100101701,"message":"The length of the keyword parameter cannot be greater than 50!"}
+            * 100101702 Department code The length cannot be greater than 50! ,{"code":100101702,"message":"The department code length cannot be greater than 50!"}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    description: Error encoding
+                    example: 100000003
+                  message:
+                    type: string
+                    description: Error message
+                    example: Pagination page number cannot be less than 1!
+  "/companies":
+    get:
+      tags:
+      - orgs
+      summary: Query company list
+      description: 'Query the company list in batches. The company list supports fuzzy
+        matching through keyword parameters (company code or company name). When the
+        "modifyTime" parameter is not passed, it is a full data query (excluding deleted
+        data). When When the "modifyTime" parameter is passed, it is to query incremental
+        data. Incremental query includes deleted data and is used for company data
+        synchronization between systems. Company data greater than this time can be
+        incrementally synchronized according to the last modification time parameter.
+        The sorting method is: First sort by the company level layNo, and then sort
+        by the sort field sort.'
+      operationId: getCompanies
+      parameters:
+      - "$ref": "#/components/parameters/acceptLanguage"
+      - name: current
+        in: query
+        description: Number of pages to turn, starting from 1
+        required: true
+        schema:
+          type: integer
+          default: 1
+          minimum: 1
+      - name: pageSize
+        in: query
+        description: Number of elements returned per page (default 20, maximum 500)
+        required: false
+        schema:
+          type: integer
+          default: 20
+          maximum: 500
+      - name: modifyTime
+        in: query
+        description: 'Last modification time (the time format must have a time zone),
+          the format is: "yyyy-MM-dd''T''HH:mm:ss.SSSZ", for example: zero time zone
+          time: "2021- 01-26T16:02:15.666+0000", East Eighth District time: "2021-01-26T16:02:15.666+0800",
+          you can query company data greater than this time.'
+        required: false
+        schema:
+          type: string
+      - name: keyword
+        in: query
+        required: false
+        description: "* Fuzzy matching keywords, support fuzzy matching parameters
+          include:\n **Company code (code)** \n **Company full name (fullName)**\n*
+          For example: input \"default_org_company\" , to match and query all the
+          data containing \"default_org_company\" in the above parameters;\n* does
+          not support case-sensitive query;\n* does not support multiple query conditions,
+          the input data will be used as a single value to match the query;\n* If
+          the relevant data matching the query does not exist, the returned data structure
+          is an empty collection.\n"
+        schema:
+          type: string
+          maxLength: 200
+      responses:
+        '200':
+          description: 'Batch query company list. Sorting method: first sort by company
+            level layNo, then sort by sort field sort.'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  list:
+                    type: array
+                    items:
+                      "$ref": "#/components/schemas/CompanyDetailInfo"
+                  pagination:
+                    "$ref": "#/components/schemas/Pagination"
+        '400':
+          description: "Error prompt\n* 100000003 page number cannot be less than
+            1!,{\"code\":100000003,\"message\":\"Page number cannot be less than 1!
+            \"}\n* 100000003 The number of entries per page cannot be less than 1!,{\"code\":100000003,\"message\":\"The
+            number of entries per page cannot be less than 1! \"}\n* 100000003 The
+            number of entries per page cannot exceed 500!,{\"code\":100000003,\"message\":\"The
+            number of entries per page cannot exceed 500! \"}\n* 1001040377 The date
+            format is wrong, {\"code\":1001040377,\"message\":\"The date format is
+            wrong, please use \"yyyy-MM-dd'T'HH:mm:ss. SSSZ\"date format\"}\n* 100101701
+            The keyword parameter length cannot be greater than 200! ,{\"code\":100101701,\"message\":\"keyword
+            parameter length cannot be greater than 200!\"} \n"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    description: Error Encoding
+                    example: 100000003
+                  message:
+                    type: string
+                    description: Error message
+                    example: Pagination page number cannot be less than 1!
+  "/departments":
+    get:
+      tags:
+      - orgs
+      summary: Query department list
+      description: 'Query the department list (without distinguishing companies).
+        The department list supports fuzzy matching through the keyword parameter
+        (department code or department name). When the "modifyTime" parameter is not
+        passed, it is a full data query (excluding deleted) data), when the "modifyTime"
+        parameter is passed to query incremental data, the incremental query contains
+        deleted data, which is used for departmental data synchronization, and the
+        data greater than this time can be incrementally synchronized according to
+        the last modification time parameter, sorted Method: first sort according
+        to the department level layNo, and then sort according to the sort field sort.'
+      operationId: getDepartments
+      parameters:
+      - "$ref": "#/components/parameters/acceptLanguage"
+      - name: current
+        in: query
+        description: Number of pages to turn, starting from 1
+        required: true
+        schema:
+          type: integer
+          default: 1
+          minimum: 1
+      - name: pageSize
+        in: query
+        description: Number of elements to return per page (default 20, max 500)
+        required: false
+        schema:
+          type: integer
+          default: 20
+          maximum: 500
+      - name: modifyTime
+        in: query
+        description: 'Last modified time (the time format must include a time zone),
+          the format is: "yyyy-MM-dd''T''HH:mm:ss.SSSZ", for example: zero time zone
+          time: "2021-01-26T16: 02:15.666+0000", East Eighth District time: "2021-01-26T16:02:15.666+0800",
+          you can query department data greater than this time.'
+        required: false
+        schema:
+          type: string
+      - name: filterVirtual
+        in: query
+        description: Whether to filter virtual personnel, the default is not to filter,
+          and if this parameter is not passed, the default is false to not filter
+        schema:
+          type: boolean
+          default: false
+        required: false
+        example: false
+      - name: keyword
+        in: query
+        required: false
+        description: |
+          * Fuzzy matching keywords, support fuzzy matching parameters include:
+           **Department name (name)**
+           **Department code (code)**
+          * For example: input"default_department" , to match and query all the data containing "default_department" in the above parameters;
+          * does not support case-sensitive query;
+          * does not support multiple query conditions, the input data will be used as a single value to match the query;
+          * If the relevant data matching the query does not exist, the returned data structure is an empty collection.
+        schema:
+          type: string
+          maxLength: 200
+      responses:
+        '200':
+          description: 'Query the list of departments. Sorting method: first sort
+            by the department level layNo, and then sort by the sort field sort.'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  list:
+                    type: array
+                    items:
+                      "$ref": "#/components/schemas/DepartmentSynchronizationInfo"
+                  pagination:
+                    "$ref": "#/components/schemas/Pagination"
+        '400':
+          description: "Error prompt\n* 100000003 page number cannot be less than
+            1!,{\"code\":100000003,\"message\":\"Page number cannot be less than 1!
+            \"}\n* 100000003 The number of entries per page cannot be less than 1!,{\"code\":100000003,\"message\":\"The
+            number of entries per page cannot be less than 1! \"}\n* 100000003 The
+            number of entries per page cannot exceed 500!,{\"code\":100000003,\"message\":\"The
+            number of entries per page cannot exceed 500! \"}\n* 1001040377 The date
+            format is wrong, {\"code\":1001040377,\"message\":\"The date format is
+            wrong, please use \"yyyy-MM-dd'T'HH:mm:ss. SSSZ\"date format\"}\n* 100101701
+            The length of the keyword parameter cannot be greater than 200! ,{\"code\":100101701,\"message\":\"
+            The length of the keyword parameter cannot be greater than 200!\"} \n"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    description: Error Encoding
+                    example: 100000003
+                  message:
+                    type: string
+                    description: Error message
+                    example: Pagination page number cannot be less than 1!
+  "/positions":
+    get:
+      tags:
+      - orgs
+      summary: Query Job List
+      description: 'Query the job list (without distinguishing companies). The job
+        list supports fuzzy matching through keyword parameters (job code or job name).
+        When the "modifyTime" parameter is not passed, it is a full data query (excluding
+        deleted ones) data), when the "modifyTime" parameter is passed to query incremental
+        data, the deleted data is included in the incremental query, which is used
+        for position data synchronization, and the data greater than this time can be
+        incrementally synchronized according to the last modification time parameter.
+        Sorting method: first sort according to the position level layNo, and then
+        sort according to the sort field sort.'
+      operationId: getPositions
+      parameters:
+      - "$ref": "#/components/parameters/acceptLanguage"
+      - name: current
+        in: query
+        description: Number of pages to turn, starting from 1
+        required: true
+        schema:
+          type: integer
+          minimum: 1
+          default: 1
+      - name: pageSize
+        in: query
+        description: Number of elements returned per page (default 20, maximum 500)
+        required: false
+        schema:
+          type: integer
+          default: 20
+          maximum: 500
+      - name: modifyTime
+        in: query
+        description: 'Last modification time (the time format must have a time zone),
+          the format is: "yyyy-MM-dd''T''HH:mm:ss.SSSZ", for example: zero time zone
+          time: "2021- 01-26T16:02:15.666+0000", East Eighth District time: "2021-01-26T16:02:15.666+0800",
+          you can query the position data greater than this time.'
+        required: false
+        schema:
+          type: string
+      - name: filterVirtual
+        in: query
+        description: Whether to filter virtual personnel, the default is not to filter,
+          and if this parameter is not passed, the default is false to not filter
+        schema:
+          type: boolean
+          default: false
+        required: false
+        example: false
+      - name: keyword
+        in: query
+        required: false
+        description: |
+          * Fuzzy position keywords, support fuzzy matching parameters include:
+           **position name (name)**
+           **position code (code)**
+          * For example: input "default_position" to match the query above The parameter contains all the data of "default_position";
+          * does not support case-sensitive query;
+          * does not support multiple query conditions, the input data will be used as a single value to match the query;
+          * if matched If the relevant data of the query does not exist, the returned data structure is an empty collection.
+        schema:
+          type: string
+          maxLength: 200
+      responses:
+        '200':
+          description: 'Query the job list. Sorting method: first sort by the company
+            level layNo, and then sort by the sort field sort.'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  list:
+                    type: array
+                    items:
+                      "$ref": "#/components/schemas/PositionSynchronizationInfo"
+                  pagination:
+                    "$ref": "#/components/schemas/Pagination"
+        '400':
+          description: "Error prompt\n* 100000003 Page number cannot be less than
+            1!,{\"code\":100000003,\"message\":\"Page number cannot be less than 1!
+            \"}\n* 100000003 The number of entries per page cannot be less than 1!,{\"code\":100000003,\"message\":\"The
+            number of entries per page cannot be less than 1! \"}\n* 100000003 The
+            number of entries per page cannot exceed 500!,{\"code\":100000003,\"message\":\"The
+            number of entries per page cannot exceed 500! \"}\n* 1001040377 The date
+            format is wrong, {\"code\":1001040377,\"message\":\"The date format is
+            wrong, please use \"yyyy-MM-dd'T'HH:mm:ss. SSSZ\"date format\"}\n* 100101701
+            The length of the keyword parameter cannot be greater than 200! ,{\"code\":100101701,\"message\":\"
+            The length of the keyword parameter cannot be greater than 200!\"} \n"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    description: Error encoding
+                    example: 100000003
+                  message:
+                    type: string
+                    description: Error message
+                    example: Pagination page number cannot be less than 1!
+  "/persons":
+    get:
+      tags:
+      - orgs
+      summary: Query Personnel List
+      description: 'Query personnel list (without distinguishing companies). The personnel
+        list supports fuzzy matching query through keyword parameters (personnel code
+        or personnel name). When the "modifyTime" parameter is not passed, it is a
+        full data query (excluding already Deleted data), when the "modifyTime" parameter
+        is passed to query incremental data, the incremental query includes deleted
+        data, which is used for personnel data synchronization, and the data greater
+        than this time can be incrementally synchronized according to the last modification
+        time parameter , sorting method: by default, it is in reverse order of update
+        time.'
+      operationId: getPersons
+      parameters:
+      - "$ref": "#/components/parameters/acceptLanguage"
+      - name: current
+        in: query
+        description: Number of pages to turn, starting from 1
+        required: true
+        schema:
+          type: integer
+          default: 1
+          minimum: 1
+      - name: pageSize
+        in: query
+        description: Number of elements to return per page (default 20, max 500)
+        required: false
+        schema:
+          type: integer
+          default: 20
+          maximum: 500
+      - name: keyword
+        in: query
+        description: |
+          * Fuzzy matching keywords, support fuzzy matching parameters include:
+           **Personnel name (name)**
+           **Personnel code (code)**
+          * For example: input "person01" to match the query above The parameter contains all the data of "person01";
+          * does not support case-sensitive query;
+          * does not support multiple query conditions, the input data will be used as a single value to match the query;
+          * if matched If the relevant data of the query does not exist, the returned data structure is an empty collection.
+        required: false
+        schema:
+          type: string
+          maxLength: 50
+          example: person01
+      - name: modifyTime
+        in: query
+        description: 'Last modification time (the time format must have a time zone),
+          the format is: "yyyy-MM-dd''T''HH:mm:ss.SSSZ", for example: zero time zone
+          time: "2021- 01-26T16:02:15.666+0000", East Eighth District time: "2021-01-26T16:02:15.666+0800",
+          you can query personnel data greater than this time.'
+        required: false
+        schema:
+          type: string
+      - name: filterVirtual
+        in: query
+        description: Whether to filter virtual personnel, the default is not to filter,
+          if this parameter is not passed, the default is false to not filter
+        schema:
+          type: boolean
+          default: false
+        required: false
+        example: false
+      responses:
+        '200':
+          description: 'Query the list of personnel. Sorting method: default in reverse
+            order of update time.'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  list:
+                    type: array
+                    items:
+                      "$ref": "#/components/schemas/PersonDetailInfo"
+                  pagination:
+                    "$ref": "#/components/schemas/Pagination"
+        '400':
+          description: |
+            Error prompt
+            * 100000003 Page number cannot be less than 1!,{"code":100000003,"message":"Page number cannot be less than 1! "}
+            * 100000003 The number of entries per page cannot be less than 1!,{"code":100000003,"message":"The number of entries per page cannot be less than 1! "}
+            * 100000003 The number of entries per page cannot exceed 500!,{"code":100000003,"message":"The number of entries per page cannot exceed 500! "}
+            * 1001040377 date format error,{"code":1001040377,"message":"date format error"}
+            * 100101701 keyword parameter length cannot be greater than 50! ,{" code":100101701,"message":"keyword parameter length cannot be greater than 50!"}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    description: Error encoding
+                    example: 100000003
+                  message:
+                    type: string
+                    description: Error message
+                    example: Pagination page number cannot be less than 1!
+  "/companies/{companyCode}/departments":
+    get:
+      tags:
+      - orgs
+      summary: Query the department list of the company with the specified code
+      description: |
+        * Query the department list under the company according to the company code, and only valid (not deleted) data can be queried. The sorting method: first sort according to the company level layNo, and then sort according to the sort field sort.
+        * If passed userName parameter, then query the department list associated with the user under the specified company
+      operationId: getDepartmentsByCompanyCode
+      parameters:
+      - "$ref": "#/components/parameters/acceptLanguage"
+      - name: companyCode
+        in: path
+        description: Company code, required
+        required: true
+        schema:
+          type: string
+      - name: username
+        in: query
+        description: User name, not required, when userName is passed, query the list
+          of departments associated with the user under the specified company
+        required: false
+        schema:
+          type: string
+      - name: current
+        in: query
+        description: The number of pages to turn, starting from 1
+        required: true
+        schema:
+          type: integer
+      - name: pageSize
+        in: query
+        description: Number of elements to return per page (default 20, max 500)
+        required: false
+        schema:
+          type: integer
+          default: 20
+          maximum: 500
+      responses:
+        '200':
+          description: 'Query the list of departments under the company. Sorting method:
+            first sort by the company level layNo, and then sort by the sort field
+            sort.'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  list:
+                    type: array
+                    items:
+                      "$ref": "#/components/schemas/DepartmentBaseInfo"
+                  pagination:
+                    "$ref": "#/components/schemas/Pagination"
+        '400':
+          description: |
+            Error prompt
+            * 100000003 Page number cannot be less than 1!,{"code":100000003,"message":"Page number cannot be less than 1! "}
+            * 100000003 The number of entries per page cannot be less than 1!,{"code":100000003,"message":"The number of entries per page cannot be less than 1! "}
+            * 100000003 The number of entries per page cannot exceed 500!,{"code":100000003,"message":"The number of entries per page cannot exceed 500! "}
+            * 100104040 The company does not exist!,{"code":100104040,"message":"The company does not exist! "}
+            * 100104050 The user does not exist under the company!,{"code":100104050,"message":"The user does not exist under the company! "}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    description: Error encoding
+                    example: 100000003
+                  message:
+                    type: string
+                    description: Error message
+                    example: Pagination page number cannot be less than 1!
+  "/companies/{companyCode}/positions":
+    get:
+      tags:
+      - orgs
+      summary: Query the job list of the company with the specified code
+      description: 'Query the job list under the company according to the company
+        code, and only valid (not deleted) data can be queried. The sorting method:
+        first sort according to the company level layNo, and then sort according to
+        the sorting field sort.'
+      operationId: getPositionsByCompanyCode
+      parameters:
+      - "$ref": "#/components/parameters/acceptLanguage"
+      - name: companyCode
+        in: path
+        description: Company code, required
+        required: true
+        schema:
+          type: string
+      - name: current
+        in: query
+        description: Number of pages to turn, starting from 1
+        required: true
+        schema:
+          type: integer
+      - name: pageSize
+        in: query
+        description: Number of elements returned per page (default 20, maximum 500)
+        required: false
+        schema:
+          type: integer
+          default: 20
+          maximum: 500
+      responses:
+        '200':
+          description: 'Query the list of departments under the company. Sorting method:
+            first sort by the company level layNo, and then sort by the sort field
+            sort.'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  list:
+                    type: array
+                    items:
+                      "$ref": "#/components/schemas/PositionBaseInfo"
+                  pagination:
+                    "$ref": "#/components/schemas/Pagination"
+        '400':
+          description: |
+            Error prompt
+            * 100000003 Page number cannot be less than 1!,{"code":100000003,"message":"Page number cannot be less than 1! "}
+            * 100000003 The number of entries per page cannot be less than 1!,{"code":100000003,"message":"The number of entries per page cannot be less than 1! "}
+            * 100000003 The number of entries per page cannot exceed 500!,{"code":100000003,"message":"The number of entries per page cannot exceed 500! "}
+            * 100104040 The company does not exist!,{"code":100104040,"message":"The company does not exist! "}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    description: Error encoding
+                    example: 100000003
+                  message:
+                    type: string
+                    description: Error message
+                    example: Pagination page number cannot be less than 1!
+  "/companies/bulk":
+    post:
+      tags:
+      - orgs
+      summary: Add, modify and delete companies in batches
+      description: "* In the company request body, add, delete, or modify data with
+        the same code, and process it according to the logic of modification, deletion,
+        and addition\n* Add company rules in batches\n * Required items: company full
+        name, abbreviation, code , system administrator name, password\n * Optional
+        options: company label, description, company parent node code\n * company
+        code: the code is a combination of letters, numbers, underscores, and dots,
+        no more than 50 characters\n * company parent Node code: if not passed, the
+        default parent node is the default company\n * System administrator: user
+        name rules: only letters, numbers, special symbols *()-_. and their combinations
+        are supported, and no more than 50 characters.\n * The username only supports
+        6 special characters *()-_. Other special symbols such as +/?%#&=space{} \"':,\\[],
+        etc., are compatible and are not supported for now, please Know!\n * Password:
+        The complexity is determined by the system password configuration, no more
+        than 50 characters\n * When the company code to be added exists in the system,
+        it will prompt \"Company code: [companyCode] already exists!\" \n * When the
+        full name of the company to be added exists in the system, it will prompt
+        \"Full name of the company: [comanyFullName] already exists!\"\n * When the
+        abbreviation of the company to be added exists in the system, it will prompt
+        \"Company Abbreviation: [companyShortName] already exists!\"\n * When the
+        new system administrator exists, it will prompt \"User name: [username] repeat\"\n*
+        Modify company rules in batches\n * Mandatory item: company Full name, abbreviation,
+        code. \n * Optional options: company label, description\n * When the full
+        name of the company to be added exists in the system, it will prompt \"Full
+        name of the company: [comanyFullName] already exists!\"\n * When the abbreviation
+        of the company to be added When it exists in the system, it will prompt \"Company
+        abbreviation: [companyShortName] already exists!\"\n * When the company to
+        be modified does not exist in the system, it will prompt \"Specified company:
+        [comanyFullName] does not exist!\"\n * Batch delete company rules\n * When
+        there are personnel in the positions under the company, delete the company
+        prompt\"There are personnel in the positions under the company, which cannot
+        be deleted!\"\n * When there are subsidiaries under the company, delete the
+        company prompt\"the The company has subsidiaries, and it is not allowed to
+        delete!\"\n * When the code in the company code set deleted by deleteCompanies
+        does not exist in the system, this code will be skipped, and the company corresponding
+        to other company codes that exist in the system will be deleted. \n* General
+        rules for batch addition and batch modification\n * Full company name rule:
+        no more than 200 characters. \n * Abbreviation rule: no more than 50 characters.
+        \n * Label: no more than 50 characters. \n * Description rules: no more than
+        255 characters. \n * When an exception occurs, the entire interface data will
+        be rolled back\n"
+      operationId: bulkCompanyOperate
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                addCompanies:
+                  type: array
+                  maxItems: 100
+                  description: New company collection
+                  items:
+                    "$ref": "#/components/schemas/AddCompany"
+                updateCompanies:
+                  type: array
+                  maxItems: 100
+                  description: Modified company collection
+                  items:
+                    "$ref": "#/components/schemas/UpdateCompany"
+                deleteCompanies:
+                  type: array
+                  maxItems: 100
+                  description: Deleted company code set
+                  items:
+                    type: string
+                    description: Company Code
+                    example: company_001
+            example:
+              addCompanies:
+              - code: company_002
+                parentCode: company_001
+                fullName: New Energy Testing Company
+                shortName: New Energy
+                tags:
+                - Label 001
+                - Label 002
+                description: New type of enterprise
+                username: zhangsan
+                password: Supos@test123
+              updateCompanies:
+              - code: company_002
+                fullName: New Energy Testing Company
+                shortName: New Energy
+                tags:
+                - Label 001
+                - Label 002
+                description: New type of enterprise
+              deleteCompanies:
+              - test_company
+              - company_003
+      responses:
+        '200':
+          "$ref": "#/components/responses/Created"
+        '400':
+          description: |
+            Error prompt
+             * 1001010300 The full name of the company is required, it cannot be empty, and the length does not exceed 200 characters! ,{"code":1001010300,"message":"Company:companyCode001, The full name is required, it cannot be empty, and the length does not exceed 200 characters! "}
+             * 1001010301 Company abbreviation is a required item, it cannot be empty, and the length does not exceed 50 characters! ,{"code":1001010301,"message":"Company: companyCode001, abbreviation is required item, cannot be empty, and the length does not exceed 50 characters! "}
+             * 1001010302 The company code is required and cannot be empty. The code is a combination of letters, numbers, underscores, and dots, and the length does not exceed 50 characters!,{"code":1001010302,"message ":"Company: companyCode001, the code is required, it cannot be empty, the code is a combination of letters, numbers, underscores, and dots, and the number does not exceed 50 characters! "}
+             * 1001010304 The size of the company label set does not exceed 10, and the length of each label does not exceed 50 characters! ,{"code":1001010304,"message":"Company:companyCode001, company label set The size does not exceed 10, and the length of each label does not exceed 50 characters! "}
+             * 1001010305 The length of the company description does not exceed 255 characters! ,{"code":1001010305,"message":"Company: companyCode001, the description does not exceed 255 characters! "}
+             * 1001010306 User name is required, only letters, numbers, special symbols *()-_. and their combinations are supported, no more than 50 characters! ,{"code":1001010306," message":"Company: companyCode001, user name is required, only letters, numbers, special symbols *()-_. and their combinations are supported, no more than 50 characters!"}
+             * 1001010307 The password is Required, the password complexity is determined by the system password configuration, and the length does not exceed 50 characters! ,{"code":1001010307,"message":"Company: companyCode001, password is required, user password No more than 50 characters in length! "}
+             * 1001010308 Company code already exists! ,{"code":1001010308,"message":"Company code: testCompany already exists! "}
+             * 1001010309 The full name of the company already exists! ,{"code":1001010309,"message":"The full name of the company: New Energy Testing Company already exists! "}
+             * 1001010310 Company abbreviation already exists!,{"code":1001010310,"message":"Company abbreviation: energy company already exists! "}
+             * 1001010311 User name is repeated,{"code":1001010311,"message":"User name: zhangsan is repeated"}
+             * 1001010312 Parent company does not exist! ,{" code":1001010312,"message":"Parent company: company_demo1 does not exist! "}
+             * 1001010313 The specified company does not exist! ,{"code":1001010313,"message":"The specified company: company_demo1 does not exist! "}
+             * 1001010314 There are personnel in the next position of the company, which cannot be deleted! ,{"code":1001010314,"message":"Company: companyCode001, there are personnel in the next position of the company, which cannot be deleted! "}
+             * 1001010315 This company has a subsidiary company, it is not allowed to delete! ,{"code":1001010315,"message":"Company: companyCode001, there is a subsidiary company, it is not allowed to delete! "}
+             * 1001010316 Newly added, modified, and deleted positions, each set size cannot exceed 100! ,{"code":1001010316,"message":"Added, modified, and deleted companies , each collection size cannot exceed 100! "}
+             * 1001010317 In the collection of adding or modifying companies, the company code is repeated! ,{"code":1001010317,"message":"Company: companyCode001, in the collection of adding or modifying companies , the company code is repeated! "}
+             * 1001010318 In the collection of adding or modifying companies, the full name of the company is repeated! ,{"code":1001010318,"message":"Company: companyCode001, in the collection of adding or modifying companies , the company's full name is repeated! "}
+             * 1001010319 In the collection of new or modified companies, the company abbreviation is repeated! ,{"code":1001010319,"message":"Company: companyCode001, in the collection of new or modified companies , company abbreviation repeat! "}
+             * 1001010320 In the collection of newly added companies, the user name is duplicated! ,{"code":1001010320,"message":"Company: companyCode001, in the collection of newly added companies, the user name is duplicated ! "}
+             * 100101653 Data causes circular dependency! ,{"code":100101653,"message":"Data causes circular dependency! "}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    description: Error Encoding
+                    example: 1001010302
+                  message:
+                    type: string
+                    description: Error message
+                    example: The company code is required and cannot be empty. The
+                      code is a combination of letters, numbers, underscores, and
+                      dots, and the length does not exceed 50 characters!
+  "/departments/bulk":
+    post:
+      tags:
+      - orgs
+      summary: Add, modify and delete departments in batches
+      description: "* The department and the incoming parent node of the batch operation
+        must be in the same company, and it needs to be called multiple times to process
+        the department data under multiple companies.\n* In the department request
+        body, there are additions, deletions and modifications with the same code
+        Data will be processed according to the logic of adding, modifying, and deleting\n*
+        Add department rules in batches\n * Optional items: person in charge, description,
+        company code, superior department code\n * Mandatory items: department name,
+        code, type \n * When the department name to be added exists in the system,
+        it will prompt \"Department name: [departmentName] already exists! \"\n *
+        When the department code to be added exists in the system, it will prompt
+        \"Department code: [departmentCode] already exists! \"\n * When the new department's
+        superior department does not exist, it will prompt \"The specified superior
+        department: [departmentCode] does not exist! \"\n * When the company specified
+        by the newly added department does not exist, it will prompt \"Specified company:
+        [companyCode] does not exist! \"\n* Modify department rules in batches\n *
+        Optional items: person in charge, description\n * Required items: department
+        name, code, type\n * When the department name to be modified exists in the
+        system, it will prompt\" Department name: [departmentName] already exists!
+        \"\n * When the department to be modified does not exist in the system, it
+        will prompt \"Designated department: [departmentCode] does not exist! \"\n
+        * Do not pass the parentCode, and modify the department to the root node by
+        default\n* Batch delete department rules\n * When there are personnel in the
+        positions associated with the department, delete the department prompt\"There
+        are personnel in the positions associated with the department or sub-department,
+        not Delete allowed! \"\n * When the code in the department code set deleted
+        by deleteDepartments does not exist in the system, skip the code and delete
+        the departments corresponding to other department codes that exist in the
+        system.\n* Add and modify general rules in batches \n * Department name: The
+        length cannot exceed 200 characters\n * Code: The code is a combination of
+        letters, numbers, underscores, and dots, and the length does not exceed 50
+        characters\n * Type: General department, emergency department\n * Responsible
+        person : Responsible person code set\n * Description rule: no more than 500
+        characters\n * Company code: If not passed, it is the default company\n *
+        Superior department code: If the superior is a company, it is empty\n * An
+        exception occurs, the entire Interface data will be rolled back\n * When the
+        specified person in charge does not exist, it will be automatically ignored\n"
+      operationId: bulkDepartmentsOperate
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                addDepartments:
+                  type: array
+                  maxItems: 100
+                  description: Added department collection
+                  items:
+                    "$ref": "#/components/schemas/AddDepartments"
+                updateDepartments:
+                  type: array
+                  maxItems: 100
+                  description: Modified department set
+                  items:
+                    "$ref": "#/components/schemas/UpdateDepartments"
+                deleteDepartments:
+                  type: array
+                  maxItems: 100
+                  description: A collection of deleted department numbers
+                  items:
+                    type: string
+                    description: Department Number
+                    example: department001
+            example:
+              addDepartments:
+              - name: Test Department 001
+                type: general
+                code: test_department
+                parentCode: department001
+                companyCode: default_org_company
+                description: Description of the testing department
+                managerCodes:
+                - zhangsan
+                - lisi
+              updateDepartments:
+              - name: Test Department 001_002
+                type: general
+                code: test_department
+                parentCode: test_department_001
+                description: New description of the testing department
+                managerCodes:
+                - tom
+                - wangwu
+              deleteDepartments:
+              - test_department002
+              - test_dept003
+      responses:
+        '200':
+          "$ref": "#/components/responses/Created"
+        '400':
+          description: |
+            Error Prompt
+            * New and modified shared error codes and error messages for departments
+             * 1001010500 The department name is required and cannot be empty, and the length cannot exceed 200 characters! ,{"code":1001010500, "message":"Department: departmentCode001, the name is required, it cannot be empty, and the length cannot exceed 200 characters! "}
+             * 1001010501 The department code is required, and the code is a combination of letters, numbers, underscores, and dots, and the length does not exceed 50 characters! ,{"code":1001010501,"message":"Department: departmentCode001, the code is required, the code is a combination of letters, numbers, underscores, and dots, and the length does not exceed 50 characters! "}
+             * 1001010502 The description length cannot exceed 500 characters! ,{"code":1001010502,"message":"Department: departmentCode001, the description length cannot exceed 500 characters! "}
+             * 1001010503 The specified department does not exist! ,{"code":1001010503,"message":"The specified department: dept_001 does not exist! "}
+             * 1001010504 Department code already exists! ,{"code":1001010504,"message":"Department code: dept_001 already exists! "}
+             * 1001010505 Department name already exists! ,{"code":1001010505,"message":"Department name: Test department 001 already exists! "}
+             * 1001010506 There is a person in the position associated with the department or sub-department, and it is not allowed to delete!,{"code":1001010506,"message":"Department: departmentCode001, or the position associated with the sub-department exists Personnel, not allowed to delete! "}
+             * 1001010507 The specified superior department does not exist!,{"code":1001010507,"message":"The specified superior department: dept_demo does not exist! "}
+             * 1001010508 The specified company does not exist!,{"code":1001010508,"message":"The specified company: company_demo does not exist! "}
+             * 1001010509 The department type is required!,{"code":1001010509,"message":"Department: company_demo The department type is required! "}
+             * 1001010510 The number of department heads does not exceed 10, and the length of the person in charge code does not exceed 50 characters!,{"code":1001010510,"message":"Department: company_demo The number of department heads is not More than 10, the person-in-charge code length shall not exceed 50 characters! "}
+             * 1001010511 Newly added, modified, and deleted positions, each set size cannot exceed 100! ,{"code":1001010511,"message":"Added, modified, and deleted departments , each collection size cannot exceed 100! "}
+             * 1001010512 In the newly added department collection, the department code is duplicated! ,{"code":1001010512,"message":"Department code: depttest001, in the newly added department collection, the department code is duplicated! "}
+             * 1001010513 The name of the department at the same level is duplicated! ,{"code":1001010513,"message":"Department code: depttest001, the name of the department at the same level is duplicated! "}
+             * 1001010514 The codes of the processing department and the batch data company should be the same!,{"code":1001010514,"message":"The processing department and the batch data company code should be the same! "}
+             * 1001010515 Department type error!,{"code":1001010515,"message":"Department: company_demo Department type error! "}
+             * 100101653 Data causes circular dependency! ,{"code":100101653,"message":"Data causes circular dependency! "}
+             * 1001040416 The specified parent code cannot be yourself! ,{"code":1001040416,"message":"The parent code specified by testdept cannot be yourself! "}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    description: Error encoding
+                    example: 1001010501
+                  message:
+                    type: string
+                    description: Error message
+                    example: The department code is required, and the code is a combination
+                      of letters, numbers, underscores, and dots, and the length does
+                      not exceed 50 characters!
+  "/positions/bulk":
+    post:
+      tags:
+      - orgs
+      summary: Batch adding, modifying and deleting positions
+      description: "* The positions of the batch operation and the incoming parent
+        nodes must all be in the same company, and multiple calls are required to
+        process the position data under multiple companies.\n* In the position request
+        body, there are additions, deletions and changes with the same code Data is
+        processed according to the logic of adding, modifying, and deleting\n* Batch
+        adding position rules\n * When the position name to be added exists in the
+        system, it will prompt \"Position name: [positionName] already exists! \"\n
+        * When the position code to be added exists in the system, it will prompt \"\"Position
+        code: [positionCode] already exists!\"\n * When the new position does not exist,
+        it will prompt\" Designated superior position: [positionName] does not exist!\"\n
+        * When the company specified by the newly added position does not exist, it
+        will prompt \"Specified company: [companyCode] does not exist!\"\n* Batch
+        modify position rules\n * When the position name to be modified exists in
+        the system, it will prompt \"Position name: [positionName] already exists!\"\n
+        * When the position to be modified does not exist in the system, it will prompt
+        \"Specified position: [positionName] does not Exist!\"\n * Do not pass the
+        parentCode, modify the department to the root node by default\n* Batch delete
+        position rules\n * When there are personnel in the position, delete the position prompt\"There
+        are related personnel in the position or sub-position, and deletion is not allowed!
+        \"\n * When the code in the position code set deleted by deletePositions does
+        not exist in the system, skip this code and delete the positions corresponding
+        to other position codes that exist in the system. \n* General rules for batch
+        addition and batch modification\n * Optional items: description, company code,
+        superior node code\n * Mandatory items: job title, code, associated department
+        code\n * job title: the length cannot exceed 200 characters\n * Code: the
+        code is a combination of letters, numbers, underscores, and dots, and the
+        length does not exceed 50 characters\n * Description rules: no more than 500
+        characters\n * Company code: If you do not pass it, it is the default company\n
+        * Superior position code: If the superior is a company, it will be empty\n
+        * If an exception occurs, the entire interface data will be rolled back\n"
+      operationId: bulkPositionsOperate
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                addPosition:
+                  type: array
+                  maxItems: 100
+                  description: Added collection of positions
+                  items:
+                    "$ref": "#/components/schemas/AddPosition"
+                updatePosition:
+                  type: array
+                  maxItems: 100
+                  description: Modified Post Collection
+                  items:
+                    "$ref": "#/components/schemas/UpdatePosition"
+                deletePosition:
+                  type: array
+                  maxItems: 100
+                  description: A collection of deleted job IDs
+                  items:
+                    type: string
+                    description: Job ID
+                    example: testposition
+            example:
+              addPosition:
+              - code: test_position
+                name: Test Post
+                parentCode: position_001
+                companyCode: company_001
+                departmentCode: test_department
+                description: Description of the position
+              updatePosition:
+              - code: test_position
+                parentCode: test_position_001
+                name: Test Post
+                departmentCode: test_department
+                description: Description of the position
+              deletePosition:
+              - position_001
+              - position_002
+      responses:
+        '200':
+          "$ref": "#/components/responses/Created"
+        '400':
+          description: |
+            Error Prompt
+            * Shared error code and error message for new and modified positions
+             * 100101600 The position name is required and cannot be empty! The length cannot exceed 200! ,{"code": 100101600,"message":"Position: positionCode001, the name is required and cannot be empty! The length does not exceed 200! "}
+             * 100101601 The position code is required and cannot be empty! And it is a combination of letters, numbers, underscores, and dots, and the length does not exceed 50! ,{"code":100101601,"message" :"Position: positionCode001, the code is required and cannot be empty! And it is a combination of letters, numbers, underscores, and dots, and the length does not exceed 50! "}
+             * 100101602 The code of the relevant department of the position is required and cannot be empty! It must be a combination of letters, numbers and underscores, and the length should not exceed 50! ,{"code":100101602,"message" :"Position: positionCode001, the code of the associated department is required and cannot be empty! And it is a combination of letters, numbers, and underscores, and the length does not exceed 50! "}
+             * 100101603 The designated superior position does not exist! ,{"code":100101603,"message":"The designated superior position: positon_test does not exist! "}
+             * 100101604 The specified company does not exist! ,{"code":100101604,"message":"The specified company: company_test does not exist! "}
+             * 100101605 Position code already exists! ,{"code":100101605,"message":"Position code: positon_test already exists! "}
+             * 100101606 The position name already exists! ,{"code":100101606,"message": Post name: Test position 001 already exists!"}
+             * 100101607 The specified position does not exist! ,{"code":100101607,"message":"Specified position: positon_test does not exist!"}
+             * 100101608 For newly added, modified and deleted positions, the size of each set cannot exceed 100! ,{"code":100101608,"message":"New, modified, and deleted positions, each set size cannot exceed 100!"}
+             * 100101650 The code of the company operating the position must be the same one! ,{"code":100101650,"message":"The code of the operating company must be the same!"}
+             * 100101651 The specified department does not exist! ,{"code":100101651,"message":"Specified department: dept001 does not exist!"}
+             * 100101653 Data causes circular dependency! ,{"code":100101653,"message":"Data causes circular dependency!"}
+             * 100101654 The description length cannot exceed 500 characters! ,{"code":100101654,"message":"Position: posicode01, the length of the description cannot exceed 500 characters!"}
+             * 100101655 The superior position code cannot be the same as the current position code! ,{ "code":100101655,"message":"Position: posicode01 The superior position code cannot be the same as the current position code!"}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    description: Error Encoding
+                    example: 100101601
+                  message:
+                    type: string
+                    description: Error message
+                    example: Encoding is required and cannot be empty! It must be
+                      a combination of letters, numbers, and underscores, and the
+                      length must not exceed 50!
+  "/persons/bulk":
+    post:
+      tags:
+      - orgs
+      summary: Add, modify, delete in batches,
+      description: "* Specific rules for adding personnel in batches\n * Optional
+        items: mobile phone number, email address, description, direct leader number,
+        next-level leader number, entry date, job title, qualification, education,
+        major, ID number. \n * Personnel number rules: combination of numbers, letters
+        and underscores, no more than 50 characters.\n * When the personnel to be
+        added exists in the system, it will prompt \"Personnel number already exists!
+        \"\n* Modify personnel-specific rules in batches\n * Optional items: mobile
+        phone number, email address, description, direct leader number, next-level
+        leader number, entry date, title, qualification, education, major, ID number.\n
+        * When the person to be modified does not exist in the system, it will prompt
+        \"The specified person does not exist! \"\n * When the field in the modified
+        personnel information is not passed or the field is empty, it means that the
+        value is blank\n* Batch delete personnel-specific rules\n * Delete personnel
+        and delete users who are bound to this personnel\n * When the personnel number
+        in the personnel number set deleted by deletePersons does not exist in the
+        system, skip this number and delete the personnel corresponding to other personnel
+        numbers that exist in the system.\n* General rules for adding and modifying
+        in batches\n * Mandatory items: personnel number, personnel name, personnel
+        gender, personnel main position code, personnel status.\n * Personnel name rule:
+        no more than 200 characters.\n * Description rule: no more than 500 characters.\n
+        * Entry date rule: the format is yyyy-MM-dd: For example: \"2021-05-26\".\n
+        * ID number rule: ID number consists of numbers, uppercase and lowercase letters,
+        and special characters, and the length does not exceed 200 Character!.\n *
+        When the request parameter, addPersons set is empty or there is no data, the
+        addition will not be processed.\n * When the request parameter, the updatePersons
+        set updatePersons is empty or there is no data, the modification will not
+        be processed.\n n * When in the request parameter, the delete personnel set
+        deletePersons is empty or has no data, the deletion will not be processed.\n
+        * The direct leader and the next-level leader must already exist in the system
+        before they can be set to other personnel.\n * Qualification rules: no more
+        than 200 characters.\n *Professional rules: no more than 200 characters.\n"
+      operationId: bulkPersonOperate
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                addPersons:
+                  type: array
+                  description: New collection of personnel
+                  items:
+                    "$ref": "#/components/schemas/AddPerson"
+                updatePersons:
+                  type: array
+                  description: Modified personnel collection
+                  items:
+                    "$ref": "#/components/schemas/UpdatePerson"
+                deletePersons:
+                  type: array
+                  description: A collection of deleted personnel numbers
+                  items:
+                    type: string
+                    description: personnel number
+                    example: zhangsan
+            example:
+              addPersons:
+              - code: zhaoyi
+                name: Zhao Yi
+                phone: 15219809782
+                gender: male
+                status: onWork
+                email: zhaoyi@163.com
+                description: My name is Zhao Yi
+                directLeaderCode: dbManager
+                grandLeaderCode: depManager
+                entryDate: '2021-01-26'
+                title: elementary
+                qualification:
+                education: middleOrOther
+                major: Computer Major
+                idNumber: 130971199809121010
+                mainPositionCode: developPosition
+              - code: qianer
+                name: Qian Er
+                phone:
+                gender: male
+                status: onWork
+                email:
+                description:
+                directLeaderCode:
+                grandLeaderCode:
+                entryDate:
+                title:
+                qualification:
+                education:
+                major:
+                idNumber:
+                mainPositionCode: developPosition
+              updatePersons:
+              - code: sunsan
+                name: Sun San
+                phone: 13738374659
+                gender: male
+                status: onWork
+                email: sunsan@163.com
+                description: Sun San is a research and development engineer
+                directLeaderCode: dbManager
+                grandLeaderCode: depManager
+                entryDate: '2021-05-26'
+                title: intermediate
+                qualification:
+                education: hd
+                major: Electronic Information Engineering
+                idNumber: 189746287423231
+                mainPositionCode: developPosition
+              - code: lisi
+                name: Li Si
+                phone:
+                gender: male
+                status: onWork
+                email:
+                description:
+                directLeaderCode:
+                grandLeaderCode:
+                entryDate:
+                title:
+                qualification:
+                education:
+                major:
+                idNumber:
+                mainPositionCode: developPosition
+              deletePersons:
+              - wangwu
+              - zhaoliu
+      responses:
+        '200':
+          "$ref": "#/components/responses/Created"
+        '400':
+          description: |
+            Error Prompt
+            * Common error code and error message for adding and modifying personnel
+            * 1001040393 The personnel number is required, cannot be empty, and is a combination of letters, numbers, and underscores, and the length does not exceed 50! ,{"code":1001040393,"message":"Personnel number is required, cannot be empty, and is a combination of letters, numbers, and underscores, and the length does not exceed 50! "}
+            * 1001040394 Personnel name is required and cannot be empty, and the length does not exceed 200! ,{"code":1001040394,"message":"Personnel name is required and cannot Think empty, and the length does not exceed 200! "}
+            * 1001040395 Personnel gender is required and cannot be empty,{"code":1001040395,"message":"Personnel gender is required and cannot be empty"}
+            * 1001040396 Personnel status is required and cannot be empty,{"code":1001040396,"message":"Personnel status is required and cannot be empty"}
+            * 1001040397 Personnel main position It is a required item and cannot be empty,{"code":1001040397,"message":"The main position of the person is required and cannot be empty"}
+            * 1001040398 The length of the description does not exceed 500! ,{"code":1001040398,"message":"The length of the description does not exceed 500! "}
+            * 1001040399 The ID number consists of numbers, uppercase and lowercase letters, and special characters, and the length does not exceed 200 characters! ,{"code":1001040399,"message":"The ID number consists of numbers , uppercase and lowercase letters, and special characters, and the length does not exceed 200 characters! "}
+            * 1001040400 The ID number cannot be repeated! ,{"code":1001040400,"message":"The ID number cannot be repeated! "}
+            * 1001040385 The immediate leader does not exist! ,{"code":1001040385,"message":"The immediate leader does not exist! "}
+            * 1001040386 Leaders at different levels do not exist! ,{"code":1001040386,"message":"Leaders at all levels do not exist! "}
+            * 1001040389 Gender system encoding is incorrect! ,{"code":1001040389,"message":"Gender system encoding is incorrect! "}
+            * 1001040390 The encoding of the personnel status system is incorrect! ,{"code":1001040390,"message":"The encoding of the personnel status system is incorrect! "}
+            * 1001040391 The title system code is incorrect! ,{"code":1001040391,"message":"The title system code is incorrect! "}
+            * 1001040392 The education system code is incorrect! ,{"code":1001040392,"message":"The education system code is incorrect! "}
+            * 100104019 The specified position does not exist! ,{"code":100104019,"message":"The specified position does not exist! "}
+            * 100104100 Entry date format error! ,{"code":100104100,"message":"Entry date format error! "}
+            * 100104101 The qualification length does not exceed 200! ,{"code":100104101,"message":"The qualification length does not exceed 200! "}
+            * 100104102 The professional length does not exceed 200! ,{"code":100104102,"message":"The professional length does not exceed 200! "}
+            * Add a unique error code and error message for personnel
+            * 100104021 The personnel number already exists! ,{"code":100104021,"message":"The personnel number already exists! "}
+            * 1001040384 There are duplicate numbers for adding personnel in batches! ,{"code":1001040384,"message":"There are duplicate numbers for adding personnel in batches! "}
+            * Special error code and error message for personnel modification
+            * 100104020 The specified personnel does not exist! ,{"code":100104020,"message":"The specified personnel does not exist! "}
+            * Specific error code and error message for personnel deletion
+            * 1001040376 User deletion failed! ,{"code":1001040376,"message":"User deletion failed! "}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    description: Error encoding
+                    example: 1001040393
+                  message:
+                    type: string
+                    description: Error message
+                    example: Personnel number is required, cannot be empty, and is
+                      a combination of letters, numbers, and underscores, and the
+                      length does not exceed 50!
+  "/persons/{personCode}/image":
+    post:
+      tags:
+      - orgs
+      summary: Upload and set the avatar for the person with the specified number
+        (currently only avatars are supported)
+      description: Upload and set an avatar for the person with the specified number
+        (currently only avatars are supported), and the avatar picture type only supports
+        bmp, jpg, jpeg, png!
+      operationId: updloadPersonImage
+      parameters:
+      - name: personCode
+        in: path
+        description: Personnel Number
+        required: true
+        schema:
+          type: string
+        example: zhangsan
+      - name: imageType
+        in: query
+        description: avatar
+        required: true
+        schema:
+          type: string
+          enum:
+          - avatar
+        example: avatar
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+      responses:
+        '200':
+          "$ref": "#/components/responses/Created"
+        '400':
+          description: |
+            Error prompt
+            * 1001040379 The format of the person's avatar is wrong, {"code":1001040379,"message":"The format of the person's avatar is wrong"}
+            * 100104020 The specified person does not exist!, {"code ":100104020,"message":"The specified person does not exist! "}
+            * 1001040387 imageType parameter error!, {"code":1001040387,"message":"imageType parameter error! "}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    description: Error encoding
+                    example: 1001040379
+                  message:
+                    type: string
+                    description: Error message
+                    example: The format of the person's avatar is wrong

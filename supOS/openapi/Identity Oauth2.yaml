@@ -1,0 +1,163 @@
+---
+openapi: 3.0.0
+info:
+  description: "* Oauth2.0 client mode to obtain token, refresh token"
+  version:
+  title: Authentication interface definition
+servers:
+- url: http://{domain}:{port}/
+  description: test environment
+  variables:
+    domain:
+      default: localhost
+      description: HTTP API request domain name
+    port:
+      default: '8080'
+- url: https://{domain}:{port}/{basePath}
+  description: formal environment
+  variables:
+    domain:
+      default: api1.supos.io
+      description: HTTPs API request domain name
+    port:
+      default: '8080'
+tags:
+- name: oauth2
+  description: oauth2.0 interface
+components:
+  responses:
+    NotFound:
+      description: object not found
+    OK:
+      description: Operation processed successfully
+    OAuth2Error:
+      description: oauth2 error wrong description
+      content:
+        application/json:
+          schema:
+            properties:
+              code:
+                type: string
+              msg:
+                type: string
+paths:
+  "/oauth2/client/v1/accessToken":
+    get:
+      tags:
+      - oauth2
+      summary: Obtain AccessToken in client mode
+      operationId: authToken
+      parameters:
+      - name: grantType
+        in: query
+        description: Authorization type, this value is fixed as "client_credential".
+        required: true
+        schema:
+          type: string
+      - name: appid
+        in: query
+        description: Third-party user unique credentials
+        required: true
+        schema:
+          type: string
+      - name: secret
+        in: query
+        description: The third-party user's unique credential key, namely appsecret
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: If the return is successful, the AccessToken can be obtained in the return packet
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  accessToken:
+                    type: string
+                    description: Authorization token, with a maximum length of 1024 characters.
+                    example: eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJwelhpeXRYVHZVVmx6YTloUC1tZTdEUXNLbXlvRkxLSmFHeE5HMEQzdUpNIn0.eyJleHAiOjE2MzQ4OTgyNTUsImlhdCI6MTYzNDg5MTA1NSwianRpIjoiOTU5NThhMDItZDI4Zi00NDhhLTk5NzItNDQ1YjA4NzBjMDBiIiwiaXNzIjoiaHR0cDovLzEwMC42NC44LjE2MTo4MDgwL2F1dGgvcmVhbG1zL2R0Iiwic3ViIjoiNWMxMzMyN2EtYzNkZS00NDVmLTk4NGEtYTgwOWRmZWY4MWM2IiwidHlwIjoiQmVhcmVyIiwiYXpwIjoiQXBwX2NlOGRjNjAyMzY4YmRjZTY5MjUzYzNiZDk3NTEyNDNhIiwic2Vzc2lvbl9zdGF0ZSI6IjYyODFlYjFhLTFlMDgtNDZhMy1iNThjLWE4MzM4MzE1MzE2YSIsImFjciI6IjEiLCJzY29wZSI6IiIsImNsaWVudElkIjoiQXBwX2NlOGRjNjAyMzY4YmRjZTY5MjUzYzNiZDk3NTEyNDNhIiwiY2xpZW50SG9zdCI6IjEwMC42NC44LjE1MiIsImNsaWVudEFkZHJlc3MiOiIxMDAuNjQuOC4xNTIifQ.nsptCw0lWeKzauAaFBWkCVOjMdkPDvfqvcVCIx-qig4dmwso_GH3fMtfZ1bhFUjbwsBqKZMUiFRekaURSZAiIIijAYc4uX0lJxsMmHNd5BZWsr-KPKjwAMkCUTxWJy8Eg-LcbSwWQXXZHtXR1MRiSouaAwVe15Q77YLgyQAWJSRtN_hAfPXdhPQiZxRab7_tWaiDu-AIEZktmnKIsm0YHYMeaNtlHCoBwCbW5McLbnscMrFdscXkeEyoOJHN8k3byY62nAY1XoSZQmtSz02HUXhcJVr2mZsQmP2Ry_z_An8t_LNrU64Us7-I64SB1j4G2X3W6okwrp8KAUcWFHU-ag
+                  expiresIn:
+                    type: integer
+                    description: The effective time from the issuance of the authorization stand to the invalidation of the token, in milliseconds.
+                    example: 7200000
+                  refreshToken:
+                    type: string
+                    description: In the authorization automatic renewal step, the parameters that need to be provided when obtaining a new authorization token, the maximum length is 1024 characters.
+                    example: eyJhbGciOiJIUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICIwZjRkZTZlNS1jYzQ1LTQyMTMtYjRmYy1mZDlmY2Q1ZmQ1YTUifQ.eyJleHAiOjE2MzQ4OTgyNTUsImlhdCI6MTYzNDg5MTA1NSwianRpIjoiNDQ2NDhhOGMtM2I1YS00MWJkLWI5YTEtZTUwM2M5ZWZhY2Q0IiwiaXNzIjoiaHR0cDovLzEwMC42NC44LjE2MTo4MDgwL2F1dGgvcmVhbG1zL2R0IiwiYXVkIjoiaHR0cDovLzEwMC42NC44LjE2MTo4MDgwL2F1dGgvcmVhbG1zL2R0Iiwic3ViIjoiNWMxMzMyN2EtYzNkZS00NDVmLTk4NGEtYTgwOWRmZWY4MWM2IiwidHlwIjoiUmVmcmVzaCIsImF6cCI6IkFwcF9jZThkYzYwMjM2OGJkY2U2OTI1M2MzYmQ5NzUxMjQzYSIsInNlc3Npb25fc3RhdGUiOiI2MjgxZWIxYS0xZTA4LTQ2YTMtYjU4Yy1hODMzODMxNTMxNmEiLCJzY29wZSI6IiJ9.sJ3VcgbavyT41OCc8xZ4sbAHliMOkXPYcvehIX_ttJE
+        '400':
+          description: |
+            Error message
+            * 100106500 Parameter verification error, {"code":100106500,"message":"request parameter error"}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    description: |
+                      wrong code
+                      * 100106500 Request parameter error
+                    example: 100106500
+                  message:
+                    type: string
+                    description: Error message
+                    example: request parameter error
+        '404':
+          "$ref": "#/components/responses/NotFound"
+  "/oauth2/client/v1/refreshToken":
+    get:
+      tags:
+      - oauth2
+      summary: Client mode obtains AccessToken through refreshToken
+      operationId: authGetAccessTokenByRefreshInClientMode
+      parameters:
+      - name: refreshToken
+        in: query
+        description: refresh password
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: If the return is successful, the Access Token can be obtained in the return packet
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  accessToken:
+                    type: string
+                    description: Authorization token, with a maximum length of 1024 characters.
+                    example: eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJwelhpeXRYVHZVVmx6YTloUC1tZTdEUXNLbXlvRkxLSmFHeE5HMEQzdUpNIn0.eyJleHAiOjE2MzQ4OTgyNTUsImlhdCI6MTYzNDg5MTA1NSwianRpIjoiOTU5NThhMDItZDI4Zi00NDhhLTk5NzItNDQ1YjA4NzBjMDBiIiwiaXNzIjoiaHR0cDovLzEwMC42NC44LjE2MTo4MDgwL2F1dGgvcmVhbG1zL2R0Iiwic3ViIjoiNWMxMzMyN2EtYzNkZS00NDVmLTk4NGEtYTgwOWRmZWY4MWM2IiwidHlwIjoiQmVhcmVyIiwiYXpwIjoiQXBwX2NlOGRjNjAyMzY4YmRjZTY5MjUzYzNiZDk3NTEyNDNhIiwic2Vzc2lvbl9zdGF0ZSI6IjYyODFlYjFhLTFlMDgtNDZhMy1iNThjLWE4MzM4MzE1MzE2YSIsImFjciI6IjEiLCJzY29wZSI6IiIsImNsaWVudElkIjoiQXBwX2NlOGRjNjAyMzY4YmRjZTY5MjUzYzNiZDk3NTEyNDNhIiwiY2xpZW50SG9zdCI6IjEwMC42NC44LjE1MiIsImNsaWVudEFkZHJlc3MiOiIxMDAuNjQuOC4xNTIifQ.nsptCw0lWeKzauAaFBWkCVOjMdkPDvfqvcVCIx-qig4dmwso_GH3fMtfZ1bhFUjbwsBqKZMUiFRekaURSZAiIIijAYc4uX0lJxsMmHNd5BZWsr-KPKjwAMkCUTxWJy8Eg-LcbSwWQXXZHtXR1MRiSouaAwVe15Q77YLgyQAWJSRtN_hAfPXdhPQiZxRab7_tWaiDu-AIEZktmnKIsm0YHYMeaNtlHCoBwCbW5McLbnscMrFdscXkeEyoOJHN8k3byY62nAY1XoSZQmtSz02HUXhcJVr2mZsQmP2Ry_z_An8t_LNrU64Us7-I64SB1j4G2X3W6okwrp8KAUcWFHU-ag
+                  expiresIn:
+                    type: integer
+                    description: The effective time from the issuance of the authorization stand to the invalidation of the token, in milliseconds.
+                    example: 7200000
+                  refreshToken:
+                    type: string
+                    description: In the authorization automatic renewal step, the parameters that need to be provided when obtaining a new authorization token, the maximum length is 1024 characters.
+                    example: eyJhbGciOiJIUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICIwZjRkZTZlNS1jYzQ1LTQyMTMtYjRmYy1mZDlmY2Q1ZmQ1YTUifQ.eyJleHAiOjE2MzQ4OTgyNTUsImlhdCI6MTYzNDg5MTA1NSwianRpIjoiNDQ2NDhhOGMtM2I1YS00MWJkLWI5YTEtZTUwM2M5ZWZhY2Q0IiwiaXNzIjoiaHR0cDovLzEwMC42NC44LjE2MTo4MDgwL2F1dGgvcmVhbG1zL2R0IiwiYXVkIjoiaHR0cDovLzEwMC42NC44LjE2MTo4MDgwL2F1dGgvcmVhbG1zL2R0Iiwic3ViIjoiNWMxMzMyN2EtYzNkZS00NDVmLTk4NGEtYTgwOWRmZWY4MWM2IiwidHlwIjoiUmVmcmVzaCIsImF6cCI6IkFwcF9jZThkYzYwMjM2OGJkY2U2OTI1M2MzYmQ5NzUxMjQzYSIsInNlc3Npb25fc3RhdGUiOiI2MjgxZWIxYS0xZTA4LTQ2YTMtYjU4Yy1hODMzODMxNTMxNmEiLCJzY29wZSI6IiJ9.sJ3VcgbavyT41OCc8xZ4sbAHliMOkXPYcvehIX_ttJE
+        '400':
+          description: |
+            Error message
+            * 100106500 Parameter verification error, {"code":100106500,"message":"request parameter error"}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    description: |
+                      wrong code
+                      * 100106500 Request parameter error
+                    example: 100106500
+                  message:
+                    type: string
+                    description: Error message
+                    example: request parameter error
+        '404':
+          "$ref": "#/components/responses/NotFound"

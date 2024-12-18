@@ -1,0 +1,154 @@
+With input, processing and output operators, you can process the data source you added and output the processed result to whereever you need.
+
+:::info
+When no processing operator is involved in the task development, the input data is incrementally synchronized to the output data according to the set primary key of the data source.
+:::
+
+1. Click a task to enter the modeling page.
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supETL/25.png)
+
+<table>
+  <thead>
+    <tr>
+      <th>No.</th>
+      <th>Section</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>Task</td>
+      <td>Displays the current task name and version that is under developing.</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>Tool bar</td>
+      <td>
+
+- **Save**: Directly save the task.
+- **Dispatch**: Configure how to execute the data task, which can be cycled dispatch or triggered by upstream task or object model event.
+- **Task info**: View and edit the task information.
+- **Variable**: Add global variables that can be used during task development.
+:::info
+Format of **Datetime** type of data can be manually set.
+:::
+
+</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>Page tab</td>
+      <td>Switch the task view between <b>Modeling</b> (task developing) and <b>Insight</b> (task debugging).</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>Publish</td>
+      <td>Click to publish current task.</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td>Operator</td>
+      <td>Provided operators that can be used to process input data by simple drag and drop.</td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td>Canvas</td>
+      <td>Task developing canvas.</td>
+    </tr>
+    <tr>
+      <td>7</td>
+      <td>Debug</td>
+      <td>Debugging details. You can click <b>Download sample data</b> to check the debugging log.</td>
+    </tr>
+  </tbody>
+</table>
+
+
+2. Drag an input operator under **Data input** based on the input data source.
+3. Double-click the operator to configure its data source.
+
+:::info
+Different input data sources require different configuration, and **Relational data source** is used as an example here. For details, see <a href="Task Node Description">Task Node Description</a>.
+:::
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supETL/26.png)
+
+<ol>
+<ol>
+<li>Under <b>Input selection</b>, select the input data source type and name.</li>
+<li>Select whether to directly input tables or use advanced SQL statements to draw data from database.</li>
+<li>Select data synchronization method.
+
+- Cycle full amount: Synchronize all data from the data table.
+- Cycle increment: Select fields from the data table to synchronize.
+
+</li>
+<li>Configure the output field, and you can set the sort order of each field, or add filters to the output fields.</li>
+<li>Click <b>Mapping config</b>, select fields you want to be mapped as input data.
+
+:::tip
+- Select fields and then click **Export** to directly map all fields.
+- Click **New** to add new fields to receive the original fields.
+- Click the mapped fields to change their name, description and data type.
+:::
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supETL/26-1.png)
+
+</li>
+<li>Click <img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supETL/27.png"></img> to save the current step.</li>
+</ol>
+</ol>
+
+4. Drag a data processing operator, connect to the input data operator, and then start configuring processing details.
+:::info
+Different types of data processing operator requires different configuration, and **Data filtering** is used as an example here. For details, see <a href="Task Node Description">Task Node Description</a>.
+:::
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supETL/28.png)
+
+<ol>
+<ol>
+<li>Double-click the data filering operator, and then select fields that you want to add filters to.</li>
+<li>Select <b>Filter condition</b>.</li>
+<li>Select <b>Value type</b>. <b>Variable</b> are the global variables you set.</li>
+<li>Set the field value to be filtered.</li>
+<li>Click <img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supETL/27.png"></img> to save the current step.</li>
+</ol>
+</ol>
+
+5. Drag a data output operator, connect to the data processing operator, and then start configuring output data details.
+
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supETL/29.png)
+
+<ol>
+<ol>
+<li>Double-click the data output operator, and then select a data source that you want to output data to.
+
+:::info
+- Different data output operators require different configuration, and **Relational data source** is used as an example here. For details, see <a href="Task Node Description">Task Node Description</a>.
+- For **Relational data source**, Paradox database cannot be the output destination.
+:::
+
+</li>
+<li>Click <b>Mapping config</b>.</li>
+<li>Map the filtered field to the output data source fields.
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supETL/30.png)
+
+</li>
+<li>Click <img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supETL/27.png"></img> to save the current step.</li>
+</ol>
+</ol>
+
+6. Click **Debug** at the bottom, and the **Insight results** is automatically displayed when the task is executed successfully.
+
+:::tip
+On **Insight** page, you can click the input and output data operator to see the data change.
+:::
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supETL/31.png)
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supETL/32.png)
+

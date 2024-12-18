@@ -1,0 +1,315 @@
+---
+hide_title: true
+---
+
+## Overview
+This document dedicates in demonstrating the process of obtaining data from supOS platform through common openAPIs.
+:::info
+Using open APIs to get data from supOS platform in external platforms requires authorization.
+:::
+
+## Operation Process
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/openAPI/5.png)
+
+### Getting Authorization
+Get the AK/SK file from the supOS platform for subsequent use.
+1. Log in to supOS platform.
+2. In design center, select **System Management** > **System Confirguation** > **AK/SK credential**.
+3. Click **New**, enter the APP ID and then click **OK**.
+4. Click **Donwload** on the pop-up window to download the authorization file.
+ ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/openAPI/6.png)
+
+:::info
+AK is the **secret ID** and SK is **secret key** in the file.
+:::
+
+### Calculating Signature
+Use the following code to calculate the signature as authorization for using open API to get supOS platform data in third-party platforms.<br />
+Copy the following code in your IDE, change the AK/SK information to what you got from the supOS platform.
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+<Tabs>
+<TabItem value="js" label="JavaScript">
+
+```js
+const crypto = require('crypto');
+const ak="993034575ceaf0e166ad9a73fcf3c469"
+const sk="62f6652846cf9096d680e7dc42f03ed1"
+const supos="http://isv-integrate-pgx3.demo.devcloud.supos.net"
+//sort query parameter
+function sortQuery(jsonObj) {
+    if (jsonObj == null) return '';
+    let lowerCasekeyObj = {};
+    let lowerCasekeyArr = [];
+    for (const key in jsonObj) {
+        lowerKey = key.toLowerCase()
+        lowerCasekeyArr.push(lowerKey);
+        lowerCasekeyObj[lowerKey] = jsonObj[key];
+    }
+    let res = '';
+    lowerCasekeyArr.sort();
+    for (const i in lowerCasekeyArr) {
+        let key = lowerCasekeyArr[i];
+        res += lowerCasekeyArr[i] + "=" + lowerCasekeyObj[key] + "&";
+    }
+    return res.substring(0, res.length - 1);
+}
+//json convert query
+function json2query(jsonObj) {
+    let res = '';
+    for (const key in jsonObj) {
+        res += key + "=" + jsonObj[key] + "&"
+    }
+    return res.substring(0, res.length - 1);
+}
+function buildSignString(uri, methodName, queryJson, headerJson) {
+    let signStr = ''
+    // HTTP Schema
+    signStr = signStr + methodName + "\n"
+    // HTTP URI
+    signStr = signStr + uri + "\n"
+    // HTTP ContentType
+    signStr = signStr + headerJson['Content-Type'] + "\n"
+    // CanonicalQueryString
+    signStr = signStr + sortQuery(queryJson) + "\n" + "\n"
+    return signStr
+}
+//AK/SK to get signature
+function signHeader(uri, methodName, queryJson, headerJson) {
+    let signStr = buildSignString(uri, methodName, queryJson, headerJson);
+    console.log("signature source==========Start===========")
+    console.log(signStr)
+    console.log("signature source==========End===========")
+    let signature = crypto.createHmac('sha256', sk).update(signStr, 'utf8').digest('hex');
+    let final_signature = "Sign " + ak + "-" + signature
+    console.log("signature", final_signature)
+    headerJson['Authorization'] = final_signature;
+}
+module.exports = {
+    signHeader,
+    json2query,
+    supos
+}
+```
+
+</TabItem>
+<TabItem value="py" label="Python">
+
+```py
+import hashlib
+import hmac
+import json
+import os
+import requests
+
+# supOS address
+env_supos_url = os.getenv("SDK_ADDRESS")
+supos_url = env_supos_url if env_supos_url is not None else "http://isv-integrate-pgx3.demo.devcloud.supos.net"
+# AK
+env_ak = os.getenv("SUPOS_APP_ACCOUNT_ID")
+# SK
+env_sk = os.getenv("SUPOS_SUPOS_APP_SECRET_KEY")
+# enter AK and SK
+app_ak = env_ak if env_ak is not None else "993034575ceaf0e166ad9a73fcf3c469"
+app_sk = env_sk if env_sk is not None else "62f6652846cf9096d680e7dc42f03ed1"
+
+
+class SignRequest:
+    __authorize_uri = "/inter-api/auth/v1/oauth2/authorize"
+    __token_uri = "/open-api/auth/v2/oauth2/token"
+
+    def authorize(self, redirect_uri, state):
+        auth_url = self.__authorize_uri + "?responseType=code&state=" + state + "&redirectUri=" + redirect_uri
+        return supos_url + auth_url
+
+    def access_token(self, access_code, logout_url):
+        token_dict = {'grantType': 'authorization_code', 'code': access_code, 'logoutUri': logout_url}
+        return self.post(self.__token_uri, token_dict)
+
+    def get(self, open_api_uri, query_params):
+        return self.__do_request(open_api_uri, "GET", query_params, None)
+
+    def post(self, open_api_uri, request_body):
+        return self.__do_request(open_api_uri, "POST", None, request_body)
+
+    def put(self, open_api_uri, request_body):
+        return self.__do_request(open_api_uri, "PUT", None, request_body)
+
+    def delete(self, open_api_uri, query_params):
+        return self.__do_request(open_api_uri, "DELETE", query_params, None)
+
+    def __do_request(self, api_url, method_name, query_dict, request_dict):
+        headers = {"Content-Type": 'application/json;charset=utf-8'}
+        whole_url = supos_url + api_url
+        self.__sign_header(api_url, method_name, query_dict, headers)
+        response = None
+        if "GET" == method_name:
+            response = requests.get(url=whole_url, params=self.__dict_to_query(query_dict), headers=headers)
+        elif "POST" == method_name:
+            response = requests.post(url=whole_url, data=json.dumps(request_dict, ensure_ascii=False).encode('utf-8'),
+                                     headers=headers)
+        elif "PUT" == method_name:
+            response = requests.put(url=whole_url, data=json.dumps(request_dict, ensure_ascii=False).encode('utf-8'),
+                                    headers=headers)
+        elif "DELETE" == method_name:
+            response = requests.delete(url=whole_url, headers=headers)
+        response.encoding = 'utf-8'
+        print("request respnse：" + response.text)
+        return response
+
+    # sort query parameters
+    @staticmethod
+    def __sorted_query(query):
+        if query is not None:
+            res = ''
+            for i in sorted(query):
+                if isinstance(query[i], str):
+                    res = res + i.lower() + '=' + query[i] + '&'
+                else:
+                    res = res + i.lower() + '=' + str(query[i]) + '&'
+            return res.rstrip('&')
+        return ''
+    
+    # dict convert to query parameter string
+    @staticmethod
+    def __dict_to_query(query):
+        if query is not None:
+            res = ''
+            for i in sorted(query):
+                if isinstance(query[i], str):
+                    res = res + i + '=' + query[i] + '&'
+                else:
+                    res = res + i + '=' + str(query[i]) + '&'
+            return res.rstrip('&')
+        return ''
+
+    # combine signature
+    def __build_sign_str(self, uri, method_name, query_params, header_map):
+        sign_str = ''
+        # HTTP Schema
+        sign_str = sign_str + method_name + "\n"
+        # HTTP URI
+        sign_str = sign_str + uri + "\n"
+        # HTTP ContentType
+        sign_str = sign_str + header_map['Content-Type'] + "\n"
+        # CanonicalQueryString
+        sign_str = sign_str + self.__sorted_query(query_params) + "\n" + "\n"
+        return sign_str
+
+    # generate signature and write in request head
+    def __sign_header(self, uri, method_name, query_params, header_map):
+        sign_str = self.__build_sign_str(uri, method_name, query_params, header_map)
+        print("signature source：========start======>>\n" + sign_str)
+        signature = hmac.new(app_sk.encode('utf-8'), sign_str.encode('utf-8'), digestmod=hashlib.sha256).hexdigest()
+        final_signature = "Sign " + app_ak + "-" + signature
+        print("signature source：<<========end======")
+        print('signature：' + final_signature)
+        header_map['Authorization'] = final_signature
+```
+
+</TabItem>
+</Tabs>
+
+
+### Calling API to get Data
+In your IDE, create another file, and then copy the following code.
+
+
+<Tabs>
+<TabItem value="js" label="JavaScript">
+
+```js 
+const hosted = require('./hosted.js')
+const rp = require('request-promise');
+function test() {
+    let openApiUri = '/open-api/organization/v2/companies';
+    methodName = 'GET' //DELETE/POST/PUT
+    let queryJson = {
+        "current": "1",
+        "pageSize": "500"
+    };
+    let headerJson = {
+        'Content-Type': 'application/json;charset=utf-8'
+    };
+ let wholeUrl=hosted.supos+openApiUri;
+    //queryJson contributes to the url but not the body
+    hosted.signHeader(openApiUri, methodName, queryJson, headerJson);
+    var options = {
+        method: methodName,
+        uri: wholeUrl,
+        headers: headerJson,
+        //body{}, enter body param of the API
+        json: true
+    };
+    if (queryJson != null) {
+        wholeUrl += "?" + hosted.json2query(queryJson);
+        options['uri'] = wholeUrl;
+    }
+    rp(options)
+        .then(function (response) {
+            console.log('response:', response);
+        })
+        .catch(function (err) {
+            console.error(err)
+        });
+
+}
+test()
+```
+
+</TabItem>
+<TabItem value="py" label="Python">
+
+```py
+from integrates import SignRequest
+
+if __name__ == '__main__':
+    sign_request = SignRequest()
+    params = {'current': 1, 'pageSize': 500}
+    resp = sign_request.get("/open-api/organization/v2/companies", params)
+```
+
+</TabItem>
+</Tabs>
+
+
+### Results
+
+Run the calling API code to get the signature and results.<br/>
+The signature should be like the following examples with different data obtained from supOS.
+
+<Tabs>
+<TabItem value="js" label="JavaScript">
+
+```js
+signature source==========Start===========
+GET
+/open-api/organization/v2/companies
+application/json;charset=utf-8
+current=1&pagesize=500
+
+
+signature source==========End===========
+signature： Sign 993034575ceaf0e166ad9a73fcf3c469-fb17c1b737f768a6153e2b69ce0f5c1df4f8bbcde5e3195c00fffb17e185822a
+```
+
+</TabItem>
+<TabItem value="py" label="Python">
+
+```py
+signature source: ========start======>>
+GET
+/open-api/organization/v2/companies
+application/json;charset=utf-8
+current=1&pagesize=500
+
+
+signature source: <<========end======
+signature：Sign 993034575ceaf0e166ad9a73fcf3c469-fb17c1b737f768a6153e2b69ce0f5c1df4f8bbcde5e3195c00fffb17e185822a
+```
+
+</TabItem>
+</Tabs>
+

@@ -1,0 +1,100 @@
+---
+hide_title: true
+---
+
+### Creating Function Set
+
+1. Log in to supOS, and then click <img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/factoryModeling/7.png" alt="" /> to go to the design center.
+2. Select **Object Model Management** > **Function Set** > **Function Set**.
+3. Select a template, and then click <img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/factoryModeling/26.png" /> to add a function set.
+4. Enter the basic information of the function set and then click <strong>OK</strong>.
+
+<ul>
+<ul>
+<li>Operations of creating a function set are similar to template creation. For details, see <a href="Creating Entity Template">Creating Entity Template</a>.</li>
+<li>A function set can be bound with templates and instances for inheritance.</li>
+<li>Select a function set, and then click <strong>Sync Reference Template</strong> to synchronize changes of the function set to bound templates and instances.</li>
+</ul>
+</ul>
+
+### Creating Tag
+
+
+Create tags to filter and search for templates, instances, attributes, services, events and subscriptions.
+1. Log in to supOS, and then click <img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/factoryModeling/7.png" /> to go to the design center.
+2. Select <strong>Object Model Management</strong> > <strong>Tag Management</strong>.
+3. Click <img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/factoryModeling/26.png" /> and enter name, alias and remarks of the tag category, select whether the category is visible to other APPs on the prompted window, and then click <strong>OK</strong>.
+4. Select a category, click <strong>New</strong> and then enter basic information of the tag, click <strong>OK</strong>.
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/factoryModeling/14.png" width={470}/>
+  
+
+### Creating Data Set
+
+You can define data sets to bind with events in object models, and receive messages related to the bound data set when events are triggered.
+
+1. Log in to supOS, and then click <img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/factoryModeling/7.png"/> to go to the design center.
+2. Select <strong>Object Model Management</strong> > <strong>Data Set</strong>.
+3. Click <strong>New</strong>, and then enter basic information of the data set.
+4. Click <strong>OK</strong>. Click the data set again, and then click the <strong>Field Definition</strong> tab.
+5. Click <strong>New</strong>, enter field information such as name, alias, data type and default value, and then click <strong>OK</strong>.
+
+:::info
+- Multiple fields are available.
+- Add fields to bound data sets that have generated data by event triggering, data belongs to new fields will be empty.
+:::
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/factoryModeling/15.png" width={470}/>
+
+  
+6. Click <strong>OK</strong>.
+
+:::info
+Bound data sets cannot be deleted.
+:::
+
+  
+
+### Creating Data Group
+
+Group and manage instance data permission.
+- You cannot see objects that you have no permission of in design center or object selector.
+- You cannot see corresponding attribute data that you have no permission of in operation center.
+
+:::info 
+Data groups can only be applied to entity instances.
+:::
+
+1. Log in to supOS, and then click <img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/factoryModeling/7.png" /> to go to the design center.
+2. Select <strong>Object Model Management</strong> > <strong>Data Group</strong>, and then click <strong>New</strong>.
+3. Enter basic information of the data group, and then click <strong>Save</strong>.
+4. Select the <strong>Permission Config</strong> tab, click <img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/factoryModeling/26.png"/> next to <strong>Template Config</strong> to select template types.
+5. Select a type of template to configure attribute permissions.
+- On the right side, select <strong>All Instances</strong> to grant permissions to properties of all instances under the template.
+- Click <strong>Partial Instances</strong> to grant permissions to properties of selected instances under the template.
+
+<ol>
+<ol>
+<li>Click <strong>New </strong>to select instances, and then click <strong>OK</strong>.</li>
+<li>Click <strong>Attributes </strong>under <strong>Operate </strong>to select all or partial properties of the instance.</li>
+<li>Click <strong>OK </strong>after selecting needed properties.</li>
+<li>Click <strong> Alarm Permission</strong> under <strong>Operate </strong>of selected property to configure alarm permissions, and then click <strong>OK</strong>.</li>
+<li>Click <strong>Close</strong>.</li>
+</ol>
+</ol>
+
+:::info
+- Alarm data can be viewed in operation center, but not used to build templates.
+- Data groups are used to grant permissions to users or roles. For details, see <a href="../../System%20Configuration/User%20Security%20Management.mdx">User Security Management</a>.
+::: 
+    
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/factoryModeling/32.png" width={470}/>
+
+### Managing Tasks
+
+View information of subscription tasks in <strong>Task Management</strong>, such as last execution and failure log.
+1. Log in to supOS, and then click <img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/factoryModeling/7.png" /> to go to the design center.
+2. Select <strong>Object Model Management</strong> > <strong>Task Management</strong>.
+3. Click <img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/factoryModeling/17.png" /> and enter keywords of subscription, and then press Enter.
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/factoryModeling/18.png" />

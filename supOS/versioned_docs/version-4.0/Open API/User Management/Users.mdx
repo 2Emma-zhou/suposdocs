@@ -1,0 +1,784 @@
+---
+hide_title: true
+---
+
+<div className='div'>
+<div className='title'>
+
+## ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/openAPI/1.png) Add User
+
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Path</div>
+<div className='rightCol'>
+
+```
+http://{supOS ip:port}/open-api/auth/v2/users
+```
+
+</div>
+<div className='leftCol'>Request body</div>
+<div className='rightCol'>
+
+```json
+{
+  "username": "test",  //required
+  "password": "xxxxx",  //required
+  "userDesc": "general user",
+  "timeZone": "GMT+0800",  //required
+  "personCode": "person01",  //required
+  "companyCode": "default",  //required
+  "accountType": 0,  //required
+  "roleNameList": [  //role code list
+    "role1"
+  ],
+  "recoveryDeleted": false  //whether to restore deleted users
+}{
+  "username": "test",
+  "password": "xxxxx",
+  "userDesc": "general user",
+  "timeZone": "GMT+0800",
+  "personCode": "person01",
+  "companyCode": "default",
+  "accountType": 0,
+  "roleNameList": [
+    "role1"
+  ],
+  "recoveryDeleted": false
+}
+```
+
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+
+- 200: Successful.
+- 400
+
+```json
+{
+  "code": 100106021,
+  "message": "password rule: Contains upper and lower cases, and number, and the length is 6-8 digits."
+}
+```
+
+<ul>
+<ul>
+<li>100106500: Parameter validation error</li>
+<li>100106004: Username already exists</li>
+<li>100106005: Person is already bound to a user</li>
+<li>100106012: Person does not exist</li>
+<li>100106013: Role does not exist</li>
+<li>100106021: Password complexity does not meet system requirements</li>
+<li>100106014: Company does not exist</li>
+<li>100106020: Person does not belong to this company</li>
+<li>100106022: Role does not belong to this company</li>
+</ul>
+</ul>
+
+- 500
+```json
+{
+  "code": 100000001,
+  "message": "internal service exception"
+}
+```
+
+</div>
+</div>
+</div>
+
+<div className='div'>
+<div className='title'>
+
+## ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/openAPI/4.png) Get User List
+
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Path</div>
+<div className='rightCol'>
+
+```
+http://{supOS ip:port}/open-api/auth/v2/users
+```
+
+</div>
+<div className='leftCol'>Query parameter</div>
+<div className='rightCol'>
+
+- keyword: Keyword for fuzzy matching.
+- pageIndex: Page number. Required.
+- pageSize: Items on the page.
+- companyCode: Required.
+- roleCode: Role code.
+- modifyTime: Modify time.
+
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+
+- 200: Successful.
+
+```json
+{
+  "list": [
+    {
+      "username": "admin",
+      "userDesc": "super admin",
+      "accountType": 0,
+      "lockStatus": 0,
+      "personCode": "person01",
+      "personName": "person01",
+      "modifyTime": "2020-09-22T07:38:13.893+0800",
+      "createTime": "2020-09-22T07:38:13.893+0800",
+      "userRoleList": [
+        {
+          "name": "systemRole",
+          "showname": "admin role",
+          "description": "string"
+        }
+      ],
+      "avatar": "/auth/v2/users/admin/avatar"
+    }
+  ],
+  "pagination": {
+    "total": 100,
+    "pageSize": 20,
+    "pageIndex": 1
+  }
+}
+```
+- 400
+
+```json
+{
+  "code": 100106500,
+  "message": "pageSize exceeds the maximum of 500"
+}
+```
+
+100106014: Company does not exist.
+
+- 500
+```json
+{
+  "code": 100000001,
+  "message": "internal service exception"
+}
+```
+
+</div>
+</div>
+</div>
+
+<div className='div'>
+<div className='title'>
+
+## ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/openAPI/3.png) Delete User in Batches
+
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Path</div>
+<div className='rightCol'>
+
+```
+http://{supOS ip:port}/open-api/auth/v2/users
+```
+
+</div>
+<div className='leftCol'>Query parameter</div>
+<div className='rightCol'>
+
+**usernames**: Required. For example, usernames=user1,user2...
+
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+
+- 200: Successful.
+- 400
+
+```json
+{
+  "code": 100106017,
+  "message": "{name},pending tasks exist, {name} cannot be deleted"
+}
+```
+
+<ul>
+<ul>
+<li>100106500: pageSize exceeds the maximum of 500.</li>
+<li>100106018: xxx (name), admin xxx cannot be deleted.</li>
+</ul>
+</ul>
+
+- 500
+```json
+{
+  "code": 100000001,
+  "message": "internal service exception"
+}
+```
+
+</div>
+</div>
+</div>
+
+<div className='div'>
+<div className='title'>
+
+## ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/openAPI/4.png) Get User Details
+
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Path</div>
+<div className='rightCol'>
+
+```
+http://{supOS ip:port}/open-api/auth/v2/users/{username}
+```
+
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+
+- 200: Successful.
+```json
+{
+  "username": "admin",
+  "userDesc": "super admin",
+  "accountType": 0,
+  "lockStatus": 0,
+  "personCode": "person01",
+  "personName": "person01",
+  "modifyTime": "2020-09-22T07:38:13.893+0800",
+  "createTime": "2020-09-22T07:38:13.893+0800",
+  "userRoleList": [
+    {
+      "name": "systemRole",
+      "showname": "admin role",
+      "description": "string"
+    }
+  ],
+  "avatar": "/auth/v2/users/admin/avatar"
+}
+```
+
+- 500
+```json
+{
+  "code": 100000001,
+  "message": "internal service exception"
+}
+```
+
+</div>
+</div>
+</div>
+
+<div className='div'>
+<div className='title'>
+
+## ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/openAPI/2.png) Edit User
+
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Path</div>
+<div className='rightCol'>
+
+```
+http://{supOS ip:port}/open-api/auth/v2/users/{username}
+```
+
+</div>
+<div className='leftCol'>Request body</div>
+<div className='rightCol'>
+
+```json
+{
+  "userDesc": "manager",
+  "timeZone": "GMT+0000",
+  "personCode": "person01",
+  "lockStatus": 0  //0-not locked, 1-locked
+}
+```
+
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+
+- 200: Successful.
+- 400
+
+```json
+{
+  "code": 100106500,
+  "message": "timeZone format error"
+}
+```
+
+<ul>
+<ul>
+<li>100106500: Parameter validation error.</li>
+<li>100106012: Person does not exist.</li>
+</ul>
+</ul>
+
+- 500
+```json
+{
+  "code": 100000001,
+  "message": "internal service exception"
+}
+```
+
+</div>
+</div>
+</div>
+
+<div className='div'>
+<div className='title'>
+
+## ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/openAPI/2.png) Unbind User
+
+:::info
+Up to 10 roles can be unbind.
+:::
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Path</div>
+<div className='rightCol'>
+
+```
+http://{supOS ip:port}/open-api/auth/v2/users/{username}/role
+```
+
+</div>
+<div className='leftCol'>Request body</div>
+<div className='rightCol'>
+
+```json
+{
+  "roleCodes": [  //required
+    "role1"
+  ]
+}
+```
+
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+
+- 200: Successful.
+- 400
+
+```json
+{
+  "code": 100106013,
+  "message": "role1,role2 do not exist"
+}
+```
+
+<ul>
+<ul>
+<li>100106500: Parameter validation error.</li>
+<li>100106013: Person does not exist.</li>
+<li>100106019: System admin cannot edit roles.</li>
+</ul>
+</ul>
+
+- 500
+```json
+{
+  "code": 100000001,
+  "message": "internal service exception"
+}
+```
+
+</div>
+</div>
+</div>
+
+<div className='div'>
+<div className='title'>
+
+## ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/openAPI/1.png) Bind User
+
+:::info
+Up to 10 roles can be bound.
+:::
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Path</div>
+<div className='rightCol'>
+
+```
+http://{supOS ip:port}/open-api/auth/v2/users/{username}/role
+```
+
+</div>
+<div className='leftCol'>Request body</div>
+<div className='rightCol'>
+
+```json
+{
+  "roleCodes": [  //required
+    "role1"
+  ]
+}
+```
+
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+
+- 200: Successful.
+- 400
+
+```json
+{
+  "code": 100106013,
+  "message": "role1,role2 do not exist"
+}
+```
+
+<ul>
+<ul>
+<li>100106500: Parameter validation error.</li>
+<li>100106013: Person does not exist.</li>
+<li>100106019: System admin cannot edit roles.</li>
+<li>100106022: Role does not belong to the company.</li>
+</ul>
+</ul>
+
+- 500
+```json
+{
+  "code": 100000001,
+  "message": "internal service exception"
+}
+```
+
+</div>
+</div>
+</div>
+
+<div className='div'>
+<div className='title'>
+
+## ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/openAPI/2.png) Reset Default Admin Password
+
+:::info
+- Only works on admin.
+- Permission must be granted before using this API.
+:::
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Path</div>
+<div className='rightCol'>
+
+```
+http://{supOS ip:port}/open-api/auth/v2/users/{username}/role
+```
+
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+
+- 200: Successful.
+```json
+{
+  "password": "9Bo0JPnIfi0A9tptjB/pwisHnom1gSPm/OLyuPDXldM="
+}
+```
+:::info
+The returned password is encrypted with base64. Decipher with following algorithms:
+- Symmetric decryption algorithm: AES-128-ECB
+- Data: PKCS5Padding
+- Symmetric decryption key: aeskey=md5(sk). aeskey has 16 bytes.
+:::
+
+</div>
+</div>
+</div>
+
+<div className='div'>
+<div className='title'>
+
+## ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/openAPI/3.png) Unbind Third-party Role
+
+:::info
+- Works on 1-10 third-party roles.
+- No reminders when unbinding non-existent roles.
+:::
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Path</div>
+<div className='rightCol'>
+
+```
+http://{supOS ip:port}/open-api/auth/v2/users/{username}/role/third/identity
+```
+
+</div>
+<div className='leftCol'>Query parameter</div>
+<div className='rightCol'>
+
+**identityIds**: Unique identity code. Required. For example: identityIds=12131231,123123123.
+
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+
+- 200: Successful.
+- 400
+```json
+{
+  "code": 100106500,
+  "message": "number of roles exceeds the maximum of 10"
+}
+```
+
+</div>
+</div>
+</div>
+
+<div className='div'>
+<div className='title'>
+
+## ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/openAPI/4.png) Get Accessible Menus by Username 
+
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Path</div>
+<div className='rightCol'>
+
+```
+http://{supOS ip:port}/open-api/rbac/v2/users/{username}/permissions/menus
+```
+
+</div>
+<div className='leftCol'>Query parameter</div>
+<div className='rightCol'>
+
+- companyCode: Required. Based on the company code, get accessible menus of the user in this company.
+- source: Menu source. **source=IDE** means to get menus whose source is APP designer; emptyt means to get all menus.
+
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+
+- 200: Successful.
+
+```json
+{
+  "list": [
+    {
+      "name": "device management",
+      "url": "/project/compute-engine/datadump",
+      "code": "bisDesigner"
+    }
+  ]
+}
+```
+- 400
+
+```json
+{
+  "code": 100105225,
+  "message": "specified user does not exist"
+}
+```
+<ul>
+<ul>
+<li>100105226: Specified user is not employed by specified company.</li>
+<li>100105227: Specified company does not exist.</li>
+<li>100000001: Source is not in compliance with the rules, example: IDE.</li>
+<li>100000001: Company code cannot be empty.</li>
+<li>100000001: Internal service exception.</li>
+</ul>
+</ul>
+
+- 500
+```json
+{
+  "code": 100000001,
+  "message": "internal service exception"
+}
+```
+
+</div>
+</div>
+</div>
+
+<div className='div'>
+<div className='title'>
+
+## ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/openAPI/4.png) Get Accessible Menus by Role 
+
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Path</div>
+<div className='rightCol'>
+
+```
+http://{supOS ip:port}/open-api/rbac/v2/roles/{rolecode}/permissions/menus
+```
+
+</div>
+<div className='leftCol'>Query parameter</div>
+<div className='rightCol'>
+
+- companyCode: Required. Based on the company code, get accessible menus of the role in this company.
+- scope: Menu source. 0-design center menu; 1-operation center menu; emptyt means to get all menus.
+
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+
+- 200: Successful.
+
+```json
+{
+  "list": [
+    {
+      "name": "device management",
+      "url": "/project/compute-engine/datadump",
+      "code": "bisDesigner"
+    }
+  ]
+}
+```
+- 400
+
+```json
+{
+  "code": 100105228,
+  "message": "specified role does not exist"
+}
+```
+<ul>
+<ul>
+<li>100000003: Illegal scope. For example：0, 1.</li>
+<li>100105225: Specified user does not exist.</li>
+<li>100105226: Specified user is not employed by specified company.</li>
+<li>100105227: Specified company does not exist.</li>
+<li>100000001: Company code cannot be empty.</li>
+</ul>
+</ul>
+
+- 500
+```json
+{
+  "code": 100000001,
+  "message": "internal service exception"
+}
+```
+
+</div>
+</div>
+</div>
+
+<div className='div'>
+<div className='title'>
+
+## ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/openAPI/4.png) Load User Icon
+
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Path</div>
+<div className='rightCol'>
+
+```
+http://{supOS ip:port}/open-api/auth/v2/users/{username}/avatar
+```
+
+</div>
+<div className='leftCol'>Query parameter</div>
+<div className='rightCol'>
+
+- companyCode: Required. Based on the company code, get accessible menus of the user in this company.
+- source: Menu source. **source=IDE** means to get menus whose source is APP designer; emptyt means to get all menus.
+
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+
+- 200: Successful.
+- 400
+
+```json
+{
+  "code": 100106114,
+  "message": "avatar file does not exist"
+}
+```
+
+</div>
+</div>
+</div>
+
+<div className='div'>
+<div className='title'>
+
+## ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/openAPI/1.png) Upload User Icon
+
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Path</div>
+<div className='rightCol'>
+
+```
+http://{supOS ip:port}/open-api/auth/v2/users/{username}/avatar
+```
+
+</div>
+<div className='leftCol'>Query parameter</div>
+<div className='rightCol'>
+
+**fileName**: Required.
+
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+
+- 200: Successful.
+```json
+{
+  "fileName": "string",
+  "fileFullPath": "string",
+  "fileDownloadUrl": "string"
+}
+```
+- 400
+
+```json
+{
+  "code": 100106112,
+  "message": "file type can only be jpg, gif and png"
+}
+```
+
+<ul>
+<ul>
+<li>100106111: File name length cannot exceed 20.</li>
+<li>100106113: File size exceeds the limit. The maximum size is 5 M.</li>
+</ul>
+</ul>
+
+</div>
+</div>
+</div>

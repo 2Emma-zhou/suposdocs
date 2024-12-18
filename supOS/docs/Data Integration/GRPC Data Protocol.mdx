@@ -1,0 +1,124 @@
+## Verification
+
+```
+message VerifyRequest
+{
+  string authToken = 1;		// collection node UUID assigned bu supOS
+  string endpointName = 2;	// node name set on supOS
+  string endpointIdentify = 3;	// device ID
+  int64 leaseValue = 4;		// maximum time interval (s) of transmitting data from device
+}
+message VerifyResponse
+{
+  int32 errorCode = 1;	// result code
+  string reason = 2;	// description
+  string sessionID = 3;	// session ID
+}
+```
+## Metadata Connection
+
+### Complete Refresh
+```
+message RefreshMetaRequest
+{
+  repeated MetaTag tag = 1;
+}
+message RefreshMetaResponse
+{
+  int32 errorCode = 1;
+  string reason = 2;
+}
+```
+### Insert
+```
+message AddMetaRequest
+{
+  repeated MetaTag tag = 1;
+}
+message AddMetaResponse
+{
+  int32 errorCode = 1;
+  string reason = 2;
+}
+```
+### Update
+```
+message ModMetaRequest
+{
+  repeated MetaTag tag = 1;
+}
+message ModMetaResponse
+{
+  int32 errorCode = 1;
+  string reason = 2;
+}
+```
+### Delete
+```
+message DelMetaRequest
+{
+  repeated string tag = 1;
+}
+message DelMetaResponse
+{
+  int32 errorCode = 1;
+  string reason = 2;
+}
+```
+## Update Real-time Data
+```
+message UpdateValueRequest
+{
+  repeated NamedValue value = 1;
+}
+message UpdateValueResponse
+{
+  int32 errorCode = 1;
+  string reason = 2;
+}
+```
+## Resume History Data Transmission
+```
+message RetransValueRequest
+{
+  int64 sequenceNo = 1;
+  bytes gzValues = 2;
+}
+message RetransValueResponse
+{
+  int64 sequenceNo = 1;
+  int32 errorCode = 2;
+  string reason = 3;   
+}
+```
+:::info
+`gzValues` is `ValueSequence` compressed through **gz**.
+:::
+
+## System Time Synchronization
+```
+message SyncTimeRequest
+{
+  int64 localTimeStamp =1;
+}
+message SyncTimeResponse
+{
+  int64 localTimeStamp =1;
+  int64 serverTimeStamp =2;
+}
+```
+## Interface Definition
+```
+service RtdService
+{
+  rpc Verify (VerifyRequest) returns (VerifyResponse);
+  rpc RefreshMeta (RefreshMetaRequest) returns (RefreshMetaResponse);
+  rpc AddMeta (AddMetaRequest) returns (AddMetaResponse);
+  rpc ModMeta (ModMetaRequest) returns (ModMetaResponse);
+  rpc DelMeta (DelMetaRequest) returns (DelMetaResponse);
+  rpc UpdateValue (UpdateValueRequest) returns (UpdateValueResponse);
+  rpc NotifyEvent (RtdEvent) returns (google.protobuf.Empty);
+  rpc RetransValue (RetransValueRequest) returns (RetransValueResponse);
+  rpc SyncTime (SyncTimeRequest) returns (SyncTimeResponse);
+}
+```

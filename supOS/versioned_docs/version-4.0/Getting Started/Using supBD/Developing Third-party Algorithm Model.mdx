@@ -1,0 +1,115 @@
+You can upload third-party algorithm models to X-BD, and manage, run and call the model with supOS object data on the platform.
+
+### Developing Algorithm Model
+A model package should include a folder named **backend** containing a model algorithm file **runtime.py** and a dependency file **requirements.text**, and a model description file **manifest.json**.
+
+#### runtime.py
+- Only 3 entry arguments
+
+<ul>
+<ul>
+<li>inputData: 2-dimensional array, corresponds to input variables.</li>
+<li>dataStruct: Defined data structure.</li>
+<li>config: Custom model configuration.</li>
+</ul>
+</ul>
+
+- Must contain a whole process function defined as **algorithmrun**
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supBD/33.png)
+
+- Only one return argument: outputdata.
+
+:::info
+If there are other referenced projects or model files, you can either reference in **runtime.py** or put them together with **runtime.py** in the same folder **backend**.
+:::
+
+#### requirements.txt
+
+For the following dependencies, the requirements file content should be:
+cvxopt==1.3.0
+pipdeptree==2.2.1
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supBD/30.png)
+
+#### manifest.json
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>modelName</td>
+<td>
+
+- Must be unique.
+- Cannot end with a number.
+- Cannot exceed 50 in length.
+- Update with the same name.
+- Required.
+
+</td>
+</tr>
+<tr>
+<td>description</td>
+<td>Cannot exceed 500 in length.</td>
+</tr>
+<tr>
+<td>devLanguage</td>
+<td>Python</td>
+</tr>
+<tr>
+<td>version</td>
+<td>Must be unique. Required.</td>
+</tr>
+<tr>
+<td>versionFeatures</td>
+<td>Features of the current version. Cannot exceed 500 in length.</td>
+</tr>
+<tr>
+<td>runEnv</td>
+<td>Python. Required.</td>
+</tr>
+<tr>
+<td>runEnvVersion</td>
+<td>Python version: 3.7.1. Required.</td>
+</tr>
+<tr>
+<td>runtimeRunClass</td>
+<td>runtime.py. Required.</td>
+</tr>
+<tr>
+<td>inputStructs</td>
+<td>Input data structure.
+
+```
+[{"name":"temperature","dataType":"Double","description":" temperature"},
+{"name":"","dataType":"Double","description":" pressure"}]
+```
+
+</td>
+</tr>
+<tr>
+<td>outputStructs</td>
+<td>Output data structure.
+
+```
+[{"name":"heat","dataType":"Double","description":" heat"}]
+```
+</td>
+</tr>
+<tr>
+<td>config</td>
+<td>Custom configuration.</td>
+</tr>
+</tbody>
+</table>
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supBD/34.png)
+
+### Uploading Algorithm Model
+1. Log in to supOS, and then select **Data Intelligence** > **Data Science** > **Model Management**.
+2. Click **Import model**, select the model file from local and then click **OK**.
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supBD/32.png)

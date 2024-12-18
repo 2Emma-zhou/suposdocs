@@ -1,0 +1,152 @@
+---
+openapi: 3.0.0
+info:
+  description: |-
+    Contains functions for querying quota information for systems and tenants
+
+    # Authentication
+
+    <!-- ReDoc-Inject: <security-definitions> -->
+  version:
+  title: Authorization service interface definition
+servers:
+- url: "/open-api/supos/license/v1/"
+tags:
+- name: quota
+security:
+- Sign: []
+paths:
+  "/quotas/tenants/{tenantId}":
+    get:
+      operationId: queryTenantQuota
+      description: Query all quota information of a tenant
+      summary: query all quota information of a tenant
+      tags:
+      - quota
+      parameters:
+      - name: tenantId
+        in: path
+        description: tenant ID
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/TenantQuotaResponseResult"
+        '400':
+          description: client request error
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ErrorCode"
+        '500':
+          description: server exception
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ErrorCode"
+  "/quotas/system":
+    get:
+      operationId: querySystemQuota
+      summary: Query all quota information of the system
+      description: Query all quota information of the system
+      tags:
+      - quota
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/SystemQuotaResponseResult"
+        '400':
+          description: client request error
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ErrorCode"
+        '500':
+          description: server exception
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ErrorCode"
+components:
+  securitySchemes:
+    Sign:
+      type: apiKey
+      name: Authorization
+      in: header
+  schemas:
+    ErrorCode:
+      title: error message
+      type: object
+      description: Error code and error message prompt
+      properties:
+        code:
+          type: integer
+          enum:
+          - 10001001
+          - 10001005
+          - 10001008
+          description: |
+            Error code returned by openapi
+              * 10001001: server exception
+              * 10001005: Tenant ID is empty
+              * 10001008: Tenant does not exist
+        message:
+          type: string
+          description: error message prompt
+    TenantQuotaResponseResult:
+      title: TenantQuotaResponseResult
+      type: object
+      description: quota data
+      properties:
+        productQuota:
+          type: object
+          description: Product quota, map structure
+          example:
+            TENANT_DEADLINE: permanent
+        featureQuota:
+          type: object
+          description: Function quota, map structure
+          example:
+            MAX_TAG_NUM:
+              total: 20000
+              used: 0
+            MAX_COLLECTOR_NUM:
+              total: 50
+              used: 0
+            MAX_PC_LOGIN:
+              total: 50
+              used: 0
+    SystemQuotaResponseResult:
+      title: SystemQuotaResponseResult
+      type: object
+      description: quota data
+      properties:
+        productQuota:
+          type: object
+          description: Product quota, map structure
+          example:
+            PLATFORM_DEADLINE: permanent
+        featureQuota:
+          type: object
+          description: Function quota, map structure
+          example:
+            MAX_TAG_NUM:
+              total: 20000
+              used: 0
+            MAX_TENANT_NUM:
+              total: 500
+              used: 0
+            MAX_COLLECTOR_NUM:
+              total: 500
+              used: 0
+            MAX_PC_LOGIN:
+              total: 500
+              used: 0

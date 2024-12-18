@@ -1,0 +1,216 @@
+---
+sidebar_position: 2
+
+---
+
+## Overview
+This demo demonstrates the process of sales order and its basic operations in supOS platform.
+:::info
+Data used in the demo is for reference only.
+:::
+## Operation Process
+
+<img width={450} src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/demo/6.png" />
+
+### Creating Data Source
+Manually add data in form template for subsequent data display on sales order report table.
+:::tip
+You can also get data from third-party databases by form service. For details, see <a href="../Using supOS/Factory Modeling/Third-party Database Connection">Third-party Database Connection</a>.
+:::
+1. Log in to supOS platform, and then click ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/platform/7.png) to go to the design center.
+2. Select **Object Model Management** > **Object Template** > **Form Template**, and then click ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/factoryModeling/26.png) to add a sales order template.<br/>
+Each form template can be seen as an empty table, and each attribute in the template is a column of the table.
+
+<ul>
+<li>Enter the basic information of the form template.</li>
+<li>Add attributes in <strong>Attributes</strong> tab that are necessary in sales order report.</li>
+</ul>
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/demo/10.png)
+
+3. Go back to **Object Model Management** page, click **Object Instance** tab, and then under **Form Template**, find the template you added and create new instances.<br/>
+In the **Attributes** tab, click ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/demo/7.png) corresponding to each attribute to add a value.
+:::info
+Each instance attribute is a row of data on the form template table.
+::: 
+
+<span id="add_order"></span>
+
+### Creating Sales Order Application
+On **Business Designer**, create a sales order table and related adding and editing page. With the template data, you can view, add and edit sales order information.
+1. On supOS platform, under **Business Designer**, add a new application.
+2. Click **Edit Page** to enter the application, and then add an **Add Order** page which contains all attributes in sales order template.
+
+<img width={450} src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/demo/9.png" />
+
+<ul>
+<li>Add a click event to <strong>OK</strong> button and write its script.</li>
+</ul>
+
+```javascript
+var formEntity = scriptUtil.getFormData(['id','amount','salesman','dept','price','date']); //get data from the page by component ID
+scriptUtil.addDataTable( //add the entered data to the form template
+  {
+    dataSource: 'emma_sales.sales_order', //form template namespace.form template alias
+    properties: formEntity, //must be array
+    version: 'V2',
+  },
+  function (res) {
+   scriptUtil.showMessage('Successfully Saved!', 'success')
+   window.parent.scriptUtil.getRegisterReactDom('htDiv-l78qpdgd0-79').reloadTableData(); //add data to the sales order table on another page for display
+   setTimeout(function(){
+       window.parent.scriptUtil.closeModal();
+   },500)
+   
+  }
+);
+```
+
+<ul>
+<li>Add a click event to <strong>Cancel</strong> button and write its script.</li>
+</ul>
+
+```
+window.parent.scriptUtil.closeModal();
+```
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/demo/6.gif" />
+
+3. Copy the **Add Order** page and rename it to **Edit Order**.
+
+<ul>
+<li>Change the click event script of the <strong>OK</strong> button.</li>
+</ul>
+
+```javascript
+var formEntity = scriptUtil.getFormData(['emma_sales.id','emma_sales.amount','emma_sales.salesman','emma_sales.dept','emma_sales.price','emma_sales.date']); //get data from the page by component ID
+scriptUtil.updateDataTable( //update data entered on the page to the form template by matching template attribute alias with component id
+  {
+    dataSource:'emma_sales.sales_order',
+    properties: {
+        'id':formEntity['emma_sales.id'],
+        'amount':formEntity['emma_sales.amount'],
+        'salesman':formEntity['emma_sales.salesman'],
+        'dept':formEntity['emma_sales.dept'],
+        'price':formEntity['emma_sales.price'],
+        'date':formEntity['emma_sales.date'],
+    }, // must be array
+    keys:{
+        'id':formEntity['emma_sales.id'] //primary key which is used to be the matching standard
+    },
+    version: 'V2',
+  },
+  function (res) {
+   scriptUtil.showMessage('Successfully Changed!', 'success')
+   window.parent.scriptUtil.getRegisterReactDom('htDiv-l78qpdgd0-79').reloadTableData(); //update the table on <strong>Sales Order</strong> page for display
+   setTimeout(function(){
+       window.parent.scriptUtil.closeModal();
+   },500)
+   
+  }
+);
+```
+
+<ul>
+<li>Add a <strong>Content Loading</strong> event to the page and write its script.</li>
+</ul>
+
+```javascript
+var res = window.parent.localStorage.getItem("rowData"); //get the row of data when clicking corresponding <strong>Edit</strong> button from local storage
+if(res){ //replace the data and save it to local storage
+    var entity = JSON.parse(res);
+    scriptUtil.setFormData(entity);
+}
+```
+<ul>
+<li>Leave the <strong>Cancel</strong> button event the same.</li>
+</ul>
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/demo/7.gif" />
+
+4. Add a sales order page.
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/demo/12.png)
+
+<ul>
+<li>Add the form template to be the table data source and set corresponding headers with attributes.</li>
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/demo/8.gif)
+
+<li>Add corresponding attribute as the data source of the <strong>Salesman</strong> drop-down list under list <strong>Property</strong> > <strong>Dynamic Data</strong>.</li>
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/demo/9.gif)
+
+
+<li>Link all three search conditions, including ID, salesman and order date to corresponding data columns of the table under table <strong>Property</strong> > <strong>Linkage Object</strong></li>
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/demo/10.gif)
+
+
+<li>Add a <strong>Click</strong> event to the <strong>Add</strong> button and link it to <strong>Add Order</strong> page.
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/demo/11.gif)
+
+</li>
+<li>Add <strong>Content Loading</strong> event to the page.</li>
+</ul>
+
+```javascript
+var table = scriptUtil.getRegisterReactDom('htDiv-l78qpdgd0-79'); //get the sales order table
+    var columnOperation = [ //add an edit button to the table and configure its style
+        {
+            name: 'Edit',
+            style: {
+                width: '48px',
+                height: '34px',
+                backgroundColor: '#3377FF',
+                borderRadius: '5px',
+                color: '#fff',
+                padding: '0px 0px',
+                border: '0px',
+            },
+            click: function (row){ //update the entered data to the table upon clicking the button
+                if(row){ 
+                    localStorage.setItem("rowData",JSON.stringify(row)) //get the current row data
+                    scriptUtil.showModal('{"width":800,"height":624,"needTitle":false,"margin":0,"isCenter":true,"url":"/#/runtime-fullscreen/runtime-fullscreen/Page_d8fb90a98ca844d997de02d661d7485c"}')
+                    //set the style and path of the pop-up page (edit order page) after clicking the edit button
+                }
+            }
+        },
+        { //add a delete button
+             name: 'Delete',
+            style: {
+                width: '48px',
+                height: '34px',
+                backgroundColor: '#FF7875',
+                borderRadius: '5px',
+                color: '#fff',
+                padding: '0px 0px',
+                border: '0px',
+            },
+            click: function (row){
+                scriptUtil.delDataTable( //match the data with form template by id and delete row data upon clicking the button
+                    {
+                        dataSource: 'emma_sales.sales_order',
+                        properties: [{'id':row['emma_sales.id']}],
+                        version: 'V2'
+                    },
+                    function(res){
+                        scriptUtil.showMessage('Successfully Deleted!', 'success')
+                        window.parent.scriptUtil.GetRegisterReactDom('htDiv-l78qpdgd0-79').reloadTableData();
+                    }
+                    );
+                    }
+        },
+];
+        table.setColumnOperation(columnOperation);
+```
+:::info
+Preview the edit order page and then on the address bar, you can see its page ID after **pageId**.
+:::
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/demo/12.gif)
+
+5. Save the pages and go back to the **Business Designer** page, and then publish the application of sales order.
+## Demo Effect
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/demo/13.gif)
+

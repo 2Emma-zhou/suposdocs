@@ -1,0 +1,104 @@
+---
+sidebar_position: 1
+
+---
+
+## Overview
+This demo demonstrates the process of gas monitoring in supOS platform.
+:::info
+Data used in the demo is for reference only.
+:::
+## Operation Process
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/demo/1.png)
+### Connecting Data Source
+Add necessary equipment for gas monitoring such as heating furnace and desulfurization tower to X-Collector, and then X-Collector transmits data to supOS for subsequent template creation and data calling.
+1. Log in to X-Collector, and then select **RTD Collector** > **Source**.
+2. Click **Add**.<br/>
+Enter information of the equipment.
+:::info
+Make sure necessary data tags are synchronized to the source of X-Collector. For details, see <a href="../Using supOS/Connecting X-Collector/Configuring X-Collector">Configuring X-Collector</a>.
+:::
+3. Log in to supOS platform, and then click ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/platform/7.png) to go to the design center.
+4. Select **Collection Node Management** > **Authentication**, and then click ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/platform/16.png) to add a collector.<br/>
+Enter collector information and set **type** to **common Collector**. For details, see <a href="../Using supOS/Connecting X-Collector/Connecting Common Collector">Connecting Common Collector</a>.
+5. On X-Collector, select **RTD Collector** > **Connection Info**, and then click **Add**, enter corresponding information to add the collector you just added on supOS platform.
+
+<img width={350} src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/supCollector/Snap4.png" />
+
+6. On supOS platform, select **Collection Node Management** > **Status**, find the collector you added, and then click **OK** to complete the data source adding.<br/>
+Now you can see a new instance is added under **Object Model Management** > **Object Instance** > **Entity Template** > **Collector Template**.
+### Creating Object Template
+:::info
+- After connecting data source, the collected data is added to the supOS platform that you can directly use during application development.
+- If you need to do data cleaning or do basic calculation, you can create a new template instance.
+:::
+1. On supOS platform, select **Object Model Management** > **Object Template** > **Entity Template**, and then click ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/factoryModeling/26.png) to add a template.
+2. Click **Object Instance** tab, and then under **Entity Template**, find the template you added and create a new instance.
+3. Inside the instance, click **Attributes** tab, and then add a new attribute.<br />
+Next to **Data Sources** on the **Attribute Info** panel, you can click **Setup** to select a data source and do basic calculations to it.
+:::info
+For details on calculations, see <a href="../Using supOS/Factory Modeling/Creating Object Instance#data_source">Configuring Data Source</a>.
+:::
+
+<img width={350} src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/demo/2.png" />
+
+4. Click **OK**.
+
+### Creating Process Application
+On **Business Designer**, draw a process diagram of the gas monitoring system. With the collected data, you can view the monitor gas status in real time.
+1. On supOS platform, select **Business Designer** > <img width={20} src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/demo/3.png" /> to add a new application.
+2. Click **Edit Page** to enter the application, and then add a new page.
+3. On the page, use elements on the left side and provided templates to draw a diagram of the gas monitoring system.
+<ul>
+<li>Add data sources to corresponding data connection elements.</li></ul>
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/demo/1.gif)
+
+<ul><ul><li>Double-click rectangles that represent the liquid level of equipment, and then under <strong>Filling</strong>, add corresponding data source and set filling rules.</li></ul></ul>
+
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/demo/2.gif)
+
+<ul><ul><li>Add buttons for opening and closing the furnace at the lower-right corner and write corresponding script for <strong>Click</strong> event under <strong>Interact</strong> on the right.
+<ul>
+<li>Open the furnace<br/>
+<code>document.getElementById('<em>image id on the furnace</em>').style.visibility = 'unset';</code></li>
+<li>Close the furnace<br/>
+<code>document.getElementById('<em>image id on the furnace</em>').style.visibility = 'hidden';</code></li>
+</ul>
+<br />
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/demo/3.gif"  />
+
+</li>
+<li>Click on the diagram, and then under <strong>Interact</strong> on the right side, write a script for <strong>Content Loading</strong> to control the furnace automatically based on corresponding property value.</li>
+</ul></ul>
+
+```js
+function aa() {
+    var params={
+        "propName":'Property_218' //define the property value that controls the furnace
+    }
+     scriptUtil.callFunction('<em>template namespace.template alias/instance alias</em>', 'getPropertyValue',params).then(function(res){
+        console.log(res.data); //get and print the property value
+        
+        var result = res.data; //set the results according to different property values
+        if(result < 5) {
+            document.getElementById('htDiv-l7r2kth40-62537').style.visibility = 'hidden';
+        } else {
+            document.getElementById('htDiv-l7r2kth40-62537').style.visibility = 'unset';
+        }
+    });
+}
+aa();
+setInterval(() => { set the refresh rate of property value
+  aa();
+}, 2000);
+
+```
+
+<img src="https://wordpressfreezonex.oss-accelerate.aliyuncs.com/demo/4.gif"  />
+
+4. Save the page and go back to the **Business Designer** page, and then publish the application of gas monitoring.
+
+## Demo Effect
+![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/demo/5.gif)
+

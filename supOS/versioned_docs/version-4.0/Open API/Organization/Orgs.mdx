@@ -1,0 +1,1433 @@
+---
+hide_title: true
+---
+
+<div className='div'>
+<div className='title'>
+
+## ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/openAPI/4.png) Get Person Details by Code
+
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Path</div>
+<div className='rightCol'>
+
+```
+http://{supOS ip:port}/open-api/organization/v2/persons/{personCode}
+```
+
+</div>
+<div className='leftCol'>Header parameter</div>
+<div className='rightCol'>
+
+Accept-Language: Default is the server language. Options are **en-us** and **zh-cn**.
+
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+
+- 200: Successful.
+```json
+{
+  "code": "zhangsan",
+  "name": "Zhangsan",
+  "valid": 1,
+  "gender": {
+    "code": "male",
+    "name": "Male"
+  },
+  "status": {
+    "code": "onWork",
+    "name": "On post"
+  },
+  "mainPosition": {
+    "code": "developPosition",
+    "name": "R&D"
+  },
+  "entryDate": "2021-05-28",
+  "title": {
+    "code": "primary",
+    "name": "Primary"
+  },
+  "qualification": "string",
+  "education": {
+    "code": "doctor",
+    "name": "Doctor"
+  },
+  "major": "IT",
+  "idNumber": "130971199809121011",
+  "departments": [
+    {
+      "name": "Tech department",
+      "code": "tecDept"
+    }
+  ],
+  "companies": [
+    {
+      "name": "Tech company",
+      "code": "tecCom"
+    }
+  ],
+  "user": {
+    "username": "zhangsan"
+  },
+  "positions": [
+    {
+      "name": "Tech post",
+      "code": "tecPos"
+    }
+  ],
+  "modifyTime": "2021-01-26T16:02:15.666+0000"
+}
+```
+- 400
+
+```json
+{
+  "code": 100104020,
+  "message": "specified person does not exist"
+}
+```
+
+</div>
+</div>
+</div>
+
+<div className='div'>
+<div className='title'>
+
+## ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/openAPI/4.png) Get Company Details by Code
+
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Path</div>
+<div className='rightCol'>
+
+```
+http://{supOS ip:port}/open-api/organization/v2/companies/{companyCode}
+```
+
+</div>
+<div className='leftCol'>Header parameter</div>
+<div className='rightCol'>
+
+Accept-Language: Default is the server language. Options are **en-us** and **zh-cn**.
+
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+
+- 200: Successful.
+```json
+{
+  "code": "developCompany",
+  "parentCode": "defualt_company",
+  "fullName": "Hangzhou R&D company",
+  "shortName": "R&D company",
+  "description": "A R&D company located in Hangzhou",
+  "tags": [
+    "develop",
+    "hangzhou"
+  ],
+  "fullPath": "/group/R&D",
+  "layNo": 2,
+  "sort": 678.23,
+  "valid": 1,
+  "modifyTime": "2021-01-26T16:02:15.666+0000"
+}
+```
+- 400
+
+```json
+{
+  "code": 100104040,
+  "message": "company does not exist"
+}
+```
+
+</div>
+</div>
+</div>
+
+<div className='div'>
+<div className='title'>
+
+## ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/openAPI/4.png) Get Persons by Company Code
+
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Path</div>
+<div className='rightCol'>
+
+```
+http://{supOS ip:port}/open-api/organization/v2/companies/{companyCode}/persons
+```
+
+</div>
+<div className='leftCol'>Query parameter</div>
+<div className='rightCol'>
+
+- current: Required integer. Current page number, starting from 1.
+- pageSize: Integer. Items on the page.
+
+</div>
+<div className='leftCol'>Header parameter</div>
+<div className='rightCol'>
+
+Accept-Language: Default is the server language. Options are **en-us** and **zh-cn**.
+
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+
+- 200: Successful.
+```json
+{
+  "list": [
+    {
+      "code": "zhangsan",
+      "name": "Zhangsan",
+      "valid": 1,
+      "gender": {
+        "code": "male",
+        "name": "Male"
+      },
+      "status": {
+        "code": "onWork",
+        "name": "On post"
+      },
+      "mainPosition": {
+        "code": "developPosition",
+        "name": "R&D"
+      },
+      "entryDate": "2021-05-28",
+      "title": {
+        "code": "primary",
+        "name": "Primary"
+      },
+      "qualification": "string",
+      "education": {
+        "code": "doctor",
+        "name": "Doctor"
+      },
+      "major": "IT",
+      "idNumber": "130971199809121011",
+      "departments": [
+        {
+          "name": "Tech department",
+          "code": "tecDept"
+        }
+      ],
+      "companies": [
+        {
+          "name": "Tech company",
+          "code": "tecCom"
+        }
+      ]
+    }
+  ],
+  "pagination": {
+    "total": 1,
+    "pageSize": 20,
+    "current": 1
+  }
+}
+```
+- 400
+
+```json
+{
+  "code": 100000003,
+  "message": "'current' cannot be smaller than 1"
+}
+```
+
+<ul>
+<li>100000003: 'pageSize' cannot be smaller than 1!</li>
+<li>100000003: 'pageSize' cannot be larger than 500!</li>
+<li>100104040: Company does not exist.</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div className='div'>
+<div className='title'>
+
+## ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/openAPI/4.png) Get Post Details by Code
+
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Path</div>
+<div className='rightCol'>
+
+```
+http://{supOS ip:port}/open-api/organization/v2/positions/{positionCode}
+```
+
+</div>
+<div className='leftCol'>Header parameter</div>
+<div className='rightCol'>
+
+Accept-Language: Default is the server language. Options are **en-us** and **zh-cn**.
+
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+
+- 200: Successful.
+```json
+{
+  "parentCode": "technologyPosition",
+  "code": "developPosition",
+  "name": "R&D",
+  "valid": 1,
+  "modifyTime": "2021-01-26T16:02:15.666+0000",
+  "department": {
+    "code": "tecDep",
+    "name": "Tech department"
+  },
+  "company": {
+    "code": "tecCompany",
+    "shortName": "Tech company",
+    "fullName": "Hangzhou R&D company"
+  },
+  "description": "R&D position in Hangzhou R&D company",
+  "fullPath": "/tech post/R&D",
+  "layNo": 2,
+  "sort": 678.23,
+  "roles": [
+    {
+      "name": "system admin",
+      "code": "systemRole"
+    }
+  ]
+}
+```
+- 400
+
+```json
+{
+  "code": 100104013,
+  "message": "specified post does not exist"
+}
+```
+
+<ul>
+<ul>
+<li>100000003: pageSize cannot be smaller than 1!</li>
+<li>100000003: pageSize cannot be larger than 500!</li>
+<li>100104040: Company does not exist.</li>
+</ul>
+</ul>
+
+</div>
+</div>
+</div>
+
+<div className='div'>
+<div className='title'>
+
+## ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/openAPI/4.png) Get Persons by Post
+
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Path</div>
+<div className='rightCol'>
+
+```
+http://{supOS ip:port}/open-api/organization/v2/positions/{positionCode}/persons
+```
+
+</div>
+<div className='leftCol'>Query parameter</div>
+<div className='rightCol'>
+
+- current: Required integer. Current page number, starting from 1.
+- pageSize: Integer. Items on the page.
+
+</div>
+<div className='leftCol'>Header parameter</div>
+<div className='rightCol'>
+
+Accept-Language: Default is the server language. Options are **en-us** and **zh-cn**.
+
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+
+- 200: Successful.
+```json
+{
+  "list": [
+    {
+      "code": "zhangsan",
+      "name": "Zhangsan",
+      "valid": 1,
+      "gender": {
+        "code": "male",
+        "name": "Male"
+      },
+      "status": {
+        "code": "onWork",
+        "name": "On post"
+      },
+      "mainPosition": {
+        "code": "developPosition",
+        "name": "R&D"
+      },
+      "entryDate": "2021-05-28",
+      "title": {
+        "code": "primary",
+        "name": "Primary"
+      },
+      "qualification": "string",
+      "education": {
+        "code": "doctor",
+        "name": "Doctor"
+      },
+      "major": "IT",
+      "idNumber": "130971199809121011",
+      "departments": [
+        {
+          "name": "Tech department",
+          "code": "tecDept"
+        }
+      ],
+      "companies": [
+        {
+          "name": "Tech company",
+          "code": "tecCom"
+        }
+      ]
+    }
+  ],
+  "pagination": {
+    "total": 1,
+    "pageSize": 20,
+    "current": 1
+  }
+}
+```
+- 400
+
+```json
+{
+  "code": 100000003,
+  "message": "'current' cannot be smaller than 1"
+}
+```
+
+<ul>
+<ul>
+<li>100000003: 'pageSize' cannot be smaller than 1!</li>
+<li>100000003: 'pageSize' cannot be larger than 500!</li>
+<li>100104013: Specified post does not exist.</li>
+</ul>
+</ul>
+</div>
+</div>
+</div>
+
+<div className='div'>
+<div className='title'>
+
+## ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/openAPI/4.png) Get Department Details by Code
+
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Path</div>
+<div className='rightCol'>
+
+```
+http://{supOS ip:port}/open-api/organization/v2/departments/{departmentCode}
+```
+
+</div>
+<div className='leftCol'>Header parameter</div>
+<div className='rightCol'>
+
+Accept-Language: Default is the server language. Options are **en-us** and **zh-cn**.
+
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+
+- 200: Successful.
+```json
+{
+  "parentCode": "technologyDepartment",
+  "code": "developDepartment",
+  "name": "R&D",
+  "deptType": {
+    "code": "general",
+    "name": "General"
+  },
+  "description": "R&D department in Hangzhou R&D company",
+  "fullPath": "/tech department/R&D",
+  "layNo": 2,
+  "sort": 678.23,
+  "valid": 1,
+  "modifyTime": "2021-01-26T16:02:15.666+0000",
+  "company": {
+    "code": "tecCompany",
+    "shortName": "R&D company",
+    "fullName": "Hangzhou R&D company"
+  },
+  "managers": [
+    {
+      "name": "Lisi",
+      "code": "lisi"
+    }
+  ],
+  "positions": [
+    {
+      "name": "developPosition",
+      "code": "R&D postistion"
+    }
+  ]
+}
+```
+- 400
+
+```json
+{
+  "code": 100104004,
+  "message": "specified department does not exist"
+}
+```
+
+</div>
+</div>
+</div>
+
+<div className='div'>
+<div className='title'>
+
+## ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/openAPI/4.png) Get Persons by Department
+
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Path</div>
+<div className='rightCol'>
+
+```
+http://{supOS ip:port}/open-api/organization/v2/departments/{departmentCode}/persons
+```
+
+</div>
+<div className='leftCol'>Query parameter</div>
+<div className='rightCol'>
+
+- current: Required integer. Current page number, starting from 1.
+- pageSize: Integer. Items on the page.
+
+</div>
+<div className='leftCol'>Header parameter</div>
+<div className='rightCol'>
+
+Accept-Language: Default is the server language. Options are **en-us** and **zh-cn**.
+
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+
+- 200: Successful.
+```json
+{
+  "list": [
+    {
+      "code": "zhangsan",
+      "name": "Zhangsan",
+      "valid": 1,
+      "gender": {
+        "code": "male",
+        "name": "Male"
+      },
+      "status": {
+        "code": "onWork",
+        "name": "On post"
+      },
+      "mainPosition": {
+        "code": "developPosition",
+        "name": "R&D"
+      },
+      "entryDate": "2021-05-28",
+      "title": {
+        "code": "primary",
+        "name": "Primary"
+      },
+      "qualification": "string",
+      "education": {
+        "code": "doctor",
+        "name": "Doctor"
+      },
+      "major": "IT",
+      "idNumber": "130971199809121011",
+      "departments": [
+        {
+          "name": "Tech department",
+          "code": "tecDept"
+        }
+      ],
+      "companies": [
+        {
+          "name": "Tech company",
+          "code": "tecCom"
+        }
+      ]
+    }
+  ],
+  "pagination": {
+    "total": 1,
+    "pageSize": 20,
+    "current": 1
+  }
+}
+```
+- 400
+
+```json
+{
+  "code": 100000003,
+  "message": "'current' cannot be smaller than 1"
+}
+```
+
+<ul>
+<ul>
+<li>100000003: 'pageSize' cannot be smaller than 1!</li>
+<li>100000003: 'pageSize' cannot be larger than 500!</li>
+<li>100104004: Specified department does not exist.</li>
+</ul>
+</ul>
+</div>
+</div>
+</div>
+
+<div className='div'>
+<div className='title'>
+
+## ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/openAPI/4.png) Get Company List
+
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Path</div>
+<div className='rightCol'>
+
+```
+http://{supOS ip:port}/open-api/organization/v2/companies
+```
+
+</div>
+<div className='leftCol'>Query parameter</div>
+<div className='rightCol'>
+
+- current: Required integer. Current page number, starting from 1.
+- pageSize: Integer. Items on the page.
+- modifyTime: The lastest modify time. Format is **yyyy-MM-dd'T'HH:mm:ss.SSSZ**.
+
+</div>
+<div className='leftCol'>Header parameter</div>
+<div className='rightCol'>
+
+Accept-Language: Default is the server language. Options are **en-us** and **zh-cn**.
+
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+
+- 200: Successful.
+```json
+{
+  "list": [
+    {
+        "code": "developCompany",
+        "parentCode": "defualt_company",
+        "fullName": "Hangzhou R&D company",
+        "shortName": "R&D company",
+        "description": "A R&D company located in Hangzhou",
+        "tags": [
+            "develop",
+            "hangzhou"
+        ],
+        "fullPath": "/group/R&D",
+        "layNo": 2,
+        "sort": 678.23,
+        "valid": 1,
+        "modifyTime": "2021-01-26T16:02:15.666+0000"
+    }
+  ],
+  "pagination": {
+    "total": 1,
+    "pageSize": 20,
+    "current": 1
+  }
+}
+```
+- 400
+
+```json
+{
+  "code": 100000003,
+  "message": "'current' cannot be smaller than 1"
+}
+```
+
+<ul>
+<ul>
+<li>100000003: 'pageSize' cannot be smaller than 1!</li>
+<li>100000003: 'pageSize' cannot be larger than 500!</li>
+<li>1001040377: Date format error.</li>
+</ul>
+</ul>
+</div>
+</div>
+</div>
+
+<div className='div'>
+<div className='title'>
+
+## ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/openAPI/4.png) Get Department List
+
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Path</div>
+<div className='rightCol'>
+
+```
+http://{supOS ip:port}/open-api/organization/v2/departments
+```
+
+</div>
+<div className='leftCol'>Query parameter</div>
+<div className='rightCol'>
+
+- current: Required integer. Current page number, starting from 1.
+- pageSize: Integer. Items on the page.
+- modifyTime: The lastest modify time. Format is **yyyy-MM-dd'T'HH:mm:ss.SSSZ**.
+
+</div>
+<div className='leftCol'>Header parameter</div>
+<div className='rightCol'>
+
+Accept-Language: Default is the server language. Options are **en-us** and **zh-cn**.
+
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+
+- 200: Successful.
+```json
+{
+  "list": [
+        {
+    "parentCode": "technologyDepartment",
+    "code": "developDepartment",
+    "name": "R&D",
+    "deptType": {
+        "code": "general",
+        "name": "General"
+    },
+    "description": "R&D department in Hangzhou R&D company",
+    "fullPath": "/tech department/R&D",
+    "layNo": 2,
+    "sort": 678.23,
+    "valid": 1,
+    "modifyTime": "2021-01-26T16:02:15.666+0000",
+    "company": {
+        "code": "tecCompany",
+        "shortName": "R&D company",
+        "fullName": "Hangzhou R&D company"
+    },
+    "managers": [
+        {
+        "name": "Lisi",
+        "code": "lisi"
+        }
+    ]
+    }
+  ],
+  "pagination": {
+    "total": 1,
+    "pageSize": 20,
+    "current": 1
+  }
+}
+```
+- 400
+
+```json
+{
+  "code": 100000003,
+  "message": "'current' cannot be smaller than 1"
+}
+```
+
+<ul>
+<ul>
+<li>100000003: 'pageSize' cannot be smaller than 1!</li>
+<li>100000003: 'pageSize' cannot be larger than 500!</li>
+<li>1001040377: Date format error.</li>
+</ul>
+</ul>
+</div>
+</div>
+</div>
+
+<div className='div'>
+<div className='title'>
+
+## ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/openAPI/4.png) Get Post List
+
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Path</div>
+<div className='rightCol'>
+
+```
+http://{supOS ip:port}/open-api/organization/v2/positions
+```
+
+</div>
+<div className='leftCol'>Query parameter</div>
+<div className='rightCol'>
+
+- current: Required integer. Current page number, starting from 1.
+- pageSize: Integer. Items on the page.
+- modifyTime: The lastest modify time. Format is **yyyy-MM-dd'T'HH:mm:ss.SSSZ**.
+
+</div>
+<div className='leftCol'>Header parameter</div>
+<div className='rightCol'>
+
+Accept-Language: Default is the server language. Options are **en-us** and **zh-cn**.
+
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+
+- 200: Successful.
+```json
+{
+  "list": [
+    {
+      "parentCode": "technologyPosition",
+      "code": "developPosition",
+      "name": "R&D",
+      "valid": 1,
+      "modifyTime": "2021-01-26T16:02:15.666+0000",
+      "department": {
+        "code": "tecDep",
+        "name": "Tech department"
+      },
+      "company": {
+        "code": "tecCompany",
+        "shortName": "R&D company",
+        "fullName": "Hangzhou R&D company"
+      },
+      "description": "R&D post in Hangzhou R&D company",
+      "fullPath": "/tech position/R&D",
+      "layNo": 2,
+      "sort": 678.23
+    }
+  ],
+  "pagination": {
+    "total": 1,
+    "pageSize": 20,
+    "current": 1
+  }
+}
+```
+- 400
+
+```json
+{
+  "code": 100000003,
+  "message": "'current' cannot be smaller than 1"
+}
+```
+
+<ul>
+<ul>
+<li>100000003: 'pageSize' cannot be smaller than 1!</li>
+<li>100000003: 'pageSize' cannot be larger than 500!</li>
+<li>1001040377: Date format error.</li>
+</ul>
+</ul>
+</div>
+</div>
+</div>
+
+<div className='div'>
+<div className='title'>
+
+## ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/openAPI/4.png) Get Person List
+
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Path</div>
+<div className='rightCol'>
+
+```
+http://{supOS ip:port}/open-api/organization/v2/persons
+```
+
+</div>
+<div className='leftCol'>Query parameter</div>
+<div className='rightCol'>
+
+- current: Required integer. Current page number, starting from 1.
+- pageSize: Integer. Items on the page.
+- modifyTime: The lastest modify time. Format is **yyyy-MM-dd'T'HH:mm:ss.SSSZ**.
+
+</div>
+<div className='leftCol'>Header parameter</div>
+<div className='rightCol'>
+
+Accept-Language: Default is the server language. Options are **en-us** and **zh-cn**.
+
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+
+- 200: Successful.
+```json
+{
+  "list": [
+        {
+    "code": "zhangsan",
+    "name": "Zhangsan",
+    "valid": 1,
+    "gender": {
+        "code": "male",
+        "name": "Male"
+    },
+    "status": {
+        "code": "onWork",
+        "name": "On post"
+    },
+    "mainPosition": {
+        "code": "developPosition",
+        "name": "R&D"
+    },
+    "entryDate": "2021-05-28",
+    "title": {
+        "code": "primary",
+        "name": "Primary"
+    },
+    "qualification": "string",
+    "education": {
+        "code": "doctor",
+        "name": "Doctor"
+    },
+    "major": "IT",
+    "idNumber": "130971199809121011",
+    "departments": [
+        {
+        "name": "Tech department",
+        "code": "tecDept"
+        }
+    ],
+    "companies": [
+        {
+        "name": "Tech company",
+        "code": "tecCom"
+        }
+    ],
+    "user": {
+        "username": "zhangsan"
+    },
+    "positions": [
+        {
+        "name": "Tech post",
+        "code": "tecPos"
+        }
+    ],
+    "modifyTime": "2021-01-26T16:02:15.666+0000"
+    }
+  ],
+  "pagination": {
+    "total": 1,
+    "pageSize": 20,
+    "current": 1
+  }
+}
+```
+- 400
+
+```json
+{
+  "code": 100000003,
+  "message": "'current' cannot be smaller than 1"
+}
+```
+
+<ul>
+<ul>
+<li>100000003: 'pageSize' cannot be smaller than 1!</li>
+<li>100000003: 'pageSize' cannot be larger than 500!</li>
+<li>1001040377: Date format error.</li>
+</ul>
+</ul>
+</div>
+</div>
+</div>
+
+<div className='div'>
+<div className='title'>
+
+## ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/openAPI/4.png) Get Department List by Company
+
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Path</div>
+<div className='rightCol'>
+
+```
+http://{supOS ip:port}/open-api/organization/v2/companies/{companyCode}/departments
+```
+
+</div>
+<div className='leftCol'>Query parameter</div>
+<div className='rightCol'>
+
+- username: When it is not empty, departments the user is linked with are returned.
+- current: Required integer. Current page number, starting from 1.
+- pageSize: Integer. Items on the page.
+
+</div>
+<div className='leftCol'>Header parameter</div>
+<div className='rightCol'>
+
+Accept-Language: Default is the server language. Options are **en-us** and **zh-cn**.
+
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+
+- 200: Successful.
+```json
+{
+  "list": [
+        {
+    "parentCode": "technologyDepartment",
+    "code": "developDepartment",
+    "name": "R&D",
+    "deptType": {
+        "code": "general",
+        "name": "General"
+    },
+    "description": "R&D department in Hangzhou R&D company",
+    "fullPath": "/tech department/R&D",
+    "layNo": 2,
+    "sort": 678.23,
+    "valid": 1,
+    "modifyTime": "2021-01-26T16:02:15.666+0000",
+    "company": {
+        "code": "tecCompany",
+        "shortName": "R&D company",
+        "fullName": "Hangzhou R&D company"
+    },
+    }
+  ],
+  "pagination": {
+    "total": 1,
+    "pageSize": 20,
+    "current": 1
+  }
+}
+```
+- 400
+
+```json
+{
+  "code": 100000003,
+  "message": "'current' cannot be smaller than 1"
+}
+```
+
+<ul>
+<ul>
+<li>100000003: 'pageSize' cannot be smaller than 1!</li>
+<li>100000003: 'pageSize' cannot be larger than 500!</li>
+<li>100104040: Company does not exist.</li>
+<li>100104050: User does not exist under the company.</li>
+</ul>
+</ul>
+</div>
+</div>
+</div>
+
+<div className='div'>
+<div className='title'>
+
+## ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/openAPI/4.png) Get Post List by Company
+
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Path</div>
+<div className='rightCol'>
+
+```
+http://{supOS ip:port}/open-api/organization/v2/companies/{companyCode}/positions
+```
+
+</div>
+<div className='leftCol'>Query parameter</div>
+<div className='rightCol'>
+
+- current: Required integer. Current page number, starting from 1.
+- pageSize: Integer. Items on the page.
+
+</div>
+<div className='leftCol'>Header parameter</div>
+<div className='rightCol'>
+
+Accept-Language: Default is the server language. Options are **en-us** and **zh-cn**.
+
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+
+- 200: Successful.
+```json
+{
+  "list": [
+    {
+      "parentCode": "technologyPosition",
+      "code": "developPosition",
+      "name": "R&D",
+      "department": {
+        "code": "developDept",
+        "name": "R&D department"
+      },
+      "valid": 1,
+      "company": {
+        "code": "tecCompany",
+        "shortName": "R&D company",
+        "fullName": "Hangzhou R&D company"
+      },
+      "fullPath": "/tech position/R&D"
+    }
+  ],
+  "pagination": {
+    "total": 1,
+    "pageSize": 20,
+    "current": 1
+  }
+}
+```
+- 400
+
+```json
+{
+  "code": 100000003,
+  "message": "'current' cannot be smaller than 1"
+}
+```
+
+<ul>
+<ul>
+<li>100000003: 'pageSize' cannot be smaller than 1!</li>
+<li>100000003: 'pageSize' cannot be larger than 500!</li>
+<li>100104040: Company does not exist.</li>
+</ul>
+</ul>
+</div>
+</div>
+</div>
+
+<div className='div'>
+<div className='title'>
+
+## ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/openAPI/1.png) Add, Edit and Delete Person in Batches
+
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Path</div>
+<div className='rightCol'>
+
+```
+http://{supOS ip:port}/open-api/organization/v2/persons/bulk
+```
+
+</div>
+<div className='leftCol'>Request body</div>
+<div className='rightCol'>
+
+```json
+{
+  "addPersons": [
+    {
+      "code": "zhaoyi",  //required
+      "name": "Zhaoyi",  //required
+      "phone": 15219809782,
+      "gender": "male",  //required
+      "status": "onWork",  //required
+      "email": "zhaoyi@163.com",
+      "description": "My name is Zhaoyi",
+      "directLeaderCode": "dbManager",
+      "grandLeaderCode": "depManager",
+      "entryDate": "2021-01-26",
+      "title": "elementary", 
+      "qualification": null,
+      "education": "middleOrOther",
+      "major": "IT",
+      "idNumber": 130971199809121010,
+      "mainPositionCode": "developPosition"  //required
+    },
+    {
+      "code": "qianer",
+      "name": "Qianer",
+      "phone": null,
+      "gender": "male",
+      "status": "onWork",
+      "email": null,
+      "description": null,
+      "directLeaderCode": null,
+      "grandLeaderCode": null,
+      "entryDate": null,
+      "title": null,
+      "qualification": null,
+      "education": null,
+      "major": null,
+      "idNumber": null,
+      "mainPositionCode": "developPosition"
+    }
+  ],
+  "updatePersons": [
+    {
+      "code": "sunsan",  //required
+      "name": "Sunsan",  //required
+      "phone": 13738374659,
+      "gender": "male",  //required
+      "status": "onWork",  //required
+      "email": "sunsan@163.com",
+      "description": "Sunsan is a R&D engineer",
+      "directLeaderCode": "dbManager",
+      "grandLeaderCode": "depManager",
+      "entryDate": "2021-05-26",
+      "title": "intermediate",
+      "qualification": null,
+      "education": "hd",
+      "major": "Computer information",
+      "idNumber": 189746287423231,
+      "mainPositionCode": "developPosition"  //required
+    },
+    {
+      "code": "lisi",
+      "name": "Lisi",
+      "phone": null,
+      "gender": "male",
+      "status": "onWork",
+      "email": null,
+      "description": null,
+      "directLeaderCode": null,
+      "grandLeaderCode": null,
+      "entryDate": null,
+      "title": null,
+      "qualification": null,
+      "education": null,
+      "major": null,
+      "idNumber": null,
+      "mainPositionCode": "developPosition"
+    }
+  ],
+  "deletePersons": [
+    "wangwu",
+    "zhaoliu"
+  ]
+}
+```
+:::info
+- **gender**: System code is sys_gender: male/female.
+- **status**: System code is sys_person_status: onWork/offWork.
+- **title**: System code is sys_title: elementary/intermidiate/advanced.
+- **education**: System code is sys_education: middleOrOther/highSecondary/degree/college/master/phd.
+:::
+
+</div>
+<div className='leftCol'>Header parameter</div>
+<div className='rightCol'>
+
+Accept-Language: Default is the server language. Options are **en-us** and **zh-cn**.
+
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+
+- 200: Successful.
+- 400
+
+```json
+{
+  "code": 1001040393,
+  "message": "person code is required, cannot be empty. It must a combination of letter, number and underscore, with length less than 50."
+}
+```
+
+<table> 
+<colgroup>
+    <col style={{width: "40%"}}/>
+    <col style={{width: "20%"}}/>
+    <col style={{width: "40%"}}/>
+  </colgroup>
+  <thead>
+    <tr>
+      <th>Error Type</th>
+      <th>Error Code</th>
+      <th>Message</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td rowspan="15">Common errors for personnel addition and modification</td>
+      <td>1001040393</td>
+      <td>Person code is required, cannot be empty, and must be a combination of letters, numbers, and underscores, with a length not exceeding 50!</td>
+    </tr>
+    <tr>
+      <td>1001040394</td>
+      <td>Person name is required, cannot be empty, and must be no more than 200 characters in length!</td>
+    </tr>
+    <tr>
+      <td>1001040395</td>
+      <td>Person gender is required and cannot be empty!</td>
+    </tr>
+    <tr>
+      <td>1001040396</td>
+      <td>Person status is required and cannot be empty!</td>
+    </tr>
+    <tr>
+      <td>1001040397</td>
+      <td>Main position is required and cannot be empty!</td>
+    </tr>
+    <tr>
+      <td>1001040398</td>
+      <td>Description cannot be more than 500 characters in length!</td>
+    </tr>
+    <tr>
+      <td>1001040399</td>
+      <td>ID card number is composed of numbers, uppercase and lowercase letters, and special characters, with a length not exceeding 200 characters!</td>
+    </tr>
+    <tr>
+      <td>1001040400</td>
+      <td>ID card number cannot be duplicated!</td>
+    </tr>
+    <tr>
+      <td>1001040385</td>
+      <td>Direct leader does not exist!</td>
+    </tr>
+    <tr>
+      <td>1001040386</td>
+      <td>Grand leader does not exist!</td>
+    </tr>
+    <tr>
+      <td>1001040389</td>
+      <td>Gender system code is incorrect!</td>
+    </tr>
+    <tr>
+      <td>1001040390</td>
+      <td>Person status system code is incorrect!</td>
+    </tr>
+    <tr>
+      <td>1001040391</td>
+      <td>Title system code is incorrect!</td>
+    </tr>
+    <tr>
+      <td>1001040392</td>
+      <td>Education system code is incorrect!</td>
+    </tr>
+    <tr>
+      <td>100104019</td>
+      <td>The specified position does not exist!</td>
+    </tr>
+    <tr>
+      <td rowspan="2">Unique errors for personnel addition</td>
+      <td>100104021</td>
+      <td>Person number already exists!</td>
+    </tr>
+    <tr>
+      <td>1001040384</td>
+      <td>Duplicate person codes!</td>
+    </tr>
+    <tr>
+      <td>Specific errors for personnel modification</td>
+      <td>100104020</td>
+      <td>The specified person does not exist!</td>
+    </tr>
+    <tr>
+      <td>Specific errors for personnel deletion</td>
+      <td>1001040376</td>
+      <td>Failed to delete user!</td>
+    </tr>
+    </tbody>
+</table>
+</div>
+</div>
+</div>
+
+<div className='div'>
+<div className='title'>
+
+## ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/openAPI/1.png) Set Person Icon by Code
+
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Path</div>
+<div className='rightCol'>
+
+```
+http://{supOS ip:port}/open-api/organization/v2/persons/{personCode}/image
+```
+
+</div>
+<div className='leftCol'>Query parameter</div>
+<div className='rightCol'>
+
+**imageType**: Required string. For example: **imageType=avatar**.
+
+</div>
+<div className='leftCol'>Request body</div>
+<div className='rightCol'>
+
+fileName
+
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+
+- 200: Successful.
+- 400
+
+```json
+{
+  "code": 1001040379,
+  "message": "person icon format error"
+}
+```
+
+<ul>
+<ul>
+<li>1001040387: 'imageType' error.</li>
+<li>100104020: Specified person does not exist.</li>
+</ul>
+</ul>
+</div>
+</div>
+</div>

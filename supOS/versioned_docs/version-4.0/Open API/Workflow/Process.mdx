@@ -1,0 +1,567 @@
+---
+hide_title: true
+---
+
+<div className='div'>
+<div className='title'>
+
+## ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/openAPI/4.png) Get Process Start Details
+
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Path</div>
+<div className='rightCol'>
+
+```
+http://{supOS ip:port}/open-api/p/workflow/v2/processes/{processKey}/startInfo
+```
+
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+
+- 200: Successful.
+
+```json
+{
+  "companyId": "1000",
+  "assigns": [
+    {
+      "seqKey": "edge_123",
+      "name": "review"
+    }
+  ],
+  "audits": [
+    {
+      "seqKey": "edge_123",
+      "name": "agree",
+      "order": 1,
+      "value": "1",
+      "type": 0
+    }
+  ],
+  "enableComment": true,
+  "multiCompany": true,
+  "enableSave": false,
+  "processName": "leave workflow",
+  "readOnly": false,
+  "firstTaskName": "Edit",
+  "url": "Page_0a4f3b38124142cbae4dae62f6664f5a"
+}
+```
+- 400
+
+```json
+{
+  "code": 100108112,
+  "message": "process is not published"
+}
+```
+
+<ul>
+<ul>
+<li>100108002: Process design does not exist.</li>
+<li>100108112: Process is not published.</li>
+</ul>
+</ul>
+
+- 500
+```json
+{
+  "code": 100000001,
+  "message": "internal service exception"
+}
+```
+
+</div>
+</div>
+</div>
+
+<div className='div'>
+<div className='title'>
+
+## ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/openAPI/4.png) Get Process Details
+
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Path</div>
+<div className='rightCol'>
+
+```
+http://{supOS ip:port}/open-api/p/workflow/v2/processes/{processId}
+```
+
+</div>
+<div className='leftCol'>Query parameter</div>
+<div className='rightCol'>
+
+**username**: Required.
+
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+
+- 200: Successful.
+
+```json
+{
+  "appId": "App_325ea305252fe5d0d1f78b1c2efe2413",
+  "processId": "1000492908536528",
+  "processName": "leave workflow",
+  "endTime": "2020-09-22T07:38:13.893+0800",
+  "startTime": "2020-09-22T07:38:13.893+0800",
+  "status": 88,
+  "tasks": [
+    {
+      "username": "test",
+      "taskId": "1000492908536528",
+      "taskName": "review"
+    }
+  ]
+}
+```
+- 400
+
+```json
+{
+  "code": 100108227,
+  "message": "process instance does not exist"
+}
+```
+
+<ul>
+<ul>
+<li>100108502: username cannot be empty.</li>
+<li>100108230: User does not exist.</li>
+<li>100108214: No permission.</li>
+</ul>
+</ul>
+
+- 500
+```json
+{
+  "code": 100000001,
+  "message": "internal service exception"
+}
+```
+
+</div>
+</div>
+</div>
+
+<div className='div'>
+<div className='title'>
+
+## ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/openAPI/4.png) Get Process Logs
+
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Path</div>
+<div className='rightCol'>
+
+```
+http://{supOS ip:port}/open-api/p/workflow/v2/processes/{processId}/logs
+```
+
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+
+- 200: Successful.
+
+```
+[
+  {
+    "auditResult": "agree",
+    "comment": "business trip",
+    "createTime": "2020-09-22T07:38:13.893+0800",
+    "operateDesc": "reviewed by zhangsan",
+    "operator": "test",
+    "taskName": "review",
+    "type": "TASK_COMPLETE"
+  }
+]
+```
+- 400
+
+```json
+{
+  "code": 100108227,
+  "message": "process instance does not exist"
+}
+```
+- 500
+```json
+{
+  "code": 100000001,
+  "message": "internal service exception"
+}
+```
+
+</div>
+</div>
+</div>
+
+<div className='div'>
+<div className='title'>
+
+## ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/openAPI/4.png) Get Reminder Information
+
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Path</div>
+<div className='rightCol'>
+
+```
+http://{supOS ip:port}/open-api/p/workflow/v2/processes/{processId}/urgeInfo
+```
+
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+
+- 200: Successful.
+
+```
+[
+  {
+    "taskId": "1000711857627856",
+    "taskName": "review",
+    "url": "Page_3d5f89e8578f4d3796f6fb6d4bda49b6",
+    "users": [
+      {
+        "username": "test",
+        "showName": "test user"
+      }
+    ]
+  }
+]
+```
+- 400
+
+```json
+{
+  "code": 100108227,
+  "message": "process instance does not exist"
+}
+```
+100108506: processId cannot be empty.
+
+- 500
+```json
+{
+  "code": 100000001,
+  "message": "internal service exception"
+}
+```
+
+</div>
+</div>
+</div>
+
+<div className='div'>
+<div className='title'>
+
+## ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/openAPI/4.png) Get Processes Initiated by User
+
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Path</div>
+<div className='rightCol'>
+
+```
+http://{supOS ip:port}/open-api/p/workflow/v2/processes
+```
+
+</div>
+<div className='leftCol'>Query parameter</div>
+<div className='rightCol'>
+
+- appId: App ID.
+- status: String. 88-ongoing/77-pause/99-void/66-completed
+- username: Required username.
+- current: Page number.
+- pageSize: Items on the page.
+
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+
+- 200: Successful.
+
+```json
+{
+  "list": [
+    {
+      "appId": "App_325ea305252fe5d0d1f78b1c2efe2413",
+      "processId": "1000492908536528",
+      "processName": "leave workflow",
+      "endTime": "2020-09-22T07:38:13.893+0800",
+      "startTime": "2020-09-22T07:38:13.893+0800",
+      "status": 88,
+      "tasks": [
+        {
+          "username": "test",
+          "taskId": "1000492908536528",
+          "taskName": "review"
+        }
+      ]
+    }
+  ],
+  "pagination": {
+    "current": 0,
+    "pageSize": 0,
+    "total": 0
+  }
+}
+```
+- 400
+
+```json
+{
+  "code": 100108501,
+  "message": "process status code does not exist"
+}
+```
+
+<ul>
+<ul>
+<li>100108502: username cannot be empty.</li>
+<li>100108230: User does not exist.</li>
+<li>100108503: pageSize exceeds the maximum value of 500.</li>
+</ul>
+</ul>
+
+- 500
+```json
+{
+  "code": 100000001,
+  "message": "internal service exception"
+}
+```
+
+</div>
+</div>
+</div>
+
+<div className='div'>
+<div className='title'>
+
+## ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/openAPI/2.png) Save Process Startup Page
+
+After clicking **Save**, the process will start and pause at the first user.
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Path</div>
+<div className='rightCol'>
+
+```
+http://{supOS ip:port}/open-api/p/workflow/v2/processes
+```
+
+</div>
+<div className='leftCol'>Request body</div>
+<div className='rightCol'>
+
+```json
+{
+  "appId": "App_eab56959eef74c1ea2e1a5fbe7b38ddf",
+  "formData": "{}",
+  "processKey": "K2002018123456789", //required. Process code
+  "username": "test"  //required
+}
+```
+
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+
+- 200: Successful.
+
+```json
+{
+  "processId": "1000492908536528",
+  "taskId": "1000492908536529"
+}
+```
+- 400
+
+```json
+{
+  "code": 100108112,
+  "message": "process is not published"
+}
+```
+
+<ul>
+<ul>
+<li>100108502: username cannot be empty.</li>
+<li>100108230: User does not exist.</li>
+<li>100108507: processKey cannot be empty.</li>
+<li>100108002: Workflow configuration does not exist.</li>
+</ul>
+</ul>
+
+- 500
+```json
+{
+  "code": 100000001,
+  "message": "internal service exception"
+}
+```
+
+</div>
+</div>
+</div>
+
+<div className='div'>
+<div className='title'>
+
+## ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/openAPI/1.png) Initiate a Process
+
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Path</div>
+<div className='rightCol'>
+
+```
+http://{supOS ip:port}/open-api/p/workflow/v2/processes
+```
+
+</div>
+<div className='leftCol'>Request body</div>
+<div className='rightCol'>
+
+```json
+{
+  "appId": "App_eab56959eef74c1ea2e1a5fbe7b38ddf",
+  "assigns": [  //assignee list
+    {
+      "taskDefKey": "userTask_123",   //node ID
+      "users": [ //user list
+        "test1",
+        "test2"
+      ]
+    }
+  ],
+  "audit": {
+    "seqKey": "edge_123", //flow arrow ID
+    "value": "1"
+  },
+  "comment": "Duration exceeded 5 days, dismiss"",
+  "formData": "{}",
+  "processKey": "K2002018123456789",
+  "processName": "leave note 001 process",
+  "username": "test"
+}
+```
+
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+
+- 200: Successful.
+```json
+{
+  "processId": "1000492908536528"
+}
+```
+- 400
+
+```json
+{
+  "code": 100108112,
+  "message": "process is not published"
+}
+```
+
+<ul>
+<ul>
+<li>100108230: User does not exist.</li>
+<li>100108502: username cannot be empty.</li>
+<li>100108507: processKey cannot be empty.</li>
+<li>100108002: Workflow configuration does not exist.</li>
+<li>100108112: Workflow is not published.</li>
+</ul>
+</ul>
+
+- 500
+```json
+{
+  "code": 100000001,
+  "message": "internal service exception"
+}
+```
+
+</div>
+</div>
+</div>
+
+<div className='div'>
+<div className='title'>
+
+## ![](https://wordpressfreezonex.oss-accelerate.aliyuncs.com/openAPI/1.png) Cancel a Process
+
+:::info
+Presently only available for general user.
+:::
+
+</div>
+<div className='grid'>
+<div className='leftCol'>Path</div>
+<div className='rightCol'>
+
+```
+http://{supOS ip:port}/open-api/p/workflow/v2/processes/{processId}/cancellation
+```
+
+</div>
+<div className='leftCol'>Request body</div>
+<div className='rightCol'>
+
+```json
+{
+  "username": "test"  //required
+}
+```
+
+</div>
+<div className='leftCol'>Response</div>
+<div className='rightCol'>
+
+- 200: Successful.
+- 400
+
+```json
+{
+  "code": 100108227,
+  "message": "process instance does not exist"
+}
+```
+
+<ul>
+<ul>
+<li>100108230: User does not exist.</li>
+<li>100108502: username cannot be empty.</li>
+<li>100108240: No permission.</li>
+</ul>
+</ul>
+
+- 500
+```json
+{
+  "code": 100000001,
+  "message": "internal service exception"
+}
+```
+
+</div>
+</div>
+</div>
